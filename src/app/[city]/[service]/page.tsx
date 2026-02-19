@@ -22,15 +22,16 @@ export function generateStaticParams() {
   );
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const location = getLocationBySlug(params.city);
-  const service = getServiceBySlug(params.service);
-  if (!location || !service) return {};
-  const serviceKey = service.name.toLowerCase();
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { city, service } = await params;
+  const location = getLocationBySlug(city);
+  const selectedService = getServiceBySlug(service);
+  if (!location || !selectedService) return {};
+  const serviceKey = selectedService.name.toLowerCase();
   const locationKey = location.name.toLowerCase();
   return {
-    title: `${service.name} in ${location.name}`,
-    description: `${service.name} in ${location.name}. Trusted local contractor, fast quotes, clear pricing, and quality workmanship.`,
+    title: `${selectedService.name} in ${location.name}`,
+    description: `${selectedService.name} in ${location.name}. Trusted local contractor, fast quotes, clear pricing, and quality workmanship.`,
     keywords: [
       `${serviceKey} ${locationKey}`,
       `${serviceKey} contractor ${location.short.toLowerCase()}`,
@@ -38,13 +39,14 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
       `home improvement ${locationKey}`,
       `remodeling contractor ${location.short.toLowerCase()}`,
     ],
-    alternates: { canonical: `/${location.slug}/${service.slug}` },
+    alternates: { canonical: `/${location.slug}/${selectedService.slug}` },
   };
 }
 
-export default function CityServicePage({ params }: { params: Params }) {
-  const location = getLocationBySlug(params.city);
-  const service = getServiceBySlug(params.service);
+export default async function CityServicePage({ params }: { params: Promise<Params> }) {
+  const { city, service: serviceSlug } = await params;
+  const location = getLocationBySlug(city);
+  const service = getServiceBySlug(serviceSlug);
 
   if (!location || !service) {
     notFound();
@@ -146,7 +148,7 @@ export default function CityServicePage({ params }: { params: Params }) {
             </div>
             <div className="surface mt-8 rounded-xl p-5">
               <h3 className="text-xl font-semibold text-[var(--accent)]">
-                Let’s plan your {service.name.toLowerCase()} project in {location.short}
+                Let&apos;s plan your {service.name.toLowerCase()} project in {location.short}
               </h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
                 Call now for scheduling help, or submit the form and we will follow up with a detailed quote conversation.

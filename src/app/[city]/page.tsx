@@ -12,8 +12,9 @@ export function generateStaticParams() {
   return locations.map((location) => ({ city: location.slug }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const location = getLocationBySlug(params.city);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { city } = await params;
+  const location = getLocationBySlug(city);
   if (!location) return {};
   return {
     title: `Home Improvement in ${location.name}`,
@@ -22,8 +23,9 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function CityHubPage({ params }: { params: Params }) {
-  const location = getLocationBySlug(params.city);
+export default async function CityHubPage({ params }: { params: Promise<Params> }) {
+  const { city } = await params;
+  const location = getLocationBySlug(city);
   if (!location) notFound();
 
   return (
