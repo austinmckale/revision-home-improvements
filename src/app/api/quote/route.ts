@@ -25,13 +25,51 @@ async function verifyTurnstile(token: string, ip?: string) {
 
 async function sendLeadWebhook(payload: Record<string, unknown>) {
   const webhookUrl = process.env.LEADS_WEBHOOK_URL;
-  if (!webhookUrl) return;
+  if (!webhookUrl) return { delivered: false, reason: "missing_webhook_url" as const };
 
-  await fetch(webhookUrl, {
+  const isDiscordWebhook = webhookUrl.includes("discord.com/api/webhooks");
+  const leadLines = [
+    `Name: ${String(payload.name || "")}`,
+    `Phone: ${String(payload.phone || "")}`,
+    `Email: ${String(payload.email || "")}`,
+    `City: ${String(payload.city || "")}`,
+    `ZIP: ${String(payload.zip || "")}`,
+    `Service: ${String(payload.service || "")}`,
+    `Timeline: ${String(payload.timeline || "")}`,
+    `Details: ${String(payload.details || "")}`,
+  ];
+
+  const body = isDiscordWebhook
+    ? {
+        username: "RHI Leads",
+        content: "New Quote Request",
+        embeds: [
+          {
+            title: "Website Lead Submission",
+            description: leadLines.join("\n"),
+            color: 13678695,
+            timestamp: new Date().toISOString(),
+          },
+        ],
+      }
+    : {
+        event: "quote_submitted",
+        submittedAt: new Date().toISOString(),
+        lead: payload,
+      };
+
+  const response = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(body),
   });
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => "");
+    throw new Error(`Webhook delivery failed (${response.status}): ${text}`);
+  }
+
+  return { delivered: true as const };
 }
 
 export async function POST(request: Request) {
@@ -67,7 +105,10 @@ export async function POST(request: Request) {
     }
 
     console.log("New quote request:", parsed.data);
-    await sendLeadWebhook(parsed.data);
+    const webhookResult = await sendLeadWebhook(parsed.data);
+    if (!webhookResult.delivered) {
+      console.warn("Lead accepted but webhook not delivered:", webhookResult.reason);
+    }
 
     return NextResponse.json({
       ok: true,
