@@ -106,6 +106,18 @@ export default function CityServicePage({ params }: { params: Params }) {
                 <li key={outcome}>{outcome}</li>
               ))}
             </ul>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Scope Homeowners in {location.short} Usually Request</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+              {service.whatIncluded.slice(0, 3).map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Pricing Drivers in This Service</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+              {service.pricingFactors.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Neighborhood Coverage</h3>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               {location.neighborhoods.map((neighborhood) => (

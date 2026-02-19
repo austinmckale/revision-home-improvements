@@ -107,6 +107,24 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
               <li>Transparent estimate and scope review before work starts</li>
               <li>Direct communication from first call through final walkthrough</li>
             </ul>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">What This Service Usually Includes</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+              {service.whatIncluded.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Where Quality Makes the Biggest Difference</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+              {service.qualityFactors.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">What Affects Project Cost</h3>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+              {service.pricingFactors.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Benefits Homeowners Typically See</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.outcomes.map((outcome) => (
