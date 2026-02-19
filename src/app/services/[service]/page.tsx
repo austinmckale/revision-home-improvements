@@ -79,8 +79,9 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
             </div>
             <h2 className="text-2xl font-bold text-[var(--accent)]">What We Do</h2>
             <p className="mt-3 text-sm text-[var(--muted)]">
-              We handle full-scope {service.name.toLowerCase()} work including planning, material coordination, build execution,
-              and final quality walkthrough. Our goal is to deliver results that look great and hold up long-term.
+              We routinely handle full-scope {service.name.toLowerCase()} work including planning, material coordination,
+              build execution, and final quality walkthrough. The goal is a result that performs well, looks right, and
+              lasts.
             </p>
             <h3 className="mt-6 text-xl font-semibold text-[var(--accent)]">Why Choose Us</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
@@ -88,7 +89,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
               <li>Excellent service-to-price value with scope choices that fit your budget</li>
               <li>Fast local response across Reading, Berks County, and Lehigh Valley</li>
             </ul>
-            <h2 className="text-2xl font-bold text-[var(--accent)]">How We Handle Your Project</h2>
+            <h2 className="text-2xl font-bold text-[var(--accent)]">Our Project Approach</h2>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.bullets.map((bullet) => (
                 <li key={bullet}>{bullet}</li>
@@ -96,7 +97,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
               <li>Transparent estimate and scope review before work starts</li>
               <li>Direct communication from first call through final walkthrough</li>
             </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Expected Outcomes</h3>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Benefits Homeowners Typically See</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.outcomes.map((outcome) => (
                 <li key={outcome}>{outcome}</li>

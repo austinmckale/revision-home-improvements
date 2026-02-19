@@ -45,6 +45,12 @@ export default function ServicesHubPage() {
                   <li key={bullet}>{bullet}</li>
                 ))}
               </ul>
+              <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Benefits</p>
+              <ul className="mt-2 list-disc pl-5 text-sm text-[var(--muted)]">
+                {service.outcomes.slice(0, 2).map((outcome) => (
+                  <li key={outcome}>{outcome}</li>
+                ))}
+              </ul>
               <Link href={`/services/${service.slug}`} className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
                 View {service.name}
               </Link>
