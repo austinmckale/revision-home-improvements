@@ -1,0 +1,57 @@
+{
+  "redirects": [
+    {
+      "source": "/request-an-estimate",
+      "destination": "/request-a-quote",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-renovations",
+      "destination": "/services/bathroom-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/basement-renovations",
+      "destination": "/services/basement-finishing",
+      "permanent": true
+    },
+    {
+      "source": "/floor-renovations",
+      "destination": "/services/flooring-installation",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/locations-served",
+      "destination": "/service-areas",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com; connect-src 'self' https://www.google-analytics.com https://challenges.cloudflare.com; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; frame-src https://challenges.cloudflare.com;"
+        }
+      ]
+    }
+  ]
+}
