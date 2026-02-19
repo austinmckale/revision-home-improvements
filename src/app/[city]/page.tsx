@@ -62,13 +62,13 @@ export default async function CityHubPage({ params }: { params: Promise<Params> 
           ))}
         </div>
         <section className="mt-10">
-          <h2 className="text-2xl font-bold text-[var(--accent)]">Neighborhoods We Commonly Serve</h2>
+          <h2 className="text-2xl font-bold text-[var(--accent)]">Priority Nearby Areas We Serve</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
-            {location.neighborhoods.map((neighborhood) => (
-              <article key={neighborhood} className="surface rounded-lg p-4">
-                <h3 className="font-semibold">{neighborhood}</h3>
+            {location.priorityAreas.map((area) => (
+              <article key={area} className="surface rounded-lg p-4">
+                <h3 className="font-semibold">{area}</h3>
                 <p className="mt-1 text-sm text-[var(--muted)]">
-                  Remodeling, restoration, and quote support available for projects near {neighborhood}.
+                  Remodeling, restoration, and quote support available for projects in and around {area}.
                 </p>
               </article>
             ))}

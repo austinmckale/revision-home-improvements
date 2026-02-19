@@ -120,11 +120,11 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Neighborhood Coverage</h3>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Priority Nearby Areas</h3>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              {location.neighborhoods.map((neighborhood) => (
-                <p key={neighborhood} className="surface rounded-lg p-3 text-sm">
-                  {service.name} near {neighborhood}
+              {location.priorityAreas.map((area) => (
+                <p key={area} className="surface rounded-lg p-3 text-sm">
+                  {service.name} in and around {area}
                 </p>
               ))}
             </div>
@@ -172,7 +172,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 ...service.faqs.slice(0, 2),
                 {
                   q: `Do you service all of ${location.name}?`,
-                  a: `Yes. We schedule projects across ${location.name} and surrounding neighborhoods.`,
+                  a: `Yes. We schedule projects across ${location.name} and surrounding municipalities.`,
                 },
               ]}
             />

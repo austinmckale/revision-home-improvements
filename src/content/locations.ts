@@ -4,7 +4,7 @@ export type Location = {
   short: string;
   region: string;
   localAngle: string;
-  neighborhoods: string[];
+  priorityAreas: string[];
   whyUs: string[];
 };
 
@@ -16,7 +16,7 @@ export const locations: Location[] = [
     region: "Berks County",
     localAngle:
       "Reading projects often combine older-home layout updates with durable finish upgrades. We plan scopes around long-term usability.",
-    neighborhoods: ["Centre Park", "Hampden Heights", "Northeast Reading", "Downtown Reading"],
+    priorityAreas: ["Wyomissing", "Shillington", "Sinking Spring", "Exeter Township", "Muhlenberg Township", "Spring Township"],
     whyUs: ["Fast quote response in-city", "Experience with mixed-age housing stock", "Clear communication for occupied homes"],
   },
   {
@@ -26,7 +26,7 @@ export const locations: Location[] = [
     region: "Berks County",
     localAngle:
       "Wyomissing clients often prioritize clean finishes and efficient project timelines. We focus on predictable scheduling and finish quality.",
-    neighborhoods: ["Wyomissing Hills", "Berkshire Heights", "Old Wyomissing", "West Reading nearby"],
+    priorityAreas: ["West Reading", "Sinking Spring", "Spring Township", "Lower Heidelberg Township", "Shillington"],
     whyUs: ["Detail-focused finish work", "Tight project coordination", "Straightforward scope and approvals"],
   },
   {
@@ -36,7 +36,7 @@ export const locations: Location[] = [
     region: "Southeastern Pennsylvania",
     localAngle:
       "Across Berks County we handle full interior remodels, outdoor upgrades, and restoration jobs with practical, phase-aware planning.",
-    neighborhoods: ["Reading area", "Wyomissing area", "Muhlenberg area", "Exeter area"],
+    priorityAreas: ["Wyomissing", "Sinking Spring", "Exeter Township", "Muhlenberg Township", "Spring Township", "Cumru Township"],
     whyUs: ["County-wide coverage", "Remodel + restoration in one team", "Reliable call-to-quote workflow"],
   },
   {
@@ -46,7 +46,7 @@ export const locations: Location[] = [
     region: "Lehigh County",
     localAngle:
       "Allentown homeowners often need modernized layouts and durable material selections. We align scopes to performance and style goals.",
-    neighborhoods: ["West End", "South Allentown", "Trexler Park area", "East Side"],
+    priorityAreas: ["Emmaus", "Macungie", "Upper Macungie Township", "South Whitehall Township", "Whitehall Township"],
     whyUs: ["Strong planning before demo", "Material guidance by use-case", "Consistent milestone communication"],
   },
   {
@@ -56,7 +56,7 @@ export const locations: Location[] = [
     region: "Lehigh/Northampton Counties",
     localAngle:
       "Bethlehem projects frequently balance character-home constraints with modern function upgrades. We scope carefully before buildout.",
-    neighborhoods: ["North Bethlehem", "South Side", "West Bethlehem", "Historic district adjacent areas"],
+    priorityAreas: ["Lower Saucon Township", "Hanover Township", "Nazareth area", "Forks Township", "Hellertown"],
     whyUs: ["Scope clarity for older homes", "Practical sequencing", "High attention to finish details"],
   },
   {
@@ -66,7 +66,7 @@ export const locations: Location[] = [
     region: "Eastern Pennsylvania",
     localAngle:
       "Lehigh Valley work ranges from targeted room upgrades to full restoration scopes. We deliver clear planning and responsive communication.",
-    neighborhoods: ["Allentown corridor", "Bethlehem corridor", "Regional suburbs", "Mixed urban/suburban homes"],
+    priorityAreas: ["Allentown area", "Bethlehem area", "Easton area", "Emmaus", "Macungie", "Nazareth"],
     whyUs: ["Regional service footprint", "Conversion-focused quote process", "Flexible project scoping by priority"],
   },
 ];
