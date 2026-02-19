@@ -87,7 +87,7 @@ export const services: Service[] = [
     gallery: [
       { src: "/images/projects/DSC00338-1.jpg", alt: "Kitchen remodeling project hero image." },
       { src: "/images/projects/img_7833.jpg", alt: "Modern white cabinet kitchen renovation." },
-      { src: "/images/projects/img_8219.jpg", alt: "Detailed interior finish work from a kitchen remodel." },
+      { src: "/images/projects/DSC00325.jpg", alt: "Kitchen remodel with updated cabinets and appliances in Reading, PA." },
     ],
   },
   {

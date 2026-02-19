@@ -149,24 +149,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               {locations.map((location) => (
                 <Link key={location.slug} href={`/${location.slug}/${service.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
-                  {service.name} in {location.name}
+                  {location.name}
                 </Link>
               ))}
             </div>
-            <section className="mt-8">
-              <h3 className="text-xl font-semibold text-[var(--accent)]">Popular Searches We Cover</h3>
-              <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                {locations.map((location) => (
-                  <Link
-                    key={`search-${location.slug}`}
-                    href={`/${location.slug}/${service.slug}`}
-                    className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
-                  >
-                    {service.name} contractor {location.short}
-                  </Link>
-                ))}
-              </div>
-            </section>
 
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Related Services</h3>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
