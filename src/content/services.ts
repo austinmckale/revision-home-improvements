@@ -131,7 +131,6 @@ export const services: Service[] = [
     },
     gallery: [
       { src: "/images/projects/img_7547.jpg", alt: "Bathroom renovation with updated vanity and wall finish." },
-      { src: "/images/projects/img_7547.jpg", alt: "Bathroom remodel with updated fixtures and durable finishes." },
     ],
   },
   {
@@ -174,9 +173,8 @@ export const services: Service[] = [
       alt: "Interior home remodeling project for a basement finish in Berks County.",
     },
     gallery: [
-      { src: "/images/projects/img_8216.jpg", alt: "Basement interior remodeling zone." },
-      { src: "/images/projects/img_8219.jpg", alt: "Finished basement flooring and trim detail." },
-      { src: "/images/projects/img_8220.jpg", alt: "Basement drywall and finish prep." },
+      { src: "/images/projects/img_8216.jpg", alt: "Finished basement interior remodeling area." },
+      { src: "/images/projects/img_8219.jpg", alt: "Basement remodel with updated flooring and finishes." },
     ],
   },
   {
@@ -219,9 +217,7 @@ export const services: Service[] = [
       alt: "Drywall and interior renovation work by Revision Home Improvements in Reading, PA.",
     },
     gallery: [
-      { src: "/images/projects/img_8220.jpg", alt: "Drywall repair and finishing detail." },
-      { src: "/images/projects/img_8216.jpg", alt: "Interior wall preparation and repair." },
-      { src: "/images/projects/img_8219.jpg", alt: "Post-repair ready-to-paint interior." },
+      { src: "/images/projects/img_8220.jpg", alt: "Interior wall and finish prep detail." },
     ],
   },
   {
@@ -265,8 +261,7 @@ export const services: Service[] = [
     },
     gallery: [
       { src: "/images/projects/img_8219.jpg", alt: "Flooring installation example in remodeled interior." },
-      { src: "/images/projects/img_8216.jpg", alt: "Interior flooring transition detail." },
-      { src: "/images/projects/img_7833.jpg", alt: "Kitchen flooring and cabinetry alignment detail." },
+      { src: "/images/projects/img_8216.jpg", alt: "Finished flooring in remodeled interior space." },
     ],
   },
   {
@@ -354,9 +349,8 @@ export const services: Service[] = [
       alt: "Restoration and reconstruction project by Revision Home Improvements in Berks County.",
     },
     gallery: [
-      { src: "/images/projects/Frontier-1.jpg", alt: "Restoration-focused rebuild project." },
-      { src: "/images/projects/Frontier-2.jpg", alt: "Structural repair and reconstruction example." },
-      { src: "/images/projects/before-after-patio_mp4_hd.original.jpg", alt: "Before and after transformation from damage project." },
+      { src: "/images/projects/Frontier-1.jpg", alt: "Restoration and reconstruction project in progress." },
+      { src: "/images/projects/Frontier-2.jpg", alt: "Property reconstruction and repair work." },
     ],
   },
   {
@@ -399,9 +393,8 @@ export const services: Service[] = [
       alt: "Active restoration site work by Revision Home Improvements in Reading and Berks County.",
     },
     gallery: [
-      { src: "/images/projects/Patio-Construction-site-frontier.jpg", alt: "Water-damage restoration jobsite preparation." },
-      { src: "/images/projects/img_8220.jpg", alt: "Interior recovery and rebuild scope detail." },
-      { src: "/images/projects/img_8219.jpg", alt: "Post-restoration flooring and finish result." },
+      { src: "/images/projects/Patio-Construction-site-frontier.jpg", alt: "Restoration jobsite preparation and rebuild work." },
+      { src: "/images/projects/Frontier-1.jpg", alt: "Reconstruction work following major property damage." },
     ],
   },
   {
@@ -446,7 +439,7 @@ export const services: Service[] = [
     gallery: [
       { src: "/images/projects/before-after-patio_mp4_hd.original.jpg", alt: "Claim-related before and after example." },
       { src: "/images/projects/Frontier-1.jpg", alt: "Insurance scope restoration example." },
-      { src: "/images/projects/img_8216.jpg", alt: "Interior reconstruction tied to claim work." },
+      { src: "/images/projects/Frontier-2.jpg", alt: "Claim-supported reconstruction work in progress." },
     ],
   },
 ];

@@ -136,7 +136,15 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             <ProcessTimeline title={`${service.name} process`} steps={service.process} />
             <section className="mt-10">
               <h3 className="text-2xl font-bold text-[var(--accent)]">Recent {service.name} Work</h3>
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <div
+                className={`mt-4 grid gap-3 ${
+                  service.gallery.length === 1
+                    ? "max-w-xl grid-cols-1"
+                    : service.gallery.length === 2
+                      ? "sm:grid-cols-2"
+                      : "sm:grid-cols-3"
+                }`}
+              >
                 {service.gallery.map((image) => (
                   <figure key={image.src} className="surface overflow-hidden rounded-lg">
                     <Image src={image.src} alt={image.alt} width={700} height={500} className="h-36 w-full object-cover" />
