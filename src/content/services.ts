@@ -131,8 +131,7 @@ export const services: Service[] = [
     },
     gallery: [
       { src: "/images/projects/img_7547.jpg", alt: "Bathroom renovation with updated vanity and wall finish." },
-      { src: "/images/projects/img_8216.jpg", alt: "Interior remodel detail for bathroom-related finish work." },
-      { src: "/images/projects/img_8220.jpg", alt: "Finish carpentry and drywall detail in bathroom project." },
+      { src: "/images/projects/img_7547.jpg", alt: "Bathroom remodel with updated fixtures and durable finishes." },
     ],
   },
   {
