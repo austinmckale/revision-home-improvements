@@ -169,12 +169,12 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_8216.jpg",
-      alt: "Interior home remodeling project for a basement finish in Berks County.",
+      src: "/images/projects/img_7548.jpg",
+      alt: "Finished basement living space with flooring and fireplace detail.",
     },
     gallery: [
-      { src: "/images/projects/img_8216.jpg", alt: "Finished basement interior remodeling area." },
-      { src: "/images/projects/img_8219.jpg", alt: "Basement remodel with updated flooring and finishes." },
+      { src: "/images/projects/img_7548.jpg", alt: "Finished basement area with updated flooring and fireplace." },
+      { src: "/images/projects/img_7540.jpg", alt: "Basement remodel in progress with finish installations." },
     ],
   },
   {
