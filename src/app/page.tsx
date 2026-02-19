@@ -13,6 +13,15 @@ export const metadata: Metadata = {
   title: "Home Remodeling Contractor in Reading, Berks County, and Lehigh Valley",
   description:
     "Revision Home Improvements delivers kitchen, bathroom, basement, and restoration projects with clear timelines and fast quote response.",
+  keywords: [
+    "home remodeling contractor reading pa",
+    "home improvement berks county",
+    "kitchen remodeling lehigh valley",
+    "bathroom remodeling reading pa",
+    "water damage restoration berks county",
+    "fire damage restoration lehigh valley",
+    "insurance claim contractor reading pa",
+  ],
 };
 
 export default function HomePage() {
@@ -91,6 +100,26 @@ export default function HomePage() {
                 </Link>
               </article>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-14">
+        <Container>
+          <h2 className="text-2xl font-bold text-[var(--accent)]">Local Services People Search For</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            <Link href="/reading-pa/kitchen-remodeling" className="surface rounded-xl p-4 hover:border-[var(--brand)]">
+              Kitchen remodeling contractor in Reading, PA
+            </Link>
+            <Link href="/berks-county-pa/bathroom-remodeling" className="surface rounded-xl p-4 hover:border-[var(--brand)]">
+              Bathroom remodeling in Berks County
+            </Link>
+            <Link href="/allentown-pa/basement-finishing" className="surface rounded-xl p-4 hover:border-[var(--brand)]">
+              Basement finishing in Allentown, PA
+            </Link>
+            <Link href="/lehigh-valley-pa/water-damage-restoration" className="surface rounded-xl p-4 hover:border-[var(--brand)]">
+              Water damage restoration in Lehigh Valley
+            </Link>
           </div>
         </Container>
       </section>

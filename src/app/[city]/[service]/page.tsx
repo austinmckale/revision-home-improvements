@@ -26,9 +26,18 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   const location = getLocationBySlug(params.city);
   const service = getServiceBySlug(params.service);
   if (!location || !service) return {};
+  const serviceKey = service.name.toLowerCase();
+  const locationKey = location.name.toLowerCase();
   return {
     title: `${service.name} in ${location.name}`,
-    description: `${service.name} in ${location.name} by Revision Home Improvements. Request a quote and speak with our team today.`,
+    description: `${service.name} in ${location.name}. Trusted local contractor, fast quotes, clear pricing, and quality workmanship.`,
+    keywords: [
+      `${serviceKey} ${locationKey}`,
+      `${serviceKey} contractor ${location.short.toLowerCase()}`,
+      `${serviceKey} near me ${location.short.toLowerCase()}`,
+      `home improvement ${locationKey}`,
+      `remodeling contractor ${location.short.toLowerCase()}`,
+    ],
     alternates: { canonical: `/${location.slug}/${service.slug}` },
   };
 }
@@ -106,6 +115,14 @@ export default function CityServicePage({ params }: { params: Params }) {
               ))}
             </div>
             <ProcessTimeline title={`How ${service.name} projects run in ${location.short}`} steps={service.process} />
+            <section className="mt-8">
+              <h3 className="text-xl font-semibold text-[var(--accent)]">What People in {location.short} Usually Ask For</h3>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+                <li>{service.name} with budget-first scope options</li>
+                <li>{service.name} timelines and scheduling guidance</li>
+                <li>{service.name} contractor recommendations for long-term durability</li>
+              </ul>
+            </section>
 
             <div className="mt-8 grid gap-2 sm:grid-cols-2">
               <Link href={`/services/${service.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">

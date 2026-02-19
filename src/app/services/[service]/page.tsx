@@ -26,9 +26,19 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   if (!service || service.slug === "insurance-claims") {
     return {};
   }
+  const serviceKey = service.name.toLowerCase();
   return {
-    title: `${service.name} in Reading and Lehigh Valley`,
-    description: `${service.description} Request a quote for ${service.name.toLowerCase()} in Reading, Berks County, and Lehigh Valley.`,
+    title: `${service.name} | Reading, Berks County, Lehigh Valley`,
+    description: `${service.name} contractor serving Reading, Wyomissing, Berks County, Allentown, Bethlehem, and Lehigh Valley. Fast quotes and clear scope.`,
+    keywords: [
+      `${serviceKey} reading pa`,
+      `${serviceKey} berks county`,
+      `${serviceKey} lehigh valley`,
+      `${serviceKey} allentown pa`,
+      `${serviceKey} bethlehem pa`,
+      `${serviceKey} wyomissing pa`,
+      `${serviceKey} contractor`,
+    ],
     alternates: { canonical: `/services/${service.slug}` },
   };
 }
@@ -123,6 +133,20 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
                 </Link>
               ))}
             </div>
+            <section className="mt-8">
+              <h3 className="text-xl font-semibold text-[var(--accent)]">Popular Searches We Cover</h3>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {locations.map((location) => (
+                  <Link
+                    key={`search-${location.slug}`}
+                    href={`/${location.slug}/${service.slug}`}
+                    className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
+                  >
+                    {service.name} contractor {location.short}
+                  </Link>
+                ))}
+              </div>
+            </section>
 
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Related Services</h3>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
