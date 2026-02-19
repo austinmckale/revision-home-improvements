@@ -26,12 +26,13 @@ export default function ServicesHubPage() {
           </Button>
         </div>
         <section className="surface mt-7 rounded-xl p-5">
-          <h2 className="text-xl font-semibold text-[var(--accent)]">How this hub is organized</h2>
+          <h2 className="text-xl font-semibold text-[var(--accent)]">What you will find on each service page</h2>
           <p className="mt-2 text-sm text-[var(--muted)]">
-            Each service page includes process details, FAQs, local area links, and direct quote options. Emergency restoration services have call-first CTAs.
+            You will see what the service includes, how projects are handled, common questions, and direct links to your city page.
+            For emergency restoration work, we lead with call-first options.
           </p>
           <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-            We focus on excellent service for price and can discuss 0% interest offers for qualified projects.
+            We focus on strong value for the price and can discuss current 0% interest offers for qualified projects.
           </p>
         </section>
         <div className="mt-8 grid gap-4 md:grid-cols-2">

@@ -78,7 +78,7 @@ export default function CityServicePage({ params }: { params: Params }) {
         <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <div className="surface mb-6 rounded-xl p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Local proof + process</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Built for homeowners in {location.short}</p>
               <p className="mt-2 text-sm text-[var(--muted)]">
                 Projects are scoped for homes in {location.short} with clear planning, communication, and timeline expectations.
               </p>
@@ -111,13 +111,13 @@ export default function CityServicePage({ params }: { params: Params }) {
             </div>
             <div className="surface mt-8 rounded-xl p-5">
               <h3 className="text-xl font-semibold text-[var(--accent)]">
-                Start your {service.name.toLowerCase()} project in {location.short}
+                Let’s plan your {service.name.toLowerCase()} project in {location.short}
               </h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                Fastest path is calling now for scheduling, or submit the form for a detailed quote follow-up.
+                Call now for scheduling help, or submit the form and we will follow up with a detailed quote conversation.
               </p>
               <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-                Ask about 0% interest financing offers for qualified projects.
+                Ask about current 0% interest promotions for qualified projects.
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Button href="/request-a-quote">Request Local Quote</Button>

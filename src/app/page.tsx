@@ -73,7 +73,7 @@ export default function HomePage() {
       <section className="py-14">
         <Container>
           <div className="surface mb-8 rounded-2xl p-5">
-            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Why Homeowners Convert Here</p>
+            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Why homeowners choose us</p>
             <div className="mt-3 grid gap-3 md:grid-cols-3">
               <p className="text-sm text-[var(--muted)]">Fast callback and quote scheduling</p>
               <p className="text-sm text-[var(--muted)]">Clear scope and timeline before work starts</p>

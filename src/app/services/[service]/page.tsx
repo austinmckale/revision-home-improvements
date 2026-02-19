@@ -72,7 +72,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
         <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
             <div className="surface mb-6 rounded-xl p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Conversion-focused trust block</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">What to expect when you work with us</p>
               <p className="mt-2 text-sm text-[var(--muted)]">
                 Local service team, clear scope review, and direct communication from estimate to completion.
               </p>
@@ -132,12 +132,12 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
               ))}
             </div>
             <div className="surface mt-8 rounded-xl p-5">
-              <h3 className="text-xl font-semibold text-[var(--accent)]">Ready to plan your {service.name.toLowerCase()} project?</h3>
+              <h3 className="text-xl font-semibold text-[var(--accent)]">Talk with us about your {service.name.toLowerCase()} project</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                Call for immediate help or send your quote request now. We typically respond quickly during business hours.
+                Call for immediate help or send your quote request online. We reply quickly and walk you through next steps.
               </p>
               <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-                Ask about 0% interest offers for qualified projects.
+                Ask about current 0% interest promotions for qualified projects.
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Button href="/request-a-quote">Request a Quote</Button>
