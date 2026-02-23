@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import EmergencyBar from "@/components/layout/EmergencyBar";
 import Footer from "@/components/layout/Footer";
 import StickyCTA from "@/components/layout/StickyCTA";
 import TrackingEvents from "@/components/TrackingEvents";
@@ -41,6 +42,7 @@ export default function RootLayout({
         )}
         <TrackingEvents />
         <Header />
+        <EmergencyBar />
         <main className="pb-20 md:pb-0">{children}</main>
         <Footer />
         <StickyCTA />

@@ -36,8 +36,11 @@ export default async function CityHubPage({ params }: { params: Promise<Params> 
           Find the exact service page for your area. Each page includes relevant scope details and direct quote paths.
         </p>
         <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">{location.localAngle}</p>
-        <div className="mt-6">
+        <div className="mt-6 flex flex-wrap gap-3">
           <Button href="/request-a-quote">Request a Quote in {location.short}</Button>
+          <Button href="/fire-water-damage-restoration" variant="secondary">
+            Emergency Restoration
+          </Button>
         </div>
         <section className="surface mt-8 rounded-xl p-5">
           <h2 className="text-xl font-semibold text-[var(--accent)]">Why clients in {location.short} hire us</h2>
@@ -62,13 +65,13 @@ export default async function CityHubPage({ params }: { params: Promise<Params> 
           ))}
         </div>
         <section className="mt-10">
-          <h2 className="text-2xl font-bold text-[var(--accent)]">Priority Nearby Areas We Serve</h2>
+          <h2 className="text-2xl font-bold text-[var(--accent)]">Priority Areas We Serve</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             {location.priorityAreas.map((area) => (
               <article key={area} className="surface rounded-lg p-4">
                 <h3 className="font-semibold">{area}</h3>
                 <p className="mt-1 text-sm text-[var(--muted)]">
-                  Remodeling, restoration, and quote support available for projects in and around {area}.
+                  Local scheduling support for remodeling and restoration projects.
                 </p>
               </article>
             ))}

@@ -9,10 +9,10 @@ export default function StickyCTA() {
           href={siteConfig.phoneHref}
           className="flex-1 rounded-full bg-[var(--brand)] px-4 py-3 text-center text-sm font-semibold text-white"
         >
-          Call Now
+          Call for Quote
         </a>
         <Button href="/request-a-quote" variant="secondary" className="flex-1 py-3 text-center text-sm">
-          Request Quote
+          Get Estimate
         </Button>
       </div>
     </div>

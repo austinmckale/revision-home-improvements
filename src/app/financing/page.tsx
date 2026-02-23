@@ -7,7 +7,7 @@ import { siteConfig } from "@/content/site";
 export const metadata: Metadata = {
   title: "Financing",
   description:
-    "Financing options including potential 0% interest offers for qualified home improvement projects in Reading, Berks County, and Lehigh Valley.",
+    "Financing options for qualified home improvement projects in Reading, Berks County, and Lehigh Valley with clear disclosure terms.",
 };
 
 export default function FinancingPage() {
@@ -19,14 +19,13 @@ export default function FinancingPage() {
           Financing can reduce upfront pressure and help you move forward with needed work sooner.
         </p>
         <div className="surface mt-6 rounded-2xl border-2 border-[var(--brand)] p-6">
-          <h2 className="text-2xl font-semibold text-[var(--accent)]">0% Interest Offers</h2>
+          <h2 className="text-2xl font-semibold text-[var(--accent)]">Promotional Financing Options</h2>
           <p className="mt-2 text-[var(--muted)]">
-            We may offer 0% interest financing promotions for qualified customers. Availability and term length depend
-            on current programs and approval criteria.
+            {siteConfig.financing.teaser} {siteConfig.financing.disclosure}
           </p>
-          <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-            Ask about active offers when you request your quote.
-          </p>
+          <Link href="/financing-terms" className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+            Review financing terms and disclosures
+          </Link>
         </div>
         <div className="surface mt-6 rounded-2xl p-6">
           <h2 className="text-2xl font-semibold text-[var(--accent)]">How to get started</h2>

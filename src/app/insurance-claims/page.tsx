@@ -20,6 +20,15 @@ export default function InsuranceClaimsPage() {
           For fire, water, and related claim-driven projects, we help homeowners with documented scopes and
           restoration-focused planning.
         </p>
+        <div className="surface mt-6 rounded-2xl border-[var(--brand)] p-6">
+          <h2 className="text-2xl font-semibold text-[var(--accent)]">Urgent damage situation?</h2>
+          <p className="mt-2 text-sm text-[var(--muted)]">
+            Call first for immediate scheduling guidance. We can help with both emergency planning and full rebuild execution.
+          </p>
+          <Button href={siteConfig.phoneHref} className="mt-4">
+            Call {siteConfig.phoneDisplay}
+          </Button>
+        </div>
         <div className="surface mt-6 rounded-2xl p-6">
           <h2 className="text-2xl font-semibold text-[var(--accent)]">Support Areas</h2>
           <div className="mt-3 grid gap-2 sm:grid-cols-2">

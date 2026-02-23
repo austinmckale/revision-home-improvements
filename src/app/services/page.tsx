@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import ConfidenceSection from "@/components/sections/ConfidenceSection";
 import { primaryServices } from "@/content/services";
 import { siteConfig } from "@/content/site";
 
@@ -32,9 +33,24 @@ export default function ServicesHubPage() {
             For emergency restoration work, we lead with call-first options.
           </p>
           <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-            We focus on strong value for the price and can discuss current 0% interest offers for qualified projects.
+            We focus on strong value for the price and can discuss available financing options. {siteConfig.financing.shortDisclosure}
           </p>
+          <div className="mt-4">
+            <Link href="/fire-water-damage-restoration" className="text-sm font-semibold text-[var(--brand)]">
+              Need urgent help? View fire and water damage restoration support.
+            </Link>
+            <p className="mt-2 text-sm">
+              <Link href="/financing-terms" className="font-semibold text-[var(--brand)]">
+                Review financing terms
+              </Link>
+            </p>
+          </div>
         </section>
+        <ConfidenceSection
+          className="mt-7"
+          title="Confidence Before Construction Starts"
+          intro="We keep scopes clear, options transparent, and communication consistent from estimate through closeout."
+        />
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {primaryServices.map((service) => (
             <article key={service.slug} className="surface rounded-xl p-6">

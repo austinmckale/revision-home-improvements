@@ -345,12 +345,12 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/Frontier-1.jpg",
-      alt: "Restoration and reconstruction project by Revision Home Improvements in Berks County.",
+      src: "/images/projects/img_8220.jpg",
+      alt: "Interior restoration and rebuild work by Revision Home Improvements in Berks County.",
     },
     gallery: [
-      { src: "/images/projects/Frontier-1.jpg", alt: "Restoration and reconstruction project in progress." },
-      { src: "/images/projects/Frontier-2.jpg", alt: "Property reconstruction and repair work." },
+      { src: "/images/projects/img_8220.jpg", alt: "Interior restoration and reconstruction in progress." },
+      { src: "/images/projects/img_8216.jpg", alt: "Restored interior flooring and finish work." },
     ],
   },
   {
@@ -389,12 +389,12 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/Patio-Construction-site-frontier.jpg",
-      alt: "Active restoration site work by Revision Home Improvements in Reading and Berks County.",
+      src: "/images/projects/img_7540.jpg",
+      alt: "Water-damage reconstruction and interior rebuild work in progress.",
     },
     gallery: [
-      { src: "/images/projects/Patio-Construction-site-frontier.jpg", alt: "Restoration jobsite preparation and rebuild work." },
-      { src: "/images/projects/Frontier-1.jpg", alt: "Reconstruction work following major property damage." },
+      { src: "/images/projects/img_7540.jpg", alt: "Interior rebuild work after water-related damage." },
+      { src: "/images/projects/img_8219.jpg", alt: "Replacement flooring and finish restoration work." },
     ],
   },
   {
@@ -433,13 +433,13 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/before-after-patio_mp4_hd.original.jpg",
-      alt: "Before and after remodeling project showing insurance claim repair quality.",
+      src: "/images/projects/img_8216.jpg",
+      alt: "Insurance-supported interior repair and finish restoration project.",
     },
     gallery: [
-      { src: "/images/projects/before-after-patio_mp4_hd.original.jpg", alt: "Claim-related before and after example." },
-      { src: "/images/projects/Frontier-1.jpg", alt: "Insurance scope restoration example." },
-      { src: "/images/projects/Frontier-2.jpg", alt: "Claim-supported reconstruction work in progress." },
+      { src: "/images/projects/img_8216.jpg", alt: "Claim-supported interior restoration result." },
+      { src: "/images/projects/img_8220.jpg", alt: "Drywall and finish reconstruction for claim scope." },
+      { src: "/images/projects/img_7540.jpg", alt: "Repair-in-progress detail from insurance-supported project." },
     ],
   },
 ];

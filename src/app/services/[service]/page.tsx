@@ -9,7 +9,9 @@ import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import TestimonialStrip from "@/components/sections/TestimonialStrip";
+import ConfidenceSection from "@/components/sections/ConfidenceSection";
 import { getServiceBySlug, primaryServices } from "@/content/services";
+import { caseStudies } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
@@ -35,9 +37,6 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       `${serviceKey} reading pa`,
       `${serviceKey} berks county`,
       `${serviceKey} lehigh valley`,
-      `${serviceKey} allentown pa`,
-      `${serviceKey} bethlehem pa`,
-      `${serviceKey} wyomissing pa`,
       `${serviceKey} contractor`,
     ],
     alternates: { canonical: `/services/${service.slug}` },
@@ -52,6 +51,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   }
 
   const related = primaryServices.filter((item) => item.slug !== service.slug).slice(0, 3);
+  const relatedCaseStudies = caseStudies.filter((item) => item.serviceSlug === service.slug).slice(0, 2);
+  const isEmergencyService = service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
   const jsonLd = getServiceJsonLd(
     service.name,
     absoluteUrl(`/services/${service.slug}`),
@@ -89,6 +90,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 Local service team, clear scope review, and direct communication from estimate to completion.
               </p>
             </div>
+            {isEmergencyService && (
+              <div className="surface mb-6 rounded-xl border-[var(--brand)] p-4">
+                <p className="text-sm font-semibold text-[var(--accent)]">Emergency damage situation?</p>
+                <p className="mt-2 text-sm text-[var(--muted)]">
+                  Call first for immediate scheduling guidance. We can support both urgent stabilization planning and full rebuild scope.
+                </p>
+                <Button href={siteConfig.phoneHref} className="mt-3">
+                  Call {siteConfig.phoneDisplay}
+                </Button>
+              </div>
+            )}
             <h2 className="text-2xl font-bold text-[var(--accent)]">What We Do</h2>
             <p className="mt-3 text-sm text-[var(--muted)]">
               We routinely handle full-scope {service.name.toLowerCase()} work including planning, material coordination,
@@ -101,7 +113,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               <li>Excellent service-to-price value with scope choices that fit your budget</li>
               <li>Fast local response across Reading, Berks County, and Lehigh Valley</li>
             </ul>
-            <h2 className="text-2xl font-bold text-[var(--accent)]">Our Project Approach</h2>
+            <h2 className="mt-6 text-2xl font-bold text-[var(--accent)]">Our Project Approach</h2>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.bullets.map((bullet) => (
                 <li key={bullet}>{bullet}</li>
@@ -109,6 +121,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               <li>Transparent estimate and scope review before work starts</li>
               <li>Direct communication from first call through final walkthrough</li>
             </ul>
+            <ConfidenceSection
+              className="mt-8"
+              title="Project Standards That Protect Your Investment"
+              intro="We run your project with written expectations, schedule visibility, and quality-control checkpoints."
+            />
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">What This Service Usually Includes</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.whatIncluded.map((item) => (
@@ -152,6 +169,20 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 ))}
               </div>
             </section>
+            {relatedCaseStudies.length > 0 && (
+              <section className="mt-8">
+                <h3 className="text-xl font-semibold text-[var(--accent)]">Project Case Studies</h3>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {relatedCaseStudies.map((item) => (
+                    <Link key={item.slug} href={`/projects/${item.slug}`} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName}</p>
+                      <p className="mt-1 text-sm font-semibold">{item.title}</p>
+                      <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
 
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Service Areas for {service.name}</h3>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -176,7 +207,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 Call for immediate help or send your quote request online. We reply quickly and walk you through next steps.
               </p>
               <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-                Ask about current 0% interest promotions for qualified projects.
+                {siteConfig.financing.teaser} {siteConfig.financing.shortDisclosure}
+              </p>
+              <p className="mt-2 text-sm">
+                <Link href="/financing-terms" className="font-semibold text-[var(--brand)]">
+                  Review financing terms
+                </Link>
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Button href="/request-a-quote">Request a Quote</Button>

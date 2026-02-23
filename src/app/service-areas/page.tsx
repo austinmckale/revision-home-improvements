@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { locations } from "@/content/locations";
+import Button from "@/components/ui/Button";
+import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Service Areas",
@@ -17,6 +19,12 @@ export default function ServiceAreasPage() {
         <p className="mt-3 text-[var(--muted)]">
           Explore area-specific service pages with project examples and quote options.
         </p>
+        <div className="mt-5 flex flex-wrap gap-3">
+          <Button href="/request-a-quote">Request a Quote</Button>
+          <Button href={siteConfig.phoneHref} variant="secondary">
+            Call {siteConfig.phoneDisplay}
+          </Button>
+        </div>
         <div className="mt-7 grid gap-4 md:grid-cols-2">
           {locations.map((location) => (
             <Link key={location.slug} href={`/${location.slug}`} className="surface rounded-xl p-6 hover:border-[var(--brand)]">

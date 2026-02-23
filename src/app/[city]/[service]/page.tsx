@@ -9,6 +9,7 @@ import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import { getLocationBySlug, locations } from "@/content/locations";
+import { caseStudies } from "@/content/caseStudies";
 import { getServiceBySlug, services } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
@@ -35,9 +36,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     keywords: [
       `${serviceKey} ${locationKey}`,
       `${serviceKey} contractor ${location.short.toLowerCase()}`,
-      `${serviceKey} near me ${location.short.toLowerCase()}`,
       `home improvement ${locationKey}`,
-      `remodeling contractor ${location.short.toLowerCase()}`,
+      `remodeling ${location.short.toLowerCase()}`,
     ],
     alternates: { canonical: `/${location.slug}/${selectedService.slug}` },
   };
@@ -57,6 +57,9 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     absoluteUrl(`/${location.slug}/${service.slug}`),
     location.name,
   );
+  const localProof = caseStudies
+    .filter((item) => item.locationSlug === location.slug && item.serviceSlug === service.slug)
+    .slice(0, 1);
 
   return (
     <>
@@ -102,41 +105,45 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               <li>Clear estimate, scope, and timeline before work begins</li>
               <li>Excellent value for price with options based on your budget priorities</li>
             </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Benefits of {service.name} in {location.short}</h3>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">What Homeowners Gain</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.outcomes.map((outcome) => (
                 <li key={outcome}>{outcome}</li>
               ))}
             </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Scope Homeowners in {location.short} Usually Request</h3>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Typical Project Scope</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.whatIncluded.slice(0, 3).map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Pricing Drivers in This Service</h3>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">What Drives Cost</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.pricingFactors.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
+            {localProof.length > 0 && (
+              <section className="mt-8">
+                <h3 className="text-xl font-semibold text-[var(--accent)]">Local Project Proof</h3>
+                {localProof.map((item) => (
+                  <Link key={item.slug} href={`/projects/${item.slug}`} className="surface mt-3 block rounded-lg p-4 hover:border-[var(--brand)]">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName}</p>
+                    <p className="mt-1 text-sm font-semibold">{item.title}</p>
+                    <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
+                  </Link>
+                ))}
+              </section>
+            )}
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Priority Nearby Areas</h3>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               {location.priorityAreas.map((area) => (
                 <p key={area} className="surface rounded-lg p-3 text-sm">
-                  {service.name} in and around {area}
+                  {area}
                 </p>
               ))}
             </div>
             <ProcessTimeline title={`How ${service.name} projects run in ${location.short}`} steps={service.process} />
-            <section className="mt-8">
-              <h3 className="text-xl font-semibold text-[var(--accent)]">What People in {location.short} Usually Ask For</h3>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-                <li>{service.name} with budget-first scope options</li>
-                <li>{service.name} timelines and scheduling guidance</li>
-                <li>{service.name} contractor recommendations for long-term durability</li>
-              </ul>
-            </section>
 
             <div className="mt-8 grid gap-2 sm:grid-cols-2">
               <Link href={`/services/${service.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
@@ -151,10 +158,15 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 Let&apos;s plan your {service.name.toLowerCase()} project in {location.short}
               </h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                Call now for scheduling help, or submit the form and we will follow up with a detailed quote conversation.
+                Call now for scheduling help, or submit the form for a detailed scope and quote conversation.
               </p>
               <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-                Ask about current 0% interest promotions for qualified projects.
+                {siteConfig.financing.teaser} {siteConfig.financing.shortDisclosure}
+              </p>
+              <p className="mt-2 text-sm">
+                <Link href="/financing-terms" className="font-semibold text-[var(--brand)]">
+                  Review financing terms
+                </Link>
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
                 <Button href="/request-a-quote">Request Local Quote</Button>

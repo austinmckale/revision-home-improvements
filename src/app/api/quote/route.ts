@@ -24,7 +24,7 @@ async function verifyTurnstile(token: string, ip?: string) {
 }
 
 async function sendLeadWebhook(payload: Record<string, unknown>) {
-  const webhookUrl = process.env.LEADS_WEBHOOK_URL;
+  const webhookUrl = process.env.LEADS_WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) return { delivered: false, reason: "missing_webhook_url" as const };
 
   const isDiscordWebhook = webhookUrl.includes("discord.com/api/webhooks");

@@ -53,6 +53,7 @@ Copy `.env.example` to `.env.local` and fill values:
 - `TURNSTILE_SECRET_KEY`
 - `LEADS_TO_EMAIL`
 - `LEADS_WEBHOOK_URL`
+- `DISCORD_WEBHOOK_URL` (optional alias; use this if you only want Discord delivery)
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 - `SMTP_HOST`
 - `SMTP_PORT`
@@ -61,8 +62,9 @@ Copy `.env.example` to `.env.local` and fill values:
 
 ## Current route coverage
 
-- Core: `/`, `/services`, `/service-areas`, `/request-a-quote`, `/projects`, `/about`, `/financing`, `/insurance-claims`, `/privacy`
+- Core: `/`, `/services`, `/service-areas`, `/request-a-quote`, `/projects`, `/about`, `/our-process`, `/warranty`, `/licenses-and-insurance`, `/financing`, `/financing-terms`, `/insurance-claims`, `/fire-water-damage-restoration`, `/privacy`
 - Services: `/services/[service]`
+- Projects: `/projects/[slug]`
 - Local: `/[city]` and `/[city]/[service]`
 - SEO: `/sitemap.xml`, `/robots.txt`
 - API: `POST /api/quote`
@@ -71,10 +73,12 @@ Copy `.env.example` to `.env.local` and fill values:
 ## Conversion + anti-spam behavior
 
 - Every main template includes prominent call and quote CTAs.
+- Global emergency bar routes fire/water damage users into a call-first path.
 - Mobile sticky CTA keeps call/quote actions visible.
-- Quote form uses honeypot + Zod validation.
+- Quote form uses a two-step flow, honeypot protection, and Zod validation.
 - If Turnstile keys are set, server validates Turnstile token before accepting lead.
-- If `LEADS_WEBHOOK_URL` is configured, accepted leads are posted server-side to that endpoint.
+- If `LEADS_WEBHOOK_URL` or `DISCORD_WEBHOOK_URL` is configured, accepted leads are posted server-side to that endpoint.
+- Client tracking emits events for call clicks, quote steps, quote submit attempts, quote errors, and successful lead submissions.
 
 ## Media sync script
 

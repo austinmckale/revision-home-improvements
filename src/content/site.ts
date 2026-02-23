@@ -12,4 +12,10 @@ export const siteConfig = {
     postalCode: "19601",
     country: "US",
   },
+  financing: {
+    teaser: "0% promotional financing may be available for qualified customers.",
+    shortDisclosure: "Subject to lender approval. Terms vary.",
+    disclosure:
+      "Financing offers are subject to lender approval. Program availability, rates, and term length vary by borrower profile and project scope.",
+  },
 };
