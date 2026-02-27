@@ -2,9 +2,49 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { quoteSchema } from "@/lib/quoteSchema";
 
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 8;
+const requestBuckets = new Map<string, number[]>();
+
+function isRateLimited(ip: string) {
+  const now = Date.now();
+  const cutoff = now - RATE_LIMIT_WINDOW_MS;
+  const recent = (requestBuckets.get(ip) ?? []).filter((ts) => ts > cutoff);
+
+  if (recent.length >= RATE_LIMIT_MAX_REQUESTS) {
+    requestBuckets.set(ip, recent);
+    return true;
+  }
+
+  recent.push(now);
+  requestBuckets.set(ip, recent);
+  return false;
+}
+
+function redactEmail(value: unknown) {
+  const email = typeof value === "string" ? value.trim() : "";
+  const at = email.indexOf("@");
+  if (at <= 1) return email ? "[redacted]" : "";
+  return `${email.slice(0, 1)}***${email.slice(at)}`;
+}
+
+function redactPhone(value: unknown) {
+  const raw = typeof value === "string" ? value : "";
+  const digits = raw.replace(/\D/g, "");
+  if (!digits) return "";
+  if (digits.length <= 4) return `***${digits}`;
+  return `***${digits.slice(-4)}`;
+}
+
 async function verifyTurnstile(token: string, ip?: string) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) return true;
+  if (!secret) {
+    if (process.env.NODE_ENV === "production") {
+      console.error("TURNSTILE_SECRET_KEY is missing in production.");
+      return false;
+    }
+    return true;
+  }
   if (!token) return false;
 
   const formData = new FormData();
@@ -240,6 +280,16 @@ export async function POST(request: Request) {
 
     const remoteIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
     const userAgent = request.headers.get("user-agent") || "";
+    if (remoteIp && isRateLimited(remoteIp)) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message: "Too many requests. Please wait a few minutes and try again.",
+        },
+        { status: 429 },
+      );
+    }
+
     const turnstileOk = await verifyTurnstile(parsed.data["cf-turnstile-response"] || "", remoteIp);
     if (!turnstileOk) {
       return NextResponse.json(
@@ -251,7 +301,14 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log("New quote request:", parsed.data);
+    console.log("New quote request received", {
+      service: parsed.data.service,
+      city: parsed.data.city,
+      timeline: parsed.data.timeline,
+      email: redactEmail(parsed.data.email),
+      phone: redactPhone(parsed.data.phone),
+      ip: remoteIp || "unknown",
+    });
 
     await Promise.allSettled([
       sendLeadWebhook(parsed.data),

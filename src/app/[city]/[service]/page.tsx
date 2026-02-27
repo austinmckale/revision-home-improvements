@@ -11,7 +11,7 @@ import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import { getLocationBySlug, locations } from "@/content/locations";
 import { caseStudies } from "@/content/caseStudies";
-import { getServiceBySlug, primaryServices, services } from "@/content/services";
+import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices, services } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
 import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
@@ -65,8 +65,13 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     .filter((item) => item.locationSlug === location.slug && item.serviceSlug === service.slug)
     .slice(0, 1);
   const relatedLocalServices = primaryServices.filter((item) => item.slug !== service.slug);
+  const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
+    service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
+  );
   const portfolioTag = service.portfolioTag ?? service.slug;
-  const portfolioImages = await getPortfolioImages({ serviceTags: [portfolioTag], limit: 3 });
+  const portfolioImages = showCuratedStaticGallery
+    ? []
+    : await getPortfolioImages({ serviceTags: [portfolioTag], limit: 3 });
 
   return (
     <>
@@ -134,13 +139,24 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </section>
             )}
 
-            {portfolioImages.length > 0 ? (
+            {showCuratedStaticGallery && service.gallery.length > 0 ? (
+              <section className="mt-8">
+                <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Project Photos</h2>
+                <div className={`mt-3 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}>
+                  {service.gallery.slice(0, 4).map((image) => (
+                    <figure key={image.src} className="surface overflow-hidden rounded-lg">
+                      <Image src={image.src} alt={image.alt} width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
+                    </figure>
+                  ))}
+                </div>
+              </section>
+            ) : portfolioImages.length > 0 ? (
               <PortfolioGallery images={portfolioImages} title={`Recent ${service.name} Work`} />
             ) : service.gallery.length > 0 ? (
               <div className={`mt-8 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}>
                 {service.gallery.slice(0, 3).map((image) => (
                   <figure key={image.src} className="surface overflow-hidden rounded-lg">
-                    <Image src={image.src} alt={image.alt} width={700} height={500} className="h-40 w-full object-cover" />
+                    <Image src={image.src} alt={image.alt} width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
                   </figure>
                 ))}
               </div>

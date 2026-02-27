@@ -1,0 +1,19 @@
+# Build and dependency artifacts
+.git
+.next
+node_modules
+coverage
+
+# Local working folders not needed for production deploy
+Bathroom Folder
+Basement photos
+Photos Labeled
+backup
+
+# Raw media source files
+*.heic
+*.HEIC
+*.heif
+*.HEIF
+*.mov
+*.MOV

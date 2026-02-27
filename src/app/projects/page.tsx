@@ -10,22 +10,42 @@ import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
 
-const staticImages = [
+const additionalImages = [
   {
-    src: "/images/projects/img_7833.jpg",
-    alt: "Modern kitchen remodeling project in Lehigh Valley and Berks County.",
+    src: "/images/projects/kitchen-1.jpg",
+    alt: "Kitchen remodel with updated finishes and fixtures.",
   },
   {
-    src: "/images/projects/img_7547.jpg",
-    alt: "Bathroom renovation project in Reading and Berks County.",
+    src: "/images/projects/bathroom-after.jpg",
+    alt: "Finished bathroom renovation with updated fixtures.",
+  },
+  {
+    src: "/images/projects/big-screen-basement.jpg",
+    alt: "Finished basement media room with large screen.",
+  },
+  {
+    src: "/images/projects/basement-epoxy-floor-big-screen.jpg",
+    alt: "Basement epoxy flooring finish detail.",
+  },
+  {
+    src: "/images/projects/finished-room.jpg",
+    alt: "Finished interior room after flooring upgrade.",
+  },
+  {
+    src: "/images/projects/fire-place-construction.jpg",
+    alt: "Fireplace construction detail during interior build.",
+  },
+  {
+    src: "/images/projects/patio-construction-2.jpg",
+    alt: "Patio construction phase during build.",
   },
   {
     src: "/images/projects/Patio-3.jpg",
-    alt: "Patio remodeling and outdoor hardscape project in Reading, PA.",
+    alt: "Finished patio and hardscape project in Reading, PA.",
   },
   {
-    src: "/images/projects/img_8216.jpg",
-    alt: "Interior remodeling project in Berks County by Revision Home Improvements.",
+    src: "/images/projects/living-room-1.jpg",
+    alt: "Living room finish detail after interior renovation.",
   },
 ];
 
@@ -71,21 +91,21 @@ export default async function ProjectsPage() {
             </div>
           </section>
 
-          {portfolioImages.length > 0 ? (
+          {portfolioImages.length > 0 && (
             <PortfolioGallery images={portfolioImages} title="Portfolio" showStageLabels />
-          ) : (
-            <section className="mt-10">
-              <h2 className="text-2xl font-bold text-[var(--accent)]">Additional Project Photos</h2>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {staticImages.map((image) => (
-                  <figure key={image.src} className="surface overflow-hidden rounded-xl">
-                    <Image src={image.src} alt={image.alt} width={900} height={600} className="h-44 w-full object-cover" />
-                    <figcaption className="p-3 text-sm text-[var(--muted)]">{image.alt}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </section>
           )}
+
+          <section className="mt-10">
+            <h2 className="text-2xl font-bold text-[var(--accent)]">Additional Project Photos</h2>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {additionalImages.map((image) => (
+                <figure key={image.src} className="surface overflow-hidden rounded-xl">
+                  <Image src={image.src} alt={image.alt} width={900} height={600} className="h-44 w-full object-cover" />
+                  <figcaption className="p-3 text-sm text-[var(--muted)]">{image.alt}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
 
           <section className="surface mt-10 rounded-2xl p-8 text-center">
             <h2 className="text-2xl font-bold text-[var(--accent)]">Want results like these for your home?</h2>

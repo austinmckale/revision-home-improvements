@@ -9,7 +9,7 @@ import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
 import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
-import { getServiceBySlug, primaryServices } from "@/content/services";
+import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices } from "@/content/services";
 import { caseStudies } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
@@ -57,8 +57,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   const relatedCaseStudies = caseStudies.filter((item) => item.serviceSlug === service.slug).slice(0, 2);
   const serviceTestimonials = getTestimonialsByService(service.slug);
   const isEmergencyService = service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
+  const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
+    service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
+  );
   const portfolioTag = service.portfolioTag ?? service.slug;
-  const portfolioImages = await getPortfolioImages({ serviceTags: [portfolioTag], limit: 6 });
+  const portfolioImages = showCuratedStaticGallery
+    ? []
+    : await getPortfolioImages({ serviceTags: [portfolioTag], limit: 6 });
   const jsonLd = getServiceJsonLd(
     service.name,
     absoluteUrl(`/services/${service.slug}`),
@@ -125,7 +130,18 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               ))}
             </ul>
 
-            {portfolioImages.length > 0 ? (
+            {showCuratedStaticGallery && service.gallery.length > 0 ? (
+              <section className="mt-10">
+                <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Project Photos</h2>
+                <div className={`mt-4 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}>
+                  {service.gallery.slice(0, 4).map((image) => (
+                    <figure key={image.src} className="surface overflow-hidden rounded-lg">
+                      <Image src={image.src} alt={image.alt} width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
+                    </figure>
+                  ))}
+                </div>
+              </section>
+            ) : portfolioImages.length > 0 ? (
               <PortfolioGallery images={portfolioImages} />
             ) : service.gallery.length > 0 ? (
               <section className="mt-10">
@@ -133,7 +149,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <div className={`mt-4 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}>
                   {service.gallery.map((image) => (
                     <figure key={image.src} className="surface overflow-hidden rounded-lg">
-                      <Image src={image.src} alt={image.alt} width={700} height={500} className="h-40 w-full object-cover" />
+                      <Image src={image.src} alt={image.alt} width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
                     </figure>
                   ))}
                 </div>

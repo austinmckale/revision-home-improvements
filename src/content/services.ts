@@ -30,6 +30,13 @@ export type Service = {
   }>;
 };
 
+export const curatedStaticGalleryServiceSlugs = [
+  "kitchen-remodeling",
+  "bathroom-remodeling",
+  "basement-finishing",
+  "drywall-installation-repair",
+] as const;
+
 function sharedFaqs(serviceName: string, typicalTimeline: string): ServiceFaq[] {
   return [
     {
@@ -88,13 +95,13 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_7833.jpg",
-      alt: "Modern kitchen remodel with white cabinets by Revision Home Improvements.",
+      src: "/images/projects/kitchen-1.jpg",
+      alt: "Kitchen remodel with updated finishes and fixtures.",
     },
     gallery: [
-      { src: "/images/projects/DSC00338-1.jpg", alt: "Kitchen remodeling project hero image." },
+      { src: "/images/projects/kitchen-1.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
+      { src: "/images/projects/Kitchen-High-End.jpg", alt: "High-end kitchen remodel with modern appliances and island." },
       { src: "/images/projects/img_7833.jpg", alt: "Modern white cabinet kitchen renovation." },
-      { src: "/images/projects/DSC00325.jpg", alt: "Kitchen remodel with updated cabinets and appliances in Reading, PA." },
     ],
   },
   {
@@ -137,11 +144,14 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_7547.jpg",
-      alt: "Modern bathroom renovation by Revision Home Improvements serving Reading and Berks County.",
+      src: "/images/projects/bathroom-after-4.jpg",
+      alt: "Finished bathroom renovation with updated shower and vanity.",
     },
     gallery: [
-      { src: "/images/projects/img_7547.jpg", alt: "Bathroom renovation with updated vanity and wall finish." },
+      { src: "/images/projects/bathroom-after-4.jpg", alt: "Finished bathroom renovation with updated shower and vanity." },
+      { src: "/images/projects/bathroom-finished-2.jpg", alt: "Finished shower detail with updated fixtures and trim." },
+      { src: "/images/projects/bathroom-after.jpg", alt: "Bathroom renovation with updated vanity and finishes." },
+      { src: "/images/projects/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
     ],
   },
   {
@@ -185,12 +195,14 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_7548.jpg",
-      alt: "Finished basement living space with flooring and fireplace detail.",
+      src: "/images/projects/big-screen-basement.jpg",
+      alt: "Finished basement media room with large screen.",
     },
     gallery: [
-      { src: "/images/projects/img_7548.jpg", alt: "Finished basement area with updated flooring and fireplace." },
-      { src: "/images/projects/img_7540.jpg", alt: "Basement remodel in progress with finish installations." },
+      { src: "/images/projects/big-screen-basement.jpg", alt: "Finished basement media room with large screen." },
+      { src: "/images/projects/basement-epoxy-floor-big-screen.jpg", alt: "Basement epoxy flooring finish detail." },
+      { src: "/images/projects/pace-3.jpg", alt: "Wide basement view showing finished layout and floor detail." },
+      { src: "/images/projects/pace-4.jpg", alt: "Basement wide-angle finish showing completed room flow." },
     ],
   },
   {
@@ -234,11 +246,12 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_8220.jpg",
-      alt: "Drywall and interior renovation work by Revision Home Improvements in Reading, PA.",
+      src: "/images/projects/living-room-1.jpg",
+      alt: "Finished living room with clean drywall and paint-ready surfaces.",
     },
     gallery: [
-      { src: "/images/projects/img_8220.jpg", alt: "Interior wall and finish prep detail." },
+      { src: "/images/projects/living-room-1.jpg", alt: "Finished living room with smooth drywall and clean corners." },
+      { src: "/images/projects/finished-room.jpg", alt: "Finished room with clean drywall lines and finished surfaces." },
     ],
   },
   {
@@ -286,6 +299,8 @@ export const services: Service[] = [
       alt: "Home renovation flooring installation project in Lehigh Valley.",
     },
     gallery: [
+      { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
+      { src: "/images/projects/living-room-1.jpg", alt: "Living room finish detail after interior renovation." },
       { src: "/images/projects/img_8219.jpg", alt: "Flooring installation example in remodeled interior." },
       { src: "/images/projects/img_8216.jpg", alt: "Finished flooring in remodeled interior space." },
     ],
@@ -336,8 +351,10 @@ export const services: Service[] = [
     },
     gallery: [
       { src: "/images/projects/Patio-3.jpg", alt: "Completed paver patio installation." },
+      { src: "/images/projects/patio-construction-2.jpg", alt: "Patio construction phase during build." },
       { src: "/images/projects/Frontier-2.jpg", alt: "Outdoor patio build in progress." },
       { src: "/images/projects/Patio-Construction-site-frontier.jpg", alt: "Site prep for patio and paver build." },
+      { src: "/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg", alt: "Finished patio roof and gable detail." },
     ],
   },
   {

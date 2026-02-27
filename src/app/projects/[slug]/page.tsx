@@ -6,6 +6,7 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
+import BeforeAfterToggle from "@/components/sections/BeforeAfterToggle";
 import { caseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
@@ -103,6 +104,13 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                 <li key={item}>{item}</li>
               ))}
             </ul>
+
+            {caseStudy.beforeImages?.length && caseStudy.afterImages?.length ? (
+              <BeforeAfterToggle
+                beforeImages={caseStudy.beforeImages}
+                afterImages={caseStudy.afterImages}
+              />
+            ) : null}
 
             <blockquote className="surface mt-8 rounded-xl p-5">
               <p className="text-[var(--muted)]">&ldquo;{caseStudy.testimonial.quote}&rdquo;</p>

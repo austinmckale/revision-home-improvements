@@ -19,6 +19,14 @@ export type CaseStudy = {
     src: string;
     alt: string;
   }>;
+  beforeImages?: Array<{
+    src: string;
+    alt: string;
+  }>;
+  afterImages?: Array<{
+    src: string;
+    alt: string;
+  }>;
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -46,8 +54,9 @@ export const caseStudies: CaseStudy[] = [
       author: "Reading homeowner",
     },
     images: [
-      { src: "/images/projects/DSC00338-1.jpg", alt: "Completed kitchen remodeling project in Reading, PA." },
       { src: "/images/projects/img_7833.jpg", alt: "Kitchen renovation with updated cabinets and modern finishes." },
+      { src: "/images/projects/kitchen-1.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
+      { src: "/images/projects/Kitchen-High-End.jpg", alt: "High-end kitchen remodel with modern appliances and island." },
     ],
   },
   {
@@ -74,7 +83,17 @@ export const caseStudies: CaseStudy[] = [
       author: "Wyomissing homeowner",
     },
     images: [
-      { src: "/images/projects/img_7547.jpg", alt: "Finished bathroom renovation project in Wyomissing, PA." },
+      { src: "/images/projects/bathroom-after-4.jpg", alt: "Finished bathroom shower enclosure after remodel." },
+      { src: "/images/projects/bathroom-finished-2.jpg", alt: "Finished shower detail with updated fixtures and trim." },
+      { src: "/images/projects/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
+    ],
+    beforeImages: [
+      { src: "/images/projects/bathroom-before-3.jpg", alt: "Bathroom before remodel with original shower layout." },
+      { src: "/images/projects/bathroom-before-4.jpg", alt: "Bathroom before remodel with dated tile and fixtures." },
+    ],
+    afterImages: [
+      { src: "/images/projects/bathroom-after-4.jpg", alt: "Finished bathroom shower enclosure after remodel." },
+      { src: "/images/projects/bathroom-finished-2.jpg", alt: "Finished shower detail with updated fixtures and trim." },
     ],
   },
   {
@@ -97,8 +116,10 @@ export const caseStudies: CaseStudy[] = [
       author: "Berks County homeowner",
     },
     images: [
-      { src: "/images/projects/img_7548.jpg", alt: "Finished basement interior with custom feature detail." },
-      { src: "/images/projects/img_7540.jpg", alt: "Basement remodeling in progress during finish stage." },
+      { src: "/images/projects/big-screen-basement.jpg", alt: "Finished basement media room with large screen." },
+      { src: "/images/projects/basement-epoxy-floor-big-screen.jpg", alt: "Basement epoxy flooring finish detail." },
+      { src: "/images/projects/pace-3.jpg", alt: "Wide basement view showing finished layout and floor detail." },
+      { src: "/images/projects/pace-4.jpg", alt: "Basement wide-angle finish showing completed room flow." },
     ],
   },
   {
@@ -149,8 +170,9 @@ export const caseStudies: CaseStudy[] = [
       author: "Allentown homeowner",
     },
     images: [
+      { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
+      { src: "/images/projects/living-room-1.jpg", alt: "Living room finish detail after interior renovation." },
       { src: "/images/projects/img_8219.jpg", alt: "Completed flooring installation project in Allentown, PA." },
-      { src: "/images/projects/img_8216.jpg", alt: "Interior finish quality after flooring replacement." },
     ],
   },
   {
@@ -198,6 +220,7 @@ export const caseStudies: CaseStudy[] = [
     },
     images: [
       { src: "/images/projects/Patio-3.jpg", alt: "Finished paver patio project in Reading, PA." },
+      { src: "/images/projects/patio-construction-2.jpg", alt: "Patio construction phase during build." },
       { src: "/images/projects/Patio-Construction-site-frontier.jpg", alt: "Patio construction and base prep work in progress." },
     ],
   },
