@@ -14,9 +14,9 @@ import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Remodeling Contractor in Reading, Berks County & Lehigh Valley",
+  title: "Lehigh Valley Remodeling Contractor | Revision Home Improvements",
   description:
-    "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship across Reading, Berks County, and the Lehigh Valley.",
+    "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship across the Lehigh Valley, Reading, and Berks County.",
 };
 
 export default function HomePage() {

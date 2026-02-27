@@ -34,8 +34,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   }
   const serviceKey = service.name.toLowerCase();
   return {
-    title: `${service.name} | Reading PA, Berks County & Lehigh Valley`,
-    description: `${service.name} services with clear scopes, reliable scheduling, and quality workmanship across Reading, Berks County, and the Lehigh Valley.`,
+    title: `${service.name} | Lehigh Valley, Reading & Berks County`,
+    description: `${service.name} services with clear scopes, reliable scheduling, and quality workmanship across the Lehigh Valley, Reading, and Berks County.`,
     keywords: [
       `${serviceKey} reading pa`,
       `${serviceKey} berks county`,

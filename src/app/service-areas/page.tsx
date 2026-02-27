@@ -9,9 +9,9 @@ import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Service Areas | Reading PA, Berks County & Lehigh Valley",
+  title: "Service Areas | Lehigh Valley, Reading & Berks County",
   description:
-    "Focused coverage in Reading, Berks County, and the Lehigh Valley for remodeling and restoration projects.",
+    "Focused coverage in the Lehigh Valley, Reading, and Berks County for remodeling and restoration projects.",
   alternates: { canonical: "/service-areas" },
 };
 

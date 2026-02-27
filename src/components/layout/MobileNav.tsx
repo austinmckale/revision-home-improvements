@@ -54,8 +54,17 @@ export default function MobileNav() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 top-16 z-40 bg-white">
-          <nav className="flex flex-col divide-y divide-[var(--border)] px-4" aria-label="Mobile navigation">
+        <div className="fixed inset-0 top-16 z-40">
+          <button
+            type="button"
+            aria-label="Close menu overlay"
+            className="absolute inset-0 bg-black/35"
+            onClick={() => setOpen(false)}
+          />
+          <nav
+            className="relative flex flex-col divide-y divide-[var(--border)] bg-[var(--surface)]/95 px-4 backdrop-blur"
+            aria-label="Mobile navigation"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
