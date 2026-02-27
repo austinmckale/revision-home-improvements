@@ -4,7 +4,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
-import TestimonialStrip from "@/components/sections/TestimonialStrip";
+import ReviewsSection from "@/components/sections/ReviewsSection";
 import ConfidenceSection from "@/components/sections/ConfidenceSection";
 import BottomCTA from "@/components/sections/BottomCTA";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
@@ -41,7 +41,7 @@ export default function HomePage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button href="/request-a-quote">Request a Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
+              <Button href={siteConfig.phoneHref} variant="secondary" className="hidden sm:inline-flex">
                 Call {siteConfig.phoneDisplay}
               </Button>
             </div>
@@ -164,11 +164,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="py-8">
-        <Container>
-          <TestimonialStrip />
-        </Container>
-      </section>
+      <ReviewsSection />
 
       <BottomCTA title="Need urgent restoration help?" description="Fire and water damage calls get priority scheduling. We also support insurance-claim project scoping." links={[{ href: "/fire-water-damage-restoration", label: "Emergency Restoration" }, { href: "/insurance-claims", label: "Insurance Claims Help" }]} />
     </>

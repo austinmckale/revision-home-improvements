@@ -10,6 +10,7 @@ export function getLocalBusinessJsonLd() {
     telephone: "+1-484-706-9229",
     email: siteConfig.primaryEmail,
     image: `${siteConfig.domain}${siteConfig.ogImage}`,
+    logo: `${siteConfig.domain}${siteConfig.logo}`,
     ...(sameAs.length > 0 ? { sameAs } : {}),
     areaServed: [
       "Reading, PA",

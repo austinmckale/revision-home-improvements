@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     images: [siteConfig.ogImage],
   },
   icons: {
-    icon: "/images/brand/chat-logo.png",
-    apple: "/images/brand/chat-logo.png",
+    icon: siteConfig.logo,
+    apple: siteConfig.logo,
   },
   robots: { index: true, follow: true },
 };

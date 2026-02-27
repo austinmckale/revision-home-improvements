@@ -15,6 +15,7 @@ export const siteConfig = {
     country: "US",
   },
   ogImage: "/images/projects/DSC00338-1.jpg",
+  logo: "/images/brand/rhi-logo.png",
   hicNumber: "PA HIC #XXXXXX",
   insuranceCarrier: "Provided upon request during estimate review",
   warrantyYears: 2,
