@@ -22,8 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const location = getLocationBySlug(city);
   if (!location) return {};
   return {
-    title: `Home Improvement in ${location.name}`,
-    description: `Remodeling and restoration services in ${location.name}. Explore local kitchen, bathroom, basement, flooring, and restoration pages.`,
+    title: `Home Remodeling in ${location.name} | Revision Home Improvements`,
+    description: `Kitchen, bathroom, basement, flooring, and restoration services in ${location.name}. Local contractor with clear scopes and fast quotes.`,
     alternates: { canonical: `/${location.slug}` },
   };
 }

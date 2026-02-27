@@ -35,8 +35,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const serviceKey = selectedService.name.toLowerCase();
   const locationKey = location.name.toLowerCase();
   return {
-    title: `${selectedService.name} in ${location.name}`,
-    description: `${selectedService.name} in ${location.name}. Trusted local contractor, fast quotes, clear pricing, and quality workmanship.`,
+    title: `${selectedService.name} in ${location.name} | Revision Home Improvements`,
+    description: `Local ${selectedService.name.toLowerCase()} contractor in ${location.name} with clear scopes, reliable scheduling, and quality workmanship.`,
     keywords: [
       `${serviceKey} ${locationKey}`,
       `${serviceKey} contractor ${location.short.toLowerCase()}`,

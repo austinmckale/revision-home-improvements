@@ -34,8 +34,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   }
   const serviceKey = service.name.toLowerCase();
   return {
-    title: `${service.name} | Reading, Berks County, Lehigh Valley`,
-    description: `${service.name} contractor serving Reading, Wyomissing, Berks County, Allentown, Bethlehem, and Lehigh Valley. Fast quotes and clear scope.`,
+    title: `${service.name} | Reading PA, Berks County & Lehigh Valley`,
+    description: `${service.name} services with clear scopes, reliable scheduling, and quality workmanship across Reading, Berks County, and the Lehigh Valley.`,
     keywords: [
       `${serviceKey} reading pa`,
       `${serviceKey} berks county`,

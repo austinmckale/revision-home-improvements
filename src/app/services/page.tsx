@@ -10,9 +10,9 @@ import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Home Improvement Services in Reading, Berks County & Lehigh Valley",
+  title: "Remodeling & Restoration Services | Reading PA & Lehigh Valley",
   description:
-    "Kitchen remodeling, bathroom renovation, basement finishing, flooring, drywall, pavers, and restoration services. Serving Reading, Berks County, and Lehigh Valley.",
+    "Kitchen, bathroom, basement, flooring, drywall, pavers, and fire/water restoration services across Reading, Berks County, and the Lehigh Valley.",
   alternates: { canonical: "/services" },
 };
 

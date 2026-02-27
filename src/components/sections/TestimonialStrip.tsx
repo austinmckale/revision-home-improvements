@@ -1,4 +1,5 @@
 import { testimonials, Testimonial } from "@/content/testimonials";
+import { siteConfig } from "@/content/site";
 
 type TestimonialStripProps = {
   items?: Testimonial[];
@@ -22,7 +23,17 @@ export default function TestimonialStrip({ items, title = "What Our Clients Say"
 
   return (
     <section className="mt-10">
-      <h3 className="text-2xl font-bold text-[var(--accent)]">{title}</h3>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h3 className="text-2xl font-bold text-[var(--accent)]">{title}</h3>
+        <a
+          href={siteConfig.googleBusinessProfileUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="text-sm font-semibold text-[var(--brand)]"
+        >
+          Read more reviews
+        </a>
+      </div>
       <div className="mt-4 grid gap-3 md:grid-cols-3">
         {displayItems.map((item) => (
           <article key={item.context} className="surface rounded-lg p-4">
@@ -30,6 +41,7 @@ export default function TestimonialStrip({ items, title = "What Our Clients Say"
             <p className="mt-2 text-sm text-[var(--muted)]">&ldquo;{item.quote}&rdquo;</p>
             <p className="mt-3 text-sm font-semibold">{item.name}</p>
             <p className="text-xs text-[var(--muted)]">{item.context}</p>
+            {item.source ? <p className="mt-1 text-[11px] text-[var(--muted)]">{item.source}</p> : null}
           </article>
         ))}
       </div>

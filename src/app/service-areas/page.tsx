@@ -9,9 +9,9 @@ import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Service Areas — Reading, Berks County & Lehigh Valley",
+  title: "Service Areas | Reading PA, Berks County & Lehigh Valley",
   description:
-    "Revision Home Improvements serves Reading, Wyomissing, Berks County, Allentown, Bethlehem, and Lehigh Valley.",
+    "Focused coverage in Reading, Berks County, and the Lehigh Valley for remodeling and restoration projects.",
   alternates: { canonical: "/service-areas" },
 };
 
@@ -24,6 +24,9 @@ export default function ServiceAreasPage() {
           <h1 className="text-4xl font-extrabold text-[var(--accent)]">Service Areas</h1>
           <p className="mt-3 max-w-3xl text-[var(--muted)]">
             We serve homeowners across southeastern Pennsylvania. Find your area below to see local services, project examples, and get a quote tailored to your neighborhood.
+          </p>
+          <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
+            We keep our coverage focused so projects stay on schedule. If you’re just outside these areas, call — we’ll confirm availability quickly.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Button href="/request-a-quote">Request a Quote</Button>

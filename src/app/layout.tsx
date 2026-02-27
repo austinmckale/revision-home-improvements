@@ -6,31 +6,37 @@ import EmergencyBar from "@/components/layout/EmergencyBar";
 import Footer from "@/components/layout/Footer";
 import StickyCTA from "@/components/layout/StickyCTA";
 import TrackingEvents from "@/components/TrackingEvents";
+import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/content/site";
+import { getLocalBusinessJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.domain),
   title: {
-    default: "Revision Home Improvements | Reading & Lehigh Valley Remodeling",
+    default: "Revision Home Improvements | Remodeling & Restoration in Reading PA",
     template: "%s | Revision Home Improvements",
   },
   description:
-    "Home remodeling and restoration contractor serving Reading, Wyomissing, Berks County, Allentown, Bethlehem, and Lehigh Valley.",
+    "Licensed remodeling and restoration contractor serving Reading, Berks County, and the Lehigh Valley. Kitchens, bathrooms, basements, and damage repair.",
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: siteConfig.name,
-    title: "Revision Home Improvements | Reading & Lehigh Valley Remodeling",
+    title: "Revision Home Improvements | Remodeling & Restoration in Reading PA",
     description:
-      "Kitchen, bathroom, basement, and restoration projects with clear timelines and quality execution across Reading, Berks County, and Lehigh Valley.",
+      "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship across Reading, Berks County, and the Lehigh Valley.",
     images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Revision Home Improvements | Reading & Lehigh Valley Remodeling",
+    title: "Revision Home Improvements | Remodeling & Restoration in Reading PA",
     description:
-      "Kitchen, bathroom, basement, and restoration projects with clear timelines and quality execution.",
+      "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship.",
     images: [siteConfig.ogImage],
+  },
+  icons: {
+    icon: "/images/brand/chat-logo.png",
+    apple: "/images/brand/chat-logo.png",
   },
   robots: { index: true, follow: true },
 };
@@ -46,6 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <JsonLd data={getLocalBusinessJsonLd()} />
         {gaId && (
           <>
             <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />

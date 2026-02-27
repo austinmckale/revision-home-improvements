@@ -11,9 +11,9 @@ import { siteConfig } from "@/content/site";
 import { testimonials } from "@/content/testimonials";
 
 export const metadata: Metadata = {
-  title: "About Us — Local Remodeling Contractor in Reading & Lehigh Valley",
+  title: "About Revision Home Improvements | Reading & Lehigh Valley Contractor",
   description:
-    "Meet the team behind Revision Home Improvements. Licensed PA contractor serving Reading, Berks County, and Lehigh Valley with clear communication and quality execution.",
+    "Local, licensed, and insured remodeling contractor serving Reading, Berks County, and the Lehigh Valley with clear scopes and reliable schedules.",
   alternates: { canonical: "/about" },
 };
 

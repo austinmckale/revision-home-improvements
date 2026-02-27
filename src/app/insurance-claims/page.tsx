@@ -8,9 +8,9 @@ import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Insurance Claims Assistance",
+  title: "Insurance Claim Remodeling Support | Reading PA & Lehigh Valley",
   description:
-    "Need help with claim-related repair scope? Revision Home Improvements supports insurance-backed remodeling and restoration work.",
+    "Need help with claim-related repair scope? We support insurance-backed remodeling and restoration work across Reading, Berks County, and the Lehigh Valley.",
   alternates: { canonical: "/insurance-claims" },
 };
 

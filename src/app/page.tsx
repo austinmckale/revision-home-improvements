@@ -7,22 +7,21 @@ import JsonLd from "@/components/JsonLd";
 import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import ConfidenceSection from "@/components/sections/ConfidenceSection";
 import BottomCTA from "@/components/sections/BottomCTA";
-import { getLocalBusinessJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { primaryServices } from "@/content/services";
 import { caseStudies } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Home Remodeling Contractor in Reading, Berks County, and Lehigh Valley",
+  title: "Remodeling Contractor in Reading, Berks County & Lehigh Valley",
   description:
-    "Revision Home Improvements delivers kitchen, bathroom, basement, and restoration projects with clear timelines, fast communication, and quality execution.",
+    "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship across Reading, Berks County, and the Lehigh Valley.",
 };
 
 export default function HomePage() {
   return (
     <>
-      <JsonLd data={getLocalBusinessJsonLd()} />
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }])} />
       <section className="hero-band py-16 md:py-24">
         <Container className="grid items-center gap-10 md:grid-cols-2">
@@ -117,14 +116,22 @@ export default function HomePage() {
       <section className="py-14">
         <Container>
           <h2 className="text-2xl font-bold text-[var(--accent)]">Service Areas</h2>
+          <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
+            We focus on Reading, Berks County, and the Lehigh Valley. Start with a nearby hub and we’ll confirm coverage for your address.
+          </p>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
-            {locations.map((location) => (
+            {locations.slice(0, 6).map((location) => (
               <Link key={location.slug} href={`/${location.slug}`} className="surface rounded-xl p-4 hover:border-[var(--brand)]">
                 <p className="font-semibold">{location.name}</p>
                 <p className="text-sm text-[var(--muted)]">{location.region}</p>
               </Link>
             ))}
           </div>
+          <p className="mt-4 text-sm">
+            <Link href="/service-areas" className="font-semibold text-[var(--brand)]">
+              View all service areas
+            </Link>
+          </p>
         </Container>
       </section>
 

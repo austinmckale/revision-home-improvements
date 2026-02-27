@@ -32,9 +32,9 @@ const staticImages = [
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Remodeling Projects & Case Studies in Reading & Lehigh Valley",
+  title: "Remodeling Projects & Case Studies | Reading PA & Lehigh Valley",
   description:
-    "Browse recent kitchen, bathroom, basement, flooring, and outdoor remodeling projects by Revision Home Improvements across Reading, Berks County, and Lehigh Valley.",
+    "Browse recent kitchen, bathroom, basement, flooring, and restoration projects across Reading, Berks County, and the Lehigh Valley.",
   alternates: { canonical: "/projects" },
 };
 

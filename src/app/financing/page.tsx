@@ -8,9 +8,9 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "0% Financing Options for Home Improvement Projects",
+  title: "Remodeling Financing Options | Reading PA & Lehigh Valley",
   description:
-    "Financing options for qualified home improvement projects in Reading, Berks County, and Lehigh Valley with clear disclosure terms.",
+    "Financing options for qualified homeowners in Reading, Berks County, and the Lehigh Valley. Clear terms and quick next steps.",
   alternates: { canonical: "/financing" },
 };
 

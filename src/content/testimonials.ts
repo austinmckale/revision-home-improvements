@@ -3,6 +3,7 @@ export type Testimonial = {
   name: string;
   context: string;
   rating: number;
+  source?: string;
   locationSlug?: string;
   serviceSlug?: string;
 };
@@ -10,93 +11,91 @@ export type Testimonial = {
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "Communication was clear from estimate through final walkthrough. The project stayed organized and the finish quality was excellent.",
-    name: "Sarah M.",
-    context: "Kitchen remodel in Reading, PA",
+      "Ryan’s customer service was great from beginning to end. I highly recommend the family owned business! Very professional work and service!",
+    name: "Curin R.",
+    context: "Interior painting (1–2 rooms)",
     rating: 5,
+    source: "Angi Review · Feb 2025",
     locationSlug: "reading-pa",
-    serviceSlug: "kitchen-remodeling",
+    serviceSlug: "painting",
   },
   {
     quote:
-      "We needed repairs quickly after damage and the team helped us understand each step. Fast response and very professional.",
-    name: "David R.",
-    context: "Restoration project in Berks County, PA",
+      "Very pleased! Fast response, professional, very nice, and easy to work with. Fixed my lighting problem. Fair price, great job!",
+    name: "Alice H.",
+    context: "Lighting repair",
     rating: 5,
+    source: "Angi Review · Aug 2024",
     locationSlug: "berks-county-pa",
-    serviceSlug: "water-damage-restoration",
+    serviceSlug: "electrical",
   },
   {
     quote:
-      "The quote process was straightforward and we knew what to expect before work started. Great experience overall.",
-    name: "Jennifer L.",
-    context: "Bathroom renovation in Lehigh Valley, PA",
+      "Very professional, excellent workmanship, very thorough.",
+    name: "Walter M.",
+    context: "General contractor service",
     rating: 5,
+    source: "Angi Review · Aug 2024",
+    locationSlug: "berks-county-pa",
+    serviceSlug: "general-contractor",
+  },
+  {
+    quote:
+      "The crew was professional, easy to talk with, and kept a clean work area. The project was completed as requested. I would recommend them.",
+    name: "Elsie M.",
+    context: "Demo + pool removal + landscaping",
+    rating: 5,
+    source: "Angi Review · Aug 2024",
+    locationSlug: "berks-county-pa",
+    serviceSlug: "general-contractor",
+  },
+  {
+    quote:
+      "Would recommend these guys to anyone looking to have painting or home improvement work done. The crew is very respectful and highly skilled.",
+    name: "David H.",
+    context: "Painting + home improvement",
+    rating: 5,
+    source: "Angi Review · Jul 2024",
     locationSlug: "lehigh-valley-pa",
+    serviceSlug: "painting",
+  },
+  {
+    quote:
+      "This company has the experience and know-how to do almost any work you need. Their work is impeccable and communication was consistent.",
+    name: "Richard K.",
+    context: "Bathroom remodel",
+    rating: 5,
+    source: "Angi Review · Jun 2024",
+    locationSlug: "berks-county-pa",
     serviceSlug: "bathroom-remodeling",
   },
   {
     quote:
-      "They took a blank basement and turned it into a space our family actually uses every day. Could not be happier with the result.",
-    name: "Michael T.",
-    context: "Basement finishing in Berks County, PA",
+      "Very professional and clean. Everything we asked for and more. They went above and beyond and everything came out perfect.",
+    name: "Paul C.",
+    context: "Major home repair",
     rating: 5,
+    source: "Angi Review · Mar 2024",
     locationSlug: "berks-county-pa",
-    serviceSlug: "basement-finishing",
   },
   {
     quote:
-      "The patio feels like a complete extension of the home now. Great planning and finish quality.",
-    name: "Karen W.",
-    context: "Paver patio in Reading, PA",
+      "Honest, detail oriented, and great communication throughout the project.",
+    name: "Albert S.",
+    context: "Kitchen remodel",
     rating: 5,
-    locationSlug: "reading-pa",
-    serviceSlug: "paver-installation",
-  },
-  {
-    quote:
-      "Fast response and clear next steps made a stressful situation manageable. The rebuild quality exceeded what we had before.",
-    name: "Tom H.",
-    context: "Water damage restoration in Lehigh Valley, PA",
-    rating: 5,
-    locationSlug: "lehigh-valley-pa",
-    serviceSlug: "water-damage-restoration",
-  },
-  {
-    quote:
-      "The repaired walls blended in perfectly and saved us from a bigger remodel. Very detail-oriented crew.",
-    name: "Angela P.",
-    context: "Drywall repair in Bethlehem, PA",
-    rating: 5,
-    locationSlug: "bethlehem-pa",
-    serviceSlug: "drywall-installation-repair",
-  },
-  {
-    quote:
-      "The floor feels solid and the finishing details made a big difference in the final look. Highly recommend.",
-    name: "Chris B.",
-    context: "Flooring installation in Allentown, PA",
-    rating: 5,
-    locationSlug: "allentown-pa",
-    serviceSlug: "flooring-installation",
-  },
-  {
-    quote:
-      "They brought structure to a chaotic situation and delivered quality work from start to finish. Could not ask for more.",
-    name: "Lisa G.",
-    context: "Fire damage restoration in Berks County, PA",
-    rating: 5,
+    source: "Angi Review · Mar 2024",
     locationSlug: "berks-county-pa",
-    serviceSlug: "fire-damage-restoration",
-  },
-  {
-    quote:
-      "Our kitchen turned out better than we imagined. The team was respectful of our home and kept us informed the whole time.",
-    name: "Mark D.",
-    context: "Kitchen remodel in Wyomissing, PA",
-    rating: 5,
-    locationSlug: "wyomissing-pa",
     serviceSlug: "kitchen-remodeling",
+  },
+  {
+    quote:
+      "Excellent work, courteous, punctual, and knowledgeable.",
+    name: "Ron K.",
+    context: "Fixture repair",
+    rating: 5,
+    source: "Angi Review · Feb 2024",
+    locationSlug: "berks-county-pa",
   },
 ];
 

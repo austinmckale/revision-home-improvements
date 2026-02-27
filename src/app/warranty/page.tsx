@@ -7,9 +7,9 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: `${siteConfig.warrantyYears}-Year Workmanship Warranty`,
+  title: "Workmanship Warranty | Revision Home Improvements",
   description:
-    `Every Revision Home Improvements project includes a ${siteConfig.warrantyYears}-year workmanship warranty. See what is covered, how to report issues, and our resolution process.`,
+    `Every Revision Home Improvements project includes a ${siteConfig.warrantyYears}-year workmanship warranty. See what is covered and how to request service.`,
   alternates: { canonical: "/warranty" },
 };
 

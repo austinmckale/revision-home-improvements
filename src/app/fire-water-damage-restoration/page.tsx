@@ -12,9 +12,9 @@ import { absoluteUrl } from "@/lib/url";
 import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Fire and Water Damage Restoration",
+  title: "Fire & Water Damage Restoration | Reading PA & Lehigh Valley",
   description:
-    "Call-first fire and water damage restoration support in Reading, Berks County, and Lehigh Valley, including rebuild scopes and insurance claim coordination.",
+    "Emergency fire and water damage restoration with insurance coordination and rebuild scopes across Reading, Berks County, and the Lehigh Valley.",
   alternates: { canonical: "/fire-water-damage-restoration" },
 };
 

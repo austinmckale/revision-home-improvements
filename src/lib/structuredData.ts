@@ -1,6 +1,7 @@
 import { siteConfig } from "@/content/site";
 
 export function getLocalBusinessJsonLd() {
+  const sameAs = [siteConfig.googleBusinessProfileUrl].filter(Boolean);
   return {
     "@context": "https://schema.org",
     "@type": "GeneralContractor",
@@ -8,6 +9,8 @@ export function getLocalBusinessJsonLd() {
     url: siteConfig.domain,
     telephone: "+1-484-706-9229",
     email: siteConfig.primaryEmail,
+    image: `${siteConfig.domain}${siteConfig.ogImage}`,
+    ...(sameAs.length > 0 ? { sameAs } : {}),
     areaServed: [
       "Reading, PA",
       "Wyomissing, PA",
