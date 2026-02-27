@@ -6,8 +6,10 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import ConfidenceSection from "@/components/sections/ConfidenceSection";
-import { getLocalBusinessJsonLd } from "@/lib/structuredData";
+import BottomCTA from "@/components/sections/BottomCTA";
+import { getLocalBusinessJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { primaryServices } from "@/content/services";
+import { caseStudies } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 
@@ -21,6 +23,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={getLocalBusinessJsonLd()} />
+      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }])} />
       <section className="hero-band py-16 md:py-24">
         <Container className="grid items-center gap-10 md:grid-cols-2">
           <div>
@@ -47,7 +50,7 @@ export default function HomePage() {
               <p className="surface rounded-lg px-3 py-2">Clear scopes before work starts</p>
               <p className="surface rounded-lg px-3 py-2">Fast quote follow-up</p>
               <p className="surface rounded-lg px-3 py-2">Remodeling and restoration under one team</p>
-              <p className="surface rounded-lg px-3 py-2">{siteConfig.financing.teaser}</p>
+              <p className="surface rounded-lg px-3 py-2">Licensed, insured, and warranty-backed</p>
             </div>
           </div>
           <div className="surface overflow-hidden rounded-2xl">
@@ -64,8 +67,10 @@ export default function HomePage() {
 
       <section className="py-14">
         <Container>
-          <ConfidenceSection />
-          <h2 className="text-2xl font-bold text-[var(--accent)]">Core Services</h2>
+          <h2 className="text-2xl font-bold text-[var(--accent)]">Start With Your Project Type</h2>
+          <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
+            We handle everything from kitchen upgrades to emergency damage restoration. Pick the service that fits your needs.
+          </p>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             {primaryServices.slice(0, 6).map((service) => (
               <article key={service.slug} className="surface rounded-xl p-5">
@@ -77,28 +82,34 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+          <ConfidenceSection
+            className="mt-8"
+            title="Why Homeowners Keep Referring Us"
+            intro="We prioritize practical scope planning, direct communication, and finish quality that holds up after handoff."
+          />
         </Container>
       </section>
 
       <section className="py-14">
         <Container>
-          <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Service Pages</h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
-            <Link href="/reading-pa/kitchen-remodeling" className="surface rounded-xl p-4 hover:border-[var(--brand)]">
-              Kitchen remodeling in Reading, PA
-            </Link>
-            <Link href="/berks-county-pa/bathroom-remodeling" className="surface rounded-xl p-4 hover:border-[var(--brand)]">
-              Bathroom remodeling in Berks County
-            </Link>
-            <Link href="/allentown-pa/basement-finishing" className="surface rounded-xl p-4 hover:border-[var(--brand)]">
-              Basement finishing in Allentown, PA
-            </Link>
-            <Link href="/lehigh-valley-pa/water-damage-restoration" className="surface rounded-xl p-4 hover:border-[var(--brand)]">
-              Water damage restoration in Lehigh Valley
-            </Link>
-            <Link href="/fire-water-damage-restoration" className="surface rounded-xl p-4 hover:border-[var(--brand)]">
-              Fire and water damage restoration
-            </Link>
+          <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Project Outcomes</h2>
+          <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
+            Real projects across Berks County and Lehigh Valley with clear before/after scope and measurable results.
+          </p>
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            {caseStudies.slice(0, 3).map((study) => (
+              <article key={study.slug} className="surface overflow-hidden rounded-xl">
+                <Image src={study.images[0].src} alt={study.images[0].alt} width={900} height={600} className="h-44 w-full object-cover" />
+                <div className="p-4">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{study.locationName}</p>
+                  <h3 className="mt-1 text-base font-semibold text-[var(--accent)]">{study.title}</h3>
+                  <p className="mt-2 text-sm text-[var(--muted)]">{study.summary}</p>
+                  <Link href={`/projects/${study.slug}`} className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+                    Read case study
+                  </Link>
+                </div>
+              </article>
+            ))}
           </div>
         </Container>
       </section>
@@ -118,7 +129,10 @@ export default function HomePage() {
       </section>
 
       <section className="py-14">
-        <Container className="grid gap-4 md:grid-cols-3">
+        <Container>
+          <h2 className="text-2xl font-bold text-[var(--accent)]">How It Works</h2>
+        </Container>
+        <Container className="mt-5 grid gap-4 md:grid-cols-3">
           <article className="surface rounded-xl p-5">
             <h3 className="text-lg font-semibold">1. Quick Discovery Call</h3>
             <p className="mt-2 text-sm text-[var(--muted)]">
@@ -138,6 +152,9 @@ export default function HomePage() {
             </p>
           </article>
         </Container>
+        <Container className="mt-6 text-center">
+          <Button href="/our-process" variant="secondary">See our full process</Button>
+        </Container>
       </section>
 
       <section className="py-8">
@@ -146,20 +163,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="pb-14">
-        <Container className="surface rounded-2xl p-8 text-center">
-          <h2 className="text-3xl font-extrabold text-[var(--accent)]">Need urgent restoration help?</h2>
-          <p className="mt-3 text-[var(--muted)]">
-            Fire and water damage calls get priority scheduling. We can also support insurance-claim project scoping.
-          </p>
-          <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <Button href={siteConfig.phoneHref}>Call {siteConfig.phoneDisplay}</Button>
-            <Button href="/insurance-claims" variant="secondary">
-              Insurance Claims Help
-            </Button>
-          </div>
-        </Container>
-      </section>
+      <BottomCTA title="Need urgent restoration help?" description="Fire and water damage calls get priority scheduling. We also support insurance-claim project scoping." links={[{ href: "/fire-water-damage-restoration", label: "Emergency Restoration" }, { href: "/insurance-claims", label: "Insurance Claims Help" }]} />
     </>
   );
 }

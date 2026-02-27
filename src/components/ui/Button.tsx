@@ -16,8 +16,8 @@ export default function Button({
 }: ButtonProps) {
   const styles =
     variant === "primary"
-      ? "bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)]"
-      : "bg-white text-[var(--brand)] border border-[var(--brand)] hover:bg-[var(--surface-soft)]";
+      ? "bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)] focus-visible:ring-2 focus-visible:ring-[var(--brand)] focus-visible:ring-offset-2"
+      : "bg-white text-[var(--brand)] border border-[var(--brand)] hover:bg-[var(--surface-soft)] focus-visible:ring-2 focus-visible:ring-[var(--brand)] focus-visible:ring-offset-2";
 
   if (href.startsWith("tel:")) {
     return (

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 import { quoteSchema } from "@/lib/quoteSchema";
 
 async function verifyTurnstile(token: string, ip?: string) {
@@ -39,6 +40,10 @@ async function sendLeadWebhook(payload: Record<string, unknown>) {
     `Details: ${String(payload.details || "")}`,
   ];
 
+  if (payload.utm_source) {
+    leadLines.push(`Source: ${String(payload.utm_source)} / ${String(payload.utm_medium || "")}`);
+  }
+
   const body = isDiscordWebhook
     ? {
         username: "RHI Leads",
@@ -72,6 +77,147 @@ async function sendLeadWebhook(payload: Record<string, unknown>) {
   return { delivered: true as const };
 }
 
+async function sendLeadEmail(payload: Record<string, unknown>) {
+  const host = process.env.SMTP_HOST;
+  const port = Number(process.env.SMTP_PORT || 465);
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  const to = process.env.EMAIL_TO;
+  const from = process.env.EMAIL_FROM || user;
+
+  if (!host || !user || !pass || !to || !from) {
+    return { delivered: false, reason: "missing_smtp_config" as const };
+  }
+
+  const transporter = nodemailer.createTransport({
+    host,
+    port,
+    secure: port === 465,
+    auth: { user, pass },
+  });
+
+  const subject = `New Quote Request — ${String(payload.name || "Lead")} (${String(payload.service || "Service TBD")})`;
+  const body = [
+    `Name: ${String(payload.name || "")}`,
+    `Phone: ${String(payload.phone || "")}`,
+    `Email: ${String(payload.email || "")}`,
+    `City: ${String(payload.city || "")}`,
+    `ZIP: ${String(payload.zip || "")}`,
+    `Service: ${String(payload.service || "")}`,
+    `Timeline: ${String(payload.timeline || "")}`,
+    `Details: ${String(payload.details || "")}`,
+  ];
+  if (payload.utm_source) {
+    body.push(`Source: ${String(payload.utm_source)} / ${String(payload.utm_medium || "")}`);
+  }
+
+  await transporter.sendMail({
+    from,
+    to,
+    replyTo: payload.email ? String(payload.email) : undefined,
+    subject,
+    text: body.join("\n"),
+  });
+
+  return { delivered: true as const };
+}
+
+function getManagerAppUrl() {
+  if (process.env.MANAGER_APP_URL) return process.env.MANAGER_APP_URL;
+  return process.env.NODE_ENV === "production" ? "https://app.rhipros.com" : "http://localhost:3001";
+}
+
+async function forwardToManagerApp(payload: Record<string, unknown>) {
+  const managerUrl = getManagerAppUrl();
+  const apiKey = process.env.LEAD_INGEST_API_KEY;
+  if (!apiKey) {
+    console.warn("[lead-intake] Skipped: set LEAD_INGEST_API_KEY on the site (same value as Manager App) to forward leads.");
+    return;
+  }
+
+  const externalRef = `siteform-${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
+  const addressParts = [payload.city, payload.zip].filter(Boolean).map(String);
+  const address = addressParts.length > 0 ? addressParts.join(", ") : undefined;
+
+  try {
+    const intakeUrl = `${managerUrl}/api/leads/intake`;
+    const res = await fetch(intakeUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-lead-intake-key": apiKey,
+      },
+      body: JSON.stringify({
+        externalRef,
+        contactName: payload.name,
+        phone: payload.phone,
+        email: payload.email,
+        address: address || undefined,
+        serviceType: payload.service,
+        source: "website_form",
+        notes: payload.details,
+        utm_source: payload.utm_source ?? undefined,
+        utm_medium: payload.utm_medium ?? undefined,
+        utm_campaign: payload.utm_campaign ?? undefined,
+        utm_content: payload.utm_content ?? undefined,
+        utm_term: payload.utm_term ?? undefined,
+        landing_path: payload.landing_path ?? undefined,
+        city: payload.city,
+        zip: payload.zip,
+        timeline: payload.timeline,
+      }),
+    });
+    const text = await res.text();
+    if (!res.ok) {
+      console.warn("[lead-intake] failed:", res.status, intakeUrl, text);
+    } else {
+      try {
+        const data = JSON.parse(text || "{}") as { leadId?: string };
+        console.log("[lead-intake] forwarded to Manager App:", res.status, data.leadId ?? "ok");
+      } catch {
+        console.log("[lead-intake] forwarded to Manager App:", res.status);
+      }
+    }
+  } catch (err) {
+    console.warn("[lead-intake] request error:", err);
+  }
+}
+
+async function sendFbConversionEvent(payload: Record<string, unknown>, ip?: string, ua?: string) {
+  const pixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
+  const token = process.env.FB_CONVERSIONS_API_TOKEN;
+  if (!pixelId || !token) return;
+
+  try {
+    await fetch(`https://graph.facebook.com/v21.0/${pixelId}/events`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        data: [
+          {
+            event_name: "Lead",
+            event_time: Math.floor(Date.now() / 1000),
+            action_source: "website",
+            user_data: {
+              em: payload.email ? [payload.email] : undefined,
+              ph: payload.phone ? [payload.phone] : undefined,
+              client_ip_address: ip || undefined,
+              client_user_agent: ua || undefined,
+            },
+            custom_data: {
+              content_name: payload.service || "Quote Request",
+              content_category: "lead",
+            },
+          },
+        ],
+        access_token: token,
+      }),
+    });
+  } catch (err) {
+    console.warn("FB CAPI event failed:", err);
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -93,6 +239,7 @@ export async function POST(request: Request) {
     }
 
     const remoteIp = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+    const userAgent = request.headers.get("user-agent") || "";
     const turnstileOk = await verifyTurnstile(parsed.data["cf-turnstile-response"] || "", remoteIp);
     if (!turnstileOk) {
       return NextResponse.json(
@@ -105,10 +252,13 @@ export async function POST(request: Request) {
     }
 
     console.log("New quote request:", parsed.data);
-    const webhookResult = await sendLeadWebhook(parsed.data);
-    if (!webhookResult.delivered) {
-      console.warn("Lead accepted but webhook not delivered:", webhookResult.reason);
-    }
+
+    await Promise.allSettled([
+      sendLeadWebhook(parsed.data),
+      sendLeadEmail(parsed.data),
+      forwardToManagerApp(parsed.data),
+      sendFbConversionEvent(parsed.data, remoteIp, userAgent),
+    ]);
 
     return NextResponse.json({
       ok: true,

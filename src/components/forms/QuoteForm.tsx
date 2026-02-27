@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, MouseEvent, useState } from "react";
+import { FormEvent, MouseEvent, useEffect, useState } from "react";
 import Script from "next/script";
 import { primaryServices } from "@/content/services";
 import { locations } from "@/content/locations";
@@ -12,22 +12,64 @@ type FormState = {
   errors?: Record<string, string[]>;
 };
 
+type StepOneData = {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+};
+
 const initialState: FormState = { ok: false };
 const stepOneFields = ["name", "phone", "email", "service"] as const;
+const initialStepOneData: StepOneData = {
+  name: "",
+  phone: "",
+  email: "",
+  service: "",
+};
 
 function track(name: string, detail: Record<string, unknown> = {}) {
   window.dispatchEvent(new CustomEvent(name, { detail }));
+}
+
+type UtmData = {
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
+  utm_content: string;
+  utm_term: string;
+  landing_path: string;
+};
+
+function captureUtmParams(): UtmData {
+  if (typeof window === "undefined") {
+    return { utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "", landing_path: "" };
+  }
+  const params = new URLSearchParams(window.location.search);
+  return {
+    utm_source: params.get("utm_source") || "",
+    utm_medium: params.get("utm_medium") || "",
+    utm_campaign: params.get("utm_campaign") || "",
+    utm_content: params.get("utm_content") || "",
+    utm_term: params.get("utm_term") || "",
+    landing_path: window.location.pathname,
+  };
 }
 
 export default function QuoteForm() {
   const [state, setState] = useState<FormState>(initialState);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
-  const [selectedService, setSelectedService] = useState("");
+  const [stepOneData, setStepOneData] = useState<StepOneData>(initialStepOneData);
+  const [utmData, setUtmData] = useState<UtmData>({ utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "", landing_path: "" });
   const turnstileKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
+  useEffect(() => {
+    setUtmData(captureUtmParams());
+  }, []);
+
   const fieldError = (name: string) => state.errors?.[name]?.[0];
-  const isEmergencySelection = selectedService.toLowerCase().includes("damage");
+  const isEmergencySelection = stepOneData.service.toLowerCase().includes("damage");
 
   function isStepOneValid(form: HTMLFormElement) {
     return stepOneFields.every((fieldName) => {
@@ -45,44 +87,51 @@ export default function QuoteForm() {
     if (!form) return;
     if (!isStepOneValid(form)) return;
     setStep(2);
-    track("rhi:quote_step_1_complete", { service: selectedService || "unknown" });
+    track("rhi:quote_step_1_complete", { service: stepOneData.service || "unknown" });
     if (isEmergencySelection) {
-      track("rhi:quote_emergency_selected", { service: selectedService });
+      track("rhi:quote_emergency_selected", { service: stepOneData.service });
     }
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    track("rhi:quote_submit_attempt", { service: selectedService || "unknown" });
+    track("rhi:quote_submit_attempt", { service: stepOneData.service || "unknown" });
     setLoading(true);
     setState(initialState);
     const formData = new FormData(event.currentTarget);
-    const payload = Object.fromEntries(formData.entries());
+    const payload = { ...Object.fromEntries(formData.entries()), ...utmData };
+    const form = event.currentTarget;
 
-    const response = await fetch("/api/quote", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    const data = (await response.json()) as FormState;
-    setState(data);
-    setLoading(false);
+      const data = (await response.json()) as FormState;
+      setState(data);
 
-    if (data.ok) {
-      event.currentTarget.reset();
-      setStep(1);
-      setSelectedService("");
-      window.dispatchEvent(new CustomEvent("rhi:generate_lead"));
-      return;
-    }
+      if (data.ok) {
+        form.reset();
+        setStep(1);
+        setStepOneData(initialStepOneData);
+        window.dispatchEvent(new CustomEvent("rhi:generate_lead"));
+        setTimeout(() => setState(initialState), 6000);
+        return;
+      }
 
-    const errorFields = Object.keys(data.errors || {});
-    track("rhi:quote_submit_error", { fields: errorFields.join(","), step });
+      const errorFields = Object.keys(data.errors || {});
+      track("rhi:quote_submit_error", { fields: errorFields.join(","), step });
 
-    const hasStepOneError = stepOneFields.some((field) => data.errors?.[field]?.length);
-    if (hasStepOneError) {
-      setStep(1);
+      const hasStepOneError = stepOneFields.some((field) => data.errors?.[field]?.length);
+      if (hasStepOneError) {
+        setStep(1);
+      }
+    } catch {
+      setState({ ok: false, message: "Something went wrong. Please try again or call us directly." });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -105,17 +154,50 @@ export default function QuoteForm() {
         <div className="mt-5 grid gap-3 md:grid-cols-2">
           <label className="text-sm">
             Name
-            <input className="mt-1 w-full rounded-md border border-[var(--border)] p-2" name="name" required />
+            <input
+              className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
+              name="name"
+              required
+              value={stepOneData.name}
+              onChange={(event) =>
+                setStepOneData((prev) => ({
+                  ...prev,
+                  name: event.target.value,
+                }))
+              }
+            />
             {fieldError("name") && <span className="mt-1 block text-xs text-red-700">{fieldError("name")}</span>}
           </label>
           <label className="text-sm">
             Phone
-            <input className="mt-1 w-full rounded-md border border-[var(--border)] p-2" name="phone" required />
+            <input
+              className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
+              name="phone"
+              required
+              value={stepOneData.phone}
+              onChange={(event) =>
+                setStepOneData((prev) => ({
+                  ...prev,
+                  phone: event.target.value,
+                }))
+              }
+            />
             {fieldError("phone") && <span className="mt-1 block text-xs text-red-700">{fieldError("phone")}</span>}
           </label>
           <label className="text-sm">
             Email
-            <input className="mt-1 w-full rounded-md border border-[var(--border)] p-2" name="email" required />
+            <input
+              className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
+              name="email"
+              required
+              value={stepOneData.email}
+              onChange={(event) =>
+                setStepOneData((prev) => ({
+                  ...prev,
+                  email: event.target.value,
+                }))
+              }
+            />
             {fieldError("email") && <span className="mt-1 block text-xs text-red-700">{fieldError("email")}</span>}
           </label>
           <label className="text-sm">
@@ -123,11 +205,14 @@ export default function QuoteForm() {
             <select
               className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
               name="service"
-              defaultValue=""
+              value={stepOneData.service}
               required
               onChange={(event) => {
                 const serviceValue = event.target.value;
-                setSelectedService(serviceValue);
+                setStepOneData((prev) => ({
+                  ...prev,
+                  service: serviceValue,
+                }));
                 track("rhi:quote_service_selected", { service: serviceValue });
               }}
             >
@@ -147,6 +232,10 @@ export default function QuoteForm() {
 
       {step === 2 && (
         <>
+          <input type="hidden" name="name" value={stepOneData.name} />
+          <input type="hidden" name="phone" value={stepOneData.phone} />
+          <input type="hidden" name="email" value={stepOneData.email} />
+          <input type="hidden" name="service" value={stepOneData.service} />
           {isEmergencySelection && (
             <div className="mt-5 rounded-lg border border-[var(--brand)] bg-[var(--surface-soft)] p-3 text-sm">
               <p className="font-semibold text-[var(--accent)]">Urgent fire or water damage project?</p>

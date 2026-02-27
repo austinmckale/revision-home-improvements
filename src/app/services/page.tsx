@@ -1,79 +1,88 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import JsonLd from "@/components/JsonLd";
 import ConfidenceSection from "@/components/sections/ConfidenceSection";
 import { primaryServices } from "@/content/services";
 import { siteConfig } from "@/content/site";
+import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Home Improvement Services",
+  title: "Home Improvement Services in Reading, Berks County & Lehigh Valley",
   description:
-    "Explore kitchen remodeling, bathroom remodeling, basement finishing, flooring, drywall, paver installation, and restoration services.",
+    "Kitchen remodeling, bathroom renovation, basement finishing, flooring, drywall, pavers, and restoration services. Serving Reading, Berks County, and Lehigh Valley.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesHubPage() {
   return (
-    <section className="py-14">
-      <Container>
-        <h1 className="text-4xl font-extrabold text-[var(--accent)]">Home Improvement Services</h1>
-        <p className="mt-3 max-w-3xl text-[var(--muted)]">
-          Choose a service to see scope, project flow, and local service-area details.
-        </p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <Button href="/request-a-quote">Request a Quote</Button>
-          <Button href={siteConfig.phoneHref} variant="secondary">
-            Call {siteConfig.phoneDisplay}
-          </Button>
-        </div>
-        <section className="surface mt-7 rounded-xl p-5">
-          <h2 className="text-xl font-semibold text-[var(--accent)]">What you will find on each service page</h2>
-          <p className="mt-2 text-sm text-[var(--muted)]">
-            You will see what the service includes, how projects are handled, common questions, and direct links to your city page.
-            For emergency restoration work, we lead with call-first options.
+    <>
+      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Services", href: "/services" }])} />
+
+      <section className="py-14">
+        <Container>
+          <h1 className="text-4xl font-extrabold text-[var(--accent)]">Our Services</h1>
+          <p className="mt-3 max-w-3xl text-[var(--muted)]">
+            From kitchens and bathrooms to emergency restoration, every project gets a written scope, a clear timeline, and a team that communicates.
           </p>
-          <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-            We focus on strong value for the price and can discuss available financing options. {siteConfig.financing.shortDisclosure}
-          </p>
-          <div className="mt-4">
-            <Link href="/fire-water-damage-restoration" className="text-sm font-semibold text-[var(--brand)]">
-              Need urgent help? View fire and water damage restoration support.
-            </Link>
-            <p className="mt-2 text-sm">
-              <Link href="/financing-terms" className="font-semibold text-[var(--brand)]">
-                Review financing terms
-              </Link>
-            </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Button href="/request-a-quote">Request a Quote</Button>
+            <Button href={siteConfig.phoneHref} variant="secondary">
+              Call {siteConfig.phoneDisplay}
+            </Button>
           </div>
-        </section>
-        <ConfidenceSection
-          className="mt-7"
-          title="Confidence Before Construction Starts"
-          intro="We keep scopes clear, options transparent, and communication consistent from estimate through closeout."
-        />
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {primaryServices.map((service) => (
-            <article key={service.slug} className="surface rounded-xl p-6">
-              <h2 className="text-xl font-semibold">{service.name}</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">{service.description}</p>
-              <ul className="mt-3 list-disc pl-5 text-sm text-[var(--muted)]">
-                {service.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Benefits</p>
-              <ul className="mt-2 list-disc pl-5 text-sm text-[var(--muted)]">
-                {service.outcomes.slice(0, 2).map((outcome) => (
-                  <li key={outcome}>{outcome}</li>
-                ))}
-              </ul>
-              <Link href={`/services/${service.slug}`} className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
-                View {service.name}
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {primaryServices.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="surface group overflow-hidden rounded-xl transition hover:border-[var(--brand)]"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={service.image.src}
+                    alt={service.image.alt}
+                    width={900}
+                    height={500}
+                    className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-5">
+                  <h2 className="text-xl font-semibold text-[var(--accent)]">{service.name}</h2>
+                  <p className="mt-1 text-sm text-[var(--muted)]">{service.short}</p>
+                  <span className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+                    Learn more &rarr;
+                  </span>
+                </div>
               </Link>
-            </article>
-          ))}
-        </div>
-      </Container>
-    </section>
+            ))}
+          </div>
+
+          <ConfidenceSection
+            className="mt-10"
+            title="What Stays Consistent Across Every Service"
+            intro="No matter the project type, we run the same standards for scope clarity, communication, and closeout quality."
+          />
+        </Container>
+      </section>
+
+      <section className="py-10">
+        <Container>
+          <div className="surface rounded-2xl p-8 text-center">
+            <h2 className="text-2xl font-bold text-[var(--accent)]">Not sure which service fits your project?</h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm text-[var(--muted)]">
+              Tell us what you are planning and we will point you in the right direction.
+            </p>
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
+              <Button href="/request-a-quote">Describe Your Project</Button>
+              <Button href="/projects" variant="secondary">See Our Work</Button>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }

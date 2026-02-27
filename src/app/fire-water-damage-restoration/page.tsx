@@ -5,9 +5,11 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import QuoteForm from "@/components/forms/QuoteForm";
 import JsonLd from "@/components/JsonLd";
+import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import { siteConfig } from "@/content/site";
+import { getTestimonialsByService } from "@/content/testimonials";
 import { absoluteUrl } from "@/lib/url";
-import { getServiceJsonLd } from "@/lib/structuredData";
+import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "Fire and Water Damage Restoration",
@@ -26,6 +28,7 @@ export default function FireWaterDamageRestorationPage() {
   return (
     <>
       <JsonLd data={jsonLd} />
+      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Emergency Restoration", href: "/fire-water-damage-restoration" }])} />
       <section className="hero-band py-14">
         <Container className="grid items-center gap-8 md:grid-cols-2">
           <div>
@@ -57,17 +60,27 @@ export default function FireWaterDamageRestorationPage() {
       <section className="py-14">
         <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <div className="surface rounded-xl border-[var(--brand)] p-5">
-              <h2 className="text-xl font-semibold text-[var(--accent)]">What to do first</h2>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-                <li>Call for immediate next-step guidance and scheduling.</li>
-                <li>Protect occupants and avoid entering unsafe areas.</li>
-                <li>Capture photos and key details for documentation.</li>
-                <li>We review scope priorities and build a phased plan quickly.</li>
-              </ul>
+            <h2 className="text-2xl font-bold text-[var(--accent)]">First 60 Minutes: What to Do</h2>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              <article className="surface rounded-lg p-4">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Safety First</h3>
+                <p className="mt-1 text-sm text-[var(--muted)]">Protect occupants and avoid entering unsafe areas.</p>
+              </article>
+              <article className="surface rounded-lg p-4">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Call Immediately</h3>
+                <p className="mt-1 text-sm text-[var(--muted)]">We provide next-step guidance and priority scheduling direction.</p>
+              </article>
+              <article className="surface rounded-lg p-4">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Document Damage</h3>
+                <p className="mt-1 text-sm text-[var(--muted)]">Capture photos and key details for claim and scope alignment.</p>
+              </article>
+              <article className="surface rounded-lg p-4">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Stabilize Scope</h3>
+                <p className="mt-1 text-sm text-[var(--muted)]">We build a phased recovery plan and execution timeline.</p>
+              </article>
             </div>
 
-            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">How We Support Recovery</h2>
+            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">How We Support Recovery</h3>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               <li>Damage assessment and practical rebuild scoping</li>
               <li>Interior reconstruction for drywall, flooring, trim, and finishes</li>
@@ -87,21 +100,14 @@ export default function FireWaterDamageRestorationPage() {
                 Insurance Claims Assistance
               </Link>
             </div>
-
-            <div className="surface mt-8 rounded-xl p-5">
-              <h3 className="text-xl font-semibold text-[var(--accent)]">Need immediate restoration help?</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Call now for priority scheduling. If you prefer, submit the form and we will follow up quickly with next steps.
-              </p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <Button href={siteConfig.phoneHref}>Call {siteConfig.phoneDisplay}</Button>
-                <Button href="/request-a-quote" variant="secondary">
-                  Request a Quote
-                </Button>
-              </div>
-            </div>
           </div>
-          <QuoteForm />
+          <div>
+            <TestimonialStrip
+              items={[...getTestimonialsByService("water-damage-restoration"), ...getTestimonialsByService("fire-damage-restoration")].slice(0, 3)}
+              title="Restoration Client Feedback"
+            />
+            <QuoteForm />
+          </div>
         </Container>
       </section>
     </>

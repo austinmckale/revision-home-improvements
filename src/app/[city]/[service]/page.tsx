@@ -7,13 +7,17 @@ import Button from "@/components/ui/Button";
 import QuoteForm from "@/components/forms/QuoteForm";
 import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
-import ProcessTimeline from "@/components/sections/ProcessTimeline";
+import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection";
+import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import { getLocationBySlug, locations } from "@/content/locations";
 import { caseStudies } from "@/content/caseStudies";
-import { getServiceBySlug, services } from "@/content/services";
+import { getServiceBySlug, primaryServices, services } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
-import { getServiceJsonLd } from "@/lib/structuredData";
+import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getPortfolioImages } from "@/lib/portfolio";
+
+export const revalidate = 3600;
 
 type Params = { city: string; service: string };
 
@@ -60,10 +64,15 @@ export default async function CityServicePage({ params }: { params: Promise<Para
   const localProof = caseStudies
     .filter((item) => item.locationSlug === location.slug && item.serviceSlug === service.slug)
     .slice(0, 1);
+  const relatedLocalServices = primaryServices.filter((item) => item.slug !== service.slug);
+  const portfolioTag = service.portfolioTag ?? service.slug;
+  const portfolioImages = await getPortfolioImages({ serviceTags: [portfolioTag], limit: 3 });
 
   return (
     <>
       <JsonLd data={jsonLd} />
+      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: location.name, href: `/${location.slug}` }, { name: `${service.name} in ${location.short}`, href: `/${location.slug}/${service.slug}` }])} />
+
       <section className="hero-band py-14">
         <Container className="grid items-center gap-8 md:grid-cols-2">
           <div>
@@ -72,11 +81,10 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               {service.name} in {location.short}
             </h1>
             <p className="mt-3 text-[var(--muted)]">
-              {service.description} We serve homeowners throughout {location.name} and nearby areas.
+              {service.intro} {location.localAngle}
             </p>
-            <p className="mt-2 text-sm text-[var(--muted)]">{location.localAngle}</p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Button href="/request-a-quote">Request Local Quote</Button>
+              <Button href="/request-a-quote">Get a Free Quote</Button>
               <Button href={siteConfig.phoneHref} variant="secondary">
                 Call {siteConfig.phoneDisplay}
               </Button>
@@ -91,103 +99,100 @@ export default async function CityServicePage({ params }: { params: Promise<Para
       <section className="py-14">
         <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <div className="surface mb-6 rounded-xl p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Built for homeowners in {location.short}</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Projects are scoped for homes in {location.short} with clear planning, communication, and timeline expectations.
-              </p>
-            </div>
-            <h2 className="text-2xl font-bold text-[var(--accent)]">Why Homeowners in {location.short} Choose Us</h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {location.whyUs.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-              <li>Clear estimate, scope, and timeline before work begins</li>
-              <li>Excellent value for price with options based on your budget priorities</li>
-            </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">What Homeowners Gain</h3>
+            <h2 className="text-2xl font-bold text-[var(--accent)]">What&apos;s Included</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.outcomes.map((outcome) => (
-                <li key={outcome}>{outcome}</li>
-              ))}
-            </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Typical Project Scope</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.whatIncluded.slice(0, 3).map((item) => (
+              {service.whatIncluded.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">What Drives Cost</h3>
+
+            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What Affects the Price</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.pricingFactors.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
+
+            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What You Can Expect</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+              {service.outcomes.map((outcome) => (
+                <li key={outcome}>{outcome}</li>
+              ))}
+            </ul>
+
             {localProof.length > 0 && (
               <section className="mt-8">
-                <h3 className="text-xl font-semibold text-[var(--accent)]">Local Project Proof</h3>
+                <h2 className="text-2xl font-bold text-[var(--accent)]">Recent {service.name} in {location.short}</h2>
                 {localProof.map((item) => (
                   <Link key={item.slug} href={`/projects/${item.slug}`} className="surface mt-3 block rounded-lg p-4 hover:border-[var(--brand)]">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName}</p>
-                    <p className="mt-1 text-sm font-semibold">{item.title}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName} · {item.timeline}</p>
+                    <p className="mt-1 font-semibold">{item.title}</p>
                     <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
+                    <span className="mt-2 inline-block text-sm font-semibold text-[var(--brand)]">View full case study</span>
                   </Link>
                 ))}
               </section>
             )}
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Priority Nearby Areas</h3>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              {location.priorityAreas.map((area) => (
-                <p key={area} className="surface rounded-lg p-3 text-sm">
-                  {area}
-                </p>
-              ))}
-            </div>
-            <ProcessTimeline title={`How ${service.name} projects run in ${location.short}`} steps={service.process} />
 
-            <div className="mt-8 grid gap-2 sm:grid-cols-2">
-              <Link href={`/services/${service.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
-                View core {service.name} page
-              </Link>
-              <Link href={`/${location.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
-                View all services in {location.short}
-              </Link>
-            </div>
-            <div className="surface mt-8 rounded-xl p-5">
-              <h3 className="text-xl font-semibold text-[var(--accent)]">
-                Let&apos;s plan your {service.name.toLowerCase()} project in {location.short}
-              </h3>
+            {portfolioImages.length > 0 ? (
+              <PortfolioGallery images={portfolioImages} title={`Recent ${service.name} Work`} />
+            ) : service.gallery.length > 0 ? (
+              <div className={`mt-8 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}>
+                {service.gallery.slice(0, 3).map((image) => (
+                  <figure key={image.src} className="surface overflow-hidden rounded-lg">
+                    <Image src={image.src} alt={image.alt} width={700} height={500} className="h-40 w-full object-cover" />
+                  </figure>
+                ))}
+              </div>
+            ) : null}
+
+            <div className="surface mt-10 rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-[var(--accent)]">
+                Ready to plan your {service.name.toLowerCase()} project?
+              </h2>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                Call now for scheduling help, or submit the form for a detailed scope and quote conversation.
+                Call us to talk through your project, or fill out the form for a written scope and quote. We typically follow up the same day.
               </p>
-              <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-                {siteConfig.financing.teaser} {siteConfig.financing.shortDisclosure}
-              </p>
-              <p className="mt-2 text-sm">
-                <Link href="/financing-terms" className="font-semibold text-[var(--brand)]">
-                  Review financing terms
-                </Link>
-              </p>
+              {siteConfig.financing.teaser && (
+                <p className="mt-2 text-sm font-semibold text-[var(--brand)]">{siteConfig.financing.teaser}</p>
+              )}
               <div className="mt-4 flex flex-wrap gap-3">
-                <Button href="/request-a-quote">Request Local Quote</Button>
+                <Button href="/request-a-quote">Get a Free Quote</Button>
                 <Button href={siteConfig.phoneHref} variant="secondary">
                   Call {siteConfig.phoneDisplay}
                 </Button>
-                <Button href="/financing" variant="secondary">
-                  Financing Options
-                </Button>
               </div>
             </div>
+
             <FaqList
-              title={`${service.name} in ${location.short}: FAQs`}
+              title={`${service.name} in ${location.short}: Common Questions`}
               items={[
-                ...service.faqs.slice(0, 2),
+                ...service.faqs.slice(0, 3),
                 {
                   q: `Do you service all of ${location.name}?`,
-                  a: `Yes. We schedule projects across ${location.name} and surrounding municipalities.`,
+                  a: `Yes. We take on projects across ${location.name} including ${location.priorityAreas.slice(0, 3).join(", ")}, and surrounding areas.`,
                 },
               ]}
             />
+
+            <LocalHighlightsSection
+              location={location}
+              serviceItems={relatedLocalServices}
+              className="mt-10"
+              maxServices={6}
+              servicesTitle={`Other services in ${location.short}`}
+              priorityTitle={`Areas we serve near ${location.short}`}
+              showCityHubLink
+            />
+
+            <div className="mt-6 grid gap-2 sm:grid-cols-2">
+              <Link href={`/services/${service.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
+                View {service.name} details
+              </Link>
+              <Link href="/service-areas" className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
+                All service areas
+              </Link>
+            </div>
           </div>
           <QuoteForm />
         </Container>

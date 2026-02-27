@@ -4,7 +4,10 @@ export type ServiceFaq = {
 };
 
 export type Service = {
+  /** URL slug for this service page */
   slug: string;
+  /** Manager App job tag used for portfolio filtering; must match app SERVICE_TAG_OPTIONS slug */
+  portfolioTag?: string;
   name: string;
   short: string;
   description: string;
@@ -27,19 +30,19 @@ export type Service = {
   }>;
 };
 
-function sharedFaqs(serviceName: string): ServiceFaq[] {
+function sharedFaqs(serviceName: string, typicalTimeline: string): ServiceFaq[] {
   return [
     {
       q: `How long does a ${serviceName.toLowerCase()} project usually take?`,
-      a: "Timelines vary by scope, material lead times, and site conditions. We provide a clear schedule during estimate review.",
+      a: `Most ${serviceName.toLowerCase()} projects take ${typicalTimeline}. We give you a specific timeline during your estimate based on your scope, materials, and any prep work needed.`,
     },
     {
-      q: "Do you provide a detailed scope before work begins?",
-      a: "Yes. We review scope, budget range, and sequencing so you know what to expect before construction starts.",
+      q: "Do I get a written scope before work starts?",
+      a: "Yes — always. You get a written proposal with exactly what is included, what it costs, and when each phase happens. Nothing starts until you approve it.",
     },
     {
-      q: "Can I request this service in Reading, Berks County, and Lehigh Valley?",
-      a: "Yes. We serve Reading, Wyomissing, Berks County, Allentown, Bethlehem, and Lehigh Valley.",
+      q: "What areas do you serve?",
+      a: "We serve Reading, Wyomissing, Berks County, Allentown, Bethlehem, and the broader Lehigh Valley. Check our service areas page for your specific neighborhood.",
     },
   ];
 }
@@ -48,11 +51,11 @@ export const services: Service[] = [
   {
     slug: "kitchen-remodeling",
     name: "Kitchen Remodeling",
-    short: "Custom kitchens built for daily living.",
+    short: "The kitchen you actually want to cook in.",
     description:
       "Full kitchen renovations including layout updates, cabinets, countertops, lighting, and finishes.",
     intro:
-      "A kitchen remodel should improve flow, storage, and comfort. We plan each phase carefully so your home keeps moving while work is in progress.",
+      "A kitchen remodel is one of the biggest upgrades you can make to your home. We handle everything from layout changes and cabinetry to countertops and lighting — planned around your daily life so the disruption stays manageable.",
     cta: "Request a kitchen quote",
     bullets: ["Layout planning", "Cabinets and countertops", "Lighting and finishes"],
     whatIncluded: [
@@ -74,15 +77,19 @@ export const services: Service[] = [
     outcomes: ["Better traffic flow and work zones", "Durable finish selections", "Higher resale and day-to-day usability"],
     process: ["Discovery call and photo review", "In-home scope and estimate", "Material coordination and schedule lock", "Build execution and final walkthrough"],
     faqs: [
-      ...sharedFaqs("kitchen remodeling"),
+      ...sharedFaqs("kitchen remodeling", "4 to 8 weeks"),
       {
-        q: "Can you remodel in phases?",
-        a: "Yes. For some homes we can sequence work to reduce disruption and align with budget priorities.",
+        q: "Can you remodel my kitchen in phases?",
+        a: "Yes. We can break the project into stages — for example, doing cabinets and countertops first, then coming back for flooring or lighting. This helps spread out cost and disruption.",
+      },
+      {
+        q: "Will I still be able to use my kitchen during the remodel?",
+        a: "It depends on the scope. For full gut renovations, you will need a temporary setup for a few weeks. For smaller updates, we can often keep part of the kitchen functional. We will plan this with you upfront.",
       },
     ],
     image: {
-      src: "/images/projects/DSC00338-1.jpg",
-      alt: "Beautiful home kitchen remodel by Revision Home Improvements in Lehigh Valley and Reading.",
+      src: "/images/projects/img_7833.jpg",
+      alt: "Modern kitchen remodel with white cabinets by Revision Home Improvements.",
     },
     gallery: [
       { src: "/images/projects/DSC00338-1.jpg", alt: "Kitchen remodeling project hero image." },
@@ -93,11 +100,11 @@ export const services: Service[] = [
   {
     slug: "bathroom-remodeling",
     name: "Bathroom Remodeling",
-    short: "Functional, durable bathroom renovations.",
+    short: "A bathroom that works as good as it looks.",
     description:
       "Bathroom upgrades with improved storage, tilework, fixtures, and clean modern finishes.",
     intro:
-      "We design bathroom upgrades around practical daily use: durable materials, efficient layout choices, and clean finish details.",
+      "Whether you are dealing with an outdated layout or just want something nicer, we handle the full remodel — tile, fixtures, vanity, waterproofing, and everything in between.",
     cta: "Request a bathroom quote",
     bullets: ["Showers and vanities", "Tile and waterproofing", "Efficient layouts"],
     whatIncluded: [
@@ -119,10 +126,14 @@ export const services: Service[] = [
     outcomes: ["Better storage and usability", "Moisture-aware build details", "Modernized look and function"],
     process: ["Initial needs review", "Measurement and scope confirmation", "Fixture/tile planning", "Build and quality walkthrough"],
     faqs: [
-      ...sharedFaqs("bathroom remodeling"),
+      ...sharedFaqs("bathroom remodeling", "2 to 4 weeks"),
       {
-        q: "Do you handle older bathroom layouts?",
-        a: "Yes. We can rework awkward layouts to improve movement, storage, and fixture placement.",
+        q: "Can you work with my existing plumbing layout?",
+        a: "Usually yes. Moving plumbing is possible but adds cost and time. We will tell you upfront whether keeping the current layout makes sense or if a move is worth it for the result you want.",
+      },
+      {
+        q: "Do you handle waterproofing?",
+        a: "Yes. Proper waterproofing behind tile and around the shower pan is one of the most important parts of a bathroom remodel. We do not cut corners here.",
       },
     ],
     image: {
@@ -135,12 +146,13 @@ export const services: Service[] = [
   },
   {
     slug: "basement-finishing",
+    portfolioTag: "basement-finishing",
     name: "Basement Finishing",
-    short: "Turn unused space into livable square footage.",
+    short: "Turn your basement into space you actually use.",
     description:
       "Basement finishing and remodeling for family rooms, offices, guest spaces, and storage zones.",
     intro:
-      "Basements need planning around moisture, lighting, and utility access. We build finished spaces that stay functional long-term.",
+      "Most basements are wasted space. We turn them into rooms your family actually uses — whether that is a home office, guest bedroom, media room, or play area. We plan around moisture, lighting, and utility access so the space holds up long-term.",
     cta: "Request a basement quote",
     bullets: ["Framing and drywall", "Flooring and trim", "Moisture-aware planning"],
     whatIncluded: [
@@ -162,10 +174,14 @@ export const services: Service[] = [
     outcomes: ["More usable living space", "Improved comfort and lighting", "Flexible layouts for family needs"],
     process: ["Space planning and constraints review", "Framing/electrical/mechanical coordination", "Finish material installation", "Final punch-list completion"],
     faqs: [
-      ...sharedFaqs("basement finishing"),
+      ...sharedFaqs("basement finishing", "5 to 8 weeks"),
       {
-        q: "Can a basement include office or media areas?",
-        a: "Yes. We can plan multi-use layouts for work, guests, and entertainment zones.",
+        q: "What about moisture problems?",
+        a: "We evaluate moisture conditions before starting. If there are active water issues, those get addressed first. We use moisture-resistant materials in areas that need them and make sure ventilation is adequate.",
+      },
+      {
+        q: "Can I put a bathroom in the basement?",
+        a: "Yes, but it depends on your existing plumbing. If there is a rough-in already, it is straightforward. If not, we can discuss options during the estimate.",
       },
     ],
     image: {
@@ -179,12 +195,13 @@ export const services: Service[] = [
   },
   {
     slug: "drywall-installation-repair",
+    portfolioTag: "drywall",
     name: "Drywall Installation and Repair",
-    short: "Clean walls and ceilings with pro-level finish.",
+    short: "Walls and ceilings that look like new.",
     description:
       "Drywall hanging, patching, skim coating, and paint-ready finishing for remodel and restoration jobs.",
     intro:
-      "From full-room installs to targeted patch work, we focus on clean finish consistency and readiness for final paint.",
+      "Whether you need a full room of drywall hung or a few patches blended invisible, we get your walls smooth, flat, and ready for paint. No visible seams, no bumps, no shortcuts.",
     cta: "Call now",
     bullets: ["New drywall install", "Repair and patching", "Smooth finish prep"],
     whatIncluded: [
@@ -206,10 +223,14 @@ export const services: Service[] = [
     outcomes: ["Paint-ready surfaces", "Cleaner transitions at repairs", "Faster closeout on restoration scopes"],
     process: ["Damage and substrate review", "Board install or repair patching", "Tape/mud/sand cycles", "Final finish inspection"],
     faqs: [
-      ...sharedFaqs("drywall repair"),
+      ...sharedFaqs("drywall work", "3 to 7 days for most repair jobs"),
       {
-        q: "Can drywall work be paired with restoration projects?",
-        a: "Yes. Drywall is often sequenced with water or fire restoration rebuild scopes.",
+        q: "Will the repair be visible after painting?",
+        a: "That is our standard — repairs should be invisible under paint. We do multiple tape, mud, and sand passes to blend the repair into the surrounding wall. If there is existing texture, we match it.",
+      },
+      {
+        q: "Can you do drywall as part of a bigger remodel?",
+        a: "Yes. Drywall is almost always part of larger kitchen, bathroom, or basement projects. We handle it as part of the overall scope rather than subbing it out.",
       },
     ],
     image: {
@@ -222,12 +243,13 @@ export const services: Service[] = [
   },
   {
     slug: "flooring-installation",
+    portfolioTag: "flooring",
     name: "Flooring Installation",
-    short: "Durable flooring for high-traffic homes.",
+    short: "Floors that look great and hold up to real life.",
     description:
       "Install and replace flooring systems that fit your budget, style, and daily wear requirements.",
     intro:
-      "Flooring quality depends on subfloor prep and layout precision. We install systems designed for durability and clean finish transitions.",
+      "Good flooring starts with proper subfloor prep — that is where most installers cut corners. We level, prep, and install with tight transitions between rooms so your floors look and feel right for years.",
     cta: "Request flooring quote",
     bullets: ["Subfloor prep", "Precision installation", "Trim and transition details"],
     whatIncluded: [
@@ -249,10 +271,14 @@ export const services: Service[] = [
     outcomes: ["Smoother, quieter floors", "Cleaner transitions and trim", "Longer-lasting finish performance"],
     process: ["Material and use-case review", "Subfloor prep and leveling", "Install and trim detailing", "Final walkthrough and care guidance"],
     faqs: [
-      ...sharedFaqs("flooring installation"),
+      ...sharedFaqs("flooring installation", "1 to 2 weeks for most homes"),
       {
-        q: "Do you replace damaged flooring after water events?",
-        a: "Yes. We handle replacement scopes tied to restoration and insurance-supported projects.",
+        q: "Do I need to move my furniture?",
+        a: "We can work around furniture in some cases, but for the best result we recommend clearing the rooms being done. We will tell you exactly what needs to move before we start.",
+      },
+      {
+        q: "What type of flooring do you recommend?",
+        a: "It depends on the room and how you use it. Luxury vinyl plank works great in kitchens and basements. Hardwood is ideal for living areas. We will walk you through the options during your estimate.",
       },
     ],
     image: {
@@ -266,12 +292,13 @@ export const services: Service[] = [
   },
   {
     slug: "paver-installation",
+    portfolioTag: "paver-installation",
     name: "Paver Installation",
-    short: "Outdoor hardscapes that hold up year-round.",
+    short: "Patios and walkways built to last.",
     description:
       "Patios, walkways, and paver hardscape upgrades designed for drainage, durability, and curb appeal.",
     intro:
-      "Outdoor projects are only as strong as base preparation and drainage. We focus on long-term performance and clean layout geometry.",
+      "A patio is only as good as what is underneath it. We spend the time on proper base prep, compaction, and drainage so your pavers do not shift, sink, or pool water. The result is outdoor space you can actually enjoy year-round.",
     cta: "Request a paver quote",
     bullets: ["Patio design", "Walkways and edging", "Base prep and grading"],
     whatIncluded: [
@@ -293,10 +320,14 @@ export const services: Service[] = [
     outcomes: ["Improved outdoor usability", "Better drainage and durability", "Stronger curb appeal"],
     process: ["Site and grade review", "Layout and material planning", "Base prep and install", "Compaction and final finish"],
     faqs: [
-      ...sharedFaqs("paver installation"),
+      ...sharedFaqs("paver installation", "1 to 2 weeks depending on size"),
       {
-        q: "Can you rebuild aging patio sections?",
-        a: "Yes. We can repair or replace worn sections and rework grading where needed.",
+        q: "How long do pavers last?",
+        a: "With proper base prep and drainage, a paver patio can last 25+ years. The base work is the most important factor — we do not rush this step.",
+      },
+      {
+        q: "Can you add a patio to a sloped yard?",
+        a: "Yes. We handle grading, retaining, and drainage as part of the project. Sloped yards just need more prep work, which we will scope in your estimate.",
       },
     ],
     image: {
@@ -311,12 +342,13 @@ export const services: Service[] = [
   },
   {
     slug: "fire-damage-restoration",
+    portfolioTag: "fire-damage",
     name: "Fire Damage Restoration",
-    short: "Fast response for urgent property damage.",
+    short: "Fast response when fire damage hits your home.",
     description:
       "Emergency stabilization, rebuild planning, and full restoration work after fire damage.",
     intro:
-      "Fire events require fast planning and careful reconstruction. We coordinate stabilization and rebuild scopes with clear next steps.",
+      "Fire damage is overwhelming. We help you move from chaos to a clear plan — starting with safety, then documentation, then a structured rebuild. We handle the reconstruction so you can focus on your family.",
     cta: "Call now",
     bullets: ["Urgent response", "Damage assessment", "Rebuild coordination"],
     whatIncluded: [
@@ -338,15 +370,19 @@ export const services: Service[] = [
     outcomes: ["Faster path to recovery", "Structured rebuild scope", "Clear communication through claim-driven work"],
     process: ["Initial site evaluation", "Safety and damage scope planning", "Rebuild sequence and materials", "Final quality and handoff"],
     faqs: [
-      ...sharedFaqs("fire damage restoration"),
+      ...sharedFaqs("fire damage restoration", "varies widely — small jobs take a few weeks, major rebuilds can take months"),
       {
-        q: "Do you work with insurance claim documentation?",
-        a: "Yes. We support project scope documentation and communication for claim-related rebuild work.",
+        q: "Do you deal with the insurance company for me?",
+        a: "We do not negotiate with your insurance company directly, but we provide detailed scope documentation, photos, and cost breakdowns that make the claims process much smoother.",
+      },
+      {
+        q: "How fast can you start?",
+        a: "For active damage situations, call us immediately. We prioritize emergency stabilization and can typically be on-site or on the phone with you the same day.",
       },
     ],
     image: {
-      src: "/images/projects/img_8220.jpg",
-      alt: "Interior restoration and rebuild work by Revision Home Improvements in Berks County.",
+      src: "/images/projects/Frontier-2.jpg",
+      alt: "Fire damage restoration and rebuild work by Revision Home Improvements.",
     },
     gallery: [
       { src: "/images/projects/img_8220.jpg", alt: "Interior restoration and reconstruction in progress." },
@@ -355,12 +391,13 @@ export const services: Service[] = [
   },
   {
     slug: "water-damage-restoration",
+    portfolioTag: "water-damage",
     name: "Water Damage Restoration",
-    short: "Restore structure and finishes after water events.",
+    short: "Get your home back to normal after water damage.",
     description:
       "Water-damage rebuild services for drywall, flooring, trim, and affected finished spaces.",
     intro:
-      "Water damage can spread quickly. We focus on practical reconstruction scopes that restore structural and finish quality efficiently.",
+      "Water damage gets worse the longer you wait. We move fast to assess what is affected, remove what cannot be saved, and rebuild the rest. If insurance is involved, we document everything along the way.",
     cta: "Call now",
     bullets: ["Rapid mitigation support", "Structural and finish repairs", "Insurance-ready documentation"],
     whatIncluded: [
@@ -382,10 +419,14 @@ export const services: Service[] = [
     outcomes: ["Stabilized damaged areas", "Coordinated rebuild sequencing", "Cleaner closeout with documented scope"],
     process: ["Damage mapping and scope", "Material removal/repair planning", "Rebuild and finish restoration", "Final review and cleanup"],
     faqs: [
-      ...sharedFaqs("water damage restoration"),
+      ...sharedFaqs("water damage restoration", "depends on severity — targeted repairs take 1 to 3 weeks, major rebuilds take longer"),
       {
-        q: "Can water damage and remodeling be combined in one scope?",
-        a: "Yes. In many cases we combine required repairs with strategic upgrades to avoid duplicate disruption.",
+        q: "Can I upgrade things while you are doing the repairs?",
+        a: "Absolutely. If we are already replacing flooring or drywall, it often makes sense to upgrade materials or layouts at the same time. We will show you the options so you can decide.",
+      },
+      {
+        q: "What if I find more damage after you start?",
+        a: "It happens, especially behind walls. We document everything and communicate immediately so there are no surprises. If insurance is involved, we update the scope documentation for your adjuster.",
       },
     ],
     image: {
@@ -399,12 +440,13 @@ export const services: Service[] = [
   },
   {
     slug: "insurance-claims",
+    portfolioTag: "insurance-restoration",
     name: "Insurance Claims Assistance",
-    short: "Work scopes built for claim-driven projects.",
+    short: "Help navigating insurance-related repairs.",
     description:
       "Support for homeowners through claim-related repairs with clear scopes and communication.",
     intro:
-      "Claim-driven projects need documentation, scope clarity, and consistent communication. We help you move from claim to completed work.",
+      "Dealing with insurance after property damage is stressful. We help by providing clear documentation, detailed scope breakdowns, and consistent communication so the repair process moves forward without you having to manage every detail.",
     cta: "Request claim help",
     bullets: ["Claim-friendly scope writing", "Photo documentation", "Project communication"],
     whatIncluded: [
@@ -426,10 +468,14 @@ export const services: Service[] = [
     outcomes: ["Clearer next steps for approval", "Coordinated repair planning", "Reduced friction in project communication"],
     process: ["Damage and claim context review", "Scope drafting and documentation", "Repair planning and sequencing", "Project execution updates"],
     faqs: [
-      ...sharedFaqs("insurance claim repair"),
+      ...sharedFaqs("insurance claim work", "depends on the repair scope and approval timeline"),
       {
-        q: "Do you guarantee claim approval?",
-        a: "No contractor can guarantee claim approval, but we provide clear documentation and practical scope support.",
+        q: "Can you guarantee my claim gets approved?",
+        a: "No — no contractor can promise that. But we provide thorough documentation, clear scope breakdowns, and photos that give your adjuster what they need to evaluate the claim fairly.",
+      },
+      {
+        q: "When should I call you — before or after I file the claim?",
+        a: "Either works. If you call us first, we can help you document the damage properly before filing. If you have already filed, we can step in to support the scope and rebuild process.",
       },
     ],
     image: {

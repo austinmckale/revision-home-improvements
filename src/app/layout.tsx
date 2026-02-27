@@ -16,6 +16,23 @@ export const metadata: Metadata = {
   },
   description:
     "Home remodeling and restoration contractor serving Reading, Wyomissing, Berks County, Allentown, Bethlehem, and Lehigh Valley.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: siteConfig.name,
+    title: "Revision Home Improvements | Reading & Lehigh Valley Remodeling",
+    description:
+      "Kitchen, bathroom, basement, and restoration projects with clear timelines and quality execution across Reading, Berks County, and Lehigh Valley.",
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Revision Home Improvements | Reading & Lehigh Valley Remodeling",
+    description:
+      "Kitchen, bathroom, basement, and restoration projects with clear timelines and quality execution.",
+    images: [siteConfig.ogImage],
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -24,6 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const fbPixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
 
   return (
     <html lang="en">
@@ -39,6 +57,20 @@ export default function RootLayout({
               gtag('config', '${gaId}');`}
             </Script>
           </>
+        )}
+        {fbPixelId && (
+          <Script id="fb-pixel" strategy="afterInteractive">
+            {`!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '${fbPixelId}');
+fbq('track', 'PageView');`}
+          </Script>
         )}
         <TrackingEvents />
         <Header />

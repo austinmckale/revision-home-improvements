@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "cursor-ide-browser": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@executeautomation/mcp-playwright"
+      ]
+    }
+  }
+}

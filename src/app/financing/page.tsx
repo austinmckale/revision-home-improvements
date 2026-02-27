@@ -2,22 +2,29 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import JsonLd from "@/components/JsonLd";
+import BottomCTA from "@/components/sections/BottomCTA";
+import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Financing",
+  title: "0% Financing Options for Home Improvement Projects",
   description:
     "Financing options for qualified home improvement projects in Reading, Berks County, and Lehigh Valley with clear disclosure terms.",
+  alternates: { canonical: "/financing" },
 };
 
 export default function FinancingPage() {
   return (
+    <>
+      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Financing", href: "/financing" }])} />
     <section className="py-14">
       <Container className="max-w-4xl">
         <h1 className="text-4xl font-extrabold text-[var(--accent)]">Project Financing</h1>
         <p className="mt-4 text-[var(--muted)]">
-          Financing can reduce upfront pressure and help you move forward with needed work sooner.
+          Don&apos;t let budget hold back the project your home needs. We offer promotional financing options so you can get started now and pay over time.
         </p>
+
         <div className="surface mt-6 rounded-2xl border-2 border-[var(--brand)] p-6">
           <h2 className="text-2xl font-semibold text-[var(--accent)]">Promotional Financing Options</h2>
           <p className="mt-2 text-[var(--muted)]">
@@ -27,24 +34,28 @@ export default function FinancingPage() {
             Review financing terms and disclosures
           </Link>
         </div>
-        <div className="surface mt-6 rounded-2xl p-6">
-          <h2 className="text-2xl font-semibold text-[var(--accent)]">How to get started</h2>
-          <ol className="mt-3 list-decimal space-y-2 pl-5 text-[var(--muted)]">
-            <li>Submit your quote request and share project goals.</li>
-            <li>Review scope and financing eligibility with our team.</li>
-            <li>Choose a schedule that fits your plan.</li>
-          </ol>
-          <Link href="/request-a-quote" className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
-            Start with a quote request
-          </Link>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <article className="surface rounded-2xl p-5">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Define Your Scope</h2>
+            <p className="mt-2 text-sm text-[var(--muted)]">Define your must-have scope and timeline.</p>
+          </article>
+          <article className="surface rounded-2xl p-5">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Review Options</h2>
+            <p className="mt-2 text-sm text-[var(--muted)]">Review financing eligibility and payment structure options.</p>
+          </article>
+          <article className="surface rounded-2xl p-5">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Lock Your Schedule</h2>
+            <p className="mt-2 text-sm text-[var(--muted)]">Lock schedule and execution plan based on approved terms.</p>
+          </article>
         </div>
+
         <div className="surface mt-6 rounded-2xl p-6">
-          <h2 className="text-2xl font-semibold text-[var(--accent)]">Financing-focused project planning</h2>
+          <h2 className="text-2xl font-semibold text-[var(--accent)]">Financing-Ready Scope Planning</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-            <li>Prioritize the most urgent scope first</li>
-            <li>Split optional upgrades into phase-two options when helpful</li>
-            <li>Align project schedule with approval timelines</li>
-            <li>Maximize value for price with scope options that match your budget goals</li>
+            <li>Separate critical work from optional upgrades.</li>
+            <li>Prioritize durability-first items that protect long-term value.</li>
+            <li>Sequence phases so approvals and install timing stay aligned.</li>
           </ul>
           <div className="mt-4 flex flex-wrap gap-3">
             <Button href="/request-a-quote">Request financing-ready quote</Button>
@@ -53,7 +64,20 @@ export default function FinancingPage() {
             </Button>
           </div>
         </div>
+
+        <div className="mt-6 flex flex-wrap gap-3 text-sm">
+          <Link href="/services" className="font-semibold text-[var(--brand)]">Browse Services</Link>
+          <Link href="/our-process" className="font-semibold text-[var(--brand)]">Our Process</Link>
+          <Link href="/projects" className="font-semibold text-[var(--brand)]">See Our Work</Link>
+        </div>
       </Container>
     </section>
+
+      <BottomCTA
+        title="Ready to explore financing for your project?"
+        description="Request a quote and we will include financing options alongside your scope and estimate."
+        showFinancing={false}
+      />
+    </>
   );
 }

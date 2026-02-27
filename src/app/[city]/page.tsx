@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import JsonLd from "@/components/JsonLd";
+import TestimonialStrip from "@/components/sections/TestimonialStrip";
+import BottomCTA from "@/components/sections/BottomCTA";
+import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection";
+import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getLocationBySlug, locations } from "@/content/locations";
-import { services } from "@/content/services";
+import { primaryServices } from "@/content/services";
+import { getTestimonialsByLocation } from "@/content/testimonials";
 
 type Params = { city: string };
 
@@ -28,56 +33,33 @@ export default async function CityHubPage({ params }: { params: Promise<Params> 
   const location = getLocationBySlug(city);
   if (!location) notFound();
 
+  const localTestimonials = getTestimonialsByLocation(location.slug);
+
   return (
-    <section className="py-14">
-      <Container>
-        <h1 className="text-4xl font-extrabold text-[var(--accent)]">Home Improvement in {location.name}</h1>
-        <p className="mt-3 max-w-3xl text-[var(--muted)]">
-          Find the exact service page for your area. Each page includes relevant scope details and direct quote paths.
-        </p>
-        <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">{location.localAngle}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Button href="/request-a-quote">Request a Quote in {location.short}</Button>
-          <Button href="/fire-water-damage-restoration" variant="secondary">
-            Emergency Restoration
-          </Button>
-        </div>
-        <section className="surface mt-8 rounded-xl p-5">
-          <h2 className="text-xl font-semibold text-[var(--accent)]">Why clients in {location.short} hire us</h2>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-            {location.whyUs.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </section>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {services.map((service) => (
-            <Link
-              key={service.slug}
-              href={`/${location.slug}/${service.slug}`}
-              className="surface rounded-xl p-5 hover:border-[var(--brand)]"
-            >
-              <h2 className="text-lg font-semibold">
-                {service.name} in {location.short}
-              </h2>
-              <p className="mt-1 text-sm text-[var(--muted)]">{service.short}</p>
-            </Link>
-          ))}
-        </div>
-        <section className="mt-10">
-          <h2 className="text-2xl font-bold text-[var(--accent)]">Priority Areas We Serve</h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
-            {location.priorityAreas.map((area) => (
-              <article key={area} className="surface rounded-lg p-4">
-                <h3 className="font-semibold">{area}</h3>
-                <p className="mt-1 text-sm text-[var(--muted)]">
-                  Local scheduling support for remodeling and restoration projects.
-                </p>
-              </article>
-            ))}
+    <>
+      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Service Areas", href: "/service-areas" }, { name: location.name, href: `/${location.slug}` }])} />
+      <section className="py-14">
+        <Container>
+          <h1 className="text-4xl font-extrabold text-[var(--accent)]">Home Improvement in {location.name}</h1>
+          <p className="mt-3 max-w-3xl text-[var(--muted)]">
+            We serve homeowners throughout {location.name} with kitchen, bathroom, basement, flooring, outdoor, and restoration projects. {location.localAngle}
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button href="/request-a-quote">Request a Quote in {location.short}</Button>
+            <Button href="/fire-water-damage-restoration" variant="secondary">
+              Emergency Restoration
+            </Button>
           </div>
-        </section>
-      </Container>
-    </section>
+          <LocalHighlightsSection location={location} serviceItems={primaryServices} className="mt-8" />
+          {localTestimonials.length > 0 && (
+            <TestimonialStrip items={localTestimonials.slice(0, 3)} title={`What ${location.short} Homeowners Say`} />
+          )}
+        </Container>
+      </section>
+      <BottomCTA
+        title={`Ready to start your project in ${location.short}?`}
+        description={`Tell us about your project and we will connect you with the right scope, timeline, and quote for ${location.name}.`}
+      />
+    </>
   );
 }

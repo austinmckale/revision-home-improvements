@@ -7,15 +7,18 @@ import Button from "@/components/ui/Button";
 import QuoteForm from "@/components/forms/QuoteForm";
 import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
-import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import TestimonialStrip from "@/components/sections/TestimonialStrip";
-import ConfidenceSection from "@/components/sections/ConfidenceSection";
+import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import { getServiceBySlug, primaryServices } from "@/content/services";
 import { caseStudies } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
-import { getServiceJsonLd } from "@/lib/structuredData";
+import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getTestimonialsByService } from "@/content/testimonials";
+import { getPortfolioImages } from "@/lib/portfolio";
+
+export const revalidate = 3600;
 
 type Params = { service: string };
 
@@ -50,9 +53,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
     notFound();
   }
 
-  const related = primaryServices.filter((item) => item.slug !== service.slug).slice(0, 3);
+  const related = primaryServices.filter((item) => item.slug !== service.slug).slice(0, 4);
   const relatedCaseStudies = caseStudies.filter((item) => item.serviceSlug === service.slug).slice(0, 2);
+  const serviceTestimonials = getTestimonialsByService(service.slug);
   const isEmergencyService = service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
+  const portfolioTag = service.portfolioTag ?? service.slug;
+  const portfolioImages = await getPortfolioImages({ serviceTags: [portfolioTag], limit: 6 });
   const jsonLd = getServiceJsonLd(
     service.name,
     absoluteUrl(`/services/${service.slug}`),
@@ -62,12 +68,19 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   return (
     <>
       <JsonLd data={jsonLd} />
+      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: service.name, href: `/services/${service.slug}` }])} />
+
       <section className="hero-band py-14">
         <Container className="grid items-center gap-8 md:grid-cols-2">
           <div>
             <h1 className="text-4xl font-extrabold text-[var(--accent)]">{service.name}</h1>
-            <p className="mt-3 text-[var(--muted)]">{service.description}</p>
-            <p className="mt-2 text-sm text-[var(--muted)]">{service.intro}</p>
+            <p className="mt-3 text-[var(--muted)]">{service.intro}</p>
+            {isEmergencyService && (
+              <div className="mt-4 rounded-lg border border-[var(--brand)] bg-[var(--surface-soft)] p-3">
+                <p className="text-sm font-semibold text-[var(--accent)]">Dealing with damage right now?</p>
+                <p className="mt-1 text-sm text-[var(--muted)]">Call us directly for priority scheduling.</p>
+              </div>
+            )}
             <div className="mt-5 flex flex-wrap gap-3">
               <Button href="/request-a-quote">{service.cta}</Button>
               <Button href={siteConfig.phoneHref} variant="secondary">
@@ -84,99 +97,57 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       <section className="py-14">
         <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <div className="surface mb-6 rounded-xl p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">What to expect when you work with us</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Local service team, clear scope review, and direct communication from estimate to completion.
-              </p>
-            </div>
-            {isEmergencyService && (
-              <div className="surface mb-6 rounded-xl border-[var(--brand)] p-4">
-                <p className="text-sm font-semibold text-[var(--accent)]">Emergency damage situation?</p>
-                <p className="mt-2 text-sm text-[var(--muted)]">
-                  Call first for immediate scheduling guidance. We can support both urgent stabilization planning and full rebuild scope.
-                </p>
-                <Button href={siteConfig.phoneHref} className="mt-3">
-                  Call {siteConfig.phoneDisplay}
-                </Button>
-              </div>
-            )}
-            <h2 className="text-2xl font-bold text-[var(--accent)]">What We Do</h2>
-            <p className="mt-3 text-sm text-[var(--muted)]">
-              We routinely handle full-scope {service.name.toLowerCase()} work including planning, material coordination,
-              build execution, and final quality walkthrough. The goal is a result that performs well, looks right, and
-              lasts.
-            </p>
-            <h3 className="mt-6 text-xl font-semibold text-[var(--accent)]">Why Choose Us</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              <li>Clear communication and transparent project steps</li>
-              <li>Excellent service-to-price value with scope choices that fit your budget</li>
-              <li>Fast local response across Reading, Berks County, and Lehigh Valley</li>
-            </ul>
-            <h2 className="mt-6 text-2xl font-bold text-[var(--accent)]">Our Project Approach</h2>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-              <li>Transparent estimate and scope review before work starts</li>
-              <li>Direct communication from first call through final walkthrough</li>
-            </ul>
-            <ConfidenceSection
-              className="mt-8"
-              title="Project Standards That Protect Your Investment"
-              intro="We run your project with written expectations, schedule visibility, and quality-control checkpoints."
-            />
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">What This Service Usually Includes</h3>
+            <h2 className="text-2xl font-bold text-[var(--accent)]">What&apos;s Included</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.whatIncluded.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Where Quality Makes the Biggest Difference</h3>
+
+            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">Where Quality Matters Most</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.qualityFactors.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">What Affects Project Cost</h3>
+
+            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What Affects the Price</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.pricingFactors.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Benefits Homeowners Typically See</h3>
+
+            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What You Can Expect</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.outcomes.map((outcome) => (
                 <li key={outcome}>{outcome}</li>
               ))}
             </ul>
-            <ProcessTimeline title={`${service.name} process`} steps={service.process} />
-            <section className="mt-10">
-              <h3 className="text-2xl font-bold text-[var(--accent)]">Recent {service.name} Work</h3>
-              <div
-                className={`mt-4 grid gap-3 ${
-                  service.gallery.length === 1
-                    ? "max-w-xl grid-cols-1"
-                    : service.gallery.length === 2
-                      ? "sm:grid-cols-2"
-                      : "sm:grid-cols-3"
-                }`}
-              >
-                {service.gallery.map((image) => (
-                  <figure key={image.src} className="surface overflow-hidden rounded-lg">
-                    <Image src={image.src} alt={image.alt} width={700} height={500} className="h-36 w-full object-cover" />
-                  </figure>
-                ))}
-              </div>
-            </section>
+
+            {portfolioImages.length > 0 ? (
+              <PortfolioGallery images={portfolioImages} />
+            ) : service.gallery.length > 0 ? (
+              <section className="mt-10">
+                <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Work</h2>
+                <div className={`mt-4 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}>
+                  {service.gallery.map((image) => (
+                    <figure key={image.src} className="surface overflow-hidden rounded-lg">
+                      <Image src={image.src} alt={image.alt} width={700} height={500} className="h-40 w-full object-cover" />
+                    </figure>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
             {relatedCaseStudies.length > 0 && (
               <section className="mt-8">
-                <h3 className="text-xl font-semibold text-[var(--accent)]">Project Case Studies</h3>
+                <h2 className="text-2xl font-bold text-[var(--accent)]">Project Case Studies</h2>
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   {relatedCaseStudies.map((item) => (
                     <Link key={item.slug} href={`/projects/${item.slug}`} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName}</p>
-                      <p className="mt-1 text-sm font-semibold">{item.title}</p>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName} · {item.timeline}</p>
+                      <p className="mt-1 font-semibold">{item.title}</p>
                       <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
                     </Link>
                   ))}
@@ -184,16 +155,39 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               </section>
             )}
 
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Service Areas for {service.name}</h3>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            {serviceTestimonials.length > 0 && (
+              <TestimonialStrip items={serviceTestimonials.slice(0, 3)} title="What Clients Say" />
+            )}
+
+            <div className="surface mt-10 rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-[var(--accent)]">Ready to get started?</h2>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Call us to talk through your project, or fill out the form for a written scope and quote. We typically follow up the same day.
+              </p>
+              {siteConfig.financing.teaser && (
+                <p className="mt-2 text-sm font-semibold text-[var(--brand)]">{siteConfig.financing.teaser}</p>
+              )}
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Button href="/request-a-quote">Get a Free Quote</Button>
+                <Button href={siteConfig.phoneHref} variant="secondary">
+                  Call {siteConfig.phoneDisplay}
+                </Button>
+                <Button href="/financing" variant="secondary">Financing Options</Button>
+              </div>
+            </div>
+
+            <FaqList title="Common Questions" items={service.faqs} />
+
+            <h2 className="mt-10 text-xl font-bold text-[var(--accent)]">Available In Your Area</h2>
+            <div className="mt-3 grid gap-2 md:grid-cols-2">
               {locations.map((location) => (
-                <Link key={location.slug} href={`/${location.slug}/${service.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
-                  {location.name}
+                <Link key={location.slug} href={`/${location.slug}/${service.slug}`} className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]">
+                  {service.name} in {location.short}
                 </Link>
               ))}
             </div>
 
-            <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Related Services</h3>
+            <h3 className="mt-8 text-lg font-bold text-[var(--accent)]">Related Services</h3>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               {related.map((item) => (
                 <Link key={item.slug} href={`/services/${item.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
@@ -201,31 +195,6 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 </Link>
               ))}
             </div>
-            <div className="surface mt-8 rounded-xl p-5">
-              <h3 className="text-xl font-semibold text-[var(--accent)]">Talk with us about your {service.name.toLowerCase()} project</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Call for immediate help or send your quote request online. We reply quickly and walk you through next steps.
-              </p>
-              <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-                {siteConfig.financing.teaser} {siteConfig.financing.shortDisclosure}
-              </p>
-              <p className="mt-2 text-sm">
-                <Link href="/financing-terms" className="font-semibold text-[var(--brand)]">
-                  Review financing terms
-                </Link>
-              </p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <Button href="/request-a-quote">Request a Quote</Button>
-                <Button href={siteConfig.phoneHref} variant="secondary">
-                  Call {siteConfig.phoneDisplay}
-                </Button>
-                <Button href="/financing" variant="secondary">
-                  Financing Options
-                </Button>
-              </div>
-            </div>
-            <FaqList title={`${service.name} FAQs`} items={service.faqs} />
-            <TestimonialStrip />
           </div>
           <QuoteForm />
         </Container>

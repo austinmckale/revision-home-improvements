@@ -1,3 +1,5 @@
+import JsonLd from "@/components/JsonLd";
+import { getFaqJsonLd } from "@/lib/structuredData";
 import { ServiceFaq } from "@/content/services";
 
 type FaqListProps = {
@@ -8,6 +10,7 @@ type FaqListProps = {
 export default function FaqList({ title, items }: FaqListProps) {
   return (
     <section className="mt-10">
+      <JsonLd data={getFaqJsonLd(items)} />
       <h3 className="text-2xl font-bold text-[var(--accent)]">{title}</h3>
       <div className="mt-4 space-y-3">
         {items.map((item) => (

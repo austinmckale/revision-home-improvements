@@ -6,6 +6,7 @@ declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
     dataLayer?: Array<Record<string, unknown>>;
+    fbq?: (...args: unknown[]) => void;
   }
 }
 
@@ -19,6 +20,10 @@ function emitWithParams(eventName: string, params: Record<string, unknown>) {
   window.dataLayer?.push({ event: eventName, ...params });
 }
 
+function fbTrack(eventName: string) {
+  window.fbq?.("track", eventName);
+}
+
 export default function TrackingEvents() {
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
@@ -29,7 +34,10 @@ export default function TrackingEvents() {
       }
     };
 
-    const onLead = () => emit("generate_lead");
+    const onLead = () => {
+      emit("generate_lead");
+      fbTrack("Lead");
+    };
     const onStep1Complete = (event: Event) => {
       const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
       emitWithParams("quote_step_1_complete", detail);

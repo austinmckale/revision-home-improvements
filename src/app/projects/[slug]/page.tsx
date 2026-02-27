@@ -5,9 +5,11 @@ import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
+import BottomCTA from "@/components/sections/BottomCTA";
 import { caseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
+import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 type Params = { slug: string };
 
@@ -48,6 +50,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   return (
     <>
       <JsonLd data={jsonLd} />
+      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Projects", href: "/projects" }, { name: caseStudy.title, href: "/projects/" + caseStudy.slug }])} />
       <section className="hero-band py-14">
         <Container className="grid items-center gap-8 md:grid-cols-2">
           <div>
@@ -130,6 +133,12 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
           </aside>
         </Container>
       </section>
+
+      <BottomCTA
+        title={`Want a similar ${caseStudy.serviceName.toLowerCase()} project?`}
+        description={`We serve homeowners across ${caseStudy.locationName} and surrounding areas. Tell us about your project to get started.`}
+        links={[{ href: "/services/" + caseStudy.serviceSlug, label: "View " + caseStudy.serviceName }, { href: "/projects", label: "More Projects" }]}
+      />
     </>
   );
 }

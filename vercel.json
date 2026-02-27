@@ -49,7 +49,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com; connect-src 'self' https://www.google-analytics.com https://challenges.cloudflare.com; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; frame-src https://challenges.cloudflare.com;"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://challenges.cloudflare.com; connect-src 'self' https://www.google-analytics.com https://www.facebook.com https://challenges.cloudflare.com; img-src 'self' data: blob: https://*.supabase.co https://www.facebook.com; style-src 'self' 'unsafe-inline'; frame-src https://challenges.cloudflare.com https://www.facebook.com;"
         }
       ]
     }
