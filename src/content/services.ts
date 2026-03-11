@@ -20,6 +20,16 @@ export type Service = {
   outcomes: string[];
   process: string[];
   faqs: ServiceFaq[];
+  authoritySnapshot?: {
+    title: string;
+    location: string;
+    estimateDate: string;
+    total: string;
+    timeline: string;
+    scope: string[];
+    compliance: string;
+    note: string;
+  };
   image: {
     src: string;
     alt: string;
@@ -182,7 +192,12 @@ export const services: Service[] = [
       "Electrical/HVAC adjustments required for comfort",
     ],
     outcomes: ["More usable living space", "Improved comfort and lighting", "Flexible layouts for family needs"],
-    process: ["Space planning and constraints review", "Framing/electrical/mechanical coordination", "Finish material installation", "Final punch-list completion"],
+    process: [
+      "Space planning and constraints review",
+      "Permit and inspection coordination",
+      "Framing/electrical/mechanical coordination",
+      "Finish material installation and final punch-list completion",
+    ],
     faqs: [
       ...sharedFaqs("basement finishing", "5 to 8 weeks"),
       {
@@ -194,6 +209,26 @@ export const services: Service[] = [
         a: "Yes, but it depends on your existing plumbing. If there is a rough-in already, it is straightforward. If not, we can discuss options during the estimate.",
       },
     ],
+    authoritySnapshot: {
+      title: "Fogelsville Partial Unfinished Basement Scope",
+      location: "Fogelsville, PA (Lehigh County)",
+      estimateDate: "April 1, 2025",
+      total: "$118,900",
+      timeline: "Estimated 12 to 16 weeks (permit and inspection timing can affect schedule)",
+      scope: [
+        "Framing for mechanical room, fitness room, workshop, wet bar zone, and custom built-ins",
+        "Pressure-treated bottom plates at concrete contact points and required fire blocking",
+        "Recessed lighting, dedicated 20-amp fitness circuits, wet bar electrical, and hardwired smoke/CO detectors",
+        "Wet bar plumbing rough-in plus sump and drainage coordination",
+        "Exterior wall insulation, 6-mil vapor barrier, and Rockwool in ceiling cavities",
+        "Slab prep with vapor barrier and LVP flooring in finished areas",
+        "Interior French drain and up to two sump pump systems for water management",
+      ],
+      compliance:
+        "Scope written to align with local building, electrical, plumbing, and energy-code requirements with final inspections for closeout.",
+      note:
+        "This is a real estimate snapshot used to show planning depth and code-first scope development. Final pricing and scope vary by home and conditions.",
+    },
     image: {
       src: "/images/projects/big-screen-basement.jpg",
       alt: "Finished basement media room with large screen.",
@@ -346,15 +381,15 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/Patio-3.jpg",
-      alt: "Patio remodel and paver construction project in Reading, PA.",
+      src: "/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg",
+      alt: "Finished patio roof gable with tongue-and-groove detail.",
     },
     gallery: [
+      { src: "/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg", alt: "Finished patio roof gable with tongue-and-groove detail." },
       { src: "/images/projects/Patio-3.jpg", alt: "Completed paver patio installation." },
       { src: "/images/projects/patio-construction-2.jpg", alt: "Patio construction phase during build." },
       { src: "/images/projects/Frontier-2.jpg", alt: "Outdoor patio build in progress." },
       { src: "/images/projects/Patio-Construction-site-frontier.jpg", alt: "Site prep for patio and paver build." },
-      { src: "/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg", alt: "Finished patio roof and gable detail." },
     ],
   },
   {

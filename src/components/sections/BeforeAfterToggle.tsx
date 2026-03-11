@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
+import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 
 type ToggleImage = {
   src: string;
@@ -47,16 +47,16 @@ export default function BeforeAfterToggle({ beforeImages, afterImages }: Props) 
       <p className="mt-3 text-sm text-[var(--muted)]">
         Showing {activeStage.toLowerCase()} photos for this bathroom project.
       </p>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        {activeImages.map((image) => (
-          <figure key={`${activeStage}-${image.src}`} className="overflow-hidden rounded-lg border border-[var(--border)]">
-            <Image src={image.src} alt={image.alt} width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
-            <figcaption className="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-[var(--muted)]">
-              {activeStage === "BEFORE" ? "Before" : "After"}
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+      <ExpandableImageGrid
+        images={activeImages.map((image) => ({
+          ...image,
+          caption: activeStage === "BEFORE" ? "Before" : "After",
+        }))}
+        gridClassName="mt-4 grid gap-3 sm:grid-cols-2"
+        cardClassName="overflow-hidden rounded-lg border border-[var(--border)]"
+        imageClassName="aspect-[4/3] w-full object-cover"
+        captionClassName="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-[var(--muted)]"
+      />
     </section>
   );
 }

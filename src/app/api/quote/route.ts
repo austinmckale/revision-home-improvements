@@ -36,34 +36,6 @@ function redactPhone(value: unknown) {
   return `***${digits.slice(-4)}`;
 }
 
-async function verifyTurnstile(token: string, ip?: string) {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) {
-    if (process.env.NODE_ENV === "production") {
-      console.error("TURNSTILE_SECRET_KEY is missing in production.");
-      return false;
-    }
-    return true;
-  }
-  if (!token) return false;
-
-  const formData = new FormData();
-  formData.append("secret", secret);
-  formData.append("response", token);
-  if (ip) {
-    formData.append("remoteip", ip);
-  }
-
-  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!response.ok) return false;
-  const data = (await response.json()) as { success?: boolean };
-  return !!data.success;
-}
-
 async function sendLeadWebhook(payload: Record<string, unknown>) {
   const webhookUrl = process.env.LEADS_WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) return { delivered: false, reason: "missing_webhook_url" as const };
@@ -287,17 +259,6 @@ export async function POST(request: Request) {
           message: "Too many requests. Please wait a few minutes and try again.",
         },
         { status: 429 },
-      );
-    }
-
-    const turnstileOk = await verifyTurnstile(parsed.data["cf-turnstile-response"] || "", remoteIp);
-    if (!turnstileOk) {
-      return NextResponse.json(
-        {
-          ok: false,
-          message: "Spam check failed. Please try again or call us directly.",
-        },
-        { status: 400 },
       );
     }
 

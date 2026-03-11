@@ -25,14 +25,24 @@ export default function TestimonialStrip({ items, title = "What Our Clients Say"
     <section className="mt-10">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="text-2xl font-bold text-[var(--accent)]">{title}</h3>
-        <a
-          href={siteConfig.googleBusinessProfileUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="text-sm font-semibold text-[var(--brand)]"
-        >
-          Read more reviews
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href={siteConfig.googleBusinessProfileUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-semibold text-[var(--brand)]"
+          >
+            Google Reviews
+          </a>
+          <a
+            href={siteConfig.facebookPageUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-semibold text-[var(--brand)]"
+          >
+            Facebook Page
+          </a>
+        </div>
       </div>
       <div className="mt-4 grid gap-3 md:grid-cols-3">
         {displayItems.map((item) => (

@@ -18,7 +18,6 @@ export const quoteSchema = z.object({
   details: asText.pipe(z.string().min(10, "Please add project details").max(2000, "Details are too long")),
   timeline: asText.pipe(z.string().min(2, "Timeline is required").max(80, "Timeline is too long")),
   website: z.string().max(0).optional(),
-  "cf-turnstile-response": z.string().max(2048).optional(),
 });
 
 export type QuoteInput = z.infer<typeof quoteSchema>;

@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
+import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { caseStudies } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
@@ -97,14 +98,12 @@ export default async function ProjectsPage() {
 
           <section className="mt-10">
             <h2 className="text-2xl font-bold text-[var(--accent)]">Additional Project Photos</h2>
-            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {additionalImages.map((image) => (
-                <figure key={image.src} className="surface overflow-hidden rounded-xl">
-                  <Image src={image.src} alt={image.alt} width={900} height={600} className="h-44 w-full object-cover" />
-                  <figcaption className="p-3 text-sm text-[var(--muted)]">{image.alt}</figcaption>
-                </figure>
-              ))}
-            </div>
+            <ExpandableImageGrid
+              images={additionalImages.map((image) => ({ ...image, caption: image.alt }))}
+              gridClassName="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+              cardClassName="surface overflow-hidden rounded-xl"
+              imageClassName="h-44 w-full object-cover"
+            />
           </section>
 
           <section className="surface mt-10 rounded-2xl p-8 text-center">

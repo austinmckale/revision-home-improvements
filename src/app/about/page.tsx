@@ -91,7 +91,7 @@ export default function AboutPage() {
 
           <div className="surface mt-8 rounded-xl p-5 text-center">
             <p className="text-sm text-[var(--muted)]">
-              <span className="font-semibold text-[var(--accent)]">{siteConfig.hicNumber}</span> · Licensed and insured in Pennsylvania · {siteConfig.warrantyYears}-year workmanship warranty
+              <span className="font-semibold text-[var(--accent)]">{siteConfig.hicNumber}</span> · Licensed and insured in Pennsylvania · 12-month workmanship warranty + applicable manufacturer warranties
             </p>
           </div>
 

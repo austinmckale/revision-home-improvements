@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 import BeforeAfterToggle from "@/components/sections/BeforeAfterToggle";
+import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { caseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
@@ -130,13 +131,12 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
           <aside>
             <div className="surface rounded-xl p-5">
               <h3 className="text-lg font-semibold text-[var(--accent)]">Project Photos</h3>
-              <div className="mt-4 grid gap-3">
-                {caseStudy.images.map((image) => (
-                  <figure key={image.src} className="overflow-hidden rounded-lg border border-[var(--border)]">
-                    <Image src={image.src} alt={image.alt} width={900} height={600} className="h-40 w-full object-cover" />
-                  </figure>
-                ))}
-              </div>
+              <ExpandableImageGrid
+                images={caseStudy.images}
+                gridClassName="mt-4 grid gap-3"
+                cardClassName="overflow-hidden rounded-lg border border-[var(--border)]"
+                imageClassName="h-40 w-full object-cover"
+              />
             </div>
           </aside>
         </Container>

@@ -98,19 +98,31 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "berks-basement-finish-and-detail",
-    title: "Basement Finish and Detail Work in Berks County",
-    summary: "Converted unfinished basement zones into livable interior space with flooring and custom detailing.",
+    title: "Full Basement Theater and Entertainment Build in Berks County",
+    summary:
+      "Complete basement transformation including drywall, new lighting, epoxy flooring, and a custom home theater entertainment wall with integrated audio and fireplace.",
     locationName: "Berks County, PA",
     locationSlug: "berks-county-pa",
     serviceName: "Basement Finishing",
     serviceSlug: "basement-finishing",
     timeline: "5 to 7 weeks",
-    scope: ["Layout planning for multi-use space", "Flooring and trim installation", "Custom finish feature detailing"],
+    scope: [
+      "Full basement framing, drywall, and finish prep",
+      "Home theater entertainment wall with fireplace integration",
+      "Speaker and audio package setup with clean wire management",
+      "Epoxy floor installation and trim detailing",
+      "New recessed lighting and final electrical finish-out",
+    ],
     challenge:
-      "The space needed better lighting, cleaner utility transitions, and practical room usage without feeling cramped.",
+      "The goal was to turn a mostly unfinished basement into a true entertainment space without making it feel dark, cluttered, or disconnected across zones.",
     solution:
-      "A phased finish plan was used to sequence framing, flooring, and final details with clean transitions.",
-    results: ["More usable square footage", "Improved comfort and flow", "A finished basement with strong visual consistency"],
+      "Work was sequenced from framing and drywall through lighting, theater/audio integration, fireplace installation, and epoxy finishing so each phase could be completed cleanly.",
+    results: [
+      "Full basement upgrade from blank space to finished entertainment zone",
+      "Custom theater focal wall with integrated speakers and fireplace",
+      "Durable epoxy floor with cleaner transitions and easier maintenance",
+      "Brighter lighting and more usable square footage for everyday family use",
+    ],
     testimonial: {
       quote: "They took a blank basement and turned it into a space our family actually uses every day.",
       author: "Berks County homeowner",

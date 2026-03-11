@@ -34,9 +34,18 @@ export const metadata: Metadata = {
       "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship.",
     images: [siteConfig.ogImage],
   },
+  alternates: {
+    canonical: "/",
+  },
   icons: {
-    icon: siteConfig.logo,
-    apple: siteConfig.logo,
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon", sizes: "48x48" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+      { url: "/favicon-192x192.png", type: "image/png", sizes: "192x192" },
+    ],
+    shortcut: ["/favicon-48x48.png"],
+    apple: "/apple-touch-icon.png",
   },
   robots: { index: true, follow: true },
 };
@@ -46,22 +55,39 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-ND2W58Q5";
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
   const fbPixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
+  const gtagId = gaId || googleAdsId;
 
   return (
     <html lang="en">
       <body className="antialiased">
         <JsonLd data={getLocalBusinessJsonLd()} />
-        {gaId && (
+        {gtmId && (
+          <Script id="gtm-init" strategy="afterInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','${gtmId}');`}
+          </Script>
+        )}
+        {gtagId && (
           <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
-            <Script id="ga4-init" strategy="afterInteractive">
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gtagId}`} strategy="afterInteractive" />
+            <Script id="gtag-init" strategy="afterInteractive">
               {`window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               window.gtag = gtag;
-              gtag('js', new Date());
-              gtag('config', '${gaId}');`}
+              gtag('js', new Date());${
+                gaId ? `
+              gtag('config', '${gaId}');` : ""
+              }${
+                googleAdsId ? `
+              gtag('config', '${googleAdsId}');` : ""
+              }`}
             </Script>
           </>
         )}

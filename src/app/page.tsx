@@ -14,7 +14,6 @@ import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Lehigh Valley Remodeling Contractor | Revision Home Improvements",
   description:
     "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship across the Lehigh Valley, Reading, and Berks County.",
 };
@@ -54,8 +53,8 @@ export default function HomePage() {
           </div>
           <div className="surface overflow-hidden rounded-2xl">
             <Image
-              src="/images/projects/DSC00338-1.jpg"
-              alt="Kitchen remodeling hero project in Reading and Berks County by Revision Home Improvements."
+              src="/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg"
+              alt="Completed Frontier patio roof and outdoor project by Revision Home Improvements in the Lehigh Valley."
               width={1200}
               height={800}
               className="h-full w-full object-cover"

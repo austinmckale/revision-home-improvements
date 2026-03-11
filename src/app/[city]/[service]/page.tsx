@@ -9,12 +9,14 @@ import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
 import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
+import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { getLocationBySlug, locations } from "@/content/locations";
 import { caseStudies } from "@/content/caseStudies";
+import { getCityServiceLocalContent } from "@/content/localSeo";
 import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices, services } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
-import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getCityServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
 
 export const revalidate = 3600;
@@ -32,11 +34,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const location = getLocationBySlug(city);
   const selectedService = getServiceBySlug(service);
   if (!location || !selectedService) return {};
+  const localContent = getCityServiceLocalContent(location.slug, selectedService.slug);
   const serviceKey = selectedService.name.toLowerCase();
   const locationKey = location.name.toLowerCase();
   return {
-    title: `${selectedService.name} in ${location.name} | Revision Home Improvements`,
-    description: `Local ${selectedService.name.toLowerCase()} contractor in ${location.name} with clear scopes, reliable scheduling, and quality workmanship.`,
+    title: localContent?.metadataTitle ?? `${selectedService.name} in ${location.name}`,
+    description:
+      localContent?.metadataDescription ??
+      `Local ${selectedService.name.toLowerCase()} contractor in ${location.name} with clear scopes, reliable scheduling, and quality workmanship.`,
     keywords: [
       `${serviceKey} ${locationKey}`,
       `${serviceKey} contractor ${location.short.toLowerCase()}`,
@@ -56,11 +61,15 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     notFound();
   }
 
-  const jsonLd = getServiceJsonLd(
-    `${service.name} in ${location.name}`,
-    absoluteUrl(`/${location.slug}/${service.slug}`),
-    location.name,
-  );
+  const localContent = getCityServiceLocalContent(location.slug, service.slug);
+  const cityServiceUrl = absoluteUrl(`/${location.slug}/${service.slug}`);
+  const jsonLd = getCityServiceJsonLd({
+    businessName: siteConfig.name,
+    cityName: location.name,
+    serviceName: service.name,
+    url: cityServiceUrl,
+    image: absoluteUrl(service.image.src),
+  });
   const localProof = caseStudies
     .filter((item) => item.locationSlug === location.slug && item.serviceSlug === service.slug)
     .slice(0, 1);
@@ -72,6 +81,38 @@ export default async function CityServicePage({ params }: { params: Promise<Para
   const portfolioImages = showCuratedStaticGallery
     ? []
     : await getPortfolioImages({ serviceTags: [portfolioTag], limit: 3 });
+  const faqItems = [
+    ...(localContent?.localizedFaqs ?? service.faqs.slice(0, 3)),
+    {
+      q: `Do you service all of ${location.name}?`,
+      a: `Yes. We take on projects across ${location.name} including ${location.priorityAreas.slice(0, 3).join(", ")}, and surrounding areas.`,
+    },
+  ];
+  const internalLinks = localContent?.internalLinks ?? [
+    {
+      href: `/${location.slug}`,
+      anchorText: `Remodeling and restoration in ${location.name}`,
+      reason: "City hub and related services",
+    },
+    {
+      href: `/services/${service.slug}`,
+      anchorText: `${service.name} service details`,
+      reason: "Service-level scope and process",
+    },
+    {
+      href: "/projects",
+      anchorText: "Recent local projects",
+      reason: "Visual trust and case-study proof",
+    },
+    {
+      href: service.slug === "water-damage-restoration" ? "/insurance-claims" : "/financing",
+      anchorText:
+        service.slug === "water-damage-restoration"
+          ? "Insurance claims assistance"
+          : "Financing options",
+      reason: "Decision-stage support",
+    },
+  ];
 
   return (
     <>
@@ -83,7 +124,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">{location.name}</p>
             <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">
-              {service.name} in {location.short}
+              {localContent?.heroHeading ?? `${service.name} in ${location.short}`}
             </h1>
             <p className="mt-3 text-[var(--muted)]">
               {service.intro} {location.localAngle}
@@ -111,6 +152,26 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               ))}
             </ul>
 
+            {service.authoritySnapshot && (
+              <section className="surface mt-8 rounded-xl p-5">
+                <h2 className="text-2xl font-bold text-[var(--accent)]">{service.authoritySnapshot.title}</h2>
+                <p className="mt-2 text-sm text-[var(--muted)]">
+                  {service.authoritySnapshot.location} · Estimate dated {service.authoritySnapshot.estimateDate}
+                </p>
+                <p className="mt-1 text-sm font-semibold text-[var(--brand)]">
+                  Total estimate: {service.authoritySnapshot.total}
+                </p>
+                <p className="mt-1 text-sm text-[var(--muted)]">{service.authoritySnapshot.timeline}</p>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                  {service.authoritySnapshot.scope.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
+                <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
+              </section>
+            )}
+
             <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What Affects the Price</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               {service.pricingFactors.map((item) => (
@@ -124,6 +185,19 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 <li key={outcome}>{outcome}</li>
               ))}
             </ul>
+
+            {localContent && (
+              <section className="surface mt-8 rounded-xl p-6">
+                <h2 className="text-2xl font-bold text-[var(--accent)]">{localContent.localProjectHeading}</h2>
+                <p className="mt-2 text-sm text-[var(--muted)]">{localContent.localProjectSnippet}</p>
+                <h3 className="mt-5 text-lg font-semibold text-[var(--accent)]">{localContent.localChallengesHeading}</h3>
+                <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                  {localContent.localChallenges.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
 
             {localProof.length > 0 && (
               <section className="mt-8">
@@ -142,24 +216,22 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             {showCuratedStaticGallery && service.gallery.length > 0 ? (
               <section className="mt-8">
                 <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Project Photos</h2>
-                <div className={`mt-3 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}>
-                  {service.gallery.slice(0, 4).map((image) => (
-                    <figure key={image.src} className="surface overflow-hidden rounded-lg">
-                      <Image src={image.src} alt={image.alt} width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
-                    </figure>
-                  ))}
-                </div>
+                <ExpandableImageGrid
+                  images={service.gallery.slice(0, 4)}
+                  gridClassName={`mt-3 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}
+                  cardClassName="surface overflow-hidden rounded-lg"
+                  imageClassName="aspect-[4/3] w-full object-cover"
+                />
               </section>
             ) : portfolioImages.length > 0 ? (
               <PortfolioGallery images={portfolioImages} title={`Recent ${service.name} Work`} />
             ) : service.gallery.length > 0 ? (
-              <div className={`mt-8 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}>
-                {service.gallery.slice(0, 3).map((image) => (
-                  <figure key={image.src} className="surface overflow-hidden rounded-lg">
-                    <Image src={image.src} alt={image.alt} width={1200} height={900} className="aspect-[4/3] w-full object-cover" />
-                  </figure>
-                ))}
-              </div>
+              <ExpandableImageGrid
+                images={service.gallery.slice(0, 3)}
+                gridClassName={`mt-8 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}
+                cardClassName="surface overflow-hidden rounded-lg"
+                imageClassName="aspect-[4/3] w-full object-cover"
+              />
             ) : null}
 
             <div className="surface mt-10 rounded-xl p-6">
@@ -180,15 +252,21 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </div>
             </div>
 
+            <section className="mt-8">
+              <h2 className="text-2xl font-bold text-[var(--accent)]">Related Local Resources</h2>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {internalLinks.map((link) => (
+                  <Link key={link.href} href={link.href} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
+                    <p className="text-sm font-semibold text-[var(--accent)]">{link.anchorText}</p>
+                    <p className="mt-1 text-xs text-[var(--muted)]">{link.reason}</p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+
             <FaqList
               title={`${service.name} in ${location.short}: Common Questions`}
-              items={[
-                ...service.faqs.slice(0, 3),
-                {
-                  q: `Do you service all of ${location.name}?`,
-                  a: `Yes. We take on projects across ${location.name} including ${location.priorityAreas.slice(0, 3).join(", ")}, and surrounding areas.`,
-                },
-              ]}
+              items={faqItems}
             />
 
             <LocalHighlightsSection

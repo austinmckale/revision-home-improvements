@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
@@ -9,7 +8,7 @@ import { siteConfig } from "@/content/site";
 export const metadata: Metadata = {
   title: "Workmanship Warranty | Revision Home Improvements",
   description:
-    `Every Revision Home Improvements project includes a ${siteConfig.warrantyYears}-year workmanship warranty. See what is covered and how to request service.`,
+    "Every Revision Home Improvements project includes a 12-month workmanship warranty plus any applicable manufacturer warranties. See what is covered and how to request service.",
   alternates: { canonical: "/warranty" },
 };
 
@@ -19,22 +18,22 @@ export default function WarrantyPage() {
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Warranty", href: "/warranty" }])} />
       <section className="py-14">
         <Container className="max-w-4xl">
-          <h1 className="text-4xl font-extrabold text-[var(--accent)]">{siteConfig.warrantyYears}-Year Workmanship Warranty</h1>
+          <h1 className="text-4xl font-extrabold text-[var(--accent)]">1-Year / 12-Month Workmanship Warranty</h1>
           <p className="mt-4 text-[var(--muted)]">
-            Every project we complete includes a <strong>{siteConfig.warrantyYears}-year workmanship warranty</strong> covering installation quality and finish standards. Terms are documented in your project proposal before work begins.
+            Every project we complete includes a <strong>12-month workmanship warranty</strong> covering installation quality and finish standards, plus any applicable manufacturer warranties on installed products. Terms are documented in your project proposal before work begins.
           </p>
 
           <div className="surface mt-6 rounded-2xl border-2 border-[var(--brand)] p-6">
             <h2 className="text-2xl font-semibold text-[var(--accent)]">What Is Covered</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              <li>Workmanship-related installation defects for <strong>{siteConfig.warrantyYears} years</strong> from project completion</li>
+              <li>Workmanship-related installation defects for <strong>12 months</strong> from project completion</li>
               <li>Finish corrections tied to approved scope and closeout standards</li>
               <li>Punch-list items identified during your final walkthrough</li>
+              <li>Any applicable manufacturer warranties on materials and products</li>
             </ul>
             <h3 className="mt-4 font-semibold text-[var(--accent)]">What Is Not Covered</h3>
             <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
               <li>Normal wear and tear or homeowner-caused damage</li>
-              <li>Material manufacturer defects (covered by the manufacturer&apos;s own warranty)</li>
               <li>Issues resulting from unauthorized modifications after project completion</li>
             </ul>
           </div>

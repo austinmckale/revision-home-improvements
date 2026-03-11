@@ -1,7 +1,7 @@
 import { siteConfig } from "@/content/site";
 
 export function getLocalBusinessJsonLd() {
-  const sameAs = [siteConfig.googleBusinessProfileUrl].filter(Boolean);
+  const sameAs = [siteConfig.googleBusinessProfileUrl, siteConfig.facebookPageUrl].filter(Boolean);
   return {
     "@context": "https://schema.org",
     "@type": "GeneralContractor",
@@ -85,5 +85,52 @@ export function getHowToJsonLd(name: string, steps: string[]) {
       position: index + 1,
       text,
     })),
+  };
+}
+
+export function getCityServiceJsonLd({
+  businessName,
+  cityName,
+  serviceName,
+  url,
+  image,
+}: {
+  businessName: string;
+  cityName: string;
+  serviceName: string;
+  url: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        name: `${serviceName} in ${cityName}`,
+        serviceType: serviceName,
+        areaServed: {
+          "@type": "City",
+          name: cityName,
+        },
+        provider: {
+          "@type": "GeneralContractor",
+          name: businessName,
+          telephone: "+1-484-706-9229",
+          url: siteConfig.domain,
+        },
+        url,
+      },
+      {
+        "@type": "HomeAndConstructionBusiness",
+        name: `${businessName} - ${serviceName}`,
+        ...(image ? { image } : {}),
+        url,
+        telephone: "+1-484-706-9229",
+        areaServed: {
+          "@type": "City",
+          name: cityName,
+        },
+      },
+    ],
   };
 }

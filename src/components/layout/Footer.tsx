@@ -37,6 +37,16 @@ export default function Footer() {
                   Google Business Profile
                 </a>
               </p>
+              <p>
+                <a
+                  href={siteConfig.facebookPageUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-[var(--brand)]"
+                >
+                  Facebook Page
+                </a>
+              </p>
             </div>
             <p className="mt-3 text-xs text-[var(--muted)]">{siteConfig.hicNumber}</p>
             <div className="mt-4 flex flex-wrap gap-2">

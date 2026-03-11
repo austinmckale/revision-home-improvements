@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, MouseEvent, useEffect, useState } from "react";
-import Script from "next/script";
 import { primaryServices } from "@/content/services";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
@@ -62,7 +61,6 @@ export default function QuoteForm() {
   const [step, setStep] = useState<1 | 2>(1);
   const [stepOneData, setStepOneData] = useState<StepOneData>(initialStepOneData);
   const [utmData, setUtmData] = useState<UtmData>({ utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "", landing_path: "" });
-  const turnstileKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   useEffect(() => {
     setUtmData(captureUtmParams());
@@ -137,10 +135,6 @@ export default function QuoteForm() {
 
   return (
     <form onSubmit={onSubmit} className="surface rounded-2xl p-6" noValidate>
-      {turnstileKey && (
-        <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
-      )}
-
       <div className="mb-4 flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
         <span>Request Your Quote</span>
         <span>Step {step} of 2</span>
@@ -279,11 +273,6 @@ export default function QuoteForm() {
             <span className="mt-1 block text-xs text-[var(--muted)]">Include a few details so we can scope your quote accurately.</span>
             {fieldError("details") && <span className="mt-1 block text-xs text-red-700">{fieldError("details")}</span>}
           </label>
-          {turnstileKey && (
-            <div className="mt-4">
-              <div className="cf-turnstile" data-sitekey={turnstileKey} data-theme="light" />
-            </div>
-          )}
         </>
       )}
 

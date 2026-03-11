@@ -11,7 +11,7 @@ export default function ReviewsSection() {
           <div>
             <h3 className="text-2xl font-bold text-[var(--accent)]">Verified Reviews</h3>
             <p className="mt-1 text-sm text-[var(--muted)]">
-              5.0 rating on Angi (9 reviews). More feedback on Google.
+              5.0 rating on Angi (9 reviews). More feedback on Google and Facebook.
             </p>
           </div>
           <div className="flex flex-wrap gap-2 text-sm">
@@ -22,6 +22,14 @@ export default function ReviewsSection() {
               className="rounded-full border border-[var(--brand)] px-3 py-1.5 font-semibold text-[var(--brand)]"
             >
               Google Reviews
+            </a>
+            <a
+              href={siteConfig.facebookPageUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-[var(--brand)] px-3 py-1.5 font-semibold text-[var(--brand)]"
+            >
+              Facebook Page
             </a>
           </div>
         </div>
