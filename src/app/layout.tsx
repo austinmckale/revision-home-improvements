@@ -58,6 +58,7 @@ export default function RootLayout({
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-ND2W58Q5";
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
+  const googleAdsPhoneConversionId = "AW-16834624221/1EeFCMD4wYocEN31r9s-";
   const fbPixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
   const gtagId = gaId || googleAdsId;
 
@@ -86,7 +87,10 @@ export default function RootLayout({
               gtag('config', '${gaId}');` : ""
               }${
                 googleAdsId ? `
-              gtag('config', '${googleAdsId}');` : ""
+              gtag('config', '${googleAdsId}');
+              gtag('config', '${googleAdsPhoneConversionId}', {
+                'phone_conversion_number': '${siteConfig.phoneDisplay}'
+              });` : ""
               }`}
             </Script>
           </>
