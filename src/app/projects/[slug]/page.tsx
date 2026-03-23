@@ -135,8 +135,8 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
               <h3 className="text-lg font-semibold text-[var(--accent)]">Project Photos</h3>
               <ExpandableImageGrid
                 images={caseStudy.images}
-                gridClassName={caseStudy.images.length > 1 ? "mt-4 grid gap-3 sm:grid-cols-2" : "mt-4 max-w-2xl"}
-                cardClassName="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
+                gridClassName={caseStudy.images.length > 1 ? "mt-4 columns-1 gap-3 sm:columns-2" : "mt-4 max-w-2xl"}
+                cardClassName="mb-3 break-inside-avoid overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
                 imageClassName="h-auto w-full"
               />
             </div>

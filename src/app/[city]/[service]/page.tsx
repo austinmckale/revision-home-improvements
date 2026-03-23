@@ -76,7 +76,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
   );
   const galleryGridClassName =
-    service.gallery.length > 1 ? "mt-3 grid gap-4 md:grid-cols-2" : "mt-3 max-w-3xl";
+    service.gallery.length > 1 ? "mt-3 columns-1 gap-4 md:columns-2" : "mt-3 max-w-3xl";
   const portfolioTag = service.portfolioTag ?? service.slug;
   const portfolioImages = showCuratedStaticGallery
     ? []
@@ -204,12 +204,12 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 <h2 className="text-2xl font-bold text-[var(--accent)]">Recent {service.name} in {location.short}</h2>
                 <div className="mt-3 grid gap-3 md:grid-cols-2">
                   {localProof.map((item) => (
-                  <Link key={item.slug} href={`/projects/${item.slug}`} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
+                    <Link key={item.slug} href={`/projects/${item.slug}`} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
                     <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName} · {item.timeline}</p>
                     <p className="mt-1 font-semibold">{item.title}</p>
                     <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
                     <span className="mt-2 inline-block text-sm font-semibold text-[var(--brand)]">View full case study</span>
-                  </Link>
+                    </Link>
                   ))}
                 </div>
               </section>
@@ -221,7 +221,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 <ExpandableImageGrid
                   images={service.gallery.slice(0, 4)}
                   gridClassName={galleryGridClassName}
-                  cardClassName="surface overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                  cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
                 />
               </section>
@@ -231,7 +231,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               <ExpandableImageGrid
                 images={service.gallery.slice(0, 3)}
                 gridClassName={galleryGridClassName.replace("mt-3", "mt-8")}
-                cardClassName="surface overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
                 imageClassName="h-auto w-full"
               />
             ) : null}

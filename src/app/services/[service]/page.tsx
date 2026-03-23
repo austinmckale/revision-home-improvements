@@ -69,7 +69,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
   );
   const galleryGridClassName =
-    service.gallery.length > 1 ? "mt-4 grid gap-4 md:grid-cols-2" : "mt-4 max-w-3xl";
+    service.gallery.length > 1 ? "mt-4 columns-1 gap-4 md:columns-2" : "mt-4 max-w-3xl";
   const priorityLocationSlugs = priorityLocationSlugsByService[service.slug];
   const availableLocations = priorityLocationSlugs
     ? priorityLocationSlugs
@@ -172,7 +172,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <ExpandableImageGrid
                   images={service.gallery.slice(0, 4)}
                   gridClassName={galleryGridClassName}
-                  cardClassName="surface overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                  cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
                 />
               </section>
@@ -184,7 +184,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <ExpandableImageGrid
                   images={service.gallery}
                   gridClassName={galleryGridClassName}
-                  cardClassName="surface overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                  cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
                 />
               </section>

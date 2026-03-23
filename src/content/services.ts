@@ -45,7 +45,12 @@ export const curatedStaticGalleryServiceSlugs = [
   "bathroom-remodeling",
   "basement-finishing",
   "drywall-installation-repair",
+  "flooring-installation",
+  "paver-installation",
   "exterior-remodeling",
+  "fire-damage-restoration",
+  "water-damage-restoration",
+  "insurance-claims",
 ] as const;
 
 function sharedFaqs(serviceName: string, typicalTimeline: string): ServiceFaq[] {
@@ -282,13 +287,13 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/living-room-1.jpg",
-      alt: "Finished living room with clean drywall and paint-ready surfaces.",
+      src: "/images/projects/img_8220.jpg",
+      alt: "Drywall and finish repair work in progress with paint-ready surface prep.",
     },
     gallery: [
       { src: "/images/projects/reading-commercial-bar-window-upgrade.jpg", alt: "Commercial bar interior with updated windows, trim, and wall finish in Reading." },
-      { src: "/images/projects/living-room-1.jpg", alt: "Finished living room with smooth drywall and clean corners." },
-      { src: "/images/projects/finished-room.jpg", alt: "Finished room with clean drywall lines and finished surfaces." },
+      { src: "/images/projects/img_8220.jpg", alt: "Drywall repair and reconstruction work in progress." },
+      { src: "/images/projects/img_8216.jpg", alt: "Finished interior wall and ceiling surfaces after drywall and finish repair." },
     ],
   },
   {
@@ -340,7 +345,6 @@ export const services: Service[] = [
       { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
       { src: "/images/projects/living-room-1.jpg", alt: "Living room finish detail after interior renovation." },
       { src: "/images/projects/img_8219.jpg", alt: "Flooring installation example in remodeled interior." },
-      { src: "/images/projects/img_8216.jpg", alt: "Finished flooring in remodeled interior space." },
     ],
   },
   {
@@ -388,13 +392,11 @@ export const services: Service[] = [
       alt: "Finished pool patio and hardscape renovation in Bethlehem.",
     },
     gallery: [
-      { src: "/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg", alt: "Finished patio roof gable with tongue-and-groove detail." },
-      { src: "/images/projects/Patio-3.jpg", alt: "Completed paver patio installation." },
       { src: "/images/projects/bethlehem-pool-patio-after-overview.jpg", alt: "Finished pool patio renovation overview in Bethlehem." },
       { src: "/images/projects/bethlehem-pool-patio-after-steps.jpg", alt: "Pool patio detail after hardscape renovation." },
+      { src: "/images/projects/bethlehem-pool-patio-before.jpg", alt: "Pool patio area before renovation." },
+      { src: "/images/projects/Patio-3.jpg", alt: "Completed paver patio installation." },
       { src: "/images/projects/patio-construction-2.jpg", alt: "Patio construction phase during build." },
-      { src: "/images/projects/Frontier-2.jpg", alt: "Outdoor patio build in progress." },
-      { src: "/images/projects/Patio-Construction-site-frontier.jpg", alt: "Site prep for patio and paver build." },
     ],
   },
   {

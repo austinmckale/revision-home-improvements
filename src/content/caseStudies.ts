@@ -303,12 +303,12 @@ export const caseStudies: CaseStudy[] = [
         alt: "Finished full exterior refresh on a historic-style home in Wyomissing.",
       },
       {
-        src: "/images/projects/wyomissing-exterior-refresh-before-after.jpg",
-        alt: "Before and after comparison of the Wyomissing exterior refresh.",
-      },
-      {
         src: "/images/projects/wyomissing-exterior-refresh-in-progress.jpg",
         alt: "Exterior refresh in progress on the Wyomissing home.",
+      },
+      {
+        src: "/images/projects/wyomissing-exterior-refresh-finished.jpg",
+        alt: "Finished front elevation after the Wyomissing exterior refresh.",
       },
     ],
     beforeImages: [
