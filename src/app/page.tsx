@@ -9,16 +9,28 @@ import ConfidenceSection from "@/components/sections/ConfidenceSection";
 import BottomCTA from "@/components/sections/BottomCTA";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { primaryServices } from "@/content/services";
-import { caseStudies } from "@/content/caseStudies";
+import { caseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
   description:
-    "Kitchen, bathroom, basement, exterior, and restoration projects with clear scopes, fast communication, and quality workmanship across the Lehigh Valley, Reading, and Berks County.",
+    "Kitchen, bathroom, basement, exterior, and restoration projects with clear scopes, fast communication, and quality workmanship across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.",
 };
 
 export default function HomePage() {
+  const featuredCaseStudies = sortCaseStudiesByMarketPriority(caseStudies).slice(0, 3);
+  const featuredLocations = [
+    "allentown-pa",
+    "bethlehem-pa",
+    "lehigh-valley-pa",
+    "reading-pa",
+    "wyomissing-pa",
+    "berks-county-pa",
+  ]
+    .map((slug) => locations.find((location) => location.slug === slug))
+    .filter((location): location is (typeof locations)[number] => Boolean(location));
+
   return (
     <>
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }])} />
@@ -26,14 +38,14 @@ export default function HomePage() {
         <Container className="grid items-center gap-10 md:grid-cols-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">
-              Reading + Lehigh Valley Remodeling
+              Allentown + Bethlehem + Lehigh Valley Remodeling
             </p>
             <h1 className="mt-3 text-4xl font-extrabold leading-tight text-[var(--accent)] md:text-5xl">
               Remodeling and restoration work that gets done right.
             </h1>
             <p className="mt-4 max-w-xl text-base text-[var(--muted)]">
-              {siteConfig.name} helps homeowners with kitchens, bathrooms, basements, exterior projects, and damage restoration across{" "}
-              {siteConfig.serviceAreas}.
+              {siteConfig.name} helps homeowners with kitchens, bathrooms, basements, exterior projects,
+              and damage restoration across {siteConfig.serviceAreas}.
             </p>
             <p className="mt-2 max-w-xl text-sm font-semibold text-[var(--brand)]">
               {siteConfig.financing.teaser}
@@ -67,14 +79,18 @@ export default function HomePage() {
         <Container>
           <h2 className="text-2xl font-bold text-[var(--accent)]">Start With Your Project Type</h2>
           <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-            We handle everything from kitchen upgrades to emergency damage restoration. Pick the service that fits your needs.
+            We handle everything from kitchen upgrades to emergency damage restoration. Pick the
+            service that fits your needs.
           </p>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             {primaryServices.map((service) => (
               <article key={service.slug} className="surface rounded-xl p-5">
                 <h3 className="text-lg font-semibold">{service.name}</h3>
                 <p className="mt-2 text-sm text-[var(--muted)]">{service.short}</p>
-                <Link href={`/services/${service.slug}`} className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]"
+                >
                   Learn more
                 </Link>
               </article>
@@ -92,14 +108,23 @@ export default function HomePage() {
         <Container>
           <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Project Outcomes</h2>
           <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-            Real projects across Berks County and Lehigh Valley with clear before/after scope and measurable results.
+            Real projects across Allentown, Bethlehem, and the Lehigh Valley with clear before/after
+            scope and measurable results.
           </p>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
-            {caseStudies.slice(0, 3).map((study) => (
+            {featuredCaseStudies.map((study) => (
               <article key={study.slug} className="surface overflow-hidden rounded-xl">
-                <Image src={study.images[0].src} alt={study.images[0].alt} width={900} height={600} className="h-44 w-full object-cover" />
+                <Image
+                  src={study.images[0].src}
+                  alt={study.images[0].alt}
+                  width={900}
+                  height={600}
+                  className="h-44 w-full object-cover"
+                />
                 <div className="p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{study.locationName}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                    {study.locationName}
+                  </p>
                   <h3 className="mt-1 text-base font-semibold text-[var(--accent)]">{study.title}</h3>
                   <p className="mt-2 text-sm text-[var(--muted)]">{study.summary}</p>
                   <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
@@ -107,7 +132,10 @@ export default function HomePage() {
                       <li key={scopeItem}>{scopeItem}</li>
                     ))}
                   </ul>
-                  <Link href={`/projects/${study.slug}`} className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+                  <Link
+                    href={`/projects/${study.slug}`}
+                    className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]"
+                  >
                     Read case study
                   </Link>
                 </div>
@@ -121,11 +149,16 @@ export default function HomePage() {
         <Container>
           <h2 className="text-2xl font-bold text-[var(--accent)]">Service Areas</h2>
           <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-            We focus on Reading, Berks County, and the Lehigh Valley. Start with a nearby hub and we’ll confirm coverage for your address.
+            We focus on Allentown, Bethlehem, and the Lehigh Valley, and we can confirm coverage for
+            nearby addresses as well.
           </p>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
-            {locations.slice(0, 6).map((location) => (
-              <Link key={location.slug} href={`/${location.slug}`} className="surface rounded-xl p-4 hover:border-[var(--brand)]">
+            {featuredLocations.map((location) => (
+              <Link
+                key={location.slug}
+                href={`/${location.slug}`}
+                className="surface rounded-xl p-4 hover:border-[var(--brand)]"
+              >
                 <p className="font-semibold">{location.name}</p>
                 <p className="text-sm text-[var(--muted)]">{location.region}</p>
               </Link>
@@ -164,13 +197,22 @@ export default function HomePage() {
           </article>
         </Container>
         <Container className="mt-6 text-center">
-          <Button href="/our-process" variant="secondary">See our full process</Button>
+          <Button href="/our-process" variant="secondary">
+            See our full process
+          </Button>
         </Container>
       </section>
 
       <ReviewsSection />
 
-      <BottomCTA title="Need urgent restoration help?" description="Fire and water damage calls get priority scheduling. We also support insurance-claim project scoping." links={[{ href: "/fire-water-damage-restoration", label: "Emergency Restoration" }, { href: "/insurance-claims", label: "Insurance Claims Help" }]} />
+      <BottomCTA
+        title="Need urgent restoration help?"
+        description="Fire and water damage calls get priority scheduling. We also support insurance-claim project scoping."
+        links={[
+          { href: "/fire-water-damage-restoration", label: "Emergency Restoration" },
+          { href: "/insurance-claims", label: "Insurance Claims Help" },
+        ]}
+      />
     </>
   );
 }

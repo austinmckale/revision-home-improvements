@@ -22,6 +22,13 @@ const nextConfig: NextConfig = {
       { source: "/about-us", destination: "/about", permanent: true },
       { source: "/basement-renovations", destination: "/services/basement-finishing", permanent: true },
       { source: "/floor-renovations", destination: "/services/flooring-installation", permanent: true },
+      { source: "/projects/reading-kitchen-layout-upgrade", destination: "/projects/allentown-kitchen-layout-upgrade", permanent: true },
+      { source: "/projects/wyomissing-bathroom-refresh", destination: "/projects/bethlehem-bathroom-refresh", permanent: true },
+      { source: "/projects/wyomissing-full-exterior-refresh", destination: "/projects/lehigh-valley-full-exterior-refresh", permanent: true },
+      { source: "/projects/wyomissing-dormer-shutter-detail-refresh", destination: "/projects/lehigh-valley-dormer-shutter-detail-refresh", permanent: true },
+      { source: "/projects/reading-interior-flooring-refresh", destination: "/projects/bethlehem-interior-flooring-refresh", permanent: true },
+      { source: "/projects/berks-basement-finish-and-detail", destination: "/projects/lehigh-valley-basement-finish-and-detail", permanent: true },
+      { source: "/projects/berks-fire-damage-interior-rebuild", destination: "/projects/allentown-fire-damage-interior-rebuild", permanent: true },
     ];
 
     return [

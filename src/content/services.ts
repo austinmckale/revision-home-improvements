@@ -335,10 +335,10 @@ export const services: Service[] = [
     ],
     image: {
       src: "/images/projects/reading-interior-flooring-refresh.jpg",
-      alt: "Interior flooring refresh with updated paint, windows, and lighting in Reading.",
+      alt: "Interior flooring refresh with updated paint, windows, and lighting.",
     },
     gallery: [
-      { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Interior flooring and finish refresh with updated lighting and windows in Reading." },
+      { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Interior flooring and finish refresh with updated lighting and windows." },
       { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
       { src: "/images/projects/living-room-1.jpg", alt: "Living room finish detail after interior renovation." },
       { src: "/images/projects/fire-place-construction.jpg", alt: "Flooring installation underway in a remodeled interior." },
@@ -443,7 +443,7 @@ export const services: Service[] = [
     },
     gallery: [
       { src: "/images/projects/allentown-exterior-log-style-home-front-finished.jpg", alt: "Finished exterior remodeling project on a log-style home in Allentown." },
-      { src: "/images/projects/wyomissing-exterior-refresh-after.jpg", alt: "Full exterior refresh with updated shutters and paint in Wyomissing." },
+      { src: "/images/projects/wyomissing-exterior-refresh-after.jpg", alt: "Full exterior refresh with updated shutters and paint in the Lehigh Valley." },
       { src: "/images/projects/bethlehem-exterior-staircase-finished.jpg", alt: "Finished exterior staircase build with landing and rail system in Bethlehem." },
       { src: "/images/projects/berks-county-exterior-refresh.jpg", alt: "Ranch-style home exterior refresh in Berks County with crisp black accents." },
       { src: "/images/projects/allentown-exterior-log-style-home-lift-access-work.jpg", alt: "Lift-access exterior remodeling work underway on an Allentown home." },

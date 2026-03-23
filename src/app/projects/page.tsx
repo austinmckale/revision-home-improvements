@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
-import { caseStudies } from "@/content/caseStudies";
+import { caseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
@@ -53,14 +53,15 @@ const additionalImages = [
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Remodeling Projects & Case Studies | Reading PA & Lehigh Valley",
+  title: "Remodeling Projects & Case Studies | Allentown, Bethlehem & Lehigh Valley",
   description:
-    "Browse recent kitchen, bathroom, basement, flooring, and restoration projects across Reading, Berks County, and the Lehigh Valley.",
+    "Browse recent kitchen, bathroom, basement, flooring, and restoration projects across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.",
   alternates: { canonical: "/projects" },
 };
 
 export default async function ProjectsPage() {
   const portfolioImages = await getPortfolioImages({ limit: 12 });
+  const orderedCaseStudies = sortCaseStudiesByMarketPriority(caseStudies);
 
   return (
     <>
@@ -69,14 +70,14 @@ export default async function ProjectsPage() {
         <Container>
           <h1 className="text-4xl font-extrabold text-[var(--accent)]">Project Gallery</h1>
           <p className="mt-3 max-w-3xl text-[var(--muted)]">
-            See what we have built for homeowners across Reading, Berks County, and Lehigh Valley.
+            See what we have built for homeowners across Allentown, Bethlehem, the Lehigh Valley, and nearby markets.
             Each project shows real scope, real challenges, and real results.
           </p>
 
           <section className="mt-8">
             <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Case Studies</h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {caseStudies.map((study) => (
+              {orderedCaseStudies.map((study) => (
                 <article key={study.slug} className="surface overflow-hidden rounded-xl">
                   <Image
                     src={study.images[0].src}

@@ -11,7 +11,7 @@ import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices } from "@/content/services";
-import { caseStudies } from "@/content/caseStudies";
+import { caseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
@@ -24,10 +24,15 @@ export const revalidate = 3600;
 type Params = { service: string };
 
 const priorityLocationSlugsByService: Partial<Record<string, string[]>> = {
-  "kitchen-remodeling": ["reading-pa", "allentown-pa", "bethlehem-pa"],
-  "bathroom-remodeling": ["reading-pa", "allentown-pa", "bethlehem-pa"],
-  "exterior-remodeling": ["reading-pa", "allentown-pa", "bethlehem-pa"],
-  "water-damage-restoration": ["reading-pa", "allentown-pa", "bethlehem-pa"],
+  "kitchen-remodeling": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "bathroom-remodeling": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "basement-finishing": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "drywall-installation-repair": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "flooring-installation": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "paver-installation": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "exterior-remodeling": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "fire-damage-restoration": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "water-damage-restoration": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
 };
 
 export function generateStaticParams() {
@@ -42,11 +47,11 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   }
   const serviceKey = service.name.toLowerCase();
   return {
-    title: `${service.name} | Lehigh Valley, Reading & Berks County`,
-    description: `${service.name} services with clear scopes, reliable scheduling, and quality workmanship across the Lehigh Valley, Reading, and Berks County.`,
+    title: `${service.name} | Allentown, Bethlehem & Lehigh Valley`,
+    description: `${service.name} services with clear scopes, reliable scheduling, and quality workmanship across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.`,
     keywords: [
-      `${serviceKey} reading pa`,
-      `${serviceKey} berks county`,
+      `${serviceKey} allentown pa`,
+      `${serviceKey} bethlehem pa`,
       `${serviceKey} lehigh valley`,
       `${serviceKey} contractor`,
     ],
@@ -62,8 +67,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   }
 
   const related = primaryServices.filter((item) => item.slug !== service.slug).slice(0, 4);
-  const relatedCaseStudies = caseStudies.filter(
-    (item) => item.serviceSlug === service.slug && item.featureInServiceListings !== false,
+  const relatedCaseStudies = sortCaseStudiesByMarketPriority(
+    caseStudies.filter((item) => item.serviceSlug === service.slug && item.featureInServiceListings !== false),
   );
   const serviceTestimonials = getTestimonialsByService(service.slug);
   const isEmergencyService =
@@ -86,7 +91,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   const jsonLd = getServiceJsonLd(
     service.name,
     absoluteUrl(`/services/${service.slug}`),
-    "Reading, Wyomissing, Berks County, Allentown, Bethlehem, Lehigh Valley",
+    "Allentown, Bethlehem, Lehigh Valley, Reading, Wyomissing, Berks County",
   );
 
   return (

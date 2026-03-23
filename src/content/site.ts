@@ -7,7 +7,7 @@ export const siteConfig = {
   googleBusinessProfileUrl: "https://share.google/ifdjSA3JbwLC33CRa",
   facebookPageUrl: "https://www.facebook.com/people/Revision-Home-Improvement/61550081845634/",
   serviceAreas:
-    "Reading, Wyomissing, Berks County, Allentown, Bethlehem, and the Lehigh Valley",
+    "Allentown, Bethlehem, the Lehigh Valley, Reading, Wyomissing, and Berks County",
   address: {
     street: "Reading, PA",
     city: "Reading",

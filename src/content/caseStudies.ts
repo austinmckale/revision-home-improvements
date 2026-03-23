@@ -32,11 +32,11 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "reading-kitchen-layout-upgrade",
-    title: "Kitchen Layout Upgrade in Reading",
+    slug: "allentown-kitchen-layout-upgrade",
+    title: "Kitchen Layout Upgrade in Allentown",
     summary: "Full kitchen refresh with improved workflow, cabinetry upgrades, and finish detailing.",
-    locationName: "Reading, PA",
-    locationSlug: "reading-pa",
+    locationName: "Allentown, PA",
+    locationSlug: "allentown-pa",
     serviceName: "Kitchen Remodeling",
     serviceSlug: "kitchen-remodeling",
     timeline: "4 to 6 weeks",
@@ -52,7 +52,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     testimonial: {
       quote: "Clear communication from estimate to closeout and the final details came out excellent.",
-      author: "Reading homeowner",
+      author: "Allentown homeowner",
     },
     images: [
       { src: "/images/projects/img_7833.jpg", alt: "Kitchen renovation with updated cabinets and modern finishes." },
@@ -61,11 +61,11 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: "wyomissing-bathroom-refresh",
-    title: "Bathroom Refresh in Wyomissing",
+    slug: "bethlehem-bathroom-refresh",
+    title: "Bathroom Refresh in Bethlehem",
     summary: "Practical bathroom upgrade focused on durable materials, better storage, and clean finish quality.",
-    locationName: "Wyomissing, PA",
-    locationSlug: "wyomissing-pa",
+    locationName: "Bethlehem, PA",
+    locationSlug: "bethlehem-pa",
     serviceName: "Bathroom Remodeling",
     serviceSlug: "bathroom-remodeling",
     timeline: "2 to 3 weeks",
@@ -81,7 +81,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     testimonial: {
       quote: "The process was straightforward and we felt informed at every stage.",
-      author: "Wyomissing homeowner",
+      author: "Bethlehem homeowner",
     },
     images: [
       { src: "/images/projects/bathroom-after-4.jpg", alt: "Finished bathroom shower enclosure after remodel." },
@@ -276,12 +276,12 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: "wyomissing-full-exterior-refresh",
-    title: "Full Exterior Refresh in Wyomissing",
+    slug: "lehigh-valley-full-exterior-refresh",
+    title: "Full Exterior Refresh in Lehigh Valley",
     summary:
       "Whole-home exterior refresh with a cleaner paint palette, new shutters, dormer detail cleanup, and a sharper front-elevation presentation.",
-    locationName: "Wyomissing, PA",
-    locationSlug: "wyomissing-pa",
+    locationName: "Lehigh Valley, PA",
+    locationSlug: "lehigh-valley-pa",
     serviceName: "Exterior Remodeling",
     serviceSlug: "exterior-remodeling",
     timeline: "Several days to 2 weeks",
@@ -302,37 +302,37 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
-        alt: "Finished full exterior refresh on a historic-style home in Wyomissing.",
+        alt: "Finished full exterior refresh on a historic-style home in the Lehigh Valley.",
       },
       {
         src: "/images/projects/wyomissing-exterior-refresh-in-progress.jpg",
-        alt: "Exterior refresh in progress on the Wyomissing home.",
+        alt: "Exterior refresh in progress on the Lehigh Valley home.",
       },
       {
         src: "/images/projects/wyomissing-exterior-refresh-finished.jpg",
-        alt: "Finished front elevation after the Wyomissing exterior refresh.",
+        alt: "Finished front elevation after the Lehigh Valley exterior refresh.",
       },
     ],
     beforeImages: [
       {
         src: "/images/projects/wyomissing-exterior-refresh-before.jpg",
-        alt: "Home exterior before shutters and finish updates in Wyomissing.",
+        alt: "Home exterior before shutters and finish updates in the Lehigh Valley.",
       },
     ],
     afterImages: [
       {
         src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
-        alt: "Home exterior after shutters and finish updates in Wyomissing.",
+        alt: "Home exterior after shutters and finish updates in the Lehigh Valley.",
       },
     ],
   },
   {
-    slug: "wyomissing-dormer-shutter-detail-refresh",
-    title: "Dormer and Shutter Detail Refresh in Wyomissing",
+    slug: "lehigh-valley-dormer-shutter-detail-refresh",
+    title: "Dormer and Shutter Detail Refresh in Lehigh Valley",
     summary:
       "Front-elevation exterior detail refresh focused on cleaned-up dormers, sharper shutter contrast, and a brighter, more polished entry presentation.",
-    locationName: "Wyomissing, PA",
-    locationSlug: "wyomissing-pa",
+    locationName: "Lehigh Valley, PA",
+    locationSlug: "lehigh-valley-pa",
     serviceName: "Exterior Remodeling",
     serviceSlug: "exterior-remodeling",
     timeline: "Front-elevation detail refresh",
@@ -353,33 +353,33 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
-        alt: "Finished front elevation after dormer, shutter, and exterior detail refresh in Wyomissing.",
+        alt: "Finished front elevation after dormer, shutter, and exterior detail refresh in the Lehigh Valley.",
       },
       {
         src: "/images/projects/wyomissing-exterior-refresh-finished.jpg",
-        alt: "Refinished dormer and front-entry details after the Wyomissing exterior update.",
+        alt: "Refinished dormer and front-entry details after the Lehigh Valley exterior update.",
       },
     ],
     beforeImages: [
       {
         src: "/images/projects/wyomissing-exterior-refresh-before.jpg",
-        alt: "Front elevation before dormer cleanup and shutter updates in Wyomissing.",
+        alt: "Front elevation before dormer cleanup and shutter updates in the Lehigh Valley.",
       },
     ],
     afterImages: [
       {
         src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
-        alt: "Front elevation after dormer cleanup and shutter updates in Wyomissing.",
+        alt: "Front elevation after dormer cleanup and shutter updates in the Lehigh Valley.",
       },
     ],
   },
   {
-    slug: "reading-interior-flooring-refresh",
-    title: "Interior Flooring and Finish Refresh in Reading",
+    slug: "bethlehem-interior-flooring-refresh",
+    title: "Interior Flooring and Finish Refresh in Bethlehem",
     summary:
       "Interior refresh with updated flooring appearance, new paint, recessed lighting, windows, and a cleaner pass-through opening between rooms.",
-    locationName: "Reading, PA",
-    locationSlug: "reading-pa",
+    locationName: "Bethlehem, PA",
+    locationSlug: "bethlehem-pa",
     serviceName: "Flooring Installation",
     serviceSlug: "flooring-installation",
     timeline: "Several days to 2 weeks",
@@ -400,7 +400,7 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/reading-interior-flooring-refresh.jpg",
-        alt: "Interior flooring and finish refresh with updated paint, lighting, and windows in Reading.",
+        alt: "Interior flooring and finish refresh with updated paint, lighting, and windows in Bethlehem.",
       },
     ],
   },
@@ -436,12 +436,12 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: "berks-basement-finish-and-detail",
-    title: "Full Basement Theater and Entertainment Build in Berks County",
+    slug: "lehigh-valley-basement-finish-and-detail",
+    title: "Full Basement Theater and Entertainment Build in Lehigh Valley",
     summary:
       "Complete basement transformation including drywall, new lighting, epoxy flooring, and a custom home theater entertainment wall with integrated audio and fireplace.",
-    locationName: "Berks County, PA",
-    locationSlug: "berks-county-pa",
+    locationName: "Lehigh Valley, PA",
+    locationSlug: "lehigh-valley-pa",
     serviceName: "Basement Finishing",
     serviceSlug: "basement-finishing",
     timeline: "5 to 7 weeks",
@@ -464,7 +464,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     testimonial: {
       quote: "They took a blank basement and turned it into a space our family actually uses every day.",
-      author: "Berks County homeowner",
+      author: "Lehigh Valley homeowner",
     },
     images: [
       { src: "/images/projects/big-screen-basement.jpg", alt: "Finished basement media room with large screen." },
@@ -620,11 +620,11 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: "berks-fire-damage-interior-rebuild",
-    title: "Fire Damage Interior Rebuild in Berks County",
+    slug: "allentown-fire-damage-interior-rebuild",
+    title: "Fire Damage Interior Rebuild in Allentown",
     summary: "Structured interior rebuild after fire-related damage with phased repairs and finish restoration.",
-    locationName: "Berks County, PA",
-    locationSlug: "berks-county-pa",
+    locationName: "Allentown, PA",
+    locationSlug: "allentown-pa",
     serviceName: "Fire Damage Restoration",
     serviceSlug: "fire-damage-restoration",
     timeline: "Scope-dependent, phased reconstruction",
@@ -636,7 +636,7 @@ export const caseStudies: CaseStudy[] = [
     results: ["Clearer path from damage to rebuild", "Better coordination across repair stages", "Restored interior function and appearance"],
     testimonial: {
       quote: "They brought structure to a chaotic situation and delivered quality work from start to finish.",
-      author: "Berks County homeowner",
+      author: "Allentown homeowner",
     },
     images: [
       { src: "/images/projects/fire-place-construction.jpg", alt: "Interior reconstruction work after fire-related damage." },
@@ -645,6 +645,34 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
 ];
+
+const caseStudyLocationPriority = [
+  "allentown-pa",
+  "bethlehem-pa",
+  "lehigh-valley-pa",
+  "reading-pa",
+  "berks-county-pa",
+  "wyomissing-pa",
+] as const;
+
+export function sortCaseStudiesByMarketPriority(items: CaseStudy[]) {
+  return [...items].sort((a, b) => {
+    const aPriority = caseStudyLocationPriority.indexOf(
+      a.locationSlug as (typeof caseStudyLocationPriority)[number],
+    );
+    const bPriority = caseStudyLocationPriority.indexOf(
+      b.locationSlug as (typeof caseStudyLocationPriority)[number],
+    );
+    const normalizedAPriority = aPriority === -1 ? caseStudyLocationPriority.length : aPriority;
+    const normalizedBPriority = bPriority === -1 ? caseStudyLocationPriority.length : bPriority;
+
+    if (normalizedAPriority !== normalizedBPriority) {
+      return normalizedAPriority - normalizedBPriority;
+    }
+
+    return a.title.localeCompare(b.title);
+  });
+}
 
 export function getCaseStudyBySlug(slug: string) {
   return caseStudies.find((caseStudy) => caseStudy.slug === slug);
