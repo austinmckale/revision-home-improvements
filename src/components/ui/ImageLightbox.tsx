@@ -92,13 +92,13 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
           </>
         )}
 
-        <div className="flex min-h-[60vh] items-center justify-center">
+        <div className="flex h-[80vh] items-center justify-center">
           <Image
             src={image.src}
             alt={image.alt}
             width={1600}
             height={1200}
-            className="max-h-[80vh] w-auto rounded-xl object-contain"
+            className="max-h-[80vh] max-w-full w-auto rounded-xl object-contain"
             sizes="100vw"
             priority
           />

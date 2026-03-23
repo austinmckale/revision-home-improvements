@@ -45,6 +45,7 @@ export const curatedStaticGalleryServiceSlugs = [
   "bathroom-remodeling",
   "basement-finishing",
   "drywall-installation-repair",
+  "exterior-remodeling",
 ] as const;
 
 function sharedFaqs(serviceName: string, typicalTimeline: string): ServiceFaq[] {
@@ -285,6 +286,7 @@ export const services: Service[] = [
       alt: "Finished living room with clean drywall and paint-ready surfaces.",
     },
     gallery: [
+      { src: "/images/projects/reading-commercial-bar-window-upgrade.jpg", alt: "Commercial bar interior with updated windows, trim, and wall finish in Reading." },
       { src: "/images/projects/living-room-1.jpg", alt: "Finished living room with smooth drywall and clean corners." },
       { src: "/images/projects/finished-room.jpg", alt: "Finished room with clean drywall lines and finished surfaces." },
     ],
@@ -330,10 +332,11 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_8219.jpg",
-      alt: "Home renovation flooring installation project in Lehigh Valley.",
+      src: "/images/projects/reading-interior-flooring-refresh.jpg",
+      alt: "Interior flooring refresh with updated paint, windows, and lighting in Reading.",
     },
     gallery: [
+      { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Interior flooring and finish refresh with updated lighting and windows in Reading." },
       { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
       { src: "/images/projects/living-room-1.jpg", alt: "Living room finish detail after interior renovation." },
       { src: "/images/projects/img_8219.jpg", alt: "Flooring installation example in remodeled interior." },
@@ -381,15 +384,71 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg",
-      alt: "Finished patio roof gable with tongue-and-groove detail.",
+      src: "/images/projects/bethlehem-pool-patio-after-overview.jpg",
+      alt: "Finished pool patio and hardscape renovation in Bethlehem.",
     },
     gallery: [
       { src: "/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg", alt: "Finished patio roof gable with tongue-and-groove detail." },
       { src: "/images/projects/Patio-3.jpg", alt: "Completed paver patio installation." },
+      { src: "/images/projects/bethlehem-pool-patio-after-overview.jpg", alt: "Finished pool patio renovation overview in Bethlehem." },
+      { src: "/images/projects/bethlehem-pool-patio-after-steps.jpg", alt: "Pool patio detail after hardscape renovation." },
       { src: "/images/projects/patio-construction-2.jpg", alt: "Patio construction phase during build." },
       { src: "/images/projects/Frontier-2.jpg", alt: "Outdoor patio build in progress." },
       { src: "/images/projects/Patio-Construction-site-frontier.jpg", alt: "Site prep for patio and paver build." },
+    ],
+  },
+  {
+    slug: "exterior-remodeling",
+    name: "Exterior Remodeling",
+    short: "Exterior updates that improve curb appeal, access, and weather resistance.",
+    description:
+      "Exterior remodeling for siding, trim, windows, stairs, garage facades, and weather-worn elevations.",
+    intro:
+      "Exterior work has to do more than look better. We plan around access, exposure, and finish durability so siding, trim, window, stair, and facade updates hold up through weather and daily use.",
+    cta: "Request an exterior quote",
+    bullets: ["Siding, stairs, and trim updates", "Window and entry improvements", "Garage and facade updates"],
+    whatIncluded: [
+      "Exterior siding, trim, window, and facade scope planning",
+      "Surface prep and finish updates on weather-exposed elevations",
+      "Exterior stair, landing, and entry-access builds when part of scope",
+      "Access coordination for multi-story sections and hard-to-reach areas",
+      "Cleanup and final walkthrough of exterior improvements",
+    ],
+    qualityFactors: [
+      "Surface prep quality before finish work starts",
+      "Consistent finish transitions across trim, siding, windows, and garage elevations",
+      "Stair and landing alignment with solid railing and guard details",
+      "Safe access planning for upper-story exterior work",
+    ],
+    pricingFactors: [
+      "Height, access difficulty, and lift or stair-build requirements",
+      "Extent of surface wear, repairs, or prep needed",
+      "Amount of siding, trim, window, stair, and facade work included in scope",
+    ],
+    outcomes: ["Stronger curb appeal", "Safer and cleaner exterior access", "Better protection for weather-exposed surfaces"],
+    process: ["Site review and photo assessment", "Access and scope planning", "Exterior prep and improvement work", "Final detail walk and touch-ups"],
+    faqs: [
+      ...sharedFaqs("exterior remodeling", "several days to 2 weeks for most targeted scopes"),
+      {
+        q: "Do you handle taller exterior elevations?",
+        a: "Yes. We plan access around ladders, lifts, and site conditions so upper-story areas can be worked safely and cleanly.",
+      },
+      {
+        q: "Can you improve curb appeal without a full exterior rebuild?",
+        a: "Yes. Many projects focus on selective siding, trim, or facade updates that make the home look sharper without replacing everything.",
+      },
+    ],
+    image: {
+      src: "/images/projects/berks-county-exterior-refresh.jpg",
+      alt: "Finished ranch-style exterior refresh in Berks County with updated black accents.",
+    },
+    gallery: [
+      { src: "/images/projects/allentown-exterior-log-style-home-front-finished.jpg", alt: "Finished exterior remodeling project on a log-style home in Allentown." },
+      { src: "/images/projects/wyomissing-exterior-refresh-after.jpg", alt: "Full exterior refresh with updated shutters and paint in Wyomissing." },
+      { src: "/images/projects/bethlehem-exterior-staircase-finished.jpg", alt: "Finished exterior staircase build with landing and rail system in Bethlehem." },
+      { src: "/images/projects/berks-county-exterior-refresh.jpg", alt: "Ranch-style home exterior refresh in Berks County with crisp black accents." },
+      { src: "/images/projects/allentown-exterior-log-style-home-lift-access-work.jpg", alt: "Lift-access exterior remodeling work underway on an Allentown home." },
+      { src: "/images/projects/allentown-exterior-log-style-home-garage-elevation.jpg", alt: "Garage-side exterior elevation during remodeling work on a log-style home." },
     ],
   },
   {
@@ -433,8 +492,8 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/Frontier-2.jpg",
-      alt: "Fire damage restoration and rebuild work by Revision Home Improvements.",
+      src: "/images/projects/img_8220.jpg",
+      alt: "Reconstruction work in progress during a fire-damage restoration project.",
     },
     gallery: [
       { src: "/images/projects/img_8220.jpg", alt: "Interior restoration and reconstruction in progress." },

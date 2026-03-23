@@ -15,7 +15,7 @@ import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
   description:
-    "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship across the Lehigh Valley, Reading, and Berks County.",
+    "Kitchen, bathroom, basement, exterior, and restoration projects with clear scopes, fast communication, and quality workmanship across the Lehigh Valley, Reading, and Berks County.",
 };
 
 export default function HomePage() {
@@ -32,7 +32,7 @@ export default function HomePage() {
               Remodeling and restoration work that gets done right.
             </h1>
             <p className="mt-4 max-w-xl text-base text-[var(--muted)]">
-              {siteConfig.name} helps homeowners with kitchens, bathrooms, basements, and damage restoration across{" "}
+              {siteConfig.name} helps homeowners with kitchens, bathrooms, basements, exterior projects, and damage restoration across{" "}
               {siteConfig.serviceAreas}.
             </p>
             <p className="mt-2 max-w-xl text-sm font-semibold text-[var(--brand)]">
@@ -70,7 +70,7 @@ export default function HomePage() {
             We handle everything from kitchen upgrades to emergency damage restoration. Pick the service that fits your needs.
           </p>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
-            {primaryServices.slice(0, 6).map((service) => (
+            {primaryServices.map((service) => (
               <article key={service.slug} className="surface rounded-xl p-5">
                 <h3 className="text-lg font-semibold">{service.name}</h3>
                 <p className="mt-2 text-sm text-[var(--muted)]">{service.short}</p>

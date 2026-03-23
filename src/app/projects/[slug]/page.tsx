@@ -113,10 +113,12 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
               />
             ) : null}
 
-            <blockquote className="surface mt-8 rounded-xl p-5">
-              <p className="text-[var(--muted)]">&ldquo;{caseStudy.testimonial.quote}&rdquo;</p>
-              <p className="mt-2 text-sm font-semibold text-[var(--accent)]">{caseStudy.testimonial.author}</p>
-            </blockquote>
+            {caseStudy.testimonial ? (
+              <blockquote className="surface mt-8 rounded-xl p-5">
+                <p className="text-[var(--muted)]">&ldquo;{caseStudy.testimonial.quote}&rdquo;</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--accent)]">{caseStudy.testimonial.author}</p>
+              </blockquote>
+            ) : null}
 
             <div className="mt-8 grid gap-2 sm:grid-cols-2">
               <Link href={`/services/${caseStudy.serviceSlug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
@@ -133,9 +135,9 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
               <h3 className="text-lg font-semibold text-[var(--accent)]">Project Photos</h3>
               <ExpandableImageGrid
                 images={caseStudy.images}
-                gridClassName="mt-4 grid gap-3"
-                cardClassName="overflow-hidden rounded-lg border border-[var(--border)]"
-                imageClassName="h-40 w-full object-cover"
+                gridClassName={caseStudy.images.length > 1 ? "mt-4 grid gap-3 sm:grid-cols-2" : "mt-4 max-w-2xl"}
+                cardClassName="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
+                imageClassName="h-auto w-full"
               />
             </div>
           </aside>

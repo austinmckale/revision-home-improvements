@@ -172,6 +172,108 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
     ],
   },
+  "reading-pa/exterior-remodeling": {
+    metadataTitle: "Exterior Remodeling in Reading, PA",
+    metadataDescription:
+      "Exterior remodeling in Reading, PA for stairs, windows, siding, trim, and weather-exposed facades. Code-conscious planning, durable materials, and cleaner finish work.",
+    heroHeading: "Exterior Remodeling in Reading, PA",
+    localProjectHeading: "Common Reading Exterior Scope",
+    localProjectSnippet:
+      "Reading exterior projects often mix older access conditions with weathered trim, aging window openings, and tight site constraints. We plan around stairs, entries, and facade upgrades early so the finished work looks cleaner and performs better over time.",
+    localChallengesHeading: "Reading Exterior Challenges We Plan For",
+    localChallenges: [
+      "Tight access around older homes and side yards",
+      "Weather exposure on trim, windows, and entry systems",
+      "Balancing structural upgrades with a clean finished look",
+    ],
+    localizedFaqs: [
+      {
+        q: "Can you build or replace exterior stairs in Reading?",
+        a: "Yes. We handle exterior stair and entry-access projects when the home needs safer, cleaner access from grade to an elevated door or landing.",
+      },
+      {
+        q: "Do you take on window-related exterior remodeling work?",
+        a: "Yes. We can scope window upgrades and the surrounding trim or finish work when those improvements are part of the broader exterior project.",
+      },
+      {
+        q: "What matters most in older Reading exterior projects?",
+        a: "Access planning, durable materials, and clean transitions around existing siding or openings usually have the biggest impact on how well the finished project holds up.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/reading-pa",
+        anchorText: "Home improvement in Reading, PA",
+        reason: "City hub and local services overview",
+      },
+      {
+        href: "/services/exterior-remodeling",
+        anchorText: "Exterior remodeling service details",
+        reason: "Broader process and quality standards",
+      },
+      {
+        href: "/projects",
+        anchorText: "Exterior and renovation project gallery",
+        reason: "Project proof and trust signals",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for exterior remodeling",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
+  "reading-pa/flooring-installation": {
+    metadataTitle: "Flooring Installation in Reading, PA",
+    metadataDescription:
+      "Flooring installation in Reading, PA for hardwood, finish refreshes, and room-to-room interior upgrades. Strong prep, clean trim lines, and better flow through older homes.",
+    heroHeading: "Flooring Installation in Reading, PA",
+    localProjectHeading: "Common Reading Flooring Scope",
+    localProjectSnippet:
+      "Reading flooring projects often turn into broader finish upgrades because once the floors improve, the walls, lighting, and windows need to feel just as clean. We plan connected finish work together so the room does not look pieced together.",
+    localChallengesHeading: "Reading Flooring Challenges We Plan For",
+    localChallenges: [
+      "Uneven older floors and room-to-room transition issues",
+      "Trim and wall details that need to match the flooring upgrade",
+      "Keeping connected rooms visually consistent after finish changes",
+    ],
+    localizedFaqs: [
+      {
+        q: "Can flooring work in Reading be combined with paint or finish updates?",
+        a: "Yes. Many Reading homes benefit from pairing flooring improvements with paint, trim, lighting, or window updates so the room feels fully refreshed instead of partially updated.",
+      },
+      {
+        q: "Do older Reading homes make flooring projects more complicated?",
+        a: "They can. Subfloor condition, transitions, and older trim details often need extra planning so the finished floor looks clean and performs well.",
+      },
+      {
+        q: "What makes a flooring refresh feel high quality?",
+        a: "Prep quality, smooth transitions, and finish details around walls, windows, and openings make the biggest difference in how polished the room feels.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/reading-pa",
+        anchorText: "Home improvement in Reading, PA",
+        reason: "City hub and related services",
+      },
+      {
+        href: "/services/flooring-installation",
+        anchorText: "Flooring installation service details",
+        reason: "Service-level scope and process",
+      },
+      {
+        href: "/projects",
+        anchorText: "Flooring and interior project gallery",
+        reason: "Proof and trust-building project content",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for interior projects",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
   "allentown-pa/kitchen-remodeling": {
     metadataTitle: "Kitchen Remodeling in Allentown, PA",
     metadataDescription:
@@ -325,6 +427,57 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
     ],
   },
+  "allentown-pa/exterior-remodeling": {
+    metadataTitle: "Exterior Remodeling in Allentown, PA",
+    metadataDescription:
+      "Exterior remodeling in Allentown, PA for siding, trim, garage facades, and multi-story elevations. Access planning, durable finish work, and curb-appeal improvements.",
+    heroHeading: "Exterior Remodeling in Allentown, PA",
+    localProjectHeading: "Common Allentown Exterior Scope",
+    localProjectSnippet:
+      "Allentown exterior projects often combine weathered trim, fading facade sections, and access challenges on taller elevations. We plan around ladders or lift access first, then sequence surface prep and finish work so the exterior looks more consistent from curb level to upper-story lines.",
+    localChallengesHeading: "Allentown Exterior Challenges We Plan For",
+    localChallenges: [
+      "Upper-story access and safe equipment placement",
+      "Weather exposure on trim and facade surfaces",
+      "Keeping finish consistency across mixed elevations and garage fronts",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do you handle exterior remodeling on taller Allentown homes?",
+        a: "Yes. We plan access around ladders, lifts, site conditions, and staging needs before the exterior work starts.",
+      },
+      {
+        q: "What kind of exterior work do you take on in Allentown?",
+        a: "We handle targeted exterior remodeling scopes that can include siding, trim, facade cleanup, and garage-front finish improvements.",
+      },
+      {
+        q: "Can exterior work be done without replacing the whole house exterior?",
+        a: "Yes. Many projects focus on improving selected elevations or worn sections so the home looks cleaner and performs better without a full exterior replacement.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/allentown-pa",
+        anchorText: "Home improvement in Allentown, PA",
+        reason: "City-level local relevance",
+      },
+      {
+        href: "/services/exterior-remodeling",
+        anchorText: "Exterior remodeling service details",
+        reason: "Broader process and quality standards",
+      },
+      {
+        href: "/projects",
+        anchorText: "Exterior and remodeling project gallery",
+        reason: "Project proof and local trust signal",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for exterior remodeling",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
   "bethlehem-pa/kitchen-remodeling": {
     metadataTitle: "Kitchen Remodeling in Bethlehem, PA",
     metadataDescription:
@@ -475,6 +628,108 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         href: "/projects",
         anchorText: "Recent restoration and rebuild projects",
         reason: "Proof and trust reinforcement",
+      },
+    ],
+  },
+  "bethlehem-pa/exterior-remodeling": {
+    metadataTitle: "Exterior Remodeling in Bethlehem, PA",
+    metadataDescription:
+      "Exterior remodeling in Bethlehem, PA for entry stairs, siding, trim, windows, and elevated access builds with durable materials and clean finish details.",
+    heroHeading: "Exterior Remodeling in Bethlehem, PA",
+    localProjectHeading: "Common Bethlehem Exterior Scope",
+    localProjectSnippet:
+      "Bethlehem exterior projects often combine elevated rear entries, weathered trim, and access upgrades that need to look clean on character homes and tighter lots. We focus on sturdy exterior builds, strong railing details, and finish work that does not look patched in.",
+    localChallengesHeading: "Bethlehem Exterior Challenges We Plan For",
+    localChallenges: [
+      "Elevated rear entries and narrow exterior access paths",
+      "Durable railing, guard, and stair details that still look clean",
+      "Matching new exterior work to existing siding and trim lines",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do you build exterior stairs and landings in Bethlehem?",
+        a: "Yes. We take on exterior stair and landing projects when a home needs safer access, stronger structure, and cleaner finish detail.",
+      },
+      {
+        q: "Can exterior remodeling in Bethlehem include windows or trim work too?",
+        a: "Yes. We often combine stairs, entries, windows, trim, or facade updates into one organized exterior scope when the project calls for it.",
+      },
+      {
+        q: "What makes exterior access work look professional instead of pieced together?",
+        a: "Consistent materials, clean alignment, and railing details that feel integrated with the home make the biggest difference.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/bethlehem-pa",
+        anchorText: "Home improvement in Bethlehem, PA",
+        reason: "City cluster linkage",
+      },
+      {
+        href: "/services/exterior-remodeling",
+        anchorText: "Exterior remodeling service details",
+        reason: "Service authority page",
+      },
+      {
+        href: "/projects",
+        anchorText: "Exterior and access-build project gallery",
+        reason: "Proof of local work outcomes",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for exterior projects",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
+  "bethlehem-pa/paver-installation": {
+    metadataTitle: "Paver Installation in Bethlehem, PA",
+    metadataDescription:
+      "Paver and pool patio installation in Bethlehem, PA with drainage-aware planning, curved layout detailing, and outdoor hardscape upgrades that improve curb appeal and usability.",
+    heroHeading: "Paver Installation in Bethlehem, PA",
+    localProjectHeading: "Common Bethlehem Pool Patio and Paver Scope",
+    localProjectSnippet:
+      "Bethlehem outdoor projects often need more than a surface swap. Around patios and pool decks, we focus on layout flow, edge detailing, and cleaner hardscape finishes so the space feels upgraded without awkward transitions or mismatched contours.",
+    localChallengesHeading: "Bethlehem Hardscape Challenges We Plan For",
+    localChallenges: [
+      "Curved pool edges and irregular patio shapes",
+      "Surface wear that makes outdoor areas look dated",
+      "Drainage and transition planning around existing structures",
+    ],
+    localizedFaqs: [
+      {
+        q: "Can you renovate a pool patio without changing the whole backyard?",
+        a: "Yes. Many Bethlehem pool patio projects focus on the hardscape immediately around the pool so the space looks dramatically better without a full backyard rebuild.",
+      },
+      {
+        q: "Do curved pool shapes make patio installation harder?",
+        a: "They require better layout planning and finish control, but yes, we handle curved edges and irregular shapes regularly.",
+      },
+      {
+        q: "What makes a pool patio renovation look high quality?",
+        a: "Clean edge detailing, consistent finish work, and transitions that follow the pool shape naturally make the biggest visual difference.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/bethlehem-pa",
+        anchorText: "Outdoor and remodeling services in Bethlehem",
+        reason: "Strengthens the city topical cluster",
+      },
+      {
+        href: "/services/paver-installation",
+        anchorText: "Paver installation service details",
+        reason: "Service authority and process details",
+      },
+      {
+        href: "/projects",
+        anchorText: "Pool patio and hardscape project gallery",
+        reason: "Proof of workmanship and outcomes",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for outdoor projects",
+        reason: "Decision-stage support",
       },
     ],
   },

@@ -45,16 +45,16 @@ export default function BeforeAfterToggle({ beforeImages, afterImages }: Props) 
         </button>
       </div>
       <p className="mt-3 text-sm text-[var(--muted)]">
-        Showing {activeStage.toLowerCase()} photos for this bathroom project.
+        Showing {activeStage.toLowerCase()} photos for this project.
       </p>
       <ExpandableImageGrid
         images={activeImages.map((image) => ({
           ...image,
           caption: activeStage === "BEFORE" ? "Before" : "After",
         }))}
-        gridClassName="mt-4 grid gap-3 sm:grid-cols-2"
-        cardClassName="overflow-hidden rounded-lg border border-[var(--border)]"
-        imageClassName="aspect-[4/3] w-full object-cover"
+        gridClassName="mt-4 grid gap-4 lg:grid-cols-2"
+        cardClassName="overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
+        imageClassName="h-auto w-full"
         captionClassName="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-[var(--muted)]"
       />
     </section>

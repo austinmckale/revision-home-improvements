@@ -26,6 +26,7 @@ type Params = { service: string };
 const priorityLocationSlugsByService: Partial<Record<string, string[]>> = {
   "kitchen-remodeling": ["reading-pa", "allentown-pa", "bethlehem-pa"],
   "bathroom-remodeling": ["reading-pa", "allentown-pa", "bethlehem-pa"],
+  "exterior-remodeling": ["reading-pa", "allentown-pa", "bethlehem-pa"],
   "water-damage-restoration": ["reading-pa", "allentown-pa", "bethlehem-pa"],
 };
 
@@ -61,12 +62,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   }
 
   const related = primaryServices.filter((item) => item.slug !== service.slug).slice(0, 4);
-  const relatedCaseStudies = caseStudies.filter((item) => item.serviceSlug === service.slug).slice(0, 2);
+  const relatedCaseStudies = caseStudies.filter((item) => item.serviceSlug === service.slug);
   const serviceTestimonials = getTestimonialsByService(service.slug);
   const isEmergencyService = service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
   );
+  const galleryGridClassName =
+    service.gallery.length > 1 ? "mt-4 grid gap-4 md:grid-cols-2" : "mt-4 max-w-3xl";
   const priorityLocationSlugs = priorityLocationSlugsByService[service.slug];
   const availableLocations = priorityLocationSlugs
     ? priorityLocationSlugs
@@ -168,9 +171,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Project Photos</h2>
                 <ExpandableImageGrid
                   images={service.gallery.slice(0, 4)}
-                  gridClassName={`mt-4 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}
-                  cardClassName="surface overflow-hidden rounded-lg"
-                  imageClassName="aspect-[4/3] w-full object-cover"
+                  gridClassName={galleryGridClassName}
+                  cardClassName="surface overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                  imageClassName="h-auto w-full"
                 />
               </section>
             ) : portfolioImages.length > 0 ? (
@@ -180,9 +183,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Work</h2>
                 <ExpandableImageGrid
                   images={service.gallery}
-                  gridClassName={`mt-4 grid gap-3 ${service.gallery.length >= 3 ? "sm:grid-cols-3" : service.gallery.length === 2 ? "sm:grid-cols-2" : "max-w-md"}`}
-                  cardClassName="surface overflow-hidden rounded-lg"
-                  imageClassName="aspect-[4/3] w-full object-cover"
+                  gridClassName={galleryGridClassName}
+                  cardClassName="surface overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                  imageClassName="h-auto w-full"
                 />
               </section>
             ) : null}
@@ -190,7 +193,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             {relatedCaseStudies.length > 0 && (
               <section className="mt-8">
                 <h2 className="text-2xl font-bold text-[var(--accent)]">Project Case Studies</h2>
-                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                <div className="mt-3 grid gap-3 md:grid-cols-2">
                   {relatedCaseStudies.map((item) => (
                     <Link key={item.slug} href={`/projects/${item.slug}`} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
                       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName} · {item.timeline}</p>
