@@ -70,7 +70,12 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     url: cityServiceUrl,
     image: absoluteUrl(service.image.src),
   });
-  const localProof = caseStudies.filter((item) => item.locationSlug === location.slug && item.serviceSlug === service.slug);
+  const localProof = caseStudies.filter(
+    (item) =>
+      item.locationSlug === location.slug &&
+      item.serviceSlug === service.slug &&
+      item.featureInServiceListings !== false,
+  );
   const relatedLocalServices = primaryServices.filter((item) => item.slug !== service.slug);
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
@@ -85,7 +90,9 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     ...(localContent?.localizedFaqs ?? service.faqs.slice(0, 3)),
     {
       q: `Do you service all of ${location.name}?`,
-      a: `Yes. We take on projects across ${location.name} including ${location.priorityAreas.slice(0, 3).join(", ")}, and surrounding areas.`,
+      a: `Yes. We take on projects across ${location.name} including ${location.priorityAreas
+        .slice(0, 3)
+        .join(", ")}, and surrounding areas.`,
     },
   ];
   const internalLinks = localContent?.internalLinks ?? [
@@ -117,12 +124,20 @@ export default async function CityServicePage({ params }: { params: Promise<Para
   return (
     <>
       <JsonLd data={jsonLd} />
-      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: location.name, href: `/${location.slug}` }, { name: `${service.name} in ${location.short}`, href: `/${location.slug}/${service.slug}` }])} />
+      <JsonLd
+        data={getBreadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: location.name, href: `/${location.slug}` },
+          { name: `${service.name} in ${location.short}`, href: `/${location.slug}/${service.slug}` },
+        ])}
+      />
 
       <section className="hero-band py-14">
         <Container className="grid items-center gap-8 md:grid-cols-2">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">{location.name}</p>
+            <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">
+              {location.name}
+            </p>
             <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">
               {localContent?.heroHeading ?? `${service.name} in ${location.short}`}
             </h1>
@@ -137,7 +152,13 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             </div>
           </div>
           <div className="surface overflow-hidden rounded-2xl">
-            <Image src={service.image.src} alt={service.image.alt} width={1200} height={800} className="h-full w-full object-cover" />
+            <Image
+              src={service.image.src}
+              alt={service.image.alt}
+              width={1200}
+              height={800}
+              className="h-full w-full object-cover"
+            />
           </div>
         </Container>
       </section>
@@ -154,14 +175,14 @@ export default async function CityServicePage({ params }: { params: Promise<Para
 
             {service.authoritySnapshot && (
               <section className="surface mt-8 rounded-xl p-5">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">{service.authoritySnapshot.title}</h2>
-                <p className="mt-2 text-sm text-[var(--muted)]">
-                  {service.authoritySnapshot.location} · Estimate dated {service.authoritySnapshot.estimateDate}
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                  Example Scope Snapshot
                 </p>
-                <p className="mt-1 text-sm font-semibold text-[var(--brand)]">
-                  Total estimate: {service.authoritySnapshot.total}
-                </p>
-                <p className="mt-1 text-sm text-[var(--muted)]">{service.authoritySnapshot.timeline}</p>
+                <h2 className="mt-1 text-2xl font-bold text-[var(--accent)]">
+                  {service.authoritySnapshot.title}
+                </h2>
+                <p className="mt-2 text-sm text-[var(--muted)]">{service.authoritySnapshot.location}</p>
+                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
                 <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
                   {service.authoritySnapshot.scope.map((item) => (
                     <li key={item}>{item}</li>
@@ -188,9 +209,13 @@ export default async function CityServicePage({ params }: { params: Promise<Para
 
             {localContent && (
               <section className="surface mt-8 rounded-xl p-6">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">{localContent.localProjectHeading}</h2>
+                <h2 className="text-2xl font-bold text-[var(--accent)]">
+                  {localContent.localProjectHeading}
+                </h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{localContent.localProjectSnippet}</p>
-                <h3 className="mt-5 text-lg font-semibold text-[var(--accent)]">{localContent.localChallengesHeading}</h3>
+                <h3 className="mt-5 text-lg font-semibold text-[var(--accent)]">
+                  {localContent.localChallengesHeading}
+                </h3>
                 <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
                   {localContent.localChallenges.map((item) => (
                     <li key={item}>{item}</li>
@@ -201,14 +226,29 @@ export default async function CityServicePage({ params }: { params: Promise<Para
 
             {localProof.length > 0 && (
               <section className="mt-8">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">Recent {service.name} in {location.short}</h2>
+                <h2 className="text-2xl font-bold text-[var(--accent)]">
+                  Recent {service.name} in {location.short}
+                </h2>
                 <div className="mt-3 grid gap-3 md:grid-cols-2">
                   {localProof.map((item) => (
-                    <Link key={item.slug} href={`/projects/${item.slug}`} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName} · {item.timeline}</p>
-                    <p className="mt-1 font-semibold">{item.title}</p>
-                    <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
-                    <span className="mt-2 inline-block text-sm font-semibold text-[var(--brand)]">View full case study</span>
+                    <Link
+                      key={item.slug}
+                      href={`/projects/${item.slug}`}
+                      className="surface rounded-lg p-4 hover:border-[var(--brand)]"
+                    >
+                      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                        {item.locationName}
+                      </p>
+                      <p className="mt-1 font-semibold">{item.title}</p>
+                      <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
+                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
+                        {item.scope.slice(0, 2).map((scopeItem) => (
+                          <li key={scopeItem}>{scopeItem}</li>
+                        ))}
+                      </ul>
+                      <span className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+                        View full case study
+                      </span>
                     </Link>
                   ))}
                 </div>
@@ -241,10 +281,13 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 Ready to plan your {service.name.toLowerCase()} project?
               </h2>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                Call us to talk through your project, or fill out the form for a written scope and quote. We typically follow up the same day.
+                Call us to talk through your project, or fill out the form for a written scope and quote.
+                We typically follow up the same day.
               </p>
               {siteConfig.financing.teaser && (
-                <p className="mt-2 text-sm font-semibold text-[var(--brand)]">{siteConfig.financing.teaser}</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
+                  {siteConfig.financing.teaser}
+                </p>
               )}
               <div className="mt-4 flex flex-wrap gap-3">
                 <Button href="/request-a-quote">Get a Free Quote</Button>
@@ -258,7 +301,11 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               <h2 className="text-2xl font-bold text-[var(--accent)]">Related Local Resources</h2>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 {internalLinks.map((link) => (
-                  <Link key={link.href} href={link.href} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="surface rounded-lg p-4 hover:border-[var(--brand)]"
+                  >
                     <p className="text-sm font-semibold text-[var(--accent)]">{link.anchorText}</p>
                     <p className="mt-1 text-xs text-[var(--muted)]">{link.reason}</p>
                   </Link>
@@ -266,10 +313,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </div>
             </section>
 
-            <FaqList
-              title={`${service.name} in ${location.short}: Common Questions`}
-              items={faqItems}
-            />
+            <FaqList title={`${service.name} in ${location.short}: Common Questions`} items={faqItems} />
 
             <LocalHighlightsSection
               location={location}
@@ -282,7 +326,10 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             />
 
             <div className="mt-6 grid gap-2 sm:grid-cols-2">
-              <Link href={`/services/${service.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
+              <Link
+                href={`/services/${service.slug}`}
+                className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
+              >
                 View {service.name} details
               </Link>
               <Link href="/service-areas" className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">

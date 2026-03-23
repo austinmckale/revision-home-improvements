@@ -7,6 +7,7 @@ export type CaseStudy = {
   serviceName: string;
   serviceSlug: string;
   timeline: string;
+  featureInServiceListings?: boolean;
   scope: string[];
   challenge: string;
   solution: string;
@@ -252,6 +253,7 @@ export const caseStudies: CaseStudy[] = [
     serviceName: "Drywall Installation and Repair",
     serviceSlug: "drywall-installation-repair",
     timeline: "Several days to 2 weeks",
+    featureInServiceListings: false,
     scope: [
       "Window and trim coordination within the bar interior",
       "Wall-finish cleanup along the seating area",
@@ -321,6 +323,53 @@ export const caseStudies: CaseStudy[] = [
       {
         src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
         alt: "Home exterior after shutters and finish updates in Wyomissing.",
+      },
+    ],
+  },
+  {
+    slug: "wyomissing-dormer-shutter-detail-refresh",
+    title: "Dormer and Shutter Detail Refresh in Wyomissing",
+    summary:
+      "Front-elevation exterior detail refresh focused on cleaned-up dormers, sharper shutter contrast, and a brighter, more polished entry presentation.",
+    locationName: "Wyomissing, PA",
+    locationSlug: "wyomissing-pa",
+    serviceName: "Exterior Remodeling",
+    serviceSlug: "exterior-remodeling",
+    timeline: "Front-elevation detail refresh",
+    scope: [
+      "Dormer trim cleanup and finish restoration",
+      "Shutter installation for stronger window contrast",
+      "Front-entry paint and detail refinishing",
+    ],
+    challenge:
+      "The upper dormer areas and front facade details looked weathered and flat, which kept the home from having the crisp, finished appearance the owners wanted from the street.",
+    solution:
+      "The scope concentrated on the most visible front-elevation details: dormer cleanup, trim refinishing, and darker shutter contrast to frame the windows and sharpen the whole facade.",
+    results: [
+      "Cleaner dormer presentation from the street",
+      "Stronger shutter contrast across the front elevation",
+      "A brighter, more intentional front-entry appearance",
+    ],
+    images: [
+      {
+        src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
+        alt: "Finished front elevation after dormer, shutter, and exterior detail refresh in Wyomissing.",
+      },
+      {
+        src: "/images/projects/wyomissing-exterior-refresh-finished.jpg",
+        alt: "Refinished dormer and front-entry details after the Wyomissing exterior update.",
+      },
+    ],
+    beforeImages: [
+      {
+        src: "/images/projects/wyomissing-exterior-refresh-before.jpg",
+        alt: "Front elevation before dormer cleanup and shutter updates in Wyomissing.",
+      },
+    ],
+    afterImages: [
+      {
+        src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
+        alt: "Front elevation after dormer cleanup and shutter updates in Wyomissing.",
       },
     ],
   },
@@ -449,7 +498,8 @@ export const caseStudies: CaseStudy[] = [
     },
     images: [
       { src: "/images/projects/img_7540.jpg", alt: "Interior restoration in progress after water damage." },
-      { src: "/images/projects/img_8219.jpg", alt: "Completed interior flooring and finish restoration." },
+      { src: "/images/projects/img_7547.jpg", alt: "Completed bathroom-area finish restoration after water damage rebuild." },
+      { src: "/images/projects/img_7548.jpg", alt: "Completed interior flooring and wall-finish restoration after water damage repair." },
     ],
   },
   {
@@ -474,7 +524,7 @@ export const caseStudies: CaseStudy[] = [
     images: [
       { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
       { src: "/images/projects/living-room-1.jpg", alt: "Living room finish detail after interior renovation." },
-      { src: "/images/projects/img_8219.jpg", alt: "Completed flooring installation project in Allentown, PA." },
+      { src: "/images/projects/img_7548.jpg", alt: "Completed interior flooring and wall-finish upgrade in Allentown, PA." },
     ],
   },
   {
@@ -497,8 +547,9 @@ export const caseStudies: CaseStudy[] = [
       author: "Bethlehem homeowner",
     },
     images: [
-      { src: "/images/projects/img_8220.jpg", alt: "Drywall and finish repair scope in Bethlehem, PA." },
-      { src: "/images/projects/img_8216.jpg", alt: "Interior surface quality after repair and prep." },
+      { src: "/images/projects/finished-room.jpg", alt: "Completed drywall and finish repair scope in Bethlehem, PA." },
+      { src: "/images/projects/living-room-1.jpg", alt: "Interior wall and ceiling surfaces after drywall repair and paint prep." },
+      { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Smooth wall, trim, and window-opening finishes after interior drywall cleanup." },
     ],
   },
   {
@@ -588,8 +639,9 @@ export const caseStudies: CaseStudy[] = [
       author: "Berks County homeowner",
     },
     images: [
-      { src: "/images/projects/img_8220.jpg", alt: "Interior reconstruction work after fire-related damage." },
-      { src: "/images/projects/img_7540.jpg", alt: "Rebuild work in progress during restoration phase." },
+      { src: "/images/projects/fire-place-construction.jpg", alt: "Interior reconstruction work after fire-related damage." },
+      { src: "/images/projects/img_7540.jpg", alt: "Repair area prepared during the restoration rebuild phase." },
+      { src: "/images/projects/img_7548.jpg", alt: "Rebuilt interior finish work after a fire-damage restoration project." },
     ],
   },
 ];

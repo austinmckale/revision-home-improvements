@@ -69,7 +69,8 @@ export default async function ProjectsPage() {
         <Container>
           <h1 className="text-4xl font-extrabold text-[var(--accent)]">Project Gallery</h1>
           <p className="mt-3 max-w-3xl text-[var(--muted)]">
-            See what we have built for homeowners across Reading, Berks County, and Lehigh Valley. Each project shows real scope, real timelines, and real results.
+            See what we have built for homeowners across Reading, Berks County, and Lehigh Valley.
+            Each project shows real scope, real challenges, and real results.
           </p>
 
           <section className="mt-8">
@@ -77,13 +78,28 @@ export default async function ProjectsPage() {
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               {caseStudies.map((study) => (
                 <article key={study.slug} className="surface overflow-hidden rounded-xl">
-                  <Image src={study.images[0].src} alt={study.images[0].alt} width={900} height={600} className="h-52 w-full object-cover" />
+                  <Image
+                    src={study.images[0].src}
+                    alt={study.images[0].alt}
+                    width={900}
+                    height={600}
+                    className="h-52 w-full object-cover"
+                  />
                   <div className="p-5">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{study.locationName}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                      {study.locationName}
+                    </p>
                     <h3 className="mt-1 text-lg font-semibold text-[var(--accent)]">{study.title}</h3>
                     <p className="mt-2 text-sm text-[var(--muted)]">{study.summary}</p>
-                    <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Timeline: {study.timeline}</p>
-                    <Link href={`/projects/${study.slug}`} className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
+                    <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
+                      {study.scope.slice(0, 2).map((scopeItem) => (
+                        <li key={scopeItem}>{scopeItem}</li>
+                      ))}
+                    </ul>
+                    <Link
+                      href={`/projects/${study.slug}`}
+                      className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]"
+                    >
                       View full case study
                     </Link>
                   </div>
@@ -107,13 +123,17 @@ export default async function ProjectsPage() {
           </section>
 
           <section className="surface mt-10 rounded-2xl p-8 text-center">
-            <h2 className="text-2xl font-bold text-[var(--accent)]">Want results like these for your home?</h2>
+            <h2 className="text-2xl font-bold text-[var(--accent)]">
+              Want results like these for your home?
+            </h2>
             <p className="mx-auto mt-2 max-w-2xl text-sm text-[var(--muted)]">
-              Tell us about your project and we will scope a plan based on your goals, budget, and timeline.
+              Tell us about your project and we will scope a plan based on your goals, budget, and needs.
             </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
               <Button href="/request-a-quote">Request a Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">Call {siteConfig.phoneDisplay}</Button>
+              <Button href={siteConfig.phoneHref} variant="secondary">
+                Call {siteConfig.phoneDisplay}
+              </Button>
             </div>
           </section>
         </Container>

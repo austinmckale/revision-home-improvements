@@ -23,9 +23,7 @@ export type Service = {
   authoritySnapshot?: {
     title: string;
     location: string;
-    estimateDate: string;
-    total: string;
-    timeline: string;
+    summary: string;
     scope: string[];
     compliance: string;
     note: string;
@@ -218,9 +216,8 @@ export const services: Service[] = [
     authoritySnapshot: {
       title: "Fogelsville Partial Unfinished Basement Scope",
       location: "Fogelsville, PA (Lehigh County)",
-      estimateDate: "April 1, 2025",
-      total: "$118,900",
-      timeline: "Estimated 12 to 16 weeks (permit and inspection timing can affect schedule)",
+      summary:
+        "Example planning snapshot for a partially unfinished basement buildout focused on layout, utilities, drainage, insulation, and code-aware finish sequencing.",
       scope: [
         "Framing for mechanical room, fitness room, workshop, wet bar zone, and custom built-ins",
         "Pressure-treated bottom plates at concrete contact points and required fire blocking",
@@ -233,7 +230,7 @@ export const services: Service[] = [
       compliance:
         "Scope written to align with local building, electrical, plumbing, and energy-code requirements with final inspections for closeout.",
       note:
-        "This is a real estimate snapshot used to show planning depth and code-first scope development. Final pricing and scope vary by home and conditions.",
+        "This example is shown to demonstrate planning depth and code-first scope development. Final scope varies by home conditions, access, inspection requirements, and finish selections.",
     },
     image: {
       src: "/images/projects/big-screen-basement.jpg",
@@ -287,13 +284,13 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_8220.jpg",
-      alt: "Drywall and finish repair work in progress with paint-ready surface prep.",
+      src: "/images/projects/img_7548.jpg",
+      alt: "Smooth interior wall and ceiling finishes after drywall repair and prep.",
     },
     gallery: [
-      { src: "/images/projects/reading-commercial-bar-window-upgrade.jpg", alt: "Commercial bar interior with updated windows, trim, and wall finish in Reading." },
-      { src: "/images/projects/img_8220.jpg", alt: "Drywall repair and reconstruction work in progress." },
-      { src: "/images/projects/img_8216.jpg", alt: "Finished interior wall and ceiling surfaces after drywall and finish repair." },
+      { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Cleaned-up wall, trim, and window-opening finishes after interior drywall work." },
+      { src: "/images/projects/living-room-1.jpg", alt: "Smooth wall and ceiling surfaces after drywall repair and finish prep." },
+      { src: "/images/projects/finished-room.jpg", alt: "Paint-ready room surfaces after drywall repair and finishing." },
     ],
   },
   {
@@ -344,7 +341,7 @@ export const services: Service[] = [
       { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Interior flooring and finish refresh with updated lighting and windows in Reading." },
       { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
       { src: "/images/projects/living-room-1.jpg", alt: "Living room finish detail after interior renovation." },
-      { src: "/images/projects/img_8219.jpg", alt: "Flooring installation example in remodeled interior." },
+      { src: "/images/projects/fire-place-construction.jpg", alt: "Flooring installation underway in a remodeled interior." },
     ],
   },
   {
@@ -494,12 +491,13 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_8220.jpg",
-      alt: "Reconstruction work in progress during a fire-damage restoration project.",
+      src: "/images/projects/fire-place-construction.jpg",
+      alt: "Interior reconstruction work during a fire-damage restoration project.",
     },
     gallery: [
-      { src: "/images/projects/img_8220.jpg", alt: "Interior restoration and reconstruction in progress." },
-      { src: "/images/projects/img_8216.jpg", alt: "Restored interior flooring and finish work." },
+      { src: "/images/projects/fire-place-construction.jpg", alt: "Interior reconstruction underway during a restoration rebuild." },
+      { src: "/images/projects/img_7540.jpg", alt: "Damaged area rebuilt and prepped during fire-damage restoration." },
+      { src: "/images/projects/img_7548.jpg", alt: "Completed interior finishes after restoration and rebuild work." },
     ],
   },
   {
@@ -548,7 +546,8 @@ export const services: Service[] = [
     },
     gallery: [
       { src: "/images/projects/img_7540.jpg", alt: "Interior rebuild work after water-related damage." },
-      { src: "/images/projects/img_8219.jpg", alt: "Replacement flooring and finish restoration work." },
+      { src: "/images/projects/img_7547.jpg", alt: "Finished bathroom-area restoration after water-damage repairs." },
+      { src: "/images/projects/img_7548.jpg", alt: "Completed flooring and wall-finish restoration after water-damage rebuild work." },
     ],
   },
   {
@@ -592,12 +591,12 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_8216.jpg",
+      src: "/images/projects/img_7548.jpg",
       alt: "Insurance-supported interior repair and finish restoration project.",
     },
     gallery: [
-      { src: "/images/projects/img_8216.jpg", alt: "Claim-supported interior restoration result." },
-      { src: "/images/projects/img_8220.jpg", alt: "Drywall and finish reconstruction for claim scope." },
+      { src: "/images/projects/img_7548.jpg", alt: "Claim-supported interior restoration result." },
+      { src: "/images/projects/fire-place-construction.jpg", alt: "Interior repair work documented for insurance-supported scope review." },
       { src: "/images/projects/img_7540.jpg", alt: "Repair-in-progress detail from insurance-supported project." },
     ],
   },

@@ -52,17 +52,39 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   return (
     <>
       <JsonLd data={jsonLd} />
-      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Projects", href: "/projects" }, { name: caseStudy.title, href: "/projects/" + caseStudy.slug }])} />
+      <JsonLd
+        data={getBreadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Projects", href: "/projects" },
+          { name: caseStudy.title, href: "/projects/" + caseStudy.slug },
+        ])}
+      />
       <section className="hero-band py-14">
         <Container className="grid items-center gap-8 md:grid-cols-2">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Project Case Study</p>
+            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">
+              Project Case Study
+            </p>
             <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">{caseStudy.title}</h1>
             <p className="mt-3 text-[var(--muted)]">{caseStudy.summary}</p>
             <div className="mt-5 grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
               <p className="surface rounded-lg px-3 py-2">Location: {caseStudy.locationName}</p>
               <p className="surface rounded-lg px-3 py-2">Service: {caseStudy.serviceName}</p>
-              <p className="surface rounded-lg px-3 py-2">Timeline: {caseStudy.timeline}</p>
+            </div>
+            <div className="mt-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                Scope Highlights
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {caseStudy.scope.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-sm text-[var(--muted)]"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button href="/request-a-quote">Request a Similar Quote</Button>
@@ -116,15 +138,23 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
             {caseStudy.testimonial ? (
               <blockquote className="surface mt-8 rounded-xl p-5">
                 <p className="text-[var(--muted)]">&ldquo;{caseStudy.testimonial.quote}&rdquo;</p>
-                <p className="mt-2 text-sm font-semibold text-[var(--accent)]">{caseStudy.testimonial.author}</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--accent)]">
+                  {caseStudy.testimonial.author}
+                </p>
               </blockquote>
             ) : null}
 
             <div className="mt-8 grid gap-2 sm:grid-cols-2">
-              <Link href={`/services/${caseStudy.serviceSlug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
+              <Link
+                href={`/services/${caseStudy.serviceSlug}`}
+                className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
+              >
                 View {caseStudy.serviceName}
               </Link>
-              <Link href={`/${caseStudy.locationSlug}/${caseStudy.serviceSlug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
+              <Link
+                href={`/${caseStudy.locationSlug}/${caseStudy.serviceSlug}`}
+                className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
+              >
                 View local page for {caseStudy.locationName}
               </Link>
             </div>
@@ -135,7 +165,9 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
               <h3 className="text-lg font-semibold text-[var(--accent)]">Project Photos</h3>
               <ExpandableImageGrid
                 images={caseStudy.images}
-                gridClassName={caseStudy.images.length > 1 ? "mt-4 columns-1 gap-3 sm:columns-2" : "mt-4 max-w-2xl"}
+                gridClassName={
+                  caseStudy.images.length > 1 ? "mt-4 columns-1 gap-3 sm:columns-2" : "mt-4 max-w-2xl"
+                }
                 cardClassName="mb-3 break-inside-avoid overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
                 imageClassName="h-auto w-full"
               />
@@ -147,7 +179,10 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
       <BottomCTA
         title={`Want a similar ${caseStudy.serviceName.toLowerCase()} project?`}
         description={`We serve homeowners across ${caseStudy.locationName} and surrounding areas. Tell us about your project to get started.`}
-        links={[{ href: "/services/" + caseStudy.serviceSlug, label: "View " + caseStudy.serviceName }, { href: "/projects", label: "More Projects" }]}
+        links={[
+          { href: "/services/" + caseStudy.serviceSlug, label: "View " + caseStudy.serviceName },
+          { href: "/projects", label: "More Projects" },
+        ]}
       />
     </>
   );

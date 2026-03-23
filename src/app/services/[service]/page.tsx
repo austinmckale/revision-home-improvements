@@ -62,9 +62,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   }
 
   const related = primaryServices.filter((item) => item.slug !== service.slug).slice(0, 4);
-  const relatedCaseStudies = caseStudies.filter((item) => item.serviceSlug === service.slug);
+  const relatedCaseStudies = caseStudies.filter(
+    (item) => item.serviceSlug === service.slug && item.featureInServiceListings !== false,
+  );
   const serviceTestimonials = getTestimonialsByService(service.slug);
-  const isEmergencyService = service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
+  const isEmergencyService =
+    service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
   );
@@ -89,7 +92,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   return (
     <>
       <JsonLd data={jsonLd} />
-      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Services", href: "/services" }, { name: service.name, href: `/services/${service.slug}` }])} />
+      <JsonLd
+        data={getBreadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Services", href: "/services" },
+          { name: service.name, href: `/services/${service.slug}` },
+        ])}
+      />
 
       <section className="hero-band py-14">
         <Container className="grid items-center gap-8 md:grid-cols-2">
@@ -110,7 +119,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             </div>
           </div>
           <div className="surface overflow-hidden rounded-2xl">
-            <Image src={service.image.src} alt={service.image.alt} width={1200} height={800} className="h-full w-full object-cover" />
+            <Image
+              src={service.image.src}
+              alt={service.image.alt}
+              width={1200}
+              height={800}
+              className="h-full w-full object-cover"
+            />
           </div>
         </Container>
       </section>
@@ -127,14 +142,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
             {service.authoritySnapshot && (
               <section className="surface mt-8 rounded-xl p-5">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">{service.authoritySnapshot.title}</h2>
-                <p className="mt-2 text-sm text-[var(--muted)]">
-                  {service.authoritySnapshot.location} · Estimate dated {service.authoritySnapshot.estimateDate}
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                  Example Scope Snapshot
                 </p>
-                <p className="mt-1 text-sm font-semibold text-[var(--brand)]">
-                  Total estimate: {service.authoritySnapshot.total}
-                </p>
-                <p className="mt-1 text-sm text-[var(--muted)]">{service.authoritySnapshot.timeline}</p>
+                <h2 className="mt-1 text-2xl font-bold text-[var(--accent)]">
+                  {service.authoritySnapshot.title}
+                </h2>
+                <p className="mt-2 text-sm text-[var(--muted)]">{service.authoritySnapshot.location}</p>
+                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
                 <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
                   {service.authoritySnapshot.scope.map((item) => (
                     <li key={item}>{item}</li>
@@ -195,10 +210,24 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <h2 className="text-2xl font-bold text-[var(--accent)]">Project Case Studies</h2>
                 <div className="mt-3 grid gap-3 md:grid-cols-2">
                   {relatedCaseStudies.map((item) => (
-                    <Link key={item.slug} href={`/projects/${item.slug}`} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{item.locationName} · {item.timeline}</p>
+                    <Link
+                      key={item.slug}
+                      href={`/projects/${item.slug}`}
+                      className="surface rounded-lg p-4 hover:border-[var(--brand)]"
+                    >
+                      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                        {item.locationName}
+                      </p>
                       <p className="mt-1 font-semibold">{item.title}</p>
                       <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
+                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
+                        {item.scope.slice(0, 2).map((scopeItem) => (
+                          <li key={scopeItem}>{scopeItem}</li>
+                        ))}
+                      </ul>
+                      <span className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+                        View full case study
+                      </span>
                     </Link>
                   ))}
                 </div>
@@ -212,17 +241,22 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             <div className="surface mt-10 rounded-xl p-6">
               <h2 className="text-xl font-semibold text-[var(--accent)]">Ready to get started?</h2>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                Call us to talk through your project, or fill out the form for a written scope and quote. We typically follow up the same day.
+                Call us to talk through your project, or fill out the form for a written scope and quote.
+                We typically follow up the same day.
               </p>
               {siteConfig.financing.teaser && (
-                <p className="mt-2 text-sm font-semibold text-[var(--brand)]">{siteConfig.financing.teaser}</p>
+                <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
+                  {siteConfig.financing.teaser}
+                </p>
               )}
               <div className="mt-4 flex flex-wrap gap-3">
                 <Button href="/request-a-quote">Get a Free Quote</Button>
                 <Button href={siteConfig.phoneHref} variant="secondary">
                   Call {siteConfig.phoneDisplay}
                 </Button>
-                <Button href="/financing" variant="secondary">Financing Options</Button>
+                <Button href="/financing" variant="secondary">
+                  Financing Options
+                </Button>
               </div>
             </div>
 
@@ -238,7 +272,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             )}
             <div className="mt-3 grid gap-2 md:grid-cols-2">
               {availableLocations.map((location) => (
-                <Link key={location.slug} href={`/${location.slug}/${service.slug}`} className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]">
+                <Link
+                  key={location.slug}
+                  href={`/${location.slug}/${service.slug}`}
+                  className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]"
+                >
                   {service.name} in {location.short}
                 </Link>
               ))}
@@ -247,7 +285,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             <h3 className="mt-8 text-lg font-bold text-[var(--accent)]">Related Services</h3>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               {related.map((item) => (
-                <Link key={item.slug} href={`/services/${item.slug}`} className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
+                <Link
+                  key={item.slug}
+                  href={`/services/${item.slug}`}
+                  className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
+                >
                   {item.name}
                 </Link>
               ))}

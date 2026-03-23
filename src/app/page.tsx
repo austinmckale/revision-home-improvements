@@ -102,6 +102,11 @@ export default function HomePage() {
                   <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">{study.locationName}</p>
                   <h3 className="mt-1 text-base font-semibold text-[var(--accent)]">{study.title}</h3>
                   <p className="mt-2 text-sm text-[var(--muted)]">{study.summary}</p>
+                  <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
+                    {study.scope.slice(0, 2).map((scopeItem) => (
+                      <li key={scopeItem}>{scopeItem}</li>
+                    ))}
+                  </ul>
                   <Link href={`/projects/${study.slug}`} className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
                     Read case study
                   </Link>
