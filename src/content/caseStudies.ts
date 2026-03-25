@@ -34,21 +34,26 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "allentown-kitchen-layout-upgrade",
     title: "Kitchen Layout Upgrade in Allentown",
-    summary: "Full kitchen refresh with improved workflow, cabinetry upgrades, and finish detailing.",
+    summary:
+      "Kitchen refresh focused on better layout flow, cleaner cabinet alignment, and more polished finish detailing.",
     locationName: "Allentown, PA",
     locationSlug: "allentown-pa",
     serviceName: "Kitchen Remodeling",
     serviceSlug: "kitchen-remodeling",
     timeline: "4 to 6 weeks",
-    scope: ["Cabinet and countertop planning", "Lighting and finish updates", "Final trim and detail work"],
+    scope: [
+      "Plan cabinet and countertop updates for better workflow",
+      "Coordinate lighting and finish improvements across the kitchen",
+      "Clean up trim and final-detail work for a more resolved finish",
+    ],
     challenge:
-      "The original layout had limited prep flow and uneven finish transitions between cabinet and flooring lines.",
+      "The original layout limited prep flow, and the finish transitions between cabinets, counters, and flooring felt uneven.",
     solution:
-      "The project was resequenced around cleaner work zones, tighter install tolerances, and coordinated finish transitions.",
+      "The upgrade was organized around cleaner work zones, coordinated cabinetry and lighting updates, and tighter finish detailing so the room would function better and feel more complete.",
     results: [
-      "Better cooking and prep workflow",
-      "Cleaner cabinet and countertop alignment",
-      "A modernized kitchen with stronger day-to-day usability",
+      "Smoother prep and cooking workflow",
+      "Cleaner alignment across cabinets, counters, and finish lines",
+      "A more polished kitchen that feels easier to use every day",
     ],
     testimonial: {
       quote: "Clear communication from estimate to closeout and the final details came out excellent.",
@@ -101,25 +106,25 @@ export const caseStudies: CaseStudy[] = [
     slug: "allentown-commercial-bathroom-renovation",
     title: "Commercial Bathroom Renovation in Allentown",
     summary:
-      "Commercial bathroom and hallway renovation that replaced worn finishes with cleaner, more durable surfaces and a sharper professional look.",
+      "Commercial bathroom and hallway renovation that updated worn restroom surfaces with cleaner, more durable finishes. The finished space reads sharper, brighter, and more professional from the stall area through the hallway.",
     locationName: "Allentown, PA",
     locationSlug: "allentown-pa",
     serviceName: "Bathroom Remodeling",
     serviceSlug: "bathroom-remodeling",
     timeline: "Phased around business operations",
     scope: [
-      "Commercial restroom stall and fixture-area upgrades",
-      "Hallway wall, ceiling, and floor refresh",
-      "Durable finish selections for daily high-traffic use",
+      "Refresh restroom stalls, fixture areas, and visible finish surfaces",
+      "Update hallway walls, ceilings, and flooring for a cleaner presentation",
+      "Install durable finish selections suited to daily high-traffic use",
     ],
     challenge:
-      "The client needed to update a worn, outdated commercial bathroom and adjacent hallway without losing the clean, durable performance the space needed every day.",
+      "The bathroom and adjoining hallway looked worn and outdated, and the client needed the space cleaned up without sacrificing the durability required for daily commercial use.",
     solution:
-      "The project focused on modernizing the finish palette, improving the look of the stall and wash areas, and delivering cleaner floor and wall surfaces that could hold up better in a busy commercial setting.",
+      "The renovation treated the stall, wash, floor, and hallway areas as one connected refresh so the finish palette, wall surfaces, and flooring would feel cleaner, more consistent, and better suited to a busy commercial setting.",
     results: [
-      "Cleaner, more professional-looking bathroom and hallway areas",
-      "Sharper finish quality across floors, walls, and stall sections",
-      "More durable surfaces for daily commercial use",
+      "A cleaner restroom and hallway presentation",
+      "More consistent finish quality across stalls, floors, walls, and sink areas",
+      "Durable surfaces that fit everyday commercial traffic",
     ],
     testimonial: {
       quote:
@@ -476,21 +481,26 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "lehigh-water-damage-rebuild",
     title: "Water Damage Interior Rebuild in Lehigh Valley",
-    summary: "Interior restoration project with phased repair scope and coordinated finish replacement.",
+    summary:
+      "Interior rebuild after water-related damage with organized scope mapping, phased repairs, and coordinated finish restoration. The work moved from affected-area review to rebuilt bathroom, flooring, and wall finishes with clear communication throughout.",
     locationName: "Lehigh Valley, PA",
     locationSlug: "lehigh-valley-pa",
     serviceName: "Water Damage Restoration",
     serviceSlug: "water-damage-restoration",
     timeline: "Scope-dependent, staged rebuild",
-    scope: ["Damage-area scope mapping", "Drywall and flooring replacement", "Finish restoration and closeout walkthrough"],
+    scope: [
+      "Map affected interior areas and organize the repair scope",
+      "Replace damaged drywall, flooring, and connected finishes",
+      "Complete finish restoration and closeout review",
+    ],
     challenge:
-      "The home required an organized rebuild path after water-related damage across multiple affected finishes.",
+      "Water-related damage had affected multiple interior finishes, and the home needed a clear rebuild path instead of piecemeal repairs.",
     solution:
-      "Work was sequenced by priority zones so repairs could move quickly while maintaining quality control.",
+      "The project was sequenced by affected area so drywall, flooring, and finish restoration could move in an organized order with clearer updates at each stage.",
     results: [
-      "Stabilized and rebuilt damaged interior areas",
-      "Clear communication through a phased scope",
-      "Restored living space quality with documented progress",
+      "Rebuilt interior areas with cleaner finished surfaces",
+      "A more organized repair process from scope review through closeout",
+      "Restored bathroom, flooring, and wall-finish quality in affected spaces",
     ],
     testimonial: {
       quote: "Fast response and clear next steps made a stressful situation manageable.",
@@ -581,25 +591,25 @@ export const caseStudies: CaseStudy[] = [
     slug: "bethlehem-pool-patio-renovation",
     title: "Pool Patio Renovation in Bethlehem",
     summary:
-      "Poolside hardscape renovation that replaced a worn surface with a cleaner, more finished patio edge and a transformed backyard look.",
+      "Poolside patio renovation that replaced a worn surface with cleaner hardscape lines, stronger edge detailing, and a more finished backyard look.",
     locationName: "Bethlehem, PA",
     locationSlug: "bethlehem-pa",
     serviceName: "Paver Installation",
     serviceSlug: "paver-installation",
     timeline: "1 to 2 weeks",
     scope: [
-      "Pool patio surface renovation and layout cleanup",
-      "Updated hardscape edge detailing around curved pool lines",
-      "Final finish work for a cleaner poolside appearance",
+      "Renovate the pool patio surface and surrounding layout",
+      "Refine hardscape edges around the pool's curved lines",
+      "Complete finish work for a cleaner poolside presentation",
     ],
     challenge:
-      "The existing pool area felt worn and dated, and the curved pool shape required a renovation approach that could improve the overall look without awkward transitions.",
+      "The pool area felt worn and dated, and the curved shape made it important to improve the look without leaving awkward edges or transitions.",
     solution:
-      "The patio renovation was rebuilt around the pool's curves with updated hardscape finishes and cleaner edge detailing so the entire area would feel more intentional and better finished.",
+      "The renovation was planned around the pool's curves so the updated surface, edge detailing, and finish work would read as one cleaner, more intentional hardscape.",
     results: [
-      "A completely transformed pool patio area",
-      "Cleaner poolside lines and a more polished finished look",
-      "A backyard space that feels more usable and visually upgraded",
+      "A visibly cleaner and more finished pool patio",
+      "Sharper edge lines that follow the pool more naturally",
+      "A backyard space that feels more usable and updated",
     ],
     testimonial: {
       quote:
@@ -622,18 +632,27 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "allentown-fire-damage-interior-rebuild",
     title: "Fire Damage Interior Rebuild in Allentown",
-    summary: "Structured interior rebuild after fire-related damage with phased repairs and finish restoration.",
+    summary:
+      "Interior fire-damage rebuild with phased repairs, documented scope planning, and coordinated finish restoration. The project focused on turning a chaotic damage situation into a clearer path back to usable interior space.",
     locationName: "Allentown, PA",
     locationSlug: "allentown-pa",
     serviceName: "Fire Damage Restoration",
     serviceSlug: "fire-damage-restoration",
     timeline: "Scope-dependent, phased reconstruction",
-    scope: ["Damage assessment and rebuild planning", "Drywall and finish restoration", "Closeout walkthrough and correction list"],
+    scope: [
+      "Review damage and organize the rebuild scope",
+      "Restore affected drywall and interior finish surfaces",
+      "Complete phased closeout review and correction items",
+    ],
     challenge:
-      "The project required a clear rebuild sequence to restore interior areas while controlling scope changes.",
+      "After fire-related damage, the project needed a clear rebuild sequence that could restore affected interior areas without letting the scope drift.",
     solution:
-      "A phase-based plan was used to prioritize safety, restore affected assemblies, and maintain communication through completion.",
-    results: ["Clearer path from damage to rebuild", "Better coordination across repair stages", "Restored interior function and appearance"],
+      "The rebuild was organized in phases so damaged areas could be restored in a controlled order, with clearer communication as interior finishes moved back into place.",
+    results: [
+      "A more structured path from damage to rebuild",
+      "Better coordination across repair and finish stages",
+      "Restored interior spaces with cleaner finished results",
+    ],
     testimonial: {
       quote: "They brought structure to a chaotic situation and delivered quality work from start to finish.",
       author: "Allentown homeowner",

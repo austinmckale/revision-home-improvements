@@ -76,6 +76,11 @@ export default async function CityServicePage({ params }: { params: Promise<Para
       item.serviceSlug === service.slug &&
       item.featureInServiceListings !== false,
   );
+  const topLocalCaseStudy = localProof[0];
+  const priorityContextualLocations = new Set(["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"]);
+  const showPriorityContextualSentence =
+    priorityContextualLocations.has(location.slug) && Boolean(localContent) && Boolean(topLocalCaseStudy);
+  const serviceOverviewAnchorText = `${service.name.toLowerCase()} services`;
   const relatedLocalServices = primaryServices.filter((item) => item.slug !== service.slug);
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
@@ -213,6 +218,19 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                   {localContent.localProjectHeading}
                 </h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{localContent.localProjectSnippet}</p>
+                {showPriorityContextualSentence && topLocalCaseStudy ? (
+                  <p className="mt-3 text-sm text-[var(--muted)]">
+                    For a local example, see{" "}
+                    <Link href={`/projects/${topLocalCaseStudy.slug}`} className="font-semibold text-[var(--brand)]">
+                      {topLocalCaseStudy.title}
+                    </Link>{" "}
+                    or review our{" "}
+                    <Link href={`/services/${service.slug}`} className="font-semibold text-[var(--brand)]">
+                      {serviceOverviewAnchorText}
+                    </Link>
+                    .
+                  </p>
+                ) : null}
                 <h3 className="mt-5 text-lg font-semibold text-[var(--accent)]">
                   {localContent.localChallengesHeading}
                 </h3>

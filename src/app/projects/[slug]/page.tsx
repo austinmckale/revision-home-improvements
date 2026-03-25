@@ -34,6 +34,8 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   const { slug } = await params;
   const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) notFound();
+  const serviceOverviewAnchorText = `${caseStudy.serviceName.toLowerCase()} services`;
+  const localServiceAnchorText = `${caseStudy.serviceName} in ${caseStudy.locationName.replace(", PA", "")}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -120,6 +122,20 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
 
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Our Approach</h3>
             <p className="mt-2 text-[var(--muted)]">{caseStudy.solution}</p>
+            <p className="mt-3 text-sm text-[var(--muted)]">
+              Learn more about our{" "}
+              <Link href={`/services/${caseStudy.serviceSlug}`} className="font-semibold text-[var(--brand)]">
+                {serviceOverviewAnchorText}
+              </Link>{" "}
+              or see local details for{" "}
+              <Link
+                href={`/${caseStudy.locationSlug}/${caseStudy.serviceSlug}`}
+                className="font-semibold text-[var(--brand)]"
+              >
+                {localServiceAnchorText}
+              </Link>
+              .
+            </p>
 
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Outcome</h3>
             <ul className="mt-2 list-disc space-y-2 pl-5 text-[var(--muted)]">

@@ -70,6 +70,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   const relatedCaseStudies = sortCaseStudiesByMarketPriority(
     caseStudies.filter((item) => item.serviceSlug === service.slug && item.featureInServiceListings !== false),
   );
+  const topCaseStudy = relatedCaseStudies[0];
   const serviceTestimonials = getTestimonialsByService(service.slug);
   const isEmergencyService =
     service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
@@ -84,6 +85,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         .map((slug) => locations.find((location) => location.slug === slug))
         .filter((location): location is (typeof locations)[number] => Boolean(location))
     : locations;
+  const contextualPriorityLocations = availableLocations.slice(0, 2);
+  const firstPriorityLocationLabel = contextualPriorityLocations[0]
+    ? `${service.name} in ${contextualPriorityLocations[0].short}`
+    : null;
+  const secondPriorityLocationLabel = contextualPriorityLocations[1]
+    ? `${service.name} in ${contextualPriorityLocations[1].short}`
+    : null;
   const portfolioTag = service.portfolioTag ?? service.slug;
   const portfolioImages = showCuratedStaticGallery
     ? []
@@ -185,6 +193,15 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <li key={outcome}>{outcome}</li>
               ))}
             </ul>
+            {topCaseStudy && (
+              <p className="mt-3 text-sm text-[var(--muted)]">
+                See a recent example:{" "}
+                <Link href={`/projects/${topCaseStudy.slug}`} className="font-semibold text-[var(--brand)]">
+                  {topCaseStudy.title}
+                </Link>
+                .
+              </p>
+            )}
 
             {showCuratedStaticGallery && service.gallery.length > 0 ? (
               <section className="mt-10">
@@ -267,12 +284,64 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
             <FaqList title="Common Questions" items={service.faqs} />
 
+            <section className="surface mt-8 rounded-xl p-5">
+              <h2 className="text-lg font-bold text-[var(--accent)]">Project Planning Resources</h2>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                If you are comparing contractors or getting ready to move forward, these pages explain
+                how we plan projects, what our warranty covers, and how we document licensing and
+                insurance information.
+              </p>
+              <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                <Link
+                  href="/our-process"
+                  className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]"
+                >
+                  See our process
+                </Link>
+                <Link
+                  href="/warranty"
+                  className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]"
+                >
+                  Review our workmanship warranty
+                </Link>
+                <Link
+                  href="/licenses-and-insurance"
+                  className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]"
+                >
+                  View licenses and insurance
+                </Link>
+              </div>
+            </section>
+
             <h2 className="mt-10 text-xl font-bold text-[var(--accent)]">
               {priorityLocationSlugs ? "Priority Service Areas" : "Available In Your Area"}
             </h2>
             {priorityLocationSlugs && (
               <p className="mt-2 text-sm text-[var(--muted)]">
                 We focus these high-intent pages on our core local markets first.
+              </p>
+            )}
+            {contextualPriorityLocations.length > 0 && (
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Explore local details for{" "}
+                <Link
+                  href={`/${contextualPriorityLocations[0].slug}/${service.slug}`}
+                  className="font-semibold text-[var(--brand)]"
+                >
+                  {firstPriorityLocationLabel}
+                </Link>
+                {contextualPriorityLocations[1] ? (
+                  <>
+                    {" "}or{" "}
+                    <Link
+                      href={`/${contextualPriorityLocations[1].slug}/${service.slug}`}
+                      className="font-semibold text-[var(--brand)]"
+                    >
+                      {secondPriorityLocationLabel}
+                    </Link>
+                  </>
+                ) : null}
+                .
               </p>
             )}
             <div className="mt-3 grid gap-2 md:grid-cols-2">

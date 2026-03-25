@@ -26,7 +26,7 @@ export default function ServiceAreasPage() {
             We serve homeowners across southeastern Pennsylvania. Find your area below to see local services, project examples, and get a quote tailored to your neighborhood.
           </p>
           <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-            We keep our coverage focused so projects stay on schedule. If you’re just outside these areas, call — we’ll confirm availability quickly.
+            We keep our coverage focused so projects stay on schedule. If you&apos;re just outside these areas, call and we&apos;ll confirm availability quickly.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Button href="/request-a-quote">Request a Quote</Button>

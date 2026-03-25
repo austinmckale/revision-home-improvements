@@ -332,12 +332,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     heroHeading: "Bathroom Remodelers in Allentown, PA",
     localProjectHeading: "Common Allentown Bathroom Scope",
     localProjectSnippet:
-      "In Allentown bathrooms, the biggest wins usually come from combining waterproofing upgrades with smarter storage and fixture layouts. We focus on long-term durability first, then finish detailing that keeps the room easy to maintain.",
+      "In Allentown, bathroom projects range from home bathroom upgrades to select restroom refresh work where durable finishes and a cleaner overall presentation matter just as much as layout and waterproofing. We focus on long-term durability first, then finish detailing that keeps the space easier to maintain.",
     localChallengesHeading: "Allentown Bathroom Challenges We Plan For",
     localChallenges: [
       "Ventilation and moisture management in high-use bathrooms",
       "Subfloor corrections discovered after demo",
-      "Balancing premium finishes with practical daily durability",
+      "Balancing a cleaner finished look with practical daily durability",
     ],
     localizedFaqs: [
       {
@@ -373,6 +373,108 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         href: "/projects",
         anchorText: "Bathroom and interior project gallery",
         reason: "Visual local trust signal",
+      },
+    ],
+  },
+  "allentown-pa/basement-finishing": {
+    metadataTitle: "Basement Finishing in Allentown, PA",
+    metadataDescription:
+      "Basement finishing in Allentown, PA with moisture-aware planning, cleaner layouts, and finish-ready spaces for offices, media rooms, guest areas, and flex living.",
+    heroHeading: "Basement Finishing in Allentown, PA",
+    localProjectHeading: "Common Allentown Basement Scope",
+    localProjectSnippet:
+      "Allentown basement projects often start with underused square footage that needs better lighting, cleaner room planning, and practical utility-area access. We focus on turning that space into something usable without ignoring moisture, storage, or service-clearance needs.",
+    localChallengesHeading: "Allentown Basement Challenges We Plan For",
+    localChallenges: [
+      "Moisture risk and material choices below grade",
+      "Lighting and ceiling planning around utilities and access points",
+      "Balancing finished living space with storage and mechanical access",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do older Allentown basements need extra moisture planning?",
+        a: "Often yes. We review wall conditions, drainage history, and utility layout before finalizing the finish scope so the basement is built around real conditions.",
+      },
+      {
+        q: "Can you finish part of a basement and keep storage or utility zones accessible?",
+        a: "Yes. Many Allentown basement projects are planned so living areas feel finished while mechanical and storage zones stay practical and easy to reach.",
+      },
+      {
+        q: "What makes a basement finish feel high quality?",
+        a: "Good lighting, clean transitions, utility-aware planning, and materials chosen for below-grade conditions usually make the biggest difference.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/allentown-pa",
+        anchorText: "Basement and home improvement services in Allentown",
+        reason: "City-level local relevance",
+      },
+      {
+        href: "/services/basement-finishing",
+        anchorText: "Basement finishing service details",
+        reason: "Full scope and process breakdown",
+      },
+      {
+        href: "/projects",
+        anchorText: "Basement and interior project gallery",
+        reason: "Proof of workmanship and outcomes",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for basement projects",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
+  "allentown-pa/drywall-installation-repair": {
+    metadataTitle: "Drywall Installation and Repair in Allentown, PA",
+    metadataDescription:
+      "Drywall installation and repair in Allentown, PA for wall patches, ceiling repairs, and paint-ready finish work with clean seam blending.",
+    heroHeading: "Drywall Installation and Repair in Allentown, PA",
+    localProjectHeading: "Common Allentown Drywall Scope",
+    localProjectSnippet:
+      "Allentown drywall projects range from targeted patch repairs to broader wall and ceiling finish work tied to remodeling or restoration. We focus on clean seam blending, paint-ready surfaces, and repair planning that does not leave the room looking patched together.",
+    localChallengesHeading: "Allentown Drywall Challenges We Plan For",
+    localChallenges: [
+      "Matching existing wall and ceiling finish conditions",
+      "Keeping repair areas clean and ready for paint",
+      "Coordinating drywall work with connected trim, flooring, or restoration scopes",
+    ],
+    localizedFaqs: [
+      {
+        q: "Can you handle both small patches and larger drywall scopes in Allentown?",
+        a: "Yes. We take on everything from isolated drywall repairs to broader wall and ceiling work tied to remodeling or restoration projects.",
+      },
+      {
+        q: "Will drywall repairs blend in with the surrounding wall?",
+        a: "That is the goal. We focus on seam blending, sanding, and finish prep so the repaired area is ready for paint without drawing attention.",
+      },
+      {
+        q: "Do you handle drywall as part of remodeling or restoration work?",
+        a: "Yes. Drywall often connects directly to basement, kitchen, bathroom, and restoration scopes, so we coordinate it as part of the larger project when needed.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/allentown-pa",
+        anchorText: "Home improvement services in Allentown",
+        reason: "City-level local relevance",
+      },
+      {
+        href: "/services/drywall-installation-repair",
+        anchorText: "Drywall installation and repair service details",
+        reason: "Full scope and process breakdown",
+      },
+      {
+        href: "/projects",
+        anchorText: "Drywall and interior repair project gallery",
+        reason: "Proof of workmanship and outcomes",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for interior repair projects",
+        reason: "Decision-stage support",
       },
     ],
   },
@@ -424,6 +526,57 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         href: "/projects",
         anchorText: "Lehigh Valley restoration project examples",
         reason: "Proof and credibility",
+      },
+    ],
+  },
+  "allentown-pa/fire-damage-restoration": {
+    metadataTitle: "Fire Damage Restoration in Allentown, PA",
+    metadataDescription:
+      "Fire damage restoration in Allentown, PA with structured rebuild planning, smoke- and fire-damage repair scopes, and clear documentation support.",
+    heroHeading: "Fire Damage Restoration in Allentown, PA",
+    localProjectHeading: "Common Allentown Fire Damage Scope",
+    localProjectSnippet:
+      "Allentown fire-damage projects usually need a careful transition from immediate damage review to phased reconstruction. We focus on organizing the rebuild scope clearly so affected finishes, structural repairs, and closeout details move in the right order.",
+    localChallengesHeading: "Allentown Fire Damage Challenges We Plan For",
+    localChallenges: [
+      "Organizing a rebuild scope after a high-stress damage event",
+      "Sequencing repairs so structural and finish work stay coordinated",
+      "Keeping documentation clear for homeowners and claim-related communication",
+    ],
+    localizedFaqs: [
+      {
+        q: "What happens first on a fire-damage project in Allentown?",
+        a: "We start with a damage review, safety priorities, and a phased rebuild plan so the project can move forward with clear next steps.",
+      },
+      {
+        q: "Do you help document fire-damage repair scopes?",
+        a: "Yes. We keep the repair scope organized with photos, written detail, and clear communication so homeowners know what is included at each stage.",
+      },
+      {
+        q: "Can fire-damage reconstruction be handled in phases?",
+        a: "Yes. Many Allentown fire-damage projects move best when repairs are phased by priority area, rebuild sequence, and finish scope.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/allentown-pa",
+        anchorText: "Restoration services in Allentown, PA",
+        reason: "City-level local relevance",
+      },
+      {
+        href: "/services/fire-damage-restoration",
+        anchorText: "Fire damage restoration service details",
+        reason: "Full scope and rebuild process breakdown",
+      },
+      {
+        href: "/insurance-claims",
+        anchorText: "Insurance claims assistance for fire damage",
+        reason: "Claim-oriented support",
+      },
+      {
+        href: "/projects",
+        anchorText: "Recent restoration and rebuild projects",
+        reason: "Proof of workmanship and outcomes",
       },
     ],
   },
@@ -580,6 +733,108 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
     ],
   },
+  "bethlehem-pa/basement-finishing": {
+    metadataTitle: "Basement Finishing in Bethlehem, PA",
+    metadataDescription:
+      "Basement finishing in Bethlehem, PA with moisture-aware planning, cleaner layouts, and finish sequencing for family rooms, offices, guest space, and flex living.",
+    heroHeading: "Basement Finishing in Bethlehem, PA",
+    localProjectHeading: "Common Bethlehem Basement Scope",
+    localProjectSnippet:
+      "Bethlehem basement projects often need layout planning around lower ceilings, utility runs, and storage-heavy footprints. We focus on making the space feel brighter, more usable, and better organized without losing practical access where the home still needs it.",
+    localChallengesHeading: "Bethlehem Basement Challenges We Plan For",
+    localChallenges: [
+      "Lower ceiling areas and obstructions that affect room planning",
+      "Moisture-aware finish choices below grade",
+      "Creating usable living space without sacrificing storage",
+    ],
+    localizedFaqs: [
+      {
+        q: "Can you make a Bethlehem basement feel brighter even if it starts dark or unfinished?",
+        a: "Yes. Lighting layout, ceiling planning, and finish choices usually make a big difference in how open and comfortable the space feels.",
+      },
+      {
+        q: "Do you plan around storage and mechanical access in basement projects?",
+        a: "Yes. We want finished rooms to feel complete without blocking the storage, utility, or service access the home still needs.",
+      },
+      {
+        q: "What usually drives basement finishing cost in Bethlehem?",
+        a: "Room count, lighting and electrical upgrades, moisture-related prep, and how much of the basement is being converted into finished living space all affect the final scope.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/bethlehem-pa",
+        anchorText: "Home remodeling in Bethlehem, PA",
+        reason: "City cluster linkage",
+      },
+      {
+        href: "/services/basement-finishing",
+        anchorText: "Basement finishing service details",
+        reason: "Full scope and process breakdown",
+      },
+      {
+        href: "/projects",
+        anchorText: "Basement and interior project gallery",
+        reason: "Proof of workmanship and outcomes",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for basement projects",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
+  "bethlehem-pa/drywall-installation-repair": {
+    metadataTitle: "Drywall Installation and Repair in Bethlehem, PA",
+    metadataDescription:
+      "Drywall installation and repair in Bethlehem, PA for patches, wall and ceiling repairs, and paint-ready finish work with smooth, clean blending.",
+    heroHeading: "Drywall Installation and Repair in Bethlehem, PA",
+    localProjectHeading: "Common Bethlehem Drywall Scope",
+    localProjectSnippet:
+      "Bethlehem drywall work often means repairing older wall surfaces, smoothing patched sections, and getting rooms ready for paint without obvious transitions. We focus on clean repairs that support the rest of the room instead of making the wall work stand out.",
+    localChallengesHeading: "Bethlehem Drywall Challenges We Plan For",
+    localChallenges: [
+      "Older wall and ceiling surfaces that need careful blending",
+      "Corner, seam, and ceiling repairs that show under paint if rushed",
+      "Coordinating finish prep around occupied rooms and connected upgrades",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do older Bethlehem homes make drywall repair more delicate?",
+        a: "They can. Older walls and ceilings often need more blending work so the finished repair looks consistent under paint.",
+      },
+      {
+        q: "Can you repair drywall without turning it into a full remodel?",
+        a: "Yes. Some Bethlehem drywall scopes are targeted repair jobs, while others are part of larger remodeling or restoration work.",
+      },
+      {
+        q: "What makes drywall work look professional once the room is painted?",
+        a: "Smooth seam work, careful sanding, clean corner detail, and finish prep that blends into the surrounding wall usually make the biggest difference.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/bethlehem-pa",
+        anchorText: "Home improvement in Bethlehem, PA",
+        reason: "City cluster linkage",
+      },
+      {
+        href: "/services/drywall-installation-repair",
+        anchorText: "Drywall installation and repair service details",
+        reason: "Full scope and process breakdown",
+      },
+      {
+        href: "/projects",
+        anchorText: "Drywall and interior repair project gallery",
+        reason: "Proof of workmanship and outcomes",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for interior repair projects",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
   "bethlehem-pa/water-damage-restoration": {
     metadataTitle: "Water Damage Restoration in Bethlehem, PA",
     metadataDescription:
@@ -628,6 +883,57 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         href: "/projects",
         anchorText: "Recent restoration and rebuild projects",
         reason: "Proof and trust reinforcement",
+      },
+    ],
+  },
+  "bethlehem-pa/fire-damage-restoration": {
+    metadataTitle: "Fire Damage Restoration in Bethlehem, PA",
+    metadataDescription:
+      "Fire damage restoration in Bethlehem, PA with phased rebuild planning, organized repair scopes, and clear communication for fire- and smoke-damage recovery.",
+    heroHeading: "Fire Damage Restoration in Bethlehem, PA",
+    localProjectHeading: "Common Bethlehem Fire Damage Scope",
+    localProjectSnippet:
+      "Bethlehem fire-damage projects often need a clear rebuild path before finish work can begin. We focus on documenting affected areas, sequencing reconstruction logically, and helping homeowners move from damage response into a more predictable repair process.",
+    localChallengesHeading: "Bethlehem Fire Damage Challenges We Plan For",
+    localChallenges: [
+      "Moving from damage response into an organized rebuild scope",
+      "Coordinating repairs across affected rooms without losing sequence control",
+      "Keeping homeowners informed when claim-related documentation is part of the project",
+    ],
+    localizedFaqs: [
+      {
+        q: "What should Bethlehem homeowners expect after a fire-damage site review?",
+        a: "The next step is usually a phased rebuild scope that maps priorities clearly so structural, drywall, flooring, and finish work can be sequenced correctly.",
+      },
+      {
+        q: "Do you support documentation for claim-related fire repairs?",
+        a: "Yes. We keep scopes and repair notes organized so homeowners have clearer documentation for the work that needs to be completed.",
+      },
+      {
+        q: "Can you rebuild only the damaged areas instead of remodeling everything?",
+        a: "Yes. We scope to the affected areas first and only expand when conditions make broader reconstruction necessary.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/bethlehem-pa",
+        anchorText: "Restoration services in Bethlehem, PA",
+        reason: "City cluster linkage",
+      },
+      {
+        href: "/services/fire-damage-restoration",
+        anchorText: "Fire damage restoration service details",
+        reason: "Full scope and rebuild process breakdown",
+      },
+      {
+        href: "/insurance-claims",
+        anchorText: "Insurance claims assistance for fire damage",
+        reason: "Claim-oriented support",
+      },
+      {
+        href: "/projects",
+        anchorText: "Recent restoration and rebuild projects",
+        reason: "Proof of workmanship and outcomes",
       },
     ],
   },
@@ -689,7 +995,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     heroHeading: "Paver Installation in Bethlehem, PA",
     localProjectHeading: "Common Bethlehem Pool Patio and Paver Scope",
     localProjectSnippet:
-      "Bethlehem outdoor projects often need more than a surface swap. Around patios and pool decks, we focus on layout flow, edge detailing, and cleaner hardscape finishes so the space feels upgraded without awkward transitions or mismatched contours.",
+      "Bethlehem outdoor projects often need more than a surface swap. Recent pool patio work in Bethlehem reflects the kind of scope we handle around patios and pool decks: layout flow, edge detailing, and cleaner hardscape finishes that upgrade the space without awkward transitions or mismatched contours.",
     localChallengesHeading: "Bethlehem Hardscape Challenges We Plan For",
     localChallenges: [
       "Curved pool edges and irregular patio shapes",
@@ -730,6 +1036,210 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         href: "/financing",
         anchorText: "Financing options for outdoor projects",
         reason: "Decision-stage support",
+      },
+    ],
+  },
+  "lehigh-valley-pa/kitchen-remodeling": {
+    metadataTitle: "Kitchen Remodeling in Lehigh Valley, PA",
+    metadataDescription:
+      "Kitchen remodeling in Lehigh Valley, PA with thoughtful layout improvements, finish coordination, and clear planning for both older homes and newer properties.",
+    heroHeading: "Kitchen Remodeling in Lehigh Valley, PA",
+    localProjectHeading: "How Lehigh Valley Kitchen Projects Usually Come Together",
+    localProjectSnippet:
+      "A nearby kitchen layout upgrade in Allentown reflects what many Lehigh Valley homeowners need: better workflow, cleaner cabinet-to-finish transitions, and planning that works as well in older homes as it does in newer properties.",
+    localChallengesHeading: "Lehigh Valley Kitchen Challenges We Plan For",
+    localChallenges: [
+      "Balancing older-room constraints with modern kitchen flow",
+      "Coordinating cabinetry, lighting, and finish details so the room feels cohesive",
+      "Keeping layout improvements practical for how the home is used every day",
+    ],
+    localizedFaqs: [
+      {
+        q: "Can a Lehigh Valley kitchen remodel still feel tailored if the home has an older layout?",
+        a: "Yes. We plan around the home first, then organize layout, storage, and finish decisions so the upgrade feels intentional instead of forced into the existing footprint.",
+      },
+      {
+        q: "Do you help coordinate finishes across the main parts of a kitchen remodel?",
+        a: "Yes. Cabinetry, countertops, lighting, flooring, and trim all need to work together if the final kitchen is going to feel clean and well resolved.",
+      },
+      {
+        q: "What usually has the biggest effect on day-to-day kitchen usability?",
+        a: "Layout flow, storage planning, and lighting usually do the most to improve how the kitchen functions once the work is complete.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/lehigh-valley-pa",
+        anchorText: "Home remodeling in Lehigh Valley, PA",
+        reason: "Regional hub and local services overview",
+      },
+      {
+        href: "/services/kitchen-remodeling",
+        anchorText: "Kitchen remodeling service details",
+        reason: "Full scope and planning expectations",
+      },
+      {
+        href: "/projects",
+        anchorText: "Kitchen and renovation project examples",
+        reason: "Nearby proof and visual outcomes",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for kitchen remodeling",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
+  "lehigh-valley-pa/bathroom-remodeling": {
+    metadataTitle: "Bathroom Remodeling in Lehigh Valley, PA",
+    metadataDescription:
+      "Bathroom remodeling in Lehigh Valley, PA with durable finish work, practical layout upgrades, and careful planning for clean, functional everyday spaces.",
+    heroHeading: "Bathroom Remodeling in Lehigh Valley, PA",
+    localProjectHeading: "What Lehigh Valley Bathroom Upgrades Often Include",
+    localProjectSnippet:
+      "Nearby bathroom projects in Bethlehem and Allentown show the kind of scope we plan across Lehigh Valley: practical layout upgrades, moisture-aware finish work, and cleaner daily-use spaces, including select restroom refresh work where durability and presentation both matter.",
+    localChallengesHeading: "Lehigh Valley Bathroom Challenges We Plan For",
+    localChallenges: [
+      "Durable finish planning for bathrooms that see heavy everyday use",
+      "Improving layout and storage without making compact rooms feel crowded",
+      "Coordinating waterproofing, fixtures, and finish selections so the room feels complete",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do Lehigh Valley bathroom remodels always need a full tear-out?",
+        a: "Not always. Some projects are full rebuilds, while others focus on the layout, fixtures, and finish areas that will make the biggest difference in daily use.",
+      },
+      {
+        q: "What matters most for long-term bathroom durability?",
+        a: "Water management, finish quality, and practical fixture planning usually have the biggest effect on how well the room holds up over time.",
+      },
+      {
+        q: "Can you improve bathroom storage and function without overcomplicating the room?",
+        a: "Yes. We look for cleaner layout decisions and better storage opportunities that improve daily use without making the space feel overcrowded.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/lehigh-valley-pa",
+        anchorText: "Bathroom and remodeling services in Lehigh Valley",
+        reason: "Regional hub and related local services",
+      },
+      {
+        href: "/services/bathroom-remodeling",
+        anchorText: "Bathroom remodeling service details",
+        reason: "Full process and quality expectations",
+      },
+      {
+        href: "/projects",
+        anchorText: "Bathroom renovation project examples",
+        reason: "Nearby proof and finished results",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for bathroom projects",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
+  "lehigh-valley-pa/basement-finishing": {
+    metadataTitle: "Basement Finishing in Lehigh Valley, PA",
+    metadataDescription:
+      "Basement finishing in Lehigh Valley, PA with moisture-conscious planning, lighting upgrades, and flexible layouts for family rooms, offices, and entertainment space.",
+    heroHeading: "Basement Finishing in Lehigh Valley, PA",
+    localProjectHeading: "What a Recent Lehigh Valley Basement Finish Included",
+    localProjectSnippet:
+      "Our recent full basement theater and entertainment build in Lehigh Valley shows the kind of planning these projects need: lighting, drywall, finish sequencing, and room layout that turn blank lower levels into space the household actually uses.",
+    localChallengesHeading: "Lehigh Valley Basement Challenges We Plan For",
+    localChallenges: [
+      "Layout planning around lower ceilings, utilities, and storage needs",
+      "Keeping finished basement areas bright and comfortable across multiple zones",
+      "Choosing finishes that support below-grade conditions and everyday use",
+    ],
+    localizedFaqs: [
+      {
+        q: "Can a Lehigh Valley basement be finished for more than one use?",
+        a: "Yes. Many projects combine family-room, office, entertainment, and storage goals in one plan so the finished basement works better across the whole household.",
+      },
+      {
+        q: "Do you plan around storage and utility access in basement projects?",
+        a: "Yes. Finished basement rooms need to feel complete without blocking the mechanical, storage, or service access the home still depends on.",
+      },
+      {
+        q: "What usually makes a basement feel truly finished instead of improvised?",
+        a: "Lighting, layout flow, finish transitions, and clean detailing usually make the biggest difference in how polished and usable the space feels.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/lehigh-valley-pa",
+        anchorText: "Home remodeling in Lehigh Valley, PA",
+        reason: "Regional hub and related local services",
+      },
+      {
+        href: "/services/basement-finishing",
+        anchorText: "Basement finishing service details",
+        reason: "Full scope and planning expectations",
+      },
+      {
+        href: "/projects",
+        anchorText: "Basement and interior project examples",
+        reason: "Direct Lehigh Valley proof and finished results",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for basement projects",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
+  "lehigh-valley-pa/water-damage-restoration": {
+    metadataTitle: "Water Damage Restoration in Lehigh Valley, PA",
+    metadataDescription:
+      "Water damage restoration in Lehigh Valley, PA with organized rebuild planning, documented repair scopes, and clear communication from damage review through final repairs.",
+    heroHeading: "Water Damage Restoration in Lehigh Valley, PA",
+    localProjectHeading: "What a Recent Lehigh Valley Water Damage Rebuild Included",
+    localProjectSnippet:
+      "Our recent water damage interior rebuild in Lehigh Valley reflects the kind of work many homeowners need after a loss: documented repair scopes, phased reconstruction, and clear communication as damaged areas move back into service.",
+    localChallengesHeading: "Lehigh Valley Water Damage Challenges We Plan For",
+    localChallenges: [
+      "Moving quickly from damage review into an organized rebuild plan",
+      "Coordinating repairs across multiple affected finishes or rooms",
+      "Keeping documentation clear when insurance communication is part of the project",
+    ],
+    localizedFaqs: [
+      {
+        q: "What happens after the initial water damage review?",
+        a: "The next step is a clear rebuild scope so affected rooms, finishes, and priorities can be sequenced in a way that keeps the project organized.",
+      },
+      {
+        q: "Do you document repair scopes clearly for Lehigh Valley restoration work?",
+        a: "Yes. We keep photos, scope details, and communication organized so homeowners have a clearer picture of what is being repaired and why.",
+      },
+      {
+        q: "Can water damage repairs be staged if only part of the home is affected?",
+        a: "Yes. Many projects move best when repairs are organized by affected area so the rebuild can stay focused and easier to manage.",
+      },
+    ],
+    internalLinks: [
+      {
+        href: "/lehigh-valley-pa",
+        anchorText: "Restoration services in Lehigh Valley, PA",
+        reason: "Regional hub and local service context",
+      },
+      {
+        href: "/services/water-damage-restoration",
+        anchorText: "Water damage restoration service details",
+        reason: "Full process and rebuild expectations",
+      },
+      {
+        href: "/insurance-claims",
+        anchorText: "Insurance claims assistance for water damage",
+        reason: "Claim-related support path",
+      },
+      {
+        href: "/projects",
+        anchorText: "Restoration and rebuild project examples",
+        reason: "Direct Lehigh Valley proof and outcomes",
       },
     ],
   },
