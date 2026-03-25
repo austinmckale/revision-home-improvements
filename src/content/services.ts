@@ -288,13 +288,13 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_7548.jpg",
-      alt: "Smooth interior wall and ceiling finishes after drywall repair and prep.",
+      src: "/images/projects/finished-room.jpg",
+      alt: "Paint-ready wall and ceiling finishes after drywall repair and finishing.",
     },
     gallery: [
-      { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Cleaned-up wall, trim, and window-opening finishes after interior drywall work." },
-      { src: "/images/projects/living-room-1.jpg", alt: "Smooth wall and ceiling surfaces after drywall repair and finish prep." },
       { src: "/images/projects/finished-room.jpg", alt: "Paint-ready room surfaces after drywall repair and finishing." },
+      { src: "/images/projects/living-room-1.jpg", alt: "Smooth wall and ceiling surfaces after drywall repair and finish prep." },
+      { src: "/images/projects/finished-room-2.jpg", alt: "Finished room surfaces after drywall repair and finish prep." },
     ],
   },
   {

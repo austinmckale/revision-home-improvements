@@ -557,9 +557,7 @@ export const caseStudies: CaseStudy[] = [
       author: "Bethlehem homeowner",
     },
     images: [
-      { src: "/images/projects/finished-room.jpg", alt: "Completed drywall and finish repair scope in Bethlehem, PA." },
-      { src: "/images/projects/living-room-1.jpg", alt: "Interior wall and ceiling surfaces after drywall repair and paint prep." },
-      { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Smooth wall, trim, and window-opening finishes after interior drywall cleanup." },
+      { src: "/images/projects/finished-room.jpg", alt: "Paint-ready room surfaces after drywall repair and finish prep." },
     ],
   },
   {
