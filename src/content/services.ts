@@ -109,12 +109,15 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/kitchen-1.jpg",
-      alt: "Kitchen remodel with updated finishes and fixtures.",
+      src: "/images/projects/Kitchen-High-End.jpg",
+      alt: "High-end kitchen remodel with modern appliances and island.",
     },
     gallery: [
+      {
+        src: "/images/projects/DSC00338-1.jpg",
+        alt: "High-end kitchen remodel with island seating, premium appliances, and updated lighting.",
+      },
       { src: "/images/projects/kitchen-1.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
-      { src: "/images/projects/Kitchen-High-End.jpg", alt: "High-end kitchen remodel with modern appliances and island." },
       { src: "/images/projects/img_7833.jpg", alt: "Modern white cabinet kitchen renovation." },
     ],
   },
@@ -289,13 +292,9 @@ export const services: Service[] = [
     ],
     image: {
       src: "/images/projects/finished-room.jpg",
-      alt: "Paint-ready wall and ceiling finishes after drywall repair and finishing.",
+      alt: "Paint-ready wall and ceiling finishes after drywall repair and finish prep.",
     },
-    gallery: [
-      { src: "/images/projects/finished-room.jpg", alt: "Paint-ready room surfaces after drywall repair and finishing." },
-      { src: "/images/projects/living-room-1.jpg", alt: "Smooth wall and ceiling surfaces after drywall repair and finish prep." },
-      { src: "/images/projects/finished-room-2.jpg", alt: "Finished room surfaces after drywall repair and finish prep." },
-    ],
+    gallery: [],
   },
   {
     slug: "flooring-installation",
@@ -338,14 +337,12 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/reading-interior-flooring-refresh.jpg",
-      alt: "Interior flooring refresh with updated paint, windows, and lighting.",
+      src: "/images/projects/living-room-1.jpg",
+      alt: "Light wood flooring installation in a finished living area.",
     },
     gallery: [
       { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Interior flooring and finish refresh with updated lighting and windows." },
       { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
-      { src: "/images/projects/living-room-1.jpg", alt: "Living room finish detail after interior renovation." },
-      { src: "/images/projects/fire-place-construction.jpg", alt: "Flooring installation underway in a remodeled interior." },
     ],
   },
   {
@@ -499,12 +496,11 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/fire-place-construction.jpg",
-      alt: "Interior reconstruction work during a fire-damage restoration project.",
+      src: "/images/projects/img_7540.jpg",
+      alt: "Interior rebuild work in progress during a fire-damage restoration project.",
     },
     gallery: [
       { src: "/images/projects/fire-place-construction.jpg", alt: "Interior reconstruction underway during a restoration rebuild." },
-      { src: "/images/projects/img_7540.jpg", alt: "Damaged area rebuilt and prepped during fire-damage restoration." },
       { src: "/images/projects/img_7548.jpg", alt: "Completed interior finishes after restoration and rebuild work." },
     ],
   },
@@ -549,14 +545,10 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_7540.jpg",
-      alt: "Water-damage reconstruction and interior rebuild work in progress.",
+      src: "/images/projects/img_7547.jpg",
+      alt: "Finished bathroom-area restoration after water-damage repairs.",
     },
-    gallery: [
-      { src: "/images/projects/img_7540.jpg", alt: "Interior rebuild work after water-related damage." },
-      { src: "/images/projects/img_7547.jpg", alt: "Finished bathroom-area restoration after water-damage repairs." },
-      { src: "/images/projects/img_7548.jpg", alt: "Completed flooring and wall-finish restoration after water-damage rebuild work." },
-    ],
+    gallery: [],
   },
   {
     slug: "insurance-claims",
@@ -603,9 +595,9 @@ export const services: Service[] = [
       alt: "Insurance-supported interior repair and finish restoration project.",
     },
     gallery: [
-      { src: "/images/projects/img_7548.jpg", alt: "Claim-supported interior restoration result." },
-      { src: "/images/projects/fire-place-construction.jpg", alt: "Interior repair work documented for insurance-supported scope review." },
       { src: "/images/projects/img_7540.jpg", alt: "Repair-in-progress detail from insurance-supported project." },
+      { src: "/images/projects/img_7547.jpg", alt: "Completed bathroom-area restoration after insurance-supported repairs." },
+      { src: "/images/projects/fire-place-construction.jpg", alt: "Interior repair work documented for insurance-supported scope review." },
     ],
   },
 ];

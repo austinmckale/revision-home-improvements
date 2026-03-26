@@ -62,7 +62,6 @@ export const caseStudies: CaseStudy[] = [
     images: [
       { src: "/images/projects/img_7833.jpg", alt: "Kitchen renovation with updated cabinets and modern finishes." },
       { src: "/images/projects/kitchen-1.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
-      { src: "/images/projects/Kitchen-High-End.jpg", alt: "High-end kitchen remodel with modern appliances and island." },
     ],
   },
   {
@@ -507,9 +506,7 @@ export const caseStudies: CaseStudy[] = [
       author: "Lehigh Valley homeowner",
     },
     images: [
-      { src: "/images/projects/img_7540.jpg", alt: "Interior restoration in progress after water damage." },
       { src: "/images/projects/img_7547.jpg", alt: "Completed bathroom-area finish restoration after water damage rebuild." },
-      { src: "/images/projects/img_7548.jpg", alt: "Completed interior flooring and wall-finish restoration after water damage repair." },
     ],
   },
   {
@@ -532,9 +529,7 @@ export const caseStudies: CaseStudy[] = [
       author: "Allentown homeowner",
     },
     images: [
-      { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
-      { src: "/images/projects/living-room-1.jpg", alt: "Living room finish detail after interior renovation." },
-      { src: "/images/projects/img_7548.jpg", alt: "Completed interior flooring and wall-finish upgrade in Allentown, PA." },
+      { src: "/images/projects/living-room-1.jpg", alt: "Completed light wood flooring installation in an Allentown living area." },
     ],
   },
   {
