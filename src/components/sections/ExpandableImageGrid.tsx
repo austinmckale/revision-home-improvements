@@ -12,6 +12,8 @@ export type ExpandableImage = {
 
 type Props = {
   images: ExpandableImage[];
+  /** Show only the first N images inline; the rest are accessible via lightbox navigation. */
+  inlineCount?: number;
   gridClassName: string;
   cardClassName: string;
   imageClassName: string;
@@ -21,6 +23,7 @@ type Props = {
 
 export default function ExpandableImageGrid({
   images,
+  inlineCount,
   gridClassName,
   cardClassName,
   imageClassName,
@@ -31,10 +34,13 @@ export default function ExpandableImageGrid({
 
   if (images.length === 0) return null;
 
+  const visibleImages = inlineCount ? images.slice(0, inlineCount) : images;
+  const hiddenCount = images.length - visibleImages.length;
+
   return (
     <>
       <div className={gridClassName}>
-        {images.map((image, index) => (
+        {visibleImages.map((image, index) => (
           <figure key={image.src} className={cardClassName}>
             <button
               type="button"
@@ -57,6 +63,16 @@ export default function ExpandableImageGrid({
           </figure>
         ))}
       </div>
+
+      {hiddenCount > 0 && (
+        <button
+          type="button"
+          onClick={() => setActiveIndex(visibleImages.length)}
+          className="mt-3 text-sm font-semibold text-[var(--brand)] hover:underline"
+        >
+          +{hiddenCount} more photo{hiddenCount > 1 ? "s" : ""}
+        </button>
+      )}
 
       <ImageLightbox
         images={images}

@@ -244,25 +244,15 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <p className="mt-2 text-sm text-[var(--muted)]">
                   {service.processGallery.intro}
                 </p>
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
-                  {service.processGallery.images.map((img) => (
-                    <figure
-                      key={img.src}
-                      className="surface overflow-hidden rounded-lg bg-[var(--surface-soft)]"
-                    >
-                      <Image
-                        src={img.src}
-                        alt={img.alt}
-                        width={800}
-                        height={600}
-                        className="h-auto w-full"
-                      />
-                      <figcaption className="px-3 py-2 text-xs leading-relaxed text-[var(--muted)]">
-                        {img.caption}
-                      </figcaption>
-                    </figure>
-                  ))}
-                </div>
+                <ExpandableImageGrid
+                  images={service.processGallery.images}
+                  inlineCount={service.processGallery.inlineCount}
+                  gridClassName="mt-4 grid gap-4 md:grid-cols-2"
+                  cardClassName="surface overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                  imageClassName="h-auto w-full"
+                  captionClassName="px-3 py-2 text-xs leading-relaxed text-[var(--muted)]"
+                  expandLabel="Tap to expand"
+                />
                 <div className="mt-5">
                   <Button href="/request-a-quote">{service.cta}</Button>
                 </div>

@@ -39,6 +39,8 @@ export type Service = {
   processGallery?: {
     title: string;
     intro: string;
+    /** How many images to show inline; the rest are accessible via lightbox. Defaults to all. */
+    inlineCount?: number;
     images: Array<{
       src: string;
       alt: string;
@@ -262,12 +264,8 @@ export const services: Service[] = [
       title: "What Happens Before the Walls Close Up",
       intro:
         "Finished walls hide a lot of work. These photos show what framing, insulation, plumbing, and HVAC look like before drywall goes up.",
+      inlineCount: 6,
       images: [
-        {
-          src: "/images/projects/basement-process/basement-process-stairway-view-framing-electrical-panel.jpg",
-          alt: "View down basement stairway showing steel stud framing and electrical panel.",
-          caption: "Steel stud framing along the foundation with electrical panel access kept clear.",
-        },
         {
           src: "/images/projects/basement-process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
           alt: "Wide view of basement framing with insulation and bathroom rough-in visible.",
@@ -289,11 +287,6 @@ export const services: Service[] = [
           caption: "Mechanical room framed with tankless water heater mounted and connected.",
         },
         {
-          src: "/images/projects/basement-process/basement-process-wide-view-ceiling-framing-insulation-hvac.jpg",
-          alt: "Wide angle of basement ceiling framing with insulation and HVAC register placement.",
-          caption: "Ceiling insulation between joists with HVAC register placed for the finished layout.",
-        },
-        {
           src: "/images/projects/basement-process/basement-process-staircase-framing-ceiling-grid-aquarium-wall.jpg",
           alt: "Basement staircase framing with ceiling grid and open floor area.",
           caption: "Staircase framed in with ceiling grid overhead — shows the scale of the finished space.",
@@ -302,6 +295,16 @@ export const services: Service[] = [
           src: "/images/projects/basement-process/basement-process-hallway-framing-drywall-stairway-electrical-boxes.jpg",
           alt: "Basement hallway with drywall going up and electrical boxes placed.",
           caption: "Drywall going up with electrical boxes set. Framing turning into finished rooms.",
+        },
+        {
+          src: "/images/projects/basement-process/basement-process-stairway-view-framing-electrical-panel.jpg",
+          alt: "View down basement stairway showing steel stud framing and electrical panel.",
+          caption: "Steel stud framing along the foundation with electrical panel access kept clear.",
+        },
+        {
+          src: "/images/projects/basement-process/basement-process-wide-view-ceiling-framing-insulation-hvac.jpg",
+          alt: "Wide angle of basement ceiling framing with insulation and HVAC register placement.",
+          caption: "Ceiling insulation between joists with HVAC register placed for the finished layout.",
         },
       ],
     },
