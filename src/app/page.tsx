@@ -44,8 +44,8 @@ export default function HomePage() {
               You get a written scope, a realistic timeline, and a contractor who communicates clearly.
             </h1>
             <p className="mt-4 max-w-xl text-base text-[var(--muted)]">
-              Every project starts with a written scope, a realistic timeline, and a team that keeps
-              you informed from estimate through final walkthrough.
+              We handle kitchens, bathrooms, basements, exteriors, and damage restoration — with
+              a written scope, a clear schedule, and consistent updates on every project.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button href="/request-a-quote">Request a Quote</Button>
@@ -55,15 +55,15 @@ export default function HomePage() {
             </div>
             <div className="mt-6 grid max-w-xl gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
               <p className="surface rounded-lg px-3 py-2">Written scope and estimate before work begins</p>
-              <p className="surface rounded-lg px-3 py-2">Licensed in PA · HIC #PA185945</p>
-              <p className="surface rounded-lg px-3 py-2">Remodeling + restoration under one local team</p>
-              <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed on every project</p>
+              <p className="surface rounded-lg px-3 py-2">PA licensed and insured · HIC #PA185945</p>
+              <p className="surface rounded-lg px-3 py-2">Clean jobsite, organized workflow</p>
+              <p className="surface rounded-lg px-3 py-2">Warranty-backed workmanship</p>
             </div>
           </div>
           <div className="surface overflow-hidden rounded-2xl">
             <Image
-              src="/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg"
-              alt="Completed Frontier patio roof and outdoor project by RHI Pros in the Lehigh Valley."
+              src="/images/projects/DSC00338-1.jpg"
+              alt="High-end kitchen remodel with island seating, premium appliances, and updated lighting by RHI Pros."
               width={1200}
               height={800}
               className="h-full w-full object-cover"
