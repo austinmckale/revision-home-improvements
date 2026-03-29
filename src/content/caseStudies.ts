@@ -132,7 +132,7 @@ export const caseStudies: CaseStudy[] = [
     },
     images: [
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom shower enclosure after remodel." },
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Finished shower detail with updated fixtures and trim." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Closer view of glass shower enclosure and hardware after remodel." },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
     ],
     beforeImages: [
@@ -140,15 +140,17 @@ export const caseStudies: CaseStudy[] = [
       { src: "/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-tile.jpg", alt: "Bathroom before remodel with dated tile and fixtures." },
     ],
     afterImages: [
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom shower enclosure after remodel." },
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Finished shower detail with updated fixtures and trim." },
+      {
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
+        alt: "Finished bathroom after remodel — full room view with vanity, shower, and updated finishes.",
+      },
     ],
   },
   {
     slug: "allentown-commercial-bathroom-renovation",
     title: "Commercial Bathroom Renovation in Allentown",
     summary:
-      "Commercial bathroom and hallway renovation that updated worn restroom surfaces with cleaner, more durable finishes. The finished space reads sharper, brighter, and more professional from the stall area through the hallway.",
+      "High-traffic restroom and corridor refresh: worn surfaces and dated finishes were replaced with durable materials and a cleaner, more professional presentation end to end.",
     locationName: "Allentown, PA",
     locationSlug: "allentown-pa",
     serviceName: "Bathroom Remodeling",
@@ -160,9 +162,9 @@ export const caseStudies: CaseStudy[] = [
       "Install durable finish selections suited to daily high-traffic use",
     ],
     challenge:
-      "The bathroom and adjoining hallway looked worn and outdated, and the client needed the space cleaned up without sacrificing the durability required for daily commercial use.",
+      "The restroom and corridor read as tired and dated, but the setting still needed finishes that could stand up to steady daily traffic.",
     solution:
-      "The renovation treated the stall, wash, floor, and hallway areas as one connected refresh so the finish palette, wall surfaces, and flooring would feel cleaner, more consistent, and better suited to a busy commercial setting.",
+      "We treated stalls, sink wall, floor, and corridor as one coordinated scope so materials, colors, and transitions would feel intentional rather than patched zone by zone.",
     results: [
       "A cleaner restroom and hallway presentation",
       "More consistent finish quality across stalls, floors, walls, and sink areas",
@@ -176,47 +178,27 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/allentown-commercial-bathroom/after/stall-finished.jpg",
-        alt: "Finished commercial bathroom stall area after renovation in Allentown.",
+        alt: "Finished commercial restroom stall run after renovation in Allentown.",
       },
       {
         src: "/images/projects/allentown-commercial-bathroom/after/floor-after.png",
-        alt: "Commercial bathroom floor area after renovation with refreshed finishes.",
-      },
-      {
-        src: "/images/projects/allentown-commercial-bathroom/after/hallway-after.png",
-        alt: "Commercial bathroom hallway after renovation in Allentown.",
+        alt: "Restroom floor zone after refresh — durable finish and cleaner transitions.",
       },
       {
         src: "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png",
-        alt: "Commercial bathroom sink area after renovation with updated surfaces.",
+        alt: "Sink and mirror wall after renovation with updated surfaces and lighting-ready finishes.",
       },
     ],
     beforeImages: [
       {
-        src: "/images/projects/allentown-commercial-bathroom/before/floor-before.png",
-        alt: "Commercial bathroom floor area before renovation in Allentown.",
-      },
-      {
         src: "/images/projects/allentown-commercial-bathroom/before/hallway-before.png",
-        alt: "Commercial bathroom hallway before renovation in Allentown.",
-      },
-      {
-        src: "/images/projects/allentown-commercial-bathroom/before/sink-area-before.png",
-        alt: "Commercial bathroom sink area before renovation in Allentown.",
+        alt: "Commercial restroom corridor before renovation — worn walls and flooring.",
       },
     ],
     afterImages: [
       {
-        src: "/images/projects/allentown-commercial-bathroom/after/floor-after.png",
-        alt: "Commercial bathroom floor area after renovation with a cleaner, more durable finish.",
-      },
-      {
         src: "/images/projects/allentown-commercial-bathroom/after/hallway-after.png",
-        alt: "Commercial bathroom hallway after renovation with brighter walls and refreshed flooring.",
-      },
-      {
-        src: "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png",
-        alt: "Commercial bathroom sink area after renovation with improved finish quality.",
+        alt: "Same corridor after renovation — brighter surfaces, refreshed flooring, cleaner sightlines.",
       },
     ],
   },
@@ -623,7 +605,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "bethlehem-pool-patio-renovation",
     title: "Pool Patio Renovation in Bethlehem",
     summary:
-      "Poolside patio renovation that replaced a worn surface with cleaner hardscape lines, stronger edge detailing, and a more finished backyard look.",
+      "Pool surround hardscape renovation: a worn deck surface and soft edges were replaced with cleaner paver lines, tighter radius work at the pool, and a more finished backyard focal point.",
     locationName: "Bethlehem, PA",
     locationSlug: "bethlehem-pa",
     serviceName: "Paver Installation",
@@ -649,16 +631,26 @@ export const caseStudies: CaseStudy[] = [
       author: "Bethlehem homeowner",
     },
     images: [
-      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg", alt: "Finished pool patio renovation overview in Bethlehem." },
-      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg", alt: "Finished pool patio detail showing updated curves and edge work." },
-      { src: "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg", alt: "Pool patio area before renovation with worn green surface." },
+      {
+        src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg",
+        alt: "Finished pool patio — wide view of new hardscape and pool surround in Bethlehem.",
+      },
+      {
+        src: "/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg",
+        alt: "Step and radius detail along the pool edge after renovation.",
+      },
     ],
     beforeImages: [
-      { src: "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg", alt: "Pool patio before renovation in Bethlehem." },
+      {
+        src: "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg",
+        alt: "Pool patio before renovation — worn surface and dated pool surround.",
+      },
     ],
     afterImages: [
-      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg", alt: "Pool patio after renovation with updated hardscape around the pool." },
-      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg", alt: "Pool patio step and curve detail after renovation in Bethlehem." },
+      {
+        src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg",
+        alt: "Pool patio after renovation — updated hardscape and cleaner lines around the full surround.",
+      },
     ],
   },
   {
@@ -718,16 +710,47 @@ export const caseStudies: CaseStudy[] = [
       "Cleaner finish transitions along trim and corners",
       "A space that feels more finished without overbuilding the scope",
     ],
+    beforeImages: [
+      {
+        src: "/images/projects/ryan-bedroom/before/01-interior-refresh-before.jpg",
+        alt: "Bedroom before interior refresh with original wall and trim condition.",
+      },
+    ],
+    afterImages: [
+      {
+        src: "/images/projects/ryan-bedroom/after/05-interior-refresh-blue-done.jpg",
+        alt: "Bedroom interior refresh after updated blue wall color and finished trim.",
+      },
+    ],
     images: [
-      { src: "/images/projects/ryan-bedroom/after/05-interior-refresh-blue-done.jpg", alt: "Bedroom interior refresh after updated blue wall color and finished trim." },
-      { src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg", alt: "Bedroom refresh showing completed blue palette and cleaned-up finish lines." },
-      { src: "/images/projects/ryan-bedroom/before/01-interior-refresh-before.jpg", alt: "Bedroom before interior refresh with original wall and trim condition." },
-      { src: "/images/projects/ryan-bedroom/before/02-interior-refresh-blue-before-2.jpg", alt: "Additional before view of bedroom walls prior to refresh." },
-      { src: "/images/projects/ryan-bedroom/process/01-interior-refresh-blue-2-process.jpg", alt: "Bedroom refresh in progress during paint and finish prep." },
-      { src: "/images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg", alt: "Interior refresh underway with protection and phased finish work." },
-      { src: "/images/projects/ryan-bedroom/after/02-interior-refresh-blue-1.jpg", alt: "Bedroom refresh progress toward final blue wall color." },
-      { src: "/images/projects/ryan-bedroom/after/03-interior-refresh-blue-3.jpg", alt: "Bedroom interior with updated blue walls and coordinated finishes." },
-      { src: "/images/projects/ryan-bedroom/after/04-interior-refresh-blue-4.jpg", alt: "Wide view of refreshed bedroom interior after completion." },
+      {
+        src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
+        alt: "Bedroom refresh showing completed blue palette and cleaned-up finish lines.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/after/02-interior-refresh-blue-1.jpg",
+        alt: "Alternate angle of refreshed bedroom with blue wall color.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/after/03-interior-refresh-blue-3.jpg",
+        alt: "Bedroom interior with updated blue walls and coordinated finishes.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/after/04-interior-refresh-blue-4.jpg",
+        alt: "Wide view of refreshed bedroom interior after completion.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/before/02-interior-refresh-blue-before-2.jpg",
+        alt: "Additional before view of bedroom walls prior to refresh.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/process/01-interior-refresh-blue-2-process.jpg",
+        alt: "Bedroom refresh in progress during paint and finish prep.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg",
+        alt: "Interior refresh underway with protection and phased finish work.",
+      },
     ],
   },
   {
@@ -767,9 +790,9 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "ryan-kitchen-remodel",
-    title: "Kitchen Remodel — Before and After",
+    title: "Kitchen Remodel in Berks County",
     summary:
-      "Full kitchen transformation from dated finishes to an updated layout-ready finish package, with clear sequencing through demo prep, installation, and final detailing.",
+      "Complete kitchen reset: dated cabinets and finishes were replaced with a coordinated cabinet, counter, and fixture package, built on a phased schedule the household could plan around.",
     locationName: "Berks County, PA",
     locationSlug: "berks-county-pa",
     serviceName: "Kitchen Remodeling",
@@ -790,21 +813,29 @@ export const caseStudies: CaseStudy[] = [
       "A finished space that feels move-in ready",
     ],
     images: [
-      { src: "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg", alt: "Kitchen after remodel with updated cabinets, counters, and finishes." },
-      { src: "/images/projects/ryan-kitchen/before/01-ryans-kitchen-before.jpg", alt: "Kitchen before remodel with original cabinets and finishes." },
+      {
+        src: "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg",
+        alt: "Kitchen after remodel — updated cabinets, counters, appliances, and lighting.",
+      },
     ],
     beforeImages: [
-      { src: "/images/projects/ryan-kitchen/before/01-ryans-kitchen-before.jpg", alt: "Kitchen before remodel with original layout and finishes." },
+      {
+        src: "/images/projects/ryan-kitchen/before/01-ryans-kitchen-before.jpg",
+        alt: "Kitchen before remodel — original cabinets, counters, and layout prior to demolition.",
+      },
     ],
     afterImages: [
-      { src: "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg", alt: "Kitchen after remodel with updated finishes and fixtures." },
+      {
+        src: "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg",
+        alt: "Kitchen after remodel — same vantage as before, showing the full transformation.",
+      },
     ],
   },
   {
     slug: "ryan-bathroom-remodel",
-    title: "Bathroom Remodel — Before and After",
+    title: "Bathroom Remodel in Berks County",
     summary:
-      "Bathroom upgrade from dated finishes to a cleaner, modern half-bath presentation with coordinated vanity, wall, and flooring selections.",
+      "Half-bath refresh: darker dated finishes were swapped for a brighter, modern palette with a coordinated vanity, wall, and floor package in a compact footprint.",
     locationName: "Berks County, PA",
     locationSlug: "berks-county-pa",
     serviceName: "Bathroom Remodeling",
@@ -825,14 +856,22 @@ export const caseStudies: CaseStudy[] = [
       "A compact space that feels intentional, not cramped",
     ],
     images: [
-      { src: "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg", alt: "Finished bathroom after remodel with updated vanity and wall finishes." },
-      { src: "/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg", alt: "Bathroom before remodel with original finishes." },
+      {
+        src: "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg",
+        alt: "Bathroom after remodel — vanity, mirror, and wall finishes in the finished half bath.",
+      },
     ],
     beforeImages: [
-      { src: "/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg", alt: "Bathroom before remodel." },
+      {
+        src: "/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg",
+        alt: "Bathroom before remodel — original vanity, mirror wall, and floor at the same viewpoint.",
+      },
     ],
     afterImages: [
-      { src: "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg", alt: "Bathroom after remodel with updated finishes." },
+      {
+        src: "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg",
+        alt: "Bathroom after remodel — same viewpoint as before for a direct before/after read.",
+      },
     ],
   },
   {
@@ -934,4 +973,22 @@ export function sortCaseStudiesByMarketPriority(items: CaseStudy[]) {
 
 export function getCaseStudyBySlug(slug: string) {
   return visibleCaseStudies.find((caseStudy) => caseStudy.slug === slug);
+}
+
+/** Other visible case studies for project detail “similar work” blocks: same service first, then same market. */
+export function getSimilarCaseStudiesForProject(current: CaseStudy, limit = 4): CaseStudy[] {
+  const byService = visibleCaseStudies.filter(
+    (c) => c.slug !== current.slug && c.serviceSlug === current.serviceSlug,
+  );
+  const serviceOrdered = sortCaseStudiesByMarketPriority(byService);
+  if (serviceOrdered.length >= limit) return serviceOrdered.slice(0, limit);
+
+  const byLocation = visibleCaseStudies.filter(
+    (c) =>
+      c.slug !== current.slug &&
+      c.locationSlug === current.locationSlug &&
+      !serviceOrdered.some((s) => s.slug === c.slug),
+  );
+  const locationOrdered = sortCaseStudiesByMarketPriority(byLocation);
+  return [...serviceOrdered, ...locationOrdered].slice(0, limit);
 }

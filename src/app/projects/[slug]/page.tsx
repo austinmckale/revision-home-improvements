@@ -8,10 +8,11 @@ import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 import BeforeAfterToggle from "@/components/sections/BeforeAfterToggle";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
-import { visibleCaseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
+import { visibleCaseStudies, getCaseStudyBySlug, getSimilarCaseStudiesForProject } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getProjectGalleryImages } from "@/lib/projectPageMedia";
 
 type Params = { slug: string };
 
@@ -34,8 +35,10 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   const { slug } = await params;
   const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) notFound();
-  const serviceOverviewAnchorText = `${caseStudy.serviceName.toLowerCase()} services`;
-  const localServiceAnchorText = `${caseStudy.serviceName} in ${caseStudy.locationName.replace(", PA", "")}`;
+  const locationShort = caseStudy.locationName.replace(/, PA$/, "");
+  const similarCaseStudies = getSimilarCaseStudiesForProject(caseStudy, 4);
+  const galleryImages = getProjectGalleryImages(caseStudy);
+  const showProjectPhotosAside = galleryImages.length > 0;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -108,7 +111,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
       </section>
 
       <section className="py-14">
-        <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+        <Container className={`grid gap-8 ${showProjectPhotosAside ? "lg:grid-cols-[1.2fr_0.8fr]" : ""}`}>
           <div>
             <h2 className="text-2xl font-bold text-[var(--accent)]">Project Scope</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
@@ -123,16 +126,9 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
             <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Our Approach</h3>
             <p className="mt-2 text-[var(--muted)]">{caseStudy.solution}</p>
             <p className="mt-3 text-sm text-[var(--muted)]">
-              Learn more about our{" "}
+              For timelines, typical scopes, and how we run projects like this, see our{" "}
               <Link href={`/services/${caseStudy.serviceSlug}`} className="font-semibold text-[var(--brand)]">
-                {serviceOverviewAnchorText}
-              </Link>{" "}
-              or see local details for{" "}
-              <Link
-                href={`/${caseStudy.locationSlug}/${caseStudy.serviceSlug}`}
-                className="font-semibold text-[var(--brand)]"
-              >
-                {localServiceAnchorText}
+                {caseStudy.serviceName.toLowerCase()} overview
               </Link>
               .
             </p>
@@ -160,35 +156,77 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
               </blockquote>
             ) : null}
 
-            <div className="mt-8 grid gap-2 sm:grid-cols-2">
-              <Link
-                href={`/services/${caseStudy.serviceSlug}`}
-                className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
-              >
-                View {caseStudy.serviceName}
-              </Link>
-              <Link
-                href={`/${caseStudy.locationSlug}/${caseStudy.serviceSlug}`}
-                className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
-              >
-                View local page for {caseStudy.locationName}
-              </Link>
-            </div>
+            <section className="mt-10 border-t border-[var(--border)] pt-8" aria-labelledby="project-explore-next">
+              <h3 id="project-explore-next" className="text-lg font-semibold text-[var(--accent)]">
+                Explore next
+              </h3>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                <Link
+                  href={`/services/${caseStudy.serviceSlug}`}
+                  className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                >
+                  Explore {caseStudy.serviceName.toLowerCase()}
+                </Link>{" "}
+                — how we plan work, what affects pricing, and more photos from this trade.
+              </p>
+              {similarCaseStudies.length > 0 ? (
+                <div className="mt-5">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                    Similar projects
+                  </p>
+                  <ul className="mt-2 space-y-2 text-sm">
+                    {similarCaseStudies.map((item) => (
+                      <li key={item.slug}>
+                        <Link
+                          href={`/projects/${item.slug}`}
+                          className="text-[var(--muted)] underline-offset-2 hover:text-[var(--brand)] hover:underline"
+                        >
+                          {item.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              <p className="mt-5 text-xs leading-relaxed text-[var(--muted)]">
+                <Link
+                  href={`/${caseStudy.locationSlug}/${caseStudy.serviceSlug}`}
+                  className="text-[var(--brand)] underline-offset-2 hover:underline"
+                >
+                  Service area details — {locationShort}
+                </Link>
+              </p>
+              <p className="mt-3 text-sm text-[var(--muted)]">
+                Ready to talk about your space?{" "}
+                <Link href="/request-a-quote" className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline">
+                  Request a quote
+                </Link>
+                {" · "}
+                <Link href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline">
+                  Call {siteConfig.phoneDisplay}
+                </Link>
+              </p>
+            </section>
           </div>
 
-          <aside>
-            <div className="surface rounded-xl p-5">
-              <h3 className="text-lg font-semibold text-[var(--accent)]">Project Photos</h3>
-              <ExpandableImageGrid
-                images={caseStudy.images}
-                gridClassName={
-                  caseStudy.images.length > 1 ? "mt-4 columns-1 gap-3 sm:columns-2" : "mt-4 max-w-2xl"
-                }
-                cardClassName="mb-3 break-inside-avoid overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
-                imageClassName="h-auto w-full"
-              />
-            </div>
-          </aside>
+          {showProjectPhotosAside ? (
+            <aside>
+              <div className="surface rounded-xl p-5">
+                <h3 className="text-lg font-semibold text-[var(--accent)]">Project Photos</h3>
+                <p className="mt-1 text-xs text-[var(--muted)]">
+                  Extra angles, detail shots, and context not repeated in Before and After.
+                </p>
+                <ExpandableImageGrid
+                  images={galleryImages}
+                  gridClassName={
+                    galleryImages.length > 1 ? "mt-4 columns-1 gap-3 sm:columns-2" : "mt-4 max-w-2xl"
+                  }
+                  cardClassName="mb-3 break-inside-avoid overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
+                  imageClassName="h-auto w-full"
+                />
+              </div>
+            </aside>
+          ) : null}
         </Container>
       </section>
 
@@ -196,8 +234,8 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
         title={`Want a similar ${caseStudy.serviceName.toLowerCase()} project?`}
         description={`We serve homeowners across ${caseStudy.locationName} and surrounding areas. Tell us about your project to get started.`}
         links={[
-          { href: "/services/" + caseStudy.serviceSlug, label: "View " + caseStudy.serviceName },
-          { href: "/projects", label: "More Projects" },
+          { href: "/services/" + caseStudy.serviceSlug, label: "Explore " + caseStudy.serviceName.toLowerCase() },
+          { href: "/projects", label: "More projects" },
         ]}
       />
     </>
