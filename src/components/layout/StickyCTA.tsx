@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/content/site";
 import Button from "@/components/ui/Button";
 
 export default function StickyCTA() {
   const [visible, setVisible] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => {
@@ -16,7 +18,7 @@ export default function StickyCTA() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  if (!visible) return null;
+  if (!visible || pathname === "/request-a-quote") return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--border)] bg-white p-3 shadow-lg md:hidden">
