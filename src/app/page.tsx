@@ -4,13 +4,10 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
-import ReviewsSection from "@/components/sections/ReviewsSection";
-import ConfidenceSection from "@/components/sections/ConfidenceSection";
-import BottomCTA from "@/components/sections/BottomCTA";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { primaryServices } from "@/content/services";
 import { caseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
-import { locations } from "@/content/locations";
+import { testimonials } from "@/content/testimonials";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -18,22 +15,29 @@ export const metadata: Metadata = {
     "Kitchen, bathroom, basement, exterior, and restoration projects with clear scopes, fast communication, and quality workmanship across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.",
 };
 
+const priorityServiceSlugs = [
+  "kitchen-remodeling",
+  "bathroom-remodeling",
+  "basement-finishing",
+  "water-damage-restoration",
+  "fire-damage-restoration",
+];
+
 export default function HomePage() {
-  const featuredCaseStudies = sortCaseStudiesByMarketPriority(caseStudies).slice(0, 3);
-  const featuredLocations = [
-    "allentown-pa",
-    "bethlehem-pa",
-    "lehigh-valley-pa",
-    "reading-pa",
-    "wyomissing-pa",
-    "berks-county-pa",
-  ]
-    .map((slug) => locations.find((location) => location.slug === slug))
-    .filter((location): location is (typeof locations)[number] => Boolean(location));
+  const priorityServices = primaryServices.filter((s) =>
+    priorityServiceSlugs.includes(s.slug),
+  );
+  const secondaryServices = primaryServices.filter(
+    (s) => !priorityServiceSlugs.includes(s.slug),
+  );
+  const featuredCaseStudies = sortCaseStudiesByMarketPriority(caseStudies).slice(0, 2);
+  const featuredReviews = testimonials.slice(0, 3);
 
   return (
     <>
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }])} />
+
+      {/* ── HERO ── */}
       <section className="hero-band py-16 md:py-24">
         <Container className="grid items-center gap-10 md:grid-cols-2">
           <div>
@@ -72,15 +76,15 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* ── SERVICES ── */}
       <section className="py-14">
         <Container>
           <h2 className="text-2xl font-bold text-[var(--accent)]">Start With Your Project Type</h2>
           <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-            We handle everything from kitchen upgrades to emergency damage restoration. Pick the
-            service that fits your needs.
+            Pick the service that fits your project. Each page covers scope, pricing factors, and what to expect.
           </p>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
-            {primaryServices.map((service) => (
+            {priorityServices.map((service) => (
               <article key={service.slug} className="surface rounded-xl p-5">
                 <h3 className="text-lg font-semibold">{service.name}</h3>
                 <p className="mt-2 text-sm text-[var(--muted)]">{service.short}</p>
@@ -93,128 +97,160 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-          <ConfidenceSection
-            className="mt-8"
-            title="Why Homeowners Keep Referring Us"
-            intro="We prioritize practical scope planning, direct communication, and finish quality that holds up after handoff."
-          />
+          {secondaryServices.length > 0 && (
+            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+              <span className="text-[var(--muted)]">We also handle:</span>
+              {secondaryServices.map((service, i) => (
+                <span key={service.slug}>
+                  <Link href={`/services/${service.slug}`} className="font-semibold text-[var(--brand)]">
+                    {service.name}
+                  </Link>
+                  {i < secondaryServices.length - 1 && <span className="text-[var(--muted)]">,</span>}
+                </span>
+              ))}
+            </div>
+          )}
         </Container>
       </section>
 
+      {/* ── HOW IT WORKS ── */}
       <section className="py-14">
         <Container>
-          <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Project Outcomes</h2>
-          <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-            Real projects across Allentown, Bethlehem, and the Lehigh Valley with clear before/after
-            scope and measurable results.
-          </p>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <h2 className="text-2xl font-bold text-[var(--accent)]">How It Works</h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-3">
+            <div className="surface rounded-xl p-5">
+              <p className="text-lg font-semibold">1. Tell us about your project</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Share your priorities, budget range, and timeline so we can scope it correctly.
+              </p>
+            </div>
+            <div className="surface rounded-xl p-5">
+              <p className="text-lg font-semibold">2. Get a written scope and estimate</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                We provide a clear project plan with pricing, phasing, and next steps.
+              </p>
+            </div>
+            <div className="surface rounded-xl p-5">
+              <p className="text-lg font-semibold">3. Build with consistent communication</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Work moves forward with regular updates and a final walkthrough.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── PROOF: CASE STUDIES + REVIEWS ── */}
+      <section className="py-14">
+        <Container>
+          <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Work</h2>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
             {featuredCaseStudies.map((study) => (
-              <article key={study.slug} className="surface overflow-hidden rounded-xl">
+              <Link
+                key={study.slug}
+                href={`/projects/${study.slug}`}
+                className="surface overflow-hidden rounded-xl hover:border-[var(--brand)]"
+              >
                 <Image
                   src={study.images[0].src}
                   alt={study.images[0].alt}
                   width={900}
                   height={600}
-                  className="h-44 w-full object-cover"
+                  className="h-48 w-full object-cover"
                 />
                 <div className="p-4">
                   <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
                     {study.locationName}
                   </p>
-                  <h3 className="mt-1 text-base font-semibold text-[var(--accent)]">{study.title}</h3>
-                  <p className="mt-2 text-sm text-[var(--muted)]">{study.summary}</p>
-                  <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
-                    {study.scope.slice(0, 2).map((scopeItem) => (
-                      <li key={scopeItem}>{scopeItem}</li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={`/projects/${study.slug}`}
-                    className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]"
-                  >
-                    Read case study
-                  </Link>
+                  <p className="mt-1 font-semibold text-[var(--accent)]">{study.title}</p>
                 </div>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-14">
-        <Container>
-          <h2 className="text-2xl font-bold text-[var(--accent)]">Service Areas</h2>
-          <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-            We focus on Allentown, Bethlehem, and the Lehigh Valley, and we can confirm coverage for
-            nearby addresses as well.
-          </p>
-          <div className="mt-5 grid gap-3 md:grid-cols-3">
-            {featuredLocations.map((location) => (
-              <Link
-                key={location.slug}
-                href={`/${location.slug}`}
-                className="surface rounded-xl p-4 hover:border-[var(--brand)]"
-              >
-                <p className="font-semibold">{location.name}</p>
-                <p className="text-sm text-[var(--muted)]">{location.region}</p>
               </Link>
             ))}
           </div>
           <p className="mt-4 text-sm">
-            <Link href="/service-areas" className="font-semibold text-[var(--brand)]">
-              View all service areas
+            <Link href="/projects" className="font-semibold text-[var(--brand)]">
+              View all projects
             </Link>
           </p>
-        </Container>
-      </section>
 
-      <section className="py-14">
-        <Container>
-          <h2 className="text-2xl font-bold text-[var(--accent)]">How It Works</h2>
-        </Container>
-        <Container className="mt-5 grid gap-4 md:grid-cols-3">
-          <article className="surface rounded-xl p-5">
-            <h3 className="text-lg font-semibold">1. Quick Discovery Call</h3>
-            <p className="mt-2 text-sm text-[var(--muted)]">
-              Tell us your priorities, budget range, and timeline so we can scope correctly.
-            </p>
-          </article>
-          <article className="surface rounded-xl p-5">
-            <h3 className="text-lg font-semibold">2. Scope + Estimate</h3>
-            <p className="mt-2 text-sm text-[var(--muted)]">
-              We provide a clear project plan with transparent next steps.
-            </p>
-          </article>
-          <article className="surface rounded-xl p-5">
-            <h3 className="text-lg font-semibold">3. Build + Communication</h3>
-            <p className="mt-2 text-sm text-[var(--muted)]">
-              Work moves forward with consistent updates and final walkthrough.
-            </p>
-          </article>
-        </Container>
-        <Container className="mt-6 text-center">
-          <p className="text-sm font-semibold text-[var(--brand)]">
-            {siteConfig.financing.teaser}
-          </p>
-          <div className="mt-3">
-            <Button href="/our-process" variant="secondary">
-              See our full process
-            </Button>
+          <div className="mt-10">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h3 className="text-xl font-bold text-[var(--accent)]">What Clients Say</h3>
+              <div className="flex flex-wrap gap-2 text-sm">
+                <a
+                  href={siteConfig.googleBusinessProfileUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-[var(--brand)] px-3 py-1.5 font-semibold text-[var(--brand)]"
+                >
+                  Google Reviews
+                </a>
+                <a
+                  href={siteConfig.facebookPageUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-[var(--brand)] px-3 py-1.5 font-semibold text-[var(--brand)]"
+                >
+                  Facebook Page
+                </a>
+              </div>
+            </div>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              {featuredReviews.map((item) => (
+                <article key={`${item.name}-${item.context}`} className="surface rounded-lg p-4">
+                  <p className="text-sm text-[var(--muted)]">&ldquo;{item.quote}&rdquo;</p>
+                  <p className="mt-3 text-sm font-semibold">{item.name}</p>
+                  <p className="text-xs text-[var(--muted)]">{item.context}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
 
-      <ReviewsSection />
+      {/* ── CLOSING CTA ── */}
+      <section className="py-14">
+        <Container>
+          <div className="surface rounded-2xl p-8 text-center">
+            <h2 className="text-3xl font-extrabold text-[var(--accent)]">Ready to start your project?</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-[var(--muted)]">
+              Tell us what you are thinking. We will follow up with a written scope and clear next steps.
+            </p>
+            <p className="mt-3 text-sm font-semibold text-[var(--brand)]">
+              {siteConfig.financing.teaser}
+            </p>
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
+              <Button href="/request-a-quote">Request a Quote</Button>
+              <Button href={siteConfig.phoneHref} variant="secondary">
+                Call {siteConfig.phoneDisplay}
+              </Button>
+            </div>
+            <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
+              <Link href="/our-process" className="font-semibold text-[var(--brand)]">
+                Our Process
+              </Link>
+              <Link href="/warranty" className="font-semibold text-[var(--brand)]">
+                Workmanship Warranty
+              </Link>
+              <Link href="/licenses-and-insurance" className="font-semibold text-[var(--brand)]">
+                Licenses &amp; Insurance
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
 
-      <BottomCTA
-        title="Need urgent restoration help?"
-        description="Fire and water damage calls get priority scheduling. We also support insurance-claim project scoping."
-        links={[
-          { href: "/fire-water-damage-restoration", label: "Emergency Restoration" },
-          { href: "/insurance-claims", label: "Insurance Claims Help" },
-        ]}
-      />
+      {/* ── SERVICE AREAS (lightweight) ── */}
+      <section className="pb-14">
+        <Container>
+          <p className="text-sm text-[var(--muted)]">
+            Serving Allentown, Bethlehem, the Lehigh Valley, Reading, Wyomissing, and Berks County.{" "}
+            <Link href="/service-areas" className="font-semibold text-[var(--brand)]">
+              See all service areas
+            </Link>
+          </p>
+        </Container>
+      </section>
     </>
   );
 }
