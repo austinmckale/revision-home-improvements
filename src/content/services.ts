@@ -36,6 +36,15 @@ export type Service = {
     src: string;
     alt: string;
   }>;
+  processGallery?: {
+    title: string;
+    intro: string;
+    images: Array<{
+      src: string;
+      alt: string;
+      caption: string;
+    }>;
+  };
 };
 
 export const curatedStaticGalleryServiceSlugs = [
@@ -249,6 +258,53 @@ export const services: Service[] = [
       { src: "/images/projects/pace-3.jpg", alt: "Wide basement view showing finished layout and floor detail." },
       { src: "/images/projects/pace-4.jpg", alt: "Basement wide-angle finish showing completed room flow." },
     ],
+    processGallery: {
+      title: "What Happens Before the Walls Close Up",
+      intro:
+        "Finished walls hide a lot of work. These photos show how we frame, insulate, run plumbing and electrical, and coordinate mechanical systems before any drywall goes up — the work that determines how well the space holds up over time.",
+      images: [
+        {
+          src: "/images/projects/basement-process/basement-process-stairway-view-framing-electrical-panel.jpg",
+          alt: "View down basement stairway showing steel stud framing and electrical panel.",
+          caption: "Looking down into the basement during framing. Steel stud walls along the foundation with electrical panel access kept clear.",
+        },
+        {
+          src: "/images/projects/basement-process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
+          alt: "Wide view of basement framing with insulation and bathroom rough-in visible.",
+          caption: "The full layout taking shape — wall insulation going in, ceiling framing underway, and the bathroom area roughed in toward the back.",
+        },
+        {
+          src: "/images/projects/basement-process/basement-process-metal-stud-framing-bathroom-rough-in.jpg",
+          alt: "Metal stud partition walls framing out a basement bathroom.",
+          caption: "Bathroom walls framed with metal studs. Insulation is in the ceiling above, and the room is sized and squared before plumbing goes in.",
+        },
+        {
+          src: "/images/projects/basement-process/basement-process-bathroom-plumbing-rough-in-supply-drain.jpg",
+          alt: "Basement bathroom plumbing rough-in with supply lines and drain piping.",
+          caption: "Bathroom plumbing roughed in — hot and cold supply lines, drain piping, and the pump unit all installed before the walls get closed up.",
+        },
+        {
+          src: "/images/projects/basement-process/basement-process-mechanical-room-framing-tankless-water-heater.jpg",
+          alt: "Framed mechanical room with tankless water heater and copper piping.",
+          caption: "The mechanical room framed out with its own doorway opening. Tankless water heater mounted and copper supply lines connected.",
+        },
+        {
+          src: "/images/projects/basement-process/basement-process-wide-view-ceiling-framing-insulation-hvac.jpg",
+          alt: "Wide angle of basement ceiling framing with insulation and HVAC register placement.",
+          caption: "Ceiling framing across the main space with insulation between the joists and the HVAC register positioned for the finished layout.",
+        },
+        {
+          src: "/images/projects/basement-process/basement-process-staircase-framing-ceiling-grid-aquarium-wall.jpg",
+          alt: "Basement staircase framing with ceiling grid and open floor area.",
+          caption: "New staircase framed in with the ceiling grid running overhead. The open floor gives a sense of how much usable space this basement will have.",
+        },
+        {
+          src: "/images/projects/basement-process/basement-process-hallway-framing-drywall-stairway-electrical-boxes.jpg",
+          alt: "Basement hallway with drywall going up and electrical boxes placed.",
+          caption: "Drywall going up in the hallway with electrical boxes set in place — the point where rough framing starts turning into finished rooms.",
+        },
+      ],
+    },
   },
   {
     slug: "drywall-installation-repair",

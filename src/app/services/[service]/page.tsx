@@ -236,6 +236,39 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               </section>
             ) : null}
 
+            {service.processGallery && (
+              <section className="mt-10">
+                <h2 className="text-2xl font-bold text-[var(--accent)]">
+                  {service.processGallery.title}
+                </h2>
+                <p className="mt-2 text-sm text-[var(--muted)]">
+                  {service.processGallery.intro}
+                </p>
+                <div className="mt-4 grid gap-4 md:grid-cols-2">
+                  {service.processGallery.images.map((img) => (
+                    <figure
+                      key={img.src}
+                      className="surface overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                    >
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        width={800}
+                        height={600}
+                        className="h-auto w-full"
+                      />
+                      <figcaption className="p-3 text-sm text-[var(--muted)]">
+                        {img.caption}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+                <div className="mt-5">
+                  <Button href="/request-a-quote">{service.cta}</Button>
+                </div>
+              </section>
+            )}
+
             {serviceTestimonials.length > 0 && (
               <TestimonialStrip items={serviceTestimonials.slice(0, 3)} title="What Clients Say" />
             )}
