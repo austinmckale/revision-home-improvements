@@ -192,7 +192,7 @@ export const services: Service[] = [
     description:
       "Basement finishing and remodeling for family rooms, offices, guest spaces, and storage zones.",
     intro:
-      "Most basements sit unused — too damp, too dark, or too awkward to feel like real living space. We handle the moisture planning, mechanical coordination, and layout work that turns a basement into rooms your family actually uses. Whether it is a home office, guest suite, media room, or play area, every project is planned around your foundation conditions and built to feel like part of the home.",
+      "Most basements sit unused — too damp, too dark, or too awkward to feel like real living space. We plan around your foundation conditions, moisture concerns, and mechanical systems so the finished space is comfortable, dry, and built to last. The result is a basement that feels like part of your home, not an afterthought.",
     cta: "Request a Basement Quote",
     bullets: ["Framing and drywall", "Flooring and trim", "Moisture-aware planning"],
     whatIncluded: [
@@ -230,10 +230,10 @@ export const services: Service[] = [
       },
     ],
     authoritySnapshot: {
-      title: "Fogelsville Partial Unfinished Basement Scope",
+      title: "Basement Buildout — Fogelsville, PA",
       location: "Fogelsville, PA (Lehigh County)",
       summary:
-        "Example planning snapshot for a partially unfinished basement buildout focused on layout, utilities, drainage, insulation, and code-aware finish sequencing.",
+        "Example scope for a partially unfinished basement covering layout, utilities, drainage, insulation, and finish sequencing.",
       scope: [
         "Framing for mechanical room, fitness room, workshop, wet bar zone, and custom built-ins",
         "Pressure-treated bottom plates at concrete contact points and required fire blocking",
@@ -244,9 +244,9 @@ export const services: Service[] = [
         "Interior French drain and up to two sump pump systems for water management",
       ],
       compliance:
-        "Scope written to align with local building, electrical, plumbing, and energy-code requirements with final inspections for closeout.",
+        "Scope aligned with local building, electrical, plumbing, and energy-code requirements.",
       note:
-        "This example is shown to demonstrate planning depth and code-first scope development. Final scope varies by home conditions, access, inspection requirements, and finish selections.",
+        "Shown to illustrate planning depth. Your scope will vary based on home conditions, access, and finish selections.",
     },
     image: {
       src: "/images/projects/big-screen-basement.jpg",
@@ -261,47 +261,47 @@ export const services: Service[] = [
     processGallery: {
       title: "What Happens Before the Walls Close Up",
       intro:
-        "Finished walls hide a lot of work. Here is what framing, insulation, plumbing, and mechanical coordination look like before any drywall goes up.",
+        "Finished walls hide a lot of work. These photos show what framing, insulation, plumbing, and HVAC look like before drywall goes up.",
       images: [
         {
           src: "/images/projects/basement-process/basement-process-stairway-view-framing-electrical-panel.jpg",
           alt: "View down basement stairway showing steel stud framing and electrical panel.",
-          caption: "Steel stud framing along the foundation walls with electrical panel access kept clear.",
+          caption: "Steel stud framing along the foundation with electrical panel access kept clear.",
         },
         {
           src: "/images/projects/basement-process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
           alt: "Wide view of basement framing with insulation and bathroom rough-in visible.",
-          caption: "Full layout taking shape — insulation, ceiling framing, and bathroom area roughed in toward the back.",
+          caption: "Layout taking shape — insulation going in, bathroom roughed in toward the back.",
         },
         {
           src: "/images/projects/basement-process/basement-process-metal-stud-framing-bathroom-rough-in.jpg",
           alt: "Metal stud partition walls framing out a basement bathroom.",
-          caption: "Bathroom walls framed and squared with ceiling insulation in place before plumbing goes in.",
+          caption: "Bathroom walls framed and squared before plumbing goes in.",
         },
         {
           src: "/images/projects/basement-process/basement-process-bathroom-plumbing-rough-in-supply-drain.jpg",
           alt: "Basement bathroom plumbing rough-in with supply lines and drain piping.",
-          caption: "Hot and cold supply lines, drain piping, and pump unit installed before walls close up.",
+          caption: "Supply lines, drain piping, and pump installed before walls close up.",
         },
         {
           src: "/images/projects/basement-process/basement-process-mechanical-room-framing-tankless-water-heater.jpg",
           alt: "Framed mechanical room with tankless water heater and copper piping.",
-          caption: "Mechanical room with its own framed opening. Tankless water heater mounted and supply lines connected.",
+          caption: "Mechanical room framed with tankless water heater mounted and connected.",
         },
         {
           src: "/images/projects/basement-process/basement-process-wide-view-ceiling-framing-insulation-hvac.jpg",
           alt: "Wide angle of basement ceiling framing with insulation and HVAC register placement.",
-          caption: "Ceiling framing with insulation between joists and HVAC register positioned for the finished layout.",
+          caption: "Ceiling insulation between joists with HVAC register placed for the finished layout.",
         },
         {
           src: "/images/projects/basement-process/basement-process-staircase-framing-ceiling-grid-aquarium-wall.jpg",
           alt: "Basement staircase framing with ceiling grid and open floor area.",
-          caption: "New staircase framed in with ceiling grid overhead. Open floor shows the scale of the finished space.",
+          caption: "Staircase framed in with ceiling grid overhead — shows the scale of the finished space.",
         },
         {
           src: "/images/projects/basement-process/basement-process-hallway-framing-drywall-stairway-electrical-boxes.jpg",
           alt: "Basement hallway with drywall going up and electrical boxes placed.",
-          caption: "Drywall going up with electrical boxes set — rough framing turning into finished rooms.",
+          caption: "Drywall going up with electrical boxes set. Framing turning into finished rooms.",
         },
       ],
     },

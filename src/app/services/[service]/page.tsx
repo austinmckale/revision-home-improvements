@@ -305,8 +305,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             <div className="surface mt-10 rounded-xl p-6">
               <h2 className="text-xl font-semibold text-[var(--accent)]">Ready to get started?</h2>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                Call us to talk through your project, or fill out the form for a written scope and quote.
-                You do not need a full plan — just tell us what you are thinking.
+                You do not need a full plan. Tell us what you are thinking and we will follow up with a written scope and quote.
               </p>
               {siteConfig.financing.teaser && (
                 <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
@@ -314,7 +313,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 </p>
               )}
               <div className="mt-4 flex flex-wrap gap-3">
-                <Button href="/request-a-quote">Get a Free Quote</Button>
+                <Button href="/request-a-quote">{service.cta}</Button>
                 <Button href={siteConfig.phoneHref} variant="secondary">
                   Call {siteConfig.phoneDisplay}
                 </Button>
@@ -327,11 +326,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             <FaqList title="Common Questions" items={service.faqs} />
 
             <section className="surface mt-8 rounded-xl p-5">
-              <h2 className="text-lg font-bold text-[var(--accent)]">Project Planning Resources</h2>
+              <h2 className="text-lg font-bold text-[var(--accent)]">Before You Decide</h2>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                If you are comparing contractors or getting ready to move forward, these pages explain
-                how we plan projects, what our warranty covers, and how we document licensing and
-                insurance information.
+                Comparing contractors? These pages cover how we plan projects, what our warranty includes, and our licensing details.
               </p>
               <div className="mt-4 grid gap-2 sm:grid-cols-3">
                 <Link
@@ -360,7 +357,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             </h2>
             {contextualPriorityLocations.length > 0 && (
               <p className="mt-2 text-sm text-[var(--muted)]">
-                Explore local details for{" "}
+                See details for{" "}
                 <Link
                   href={`/${contextualPriorityLocations[0].slug}/${service.slug}`}
                   className="font-semibold text-[var(--brand)]"
