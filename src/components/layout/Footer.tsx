@@ -11,7 +11,7 @@ export default function Footer() {
       <Container className="py-12">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <h2 className="text-lg font-semibold text-[var(--accent)]">Revision Home Improvements</h2>
+            <h2 className="text-lg font-semibold text-[var(--accent)]">{siteConfig.name}</h2>
             <p className="mt-2 text-sm text-[var(--muted)]">
               Remodeling and restoration contractor serving Reading, Berks County, and Lehigh Valley.
             </p>
@@ -106,7 +106,7 @@ export default function Footer() {
       </Container>
       <div className="border-t border-[var(--border)]">
         <Container className="flex flex-wrap items-center justify-between gap-2 py-4 text-xs text-[var(--muted)]">
-          <p>&copy; {new Date().getFullYear()} Revision Home Improvements. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
           <div className="flex gap-4">
             <Link href="/privacy" className="hover:text-[var(--brand)]">Privacy Policy</Link>
             <Link href="/financing-terms" className="hover:text-[var(--brand)]">Financing Terms</Link>

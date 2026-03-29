@@ -116,7 +116,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       <section className="hero-band py-14">
         <Container className="grid items-center gap-8 md:grid-cols-2">
           <div>
-            <h1 className="text-4xl font-extrabold text-[var(--accent)]">{service.name}</h1>
+            <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">
+              Lehigh Valley &amp; Berks County
+            </p>
+            <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">{service.name}</h1>
             <p className="mt-3 text-[var(--muted)]">{service.intro}</p>
             {isEmergencyService && (
               <div className="mt-4 rounded-lg border border-[var(--brand)] bg-[var(--surface-soft)] p-3">
@@ -129,6 +132,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               <Button href={siteConfig.phoneHref} variant="secondary">
                 Call {siteConfig.phoneDisplay}
               </Button>
+            </div>
+            <div className="mt-5 grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
+              <p className="surface rounded-lg px-3 py-2">Written scope before work begins</p>
+              <p className="surface rounded-lg px-3 py-2">Licensed in PA · HIC #PA185945</p>
+              <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed</p>
+              <p className="surface rounded-lg px-3 py-2">Clear communication throughout</p>
             </div>
           </div>
           <div className="surface overflow-hidden rounded-2xl">
@@ -227,6 +236,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               </section>
             ) : null}
 
+            {serviceTestimonials.length > 0 && (
+              <TestimonialStrip items={serviceTestimonials.slice(0, 3)} title="What Clients Say" />
+            )}
+
             {relatedCaseStudies.length > 0 && (
               <section className="mt-8">
                 <h2 className="text-2xl font-bold text-[var(--accent)]">Project Case Studies</h2>
@@ -256,15 +269,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               </section>
             )}
 
-            {serviceTestimonials.length > 0 && (
-              <TestimonialStrip items={serviceTestimonials.slice(0, 3)} title="What Clients Say" />
-            )}
-
             <div className="surface mt-10 rounded-xl p-6">
               <h2 className="text-xl font-semibold text-[var(--accent)]">Ready to get started?</h2>
               <p className="mt-2 text-sm text-[var(--muted)]">
                 Call us to talk through your project, or fill out the form for a written scope and quote.
-                We typically follow up the same day.
+                You do not need a full plan — just tell us what you are thinking.
               </p>
               {siteConfig.financing.teaser && (
                 <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
@@ -314,13 +323,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             </section>
 
             <h2 className="mt-10 text-xl font-bold text-[var(--accent)]">
-              {priorityLocationSlugs ? "Priority Service Areas" : "Available In Your Area"}
+              {priorityLocationSlugs ? "Service Areas" : "Available In Your Area"}
             </h2>
-            {priorityLocationSlugs && (
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                We focus these high-intent pages on our core local markets first.
-              </p>
-            )}
             {contextualPriorityLocations.length > 0 && (
               <p className="mt-2 text-sm text-[var(--muted)]">
                 Explore local details for{" "}

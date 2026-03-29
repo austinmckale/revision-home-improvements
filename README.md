@@ -55,6 +55,7 @@ Copy `.env.example` to `.env.local` and fill values:
 - `LEADS_WEBHOOK_URL`
 - `DISCORD_WEBHOOK_URL` (optional alias; use this if you only want Discord delivery)
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+- `NEXT_PUBLIC_GOOGLE_ADS_ID` (e.g. `AW-16834624221`)
 - `SMTP_HOST`
 - `SMTP_PORT`
 - `SMTP_USER`

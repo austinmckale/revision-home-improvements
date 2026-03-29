@@ -27,7 +27,7 @@ export default function AboutPage() {
             <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">About Us</p>
             <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">Built on Clarity, Delivered with Care</h1>
             <p className="mt-4 text-[var(--muted)]">
-              We started Revision Home Improvements because too many homeowners were getting vague estimates, missed timelines, and surprise costs. We decided to do it differently — written scopes, predictable schedules, and honest communication from day one.
+              We started this company because too many homeowners were getting vague estimates, missed timelines, and surprise costs. We decided to do it differently — written scopes, predictable schedules, and honest communication from day one.
             </p>
             <p className="mt-3 text-[var(--muted)]">
               Today we serve homeowners across {siteConfig.serviceAreas} with kitchen, bathroom, basement, flooring, outdoor, and restoration projects.
@@ -42,7 +42,7 @@ export default function AboutPage() {
           <div className="surface overflow-hidden rounded-2xl">
             <Image
               src="/images/projects/Frontier-1.jpg"
-              alt="Outdoor project site by Revision Home Improvements in Reading, PA."
+              alt="Outdoor project site by RHI Pros in Reading, PA."
               width={1200}
               height={800}
               className="h-full w-full object-cover"

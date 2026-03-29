@@ -38,35 +38,32 @@ export default function HomePage() {
         <Container className="grid items-center gap-10 md:grid-cols-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">
-              Allentown + Bethlehem + Lehigh Valley Remodeling
+              Lehigh Valley&rsquo;s Remodeling &amp; Restoration Contractor
             </p>
             <h1 className="mt-3 text-4xl font-extrabold leading-tight text-[var(--accent)] md:text-5xl">
-              Remodeling and restoration work that gets done right.
+              You get a written scope, a realistic timeline, and a contractor who communicates clearly.
             </h1>
             <p className="mt-4 max-w-xl text-base text-[var(--muted)]">
-              {siteConfig.name} helps homeowners with kitchens, bathrooms, basements, exterior projects,
-              and damage restoration across {siteConfig.serviceAreas}.
-            </p>
-            <p className="mt-2 max-w-xl text-sm font-semibold text-[var(--brand)]">
-              {siteConfig.financing.teaser}
+              Every project starts with a written scope, a realistic timeline, and a team that keeps
+              you informed from estimate through final walkthrough.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button href="/request-a-quote">Request a Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary" className="hidden sm:inline-flex">
+              <Button href={siteConfig.phoneHref} variant="secondary">
                 Call {siteConfig.phoneDisplay}
               </Button>
             </div>
             <div className="mt-6 grid max-w-xl gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
-              <p className="surface rounded-lg px-3 py-2">Clear scopes before work starts</p>
-              <p className="surface rounded-lg px-3 py-2">Fast quote follow-up</p>
-              <p className="surface rounded-lg px-3 py-2">Remodeling and restoration under one team</p>
-              <p className="surface rounded-lg px-3 py-2">Licensed, insured, and warranty-backed</p>
+              <p className="surface rounded-lg px-3 py-2">Written scope and estimate before work begins</p>
+              <p className="surface rounded-lg px-3 py-2">Licensed in PA · HIC #PA185945</p>
+              <p className="surface rounded-lg px-3 py-2">Remodeling + restoration under one local team</p>
+              <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed on every project</p>
             </div>
           </div>
           <div className="surface overflow-hidden rounded-2xl">
             <Image
               src="/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg"
-              alt="Completed Frontier patio roof and outdoor project by Revision Home Improvements in the Lehigh Valley."
+              alt="Completed Frontier patio roof and outdoor project by RHI Pros in the Lehigh Valley."
               width={1200}
               height={800}
               className="h-full w-full object-cover"
@@ -197,9 +194,14 @@ export default function HomePage() {
           </article>
         </Container>
         <Container className="mt-6 text-center">
-          <Button href="/our-process" variant="secondary">
-            See our full process
-          </Button>
+          <p className="text-sm font-semibold text-[var(--brand)]">
+            {siteConfig.financing.teaser}
+          </p>
+          <div className="mt-3">
+            <Button href="/our-process" variant="secondary">
+              See our full process
+            </Button>
+          </div>
         </Container>
       </section>
 

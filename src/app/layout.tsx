@@ -13,7 +13,7 @@ import { getLocalBusinessJsonLd } from "@/lib/structuredData";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.domain),
   title: {
-    default: "Revision Home Improvements | Lehigh Valley Remodeling & Restoration",
+    default: "RHI Pros | Lehigh Valley Remodeling & Restoration",
     template: "%s | Revision Home Improvements",
   },
   description:
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: siteConfig.name,
-    title: "Revision Home Improvements | Lehigh Valley Remodeling & Restoration",
+    title: "RHI Pros | Lehigh Valley Remodeling & Restoration",
     description:
       "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship across the Lehigh Valley, Reading, and Berks County.",
     images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Revision Home Improvements | Lehigh Valley Remodeling & Restoration",
+    title: "RHI Pros | Lehigh Valley Remodeling & Restoration",
     description:
       "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship.",
     images: [siteConfig.ogImage],

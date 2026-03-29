@@ -20,14 +20,14 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2 text-[var(--accent)]">
           <Image
             src="/images/brand/chat-logo.png"
-            alt="Revision Home Improvements logo"
+            alt={`${siteConfig.name} logo`}
             width={56}
             height={56}
             className="h-12 w-12 object-contain"
             priority
           />
           <span className="hidden text-base font-bold leading-tight tracking-tight sm:block">
-            Revision Home Improvements
+            {siteConfig.name}
           </span>
         </Link>
         <nav className="hidden items-center gap-5 text-sm md:flex" aria-label="Main navigation">

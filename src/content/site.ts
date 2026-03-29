@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "Revision Home Improvements",
+  name: "RHI Pros",
   domain: "https://www.rhipros.com",
   phoneDisplay: "(484) 706-9229",
   phoneHref: "tel:+14847069229",

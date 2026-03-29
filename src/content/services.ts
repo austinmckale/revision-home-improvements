@@ -72,12 +72,12 @@ export const services: Service[] = [
   {
     slug: "kitchen-remodeling",
     name: "Kitchen Remodeling",
-    short: "The kitchen you actually want to cook in.",
+    short: "Layout, cabinets, countertops, and finishes — planned around your daily life.",
     description:
       "Full kitchen renovations including layout updates, cabinets, countertops, lighting, and finishes.",
     intro:
-      "A kitchen remodel is one of the biggest upgrades you can make to your home. We handle everything from layout changes and cabinetry to countertops and lighting, planned around your daily life so the disruption stays manageable.",
-    cta: "Request a kitchen quote",
+      "A kitchen remodel involves layout decisions, cabinet and countertop coordination, electrical work, plumbing, and finish detailing — all in the room your household uses most. We plan the project so you know what to expect each week, coordinate materials before demo starts, and keep disruption to your daily routine as short as possible. You get a written scope with clear phasing before any work begins.",
+    cta: "Request a Kitchen Quote",
     bullets: ["Layout planning", "Cabinets and countertops", "Lighting and finishes"],
     whatIncluded: [
       "Space planning for prep, cooking, and storage flow",
@@ -124,12 +124,12 @@ export const services: Service[] = [
   {
     slug: "bathroom-remodeling",
     name: "Bathroom Remodeling",
-    short: "A bathroom that works as good as it looks.",
+    short: "Bathrooms built right — tile, waterproofing, fixtures, and finishes you can count on.",
     description:
       "Bathroom upgrades with improved storage, tilework, fixtures, and clean modern finishes.",
     intro:
-      "Whether you are dealing with an outdated layout or just want something nicer, we handle the full remodel: tile, fixtures, vanity, waterproofing, and everything in between. We also take on select restroom refresh projects when the work overlaps with our core bathroom remodeling process.",
-    cta: "Request a bathroom quote",
+      "A bathroom remodel touches plumbing, waterproofing, tile, electrical, and finishes — all in a space your household uses every day. We plan the work around your daily routine, handle waterproofing properly so nothing fails behind the walls, and keep the jobsite clean throughout. You get a written scope before we start and consistent updates until the final walkthrough.",
+    cta: "Request a Bathroom Quote",
     bullets: ["Showers and vanities", "Tile and waterproofing", "Efficient layouts"],
     whatIncluded: [
       "Shower/tub area upgrades and fixture replacement",
@@ -459,12 +459,12 @@ export const services: Service[] = [
     slug: "fire-damage-restoration",
     portfolioTag: "fire-damage",
     name: "Fire Damage Restoration",
-    short: "Fast response when fire damage hits your home.",
+    short: "Damage assessment, structured rebuild planning, and insurance-ready documentation.",
     description:
       "Emergency stabilization, rebuild planning, and full restoration work after fire damage.",
     intro:
-      "Fire damage is overwhelming. We help you move from chaos to a clear plan, starting with safety, then documentation, then a structured rebuild. We handle the reconstruction so you can focus on your family.",
-    cta: "Call now",
+      "After a fire, you need a clear path forward — not more confusion. We start with a damage assessment and safety review, then build a structured reconstruction plan with documented scope for insurance. You get consistent communication through every phase of the rebuild so you always know what is happening and what comes next.",
+    cta: "Call for Immediate Help",
     bullets: ["Urgent response", "Damage assessment", "Rebuild coordination"],
     whatIncluded: [
       "Initial damage assessment and safety-first planning",
@@ -508,12 +508,12 @@ export const services: Service[] = [
     slug: "water-damage-restoration",
     portfolioTag: "water-damage",
     name: "Water Damage Restoration",
-    short: "Get your home back to normal after water damage.",
+    short: "Fast damage assessment, structured rebuild, and insurance-ready documentation.",
     description:
       "Water-damage rebuild services for drywall, flooring, trim, and affected finished spaces.",
     intro:
-      "Water damage gets worse the longer you wait. We move fast to assess what is affected, remove what cannot be saved, and rebuild the rest. If insurance is involved, we document everything along the way.",
-    cta: "Call now",
+      "Water damage gets worse the longer you wait. Call us to start with a damage assessment — we identify what is affected, map the rebuild scope, and document everything for insurance if needed. From there, we handle the full restoration: drywall, flooring, trim, and finishes, with clear communication at every stage so you know exactly where things stand.",
+    cta: "Call for Immediate Help",
     bullets: ["Rapid mitigation support", "Structural and finish repairs", "Insurance-ready documentation"],
     whatIncluded: [
       "Damage mapping and affected-area reconstruction planning",
