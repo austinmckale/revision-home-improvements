@@ -192,8 +192,8 @@ export const services: Service[] = [
     description:
       "Basement finishing and remodeling for family rooms, offices, guest spaces, and storage zones.",
     intro:
-      "Most basements are wasted space. We turn them into rooms your family actually uses, whether that is a home office, guest bedroom, media room, or play area. We plan around moisture, lighting, and utility access so the space holds up long-term.",
-    cta: "Request a basement quote",
+      "Most basements sit unused — too damp, too dark, or too awkward to feel like real living space. We handle the moisture planning, mechanical coordination, and layout work that turns a basement into rooms your family actually uses. Whether it is a home office, guest suite, media room, or play area, every project is planned around your foundation conditions and built to feel like part of the home.",
+    cta: "Request a Basement Quote",
     bullets: ["Framing and drywall", "Flooring and trim", "Moisture-aware planning"],
     whatIncluded: [
       "Basement layout planning for multi-use living",
@@ -261,47 +261,47 @@ export const services: Service[] = [
     processGallery: {
       title: "What Happens Before the Walls Close Up",
       intro:
-        "Finished walls hide a lot of work. These photos show how we frame, insulate, run plumbing and electrical, and coordinate mechanical systems before any drywall goes up — the work that determines how well the space holds up over time.",
+        "Finished walls hide a lot of work. Here is what framing, insulation, plumbing, and mechanical coordination look like before any drywall goes up.",
       images: [
         {
           src: "/images/projects/basement-process/basement-process-stairway-view-framing-electrical-panel.jpg",
           alt: "View down basement stairway showing steel stud framing and electrical panel.",
-          caption: "Looking down into the basement during framing. Steel stud walls along the foundation with electrical panel access kept clear.",
+          caption: "Steel stud framing along the foundation walls with electrical panel access kept clear.",
         },
         {
           src: "/images/projects/basement-process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
           alt: "Wide view of basement framing with insulation and bathroom rough-in visible.",
-          caption: "The full layout taking shape — wall insulation going in, ceiling framing underway, and the bathroom area roughed in toward the back.",
+          caption: "Full layout taking shape — insulation, ceiling framing, and bathroom area roughed in toward the back.",
         },
         {
           src: "/images/projects/basement-process/basement-process-metal-stud-framing-bathroom-rough-in.jpg",
           alt: "Metal stud partition walls framing out a basement bathroom.",
-          caption: "Bathroom walls framed with metal studs. Insulation is in the ceiling above, and the room is sized and squared before plumbing goes in.",
+          caption: "Bathroom walls framed and squared with ceiling insulation in place before plumbing goes in.",
         },
         {
           src: "/images/projects/basement-process/basement-process-bathroom-plumbing-rough-in-supply-drain.jpg",
           alt: "Basement bathroom plumbing rough-in with supply lines and drain piping.",
-          caption: "Bathroom plumbing roughed in — hot and cold supply lines, drain piping, and the pump unit all installed before the walls get closed up.",
+          caption: "Hot and cold supply lines, drain piping, and pump unit installed before walls close up.",
         },
         {
           src: "/images/projects/basement-process/basement-process-mechanical-room-framing-tankless-water-heater.jpg",
           alt: "Framed mechanical room with tankless water heater and copper piping.",
-          caption: "The mechanical room framed out with its own doorway opening. Tankless water heater mounted and copper supply lines connected.",
+          caption: "Mechanical room with its own framed opening. Tankless water heater mounted and supply lines connected.",
         },
         {
           src: "/images/projects/basement-process/basement-process-wide-view-ceiling-framing-insulation-hvac.jpg",
           alt: "Wide angle of basement ceiling framing with insulation and HVAC register placement.",
-          caption: "Ceiling framing across the main space with insulation between the joists and the HVAC register positioned for the finished layout.",
+          caption: "Ceiling framing with insulation between joists and HVAC register positioned for the finished layout.",
         },
         {
           src: "/images/projects/basement-process/basement-process-staircase-framing-ceiling-grid-aquarium-wall.jpg",
           alt: "Basement staircase framing with ceiling grid and open floor area.",
-          caption: "New staircase framed in with the ceiling grid running overhead. The open floor gives a sense of how much usable space this basement will have.",
+          caption: "New staircase framed in with ceiling grid overhead. Open floor shows the scale of the finished space.",
         },
         {
           src: "/images/projects/basement-process/basement-process-hallway-framing-drywall-stairway-electrical-boxes.jpg",
           alt: "Basement hallway with drywall going up and electrical boxes placed.",
-          caption: "Drywall going up in the hallway with electrical boxes set in place — the point where rough framing starts turning into finished rooms.",
+          caption: "Drywall going up with electrical boxes set — rough framing turning into finished rooms.",
         },
       ],
     },

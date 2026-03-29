@@ -141,7 +141,7 @@ export default function QuoteForm() {
       </div>
 
       <p className="mt-1 text-sm text-[var(--muted)]">
-        Tell us about your project and we will follow up quickly.
+        You do not need a finished plan. Tell us about the space and we will follow up with clear next steps.
       </p>
 
       {step === 1 && (

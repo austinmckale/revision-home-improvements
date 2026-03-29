@@ -257,7 +257,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                         height={600}
                         className="h-auto w-full"
                       />
-                      <figcaption className="p-3 text-sm text-[var(--muted)]">
+                      <figcaption className="px-3 py-2 text-xs leading-relaxed text-[var(--muted)]">
                         {img.caption}
                       </figcaption>
                     </figure>
