@@ -48,8 +48,8 @@ export default function HomePage() {
               You get a written scope, a realistic timeline, and a contractor who communicates clearly.
             </h1>
             <p className="mt-4 max-w-xl text-base text-[var(--muted)]">
-              We handle kitchens, bathrooms, basements, exteriors, and damage restoration — with
-              a written scope, a clear schedule, and consistent updates on every project.
+              Kitchens, bathrooms, basements, exteriors, and damage restoration across
+              the Lehigh Valley, Reading, and Berks County.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button href="/request-a-quote">Request a Quote</Button>
