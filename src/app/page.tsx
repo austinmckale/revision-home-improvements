@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { primaryServices } from "@/content/services";
-import { caseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
+import { caseStudies } from "@/content/caseStudies";
 import { testimonials } from "@/content/testimonials";
 import { siteConfig } from "@/content/site";
 
@@ -30,7 +30,13 @@ export default function HomePage() {
   const secondaryServices = primaryServices.filter(
     (s) => !priorityServiceSlugs.includes(s.slug),
   );
-  const featuredCaseStudies = sortCaseStudiesByMarketPriority(caseStudies).slice(0, 2);
+  const homepageSlugs = [
+    "allentown-kitchen-layout-upgrade",
+    "allentown-commercial-bathroom-renovation",
+  ];
+  const featuredCaseStudies = homepageSlugs
+    .map((slug) => caseStudies.find((s) => s.slug === slug)!)
+    .filter(Boolean);
   const featuredReviews = testimonials.slice(0, 3);
 
   return (
