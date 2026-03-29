@@ -32,7 +32,7 @@ export default function HomePage() {
   );
   const homepageSlugs = [
     "allentown-kitchen-layout-upgrade",
-    "allentown-commercial-bathroom-renovation",
+    "lehigh-valley-basement-finish-and-detail",
   ];
   const featuredCaseStudies = homepageSlugs
     .map((slug) => caseStudies.find((s) => s.slug === slug)!)
