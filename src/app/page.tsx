@@ -77,20 +77,20 @@ export default function HomePage() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="py-14">
+      <section className="py-8 md:py-14">
         <Container>
           <h2 className="text-2xl font-bold text-[var(--accent)]">Start With Your Project Type</h2>
           <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
             Pick the service that fits your project. Each page covers scope, pricing factors, and what to expect.
           </p>
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
+          <div className="mt-4 grid gap-3 md:mt-5 md:gap-4 md:grid-cols-3">
             {priorityServices.map((service) => (
-              <article key={service.slug} className="surface rounded-xl p-5">
-                <h3 className="text-lg font-semibold">{service.name}</h3>
-                <p className="mt-2 text-sm text-[var(--muted)]">{service.short}</p>
+              <article key={service.slug} className="surface rounded-lg p-4 md:rounded-xl md:p-5">
+                <h3 className="text-base font-semibold md:text-lg">{service.name}</h3>
+                <p className="mt-1 text-sm text-[var(--muted)]">{service.short}</p>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]"
+                  className="mt-2 inline-block text-sm font-semibold text-[var(--brand)]"
                 >
                   Learn more
                 </Link>
@@ -98,7 +98,7 @@ export default function HomePage() {
             ))}
           </div>
           {secondaryServices.length > 0 && (
-            <div className="surface mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg px-4 py-3 text-sm">
+            <div className="surface mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg px-4 py-3 text-sm md:mt-5">
               <span className="text-[var(--muted)]">We also handle:</span>
               {secondaryServices.map((service, i) => (
                 <span key={service.slug}>
@@ -114,68 +114,68 @@ export default function HomePage() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section className="py-14">
+      <section className="py-8 md:py-14">
         <Container>
-          <h2 className="text-2xl font-bold text-[var(--accent)]">How It Works</h2>
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
-            <div className="surface rounded-xl p-5">
-              <p className="text-lg font-semibold">1. Tell us about your project</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Share your priorities, budget range, and timeline so we can scope it correctly.
-              </p>
-            </div>
-            <div className="surface rounded-xl p-5">
-              <p className="text-lg font-semibold">2. Get a written scope and estimate</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                We provide a clear project plan with pricing, phasing, and next steps.
-              </p>
-            </div>
-            <div className="surface rounded-xl p-5">
-              <p className="text-lg font-semibold">3. Build with consistent communication</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Work moves forward with regular updates and a final walkthrough.
-              </p>
-            </div>
-          </div>
+          <h2 className="text-xl font-bold text-[var(--accent)] md:text-2xl">How It Works</h2>
+          <ol className="mt-3 space-y-2 text-sm md:mt-5 md:grid md:grid-cols-3 md:gap-4 md:space-y-0">
+            <li className="surface rounded-lg px-4 py-3 md:rounded-xl md:p-5">
+              <span className="font-semibold text-[var(--accent)]">1. Tell us about your project</span>
+              <span className="ml-1 text-[var(--muted)] md:ml-0 md:mt-1 md:block">
+                — share priorities, budget range, and timeline.
+              </span>
+            </li>
+            <li className="surface rounded-lg px-4 py-3 md:rounded-xl md:p-5">
+              <span className="font-semibold text-[var(--accent)]">2. Get a written scope and estimate</span>
+              <span className="ml-1 text-[var(--muted)] md:ml-0 md:mt-1 md:block">
+                — clear project plan with pricing and next steps.
+              </span>
+            </li>
+            <li className="surface rounded-lg px-4 py-3 md:rounded-xl md:p-5">
+              <span className="font-semibold text-[var(--accent)]">3. Build with consistent communication</span>
+              <span className="ml-1 text-[var(--muted)] md:ml-0 md:mt-1 md:block">
+                — regular updates and a final walkthrough.
+              </span>
+            </li>
+          </ol>
         </Container>
       </section>
 
       {/* ── PROOF: CASE STUDIES + REVIEWS ── */}
-      <section className="py-14">
+      <section className="py-8 md:py-14">
         <Container>
           <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Work</h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
+          <div className="mt-3 grid gap-3 md:mt-4 md:gap-4 md:grid-cols-2">
             {featuredCaseStudies.map((study) => (
               <Link
                 key={study.slug}
                 href={`/projects/${study.slug}`}
-                className="surface overflow-hidden rounded-xl hover:border-[var(--brand)]"
+                className="surface overflow-hidden rounded-lg hover:border-[var(--brand)] md:rounded-xl"
               >
                 <Image
                   src={study.images[0].src}
                   alt={study.images[0].alt}
                   width={900}
                   height={600}
-                  className="h-48 w-full object-cover"
+                  className="h-36 w-full object-cover md:h-48"
                 />
-                <div className="p-4">
+                <div className="px-4 py-3 md:p-4">
                   <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
                     {study.locationName}
                   </p>
-                  <p className="mt-1 font-semibold text-[var(--accent)]">{study.title}</p>
+                  <p className="mt-0.5 text-sm font-semibold text-[var(--accent)] md:mt-1 md:text-base">{study.title}</p>
                 </div>
               </Link>
             ))}
           </div>
-          <p className="mt-4 text-sm">
+          <p className="mt-3 text-sm md:mt-4">
             <Link href="/projects" className="font-semibold text-[var(--brand)]">
               View all projects
             </Link>
           </p>
 
-          <div className="mt-10">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="text-xl font-bold text-[var(--accent)]">What Clients Say</h3>
+          <div className="mt-6 md:mt-10">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="text-lg font-bold text-[var(--accent)] md:text-xl">What Clients Say</h3>
               <div className="flex flex-wrap gap-2 text-sm">
                 <a
                   href={siteConfig.googleBusinessProfileUrl}
@@ -195,11 +195,11 @@ export default function HomePage() {
                 </a>
               </div>
             </div>
-            <div className="mt-4 grid gap-3 md:grid-cols-3">
+            <div className="mt-3 grid gap-2 md:mt-4 md:gap-3 md:grid-cols-3">
               {featuredReviews.map((item) => (
-                <article key={`${item.name}-${item.context}`} className="surface rounded-lg p-4">
+                <article key={`${item.name}-${item.context}`} className="surface rounded-lg px-4 py-3 md:p-4">
                   <p className="text-sm text-[var(--muted)]">&ldquo;{item.quote}&rdquo;</p>
-                  <p className="mt-3 text-sm font-semibold">{item.name}</p>
+                  <p className="mt-2 text-sm font-semibold">{item.name}</p>
                   <p className="text-xs text-[var(--muted)]">{item.context}</p>
                 </article>
               ))}
@@ -209,23 +209,23 @@ export default function HomePage() {
       </section>
 
       {/* ── CLOSING CTA ── */}
-      <section className="py-14">
+      <section className="py-8 md:py-14">
         <Container>
-          <div className="surface rounded-2xl p-8 text-center">
-            <h2 className="text-3xl font-extrabold text-[var(--accent)]">Ready to start your project?</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-[var(--muted)]">
+          <div className="surface rounded-xl p-6 text-center md:rounded-2xl md:p-8">
+            <h2 className="text-2xl font-extrabold text-[var(--accent)] md:text-3xl">Ready to start your project?</h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm text-[var(--muted)] md:mt-3 md:text-base">
               Tell us what you are thinking. We will follow up with a written scope and clear next steps.
             </p>
-            <p className="mt-3 text-sm font-semibold text-[var(--brand)]">
+            <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
               {siteConfig.financing.teaser}
             </p>
-            <div className="mt-5 flex flex-wrap justify-center gap-3">
+            <div className="mt-4 flex flex-wrap justify-center gap-3 md:mt-5">
               <Button href="/request-a-quote">Request a Quote</Button>
               <Button href={siteConfig.phoneHref} variant="secondary">
                 Call {siteConfig.phoneDisplay}
               </Button>
             </div>
-            <div className="mt-4 flex flex-wrap justify-center gap-4 text-sm">
+            <div className="mt-3 flex flex-wrap justify-center gap-4 text-xs md:mt-4 md:text-sm">
               <Link href="/our-process" className="font-semibold text-[var(--brand)]">
                 Our Process
               </Link>
@@ -241,7 +241,7 @@ export default function HomePage() {
       </section>
 
       {/* ── SERVICE AREAS (lightweight) ── */}
-      <section className="pb-14">
+      <section className="pb-8 md:pb-14">
         <Container>
           <p className="text-sm text-[var(--muted)]">
             Serving Allentown, Bethlehem, the Lehigh Valley, Reading, Wyomissing, and Berks County.{" "}
