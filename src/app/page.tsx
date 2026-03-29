@@ -98,7 +98,7 @@ export default function HomePage() {
             ))}
           </div>
           {secondaryServices.length > 0 && (
-            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+            <div className="surface mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg px-4 py-3 text-sm">
               <span className="text-[var(--muted)]">We also handle:</span>
               {secondaryServices.map((service, i) => (
                 <span key={service.slug}>
