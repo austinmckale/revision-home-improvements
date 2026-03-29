@@ -41,7 +41,7 @@ export default function AboutPage() {
           </div>
           <div className="surface overflow-hidden rounded-2xl">
             <Image
-              src="/images/projects/Frontier-1.jpg"
+              src="/images/projects/frontier-patio-gable-roof/after/angle-1.jpg"
               alt="Outdoor project site by RHI Pros in Reading, PA."
               width={1200}
               height={800}

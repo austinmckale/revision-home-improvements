@@ -47,7 +47,7 @@ export default function FireWaterDamageRestorationPage() {
           </div>
           <div className="surface overflow-hidden rounded-2xl">
             <Image
-              src="/images/projects/img_7540.jpg"
+              src="/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg"
               alt="Interior reconstruction work following property damage."
               width={1200}
               height={800}

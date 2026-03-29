@@ -11,7 +11,7 @@ import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices } from "@/content/services";
-import { caseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
+import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
@@ -68,7 +68,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
   const related = primaryServices.filter((item) => item.slug !== service.slug).slice(0, 4);
   const relatedCaseStudies = sortCaseStudiesByMarketPriority(
-    caseStudies.filter((item) => item.serviceSlug === service.slug && item.featureInServiceListings !== false),
+    visibleCaseStudies.filter((item) => item.serviceSlug === service.slug && item.featureInServiceListings !== false),
   );
   const topCaseStudy = relatedCaseStudies[0];
   const serviceTestimonials = getTestimonialsByService(service.slug);
@@ -140,15 +140,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               <p className="surface rounded-lg px-3 py-2">Clear communication throughout</p>
             </div>
           </div>
-          <div className="surface overflow-hidden rounded-2xl">
-            <Image
-              src={service.image.src}
-              alt={service.image.alt}
-              width={1200}
-              height={800}
-              className="h-full w-full object-cover"
-            />
-          </div>
+          {service.image.src && (
+            <div className="surface overflow-hidden rounded-2xl">
+              <Image
+                src={service.image.src}
+                alt={service.image.alt}
+                width={1200}
+                height={800}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          )}
         </Container>
       </section>
 

@@ -15,7 +15,7 @@ export const siteConfig = {
     postalCode: "19601",
     country: "US",
   },
-  ogImage: "/images/projects/frontier-final-patio-roof-gable-tongue-groove.jpg",
+  ogImage: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
   logo: "/images/brand/rhi-logo.png",
   hicNumber: "PA HIC #PA185945",
   insuranceCarrier: "Provided upon request during estimate review",

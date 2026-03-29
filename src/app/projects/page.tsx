@@ -6,46 +6,46 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
-import { caseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
+import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
 
 const additionalImages = [
   {
-    src: "/images/projects/kitchen-1.jpg",
+    src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
     alt: "Kitchen remodel with updated finishes and fixtures.",
   },
   {
-    src: "/images/projects/bathroom-after.jpg",
+    src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg",
     alt: "Finished bathroom renovation with updated fixtures.",
   },
   {
-    src: "/images/projects/big-screen-basement.jpg",
+    src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
     alt: "Finished basement media room with large screen.",
   },
   {
-    src: "/images/projects/basement-epoxy-floor-big-screen.jpg",
+    src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
     alt: "Basement epoxy flooring finish detail.",
   },
   {
-    src: "/images/projects/finished-room.jpg",
+    src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
     alt: "Finished interior room after flooring upgrade.",
   },
   {
-    src: "/images/projects/fire-place-construction.jpg",
-    alt: "Fireplace construction detail during interior build.",
+    src: "/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
+    alt: "Fireplace wall renovation during living room refresh.",
   },
   {
-    src: "/images/projects/patio-construction-2.jpg",
+    src: "/images/projects/frontier-patio-gable-roof/process/patio-construction.jpg",
     alt: "Patio construction phase during build.",
   },
   {
-    src: "/images/projects/Patio-3.jpg",
-    alt: "Finished patio and hardscape project in Reading, PA.",
+    src: "/images/projects/frontier-patio-gable-roof/after/patio-finished.jpg",
+    alt: "Finished patio and hardscape project.",
   },
   {
-    src: "/images/projects/living-room-1.jpg",
+    src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
     alt: "Living room finish detail after interior renovation.",
   },
 ];
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
 
 export default async function ProjectsPage() {
   const portfolioImages = await getPortfolioImages({ limit: 12 });
-  const orderedCaseStudies = sortCaseStudiesByMarketPriority(caseStudies);
+  const orderedCaseStudies = sortCaseStudiesByMarketPriority(visibleCaseStudies);
 
   return (
     <>

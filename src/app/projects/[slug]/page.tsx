@@ -8,7 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 import BeforeAfterToggle from "@/components/sections/BeforeAfterToggle";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
-import { caseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
+import { visibleCaseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
@@ -16,7 +16,7 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 type Params = { slug: string };
 
 export function generateStaticParams() {
-  return caseStudies.map((item) => ({ slug: item.slug }));
+  return visibleCaseStudies.map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {

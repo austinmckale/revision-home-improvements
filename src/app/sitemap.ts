@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { locations } from "@/content/locations";
 import { services, primaryServices } from "@/content/services";
-import { caseStudies } from "@/content/caseStudies";
+import { visibleCaseStudies } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const serviceRoutes = primaryServices.map((service) => `/services/${service.slug}`);
   const cityRoutes = locations.map((location) => `/${location.slug}`);
-  const caseStudyRoutes = caseStudies.map((item) => `/projects/${item.slug}`);
+  const caseStudyRoutes = visibleCaseStudies.map((item) => `/projects/${item.slug}`);
   const cityServiceRoutes = locations.flatMap((location) =>
     services.map((service) => `/${location.slug}/${service.slug}`),
   );

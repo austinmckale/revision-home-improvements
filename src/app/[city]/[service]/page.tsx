@@ -11,7 +11,7 @@ import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { getLocationBySlug, locations } from "@/content/locations";
-import { caseStudies } from "@/content/caseStudies";
+import { visibleCaseStudies } from "@/content/caseStudies";
 import { getCityServiceLocalContent } from "@/content/localSeo";
 import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices, services } from "@/content/services";
 import { siteConfig } from "@/content/site";
@@ -68,9 +68,9 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     cityName: location.name,
     serviceName: service.name,
     url: cityServiceUrl,
-    image: absoluteUrl(service.image.src),
+    image: service.image.src ? absoluteUrl(service.image.src) : undefined,
   });
-  const localProof = caseStudies.filter(
+  const localProof = visibleCaseStudies.filter(
     (item) =>
       item.locationSlug === location.slug &&
       item.serviceSlug === service.slug &&
@@ -156,15 +156,17 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </Button>
             </div>
           </div>
-          <div className="surface overflow-hidden rounded-2xl">
-            <Image
-              src={service.image.src}
-              alt={service.image.alt}
-              width={1200}
-              height={800}
-              className="h-full w-full object-cover"
-            />
-          </div>
+          {service.image.src && (
+            <div className="surface overflow-hidden rounded-2xl">
+              <Image
+                src={service.image.src}
+                alt={service.image.alt}
+                width={1200}
+                height={800}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          )}
         </Container>
       </section>
 

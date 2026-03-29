@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { primaryServices } from "@/content/services";
-import { caseStudies } from "@/content/caseStudies";
+import { visibleCaseStudies } from "@/content/caseStudies";
 import { testimonials } from "@/content/testimonials";
 import { siteConfig } from "@/content/site";
 
@@ -35,7 +35,7 @@ export default function HomePage() {
     "lehigh-valley-basement-finish-and-detail",
   ];
   const featuredCaseStudies = homepageSlugs
-    .map((slug) => caseStudies.find((s) => s.slug === slug)!)
+    .map((slug) => visibleCaseStudies.find((s) => s.slug === slug)!)
     .filter(Boolean);
   const featuredReviews = testimonials.slice(0, 3);
 
@@ -72,7 +72,7 @@ export default function HomePage() {
           </div>
           <div className="surface overflow-hidden rounded-2xl">
             <Image
-              src="/images/projects/DSC00338-1.jpg"
+              src="/images/projects/allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg"
               alt="High-end kitchen remodel with island seating, premium appliances, and updated lighting by RHI Pros."
               width={1200}
               height={800}

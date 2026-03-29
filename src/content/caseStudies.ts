@@ -8,6 +8,8 @@ export type CaseStudy = {
   serviceSlug: string;
   timeline: string;
   featureInServiceListings?: boolean;
+  /** When true, this case study is excluded from all public listings. */
+  hidden?: boolean;
   scope: string[];
   challenge: string;
   solution: string;
@@ -29,6 +31,47 @@ export type CaseStudy = {
     alt: string;
   }>;
 };
+
+const fireDamageDocumentationAfterFiles = [
+  "01-img_7761.jpg",
+  "02-img_7762.jpg",
+  "03-img_7764.jpg",
+  "04-img_7765.jpg",
+  "05-img_7766.jpg",
+  "06-img_7768.jpg",
+  "07-img_7769.jpg",
+  "08-img_7770.jpg",
+  "09-img_8454.jpg",
+  "10-img_8455.jpg",
+  "11-img_8456.jpg",
+  "12-img_8457.jpg",
+  "13-img_8458.jpg",
+  "14-img_8459.jpg",
+  "15-img_8460.jpg",
+  "16-img_8461.jpg",
+  "17-img_8462.jpg",
+  "18-img_8463.jpg",
+  "19-img_8464.jpg",
+  "20-img_8465.jpg",
+  "21-img_8466.jpg",
+  "22-img_8467.jpg",
+  "23-img_8468.jpg",
+  "24-img_8469.jpg",
+  "25-img_8470.jpg",
+  "26-img_8471.jpg",
+  "27-img_8472.jpg",
+  "28-img_8473.jpg",
+  "29-img_8474.jpg",
+  "30-img_8475.jpg",
+  "31-img_8476.jpg",
+  "32-img_8477.jpg",
+  "33-img_8478.jpg",
+  "34-img_8479.jpg",
+  "35-img_8480.jpg",
+  "36-img_8933.jpg",
+  "37-img_8934.jpg",
+  "38-img_8935.jpg",
+] as const;
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -60,8 +103,8 @@ export const caseStudies: CaseStudy[] = [
       author: "Allentown homeowner",
     },
     images: [
-      { src: "/images/projects/img_7833.jpg", alt: "Kitchen renovation with updated cabinets and modern finishes." },
-      { src: "/images/projects/kitchen-1.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
+      { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg", alt: "Kitchen renovation with updated cabinets and modern finishes." },
+      { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
     ],
   },
   {
@@ -88,17 +131,17 @@ export const caseStudies: CaseStudy[] = [
       author: "Bethlehem homeowner",
     },
     images: [
-      { src: "/images/projects/bathroom-after-4.jpg", alt: "Finished bathroom shower enclosure after remodel." },
-      { src: "/images/projects/bathroom-finished-2.jpg", alt: "Finished shower detail with updated fixtures and trim." },
-      { src: "/images/projects/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom shower enclosure after remodel." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Finished shower detail with updated fixtures and trim." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
     ],
     beforeImages: [
-      { src: "/images/projects/bathroom-before-3.jpg", alt: "Bathroom before remodel with original shower layout." },
-      { src: "/images/projects/bathroom-before-4.jpg", alt: "Bathroom before remodel with dated tile and fixtures." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg", alt: "Bathroom before remodel with original shower layout." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-tile.jpg", alt: "Bathroom before remodel with dated tile and fixtures." },
     ],
     afterImages: [
-      { src: "/images/projects/bathroom-after-4.jpg", alt: "Finished bathroom shower enclosure after remodel." },
-      { src: "/images/projects/bathroom-finished-2.jpg", alt: "Finished shower detail with updated fixtures and trim." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom shower enclosure after remodel." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Finished shower detail with updated fixtures and trim." },
     ],
   },
   {
@@ -132,47 +175,47 @@ export const caseStudies: CaseStudy[] = [
     },
     images: [
       {
-        src: "/images/projects/allentown-commercial-bathroom-stall-finished.jpg",
+        src: "/images/projects/allentown-commercial-bathroom/after/stall-finished.jpg",
         alt: "Finished commercial bathroom stall area after renovation in Allentown.",
       },
       {
-        src: "/images/projects/allentown-commercial-bathroom-floor-after.png",
+        src: "/images/projects/allentown-commercial-bathroom/after/floor-after.png",
         alt: "Commercial bathroom floor area after renovation with refreshed finishes.",
       },
       {
-        src: "/images/projects/allentown-commercial-bathroom-hallway-after.png",
+        src: "/images/projects/allentown-commercial-bathroom/after/hallway-after.png",
         alt: "Commercial bathroom hallway after renovation in Allentown.",
       },
       {
-        src: "/images/projects/allentown-commercial-bathroom-sink-area-after.png",
+        src: "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png",
         alt: "Commercial bathroom sink area after renovation with updated surfaces.",
       },
     ],
     beforeImages: [
       {
-        src: "/images/projects/allentown-commercial-bathroom-floor-before.png",
+        src: "/images/projects/allentown-commercial-bathroom/before/floor-before.png",
         alt: "Commercial bathroom floor area before renovation in Allentown.",
       },
       {
-        src: "/images/projects/allentown-commercial-bathroom-hallway-before.png",
+        src: "/images/projects/allentown-commercial-bathroom/before/hallway-before.png",
         alt: "Commercial bathroom hallway before renovation in Allentown.",
       },
       {
-        src: "/images/projects/allentown-commercial-bathroom-sink-area-before.png",
+        src: "/images/projects/allentown-commercial-bathroom/before/sink-area-before.png",
         alt: "Commercial bathroom sink area before renovation in Allentown.",
       },
     ],
     afterImages: [
       {
-        src: "/images/projects/allentown-commercial-bathroom-floor-after.png",
+        src: "/images/projects/allentown-commercial-bathroom/after/floor-after.png",
         alt: "Commercial bathroom floor area after renovation with a cleaner, more durable finish.",
       },
       {
-        src: "/images/projects/allentown-commercial-bathroom-hallway-after.png",
+        src: "/images/projects/allentown-commercial-bathroom/after/hallway-after.png",
         alt: "Commercial bathroom hallway after renovation with brighter walls and refreshed flooring.",
       },
       {
-        src: "/images/projects/allentown-commercial-bathroom-sink-area-after.png",
+        src: "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png",
         alt: "Commercial bathroom sink area after renovation with improved finish quality.",
       },
     ],
@@ -203,15 +246,15 @@ export const caseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        src: "/images/projects/allentown-exterior-log-style-home-front-finished.jpg",
+        src: "/images/projects/allentown-exterior-log-home/after/front-finished.jpg",
         alt: "Finished log-style home exterior after remodeling work in Allentown.",
       },
       {
-        src: "/images/projects/allentown-exterior-log-style-home-garage-elevation.jpg",
+        src: "/images/projects/allentown-exterior-log-home/after/garage-elevation.jpg",
         alt: "Garage-side exterior elevation during remodeling work on a log-style home in Allentown.",
       },
       {
-        src: "/images/projects/allentown-exterior-log-style-home-lift-access-work.jpg",
+        src: "/images/projects/allentown-exterior-log-home/process/lift-access-work.jpg",
         alt: "Lift-access exterior remodeling work underway on an Allentown home.",
       },
     ],
@@ -242,7 +285,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        src: "/images/projects/bethlehem-exterior-staircase-finished.jpg",
+        src: "/images/projects/bethlehem-exterior-staircase/after/staircase-finished.jpg",
         alt: "Finished exterior staircase and landing build in Bethlehem.",
       },
     ],
@@ -274,7 +317,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        src: "/images/projects/reading-commercial-bar-window-upgrade.jpg",
+        src: "/images/projects/reading-commercial-bar-window/after/window-upgrade.jpg",
         alt: "Commercial bar window upgrade with new trim and brighter interior light in Reading.",
       },
     ],
@@ -305,27 +348,27 @@ export const caseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
+        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
         alt: "Finished full exterior refresh on a historic-style home in the Lehigh Valley.",
       },
       {
-        src: "/images/projects/wyomissing-exterior-refresh-in-progress.jpg",
+        src: "/images/projects/lehigh-valley-exterior-refresh/process/exterior-in-progress.jpg",
         alt: "Exterior refresh in progress on the Lehigh Valley home.",
       },
       {
-        src: "/images/projects/wyomissing-exterior-refresh-finished.jpg",
+        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
         alt: "Finished front elevation after the Lehigh Valley exterior refresh.",
       },
     ],
     beforeImages: [
       {
-        src: "/images/projects/wyomissing-exterior-refresh-before.jpg",
+        src: "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg",
         alt: "Home exterior before shutters and finish updates in the Lehigh Valley.",
       },
     ],
     afterImages: [
       {
-        src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
+        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
         alt: "Home exterior after shutters and finish updates in the Lehigh Valley.",
       },
     ],
@@ -356,23 +399,23 @@ export const caseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
+        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
         alt: "Finished front elevation after dormer, shutter, and exterior detail refresh in the Lehigh Valley.",
       },
       {
-        src: "/images/projects/wyomissing-exterior-refresh-finished.jpg",
+        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
         alt: "Refinished dormer and front-entry details after the Lehigh Valley exterior update.",
       },
     ],
     beforeImages: [
       {
-        src: "/images/projects/wyomissing-exterior-refresh-before.jpg",
+        src: "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg",
         alt: "Front elevation before dormer cleanup and shutter updates in the Lehigh Valley.",
       },
     ],
     afterImages: [
       {
-        src: "/images/projects/wyomissing-exterior-refresh-after.jpg",
+        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
         alt: "Front elevation after dormer cleanup and shutter updates in the Lehigh Valley.",
       },
     ],
@@ -403,7 +446,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        src: "/images/projects/reading-interior-flooring-refresh.jpg",
+        src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
         alt: "Interior flooring and finish refresh with updated paint, lighting, and windows in Bethlehem.",
       },
     ],
@@ -434,7 +477,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        src: "/images/projects/berks-county-exterior-refresh.jpg",
+        src: "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg",
         alt: "Ranch-style home exterior refresh in Berks County with updated black accents and clean siding lines.",
       },
     ],
@@ -471,15 +514,16 @@ export const caseStudies: CaseStudy[] = [
       author: "Lehigh Valley homeowner",
     },
     images: [
-      { src: "/images/projects/big-screen-basement.jpg", alt: "Finished basement media room with large screen." },
-      { src: "/images/projects/basement-epoxy-floor-big-screen.jpg", alt: "Basement epoxy flooring finish detail." },
-      { src: "/images/projects/pace-3.jpg", alt: "Wide basement view showing finished layout and floor detail." },
-      { src: "/images/projects/pace-4.jpg", alt: "Basement wide-angle finish showing completed room flow." },
+      { src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg", alt: "Finished basement media room with large screen." },
+      { src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg", alt: "Basement epoxy flooring finish detail." },
+      { src: "/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg", alt: "Wide basement view showing finished layout and floor detail." },
+      { src: "/images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg", alt: "Basement wide-angle finish showing completed room flow." },
     ],
   },
   {
     slug: "lehigh-water-damage-rebuild",
     title: "Water Damage Interior Rebuild in Lehigh Valley",
+    hidden: true,
     summary:
       "Interior rebuild after water-related damage with organized scope mapping, phased repairs, and coordinated finish restoration. The work moved from affected-area review to rebuilt bathroom, flooring, and wall finishes with clear communication throughout.",
     locationName: "Lehigh Valley, PA",
@@ -505,9 +549,7 @@ export const caseStudies: CaseStudy[] = [
       quote: "Fast response and clear next steps made a stressful situation manageable.",
       author: "Lehigh Valley homeowner",
     },
-    images: [
-      { src: "/images/projects/img_7547.jpg", alt: "Completed bathroom-area finish restoration after water damage rebuild." },
-    ],
+    images: [],
   },
   {
     slug: "allentown-flooring-replacement-upgrade",
@@ -529,7 +571,7 @@ export const caseStudies: CaseStudy[] = [
       author: "Allentown homeowner",
     },
     images: [
-      { src: "/images/projects/living-room-1.jpg", alt: "Completed light wood flooring installation in an Allentown living area." },
+      { src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg", alt: "Completed light wood flooring installation in an Allentown living area." },
     ],
   },
   {
@@ -552,12 +594,13 @@ export const caseStudies: CaseStudy[] = [
       author: "Bethlehem homeowner",
     },
     images: [
-      { src: "/images/projects/finished-room.jpg", alt: "Paint-ready room surfaces after drywall repair and finish prep." },
+      { src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg", alt: "Paint-ready room surfaces after drywall repair and finish prep." },
     ],
   },
   {
     slug: "reading-paver-patio-buildout",
     title: "Paver Patio Buildout in Reading",
+    hidden: true,
     summary: "Outdoor hardscape project with base prep, layout detailing, and finished patio installation.",
     locationName: "Reading, PA",
     locationSlug: "reading-pa",
@@ -574,11 +617,7 @@ export const caseStudies: CaseStudy[] = [
       quote: "The patio feels like a complete extension of the home now. Great planning and finish.",
       author: "Reading homeowner",
     },
-    images: [
-      { src: "/images/projects/Patio-3.jpg", alt: "Finished paver patio project in Reading, PA." },
-      { src: "/images/projects/patio-construction-2.jpg", alt: "Patio construction phase during build." },
-      { src: "/images/projects/Patio-Construction-site-frontier.jpg", alt: "Patio construction and base prep work in progress." },
-    ],
+    images: [],
   },
   {
     slug: "bethlehem-pool-patio-renovation",
@@ -610,16 +649,16 @@ export const caseStudies: CaseStudy[] = [
       author: "Bethlehem homeowner",
     },
     images: [
-      { src: "/images/projects/bethlehem-pool-patio-after-overview.jpg", alt: "Finished pool patio renovation overview in Bethlehem." },
-      { src: "/images/projects/bethlehem-pool-patio-after-steps.jpg", alt: "Finished pool patio detail showing updated curves and edge work." },
-      { src: "/images/projects/bethlehem-pool-patio-before.jpg", alt: "Pool patio area before renovation with worn green surface." },
+      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg", alt: "Finished pool patio renovation overview in Bethlehem." },
+      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg", alt: "Finished pool patio detail showing updated curves and edge work." },
+      { src: "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg", alt: "Pool patio area before renovation with worn green surface." },
     ],
     beforeImages: [
-      { src: "/images/projects/bethlehem-pool-patio-before.jpg", alt: "Pool patio before renovation in Bethlehem." },
+      { src: "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg", alt: "Pool patio before renovation in Bethlehem." },
     ],
     afterImages: [
-      { src: "/images/projects/bethlehem-pool-patio-after-overview.jpg", alt: "Pool patio after renovation with updated hardscape around the pool." },
-      { src: "/images/projects/bethlehem-pool-patio-after-steps.jpg", alt: "Pool patio step and curve detail after renovation in Bethlehem." },
+      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg", alt: "Pool patio after renovation with updated hardscape around the pool." },
+      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg", alt: "Pool patio step and curve detail after renovation in Bethlehem." },
     ],
   },
   {
@@ -651,9 +690,214 @@ export const caseStudies: CaseStudy[] = [
       author: "Allentown homeowner",
     },
     images: [
-      { src: "/images/projects/fire-place-construction.jpg", alt: "Interior reconstruction work after fire-related damage." },
-      { src: "/images/projects/img_7540.jpg", alt: "Repair area prepared during the restoration rebuild phase." },
-      { src: "/images/projects/img_7548.jpg", alt: "Rebuilt interior finish work after a fire-damage restoration project." },
+      { src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg", alt: "Repair area prepared during the restoration rebuild phase." },
+      { src: "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg", alt: "Rebuilt interior finish work after a fire-damage restoration project." },
+    ],
+  },
+  {
+    slug: "ryan-bedroom-interior-refresh",
+    title: "Bedroom Interior Refresh (Blue Palette)",
+    summary:
+      "Bedroom interior refresh with updated wall color, cleaner finish lines, and coordinated trim and detail work from early prep through final walkthrough.",
+    locationName: "Berks County, PA",
+    locationSlug: "berks-county-pa",
+    serviceName: "Flooring Installation",
+    serviceSlug: "flooring-installation",
+    timeline: "Several days to 2 weeks",
+    scope: [
+      "Interior finish refresh and paint coordination",
+      "Protection and sequencing for occupied living space",
+      "Final cleanup and punch-list walkthrough",
+    ],
+    challenge:
+      "The room needed a clearer color direction and more polished finish transitions without dragging out disruption in a lived-in home.",
+    solution:
+      "Work was phased from prep through final coat and detail touch-ups, with process checkpoints so the refreshed palette and trim lines would read clean in everyday light.",
+    results: [
+      "A more intentional bedroom color story",
+      "Cleaner finish transitions along trim and corners",
+      "A space that feels more finished without overbuilding the scope",
+    ],
+    images: [
+      { src: "/images/projects/ryan-bedroom/after/05-interior-refresh-blue-done.jpg", alt: "Bedroom interior refresh after updated blue wall color and finished trim." },
+      { src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg", alt: "Bedroom refresh showing completed blue palette and cleaned-up finish lines." },
+      { src: "/images/projects/ryan-bedroom/before/01-interior-refresh-before.jpg", alt: "Bedroom before interior refresh with original wall and trim condition." },
+      { src: "/images/projects/ryan-bedroom/before/02-interior-refresh-blue-before-2.jpg", alt: "Additional before view of bedroom walls prior to refresh." },
+      { src: "/images/projects/ryan-bedroom/process/01-interior-refresh-blue-2-process.jpg", alt: "Bedroom refresh in progress during paint and finish prep." },
+      { src: "/images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg", alt: "Interior refresh underway with protection and phased finish work." },
+      { src: "/images/projects/ryan-bedroom/after/02-interior-refresh-blue-1.jpg", alt: "Bedroom refresh progress toward final blue wall color." },
+      { src: "/images/projects/ryan-bedroom/after/03-interior-refresh-blue-3.jpg", alt: "Bedroom interior with updated blue walls and coordinated finishes." },
+      { src: "/images/projects/ryan-bedroom/after/04-interior-refresh-blue-4.jpg", alt: "Wide view of refreshed bedroom interior after completion." },
+    ],
+  },
+  {
+    slug: "blue-kitchen-cabinet-counters",
+    title: "Blue Kitchen Cabinets and Countertops",
+    summary:
+      "Kitchen upgrade focused on cabinet installation, countertop coordination, and clean finish sequencing from layout planning through final hardware and punch list.",
+    locationName: "Lehigh Valley, PA",
+    locationSlug: "lehigh-valley-pa",
+    serviceName: "Kitchen Remodeling",
+    serviceSlug: "kitchen-remodeling",
+    timeline: "4 to 6 weeks",
+    scope: [
+      "Cabinet layout coordination and installation",
+      "Countertop templating, install, and seam detailing",
+      "Trim, backsplash-adjacent prep, and final finish walkthrough",
+    ],
+    challenge:
+      "The kitchen needed a bolder cabinet direction and countertops that would line up cleanly with the layout without leaving awkward gaps or rushed transitions.",
+    solution:
+      "The build followed a clear sequence from cabinet set to countertop install, with layout documentation and field adjustments so the finished kitchen would read tight and intentional.",
+    results: [
+      "Coordinated blue cabinet run with cleaner sight lines",
+      "Countertops set square to cabinets with disciplined edge and seam detail",
+      "A kitchen that feels more custom without unnecessary scope creep",
+    ],
+    images: [
+      { src: "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg", alt: "Finished kitchen with blue cabinets and installed countertops." },
+      { src: "/images/projects/blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg", alt: "Kitchen cabinets and counters complete after installation." },
+      { src: "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg", alt: "Kitchen after cabinet and counter upgrade." },
+      { src: "/images/projects/blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg", alt: "Updated kitchen overview with blue cabinet finish." },
+      { src: "/images/projects/blue-kitchen-cabinet-counters/after/03-blue-kitchen-cabinets-1.jpg", alt: "Cabinet and counter detail after kitchen upgrade." },
+      { src: "/images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg", alt: "Countertop installation phase during kitchen remodel." },
+      { src: "/images/projects/blue-kitchen-cabinet-counters/process/02-blue-kitchen-cabinets-process.jpg", alt: "Kitchen cabinets during installation and alignment." },
+      { src: "/images/projects/blue-kitchen-cabinet-counters/marketing/01-blue-kitchen-cabinet-layout-diagram.png", alt: "Cabinet layout diagram used to coordinate the kitchen plan." },
+    ],
+  },
+  {
+    slug: "ryan-kitchen-remodel",
+    title: "Kitchen Remodel — Before and After",
+    summary:
+      "Full kitchen transformation from dated finishes to an updated layout-ready finish package, with clear sequencing through demo prep, installation, and final detailing.",
+    locationName: "Berks County, PA",
+    locationSlug: "berks-county-pa",
+    serviceName: "Kitchen Remodeling",
+    serviceSlug: "kitchen-remodeling",
+    timeline: "4 to 8 weeks",
+    scope: [
+      "Kitchen demo prep and protection",
+      "Cabinet, counter, and fixture coordination",
+      "Final finishes, cleanup, and walkthrough",
+    ],
+    challenge:
+      "The kitchen needed a complete visual and functional reset while keeping the project organized enough that the household could plan around a predictable build schedule.",
+    solution:
+      "We built a phased schedule around cabinet and counter milestones, communicated checkpoints as finishes came together, and closed out with a punch list focused on daily-use details.",
+    results: [
+      "A fully updated kitchen presentation from the working triangle to storage",
+      "Cleaner appliance and fixture integration",
+      "A finished space that feels move-in ready",
+    ],
+    images: [
+      { src: "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg", alt: "Kitchen after remodel with updated cabinets, counters, and finishes." },
+      { src: "/images/projects/ryan-kitchen/before/01-ryans-kitchen-before.jpg", alt: "Kitchen before remodel with original cabinets and finishes." },
+    ],
+    beforeImages: [
+      { src: "/images/projects/ryan-kitchen/before/01-ryans-kitchen-before.jpg", alt: "Kitchen before remodel with original layout and finishes." },
+    ],
+    afterImages: [
+      { src: "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg", alt: "Kitchen after remodel with updated finishes and fixtures." },
+    ],
+  },
+  {
+    slug: "ryan-bathroom-remodel",
+    title: "Bathroom Remodel — Before and After",
+    summary:
+      "Bathroom upgrade from dated finishes to a cleaner, modern half-bath presentation with coordinated vanity, wall, and flooring selections.",
+    locationName: "Berks County, PA",
+    locationSlug: "berks-county-pa",
+    serviceName: "Bathroom Remodeling",
+    serviceSlug: "bathroom-remodeling",
+    timeline: "2 to 4 weeks",
+    scope: [
+      "Vanity, fixture, and finish replacement",
+      "Moisture-aware prep in wet-adjacent zones",
+      "Final detailing and turnover cleaning",
+    ],
+    challenge:
+      "The bathroom needed a full finish reset that would feel brighter and more current without overcomplicating a compact footprint.",
+    solution:
+      "We focused on a tight material palette, disciplined waterproofing at critical transitions, and installation sequencing that kept the room out of service for as short a window as practical.",
+    results: [
+      "A brighter, more modern bathroom presentation",
+      "Coordinated vanity, wall, and floor finishes",
+      "A compact space that feels intentional, not cramped",
+    ],
+    images: [
+      { src: "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg", alt: "Finished bathroom after remodel with updated vanity and wall finishes." },
+      { src: "/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg", alt: "Bathroom before remodel with original finishes." },
+    ],
+    beforeImages: [
+      { src: "/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg", alt: "Bathroom before remodel." },
+    ],
+    afterImages: [
+      { src: "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg", alt: "Bathroom after remodel with updated finishes." },
+    ],
+  },
+  {
+    slug: "lehigh-valley-fire-damage-documentation",
+    title: "Fire Damage Rebuild — Field Documentation",
+    summary:
+      "Field photo set from a fire-damage rebuild: conditions after loss, exposed framing and MEP, and progress through restoration. Useful for understanding how we document scope and sequencing on complex interior rebuilds.",
+    locationName: "Lehigh Valley, PA",
+    locationSlug: "lehigh-valley-pa",
+    serviceName: "Fire Damage Restoration",
+    serviceSlug: "fire-damage-restoration",
+    timeline: "Scope-dependent, phased reconstruction",
+    scope: [
+      "Photo documentation for affected areas and rebuild phasing",
+      "Coordinated demolition, stabilization, and reconstruction planning",
+      "Interior finish restoration aligned with documented scope",
+    ],
+    challenge:
+      "Fire losses need traceable documentation so owners and adjusters can follow what was affected and how the rebuild advances.",
+    solution:
+      "We captured conditions across demolition, rough-in, and finish stages so the project story stays clear from loss through completion.",
+    results: [
+      "Stronger alignment on what changed at each stage",
+      "Clearer communication during a high-stress rebuild",
+      "Better support for insurance-related documentation needs",
+    ],
+    images: fireDamageDocumentationAfterFiles.map((file, i) => ({
+      src: `/images/projects/fire-damage-documentation/after/${file}`,
+      alt: `Fire damage rebuild documentation - project photo ${i + 1}.`,
+    })),
+  },
+  {
+    slug: "beige-bathroom-before-after",
+    title: "Beige Bathroom Refresh (Layouts)",
+    hidden: true,
+    summary:
+      "Reserved case study for a beige bathroom refresh. Current assets are design-template PNGs only — add real before/after job photos, then set hidden to false and rewrite copy to match the actual scope.",
+    locationName: "Lehigh Valley, PA",
+    locationSlug: "lehigh-valley-pa",
+    serviceName: "Bathroom Remodeling",
+    serviceSlug: "bathroom-remodeling",
+    timeline: "TBD",
+    featureInServiceListings: false,
+    scope: [
+      "Bathroom finish refresh planning",
+      "Before/after documentation once photography is available",
+      "Fixture and material coordination to be confirmed on site",
+    ],
+    challenge:
+      "Placeholder visuals need to be swapped for real project photography before this page represents a completed job.",
+    solution:
+      "Treat this entry as a staging record: upload true before/after photos into public/images/projects/beige-bathroom-before-after/, update copy to match the real scope, and remove or archive the template PNGs.",
+    results: [
+      "Clear placeholder until real documentation is added",
+      "No claim of finished photography where templates are shown",
+    ],
+    images: [
+      {
+        src: "/images/projects/beige-bathroom-before-after/marketing/01-beige-minimalist-skincare-before-and-after-instagram-post-1-.png",
+        alt: "Design template graphic for before/after layout — not on-site job photography.",
+      },
+      {
+        src: "/images/projects/beige-bathroom-before-after/marketing/02-beige-minimalist-skincare-before-and-after-instagram-post.png",
+        alt: "Design template graphic for before/after layout — not on-site job photography.",
+      },
     ],
   },
 ];
@@ -666,6 +910,8 @@ const caseStudyLocationPriority = [
   "berks-county-pa",
   "wyomissing-pa",
 ] as const;
+
+export const visibleCaseStudies = caseStudies.filter((cs) => !cs.hidden);
 
 export function sortCaseStudiesByMarketPriority(items: CaseStudy[]) {
   return [...items].sort((a, b) => {
@@ -687,5 +933,5 @@ export function sortCaseStudiesByMarketPriority(items: CaseStudy[]) {
 }
 
 export function getCaseStudyBySlug(slug: string) {
-  return caseStudies.find((caseStudy) => caseStudy.slug === slug);
+  return visibleCaseStudies.find((caseStudy) => caseStudy.slug === slug);
 }

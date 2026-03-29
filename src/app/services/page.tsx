@@ -41,15 +41,17 @@ export default function ServicesHubPage() {
                 href={`/services/${service.slug}`}
                 className="surface group overflow-hidden rounded-xl transition hover:border-[var(--brand)]"
               >
-                <div className="relative h-48 overflow-hidden">
-                  <Image
-                    src={service.image.src}
-                    alt={service.image.alt}
-                    width={900}
-                    height={500}
-                    className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                  />
-                </div>
+                {service.image.src && (
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={service.image.src}
+                      alt={service.image.alt}
+                      width={900}
+                      height={500}
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                    />
+                  </div>
+                )}
                 <div className="p-5">
                   <h2 className="text-xl font-semibold text-[var(--accent)]">{service.name}</h2>
                   <p className="mt-1 text-sm text-[var(--muted)]">{service.short}</p>

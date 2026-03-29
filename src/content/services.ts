@@ -120,16 +120,16 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/Kitchen-High-End.jpg",
+      src: "/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg",
       alt: "High-end kitchen remodel with modern appliances and island.",
     },
     gallery: [
       {
-        src: "/images/projects/DSC00338-1.jpg",
+        src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg",
         alt: "High-end kitchen remodel with island seating, premium appliances, and updated lighting.",
       },
-      { src: "/images/projects/kitchen-1.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
-      { src: "/images/projects/img_7833.jpg", alt: "Modern white cabinet kitchen renovation." },
+      { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
+      { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg", alt: "Modern white cabinet kitchen renovation." },
     ],
   },
   {
@@ -176,14 +176,14 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/bathroom-after-4.jpg",
+      src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
       alt: "Finished bathroom renovation with updated shower and vanity.",
     },
     gallery: [
-      { src: "/images/projects/bathroom-after-4.jpg", alt: "Finished bathroom renovation with updated shower and vanity." },
-      { src: "/images/projects/bathroom-finished-2.jpg", alt: "Finished shower detail with updated fixtures and trim." },
-      { src: "/images/projects/bathroom-after.jpg", alt: "Bathroom renovation with updated vanity and finishes." },
-      { src: "/images/projects/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom renovation with updated shower and vanity." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Finished shower detail with updated fixtures and trim." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg", alt: "Bathroom renovation with updated vanity and finishes." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
     ],
   },
   {
@@ -251,14 +251,14 @@ export const services: Service[] = [
         "Shown to illustrate planning depth. Your scope will vary based on home conditions, access, and finish selections.",
     },
     image: {
-      src: "/images/projects/big-screen-basement.jpg",
+      src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
       alt: "Finished basement media room with large screen.",
     },
     gallery: [
-      { src: "/images/projects/big-screen-basement.jpg", alt: "Finished basement media room with large screen." },
-      { src: "/images/projects/basement-epoxy-floor-big-screen.jpg", alt: "Basement epoxy flooring finish detail." },
-      { src: "/images/projects/pace-3.jpg", alt: "Wide basement view showing finished layout and floor detail." },
-      { src: "/images/projects/pace-4.jpg", alt: "Basement wide-angle finish showing completed room flow." },
+      { src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg", alt: "Finished basement media room with large screen." },
+      { src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg", alt: "Basement epoxy flooring finish detail." },
+      { src: "/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg", alt: "Wide basement view showing finished layout and floor detail." },
+      { src: "/images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg", alt: "Basement wide-angle finish showing completed room flow." },
     ],
     processGallery: {
       title: "What Happens Before the Walls Close Up",
@@ -267,42 +267,42 @@ export const services: Service[] = [
       inlineCount: 6,
       images: [
         {
-          src: "/images/projects/basement-process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
+          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
           alt: "Wide view of basement framing with insulation and bathroom rough-in visible.",
           caption: "Layout taking shape — insulation going in, bathroom roughed in toward the back.",
         },
         {
-          src: "/images/projects/basement-process/basement-process-metal-stud-framing-bathroom-rough-in.jpg",
+          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-metal-stud-framing-bathroom-rough-in.jpg",
           alt: "Metal stud partition walls framing out a basement bathroom.",
           caption: "Bathroom walls framed and squared before plumbing goes in.",
         },
         {
-          src: "/images/projects/basement-process/basement-process-bathroom-plumbing-rough-in-supply-drain.jpg",
+          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-bathroom-plumbing-rough-in-supply-drain.jpg",
           alt: "Basement bathroom plumbing rough-in with supply lines and drain piping.",
           caption: "Supply lines, drain piping, and pump installed before walls close up.",
         },
         {
-          src: "/images/projects/basement-process/basement-process-mechanical-room-framing-tankless-water-heater.jpg",
+          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-mechanical-room-framing-tankless-water-heater.jpg",
           alt: "Framed mechanical room with tankless water heater and copper piping.",
           caption: "Mechanical room framed with tankless water heater mounted and connected.",
         },
         {
-          src: "/images/projects/basement-process/basement-process-staircase-framing-ceiling-grid-aquarium-wall.jpg",
+          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-staircase-framing-ceiling-grid-aquarium-wall.jpg",
           alt: "Basement staircase framing with ceiling grid and open floor area.",
           caption: "Staircase framed in with ceiling grid overhead — shows the scale of the finished space.",
         },
         {
-          src: "/images/projects/basement-process/basement-process-hallway-framing-drywall-stairway-electrical-boxes.jpg",
+          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-hallway-framing-drywall-stairway-electrical-boxes.jpg",
           alt: "Basement hallway with drywall going up and electrical boxes placed.",
           caption: "Drywall going up with electrical boxes set. Framing turning into finished rooms.",
         },
         {
-          src: "/images/projects/basement-process/basement-process-stairway-view-framing-electrical-panel.jpg",
+          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-stairway-view-framing-electrical-panel.jpg",
           alt: "View down basement stairway showing steel stud framing and electrical panel.",
           caption: "Steel stud framing along the foundation with electrical panel access kept clear.",
         },
         {
-          src: "/images/projects/basement-process/basement-process-wide-view-ceiling-framing-insulation-hvac.jpg",
+          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-wide-view-ceiling-framing-insulation-hvac.jpg",
           alt: "Wide angle of basement ceiling framing with insulation and HVAC register placement.",
           caption: "Ceiling insulation between joists with HVAC register placed for the finished layout.",
         },
@@ -350,7 +350,7 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/finished-room.jpg",
+      src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
       alt: "Paint-ready wall and ceiling finishes after drywall repair and finish prep.",
     },
     gallery: [],
@@ -396,12 +396,12 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/living-room-1.jpg",
+      src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
       alt: "Light wood flooring installation in a finished living area.",
     },
     gallery: [
-      { src: "/images/projects/reading-interior-flooring-refresh.jpg", alt: "Interior flooring and finish refresh with updated lighting and windows." },
-      { src: "/images/projects/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
+      { src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg", alt: "Interior flooring and finish refresh with updated lighting and windows." },
+      { src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg", alt: "Finished interior room after flooring upgrade." },
     ],
   },
   {
@@ -449,15 +449,15 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/bethlehem-pool-patio-after-overview.jpg",
+      src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg",
       alt: "Finished pool patio and hardscape renovation in Bethlehem.",
     },
     gallery: [
-      { src: "/images/projects/bethlehem-pool-patio-after-overview.jpg", alt: "Finished pool patio renovation overview in Bethlehem." },
-      { src: "/images/projects/bethlehem-pool-patio-after-steps.jpg", alt: "Pool patio detail after hardscape renovation." },
-      { src: "/images/projects/bethlehem-pool-patio-before.jpg", alt: "Pool patio area before renovation." },
-      { src: "/images/projects/Patio-3.jpg", alt: "Completed paver patio installation." },
-      { src: "/images/projects/patio-construction-2.jpg", alt: "Patio construction phase during build." },
+      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg", alt: "Finished pool patio renovation overview in Bethlehem." },
+      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg", alt: "Pool patio detail after hardscape renovation." },
+      { src: "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg", alt: "Pool patio area before renovation." },
+      { src: "/images/projects/frontier-patio-gable-roof/after/patio-finished.jpg", alt: "Completed paver patio installation." },
+      { src: "/images/projects/frontier-patio-gable-roof/process/patio-construction.jpg", alt: "Patio construction phase during build." },
     ],
   },
   {
@@ -502,16 +502,16 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/berks-county-exterior-refresh.jpg",
+      src: "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg",
       alt: "Finished ranch-style exterior refresh in Berks County with updated black accents.",
     },
     gallery: [
-      { src: "/images/projects/allentown-exterior-log-style-home-front-finished.jpg", alt: "Finished exterior remodeling project on a log-style home in Allentown." },
-      { src: "/images/projects/wyomissing-exterior-refresh-after.jpg", alt: "Full exterior refresh with updated shutters and paint in the Lehigh Valley." },
-      { src: "/images/projects/bethlehem-exterior-staircase-finished.jpg", alt: "Finished exterior staircase build with landing and rail system in Bethlehem." },
-      { src: "/images/projects/berks-county-exterior-refresh.jpg", alt: "Ranch-style home exterior refresh in Berks County with crisp black accents." },
-      { src: "/images/projects/allentown-exterior-log-style-home-lift-access-work.jpg", alt: "Lift-access exterior remodeling work underway on an Allentown home." },
-      { src: "/images/projects/allentown-exterior-log-style-home-garage-elevation.jpg", alt: "Garage-side exterior elevation during remodeling work on a log-style home." },
+      { src: "/images/projects/allentown-exterior-log-home/after/front-finished.jpg", alt: "Finished exterior remodeling project on a log-style home in Allentown." },
+      { src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg", alt: "Full exterior refresh with updated shutters and paint in the Lehigh Valley." },
+      { src: "/images/projects/bethlehem-exterior-staircase/after/staircase-finished.jpg", alt: "Finished exterior staircase build with landing and rail system in Bethlehem." },
+      { src: "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg", alt: "Ranch-style home exterior refresh in Berks County with crisp black accents." },
+      { src: "/images/projects/allentown-exterior-log-home/process/lift-access-work.jpg", alt: "Lift-access exterior remodeling work underway on an Allentown home." },
+      { src: "/images/projects/allentown-exterior-log-home/after/garage-elevation.jpg", alt: "Garage-side exterior elevation during remodeling work on a log-style home." },
     ],
   },
   {
@@ -555,12 +555,11 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_7540.jpg",
+      src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg",
       alt: "Interior rebuild work in progress during a fire-damage restoration project.",
     },
     gallery: [
-      { src: "/images/projects/fire-place-construction.jpg", alt: "Interior reconstruction underway during a restoration rebuild." },
-      { src: "/images/projects/img_7548.jpg", alt: "Completed interior finishes after restoration and rebuild work." },
+      { src: "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg", alt: "Completed interior finishes after restoration and rebuild work." },
     ],
   },
   {
@@ -604,8 +603,8 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_7547.jpg",
-      alt: "Finished bathroom-area restoration after water-damage repairs.",
+      src: "",
+      alt: "",
     },
     gallery: [],
   },
@@ -650,13 +649,11 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/img_7548.jpg",
+      src: "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg",
       alt: "Insurance-supported interior repair and finish restoration project.",
     },
     gallery: [
-      { src: "/images/projects/img_7540.jpg", alt: "Repair-in-progress detail from insurance-supported project." },
-      { src: "/images/projects/img_7547.jpg", alt: "Completed bathroom-area restoration after insurance-supported repairs." },
-      { src: "/images/projects/fire-place-construction.jpg", alt: "Interior repair work documented for insurance-supported scope review." },
+      { src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg", alt: "Repair-in-progress detail from insurance-supported project." },
     ],
   },
 ];
