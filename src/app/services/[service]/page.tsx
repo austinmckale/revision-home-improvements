@@ -217,6 +217,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 )}
                 <ExpandableImageGrid
                   images={curatedGalleryImages}
+                  inlineCount={4}
+                  expandLabel="View all project photos"
                   gridClassName={galleryGridClassName}
                   cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
@@ -229,6 +231,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Work</h2>
                 <ExpandableImageGrid
                   images={service.gallery}
+                  inlineCount={4}
+                  expandLabel="View all recent work"
                   gridClassName={galleryGridClassName}
                   cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
@@ -242,42 +246,64 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               </div>
             )}
 
-            <div className="grid gap-8 md:grid-cols-2">
-              <div>
-                <h2 className="text-xl font-bold text-[var(--accent)]">What&apos;s Included</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)] md:text-sm">
-                  {service.whatIncluded.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
+            <div className="mt-8 space-y-3">
+              <h2 className="mb-4 text-xl font-bold text-[var(--accent)]">Service Breakdown</h2>
+              
+              <details className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]">
+                <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] outline-none marker:content-['']">
+                  What&apos;s Included
+                  <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
+                </summary>
+                <div className="px-5 pb-5 pt-1 text-[var(--muted)] md:text-sm">
+                  <ul className="list-disc space-y-2 pl-5">
+                    {service.whatIncluded.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
 
-              <div>
-                <h2 className="text-xl font-bold text-[var(--accent)]">What You Can Expect</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)] md:text-sm">
-                  {service.outcomes.map((outcome) => (
-                    <li key={outcome}>{outcome}</li>
-                  ))}
-                </ul>
-              </div>
+              <details className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]">
+                <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] outline-none marker:content-['']">
+                  What You Can Expect
+                  <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
+                </summary>
+                <div className="px-5 pb-5 pt-1 text-[var(--muted)] md:text-sm">
+                  <ul className="list-disc space-y-2 pl-5">
+                    {service.outcomes.map((outcome) => (
+                      <li key={outcome}>{outcome}</li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
 
-              <div>
-                <h2 className="text-xl font-bold text-[var(--accent)]">Where Quality Matters Most</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)] md:text-sm">
-                  {service.qualityFactors.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
+              <details className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]">
+                <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] outline-none marker:content-['']">
+                  Where Quality Matters Most
+                  <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
+                </summary>
+                <div className="px-5 pb-5 pt-1 text-[var(--muted)] md:text-sm">
+                  <ul className="list-disc space-y-2 pl-5">
+                    {service.qualityFactors.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
 
-              <div>
-                <h2 className="text-xl font-bold text-[var(--accent)]">What Affects the Price</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)] md:text-sm">
-                  {service.pricingFactors.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
+              <details className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]">
+                <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] outline-none marker:content-['']">
+                  What Affects the Price
+                  <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
+                </summary>
+                <div className="px-5 pb-5 pt-1 text-[var(--muted)] md:text-sm">
+                  <ul className="list-disc space-y-2 pl-5">
+                    {service.pricingFactors.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
             </div>
 
             {service.authoritySnapshot && (
