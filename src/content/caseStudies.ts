@@ -146,8 +146,8 @@ export const caseStudies: CaseStudy[] = [
     },
     images: [
       {
-        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg",
-        alt: "Finished bathroom after remodel — gray vanity and black fixtures.",
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
+        alt: "Finished bathroom after remodel — gray vanity, black fixtures, and new door addition.",
       },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom shower enclosure after remodel." },
     ],
