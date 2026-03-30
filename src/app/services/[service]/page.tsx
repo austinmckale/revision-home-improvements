@@ -18,6 +18,8 @@ import { absoluteUrl } from "@/lib/url";
 import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getTestimonialsByService } from "@/content/testimonials";
 import { getPortfolioImages } from "@/lib/portfolio";
+import { getFeaturedCaseStudyGalleryImages } from "@/lib/servicePageMedia";
+import { findExplicitFeaturedCaseStudy } from "@/lib/serviceFeaturedCaseStudy";
 
 export const revalidate = 3600;
 
@@ -70,28 +72,41 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   const relatedCaseStudies = sortCaseStudiesByMarketPriority(
     visibleCaseStudies.filter((item) => item.serviceSlug === service.slug && item.featureInServiceListings !== false),
   );
-  const topCaseStudy = relatedCaseStudies[0];
+  const explicitFeaturedCaseStudy = findExplicitFeaturedCaseStudy(service, visibleCaseStudies);
+  const featuredCaseStudy = explicitFeaturedCaseStudy ?? relatedCaseStudies[0];
+  const moreCaseStudyCount = featuredCaseStudy
+    ? relatedCaseStudies.filter((c) => c.slug !== featuredCaseStudy.slug).length
+    : 0;
+  const heroImageSrc = service.image.src?.trim() ?? "";
+  const featuredCaseStudyThumb =
+    featuredCaseStudy &&
+    (heroImageSrc
+      ? featuredCaseStudy.images.find((img) => img.src !== heroImageSrc)
+      : featuredCaseStudy.images[0]);
+  const showFeaturedCaseStudyThumb = Boolean(featuredCaseStudyThumb);
   const serviceTestimonials = getTestimonialsByService(service.slug);
   const isEmergencyService =
     service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
   );
+  const featuredProjectGalleryImages = getFeaturedCaseStudyGalleryImages(featuredCaseStudy, heroImageSrc);
+  const hasFeaturedProjectGallery = featuredProjectGalleryImages.length > 0;
+  const curatedGalleryImages = hasFeaturedProjectGallery
+    ? featuredProjectGalleryImages
+    : service.gallery.slice(0, 4);
+  const curatedGalleryIsSingleProject = hasFeaturedProjectGallery;
+  const showCuratedGallerySection =
+    showCuratedStaticGallery && curatedGalleryImages.length > 0;
   const galleryGridClassName =
-    service.gallery.length > 1 ? "mt-4 columns-1 gap-4 md:columns-2" : "mt-4 max-w-3xl";
+    curatedGalleryImages.length > 1 ? "mt-4 columns-1 gap-4 md:columns-2" : "mt-4 max-w-3xl";
   const priorityLocationSlugs = priorityLocationSlugsByService[service.slug];
   const availableLocations = priorityLocationSlugs
     ? priorityLocationSlugs
         .map((slug) => locations.find((location) => location.slug === slug))
         .filter((location): location is (typeof locations)[number] => Boolean(location))
     : locations;
-  const contextualPriorityLocations = availableLocations.slice(0, 2);
-  const firstPriorityLocationLabel = contextualPriorityLocations[0]
-    ? `${service.name} in ${contextualPriorityLocations[0].short}`
-    : null;
-  const secondPriorityLocationLabel = contextualPriorityLocations[1]
-    ? `${service.name} in ${contextualPriorityLocations[1].short}`
-    : null;
+  const footerLocationLinks = availableLocations.slice(0, 5);
   const portfolioTag = service.portfolioTag ?? service.slug;
   const portfolioImages = showCuratedStaticGallery
     ? []
@@ -204,21 +219,30 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <li key={outcome}>{outcome}</li>
               ))}
             </ul>
-            {topCaseStudy && (
-              <p className="mt-3 text-sm text-[var(--muted)]">
-                See a recent example:{" "}
-                <Link href={`/projects/${topCaseStudy.slug}`} className="font-semibold text-[var(--brand)]">
-                  {topCaseStudy.title}
-                </Link>
-                .
-              </p>
-            )}
-
-            {showCuratedStaticGallery && service.gallery.length > 0 ? (
+            {showCuratedGallerySection ? (
               <section className="mt-10">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Project Photos</h2>
+                <h2 className="text-2xl font-bold text-[var(--accent)]">
+                  {curatedGalleryIsSingleProject ? "Featured project photos" : `Recent ${service.name.toLowerCase()} examples`}
+                </h2>
+                {curatedGalleryIsSingleProject && featuredCaseStudy ? (
+                  <p className="mt-1 text-sm text-[var(--muted)]">
+                    From{" "}
+                    <Link
+                      href={`/projects/${featuredCaseStudy.slug}`}
+                      className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                    >
+                      {featuredCaseStudy.title}
+                    </Link>
+                    {" · "}
+                    {featuredCaseStudy.locationName}
+                  </p>
+                ) : (
+                  <p className="mt-1 text-sm text-[var(--muted)]">
+                    A mix of projects that represent the range of this type of work.
+                  </p>
+                )}
                 <ExpandableImageGrid
-                  images={service.gallery.slice(0, 4)}
+                  images={curatedGalleryImages}
                   gridClassName={galleryGridClassName}
                   cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
@@ -265,34 +289,65 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               <TestimonialStrip items={serviceTestimonials.slice(0, 3)} title="What Clients Say" />
             )}
 
-            {relatedCaseStudies.length > 0 && (
+            {featuredCaseStudy ? (
               <section className="mt-8">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">Project Case Studies</h2>
-                <div className="mt-3 grid gap-3 md:grid-cols-2">
-                  {relatedCaseStudies.map((item) => (
-                    <Link
-                      key={item.slug}
-                      href={`/projects/${item.slug}`}
-                      className="surface rounded-lg p-4 hover:border-[var(--brand)]"
-                    >
+                <h2 className="text-2xl font-bold text-[var(--accent)]">Featured case study</h2>
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  One recent project that reflects how we approach this type of work.
+                </p>
+                <article className="surface mt-4 overflow-hidden rounded-xl">
+                  <Link
+                    href={`/projects/${featuredCaseStudy.slug}`}
+                    className={`block transition-opacity hover:opacity-[0.98] ${
+                      showFeaturedCaseStudyThumb
+                        ? "md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]"
+                        : ""
+                    }`}
+                  >
+                    {showFeaturedCaseStudyThumb && featuredCaseStudyThumb ? (
+                      <div className="relative min-h-[200px] bg-[var(--surface-soft)] md:min-h-[240px]">
+                        <Image
+                          src={featuredCaseStudyThumb.src}
+                          alt={featuredCaseStudyThumb.alt}
+                          width={900}
+                          height={600}
+                          className="h-full min-h-[200px] w-full object-cover md:absolute md:inset-0 md:min-h-0"
+                        />
+                      </div>
+                    ) : null}
+                    <div className="p-5">
                       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                        {item.locationName}
+                        {featuredCaseStudy.locationName}
                       </p>
-                      <p className="mt-1 font-semibold">{item.title}</p>
-                      <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
+                      <p className="mt-1 text-lg font-semibold text-[var(--accent)]">{featuredCaseStudy.title}</p>
+                      <p className="mt-2 text-sm text-[var(--muted)]">{featuredCaseStudy.summary}</p>
                       <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
-                        {item.scope.slice(0, 2).map((scopeItem) => (
+                        {featuredCaseStudy.scope.slice(0, 2).map((scopeItem) => (
                           <li key={scopeItem}>{scopeItem}</li>
                         ))}
                       </ul>
-                      <span className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
-                        View full case study
+                      <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
+                        Read the full case study →
                       </span>
+                    </div>
+                  </Link>
+                </article>
+                {moreCaseStudyCount > 0 ? (
+                  <p className="mt-4 text-sm text-[var(--muted)]">
+                    <Link
+                      href={`/projects?service=${encodeURIComponent(service.slug)}`}
+                      className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                    >
+                      Explore more {service.name.toLowerCase()} projects
                     </Link>
-                  ))}
-                </div>
+                  </p>
+                ) : null}
               </section>
-            )}
+            ) : null}
+
+            {service.faqs.length > 0 ? (
+              <FaqList title="Quick answers" items={service.faqs} />
+            ) : null}
 
             <div className="surface mt-10 rounded-xl p-6">
               <h2 className="text-xl font-semibold text-[var(--accent)]">Ready to get started?</h2>
@@ -315,85 +370,55 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               </div>
             </div>
 
-            <FaqList title="Common Questions" items={service.faqs} />
-
-            <section className="surface mt-8 rounded-xl p-5">
-              <h2 className="text-lg font-bold text-[var(--accent)]">Before You Decide</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Comparing contractors? These pages cover how we plan projects, what our warranty includes, and our licensing details.
-              </p>
-              <div className="mt-4 grid gap-2 sm:grid-cols-3">
-                <Link
-                  href="/our-process"
-                  className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]"
-                >
-                  See our process
-                </Link>
-                <Link
-                  href="/warranty"
-                  className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]"
-                >
-                  Review our workmanship warranty
-                </Link>
-                <Link
-                  href="/licenses-and-insurance"
-                  className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]"
-                >
-                  View licenses and insurance
-                </Link>
-              </div>
-            </section>
-
-            <h2 className="mt-10 text-xl font-bold text-[var(--accent)]">
-              {priorityLocationSlugs ? "Service Areas" : "Available In Your Area"}
-            </h2>
-            {contextualPriorityLocations.length > 0 && (
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                See details for{" "}
-                <Link
-                  href={`/${contextualPriorityLocations[0].slug}/${service.slug}`}
-                  className="font-semibold text-[var(--brand)]"
-                >
-                  {firstPriorityLocationLabel}
-                </Link>
-                {contextualPriorityLocations[1] ? (
-                  <>
-                    {" "}or{" "}
+            <nav
+              className="mt-8 border-t border-[var(--border)] pt-6 text-xs leading-relaxed text-[var(--muted)]"
+              aria-label="Supporting links"
+            >
+              <p>
+                {footerLocationLinks.map((location, i) => (
+                  <span key={location.slug}>
+                    {i > 0 ? " · " : null}
                     <Link
-                      href={`/${contextualPriorityLocations[1].slug}/${service.slug}`}
-                      className="font-semibold text-[var(--brand)]"
+                      href={`/${location.slug}/${service.slug}`}
+                      className="text-[var(--brand)] underline-offset-2 hover:underline"
                     >
-                      {secondPriorityLocationLabel}
+                      {location.short}
                     </Link>
-                  </>
-                ) : null}
-                .
+                  </span>
+                ))}
+                {" · "}
+                <Link href="/service-areas" className="text-[var(--brand)] underline-offset-2 hover:underline">
+                  All areas
+                </Link>
               </p>
-            )}
-            <div className="mt-3 grid gap-2 md:grid-cols-2">
-              {availableLocations.map((location) => (
-                <Link
-                  key={location.slug}
-                  href={`/${location.slug}/${service.slug}`}
-                  className="surface rounded-lg p-3 text-sm font-semibold hover:border-[var(--brand)]"
-                >
-                  {service.name} in {location.short}
+              <p className="mt-3">
+                <Link href="/our-process" className="underline-offset-2 hover:underline">
+                  Our process
                 </Link>
-              ))}
-            </div>
-
-            <h3 className="mt-8 text-lg font-bold text-[var(--accent)]">Related Services</h3>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              {related.map((item) => (
-                <Link
-                  key={item.slug}
-                  href={`/services/${item.slug}`}
-                  className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
-                >
-                  {item.name}
+                {" · "}
+                <Link href="/warranty" className="underline-offset-2 hover:underline">
+                  Warranty
                 </Link>
-              ))}
-            </div>
+                {" · "}
+                <Link href="/licenses-and-insurance" className="underline-offset-2 hover:underline">
+                  Licenses &amp; insurance
+                </Link>
+              </p>
+              <p className="mt-3">
+                <span className="text-[var(--muted)]">Also: </span>
+                {related.map((item, i) => (
+                  <span key={item.slug}>
+                    {i > 0 ? " · " : null}
+                    <Link
+                      href={`/services/${item.slug}`}
+                      className="text-[var(--brand)] underline-offset-2 hover:underline"
+                    >
+                      {item.name}
+                    </Link>
+                  </span>
+                ))}
+              </p>
+            </nav>
           </div>
           <QuoteForm />
         </Container>

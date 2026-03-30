@@ -7,6 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
+import { getServiceBySlug } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
@@ -41,8 +42,8 @@ const additionalImages = [
     alt: "Patio construction phase during build.",
   },
   {
-    src: "/images/projects/frontier-patio-gable-roof/after/patio-finished.jpg",
-    alt: "Finished patio and hardscape project.",
+    src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
+    alt: "Finished patio, pavilion roof, and hardscape outdoor living space.",
   },
   {
     src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
@@ -59,9 +60,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "/projects" },
 };
 
-export default async function ProjectsPage() {
+type ProjectsPageProps = {
+  searchParams?: Promise<{ service?: string }>;
+};
+
+export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
   const portfolioImages = await getPortfolioImages({ limit: 12 });
   const orderedCaseStudies = sortCaseStudiesByMarketPriority(visibleCaseStudies);
+  const params = searchParams ? await searchParams : {};
+  const serviceParam = typeof params.service === "string" ? params.service : undefined;
+  const filterServiceSlug =
+    serviceParam && getServiceBySlug(serviceParam) ? serviceParam : undefined;
+  const filteredService = filterServiceSlug ? getServiceBySlug(filterServiceSlug) : undefined;
+  const displayedCaseStudies = filterServiceSlug
+    ? orderedCaseStudies.filter((study) => study.serviceSlug === filterServiceSlug)
+    : orderedCaseStudies;
 
   return (
     <>
@@ -70,14 +83,37 @@ export default async function ProjectsPage() {
         <Container>
           <h1 className="text-4xl font-extrabold text-[var(--accent)]">Project Gallery</h1>
           <p className="mt-3 max-w-3xl text-[var(--muted)]">
-            See what we have built for homeowners across Allentown, Bethlehem, the Lehigh Valley, and nearby markets.
-            Each project shows real scope, real challenges, and real results.
+            {filteredService ? (
+              <>
+                Case studies tagged{" "}
+                <span className="font-medium text-[var(--accent)]">{filteredService.name.toLowerCase()}</span>.{" "}
+                <Link href="/projects" className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline">
+                  Show all projects
+                </Link>
+              </>
+            ) : (
+              <>
+                See what we have built for homeowners across Allentown, Bethlehem, the Lehigh Valley, and nearby markets.
+                Each project shows real scope, real challenges, and real results.
+              </>
+            )}
           </p>
 
           <section className="mt-8">
-            <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Case Studies</h2>
+            <h2 className="text-2xl font-bold text-[var(--accent)]">
+              {filteredService ? `${filteredService.name} case studies` : "Featured Case Studies"}
+            </h2>
+            {displayedCaseStudies.length === 0 ? (
+              <p className="mt-4 text-sm text-[var(--muted)]">
+                No case studies are published in this category yet.{" "}
+                <Link href="/projects" className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline">
+                  Browse all projects
+                </Link>
+                .
+              </p>
+            ) : (
             <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {orderedCaseStudies.map((study) => (
+              {displayedCaseStudies.map((study) => (
                 <article key={study.slug} className="surface overflow-hidden rounded-xl">
                   <Image
                     src={study.images[0].src}
@@ -107,6 +143,7 @@ export default async function ProjectsPage() {
                 </article>
               ))}
             </div>
+            )}
           </section>
 
           {portfolioImages.length > 0 && (

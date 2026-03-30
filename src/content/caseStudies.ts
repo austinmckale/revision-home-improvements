@@ -103,6 +103,10 @@ export const caseStudies: CaseStudy[] = [
       author: "Allentown homeowner",
     },
     images: [
+      {
+        src: "/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg",
+        alt: "High-end kitchen remodel with island, premium appliances, and coordinated perimeter cabinetry.",
+      },
       { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg", alt: "Kitchen renovation with updated cabinets and modern finishes." },
       { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
     ],
@@ -155,6 +159,7 @@ export const caseStudies: CaseStudy[] = [
     locationSlug: "allentown-pa",
     serviceName: "Bathroom Remodeling",
     serviceSlug: "bathroom-remodeling",
+    featureInServiceListings: false,
     timeline: "Phased around business operations",
     scope: [
       "Refresh restroom stalls, fixture areas, and visible finish surfaces",
@@ -177,16 +182,16 @@ export const caseStudies: CaseStudy[] = [
     },
     images: [
       {
+        src: "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png",
+        alt: "Sink and mirror wall after renovation with updated surfaces and lighting-ready finishes.",
+      },
+      {
         src: "/images/projects/allentown-commercial-bathroom/after/stall-finished.jpg",
         alt: "Finished commercial restroom stall run after renovation in Allentown.",
       },
       {
         src: "/images/projects/allentown-commercial-bathroom/after/floor-after.png",
         alt: "Restroom floor zone after refresh — durable finish and cleaner transitions.",
-      },
-      {
-        src: "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png",
-        alt: "Sink and mirror wall after renovation with updated surfaces and lighting-ready finishes.",
       },
     ],
     beforeImages: [
@@ -330,16 +335,16 @@ export const caseStudies: CaseStudy[] = [
     ],
     images: [
       {
+        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
+        alt: "Finished front elevation after the Lehigh Valley exterior refresh.",
+      },
+      {
         src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
         alt: "Finished full exterior refresh on a historic-style home in the Lehigh Valley.",
       },
       {
         src: "/images/projects/lehigh-valley-exterior-refresh/process/exterior-in-progress.jpg",
         alt: "Exterior refresh in progress on the Lehigh Valley home.",
-      },
-      {
-        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
-        alt: "Finished front elevation after the Lehigh Valley exterior refresh.",
       },
     ],
     beforeImages: [
@@ -350,8 +355,8 @@ export const caseStudies: CaseStudy[] = [
     ],
     afterImages: [
       {
-        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
-        alt: "Home exterior after shutters and finish updates in the Lehigh Valley.",
+        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
+        alt: "Home exterior after shutters and finish updates — front elevation at dusk.",
       },
     ],
   },
@@ -581,25 +586,55 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "reading-paver-patio-buildout",
-    title: "Paver Patio Buildout in Reading",
-    hidden: true,
-    summary: "Outdoor hardscape project with base prep, layout detailing, and finished patio installation.",
+    title: "Paver Patio and Gable-Roof Pavilion in Reading",
+    summary:
+      "Large backyard outdoor living upgrade: a new paver patio field, integrated gable-roof pavilion with finished wood ceiling, and clean drainage-aware hardscape tied back to the home.",
     locationName: "Reading, PA",
     locationSlug: "reading-pa",
     serviceName: "Paver Installation",
     serviceSlug: "paver-installation",
-    timeline: "1 to 2 weeks",
-    scope: ["Site layout and grading", "Compacted base preparation", "Paver install and edge detailing"],
+    timeline: "Multi-week outdoor build",
+    scope: [
+      "Paver patio layout, base prep, compaction, and finished surface",
+      "Integrated pavilion / roof structure with finished ceiling and exterior details",
+      "Drainage-aware grading and transitions at the house tie-in",
+      "Landscape and edge detailing around the new outdoor living zone",
+    ],
     challenge:
-      "The outdoor area needed better structure and drainage while improving usable entertaining space.",
+      "The homeowner wanted a durable entertaining space that felt like a true extension of the home, not a small add-on slab — with a roofed area for shade and weather cover without pooling or settling issues.",
     solution:
-      "The project focused on strong base prep and clean pattern alignment to improve durability and visual consistency.",
-    results: ["Better outdoor usability", "Improved drainage performance", "Upgraded curb appeal and patio function"],
+      "We sequenced base work, paver install, and pavilion framing and finish so the patio and structure read as one project, with attention to compaction, edge restraint, and roof drainage details.",
+    results: [
+      "A cohesive outdoor living area with covered and open zones",
+      "Cleaner hardscape lines and better long-term drainage performance",
+      "Strong curb appeal and everyday usability through the seasons",
+    ],
     testimonial: {
       quote: "The patio feels like a complete extension of the home now. Great planning and finish.",
       author: "Reading homeowner",
     },
-    images: [],
+    images: [
+      {
+        src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
+        alt: "Finished paver patio with integrated gable-roof pavilion and landscaped edges in Reading.",
+      },
+      {
+        src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
+        alt: "Outdoor living area showing paver field and pavilion roof structure.",
+      },
+      {
+        src: "/images/projects/frontier-patio-gable-roof/after/angle-2.jpg",
+        alt: "Alternate view of finished patio, pavilion, and home tie-in.",
+      },
+      {
+        src: "/images/projects/frontier-patio-gable-roof/after/finished-alt.jpg",
+        alt: "Finished hardscape and pavilion wood ceiling detail.",
+      },
+      {
+        src: "/images/projects/frontier-patio-gable-roof/process/patio-construction.jpg",
+        alt: "Pavilion framing and patio area during construction.",
+      },
+    ],
   },
   {
     slug: "bethlehem-pool-patio-renovation",
@@ -682,24 +717,24 @@ export const caseStudies: CaseStudy[] = [
       author: "Allentown homeowner",
     },
     images: [
-      { src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg", alt: "Repair area prepared during the restoration rebuild phase." },
       { src: "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg", alt: "Rebuilt interior finish work after a fire-damage restoration project." },
+      { src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg", alt: "Repair area prepared during the restoration rebuild phase." },
     ],
   },
   {
     slug: "ryan-bedroom-interior-refresh",
     title: "Bedroom Interior Refresh (Blue Palette)",
     summary:
-      "Bedroom interior refresh with updated wall color, cleaner finish lines, and coordinated trim and detail work from early prep through final walkthrough.",
+      "Whole-room interior refresh focused on walls, ceiling, and trim: new color direction, cleaner finish lines at corners and openings, and careful prep and protection while the home stayed occupied — not a flooring-led scope.",
     locationName: "Berks County, PA",
     locationSlug: "berks-county-pa",
-    serviceName: "Flooring Installation",
-    serviceSlug: "flooring-installation",
+    serviceName: "Drywall Installation and Repair",
+    serviceSlug: "drywall-installation-repair",
     timeline: "Several days to 2 weeks",
     scope: [
-      "Interior finish refresh and paint coordination",
-      "Protection and sequencing for occupied living space",
-      "Final cleanup and punch-list walkthrough",
+      "Surface prep, patching, and paint-ready finishing for walls and ceiling",
+      "Trim and detail work coordinated with the new color palette",
+      "Protection and sequencing for occupied living space through final walkthrough",
     ],
     challenge:
       "The room needed a clearer color direction and more polished finish transitions without dragging out disruption in a lived-in home.",

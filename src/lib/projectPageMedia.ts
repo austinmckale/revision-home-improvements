@@ -9,10 +9,12 @@ export function collectBeforeAfterSrcs(caseStudy: CaseStudy): Set<string> {
 }
 
 /**
- * Sidebar “Project Photos”: only images not already shown in Before/After.
- * Listing cards and the project hero use `caseStudy.images[0]` — keep that entry as your best thumbnail.
+ * Sidebar “Project Photos”: skip the hero (`images[0]`) and anything already in Before/After.
+ * Listing cards and the project hero use `caseStudy.images[0]` as the lead thumbnail.
  */
 export function getProjectGalleryImages(caseStudy: CaseStudy) {
   const inBeforeAfter = collectBeforeAfterSrcs(caseStudy);
-  return caseStudy.images.filter((img) => !inBeforeAfter.has(img.src));
+  return caseStudy.images.filter(
+    (img, index) => index > 0 && !inBeforeAfter.has(img.src),
+  );
 }

@@ -32,6 +32,7 @@ export default function HomePage() {
   );
   const homepageSlugs = [
     "allentown-kitchen-layout-upgrade",
+    "lehigh-valley-full-exterior-refresh",
     "lehigh-valley-basement-finish-and-detail",
   ];
   const featuredCaseStudies = homepageSlugs
@@ -72,8 +73,8 @@ export default function HomePage() {
           </div>
           <div className="surface overflow-hidden rounded-2xl">
             <Image
-              src="/images/projects/allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg"
-              alt="High-end kitchen remodel with island seating, premium appliances, and updated lighting by RHI Pros."
+              src="/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg"
+              alt="High-end kitchen remodel with island, premium appliances, wood perimeter cabinets, and updated lighting by RHI Pros."
               width={1200}
               height={800}
               className="h-full w-full object-cover"
@@ -150,7 +151,7 @@ export default function HomePage() {
       <section className="py-8 md:py-14">
         <Container>
           <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Work</h2>
-          <div className="mt-3 grid gap-3 md:mt-4 md:gap-4 md:grid-cols-2">
+          <div className="mt-3 grid grid-cols-1 gap-3 md:mt-4 md:grid-cols-3 md:gap-4">
             {featuredCaseStudies.map((study) => (
               <Link
                 key={study.slug}

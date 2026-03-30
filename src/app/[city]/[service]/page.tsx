@@ -11,13 +11,15 @@ import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { getLocationBySlug, locations } from "@/content/locations";
-import { visibleCaseStudies } from "@/content/caseStudies";
+import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { getCityServiceLocalContent } from "@/content/localSeo";
 import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices, services } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
 import { getCityServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
+import { getFeaturedCaseStudyGalleryImages } from "@/lib/servicePageMedia";
+import { findExplicitFeaturedCaseStudy } from "@/lib/serviceFeaturedCaseStudy";
 
 export const revalidate = 3600;
 
@@ -70,13 +72,17 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     url: cityServiceUrl,
     image: service.image.src ? absoluteUrl(service.image.src) : undefined,
   });
-  const localProof = visibleCaseStudies.filter(
-    (item) =>
-      item.locationSlug === location.slug &&
-      item.serviceSlug === service.slug &&
-      item.featureInServiceListings !== false,
+  const localProof = sortCaseStudiesByMarketPriority(
+    visibleCaseStudies.filter(
+      (item) =>
+        item.locationSlug === location.slug &&
+        item.serviceSlug === service.slug &&
+        item.featureInServiceListings !== false,
+    ),
   );
   const topLocalCaseStudy = localProof[0];
+  const explicitFeaturedCaseStudy = findExplicitFeaturedCaseStudy(service, visibleCaseStudies);
+  const gallerySourceCaseStudy = explicitFeaturedCaseStudy ?? topLocalCaseStudy;
   const priorityContextualLocations = new Set(["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"]);
   const showPriorityContextualSentence =
     priorityContextualLocations.has(location.slug) && Boolean(localContent) && Boolean(topLocalCaseStudy);
@@ -85,21 +91,24 @@ export default async function CityServicePage({ params }: { params: Promise<Para
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
   );
+  const heroImageSrc = service.image.src?.trim() ?? "";
+  const localFeaturedProjectGalleryImages = getFeaturedCaseStudyGalleryImages(gallerySourceCaseStudy, heroImageSrc);
+  const hasLocalFeaturedProjectGallery = localFeaturedProjectGalleryImages.length > 0;
+  const cityCuratedGalleryImages = hasLocalFeaturedProjectGallery
+    ? localFeaturedProjectGalleryImages
+    : service.gallery.slice(0, 3);
+  const cityCuratedGalleryIsSingleProject = hasLocalFeaturedProjectGallery;
+  const showCityCuratedGallerySection =
+    showCuratedStaticGallery && cityCuratedGalleryImages.length > 0;
+  const cityGalleryGridClassName =
+    cityCuratedGalleryImages.length > 1 ? "mt-3 columns-1 gap-4 md:columns-2" : "mt-3 max-w-3xl";
   const galleryGridClassName =
     service.gallery.length > 1 ? "mt-3 columns-1 gap-4 md:columns-2" : "mt-3 max-w-3xl";
   const portfolioTag = service.portfolioTag ?? service.slug;
   const portfolioImages = showCuratedStaticGallery
     ? []
     : await getPortfolioImages({ serviceTags: [portfolioTag], limit: 3 });
-  const faqItems = [
-    ...(localContent?.localizedFaqs ?? service.faqs.slice(0, 3)),
-    {
-      q: `Do you service all of ${location.name}?`,
-      a: `Yes. We take on projects across ${location.name} including ${location.priorityAreas
-        .slice(0, 3)
-        .join(", ")}, and surrounding areas.`,
-    },
-  ];
+  const faqItems = localContent?.localizedFaqs ?? service.faqs;
   const internalLinks = localContent?.internalLinks ?? [
     {
       href: `/${location.slug}`,
@@ -275,12 +284,31 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </section>
             )}
 
-            {showCuratedStaticGallery && service.gallery.length > 0 ? (
+            {showCityCuratedGallerySection ? (
               <section className="mt-8">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Project Photos</h2>
+                <h2 className="text-2xl font-bold text-[var(--accent)]">
+                  {cityCuratedGalleryIsSingleProject ? "Featured project photos" : `Recent ${service.name.toLowerCase()} examples`}
+                </h2>
+                {cityCuratedGalleryIsSingleProject && gallerySourceCaseStudy ? (
+                  <p className="mt-1 text-sm text-[var(--muted)]">
+                    From{" "}
+                    <Link
+                      href={`/projects/${gallerySourceCaseStudy.slug}`}
+                      className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                    >
+                      {gallerySourceCaseStudy.title}
+                    </Link>
+                    {" · "}
+                    {gallerySourceCaseStudy.locationName}
+                  </p>
+                ) : (
+                  <p className="mt-1 text-sm text-[var(--muted)]">
+                    A mix of projects that represent the range of this type of work.
+                  </p>
+                )}
                 <ExpandableImageGrid
-                  images={service.gallery.slice(0, 4)}
-                  gridClassName={galleryGridClassName}
+                  images={cityCuratedGalleryImages}
+                  gridClassName={cityGalleryGridClassName}
                   cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
                 />
@@ -333,7 +361,9 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </div>
             </section>
 
-            <FaqList title={`${service.name} in ${location.short}: Common Questions`} items={faqItems} />
+            {faqItems.length > 0 ? (
+              <FaqList title={`Quick answers — ${location.short}`} items={faqItems} />
+            ) : null}
 
             <LocalHighlightsSection
               location={location}
