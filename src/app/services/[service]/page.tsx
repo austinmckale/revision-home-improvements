@@ -482,7 +482,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               </p>
             </nav>
           </div>
-          <QuoteForm />
+          <div className="sticky top-24 h-fit pb-14">
+            <QuoteForm />
+          </div>
         </Container>
       </section>
     </>
