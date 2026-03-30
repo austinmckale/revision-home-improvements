@@ -68,13 +68,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Trust Badges - shifted below image on mobile */}
-            <div className="order-3 grid gap-1.5 text-sm text-[var(--muted)] sm:grid-cols-2 md:order-none md:mt-6 md:gap-2">
-              <p className="surface flex items-center rounded-lg px-3 py-2 leading-snug">Written scope and estimate before work begins</p>
-              <p className="surface flex items-center rounded-lg px-3 py-2 leading-snug">PA licensed and insured · HIC #PA185945</p>
-              <p className="surface flex items-center rounded-lg px-3 py-2 leading-snug">Clean jobsite, organized workflow</p>
-              <p className="surface flex items-center rounded-lg px-3 py-2 leading-snug">Warranty-backed workmanship</p>
-            </div>
           </div>
 
           {/* Hero Image - injected between text and badges on mobile */}
@@ -226,6 +219,34 @@ export default function HomePage() {
       {/* ── CLOSING CTA ── */}
       <section className="py-8 md:py-14">
         <Container>
+          {/* Trust Badges - Repositioned for CRO right before the lead capture */}
+          <div className="mx-auto mb-6 grid max-w-5xl gap-2 text-sm text-[var(--accent)] sm:grid-cols-2 lg:grid-cols-4 md:mb-10 md:gap-4">
+            <p className="surface flex items-center justify-center rounded-lg px-3 py-3 text-center font-semibold leading-snug shadow-sm">
+              <svg className="mr-2 h-4 w-4 shrink-0 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Written scope & estimate
+            </p>
+            <p className="surface flex items-center justify-center rounded-lg px-3 py-3 text-center font-semibold leading-snug shadow-sm">
+              <svg className="mr-2 h-4 w-4 shrink-0 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              PA licensed & insured
+            </p>
+            <p className="surface flex items-center justify-center rounded-lg px-3 py-3 text-center font-semibold leading-snug shadow-sm">
+              <svg className="mr-2 h-4 w-4 shrink-0 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Clean, organized jobsite
+            </p>
+            <p className="surface flex items-center justify-center rounded-lg px-3 py-3 text-center font-semibold leading-snug shadow-sm">
+              <svg className="mr-2 h-4 w-4 shrink-0 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              Warranty-backed work
+            </p>
+          </div>
+
           <div className="surface rounded-xl p-6 text-center md:rounded-2xl md:p-8">
             <h2 className="text-2xl font-extrabold text-[var(--accent)] md:text-3xl">Ready to start your project?</h2>
             <p className="mx-auto mt-2 max-w-2xl text-sm text-[var(--muted)] md:mt-3 md:text-base">
