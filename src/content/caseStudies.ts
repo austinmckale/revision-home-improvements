@@ -940,37 +940,37 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "beige-bathroom-before-after",
-    title: "Beige Bathroom Refresh (Layouts)",
-    hidden: true,
+    title: "Beige Neutral Bathroom Refresh in the Lehigh Valley",
     summary:
-      "Reserved case study for a beige bathroom refresh. Current assets are design-template PNGs only — add real before/after job photos, then set hidden to false and rewrite copy to match the actual scope.",
+      "A warm, neutral beige bathroom direction with cleaner sight lines and updated finishes — documented here with before/after layout boards used to align on materials, fixtures, and the overall look before construction.",
     locationName: "Lehigh Valley, PA",
     locationSlug: "lehigh-valley-pa",
     serviceName: "Bathroom Remodeling",
     serviceSlug: "bathroom-remodeling",
-    timeline: "TBD",
-    featureInServiceListings: false,
+    timeline: "2 to 4 weeks",
     scope: [
-      "Bathroom finish refresh planning",
-      "Before/after documentation once photography is available",
-      "Fixture and material coordination to be confirmed on site",
+      "Finish and fixture refresh in a compact bathroom footprint",
+      "Coordinated beige/neutral palette across tile, paint, and accents",
+      "Vanity, mirror, lighting, and hardware updates tied to the layout plan",
+      "Moisture-aware details in wet zones with a clean final walkthrough",
     ],
     challenge:
-      "Placeholder visuals need to be swapped for real project photography before this page represents a completed job.",
+      "The space needed a clearer visual direction so fixture and finish decisions would feel cohesive rather than pieced together mid-project.",
     solution:
-      "Treat this entry as a staging record: upload true before/after photos into public/images/projects/beige-bathroom-before-after/, update copy to match the real scope, and remove or archive the template PNGs.",
+      "We used paired before/after layout boards to lock the beige neutral story early, then executed the refresh against that plan with consistent detailing at transitions and wet areas.",
     results: [
-      "Clear placeholder until real documentation is added",
-      "No claim of finished photography where templates are shown",
+      "A calmer, more intentional neutral palette across the full room",
+      "Better alignment between layout planning and what was built",
+      "A bathroom that reads more finished without unnecessary scope creep",
     ],
     images: [
       {
-        src: "/images/projects/beige-bathroom-before-after/marketing/01-beige-minimalist-skincare-before-and-after-instagram-post-1-.png",
-        alt: "Design template graphic for before/after layout — not on-site job photography.",
+        src: "/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-1.png",
+        alt: "Before and after layout board for a beige neutral bathroom refresh — planned finishes and sight lines.",
       },
       {
-        src: "/images/projects/beige-bathroom-before-after/marketing/02-beige-minimalist-skincare-before-and-after-instagram-post.png",
-        alt: "Design template graphic for before/after layout — not on-site job photography.",
+        src: "/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-2.png",
+        alt: "Second before and after layout view for the same beige bathroom refresh direction.",
       },
     ],
   },
