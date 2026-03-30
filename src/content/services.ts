@@ -67,12 +67,13 @@ export const curatedStaticGalleryServiceSlugs = [
 export const services: Service[] = [
   {
     slug: "kitchen-remodeling",
+    featuredCaseStudySlug: "blue-kitchen-cabinet-counters",
     name: "Kitchen Remodeling",
     short: "Layout, cabinets, countertops, and finishes — planned around your daily life.",
     description:
       "Full kitchen renovations including layout updates, cabinets, countertops, lighting, and finishes.",
     intro:
-      "A kitchen remodel involves layout decisions, cabinet and countertop coordination, electrical work, plumbing, and finish detailing — all in the room your household uses most. We plan the project so you know what to expect each week, coordinate materials before demo starts, and keep disruption to your daily routine as short as possible. You get a written scope with clear phasing before any work begins.",
+      "Kitchen remodels touch layout, cabinets, countertops, electrical, and plumbing — all in the room you use most. We coordinate materials before demo, keep disruption short, and give you a written scope before work begins.",
     cta: "Request a Kitchen Quote",
     bullets: ["Layout planning", "Cabinets and countertops", "Lighting and finishes"],
     whatIncluded: [
@@ -104,20 +105,27 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg",
-      alt: "High-end kitchen remodel with modern appliances and island.",
+      src: "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg",
+      alt: "Finished kitchen remodel with blue cabinets and new countertops.",
     },
     gallery: [
       {
-        src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
-        alt: "Kitchen remodel with updated finishes and fixtures.",
+        src: "/images/projects/blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg",
+        alt: "Kitchen cabinets and counters complete after installation.",
       },
-      { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg", alt: "High-end kitchen remodel with island seating, premium appliances, and updated lighting." },
-      { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg", alt: "Modern white cabinet kitchen renovation." },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg",
+        alt: "Updated kitchen overview with blue cabinet finish.",
+      },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/after/03-blue-kitchen-cabinets-1.jpg",
+        alt: "Cabinet and counter detail after kitchen upgrade.",
+      },
     ],
   },
   {
     slug: "bathroom-remodeling",
+    featuredCaseStudySlug: "bethlehem-bathroom-refresh",
     name: "Bathroom Remodeling",
     short: "Bathrooms built right — tile, waterproofing, fixtures, and finishes you can count on.",
     description:
@@ -159,18 +167,19 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
-      alt: "Finished bathroom renovation with updated shower and vanity.",
+      src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.png",
+      alt: "Finished bathroom renovation with updated vanity, lighting, shower enclosure, and matte black fixtures.",
     },
     gallery: [
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.png", alt: "Finished bathroom renovation with updated vanity, lighting, and shower enclosure." },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom renovation with updated shower and vanity." },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Finished shower detail with updated fixtures and trim." },
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg", alt: "Bathroom renovation with updated vanity and finishes." },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
     ],
   },
   {
     slug: "basement-finishing",
+    featuredCaseStudySlug: "lehigh-valley-basement-finish-and-detail",
     portfolioTag: "basement-finishing",
     name: "Basement Finishing",
     short: "Turn your basement into space you actually use.",
@@ -293,6 +302,7 @@ export const services: Service[] = [
   },
   {
     slug: "drywall-installation-repair",
+    featuredCaseStudySlug: "ryan-bedroom-interior-refresh",
     portfolioTag: "drywall",
     name: "Drywall Installation and Repair",
     short: "Walls and ceilings that look like new.",
@@ -332,12 +342,38 @@ export const services: Service[] = [
     ],
     image: {
       src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
-      alt: "Berks County bedroom after wall and ceiling prep and finish work — smooth, paint-ready surfaces and clean trim lines.",
+      alt: "Completed bedroom interior with smooth wall and ceiling finish — blue palette refresh in Berks County.",
     },
-    gallery: [],
+    gallery: [
+      {
+        src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
+        alt: "Bedroom refresh showing completed blue palette and cleaned-up finish lines.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/after/02-interior-refresh-blue-1.jpg",
+        alt: "Alternate angle of refreshed bedroom with blue wall color.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/after/03-interior-refresh-blue-3.jpg",
+        alt: "Bedroom interior with updated blue walls and coordinated finishes.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/after/04-interior-refresh-blue-4.jpg",
+        alt: "Wide view of refreshed bedroom interior after completion.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/process/01-interior-refresh-blue-2-process.jpg",
+        alt: "Bedroom refresh in progress during paint and finish prep.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg",
+        alt: "Interior refresh underway with protection and phased finish work.",
+      },
+    ],
   },
   {
     slug: "flooring-installation",
+    featuredCaseStudySlug: "allentown-flooring-replacement-upgrade",
     portfolioTag: "flooring",
     name: "Flooring Installation",
     short: "Floors that look great and hold up to real life.",
@@ -381,12 +417,16 @@ export const services: Service[] = [
     },
     gallery: [
       {
-        src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
-        alt: "Bethlehem interior refresh with new wood-look flooring, paint, and lighting.",
+        src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
+        alt: "Completed light wood flooring installation in an Allentown living area.",
       },
       {
         src: "/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
         alt: "Allentown living area — flooring and trim detailed along the fireplace wall.",
+      },
+      {
+        src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
+        alt: "Bethlehem interior refresh with new wood-look flooring, paint, and lighting.",
       },
     ],
   },
@@ -443,14 +483,12 @@ export const services: Service[] = [
       { src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg", alt: "Outdoor living area with paver patio and pavilion roof detail." },
       { src: "/images/projects/frontier-patio-gable-roof/after/angle-2.jpg", alt: "Alternate view of finished patio and integrated pavilion structure." },
       { src: "/images/projects/frontier-patio-gable-roof/after/finished-alt.jpg", alt: "Finished hardscape and pavilion from another angle." },
-      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg", alt: "Finished pool patio renovation overview in Bethlehem." },
-      { src: "/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg", alt: "Pool patio detail after hardscape renovation." },
-      { src: "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg", alt: "Pool patio area before renovation." },
       { src: "/images/projects/frontier-patio-gable-roof/process/patio-construction.jpg", alt: "Patio and pavilion structure during construction." },
     ],
   },
   {
     slug: "exterior-remodeling",
+    featuredCaseStudySlug: "allentown-exterior-log-home-refresh",
     name: "Exterior Remodeling",
     short: "Exterior updates that improve curb appeal, access, and weather resistance.",
     description:
@@ -490,20 +528,21 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg",
-      alt: "Finished ranch-style exterior refresh in Berks County with updated black accents.",
+      src: "/images/projects/allentown-exterior-log-home/after/front-finished.jpg",
+      alt: "Finished log-style home exterior after remodeling work in Allentown.",
     },
     gallery: [
       { src: "/images/projects/allentown-exterior-log-home/after/front-finished.jpg", alt: "Finished exterior remodeling project on a log-style home in Allentown." },
+      { src: "/images/projects/allentown-exterior-log-home/after/garage-elevation.jpg", alt: "Garage-side exterior elevation during remodeling work on a log-style home." },
+      { src: "/images/projects/allentown-exterior-log-home/process/lift-access-work.jpg", alt: "Lift-access exterior remodeling work underway on an Allentown home." },
+      { src: "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg", alt: "Ranch-style home exterior refresh in Berks County with crisp black accents." },
       { src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg", alt: "Full exterior refresh with updated shutters and paint in the Lehigh Valley." },
       { src: "/images/projects/bethlehem-exterior-staircase/after/staircase-finished.jpg", alt: "Finished exterior staircase build with landing and rail system in Bethlehem." },
-      { src: "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg", alt: "Ranch-style home exterior refresh in Berks County with crisp black accents." },
-      { src: "/images/projects/allentown-exterior-log-home/process/lift-access-work.jpg", alt: "Lift-access exterior remodeling work underway on an Allentown home." },
-      { src: "/images/projects/allentown-exterior-log-home/after/garage-elevation.jpg", alt: "Garage-side exterior elevation during remodeling work on a log-style home." },
     ],
   },
   {
     slug: "fire-damage-restoration",
+    featuredCaseStudySlug: "allentown-fire-damage-interior-rebuild",
     portfolioTag: "fire-damage",
     name: "Fire Damage Restoration",
     short: "Damage assessment, structured rebuild planning, and insurance-ready documentation.",
@@ -542,8 +581,8 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg",
-      alt: "Completed interior finishes after restoration and rebuild work.",
+      src: "/images/projects/fire-damage-documentation/after/14-img_8459.jpg",
+      alt: "Active interior rebuild of a fire-damaged home — exposed framing, rough-in electrical, and restoration in progress.",
     },
     gallery: [
       { src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg", alt: "Interior rebuild work in progress during a fire-damage restoration project." },

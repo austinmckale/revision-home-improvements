@@ -81,8 +81,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   const featuredCaseStudyThumb =
     featuredCaseStudy &&
     (heroImageSrc
-      ? featuredCaseStudy.images.find((img) => img.src !== heroImageSrc)
-      : featuredCaseStudy.images[0]);
+      ? (featuredCaseStudy.afterImages?.find((img) => img.src !== heroImageSrc) ??
+         featuredCaseStudy.images.find((img) => img.src !== heroImageSrc))
+      : (featuredCaseStudy.afterImages?.[0] ?? featuredCaseStudy.images[0]));
   const showFeaturedCaseStudyThumb = Boolean(featuredCaseStudyThumb);
   const serviceTestimonials = getTestimonialsByService(service.slug);
   const isEmergencyService =
@@ -128,35 +129,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         ])}
       />
 
-      <section className="hero-band py-14">
-        <Container className="grid items-center gap-8 md:grid-cols-2">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">
-              Lehigh Valley &amp; Berks County
-            </p>
-            <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">{service.name}</h1>
-            <p className="mt-3 text-[var(--muted)]">{service.intro}</p>
-            {isEmergencyService && (
-              <div className="mt-4 rounded-lg border border-[var(--brand)] bg-[var(--surface-soft)] p-3">
-                <p className="text-sm font-semibold text-[var(--accent)]">Dealing with damage right now?</p>
-                <p className="mt-1 text-sm text-[var(--muted)]">Call us directly for priority scheduling.</p>
-              </div>
-            )}
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Button href="/request-a-quote">{service.cta}</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
-                Call {siteConfig.phoneDisplay}
-              </Button>
-            </div>
-            <div className="mt-5 grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
-              <p className="surface rounded-lg px-3 py-2">Written scope before work begins</p>
-              <p className="surface rounded-lg px-3 py-2">Licensed in PA · HIC #PA185945</p>
-              <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed</p>
-              <p className="surface rounded-lg px-3 py-2">Clear communication throughout</p>
-            </div>
-          </div>
+      <section className="hero-band py-8 md:py-14">
+        <Container className="grid items-center gap-6 md:grid-cols-2 md:gap-8">
           {service.image.src && (
-            <div className="surface overflow-hidden rounded-2xl">
+            <div className="surface order-first overflow-hidden rounded-2xl md:order-none">
               <Image
                 src={service.image.src}
                 alt={service.image.alt}
@@ -166,6 +142,31 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               />
             </div>
           )}
+          <div className="order-last md:order-none">
+            <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">
+              Lehigh Valley &amp; Berks County
+            </p>
+            <h1 className="mt-2 text-3xl font-extrabold text-[var(--accent)] md:text-4xl">{service.name}</h1>
+            <p className="mt-2 text-sm text-[var(--muted)] md:mt-3 md:text-base">{service.intro}</p>
+            {isEmergencyService && (
+              <div className="mt-3 rounded-lg border border-[var(--brand)] bg-[var(--surface-soft)] p-3 md:mt-4">
+                <p className="text-sm font-semibold text-[var(--accent)]">Dealing with damage right now?</p>
+                <p className="mt-1 text-sm text-[var(--muted)]">Call us directly for priority scheduling.</p>
+              </div>
+            )}
+            <div className="mt-4 grid gap-1.5 text-sm text-[var(--muted)] sm:grid-cols-2 md:gap-2">
+              <p className="surface rounded-lg px-3 py-2">Written scope before work begins</p>
+              <p className="surface rounded-lg px-3 py-2">Licensed in PA · HIC #PA185945</p>
+              <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed</p>
+              <p className="surface rounded-lg px-3 py-2">Clear communication throughout</p>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-3 md:mt-5">
+              <Button href="/request-a-quote">{service.cta}</Button>
+              <Button href={siteConfig.phoneHref} variant="secondary">
+                Call {siteConfig.phoneDisplay}
+              </Button>
+            </div>
+          </div>
         </Container>
       </section>
 
@@ -222,7 +223,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             {showCuratedGallerySection ? (
               <section className="mt-10">
                 <h2 className="text-2xl font-bold text-[var(--accent)]">
-                  {curatedGalleryIsSingleProject ? "Featured project photos" : `Recent ${service.name.toLowerCase()} examples`}
+                  {curatedGalleryIsSingleProject ? "From This Project" : "Recent Work"}
                 </h2>
                 {curatedGalleryIsSingleProject && featuredCaseStudy ? (
                   <p className="mt-1 text-sm text-[var(--muted)]">
@@ -238,7 +239,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                   </p>
                 ) : (
                   <p className="mt-1 text-sm text-[var(--muted)]">
-                    A mix of projects that represent the range of this type of work.
+                    A selection of recently completed work.
                   </p>
                 )}
                 <ExpandableImageGrid
@@ -291,9 +292,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
             {featuredCaseStudy ? (
               <section className="mt-8">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">Featured case study</h2>
+                <h2 className="text-2xl font-bold text-[var(--accent)]">Featured Project</h2>
                 <p className="mt-1 text-sm text-[var(--muted)]">
-                  One recent project that reflects how we approach this type of work.
+                  A closer look at a recent project.
                 </p>
                 <article className="surface mt-4 overflow-hidden rounded-xl">
                   <Link
@@ -327,7 +328,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                         ))}
                       </ul>
                       <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
-                        Read the full case study →
+                        See the full project →
                       </span>
                     </div>
                   </Link>

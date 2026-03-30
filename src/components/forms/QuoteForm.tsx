@@ -59,6 +59,7 @@ export default function QuoteForm() {
   const [state, setState] = useState<FormState>(initialState);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
+  const [submitted, setSubmitted] = useState(false);
   const [stepOneData, setStepOneData] = useState<StepOneData>(initialStepOneData);
   const [utmData, setUtmData] = useState<UtmData>({ utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "", landing_path: "" });
 
@@ -91,6 +92,13 @@ export default function QuoteForm() {
     }
   }
 
+  function resetForm() {
+    setState(initialState);
+    setStep(1);
+    setStepOneData(initialStepOneData);
+    setSubmitted(false);
+  }
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     track("rhi:quote_submit_attempt", { service: stepOneData.service || "unknown" });
@@ -98,7 +106,6 @@ export default function QuoteForm() {
     setState(initialState);
     const formData = new FormData(event.currentTarget);
     const payload = { ...Object.fromEntries(formData.entries()), ...utmData };
-    const form = event.currentTarget;
 
     try {
       const response = await fetch("/api/quote", {
@@ -111,11 +118,8 @@ export default function QuoteForm() {
       setState(data);
 
       if (data.ok) {
-        form.reset();
-        setStep(1);
-        setStepOneData(initialStepOneData);
         window.dispatchEvent(new CustomEvent("rhi:generate_lead"));
-        setTimeout(() => setState(initialState), 6000);
+        setSubmitted(true);
         return;
       }
 
@@ -133,6 +137,41 @@ export default function QuoteForm() {
     }
   }
 
+  /* ── Success state ── */
+  if (submitted) {
+    return (
+      <div className="surface rounded-2xl p-6 text-center">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
+          <svg className="h-7 w-7 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+          </svg>
+        </div>
+        <h3 className="mt-4 text-xl font-bold text-[var(--accent)]">Request Submitted</h3>
+        <p className="mt-2 text-sm text-[var(--muted)]">
+          We&rsquo;ll review your details and follow up within one business day by phone or email.
+        </p>
+        <p className="mt-3 text-sm text-[var(--muted)]">
+          Need a faster response?{" "}
+          <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
+            Call {siteConfig.phoneDisplay}
+          </a>
+        </p>
+        <div className="mt-3 grid gap-1.5 text-xs text-[var(--muted)] sm:grid-cols-2">
+          <p className="surface rounded-lg px-3 py-2">No obligation</p>
+          <p className="surface rounded-lg px-3 py-2">Written scope before work begins</p>
+        </div>
+        <button
+          type="button"
+          onClick={resetForm}
+          className="mt-5 text-sm font-semibold text-[var(--brand)] hover:underline"
+        >
+          Submit another request
+        </button>
+      </div>
+    );
+  }
+
+  /* ── Form ── */
   return (
     <form onSubmit={onSubmit} className="surface rounded-2xl p-6" noValidate>
       <div className="mb-4 flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
@@ -310,9 +349,6 @@ export default function QuoteForm() {
         )}
       </div>
 
-      {state.ok && state.message && (
-        <p className="mt-3 rounded-md bg-green-100 p-2 text-sm text-green-700">{state.message}</p>
-      )}
       {!state.ok && state.message && (
         <p className="mt-3 rounded-md bg-red-100 p-2 text-sm text-red-700">{state.message}</p>
       )}

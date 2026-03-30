@@ -45,39 +45,47 @@ export default function HomePage() {
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }])} />
 
       {/* ── HERO ── */}
-      <section className="hero-band py-16 md:py-24">
-        <Container className="grid items-center gap-10 md:grid-cols-2">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">
-              Lehigh Valley&rsquo;s Remodeling &amp; Restoration Contractor
-            </p>
-            <h1 className="mt-3 text-4xl font-extrabold leading-tight text-[var(--accent)] md:text-5xl">
-              You get a written scope, a realistic timeline, and a contractor who communicates clearly.
-            </h1>
-            <p className="mt-4 max-w-xl text-base text-[var(--muted)]">
-              Kitchens, bathrooms, basements, exteriors, and damage restoration across
-              the Lehigh Valley, Reading, and Berks County.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button href="/request-a-quote">Request a Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
-                Call {siteConfig.phoneDisplay}
-              </Button>
+      <section className="hero-band py-10 md:py-24">
+        <Container className="flex flex-col gap-10 md:grid md:grid-cols-2 md:items-center">
+          {/* Left Column Text & Badges */}
+          <div className="contents md:block">
+            <div className="order-1 md:order-none">
+              <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">
+                Lehigh Valley&rsquo;s Remodeling &amp; Restoration Contractor
+              </p>
+              <h1 className="mt-3 text-3xl font-extrabold leading-tight text-[var(--accent)] md:text-5xl">
+                A written scope, a realistic timeline, and a contractor who communicates clearly.
+              </h1>
+              <p className="mt-4 max-w-xl text-base text-[var(--muted)]">
+                Kitchens, bathrooms, basements, exteriors, and damage restoration across
+                the Lehigh Valley, Reading, and Berks County.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button href="/request-a-quote">Request a Quote</Button>
+                <Button href={siteConfig.phoneHref} variant="secondary">
+                  Call {siteConfig.phoneDisplay}
+                </Button>
+              </div>
             </div>
-            <div className="mt-6 grid max-w-xl gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
-              <p className="surface rounded-lg px-3 py-2">Written scope and estimate before work begins</p>
-              <p className="surface rounded-lg px-3 py-2">PA licensed and insured · HIC #PA185945</p>
-              <p className="surface rounded-lg px-3 py-2">Clean jobsite, organized workflow</p>
-              <p className="surface rounded-lg px-3 py-2">Warranty-backed workmanship</p>
+
+            {/* Trust Badges - shifted below image on mobile */}
+            <div className="order-3 grid gap-1.5 text-sm text-[var(--muted)] sm:grid-cols-2 md:order-none md:mt-6 md:gap-2">
+              <p className="surface flex items-center rounded-lg px-3 py-2 leading-snug">Written scope and estimate before work begins</p>
+              <p className="surface flex items-center rounded-lg px-3 py-2 leading-snug">PA licensed and insured · HIC #PA185945</p>
+              <p className="surface flex items-center rounded-lg px-3 py-2 leading-snug">Clean jobsite, organized workflow</p>
+              <p className="surface flex items-center rounded-lg px-3 py-2 leading-snug">Warranty-backed workmanship</p>
             </div>
           </div>
-          <div className="surface overflow-hidden rounded-2xl">
+
+          {/* Hero Image - injected between text and badges on mobile */}
+          <div className="order-2 surface overflow-hidden rounded-2xl md:order-none">
             <Image
               src="/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg"
               alt="High-end kitchen remodel with island, premium appliances, wood perimeter cabinets, and updated lighting by RHI Pros."
               width={1200}
               height={800}
               className="h-full w-full object-cover"
+              priority
             />
           </div>
         </Container>

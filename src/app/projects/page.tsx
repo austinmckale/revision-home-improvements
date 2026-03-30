@@ -11,14 +11,16 @@ import { getServiceBySlug } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
+import { getSupplementalImagesForFilteredCaseStudies } from "@/lib/projectsPageMedia";
 
-const additionalImages = [
+/** Unfiltered /projects only: curated mix of trades (not tied to one service). */
+const crossServiceHighlightImages = [
   {
     src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
     alt: "Kitchen remodel with updated finishes and fixtures.",
   },
   {
-    src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg",
+    src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.png",
     alt: "Finished bathroom renovation with updated fixtures.",
   },
   {
@@ -75,6 +77,10 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
   const displayedCaseStudies = filterServiceSlug
     ? orderedCaseStudies.filter((study) => study.serviceSlug === filterServiceSlug)
     : orderedCaseStudies;
+
+  const serviceFilteredSupplementalImages = filterServiceSlug
+    ? getSupplementalImagesForFilteredCaseStudies(displayedCaseStudies, { maxImages: 12 })
+    : [];
 
   return (
     <>
@@ -150,15 +156,39 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
             <PortfolioGallery images={portfolioImages} title="Portfolio" showStageLabels />
           )}
 
-          <section className="mt-10">
-            <h2 className="text-2xl font-bold text-[var(--accent)]">Additional Project Photos</h2>
-            <ExpandableImageGrid
-              images={additionalImages.map((image) => ({ ...image, caption: image.alt }))}
-              gridClassName="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-              cardClassName="surface overflow-hidden rounded-xl"
-              imageClassName="h-44 w-full object-cover"
-            />
-          </section>
+          {filterServiceSlug && filteredService ? (
+            serviceFilteredSupplementalImages.length > 0 ? (
+              <section className="mt-10">
+                <h2 className="text-2xl font-bold text-[var(--accent)]">
+                  More {filteredService.name.toLowerCase()} photos
+                </h2>
+                <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
+                  Extra angles from the {filteredService.name.toLowerCase()} case studies above. These are not the same
+                  images as the card thumbnails.
+                </p>
+                <ExpandableImageGrid
+                  images={serviceFilteredSupplementalImages.map((image) => ({ ...image, caption: image.alt }))}
+                  gridClassName="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+                  cardClassName="surface overflow-hidden rounded-xl"
+                  imageClassName="h-44 w-full object-cover"
+                />
+              </section>
+            ) : null
+          ) : (
+            <section className="mt-10">
+              <h2 className="text-2xl font-bold text-[var(--accent)]">More photos across our services</h2>
+              <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
+                A wider slice of kitchen, bath, basement, interior, and exterior work — not limited to one trade. For
+                focused proof, open a case study or use the service filter on this page.
+              </p>
+              <ExpandableImageGrid
+                images={crossServiceHighlightImages.map((image) => ({ ...image, caption: image.alt }))}
+                gridClassName="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+                cardClassName="surface overflow-hidden rounded-xl"
+                imageClassName="h-44 w-full object-cover"
+              />
+            </section>
+          )}
 
           <section className="surface mt-10 rounded-2xl p-8 text-center">
             <h2 className="text-2xl font-bold text-[var(--accent)]">

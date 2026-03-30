@@ -36,14 +36,14 @@ export default function RequestQuotePage() {
               </div>
             </div>
 
-            {/* Form — second on mobile, sticky sidebar on desktop */}
+            {/* Form — immediately after intro on mobile, sticky sidebar on desktop */}
             <div className="order-2 lg:row-span-3 lg:order-none">
               <div className="lg:sticky lg:top-6">
                 <QuoteForm />
               </div>
             </div>
 
-            {/* Reassurance content — below form on mobile, below headline on desktop */}
+            {/* Reassurance content — after form on mobile, below headline on desktop */}
             <div className="order-3 space-y-6 lg:order-none">
               <div className="surface rounded-xl p-5">
                 <h2 className="text-lg font-semibold text-[var(--accent)]">What Happens After You Submit</h2>

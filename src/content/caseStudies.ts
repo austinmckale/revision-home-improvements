@@ -107,8 +107,18 @@ export const caseStudies: CaseStudy[] = [
         src: "/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg",
         alt: "High-end kitchen remodel with island, premium appliances, and coordinated perimeter cabinetry.",
       },
-      { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg", alt: "Kitchen renovation with updated cabinets and modern finishes." },
-      { src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg", alt: "Kitchen remodel with updated finishes and fixtures." },
+      {
+        src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg",
+        alt: "Same kitchen — island, pendant lighting, and appliance wall after remodel.",
+      },
+      {
+        src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
+        alt: "Kitchen remodel with updated finishes, flooring transition, and fixture detailing.",
+      },
+      {
+        src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg",
+        alt: "Perimeter cabinet run and work zone after kitchen layout upgrade.",
+      },
     ],
   },
   {
@@ -135,6 +145,10 @@ export const caseStudies: CaseStudy[] = [
       author: "Bethlehem homeowner",
     },
     images: [
+      {
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.png",
+        alt: "Finished bathroom after remodel — gray vanity, black fixtures, mirror lighting, and glass shower enclosure.",
+      },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom shower enclosure after remodel." },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Closer view of glass shower enclosure and hardware after remodel." },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
@@ -145,8 +159,8 @@ export const caseStudies: CaseStudy[] = [
     ],
     afterImages: [
       {
-        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
-        alt: "Finished bathroom after remodel — full room view with vanity, shower, and updated finishes.",
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.png",
+        alt: "Finished bathroom after remodel — vanity, lighting, and shower with updated finishes.",
       },
     ],
   },
@@ -559,6 +573,10 @@ export const caseStudies: CaseStudy[] = [
     },
     images: [
       { src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg", alt: "Completed light wood flooring installation in an Allentown living area." },
+      {
+        src: "/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
+        alt: "Allentown living area — flooring and trim detailed along the fireplace wall.",
+      },
     ],
   },
   {
@@ -753,26 +771,18 @@ export const caseStudies: CaseStudy[] = [
     ],
     afterImages: [
       {
-        src: "/images/projects/ryan-bedroom/after/05-interior-refresh-blue-done.jpg",
+        src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
         alt: "Bedroom interior refresh after updated blue wall color and finished trim.",
+      },
+      {
+        src: "/images/projects/ryan-bedroom/after/04-interior-refresh-blue-4.jpg",
+        alt: "Wide view of refreshed bedroom interior after completion.",
       },
     ],
     images: [
       {
         src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
         alt: "Bedroom refresh showing completed blue palette and cleaned-up finish lines.",
-      },
-      {
-        src: "/images/projects/ryan-bedroom/after/02-interior-refresh-blue-1.jpg",
-        alt: "Alternate angle of refreshed bedroom with blue wall color.",
-      },
-      {
-        src: "/images/projects/ryan-bedroom/after/03-interior-refresh-blue-3.jpg",
-        alt: "Bedroom interior with updated blue walls and coordinated finishes.",
-      },
-      {
-        src: "/images/projects/ryan-bedroom/after/04-interior-refresh-blue-4.jpg",
-        alt: "Wide view of refreshed bedroom interior after completion.",
       },
       {
         src: "/images/projects/ryan-bedroom/before/02-interior-refresh-blue-before-2.jpg",

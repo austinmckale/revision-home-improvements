@@ -10,11 +10,19 @@ export default function EmergencyBar() {
           <span className="font-semibold">Fire or water damage?</span> Call first for priority scheduling.
         </p>
         <div className="flex items-center gap-3">
-          <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
-            Call {siteConfig.phoneDisplay}
+          <a
+            href={siteConfig.phoneHref}
+            className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+            aria-label={`Call ${siteConfig.phoneDisplay} for priority restoration scheduling`}
+          >
+            <span className="md:hidden">Call {siteConfig.phoneDisplay}</span>
+            <span className="hidden md:inline">Call now</span>
           </a>
-          <Link href="/fire-water-damage-restoration" className="font-semibold text-[var(--accent)]">
-            Restoration Help
+          <Link
+            href="/fire-water-damage-restoration"
+            className="font-semibold text-[var(--accent)] underline-offset-2 hover:underline"
+          >
+            Restoration help
           </Link>
         </div>
       </Container>
