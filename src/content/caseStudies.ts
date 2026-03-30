@@ -146,21 +146,18 @@ export const caseStudies: CaseStudy[] = [
     },
     images: [
       {
-        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.png",
-        alt: "Finished bathroom after remodel — gray vanity, black fixtures, mirror lighting, and glass shower enclosure.",
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
+        alt: "Finished bathroom after remodel — gray vanity, black fixtures, and new door addition.",
       },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom shower enclosure after remodel." },
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Closer view of glass shower enclosure and hardware after remodel." },
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
     ],
     beforeImages: [
-      { src: "/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg", alt: "Bathroom before remodel with original shower layout." },
-      { src: "/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-tile.jpg", alt: "Bathroom before remodel with dated tile and fixtures." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg", alt: "Bathroom before remodel with original shower layout, viewed through the door." },
     ],
     afterImages: [
       {
-        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.png",
-        alt: "Finished bathroom after remodel — vanity, lighting, and shower with updated finishes.",
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
+        alt: "Finished bathroom shower enclosure after remodel.",
       },
     ],
   },

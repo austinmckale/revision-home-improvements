@@ -9,6 +9,7 @@ import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
 import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
+import BeforeAfterToggle from "@/components/sections/BeforeAfterToggle";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices } from "@/content/services";
 import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
@@ -173,55 +174,27 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       <section className="py-14">
         <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <h2 className="text-2xl font-bold text-[var(--accent)]">What&apos;s Included</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.whatIncluded.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-
-            {service.authoritySnapshot && (
-              <section className="surface mt-8 rounded-xl p-5">
-                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                  Example Scope Snapshot
+            {curatedGalleryIsSingleProject && featuredCaseStudy?.beforeImages && featuredCaseStudy?.afterImages ? (
+              <div className="mb-14">
+                <h2 className="text-2xl font-bold text-[var(--accent)]">Transformation</h2>
+                <p className="mt-1 mb-4 text-sm text-[var(--muted)]">
+                  From{" "}
+                  <Link
+                    href={`/projects/${featuredCaseStudy.slug}`}
+                    className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                  >
+                    {featuredCaseStudy.title}
+                  </Link>
+                  {" · "}
+                  {featuredCaseStudy.locationName}
                 </p>
-                <h2 className="mt-1 text-2xl font-bold text-[var(--accent)]">
-                  {service.authoritySnapshot.title}
-                </h2>
-                <p className="mt-2 text-sm text-[var(--muted)]">{service.authoritySnapshot.location}</p>
-                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-                  {service.authoritySnapshot.scope.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
-                <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
-              </section>
-            )}
-
-            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">Where Quality Matters Most</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.qualityFactors.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-
-            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What Affects the Price</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.pricingFactors.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-
-            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What You Can Expect</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.outcomes.map((outcome) => (
-                <li key={outcome}>{outcome}</li>
-              ))}
-            </ul>
-            {showCuratedGallerySection ? (
-              <section className="mt-10">
+                <BeforeAfterToggle 
+                  beforeImages={featuredCaseStudy.beforeImages} 
+                  afterImages={featuredCaseStudy.afterImages} 
+                />
+              </div>
+            ) : showCuratedGallerySection ? (
+              <section className="mb-14">
                 <h2 className="text-2xl font-bold text-[var(--accent)]">
                   {curatedGalleryIsSingleProject ? "From This Project" : "Recent Work"}
                 </h2>
@@ -250,9 +223,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 />
               </section>
             ) : portfolioImages.length > 0 ? (
-              <PortfolioGallery images={portfolioImages} />
+              <div className="mb-14"><PortfolioGallery images={portfolioImages} /></div>
             ) : service.gallery.length > 0 ? (
-              <section className="mt-10">
+              <section className="mb-14">
                 <h2 className="text-2xl font-bold text-[var(--accent)]">Recent Work</h2>
                 <ExpandableImageGrid
                   images={service.gallery}
@@ -262,6 +235,70 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 />
               </section>
             ) : null}
+
+            {serviceTestimonials.length > 0 && (
+              <div className="mb-14">
+                <TestimonialStrip items={serviceTestimonials.slice(0, 3)} title="What Clients Say" />
+              </div>
+            )}
+
+            <div className="grid gap-8 md:grid-cols-2">
+              <div>
+                <h2 className="text-xl font-bold text-[var(--accent)]">What&apos;s Included</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)] md:text-sm">
+                  {service.whatIncluded.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-bold text-[var(--accent)]">What You Can Expect</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)] md:text-sm">
+                  {service.outcomes.map((outcome) => (
+                    <li key={outcome}>{outcome}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-bold text-[var(--accent)]">Where Quality Matters Most</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)] md:text-sm">
+                  {service.qualityFactors.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-bold text-[var(--accent)]">What Affects the Price</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)] md:text-sm">
+                  {service.pricingFactors.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {service.authoritySnapshot && (
+              <section className="surface mt-10 rounded-xl p-5 md:p-8">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                  Example Scope Snapshot
+                </p>
+                <h2 className="mt-1 text-2xl font-bold text-[var(--accent)]">
+                  {service.authoritySnapshot.title}
+                </h2>
+                <p className="mt-2 text-sm text-[var(--muted)]">{service.authoritySnapshot.location}</p>
+                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                  {service.authoritySnapshot.scope.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
+                <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
+              </section>
+            )}
 
             {service.processGallery && (
               <section className="mt-10">
@@ -286,9 +323,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               </section>
             )}
 
-            {serviceTestimonials.length > 0 && (
-              <TestimonialStrip items={serviceTestimonials.slice(0, 3)} title="What Clients Say" />
-            )}
+            {/* Testimonials moved up */}
 
             {featuredCaseStudy ? (
               <section className="mt-8">

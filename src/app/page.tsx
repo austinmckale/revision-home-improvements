@@ -128,33 +128,6 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section className="py-8 md:py-14">
-        <Container>
-          <h2 className="text-xl font-bold text-[var(--accent)] md:text-2xl">How It Works</h2>
-          <ol className="mt-3 space-y-2 text-sm md:mt-5 md:grid md:grid-cols-3 md:gap-4 md:space-y-0">
-            <li className="surface rounded-lg px-4 py-3 md:rounded-xl md:p-5">
-              <span className="font-semibold text-[var(--accent)]">1. Tell us about your project</span>
-              <span className="ml-1 text-[var(--muted)] md:ml-0 md:mt-1 md:block">
-                — share priorities, budget range, and timeline.
-              </span>
-            </li>
-            <li className="surface rounded-lg px-4 py-3 md:rounded-xl md:p-5">
-              <span className="font-semibold text-[var(--accent)]">2. Get a written scope and estimate</span>
-              <span className="ml-1 text-[var(--muted)] md:ml-0 md:mt-1 md:block">
-                — clear project plan with pricing and next steps.
-              </span>
-            </li>
-            <li className="surface rounded-lg px-4 py-3 md:rounded-xl md:p-5">
-              <span className="font-semibold text-[var(--accent)]">3. Build with consistent communication</span>
-              <span className="ml-1 text-[var(--muted)] md:ml-0 md:mt-1 md:block">
-                — regular updates and a final walkthrough.
-              </span>
-            </li>
-          </ol>
-        </Container>
-      </section>
-
       {/* ── PROOF: CASE STUDIES + REVIEWS ── */}
       <section className="py-8 md:py-14">
         <Container>
@@ -220,6 +193,33 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+        </Container>
+      </section>
+
+      {/* ── HOW IT WORKS ── */}
+      <section className="py-8 md:py-14">
+        <Container>
+          <h2 className="text-xl font-bold text-[var(--accent)] md:text-2xl">How It Works</h2>
+          <ol className="mt-3 space-y-2 text-sm md:mt-5 md:grid md:grid-cols-3 md:gap-4 md:space-y-0">
+            <li className="surface rounded-lg px-4 py-3 md:rounded-xl md:p-5">
+              <span className="font-semibold text-[var(--accent)]">1. Tell us about your project</span>
+              <span className="ml-1 text-[var(--muted)] md:ml-0 md:mt-1 md:block">
+                — share priorities, budget range, and timeline.
+              </span>
+            </li>
+            <li className="surface rounded-lg px-4 py-3 md:rounded-xl md:p-5">
+              <span className="font-semibold text-[var(--accent)]">2. Get a written scope and estimate</span>
+              <span className="ml-1 text-[var(--muted)] md:ml-0 md:mt-1 md:block">
+                — clear project plan with pricing and next steps.
+              </span>
+            </li>
+            <li className="surface rounded-lg px-4 py-3 md:rounded-xl md:p-5">
+              <span className="font-semibold text-[var(--accent)]">3. Build with consistent communication</span>
+              <span className="ml-1 text-[var(--muted)] md:ml-0 md:mt-1 md:block">
+                — regular updates and a final walkthrough.
+              </span>
+            </li>
+          </ol>
         </Container>
       </section>
 
