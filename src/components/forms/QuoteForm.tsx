@@ -278,16 +278,7 @@ export default function QuoteForm() {
           <div className="mt-5 grid gap-3 md:grid-cols-2">
             <label className="text-sm">
               City
-              <select className="mt-1 w-full rounded-md border border-[var(--border)] p-2" name="city" defaultValue="" required>
-                <option value="" disabled>
-                  Select city
-                </option>
-                {locations.map((location) => (
-                  <option key={location.slug} value={location.name}>
-                    {location.name}
-                  </option>
-                ))}
-              </select>
+              <input className="mt-1 w-full rounded-md border border-[var(--border)] bg-transparent p-2" name="city" type="text" placeholder="e.g. Allentown" required />
               {fieldError("city") && <span className="mt-1 block text-xs text-red-700">{fieldError("city")}</span>}
             </label>
             <label className="text-sm">

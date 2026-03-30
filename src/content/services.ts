@@ -167,11 +167,11 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
-      alt: "Finished bathroom renovation showing updated vanity, lighting, and new door addition.",
+      src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg",
+      alt: "Finished bathroom renovation showing updated vanity and lighting.",
     },
     gallery: [
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg", alt: "Finished bathroom renovation showing updated vanity and new door addition." },
+      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg", alt: "Finished bathroom renovation showing updated vanity." },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom renovation with updated shower and vanity." },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Finished shower detail with updated fixtures and trim." },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
