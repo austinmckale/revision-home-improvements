@@ -1,115 +1,57 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
-import { primaryServices } from "@/content/services";
-import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t border-white/10 bg-[var(--accent)] text-white/80">
-      <Container className="py-16">
-        <div className="grid gap-10 md:grid-cols-4">
-          <div className="md:col-span-1">
-            <h2 className="text-lg font-semibold text-white">{siteConfig.name}</h2>
-            <p className="mt-2 text-sm text-white/70">
-              Remodeling and restoration contractor serving Reading, Berks County, and Lehigh Valley.
+    <footer className="bg-[var(--accent)] text-white/70">
+      <div className="border-t border-white/5" />
+      <Container className="py-16 md:py-24">
+        <div className="flex flex-col gap-12 md:flex-row md:justify-between">
+          <div className="max-w-sm">
+            <Link href="/" className="inline-block group">
+              <span className="heading-serif text-2xl font-bold text-white tracking-widest uppercase transition-opacity group-hover:opacity-80">
+                {siteConfig.name}
+              </span>
+            </Link>
+            <p className="mt-5 text-[0.9375rem] leading-relaxed text-white/60">
+              Premium remodeling and restoration across the Lehigh Valley and Berks County. We build with integrity.
             </p>
-            <div className="mt-5 space-y-1.5 text-sm text-white/70">
-              <p>{siteConfig.address.street}</p>
-              <p>
-                <a href={siteConfig.phoneHref} className="font-semibold text-white transition-colors hover:text-[var(--brand)]">
-                  {siteConfig.phoneDisplay}
-                </a>
-              </p>
-              <p>
-                <a href={`mailto:${siteConfig.primaryEmail}`} className="transition-colors hover:text-white">
-                  {siteConfig.primaryEmail}
-                </a>
-              </p>
-              <p>
-                <a
-                  href={siteConfig.googleBusinessProfileUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition-colors hover:text-white"
-                >
-                  Google Business Profile
-                </a>
-              </p>
-              <p>
-                <a
-                  href={siteConfig.facebookPageUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition-colors hover:text-white"
-                >
-                  Facebook Page
-                </a>
-              </p>
-            </div>
-            <p className="mt-4 text-xs text-white/40">{siteConfig.hicNumber}</p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <Button href="/request-a-quote" className="text-xs">Request a Quote</Button>
+            <div className="mt-8 flex flex-col gap-2 text-sm font-medium">
+              <a href={siteConfig.phoneHref} className="hover:text-white transition-colors">{siteConfig.phoneDisplay}</a>
+              <a href={`mailto:${siteConfig.primaryEmail}`} className="hover:text-white transition-colors">{siteConfig.primaryEmail}</a>
+              <p className="opacity-40 font-normal mt-2">{siteConfig.address.street}</p>
             </div>
           </div>
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-white/50">Services</h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              {primaryServices.slice(0, 6).map((service) => (
-                <li key={service.slug}>
-                  <Link href={`/services/${service.slug}`} className="transition-colors hover:text-white">
-                    {service.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-white/50">Service Areas</h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              {locations.map((location) => (
-                <li key={location.slug}>
-                  <Link href={`/${location.slug}`} className="transition-colors hover:text-white">
-                    {location.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-white/50">Company</h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              <li>
-                <Link href="/about" className="transition-colors hover:text-white">About Us</Link>
-              </li>
-              <li>
-                <Link href="/our-process" className="transition-colors hover:text-white">Our Process</Link>
-              </li>
-              <li>
-                <Link href="/warranty" className="transition-colors hover:text-white">Workmanship Warranty</Link>
-              </li>
-              <li>
-                <Link href="/licenses-and-insurance" className="transition-colors hover:text-white">Licenses &amp; Insurance</Link>
-              </li>
-              <li>
-                <Link href="/fire-water-damage-restoration" className="font-semibold text-white transition-colors hover:text-[var(--brand)]">
-                  Emergency Restoration
-                </Link>
-              </li>
-              <li>
-                <Link href="/insurance-claims" className="transition-colors hover:text-white">Insurance Claims</Link>
-              </li>
-            </ul>
+
+          <div className="flex flex-wrap gap-12 md:gap-24">
+            <div>
+              <h3 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/30 mb-6">Expertise</h3>
+              <ul className="space-y-4 text-sm font-medium">
+                <li><Link href="/services" className="hover:text-white transition-colors">All Services</Link></li>
+                <li><Link href="/projects" className="hover:text-white transition-colors">Featured Projects</Link></li>
+                <li><Link href="/fire-water-damage-restoration" className="text-[var(--brand)] hover:opacity-80 transition-opacity">Emergency Restoration</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white/30 mb-6">Company</h3>
+              <ul className="space-y-4 text-sm font-medium">
+                <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                <li><Link href="/our-process" className="hover:text-white transition-colors">Our Process</Link></li>
+                <li><Link href="/warranty" className="hover:text-white transition-colors">Warranty & Guarantees</Link></li>
+                <li><Link href="/service-areas" className="hover:text-white transition-colors">Service Areas</Link></li>
+              </ul>
+            </div>
           </div>
         </div>
       </Container>
       <div className="border-t border-white/10">
-        <Container className="flex flex-wrap items-center justify-between gap-4 py-6 text-xs text-white/40">
-          <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
-            <Link href="/financing-terms" className="transition-colors hover:text-white">Financing Terms</Link>
+        <Container className="flex flex-col-reverse md:flex-row items-center justify-between gap-6 py-8 text-xs text-white/40">
+          <p>&copy; {new Date().getFullYear()} {siteConfig.name}. PA HIC #{siteConfig.hicNumber}.</p>
+          <div className="flex flex-wrap justify-center gap-6 font-medium">
+            <a href={siteConfig.facebookPageUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Facebook</a>
+            <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Google Reviews</a>
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
           </div>
         </Container>
       </div>
