@@ -167,7 +167,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                 >
                   Explore {caseStudy.serviceName.toLowerCase()}
                 </Link>{" "}
-                — how we plan work, what affects pricing, and more photos from this trade.
+                for how we plan work, what affects pricing, and more photos from this trade.
               </p>
               {similarCaseStudies.length > 0 ? (
                 <div className="mt-5">
@@ -193,7 +193,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                   href={`/${caseStudy.locationSlug}/${caseStudy.serviceSlug}`}
                   className="text-[var(--brand)] underline-offset-2 hover:underline"
                 >
-                  Service area details — {locationShort}
+                  Service area details: {locationShort}
                 </Link>
               </p>
               <p className="mt-3 text-sm text-[var(--muted)]">

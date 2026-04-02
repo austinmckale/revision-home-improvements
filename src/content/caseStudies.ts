@@ -109,7 +109,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg",
-        alt: "Same kitchen — island, pendant lighting, and appliance wall after remodel.",
+        alt: "Same kitchen after remodel: island, pendant lighting, and appliance wall.",
       },
       {
         src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
@@ -147,7 +147,7 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
-        alt: "Finished bathroom after remodel — gray vanity, black fixtures, and new door addition.",
+        alt: "Finished bathroom after remodel with gray vanity, black fixtures, and new door addition.",
       },
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom shower enclosure after remodel." },
     ],
@@ -202,19 +202,19 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         src: "/images/projects/allentown-commercial-bathroom/after/floor-after.png",
-        alt: "Restroom floor zone after refresh — durable finish and cleaner transitions.",
+        alt: "Restroom floor zone after refresh with durable finish and cleaner transitions.",
       },
     ],
     beforeImages: [
       {
         src: "/images/projects/allentown-commercial-bathroom/before/hallway-before.png",
-        alt: "Commercial restroom corridor before renovation — worn walls and flooring.",
+        alt: "Commercial restroom corridor before renovation with worn walls and flooring.",
       },
     ],
     afterImages: [
       {
         src: "/images/projects/allentown-commercial-bathroom/after/hallway-after.png",
-        alt: "Same corridor after renovation — brighter surfaces, refreshed flooring, cleaner sightlines.",
+        alt: "Same corridor after renovation with brighter surfaces, refreshed flooring, and cleaner sightlines.",
       },
     ],
   },
@@ -367,7 +367,7 @@ export const caseStudies: CaseStudy[] = [
     afterImages: [
       {
         src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
-        alt: "Home exterior after shutters and finish updates — front elevation at dusk.",
+        alt: "Home exterior after shutters and finish updates, front elevation at dusk.",
       },
     ],
   },
@@ -572,7 +572,7 @@ export const caseStudies: CaseStudy[] = [
       { src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg", alt: "Completed light wood flooring installation in an Allentown living area." },
       {
         src: "/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
-        alt: "Allentown living area — flooring and trim detailed along the fireplace wall.",
+        alt: "Allentown living area with flooring and trim detailed along the fireplace wall.",
       },
     ],
   },
@@ -616,7 +616,7 @@ export const caseStudies: CaseStudy[] = [
       "Landscape and edge detailing around the new outdoor living zone",
     ],
     challenge:
-      "The homeowner wanted a durable entertaining space that felt like a true extension of the home, not a small add-on slab — with a roofed area for shade and weather cover without pooling or settling issues.",
+      "The homeowner wanted a durable entertaining space that felt like a true extension of the home, not a small add-on slab, with a roofed area for shade and weather cover without pooling or settling issues.",
     solution:
       "We sequenced base work, paver install, and pavilion framing and finish so the patio and structure read as one project, with attention to compaction, edge restraint, and roof drainage details.",
     results: [
@@ -683,7 +683,7 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg",
-        alt: "Finished pool patio — wide view of new hardscape and pool surround in Bethlehem.",
+        alt: "Finished pool patio: wide view of new hardscape and pool surround in Bethlehem.",
       },
       {
         src: "/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg",
@@ -693,13 +693,13 @@ export const caseStudies: CaseStudy[] = [
     beforeImages: [
       {
         src: "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg",
-        alt: "Pool patio before renovation — worn surface and dated pool surround.",
+        alt: "Pool patio before renovation with worn surface and dated pool surround.",
       },
     ],
     afterImages: [
       {
         src: "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg",
-        alt: "Pool patio after renovation — updated hardscape and cleaner lines around the full surround.",
+        alt: "Pool patio after renovation with updated hardscape and cleaner lines around the full surround.",
       },
     ],
   },
@@ -740,7 +740,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "ryan-bedroom-interior-refresh",
     title: "Bedroom Interior Refresh (Blue Palette)",
     summary:
-      "Whole-room interior refresh focused on walls, ceiling, and trim: new color direction, cleaner finish lines at corners and openings, and careful prep and protection while the home stayed occupied — not a flooring-led scope.",
+      "Whole-room interior refresh focused on walls, ceiling, and trim: new color direction, cleaner finish lines at corners and openings, and careful prep and protection while the home stayed occupied. Flooring was not the lead scope.",
     locationName: "Berks County, PA",
     locationSlug: "berks-county-pa",
     serviceName: "Drywall Installation and Repair",
@@ -857,19 +857,19 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg",
-        alt: "Kitchen after remodel — updated cabinets, counters, appliances, and lighting.",
+        alt: "Kitchen after remodel with updated cabinets, counters, appliances, and lighting.",
       },
     ],
     beforeImages: [
       {
         src: "/images/projects/ryan-kitchen/before/01-ryans-kitchen-before.jpg",
-        alt: "Kitchen before remodel — original cabinets, counters, and layout prior to demolition.",
+        alt: "Kitchen before remodel showing original cabinets, counters, and layout prior to demolition.",
       },
     ],
     afterImages: [
       {
         src: "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg",
-        alt: "Kitchen after remodel — same vantage as before, showing the full transformation.",
+        alt: "Kitchen after remodel from the same vantage as before, showing the full transformation.",
       },
     ],
   },
@@ -900,25 +900,25 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg",
-        alt: "Bathroom after remodel — vanity, mirror, and wall finishes in the finished half bath.",
+        alt: "Bathroom after remodel with vanity, mirror, and wall finishes in the finished half bath.",
       },
     ],
     beforeImages: [
       {
         src: "/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg",
-        alt: "Bathroom before remodel — original vanity, mirror wall, and floor at the same viewpoint.",
+        alt: "Bathroom before remodel with original vanity, mirror wall, and floor at the same viewpoint.",
       },
     ],
     afterImages: [
       {
         src: "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg",
-        alt: "Bathroom after remodel — same viewpoint as before for a direct before/after read.",
+        alt: "Bathroom after remodel from the same viewpoint as before for a direct before and after read.",
       },
     ],
   },
   {
     slug: "lehigh-valley-fire-damage-documentation",
-    title: "Fire Damage Rebuild — Field Documentation",
+    title: "Fire damage rebuild: field documentation",
     summary:
       "Field photo set from a fire-damage rebuild: conditions after loss, exposed framing and MEP, and progress through restoration. Useful for understanding how we document scope and sequencing on complex interior rebuilds.",
     locationName: "Lehigh Valley, PA",
@@ -949,7 +949,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "beige-bathroom-before-after",
     title: "Beige Neutral Bathroom Refresh in the Lehigh Valley",
     summary:
-      "A warm, neutral beige bathroom direction with cleaner sight lines and updated finishes — documented here with before/after layout boards used to align on materials, fixtures, and the overall look before construction.",
+      "A warm, neutral beige bathroom direction with cleaner sight lines and updated finishes. Before and after layout boards here were used to align on materials, fixtures, and the overall look before construction.",
     locationName: "Lehigh Valley, PA",
     locationSlug: "lehigh-valley-pa",
     serviceName: "Bathroom Remodeling",
@@ -973,7 +973,7 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-1.png",
-        alt: "Before and after layout board for a beige neutral bathroom refresh — planned finishes and sight lines.",
+        alt: "Before and after layout board for a beige neutral bathroom refresh showing planned finishes and sight lines.",
       },
       {
         src: "/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-2.png",

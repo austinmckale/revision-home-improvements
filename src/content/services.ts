@@ -69,11 +69,11 @@ export const services: Service[] = [
     slug: "kitchen-remodeling",
     featuredCaseStudySlug: "blue-kitchen-cabinet-counters",
     name: "Kitchen Remodeling",
-    short: "Layout, cabinets, countertops, and finishes — planned around your daily life.",
+    short: "Layout, cabinets, countertops, and finishes planned around your daily life.",
     description:
       "Full kitchen renovations including layout updates, cabinets, countertops, lighting, and finishes.",
     intro:
-      "Kitchen remodels touch layout, cabinets, countertops, electrical, and plumbing — all in the room you use most. We coordinate materials before demo, keep disruption short, and give you a written scope before work begins.",
+      "Kitchen remodels touch layout, cabinets, countertops, electrical, and plumbing, all in the room you use most. We coordinate materials before demo, keep disruption short, and give you a written scope before work begins.",
     cta: "Request a Kitchen Quote",
     bullets: ["Layout planning", "Cabinets and countertops", "Lighting and finishes"],
     whatIncluded: [
@@ -97,7 +97,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: "Can you remodel my kitchen in phases?",
-        a: "Yes. We can break the project into stages — for example cabinets and countertops first, then flooring or lighting later — so cost and disruption are easier to manage.",
+        a: "Yes. We can break the project into stages (for example cabinets and countertops first, then flooring or lighting later) so cost and disruption are easier to manage.",
       },
       {
         q: "Will I still be able to use my kitchen during the remodel?",
@@ -127,11 +127,11 @@ export const services: Service[] = [
     slug: "bathroom-remodeling",
     featuredCaseStudySlug: "bethlehem-bathroom-refresh",
     name: "Bathroom Remodeling",
-    short: "Bathrooms built right — tile, waterproofing, fixtures, and finishes you can count on.",
+    short: "Bathrooms built right: tile, waterproofing, fixtures, and finishes you can count on.",
     description:
       "Bathroom upgrades with improved storage, tilework, fixtures, and clean modern finishes.",
     intro:
-      "A bathroom remodel touches plumbing, waterproofing, tile, electrical, and finishes — all in a space your household uses every day. We plan the work around your daily routine, handle waterproofing properly so nothing fails behind the walls, and keep the jobsite clean throughout. You get a written scope before we start and consistent updates until the final walkthrough.",
+      "A bathroom remodel touches plumbing, waterproofing, tile, electrical, and finishes, all in a space your household uses every day. We plan the work around your daily routine, handle waterproofing properly so nothing fails behind the walls, and keep the jobsite clean throughout. You get a written scope before we start and consistent updates until the final walkthrough.",
     cta: "Request a Bathroom Quote",
     bullets: ["Showers and vanities", "Tile and waterproofing", "Efficient layouts"],
     whatIncluded: [
@@ -159,7 +159,7 @@ export const services: Service[] = [
       },
       {
         q: "Do you handle waterproofing?",
-        a: "Yes. Proper waterproofing behind tile and at the shower base is critical — we do not shortcut wet-zone assemblies.",
+        a: "Yes. Proper waterproofing behind tile and at the shower base is critical; we do not shortcut wet-zone assemblies.",
       },
       {
         q: "Do you take on commercial restroom refresh projects?",
@@ -186,7 +186,7 @@ export const services: Service[] = [
     description:
       "Basement finishing and remodeling for family rooms, offices, guest spaces, and storage zones.",
     intro:
-      "Most basements sit unused — too damp, too dark, or too awkward to feel like real living space. We plan around your foundation conditions, moisture concerns, and mechanical systems so the finished space is comfortable, dry, and built to last. The result is a basement that feels like part of your home, not an afterthought.",
+      "Most basements sit unused: too damp, too dark, or too awkward to feel like real living space. We plan around your foundation conditions, moisture concerns, and mechanical systems so the finished space is comfortable, dry, and built to last. The result is a basement that feels like part of your home, not an afterthought.",
     cta: "Request a Basement Quote",
     bullets: ["Framing and drywall", "Flooring and trim", "Moisture-aware planning"],
     whatIncluded: [
@@ -223,7 +223,7 @@ export const services: Service[] = [
       },
     ],
     authoritySnapshot: {
-      title: "Basement Buildout — Fogelsville, PA",
+      title: "Basement buildout, Fogelsville, PA",
       location: "Fogelsville, PA (Lehigh County)",
       summary:
         "Example scope for a partially unfinished basement covering layout, utilities, drainage, insulation, and finish sequencing.",
@@ -260,7 +260,7 @@ export const services: Service[] = [
         {
           src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
           alt: "Wide view of basement framing with insulation and bathroom rough-in visible.",
-          caption: "Layout taking shape — insulation going in, bathroom roughed in toward the back.",
+          caption: "Layout taking shape: insulation going in, bathroom roughed in toward the back.",
         },
         {
           src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-metal-stud-framing-bathroom-rough-in.jpg",
@@ -280,7 +280,7 @@ export const services: Service[] = [
         {
           src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-staircase-framing-ceiling-grid-aquarium-wall.jpg",
           alt: "Basement staircase framing with ceiling grid and open floor area.",
-          caption: "Staircase framed in with ceiling grid overhead — shows the scale of the finished space.",
+          caption: "Staircase framed in with ceiling grid overhead, showing the scale of the finished space.",
         },
         {
           src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-hallway-framing-drywall-stairway-electrical-boxes.jpg",
@@ -337,12 +337,12 @@ export const services: Service[] = [
       },
       {
         q: "Can drywall be part of a larger remodel?",
-        a: "Yes — it is usually in scope for kitchens, baths, and basements, handled as part of the same job rather than pieced out.",
+        a: "Yes. It is usually in scope for kitchens, baths, and basements, handled as part of the same job rather than pieced out.",
       },
     ],
     image: {
       src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
-      alt: "Completed bedroom interior with smooth wall and ceiling finish — blue palette refresh in Berks County.",
+      alt: "Completed bedroom interior with smooth wall and ceiling finish after a blue palette refresh in Berks County.",
     },
     gallery: [
       {
@@ -408,7 +408,7 @@ export const services: Service[] = [
       },
       {
         q: "How do you choose materials for each space?",
-        a: "We match product to room use and moisture risk — for example LVP where water matters, hardwood or engineered wood where it fits your goals — and walk through tradeoffs at the estimate.",
+        a: "We match product to room use and moisture risk (for example LVP where water matters, hardwood or engineered wood where it fits your goals) and walk through tradeoffs at the estimate.",
       },
     ],
     image: {
@@ -422,7 +422,7 @@ export const services: Service[] = [
       },
       {
         src: "/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
-        alt: "Allentown living area — flooring and trim detailed along the fireplace wall.",
+        alt: "Allentown living area with flooring and trim detailed along the fireplace wall.",
       },
       {
         src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
@@ -467,7 +467,7 @@ export const services: Service[] = [
       },
       {
         q: "Can you build on a sloped yard?",
-        a: "Yes — grading, retaining, and drainage are part of the job; slopes mean more prep, which we call out in the estimate.",
+        a: "Yes. Grading, retaining, and drainage are part of the job; slopes mean more prep, which we call out in the estimate.",
       },
       {
         q: "Do you work on pool surrounds?",
@@ -520,7 +520,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: "Do you work on second-story or hard-to-reach elevations?",
-        a: "Yes — access is planned with ladders or lifts as needed so upper areas are done safely and finishes stay consistent.",
+        a: "Yes. Access is planned with ladders or lifts as needed so upper areas are done safely and finishes stay consistent.",
       },
       {
         q: "Can we improve curb appeal without residing the whole house?",
@@ -549,7 +549,7 @@ export const services: Service[] = [
     description:
       "Emergency stabilization, rebuild planning, and full restoration work after fire damage.",
     intro:
-      "After a fire, you need a clear path forward — not more confusion. We start with a damage assessment and safety review, then build a structured reconstruction plan with documented scope for insurance. You get consistent communication through every phase of the rebuild so you always know what is happening and what comes next.",
+      "After a fire, you need a clear path forward, not more confusion. We start with a damage assessment and safety review, then build a structured reconstruction plan with documented scope for insurance. You get consistent communication through every phase of the rebuild so you always know what is happening and what comes next.",
     cta: "Call for Immediate Help",
     bullets: ["Urgent response", "Damage assessment", "Rebuild coordination"],
     whatIncluded: [
@@ -582,7 +582,7 @@ export const services: Service[] = [
     ],
     image: {
       src: "/images/projects/fire-damage-documentation/after/14-img_8459.jpg",
-      alt: "Active interior rebuild of a fire-damaged home — exposed framing, rough-in electrical, and restoration in progress.",
+      alt: "Active interior rebuild of a fire-damaged home with exposed framing, rough-in electrical, and restoration in progress.",
     },
     gallery: [
       { src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg", alt: "Interior rebuild work in progress during a fire-damage restoration project." },
@@ -597,7 +597,7 @@ export const services: Service[] = [
     description:
       "Water-damage rebuild services for drywall, flooring, trim, and affected finished spaces.",
     intro:
-      "Water damage gets worse the longer you wait. Call us to start with a damage assessment — we identify what is affected, map the rebuild scope, and document everything for insurance if needed. From there, we handle the full restoration: drywall, flooring, trim, and finishes, with clear communication at every stage so you know exactly where things stand.",
+      "Water damage gets worse the longer you wait. Call us to start with a damage assessment. We identify what is affected, map the rebuild scope, and document everything for insurance if needed. From there, we handle the full restoration: drywall, flooring, trim, and finishes, with clear communication at every stage so you know exactly where things stand.",
     cta: "Call for Immediate Help",
     bullets: ["Rapid mitigation support", "Structural and finish repairs", "Insurance-ready documentation"],
     whatIncluded: [
@@ -621,7 +621,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: "Can we upgrade finishes while you are already replacing damaged areas?",
-        a: "Often yes — if drywall or flooring is coming out anyway, it can be the right time to improve materials or layout. We lay out options so you can decide.",
+        a: "Often yes. If drywall or flooring is coming out anyway, it can be the right time to improve materials or layout. We lay out options so you can decide.",
       },
       {
         q: "What if more damage shows up after demo?",

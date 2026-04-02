@@ -46,7 +46,7 @@ export const locations: Location[] = [
       "Berks County covers everything from suburban neighborhoods to rural properties. We adjust our approach based on your home type, access, and local permit requirements.",
     priorityAreas: ["Wyomissing", "Sinking Spring", "Exeter Township", "Muhlenberg Township", "Spring Township", "Cumru Township"],
     whyUs: [
-      "County-wide coverage — we work from Reading to the rural townships",
+      "County-wide coverage: we work from Reading to the rural townships",
       "One team for both remodeling and storm/water damage restoration",
       "Familiar with Berks County inspection and permit processes",
     ],
@@ -74,7 +74,7 @@ export const locations: Location[] = [
       "Bethlehem's historic homes often need careful renovation that preserves character while upgrading function. We plan around structural constraints so you get modern comfort without losing what makes the home special.",
     priorityAreas: ["Lower Saucon Township", "Hanover Township", "Nazareth area", "Forks Township", "Hellertown"],
     whyUs: [
-      "Careful approach with character homes — we preserve what matters",
+      "Careful approach with character homes; we preserve what matters",
       "Experienced navigating Bethlehem's historic district requirements",
       "Detailed finish work that matches older architectural styles",
     ],
@@ -89,7 +89,7 @@ export const locations: Location[] = [
     priorityAreas: ["Allentown area", "Bethlehem area", "Easton area", "Emmaus", "Macungie", "Nazareth"],
     whyUs: [
       "Regional coverage across the entire Lehigh Valley",
-      "Flexible project sizing — from single-room updates to full rebuilds",
+      "Flexible project sizing, from single-room updates to full rebuilds",
       "Responsive communication regardless of project size",
     ],
   },

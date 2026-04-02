@@ -1,8 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/content/site";
 import Container from "@/components/ui/Container";
 
 export default function EmergencyBar() {
+  const pathname = usePathname();
+
+  // Hide on homepage to preserve luxury aesthetic
+  if (pathname === "/") {
+    return null;
+  }
+
   return (
     <div className="border-b border-[var(--border)] bg-[var(--surface-soft)] py-2">
       <Container className="flex flex-wrap items-center justify-between gap-2 text-sm">

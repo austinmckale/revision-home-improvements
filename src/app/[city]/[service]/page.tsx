@@ -362,7 +362,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             </section>
 
             {faqItems.length > 0 ? (
-              <FaqList title={`Quick answers — ${location.short}`} items={faqItems} />
+              <FaqList title={`Quick answers for ${location.short}`} items={faqItems} />
             ) : null}
 
             <LocalHighlightsSection

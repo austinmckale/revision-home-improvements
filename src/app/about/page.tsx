@@ -27,7 +27,7 @@ export default function AboutPage() {
             <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">About Us</p>
             <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">Built on Clarity, Delivered with Care</h1>
             <p className="mt-4 text-[var(--muted)]">
-              We started this company because too many homeowners were getting vague estimates, missed timelines, and surprise costs. We decided to do it differently — written scopes, predictable schedules, and honest communication from day one.
+              We started this company because too many homeowners were getting vague estimates, missed timelines, and surprise costs. We decided to do it differently: written scopes, predictable schedules, and honest communication from day one.
             </p>
             <p className="mt-3 text-[var(--muted)]">
               Today we serve homeowners across {siteConfig.serviceAreas} with kitchen, bathroom, basement, flooring, outdoor, and restoration projects.
@@ -57,7 +57,7 @@ export default function AboutPage() {
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             <article className="surface rounded-xl p-5">
               <h3 className="font-semibold text-[var(--accent)]">Homeowners Who Value Transparency</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">You want a written scope and clear options before any work begins — not surprises halfway through.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">You want a written scope and clear options before any work begins, not surprises halfway through.</p>
             </article>
             <article className="surface rounded-xl p-5">
               <h3 className="font-semibold text-[var(--accent)]">Families Balancing Budget and Quality</h3>
@@ -85,7 +85,7 @@ export default function AboutPage() {
             </article>
             <article className="surface rounded-lg p-5">
               <h3 className="font-semibold text-[var(--accent)]">Clean Closeout</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">Final walkthrough, punch-list completion, and warranty documentation are built into delivery — not an afterthought.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">Final walkthrough, punch-list completion, and warranty documentation are built into delivery, not an afterthought.</p>
             </article>
           </div>
 

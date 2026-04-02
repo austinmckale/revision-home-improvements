@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap");
 
 :root {
   --background: #fffaf2;
@@ -15,8 +16,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-white: #ffffff;
-  --color-black: #000000;
   --font-sans: "Trebuchet MS", "Segoe UI", sans-serif;
   --font-serif: "DM Serif Display", Georgia, "Times New Roman", serif;
   --font-mono: Consolas, "Courier New", monospace;

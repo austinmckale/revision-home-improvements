@@ -20,7 +20,7 @@ export default function LicensesAndInsurancePage() {
         <Container className="max-w-4xl">
           <h1 className="text-4xl font-extrabold text-[var(--accent)]">Licensed and Insured in Pennsylvania</h1>
           <p className="mt-4 text-[var(--muted)]">
-            We believe you should be able to verify your contractor before signing anything. Here are our credentials — available for review during your estimate appointment.
+            We believe you should be able to verify your contractor before signing anything. Here are our credentials, available for review during your estimate appointment.
           </p>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -60,7 +60,7 @@ export default function LicensesAndInsurancePage() {
               Hiring an unlicensed or uninsured contractor puts your home and your wallet at risk. A valid PA HIC registration means the contractor meets state requirements. Active insurance means you are protected if something goes wrong on the job.
             </p>
             <p className="mt-3 text-sm text-[var(--muted)]">
-              We provide credential verification as part of every estimate — before you sign anything.
+              We provide credential verification as part of every estimate, before you sign anything.
             </p>
           </div>
 

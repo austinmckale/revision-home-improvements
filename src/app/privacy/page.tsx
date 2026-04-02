@@ -45,9 +45,9 @@ export default function PrivacyPage() {
               <h2 className="text-lg font-semibold text-[var(--accent)]">Third-Party Services</h2>
               <p className="mt-2">We use the following third-party services that may collect data:</p>
               <ul className="mt-2 list-disc space-y-1 pl-5">
-                <li><strong>Google Analytics</strong> — website traffic analysis and usage patterns.</li>
-                <li><strong>Meta (Facebook) Pixel</strong> — ad measurement and audience targeting.</li>
-                <li><strong>Cloudflare Turnstile</strong> — spam protection on our quote form.</li>
+                <li><strong>Google Analytics:</strong> website traffic analysis and usage patterns.</li>
+                <li><strong>Meta (Facebook) Pixel:</strong> ad measurement and audience targeting.</li>
+                <li><strong>Cloudflare Turnstile:</strong> spam protection on our quote form.</li>
               </ul>
               <p className="mt-2">Each service operates under its own privacy policy. We do not sell your personal information to third parties.</p>
             </section>

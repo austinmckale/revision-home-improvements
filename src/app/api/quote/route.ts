@@ -108,7 +108,7 @@ async function sendLeadEmail(payload: Record<string, unknown>) {
     auth: { user, pass },
   });
 
-  const subject = `New Quote Request — ${String(payload.name || "Lead")} (${String(payload.service || "Service TBD")})`;
+  const subject = `New Quote Request: ${String(payload.name || "Lead")} (${String(payload.service || "Service TBD")})`;
   const body = [
     `Name: ${String(payload.name || "")}`,
     `Phone: ${String(payload.phone || "")}`,

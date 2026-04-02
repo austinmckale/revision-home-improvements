@@ -21,7 +21,7 @@ export default function RequestQuotePage() {
       <section className="py-14">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-            {/* Headline + intro — always first */}
+            {/* Headline + intro first */}
             <div className="order-1 lg:order-none">
               <h1 className="text-4xl font-extrabold text-[var(--accent)]">Request a Quote</h1>
               <p className="mt-3 text-[var(--muted)]">
@@ -36,14 +36,14 @@ export default function RequestQuotePage() {
               </div>
             </div>
 
-            {/* Form — immediately after intro on mobile, sticky sidebar on desktop */}
+            {/* Form: after intro on mobile, sticky sidebar on desktop */}
             <div className="order-2 lg:row-span-3 lg:order-none">
               <div className="lg:sticky lg:top-6">
                 <QuoteForm />
               </div>
             </div>
 
-            {/* Reassurance content — after form on mobile, below headline on desktop */}
+            {/* Reassurance: after form on mobile, below headline on desktop */}
             <div className="order-3 space-y-6 lg:order-none">
               <div className="surface rounded-xl p-5">
                 <h2 className="text-lg font-semibold text-[var(--accent)]">What Happens After You Submit</h2>
@@ -61,7 +61,7 @@ export default function RequestQuotePage() {
                 <p className="surface rounded-lg px-3 py-2">PA licensed · HIC #PA185945</p>
                 <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed</p>
                 <p className="surface rounded-lg px-3 py-2">Written scope before work begins</p>
-                <p className="surface rounded-lg px-3 py-2">No obligation — honest assessment upfront</p>
+                <p className="surface rounded-lg px-3 py-2">No obligation, honest assessment upfront</p>
               </div>
 
               <blockquote className="surface rounded-xl p-5">

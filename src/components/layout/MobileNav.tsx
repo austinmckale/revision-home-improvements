@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { siteConfig } from "@/content/site";
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -13,10 +14,13 @@ const navLinks = [
   { href: "/about", label: "About" },
   { href: "/financing", label: "Financing" },
   { href: "/warranty", label: "Warranty" },
-  { href: "/request-a-quote", label: "Request a Quote" },
 ];
 
-export default function MobileNav() {
+interface MobileNavProps {
+  isTransparent?: boolean;
+}
+
+export default function MobileNav({ isTransparent = false }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -35,7 +39,11 @@ export default function MobileNav() {
     <div className="md:hidden">
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-lg text-[var(--accent)] hover:bg-[var(--surface-soft)]"
+        className={`flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
+          isTransparent && !open
+            ? "text-white hover:bg-white/10"
+            : "text-[var(--accent)] hover:bg-[var(--surface-soft)]"
+        }`}
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
       >
@@ -54,29 +62,45 @@ export default function MobileNav() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 top-16 z-40">
+        <div className="fixed inset-0 top-16 z-40 flex flex-col bg-[var(--surface)]/95 backdrop-blur">
           <button
             type="button"
             aria-label="Close menu overlay"
-            className="absolute inset-0 bg-black/35"
+            className="absolute inset-0 -z-10 bg-black/5"
             onClick={() => setOpen(false)}
           />
-          <nav
-            className="relative flex flex-col divide-y divide-[var(--border)] bg-[var(--surface)]/95 px-4 backdrop-blur"
-            aria-label="Mobile navigation"
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`py-3.5 text-base font-medium ${
-                  pathname === link.href ? "text-[var(--brand)]" : "text-[var(--accent)]"
-                }`}
+          <div className="p-4">
+            <div className="flex flex-col gap-3 pb-6">
+              <a
+                href={siteConfig.phoneHref}
+                className="flex w-full items-center justify-center rounded-sm border border-[var(--brand)] px-4 py-3 font-semibold text-[var(--brand)] transition-colors hover:bg-[var(--surface-soft)]"
               >
-                {link.label}
+                Call {siteConfig.phoneDisplay}
+              </a>
+              <Link
+                href="/request-a-quote"
+                className="flex w-full items-center justify-center rounded-sm bg-[var(--brand)] px-4 py-3 font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
+              >
+                Request a Quote
               </Link>
-            ))}
-          </nav>
+            </div>
+            <nav
+              className="flex flex-col divide-y divide-[var(--border)]"
+              aria-label="Mobile navigation"
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`py-3.5 text-base font-medium transition-colors ${
+                    pathname === link.href ? "text-[var(--brand)]" : "text-[var(--accent)] hover:text-[var(--brand)]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
       )}
     </div>

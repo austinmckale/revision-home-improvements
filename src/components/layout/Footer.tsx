@@ -7,23 +7,23 @@ import { siteConfig } from "@/content/site";
 
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t border-[var(--border)] bg-[var(--surface-soft)]">
-      <Container className="py-12">
+    <footer className="mt-16 border-t border-white/10 bg-[var(--accent)] text-white/80">
+      <Container className="py-16">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-1">
-            <h2 className="text-lg font-semibold text-[var(--accent)]">{siteConfig.name}</h2>
-            <p className="mt-2 text-sm text-[var(--muted)]">
+            <h2 className="text-lg font-semibold text-white">{siteConfig.name}</h2>
+            <p className="mt-2 text-sm text-white/70">
               Remodeling and restoration contractor serving Reading, Berks County, and Lehigh Valley.
             </p>
-            <div className="mt-4 space-y-1 text-sm text-[var(--muted)]">
+            <div className="mt-5 space-y-1.5 text-sm text-white/70">
               <p>{siteConfig.address.street}</p>
               <p>
-                <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
+                <a href={siteConfig.phoneHref} className="font-semibold text-white transition-colors hover:text-[var(--brand)]">
                   {siteConfig.phoneDisplay}
                 </a>
               </p>
               <p>
-                <a href={`mailto:${siteConfig.primaryEmail}`} className="hover:text-[var(--brand)]">
+                <a href={`mailto:${siteConfig.primaryEmail}`} className="transition-colors hover:text-white">
                   {siteConfig.primaryEmail}
                 </a>
               </p>
@@ -32,7 +32,7 @@ export default function Footer() {
                   href={siteConfig.googleBusinessProfileUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-[var(--brand)]"
+                  className="transition-colors hover:text-white"
                 >
                   Google Business Profile
                 </a>
@@ -42,23 +42,23 @@ export default function Footer() {
                   href={siteConfig.facebookPageUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-[var(--brand)]"
+                  className="transition-colors hover:text-white"
                 >
                   Facebook Page
                 </a>
               </p>
             </div>
-            <p className="mt-3 text-xs text-[var(--muted)]">{siteConfig.hicNumber}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <p className="mt-4 text-xs text-white/40">{siteConfig.hicNumber}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
               <Button href="/request-a-quote" className="text-xs">Request a Quote</Button>
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">Services</h3>
-            <ul className="mt-3 space-y-2 text-sm">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-white/50">Services</h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
               {primaryServices.slice(0, 6).map((service) => (
                 <li key={service.slug}>
-                  <Link href={`/services/${service.slug}`} className="hover:text-[var(--brand)]">
+                  <Link href={`/services/${service.slug}`} className="transition-colors hover:text-white">
                     {service.name}
                   </Link>
                 </li>
@@ -66,11 +66,11 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">Service Areas</h3>
-            <ul className="mt-3 space-y-2 text-sm">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-white/50">Service Areas</h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
               {locations.map((location) => (
                 <li key={location.slug}>
-                  <Link href={`/${location.slug}`} className="hover:text-[var(--brand)]">
+                  <Link href={`/${location.slug}`} className="transition-colors hover:text-white">
                     {location.name}
                   </Link>
                 </li>
@@ -78,38 +78,38 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-[var(--accent)]">Company</h3>
-            <ul className="mt-3 space-y-2 text-sm">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-white/50">Company</h3>
+            <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <Link href="/about" className="hover:text-[var(--brand)]">About Us</Link>
+                <Link href="/about" className="transition-colors hover:text-white">About Us</Link>
               </li>
               <li>
-                <Link href="/our-process" className="hover:text-[var(--brand)]">Our Process</Link>
+                <Link href="/our-process" className="transition-colors hover:text-white">Our Process</Link>
               </li>
               <li>
-                <Link href="/warranty" className="hover:text-[var(--brand)]">Workmanship Warranty</Link>
+                <Link href="/warranty" className="transition-colors hover:text-white">Workmanship Warranty</Link>
               </li>
               <li>
-                <Link href="/licenses-and-insurance" className="hover:text-[var(--brand)]">Licenses &amp; Insurance</Link>
+                <Link href="/licenses-and-insurance" className="transition-colors hover:text-white">Licenses &amp; Insurance</Link>
               </li>
               <li>
-                <Link href="/fire-water-damage-restoration" className="font-semibold text-[var(--brand)]">
+                <Link href="/fire-water-damage-restoration" className="font-semibold text-white transition-colors hover:text-[var(--brand)]">
                   Emergency Restoration
                 </Link>
               </li>
               <li>
-                <Link href="/insurance-claims" className="hover:text-[var(--brand)]">Insurance Claims</Link>
+                <Link href="/insurance-claims" className="transition-colors hover:text-white">Insurance Claims</Link>
               </li>
             </ul>
           </div>
         </div>
       </Container>
-      <div className="border-t border-[var(--border)]">
-        <Container className="flex flex-wrap items-center justify-between gap-2 py-4 text-xs text-[var(--muted)]">
+      <div className="border-t border-white/10">
+        <Container className="flex flex-wrap items-center justify-between gap-4 py-6 text-xs text-white/40">
           <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-          <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-[var(--brand)]">Privacy Policy</Link>
-            <Link href="/financing-terms" className="hover:text-[var(--brand)]">Financing Terms</Link>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
+            <Link href="/financing-terms" className="transition-colors hover:text-white">Financing Terms</Link>
           </div>
         </Container>
       </div>

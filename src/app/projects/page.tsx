@@ -178,7 +178,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
             <section className="mt-10">
               <h2 className="text-2xl font-bold text-[var(--accent)]">More photos across our services</h2>
               <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-                A wider slice of kitchen, bath, basement, interior, and exterior work — not limited to one trade. For
+                A wider slice of kitchen, bath, basement, interior, and exterior work, not limited to one trade. For
                 focused proof, open a case study or use the service filter on this page.
               </p>
               <ExpandableImageGrid
