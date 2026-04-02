@@ -85,39 +85,39 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-6 py-8">
-              <nav className="flex flex-col space-y-6">
-                <div className="grid grid-cols-2 gap-3 mb-8">
+            <div className="flex-1 overflow-y-auto px-6 py-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <nav className="flex flex-col space-y-5">
+                <div className="grid grid-cols-2 gap-3 mb-6">
                   <a
                     href={siteConfig.phoneHref}
                     className="flex flex-col items-center justify-center rounded-sm border border-white/20 bg-white/5 p-4 text-center text-white transition-colors hover:bg-white/10"
                   >
-                    <span className="text-[0.65rem] font-bold uppercase tracking-widest text-white/50 mb-1">Direct Call</span>
-                    <span className="text-sm font-semibold">{siteConfig.phoneDisplay}</span>
+                    <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/40 mb-1">Direct Call</span>
+                    <span className="text-sm font-semibold tracking-tight">{siteConfig.phoneDisplay}</span>
                   </a>
                   <Link
                     href="/request-a-quote"
                     className="flex flex-col items-center justify-center rounded-sm bg-[var(--brand)] p-4 text-center text-white transition-colors hover:bg-[var(--brand-dark)]"
                   >
-                    <span className="text-[0.65rem] font-bold uppercase tracking-widest text-white/80 mb-1">Next Project</span>
-                    <span className="text-sm font-semibold">Get a Quote</span>
+                    <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/70 mb-1">Next Project</span>
+                    <span className="text-sm font-semibold tracking-tight">Get a Quote</span>
                   </Link>
                 </div>
 
-                <div className="flex flex-col space-y-1">
+                <div className="flex flex-col space-y-0.5">
                   {navLinks.map((link, i) => (
                     <motion.div
                       key={link.href}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05 + 0.1 }}
+                      transition={{ delay: i * 0.04 + 0.1 }}
                     >
                       <Link
                         href={link.href}
-                        className={`block py-3 transition-colors ${
+                        className={`block py-2.5 transition-colors ${
                           link.primary 
                             ? "heading-serif text-4xl text-white active:opacity-60" 
-                            : "text-lg text-white/50 hover:text-white active:opacity-60"
+                            : "text-lg text-white/40 hover:text-white active:opacity-60"
                         }`}
                       >
                         {link.label}
@@ -127,22 +127,22 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
                 </div>
               </nav>
 
-              <div className="mt-auto pt-16">
+              <div className="mt-auto pt-12">
                 <div className="border-t border-white/10 pt-8 pb-4">
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8 text-sm font-semibold uppercase tracking-widest">
-                    <a href={siteConfig.facebookPageUrl} target="_blank" rel="noreferrer" className="text-white/40 hover:text-[var(--brand)] transition-colors">
+                  <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-[0.65rem] font-bold uppercase tracking-[0.2em]">
+                    <a href={siteConfig.facebookPageUrl} target="_blank" rel="noreferrer" className="text-white/30 hover:text-[var(--brand)] transition-colors">
                       Facebook
                     </a>
-                    <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noreferrer" className="text-white/40 hover:text-[var(--brand)] transition-colors">
+                    <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noreferrer" className="text-white/30 hover:text-[var(--brand)] transition-colors">
                       Google Reviews
                     </a>
                   </div>
 
-                  <p className="text-[0.6rem] font-bold uppercase tracking-[0.25em] text-white/20 mb-3">Service Location</p>
-                  <p className="text-base text-white/80 font-medium tracking-tight">
+                  <p className="text-[0.55rem] font-bold uppercase tracking-[0.3em] text-white/20 mb-2.5">Service Location</p>
+                  <p className="text-sm text-white/70 font-medium tracking-tight">
                     Lehigh Valley, Pennsylvania
                   </p>
-                  <p className="mt-4 text-[0.7rem] font-bold tracking-[0.1em] text-white/30 uppercase">
+                  <p className="mt-4 text-[0.65rem] font-bold tracking-[0.1em] text-white/20 uppercase">
                     {siteConfig.hicNumber}
                   </p>
                 </div>
