@@ -23,20 +23,24 @@ interface MobileNavProps {
 
 export default function MobileNav({ isTransparent = false }: MobileNavProps) {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
   useEffect(() => {
+    if (!mounted) return;
+
     let scrollPosition = 0;
 
     const lockScroll = () => {
-      // Capture the current scroll position
       scrollPosition = window.pageYOffset;
-      
-      // Apply the lock with the negative top offset to maintain visual position
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollPosition}px`;
       document.body.style.width = "100%";
@@ -46,15 +50,12 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
     
     const unlockScroll = () => {
       const top = document.body.style.top;
-      
-      // Restore the styles
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
       document.body.style.overflow = "";
       document.documentElement.style.height = "";
       
-      // Jump back to the original scroll position
       if (top) {
         window.scrollTo(0, parseInt(top || "0") * -1);
       }
@@ -67,19 +68,26 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
     }
 
     return () => unlockScroll();
-  }, [open]);
+  }, [open, mounted]);
+
+  if (!mounted) {
+    return (
+      <div className="md:hidden">
+        <div className="h-10 w-10" />
+      </div>
+    );
+  }
 
   return (
     <div className="md:hidden">
       <button
         onClick={() => setOpen(true)}
-        className={`flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
+        className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
           isTransparent && !open
             ? "text-white hover:bg-white/10"
             : "text-[var(--accent)] hover:bg-[var(--surface-soft)]"
         }`}
         aria-label="Open menu"
-        aria-expanded={false}
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
           <line x1="3" y1="7" x2="21" y2="7" />
@@ -95,10 +103,10 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[100] flex flex-col bg-[var(--accent)]"
+            className="fixed inset-0 z-[100] flex flex-col bg-[#194734] bg-opacity-100 shadow-2xl"
           >
             {/* Header in Overlay */}
-            <div className="flex h-16 items-center justify-between px-4">
+            <div className="flex h-16 items-center justify-between px-4 shrink-0">
               <span className="heading-serif text-lg font-bold text-white tracking-widest uppercase">
                 {siteConfig.name}
               </span>
@@ -162,7 +170,7 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
                     <a href={siteConfig.facebookPageUrl} target="_blank" rel="noreferrer" className="text-white/30 hover:text-[var(--brand)] transition-colors">
                       Facebook
                     </a>
-                    <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noreferrer" className="text-white/30 hover:text-[var(--brand)] transition-colors">
+                    <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noreferrer" className="text-white/40 hover:text-[var(--brand)] transition-colors">
                       Google Reviews
                     </a>
                   </div>
