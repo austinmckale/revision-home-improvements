@@ -30,14 +30,27 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
   }, [pathname]);
 
   useEffect(() => {
-    if (open) {
+    const lockScroll = () => {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.height = "100%";
+      document.documentElement.style.height = "100%";
     };
+    
+    const unlockScroll = () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.height = "";
+      document.documentElement.style.height = "";
+    };
+
+    if (open) {
+      lockScroll();
+    } else {
+      unlockScroll();
+    }
+
+    return () => unlockScroll();
   }, [open]);
 
   return (
