@@ -169,7 +169,7 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
 
                   <p className="text-[0.55rem] font-bold uppercase tracking-[0.3em] text-white/20 mb-2.5">Service Location</p>
                   <p className="text-sm text-white/70 font-medium tracking-tight">
-                    Lehigh Valley, Pennsylvania
+                    Lehigh Valley, PA
                   </p>
                   <p className="mt-4 text-[0.65rem] font-bold tracking-[0.1em] text-white/20 uppercase">
                     {siteConfig.hicNumber}
