@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import EmergencyBar from "@/components/layout/EmergencyBar";
 import Footer from "@/components/layout/Footer";
-import StickyCTA from "@/components/layout/StickyCTA";
 import TrackingEvents from "@/components/TrackingEvents";
 import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/content/site";
@@ -122,7 +121,6 @@ fbq('track', 'PageView');`}
         <EmergencyBar />
         <main className="pb-20 md:pb-0">{children}</main>
         <Footer />
-        <StickyCTA />
       </body>
     </html>
   );

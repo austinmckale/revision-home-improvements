@@ -311,18 +311,6 @@ export default function HomePage() {
           </FadeIn>
         </Container>
       </section>
-
-      {/* ── SERVICE AREAS ── */}
-      <section className="pb-10 md:pb-16">
-        <Container>
-          <p className="text-sm text-[var(--muted)]">
-            Serving Allentown, Bethlehem, the Lehigh Valley, Reading, Wyomissing, and Berks County.{" "}
-            <Link href="/service-areas" className="font-semibold text-[var(--brand)] hover:underline">
-              See all service areas
-            </Link>
-          </p>
-        </Container>
-      </section>
     </>
   );
 }

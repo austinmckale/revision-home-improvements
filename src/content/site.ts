@@ -9,10 +9,10 @@ export const siteConfig = {
   serviceAreas:
     "Allentown, Bethlehem, the Lehigh Valley, Reading, Wyomissing, and Berks County",
   address: {
-    street: "Reading, PA",
-    city: "Reading",
+    street: "Lehigh Valley, PA",
+    city: "Lehigh Valley",
     region: "PA",
-    postalCode: "19601",
+    postalCode: "18101",
     country: "US",
   },
   ogImage: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
