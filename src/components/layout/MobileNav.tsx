@@ -30,18 +30,34 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
   }, [pathname]);
 
   useEffect(() => {
+    let scrollPosition = 0;
+
     const lockScroll = () => {
+      // Capture the current scroll position
+      scrollPosition = window.pageYOffset;
+      
+      // Apply the lock with the negative top offset to maintain visual position
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollPosition}px`;
+      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.height = "100%";
       document.documentElement.style.height = "100%";
     };
     
     const unlockScroll = () => {
+      const top = document.body.style.top;
+      
+      // Restore the styles
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-      document.body.style.height = "";
       document.documentElement.style.height = "";
+      
+      // Jump back to the original scroll position
+      if (top) {
+        window.scrollTo(0, parseInt(top || "0") * -1);
+      }
     };
 
     if (open) {
