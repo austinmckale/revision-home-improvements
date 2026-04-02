@@ -259,7 +259,7 @@ export default function HomePage() {
       </section>
 
       {/* ── CLOSING CTA ── */}
-      <section className="bg-[#133526] py-16 md:py-24">
+      <section className="bg-[var(--accent)] py-16 md:py-24">
         <Container>
           <FadeIn>
             <div className="mx-auto max-w-4xl text-center">
