@@ -88,6 +88,8 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     priorityContextualLocations.has(location.slug) && Boolean(localContent) && Boolean(topLocalCaseStudy);
   const serviceOverviewAnchorText = `${service.name.toLowerCase()} services`;
   const relatedLocalServices = primaryServices.filter((item) => item.slug !== service.slug);
+  const isEmergencyService =
+    service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
   );
@@ -159,10 +161,21 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               {service.intro} {location.localAngle}
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Button href="/request-a-quote">Get a Free Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
-                Call {siteConfig.phoneDisplay}
-              </Button>
+              {isEmergencyService ? (
+                <>
+                  <Button href={siteConfig.phoneHref}>Call {siteConfig.phoneDisplay}</Button>
+                  <Button href="/request-a-quote" variant="secondary">
+                    Request a quote
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button href="/request-a-quote">Get a Free Quote</Button>
+                  <Button href={siteConfig.phoneHref} variant="secondary">
+                    Call {siteConfig.phoneDisplay}
+                  </Button>
+                </>
+              )}
             </div>
           </div>
           {service.image.src && (
@@ -182,46 +195,56 @@ export default async function CityServicePage({ params }: { params: Promise<Para
       <section className="py-14">
         <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <h2 className="text-2xl font-bold text-[var(--accent)]">What&apos;s Included</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.whatIncluded.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-
-            {service.authoritySnapshot && (
-              <section className="surface mt-8 rounded-xl p-5">
-                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                  Example Scope Snapshot
+            {service.authoritySnapshot ? (
+              <>
+                <section className="surface mt-0 rounded-xl p-5">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                    Example Scope Snapshot
+                  </p>
+                  <h2 className="mt-1 text-2xl font-bold text-[var(--accent)]">
+                    {service.authoritySnapshot.title}
+                  </h2>
+                  <p className="mt-2 text-sm text-[var(--muted)]">{service.authoritySnapshot.location}</p>
+                  <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                    {service.authoritySnapshot.scope.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
+                  <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
+                </section>
+                <p className="mt-4 text-sm text-[var(--muted)]">
+                  For full service scope and process details, see{" "}
+                  <Link href={`/services/${service.slug}`} className="font-semibold text-[var(--brand)]">
+                    {service.name} service overview
+                  </Link>.
                 </p>
-                <h2 className="mt-1 text-2xl font-bold text-[var(--accent)]">
-                  {service.authoritySnapshot.title}
-                </h2>
-                <p className="mt-2 text-sm text-[var(--muted)]">{service.authoritySnapshot.location}</p>
-                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-                  {service.authoritySnapshot.scope.map((item) => (
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold text-[var(--accent)]">What&apos;s Included</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+                  {service.whatIncluded.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
-                <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
-              </section>
+
+                <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What Affects the Price</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+                  {service.pricingFactors.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+
+                <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What You Can Expect</h2>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+                  {service.outcomes.map((outcome) => (
+                    <li key={outcome}>{outcome}</li>
+                  ))}
+                </ul>
+              </>
             )}
-
-            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What Affects the Price</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.pricingFactors.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-
-            <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What You Can Expect</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {service.outcomes.map((outcome) => (
-                <li key={outcome}>{outcome}</li>
-              ))}
-            </ul>
 
             {localContent && (
               <section className="surface mt-8 rounded-xl p-6">
@@ -324,26 +347,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               />
             ) : null}
 
-            <div className="surface mt-10 rounded-xl p-6">
-              <h2 className="text-xl font-semibold text-[var(--accent)]">
-                Ready to plan your {service.name.toLowerCase()} project?
-              </h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Call us to talk through your project, or fill out the form for a written scope and quote.
-                We typically follow up the same day.
-              </p>
-              {siteConfig.financing.teaser && (
-                <p className="mt-2 text-sm font-semibold text-[var(--brand)]">
-                  {siteConfig.financing.teaser}
-                </p>
-              )}
-              <div className="mt-4 flex flex-wrap gap-3">
-                <Button href="/request-a-quote">Get a Free Quote</Button>
-                <Button href={siteConfig.phoneHref} variant="secondary">
-                  Call {siteConfig.phoneDisplay}
-                </Button>
-              </div>
-            </div>
+
 
             <section className="mt-8">
               <h2 className="text-2xl font-bold text-[var(--accent)]">Related Local Resources</h2>

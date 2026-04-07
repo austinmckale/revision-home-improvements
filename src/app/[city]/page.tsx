@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
@@ -22,8 +23,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const location = getLocationBySlug(city);
   if (!location) return {};
   return {
-    title: `Home Remodeling in ${location.name} | Revision Home Improvements`,
-    description: `Kitchen, bathroom, basement, flooring, and restoration services in ${location.name}. Local contractor with clear scopes and fast quotes.`,
+    title: `Remodeling & Restoration in ${location.name} | RHI Pros`,
+    description: `Kitchen, bathroom, basement, flooring, and restoration services in ${location.name}. RHI Pros delivers clear scopes, reliable scheduling, and quality workmanship.`,
     alternates: { canonical: `/${location.slug}` },
   };
 }
@@ -40,15 +41,15 @@ export default async function CityHubPage({ params }: { params: Promise<Params> 
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Service Areas", href: "/service-areas" }, { name: location.name, href: `/${location.slug}` }])} />
       <section className="py-14">
         <Container>
-          <h1 className="text-4xl font-extrabold text-[var(--accent)]">Home Improvement in {location.name}</h1>
+          <h1 className="text-4xl font-extrabold text-[var(--accent)]">Remodeling & Restoration in {location.name}</h1>
           <p className="mt-3 max-w-3xl text-[var(--muted)]">
             We serve homeowners throughout {location.name} with kitchen, bathroom, basement, flooring, outdoor, and restoration projects. {location.localAngle}
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <Button href="/request-a-quote">Request a Quote in {location.short}</Button>
-            <Button href="/fire-water-damage-restoration" variant="secondary">
-              Emergency Restoration
-            </Button>
+            <Link href="/fire-water-damage-restoration" className="text-sm font-semibold text-[var(--brand)] hover:underline">
+              Emergency restoration →
+            </Link>
           </div>
           <LocalHighlightsSection location={location} serviceItems={primaryServices} className="mt-8" />
           {localTestimonials.length > 0 && (

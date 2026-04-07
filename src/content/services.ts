@@ -104,6 +104,26 @@ export const services: Service[] = [
         a: "It depends on scope. Full gut jobs usually mean a temporary setup for a few weeks; smaller updates can often leave part of the kitchen usable. We plan that with you before work starts.",
       },
     ],
+    authoritySnapshot: {
+      title: "Full kitchen gut and rebuild, Bethlehem, PA",
+      location: "Bethlehem, PA (Lehigh Valley)",
+      summary:
+        "Complete demo-to-finish kitchen remodel covering layout changes, new cabinetry, countertops, electrical upgrades, and coordinated finish work in a home that stayed occupied throughout.",
+      scope: [
+        "Full gut demo including soffit removal to open sight lines to the living area",
+        "Layout revision: relocated sink run, added prep counter opposite the range, and reconfigured storage zones around the refrigerator landing",
+        "Cabinet install with scribe rails and filler strips to fit against out-of-plumb walls and an uneven ceiling line",
+        "Dedicated 20-amp circuits for range, microwave, dishwasher, and disposal; relocated panel feeds to clear the new cabinet layout",
+        "Countertop template after cabinets set, with field-verified cutouts for undermount sink and cooktop",
+        "Tile backsplash sequenced after countertop set to get clean top-edge termination without exposed cut lines",
+        "LVP flooring run under cabinets for moisture protection, with transition detailing at the dining room threshold",
+        "Adjacent hallway and dining area protected with dust barriers and negative-pressure fan during demo and drywall phases",
+      ],
+      compliance:
+        "Electrical work permitted and inspected per local code. Plumbing relocated under existing permit scope.",
+      note:
+        "Shown to illustrate planning depth. Your scope will vary based on layout, conditions, and finish selections.",
+    },
     image: {
       src: "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg",
       alt: "Finished kitchen remodel with blue cabinets and new countertops.",
@@ -166,6 +186,26 @@ export const services: Service[] = [
         a: "Selectively, when the scope matches our bathroom remodeling work: durable finishes, fixture areas, and layouts suited to higher-traffic use.",
       },
     ],
+    authoritySnapshot: {
+      title: "Full bathroom gut and rebuild, Bethlehem, PA",
+      location: "Bethlehem, PA (Lehigh Valley)",
+      summary:
+        "Complete tear-out and rebuild of a dated second-floor bathroom including hidden rot repair, full waterproofing, plumbing corrections, new tile, and finish work coordinated around a family still using the home.",
+      scope: [
+        "Full gut demo of tile, drywall, vanity, and fixtures down to studs and subfloor",
+        "Subfloor section replaced after demo revealed moisture damage and soft spots around the toilet flange area",
+        "Shower pan built to slope with Schluter Kerdi waterproofing membrane carried up walls to full wet-zone height before any tile set",
+        "Supply lines rerouted for new valve placement; existing galvanized drain section replaced with PVC to clear a slow-drain issue found during demo",
+        "Exhaust fan ducted to exterior through soffit with insulated duct run to prevent condensation in the joist bay",
+        "Floor tile set on Ditra uncoupling membrane over patched subfloor for crack isolation, with consistent grout joints carried into the shower threshold",
+        "Vanity scribed to fit against an out-of-plumb wall; plumbing trim centered on the new countertop cutout",
+        "Trim, paint, and silicone detailing completed last to keep finish surfaces clean through the tile and fixture phases",
+      ],
+      compliance:
+        "Plumbing modifications inspected per local code. Ventilation routed to exterior per IRC mechanical requirements.",
+      note:
+        "Shown to illustrate build quality and sequencing. Your scope will vary based on layout, conditions, and finish selections.",
+    },
     image: {
       src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
       alt: "Finished bathroom renovation showing updated vanity, lighting, and new door addition.",
@@ -302,7 +342,6 @@ export const services: Service[] = [
   },
   {
     slug: "drywall-installation-repair",
-    featuredCaseStudySlug: "ryan-bedroom-interior-refresh",
     portfolioTag: "drywall",
     name: "Drywall Installation and Repair",
     short: "Walls and ceilings that look like new.",
@@ -310,7 +349,7 @@ export const services: Service[] = [
       "Drywall hanging, patching, skim coating, and paint-ready finishing for remodel and restoration jobs.",
     intro:
       "Whether you need a full room of drywall hung or a few patches blended invisible, we get your walls smooth, flat, and ready for paint. No visible seams, no bumps, no shortcuts.",
-    cta: "Call now",
+    cta: "Request a drywall quote",
     bullets: ["New drywall install", "Repair and patching", "Smooth finish prep"],
     whatIncluded: [
       "Panel replacement or full wall/ceiling drywall install",
@@ -340,6 +379,23 @@ export const services: Service[] = [
         a: "Yes. It is usually in scope for kitchens, baths, and basements, handled as part of the same job rather than pieced out.",
       },
     ],
+    authoritySnapshot: {
+      title: "Multi-room drywall repair and finish prep, Bethlehem, PA",
+      location: "Bethlehem, PA (Lehigh Valley)",
+      summary:
+        "Targeted drywall repairs across a hallway and two bedrooms with patch blending, texture matching, and dust-controlled work in an occupied home.",
+      scope: [
+        "Damaged sections cut back to solid substrate and re-boarded with matching thickness drywall",
+        "Tape, mud, and sand cycles run until patches blended flush with surrounding wall plane — no ridges or shadow lines under raking light",
+        "Existing orange-peel texture matched on repaired zones so the finished wall reads consistent after paint",
+        "Work areas sealed with plastic and floor protection; sanding dust managed with shop vac at the tool to keep the rest of the home clean",
+        "All surfaces left paint-ready with corner bead, nail spots, and seams finished to Level 4",
+      ],
+      compliance:
+        "Finish work completed to Level 4 smooth per industry standards.",
+      note:
+        "Shown to illustrate repair quality. Your scope will vary based on damage extent and finish requirements.",
+    },
     image: {
       src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
       alt: "Completed bedroom interior with smooth wall and ceiling finish after a blue palette refresh in Berks County.",
@@ -411,6 +467,26 @@ export const services: Service[] = [
         a: "We match product to room use and moisture risk (for example LVP where water matters, hardwood or engineered wood where it fits your goals) and walk through tradeoffs at the estimate.",
       },
     ],
+    authoritySnapshot: {
+      title: "Multi-room flooring replacement, Allentown, PA",
+      location: "Allentown, PA (Lehigh Valley)",
+      summary:
+        "Full flooring replacement across living room, hallway, and two bedrooms in a 1960s home with subfloor issues that had to be corrected before any finish material went down.",
+      scope: [
+        "Existing carpet and pad pulled; vinyl adhesive residue scraped and cleaned from plywood subfloor across all rooms",
+        "Subfloor mapped for flatness with a 6-ft straightedge — two crowns shimmed and three dip zones filled with self-leveling compound to bring the surface within spec",
+        "Loose and squeaking subfloor panels re-fastened with ring-shank screws into joists every 6 inches through the hallway and living room",
+        "Moisture testing with pin meter at 12 locations before underlayment selection; readings confirmed standard foam underlayment was appropriate (no vapor barrier needed)",
+        "LVP click-lock installed with staggered joints and consistent expansion gaps maintained at every wall, cabinet, and door frame",
+        "All door jambs and casings undercut with oscillating tool so flooring slides under cleanly — no visible caulk fills or trim gaps",
+        "T-molding transitions set at bedroom-to-hallway thresholds where floor heights changed; reducer strip at the kitchen tile edge to eliminate the trip lip",
+        "Base trim reinstalled with nail holes filled, caulked, and touch-up painted so the room looked finished, not just re-floored",
+      ],
+      compliance:
+        "Installed per manufacturer specs for expansion, underlayment, and acclimation requirements.",
+      note:
+        "Shown to illustrate prep depth. Your scope will vary based on subfloor condition, room count, and material choice.",
+    },
     image: {
       src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
       alt: "Light wood flooring installation in a finished living area.",
@@ -474,6 +550,26 @@ export const services: Service[] = [
         a: "Yes when the scope is the same class of work: layout, base, edge restraint, and clean radius detail at the pool.",
       },
     ],
+    authoritySnapshot: {
+      title: "Backyard patio and walkway buildout, Reading, PA",
+      location: "Reading, PA (Berks County)",
+      summary:
+        "New paver patio and connecting walkway installed over a graded yard with soft soil conditions, requiring full excavation, base build-up, and drainage pitch to keep the surface stable and dry long term.",
+      scope: [
+        "Existing sod and topsoil stripped and excavated to 10 inches below finished grade across the full patio footprint and walkway corridor",
+        "Geotextile fabric laid over exposed subgrade to separate native clay soil from aggregate base and prevent migration",
+        "6 inches of recycled concrete aggregate installed in two lifts, each compacted with a plate tamper to 95% density before the next lift",
+        "1-inch bedding layer of coarse concrete sand screeded to final grade with pipe rails for consistent depth across the patio field",
+        "Pavers set in a running bond pattern with uniform joint spacing; cuts made with a wet saw at all perimeter edges and radius curves",
+        "Snap-edge restraint spiked into compacted base along all open sides; restraint set below final paver height so it disappears under backfill",
+        "Finished surface pitched at 1/8 inch per foot away from the house foundation to move water toward the yard without pooling on the patio",
+        "Polymeric sand swept into joints and activated per manufacturer instructions; transitions detailed where pavers meet the concrete stoop and lawn edging",
+      ],
+      compliance:
+        "Base depth and compaction meet ICPI residential standards. Drainage pitch directed away from foundation per local grading requirements.",
+      note:
+        "Shown to illustrate base-prep depth. Your scope will vary based on soil conditions, site access, and paver selection.",
+    },
     image: {
       src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
       alt: "Finished patio, pavilion roof, and hardscape outdoor living space.",
@@ -527,6 +623,26 @@ export const services: Service[] = [
         a: "Often yes. Targeted siding, trim, window, or facade updates can sharpen the look without a full tear-off.",
       },
     ],
+    authoritySnapshot: {
+      title: "Full-elevation exterior refresh, Lehigh Valley, PA",
+      location: "Lehigh Valley, PA",
+      summary:
+        "Front and side elevation refresh on a two-story home with weathered trim, failing caulk joints, and inconsistent cladding transitions that were letting moisture behind the siding.",
+      scope: [
+        "Damaged siding and trim sections removed to inspect sheathing condition underneath; two areas of soft sheathing replaced before new cladding went back on",
+        "House-wrap laps checked and corrected where previous work had reversed the overlap, restoring top-over-bottom drainage continuity across the repair zones",
+        "Window and door head flashing integrated under the weather barrier so water hitting the wall above sheds over the flashing and out, not behind the frame",
+        "New fiber-cement siding installed bottom-to-top with proper reveal spacing and nailing to allow thermal movement without buckling",
+        "Soffit-to-fascia transitions detailed with aluminum trim and drip edge so water at the roofline moves into the gutter, not behind the fascia board",
+        "Exterior trim joints sealed with paintable polyurethane sealant at prescribed locations only — not used to mask gaps from poor fit",
+        "All upper-story work accessed with extension ladders and staged scaffolding; ground protection in place for landscaping along the foundation",
+        "Final coat of exterior acrylic applied after all caulk, flashing, and trim work cured — not before — so the paint film bridges clean surfaces, not wet sealant",
+      ],
+      compliance:
+        "Flashing and weather-barrier details follow manufacturer installation requirements and IRC water-resistive barrier standards.",
+      note:
+        "Shown to illustrate weatherproofing depth. Your scope will vary based on existing conditions, elevation count, and material selections.",
+    },
     image: {
       src: "/images/projects/allentown-exterior-log-home/after/front-finished.jpg",
       alt: "Finished log-style home exterior after remodeling work in Allentown.",
@@ -580,6 +696,26 @@ export const services: Service[] = [
         a: "Call as soon as you can. We prioritize stabilization and same-day phone or on-site contact when the situation is active.",
       },
     ],
+    authoritySnapshot: {
+      title: "Interior fire-damage rebuild, Allentown, PA",
+      location: "Allentown, PA (Lehigh Valley)",
+      summary:
+        "Phased interior rebuild after fire damage affected multiple rooms. Work moved from safety assessment through selective demo, smoke decontamination, and coordinated finish restoration with documented scope at each stage for insurance communication.",
+      scope: [
+        "Initial site walk with safety check — structural stability verified, utilities confirmed off, and affected zones marked before any work began",
+        "Selective demo of fire-damaged drywall, trim, and insulation down to framing; salvageable structure separated from unsalvageable material to control rebuild scope and cost",
+        "Smoke and soot residue cleaned from exposed framing, subfloor, and mechanical surfaces using dry sponge and HEPA-filtered vacuum before any new material went in",
+        "Suppression-water moisture mapped with pin meter across subfloor and wall cavities; wet zones dried and verified before closing up walls",
+        "Framing and sheathing inspected for char depth and structural integrity; two ceiling joists sistered where fire had weakened the original members",
+        "Rebuild sequenced from rough electrical and mechanical through drywall, tape, mud, paint, and finish trim so each trade worked on clean surfaces, not over wet or unfinished work",
+        "Photo documentation captured at site evaluation, after demo, at rough-in, and at final finish — organized by room for clear claim communication with the adjuster",
+        "Final walkthrough included surface-condition check across all rebuilt areas and confirmation that smoke odor was resolved before the homeowner moved back in",
+      ],
+      compliance:
+        "Electrical rough-in inspected per local code before wall close-up. Structural repairs documented for insurance scope review.",
+      note:
+        "Shown to illustrate rebuild sequencing and documentation depth. Every fire is different — your scope will depend on damage extent and affected systems.",
+    },
     image: {
       src: "/images/projects/fire-damage-documentation/after/14-img_8459.jpg",
       alt: "Active interior rebuild of a fire-damaged home with exposed framing, rough-in electrical, and restoration in progress.",
@@ -628,6 +764,26 @@ export const services: Service[] = [
         a: "We document it, tell you right away, and adjust the plan. For claim work we update written scope so your adjuster sees the full picture.",
       },
     ],
+    authoritySnapshot: {
+      title: "Water-damage mitigation and interior rebuild, Lehigh Valley, PA",
+      location: "Lehigh Valley, PA",
+      summary:
+        "Interior water damage from a second-floor supply-line failure affected ceilings, walls, and flooring across two levels. Work was sequenced from immediate moisture containment through verified drying and phased finish rebuild with documented scope for the homeowner's insurance claim.",
+      scope: [
+        "Affected areas mapped with pin-type and non-invasive moisture meters to identify every wet zone — including wall cavities and subfloor sections that looked dry on the surface",
+        "Standing water extracted and containment set up to stop spread into unaffected rooms before any demolition began",
+        "Saturated drywall, base trim, and insulation selectively removed to expose framing and allow airflow; salvageable material left in place to control rebuild scope",
+        "Air movers and commercial dehumidifiers positioned based on the moisture map and monitored with daily readings until all affected assemblies hit target moisture content",
+        "Subfloor moisture verified with pin meter at every rebuild zone before new flooring or drywall went back on — nothing was closed up wet",
+        "Framing and sheathing checked for early mold indicators; affected surfaces treated and dried before being enclosed",
+        "Rebuild phased from subfloor repair through drywall, tape, mud, paint, and finish trim so each stage started on verified-dry, clean substrate",
+        "Photo documentation and moisture readings captured at intake, during drying, and at rebuild milestones — organized for clear insurance claim communication",
+      ],
+      compliance:
+        "Drying targets followed IICRC S500 water-damage restoration guidelines. Rebuild materials installed on verified-dry substrate only.",
+      note:
+        "Shown to illustrate mitigation-to-rebuild sequencing. Every water event is different — your scope will depend on source, duration, and affected materials.",
+    },
     image: {
       src: "",
       alt: "",
