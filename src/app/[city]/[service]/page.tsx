@@ -94,23 +94,16 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
   );
   const heroImageSrc = service.image.src?.trim() ?? "";
-  const localFeaturedProjectGalleryImages = getFeaturedCaseStudyGalleryImages(gallerySourceCaseStudy, heroImageSrc);
-  const hasLocalFeaturedProjectGallery = localFeaturedProjectGalleryImages.length > 0;
-  const cityCuratedGalleryImages = hasLocalFeaturedProjectGallery
-    ? localFeaturedProjectGalleryImages
-    : service.gallery.slice(0, 3);
-  const cityCuratedGalleryIsSingleProject = hasLocalFeaturedProjectGallery;
-  const showCityCuratedGallerySection =
-    showCuratedStaticGallery && cityCuratedGalleryImages.length > 0;
-  const cityGalleryGridClassName =
-    cityCuratedGalleryImages.length > 1 ? "mt-3 columns-1 gap-4 md:columns-2" : "mt-3 max-w-3xl";
-  const galleryGridClassName =
-    service.gallery.length > 1 ? "mt-3 columns-1 gap-4 md:columns-2" : "mt-3 max-w-3xl";
+  const featuredProjectGalleryImages = getFeaturedCaseStudyGalleryImages(gallerySourceCaseStudy, heroImageSrc);
+  const showFeaturedProjectGallery = showCuratedStaticGallery && featuredProjectGalleryImages.length > 0;
+  const featuredProjectGalleryGridClassName =
+    featuredProjectGalleryImages.length > 1 ? "mt-3 columns-1 gap-4 md:columns-2" : "mt-3 max-w-3xl";
   const portfolioTag = service.portfolioTag ?? service.slug;
   const portfolioImages = showCuratedStaticGallery
     ? []
     : await getPortfolioImages({ serviceTags: [portfolioTag], limit: 3 });
-  const faqItems = localContent?.localizedFaqs ?? service.faqs;
+  const authoritySnapshotScope = service.authoritySnapshot?.scope.slice(0, 4) ?? [];
+  const faqItems = localContent?.localizedFaqs ?? [];
   const internalLinks = localContent?.internalLinks ?? [
     {
       href: `/${location.slug}`,
@@ -195,59 +188,8 @@ export default async function CityServicePage({ params }: { params: Promise<Para
       <section className="py-14">
         <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            {service.authoritySnapshot ? (
-              <>
-                <section className="surface mt-0 rounded-xl p-5">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                    Example Scope Snapshot
-                  </p>
-                  <h2 className="mt-1 text-2xl font-bold text-[var(--accent)]">
-                    {service.authoritySnapshot.title}
-                  </h2>
-                  <p className="mt-2 text-sm text-[var(--muted)]">{service.authoritySnapshot.location}</p>
-                  <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-                    {service.authoritySnapshot.scope.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                  <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
-                  <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
-                </section>
-                <p className="mt-4 text-sm text-[var(--muted)]">
-                  For full service scope and process details, see{" "}
-                  <Link href={`/services/${service.slug}`} className="font-semibold text-[var(--brand)]">
-                    {service.name} service overview
-                  </Link>.
-                </p>
-              </>
-            ) : (
-              <>
-                <h2 className="text-2xl font-bold text-[var(--accent)]">What&apos;s Included</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-                  {service.whatIncluded.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-
-                <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What Affects the Price</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-                  {service.pricingFactors.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-
-                <h2 className="mt-8 text-2xl font-bold text-[var(--accent)]">What You Can Expect</h2>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-                  {service.outcomes.map((outcome) => (
-                    <li key={outcome}>{outcome}</li>
-                  ))}
-                </ul>
-              </>
-            )}
-
             {localContent && (
-              <section className="surface mt-8 rounded-xl p-6">
+              <section className="surface rounded-xl p-6">
                 <h2 className="text-2xl font-bold text-[var(--accent)]">
                   {localContent.localProjectHeading}
                 </h2>
@@ -307,49 +249,45 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </section>
             )}
 
-            {showCityCuratedGallerySection ? (
-              <section className="mt-8">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">
-                  {cityCuratedGalleryIsSingleProject ? "Featured project photos" : `Recent ${service.name.toLowerCase()} examples`}
+            {service.authoritySnapshot && (
+              <section className="surface mt-8 rounded-xl p-5">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+                  Example project scope
+                </p>
+                <h2 className="mt-1 text-xl font-bold text-[var(--accent)]">
+                  {service.authoritySnapshot.title}
                 </h2>
-                {cityCuratedGalleryIsSingleProject && gallerySourceCaseStudy ? (
-                  <p className="mt-1 text-sm text-[var(--muted)]">
-                    From{" "}
-                    <Link
-                      href={`/projects/${gallerySourceCaseStudy.slug}`}
-                      className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
-                    >
-                      {gallerySourceCaseStudy.title}
-                    </Link>
-                    {" · "}
-                    {gallerySourceCaseStudy.locationName}
-                  </p>
-                ) : (
-                  <p className="mt-1 text-sm text-[var(--muted)]">
-                    A mix of projects that represent the range of this type of work.
-                  </p>
-                )}
-                <ExpandableImageGrid
-                  images={cityCuratedGalleryImages}
-                  gridClassName={cityGalleryGridClassName}
-                  cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
-                  imageClassName="h-auto w-full"
-                />
+                <p className="mt-2 text-sm text-[var(--muted)]">{service.authoritySnapshot.location}</p>
+                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
+                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                  {authoritySnapshotScope.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
+                <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
+                <p className="mt-4 text-sm text-[var(--muted)]">
+                  For full service scope and process details, see{" "}
+                  <Link href={`/services/${service.slug}`} className="font-semibold text-[var(--brand)]">
+                    {service.name} service overview
+                  </Link>.
+                </p>
               </section>
-            ) : portfolioImages.length > 0 ? (
-              <PortfolioGallery images={portfolioImages} title={`Recent ${service.name} Work`} />
-            ) : service.gallery.length > 0 ? (
-              <ExpandableImageGrid
-                images={service.gallery.slice(0, 3)}
-                gridClassName={galleryGridClassName.replace("mt-3", "mt-8")}
-                cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
-                imageClassName="h-auto w-full"
-              />
+            )}
+
+            {faqItems.length > 0 ? (
+              <FaqList title={`Quick answers for ${location.short}`} items={faqItems} />
             ) : null}
+          </div>
 
+          <div className="lg:row-span-2 lg:col-start-2">
+            <div className="lg:sticky lg:top-24">
+              <QuoteForm />
+            </div>
+          </div>
 
-
-            <section className="mt-8">
+          <div className="lg:col-start-1">
+            <section>
               <h2 className="text-2xl font-bold text-[var(--accent)]">Related Local Resources</h2>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 {internalLinks.map((link) => (
@@ -363,35 +301,45 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                   </Link>
                 ))}
               </div>
+
+              <LocalHighlightsSection
+                location={location}
+                serviceItems={relatedLocalServices}
+                className="mt-10"
+                maxServices={6}
+                servicesTitle={`Other services in ${location.short}`}
+                priorityTitle={`Areas we serve near ${location.short}`}
+                showCityHubLink
+              />
             </section>
 
-            {faqItems.length > 0 ? (
-              <FaqList title={`Quick answers for ${location.short}`} items={faqItems} />
+            {showFeaturedProjectGallery ? (
+              <section className="mt-8">
+                <h2 className="text-2xl font-bold text-[var(--accent)]">Featured project photos</h2>
+                {gallerySourceCaseStudy ? (
+                  <p className="mt-1 text-sm text-[var(--muted)]">
+                    From{" "}
+                    <Link
+                      href={`/projects/${gallerySourceCaseStudy.slug}`}
+                      className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                    >
+                      {gallerySourceCaseStudy.title}
+                    </Link>
+                    {" | "}
+                    {gallerySourceCaseStudy.locationName}
+                  </p>
+                ) : null}
+                <ExpandableImageGrid
+                  images={featuredProjectGalleryImages}
+                  gridClassName={featuredProjectGalleryGridClassName}
+                  cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                  imageClassName="h-auto w-full"
+                />
+              </section>
+            ) : portfolioImages.length > 0 ? (
+              <PortfolioGallery images={portfolioImages} title={`Recent ${service.name} Work`} />
             ) : null}
-
-            <LocalHighlightsSection
-              location={location}
-              serviceItems={relatedLocalServices}
-              className="mt-10"
-              maxServices={6}
-              servicesTitle={`Other services in ${location.short}`}
-              priorityTitle={`Areas we serve near ${location.short}`}
-              showCityHubLink
-            />
-
-            <div className="mt-6 grid gap-2 sm:grid-cols-2">
-              <Link
-                href={`/services/${service.slug}`}
-                className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]"
-              >
-                View {service.name} details
-              </Link>
-              <Link href="/service-areas" className="surface rounded-lg p-3 text-sm hover:border-[var(--brand)]">
-                All service areas
-              </Link>
-            </div>
           </div>
-          <QuoteForm />
         </Container>
       </section>
     </>
