@@ -6,9 +6,9 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Licensed & Insured Contractor | Revision Home Improvements",
+  title: "Licensed & Insured Contractor",
   description:
-    "Revision Home Improvements is a licensed and insured home improvement contractor in Pennsylvania. Verify our credentials before your project starts.",
+    "RHI Pros is a licensed and insured home improvement contractor in Pennsylvania. Verify our credentials before your project starts.",
   alternates: { canonical: "/licenses-and-insurance" },
 };
 

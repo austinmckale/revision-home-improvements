@@ -6,9 +6,9 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Workmanship Warranty | Revision Home Improvements",
+  title: "Workmanship Warranty",
   description:
-    "Every Revision Home Improvements project includes a 12-month workmanship warranty plus any applicable manufacturer warranties. See what is covered and how to request service.",
+    "Every RHI Pros project includes a 12-month workmanship warranty plus any applicable manufacturer warranties. See what is covered and how to request service.",
   alternates: { canonical: "/warranty" },
 };
 

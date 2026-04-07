@@ -7,7 +7,7 @@ import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Revision Home Improvements collects, uses, and protects your information.",
+  description: "How RHI Pros collects, uses, and protects your information.",
   alternates: { canonical: "/privacy" },
 };
 

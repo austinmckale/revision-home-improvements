@@ -4,9 +4,9 @@ import Button from "@/components/ui/Button";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Financing Terms & Disclosures | Revision Home Improvements",
+  title: "Financing Terms & Disclosures",
   description:
-    "Review financing disclosures, approval conditions, and program variability for Revision Home Improvements projects.",
+    "Review financing disclosures, approval conditions, and program variability for RHI Pros projects.",
   alternates: { canonical: "/financing-terms" },
 };
 

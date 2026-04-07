@@ -1,0 +1,974 @@
+﻿diff --git a/README.md b/README.md
+index 3de72ab..e12cc68 100644
+--- a/README.md
++++ b/README.md
+@@ -51,7 +51,7 @@ Copy `.env.example` to `.env.local` and fill values:
+ - `NEXT_PUBLIC_SITE_URL`
+ - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
+ - `TURNSTILE_SECRET_KEY`
+-- `LEADS_TO_EMAIL`
++- `EMAIL_TO`
+ - `LEADS_WEBHOOK_URL`
+ - `DISCORD_WEBHOOK_URL` (optional alias; use this if you only want Discord delivery)
+ - `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+diff --git a/src/app/about/page.tsx b/src/app/about/page.tsx
+index b25017c..0c9c6ed 100644
+--- a/src/app/about/page.tsx
++++ b/src/app/about/page.tsx
+@@ -11,7 +11,7 @@ import { siteConfig } from "@/content/site";
+ import { testimonials } from "@/content/testimonials";
+ 
+ export const metadata: Metadata = {
+-  title: "About Revision Home Improvements | Reading & Lehigh Valley Contractor",
++  title: "About RHI Pros | Lehigh Valley & Berks County Contractor",
+   description:
+     "Local, licensed, and insured remodeling contractor serving Reading, Berks County, and the Lehigh Valley with clear scopes and reliable schedules.",
+   alternates: { canonical: "/about" },
+diff --git a/src/app/api/quote/route.ts b/src/app/api/quote/route.ts
+index 22c5cc6..47d7b85 100644
+--- a/src/app/api/quote/route.ts
++++ b/src/app/api/quote/route.ts
+@@ -1,5 +1,7 @@
+ import { NextResponse } from "next/server";
+ import nodemailer from "nodemailer";
++import { forwardToManagerAppLead } from "@/lib/leadIntake";
++import { siteConfig } from "@/content/site";
+ import { quoteSchema } from "@/lib/quoteSchema";
+ 
+ const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+@@ -88,16 +90,22 @@ async function sendLeadWebhook(payload: Record<string, unknown>) {
+ 
+   return { delivered: true as const };
+ }
+-
+ async function sendLeadEmail(payload: Record<string, unknown>) {
+   const host = process.env.SMTP_HOST;
+   const port = Number(process.env.SMTP_PORT || 465);
+   const user = process.env.SMTP_USER;
+   const pass = process.env.SMTP_PASS;
+-  const to = process.env.EMAIL_TO;
++  const to = process.env.EMAIL_TO || siteConfig.primaryEmail;
+   const from = process.env.EMAIL_FROM || user;
+ 
+   if (!host || !user || !pass || !to || !from) {
++    console.error("[quote-api] Email delivery skipped: Missing SMTP configuration", {
++      host: Boolean(host),
++      user: Boolean(user),
++      pass: Boolean(pass),
++      to: Boolean(to),
++      from: Boolean(from),
++    });
+     return { delivered: false, reason: "missing_smtp_config" as const };
+   }
+ 
+@@ -123,117 +131,67 @@ async function sendLeadEmail(payload: Record<string, unknown>) {
+     body.push(`Source: ${String(payload.utm_source)} / ${String(payload.utm_medium || "")}`);
+   }
+ 
+-  await transporter.sendMail({
+-    from,
+-    to,
+-    replyTo: payload.email ? String(payload.email) : undefined,
+-    subject,
+-    text: body.join("\n"),
+-  });
+-
+-  return { delivered: true as const };
+-}
+-
+-function getManagerAppUrl() {
+-  if (process.env.MANAGER_APP_URL) return process.env.MANAGER_APP_URL;
+-  return process.env.NODE_ENV === "production" ? "https://app.rhipros.com" : "http://localhost:3001";
+-}
+-
+-async function forwardToManagerApp(payload: Record<string, unknown>) {
+-  const managerUrl = getManagerAppUrl();
+-  const apiKey = process.env.LEAD_INGEST_API_KEY;
+-  if (!apiKey) {
+-    console.warn("[lead-intake] Skipped: set LEAD_INGEST_API_KEY on the site (same value as Manager App) to forward leads.");
+-    return;
+-  }
+-
+-  const externalRef = `siteform-${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
+-  const addressParts = [payload.city, payload.zip].filter(Boolean).map(String);
+-  const address = addressParts.length > 0 ? addressParts.join(", ") : undefined;
+-
+   try {
+-    const intakeUrl = `${managerUrl}/api/leads/intake`;
+-    const res = await fetch(intakeUrl, {
+-      method: "POST",
+-      headers: {
+-        "Content-Type": "application/json",
+-        "x-lead-intake-key": apiKey,
+-      },
+-      body: JSON.stringify({
+-        externalRef,
+-        contactName: payload.name,
+-        phone: payload.phone,
+-        email: payload.email,
+-        address: address || undefined,
+-        serviceType: payload.service,
+-        source: "website_form",
+-        notes: payload.details,
+-        utm_source: payload.utm_source ?? undefined,
+-        utm_medium: payload.utm_medium ?? undefined,
+-        utm_campaign: payload.utm_campaign ?? undefined,
+-        utm_content: payload.utm_content ?? undefined,
+-        utm_term: payload.utm_term ?? undefined,
+-        landing_path: payload.landing_path ?? undefined,
+-        city: payload.city,
+-        zip: payload.zip,
+-        timeline: payload.timeline,
+-      }),
++    await transporter.sendMail({
++      from,
++      to,
++      replyTo: payload.email ? String(payload.email) : undefined,
++      subject,
++      text: body.join("\n"),
+     });
+-    const text = await res.text();
+-    if (!res.ok) {
+-      console.warn("[lead-intake] failed:", res.status, intakeUrl, text);
+-    } else {
+-      try {
+-        const data = JSON.parse(text || "{}") as { leadId?: string };
+-        console.log("[lead-intake] forwarded to Manager App:", res.status, data.leadId ?? "ok");
+-      } catch {
+-        console.log("[lead-intake] forwarded to Manager App:", res.status);
+-      }
+-    }
++    return { delivered: true as const };
+   } catch (err) {
+-    console.warn("[lead-intake] request error:", err);
++    console.error("[quote-api] Email delivery failed:", err);
++    throw err;
+   }
+ }
+ 
+ async function sendFbConversionEvent(payload: Record<string, unknown>, ip?: string, ua?: string) {
+   const pixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
+   const token = process.env.FB_CONVERSIONS_API_TOKEN;
+-  if (!pixelId || !token) return;
++  if (!pixelId || !token) {
++    return { delivered: false, reason: "missing_fb_pixel_config" as const };
++  }
+ 
+-  try {
+-    await fetch(`https://graph.facebook.com/v21.0/${pixelId}/events`, {
+-      method: "POST",
+-      headers: { "Content-Type": "application/json" },
+-      body: JSON.stringify({
+-        data: [
+-          {
+-            event_name: "Lead",
+-            event_time: Math.floor(Date.now() / 1000),
+-            action_source: "website",
+-            user_data: {
+-              em: payload.email ? [payload.email] : undefined,
+-              ph: payload.phone ? [payload.phone] : undefined,
+-              client_ip_address: ip || undefined,
+-              client_user_agent: ua || undefined,
+-            },
+-            custom_data: {
+-              content_name: payload.service || "Quote Request",
+-              content_category: "lead",
+-            },
++  const res = await fetch(`https://graph.facebook.com/v21.0/${pixelId}/events`, {
++    method: "POST",
++    headers: { "Content-Type": "application/json" },
++    body: JSON.stringify({
++      data: [
++        {
++          event_name: "Lead",
++          event_time: Math.floor(Date.now() / 1000),
++          action_source: "website",
++          user_data: {
++            em: payload.email ? [payload.email] : undefined,
++            ph: payload.phone ? [payload.phone] : undefined,
++            client_ip_address: ip || undefined,
++            client_user_agent: ua || undefined,
+           },
+-        ],
+-        access_token: token,
+-      }),
+-    });
+-  } catch (err) {
+-    console.warn("FB CAPI event failed:", err);
++          custom_data: {
++            content_name: payload.service || "Quote Request",
++            content_category: "lead",
++          },
++        },
++      ],
++      access_token: token,
++    }),
++  });
++
++  if (!res.ok) {
++    const text = await res.text();
++    console.error("[quote-api] FB Conversions API failed:", res.status, text);
++    throw new Error(`FB CAPI failed (${res.status})`);
+   }
++
++  return { delivered: true as const };
+ }
+ 
+ export async function POST(request: Request) {
+   try {
+     const body = await request.json();
+     const parsed = quoteSchema.safeParse(body);
++    const rawBody = body as Record<string, unknown>;
+ 
+     if (!parsed.success) {
+       return NextResponse.json(
+@@ -262,27 +220,63 @@ export async function POST(request: Request) {
+       );
+     }
+ 
+-    console.log("New quote request received", {
++    console.log("[quote-api] New request received:", {
+       service: parsed.data.service,
+       city: parsed.data.city,
+-      timeline: parsed.data.timeline,
+       email: redactEmail(parsed.data.email),
+       phone: redactPhone(parsed.data.phone),
+       ip: remoteIp || "unknown",
+     });
+ 
+-    await Promise.allSettled([
+-      sendLeadWebhook(parsed.data),
+-      sendLeadEmail(parsed.data),
+-      forwardToManagerApp(parsed.data),
+-      sendFbConversionEvent(parsed.data, remoteIp, userAgent),
++    // Send to all channels and log results
++    const results = await Promise.allSettled([
++      sendLeadWebhook(parsed.data).then(() => "Webhook"),
++      sendLeadEmail(parsed.data).then(() => "Email"),
++      forwardToManagerAppLead({
++        contactName: parsed.data.name,
++        phone: parsed.data.phone,
++        email: parsed.data.email,
++        serviceType: parsed.data.service,
++        source: "website_form",
++        notes: parsed.data.details,
++        utm_source: typeof rawBody.utm_source === "string" ? rawBody.utm_source : undefined,
++        utm_medium: typeof rawBody.utm_medium === "string" ? rawBody.utm_medium : undefined,
++        utm_campaign: typeof rawBody.utm_campaign === "string" ? rawBody.utm_campaign : undefined,
++        utm_content: typeof rawBody.utm_content === "string" ? rawBody.utm_content : undefined,
++        utm_term: typeof rawBody.utm_term === "string" ? rawBody.utm_term : undefined,
++        landing_path: typeof rawBody.landing_path === "string" ? rawBody.landing_path : undefined,
++        city: parsed.data.city,
++        zip: parsed.data.zip,
++        timeline: parsed.data.timeline,
++      }),
++      sendFbConversionEvent(parsed.data, remoteIp, userAgent).then(() => "FB Ads"),
+     ]);
+ 
++    const failures = results.filter((r) => r.status === "rejected");
++    if (failures.length > 0) {
++      console.warn(`[quote-api] Some delivery channels failed:`, failures.map(f => (f as PromiseRejectedResult).reason));
++    } else {
++      console.log("[quote-api] Lead delivered successfully to all configured channels.");
++    }
++
++    const managerResult = results[2];
++    if (managerResult.status === "fulfilled") {
++      if (!managerResult.value.forwarded) {
++        console.warn("[quote-api] Manager App delivery skipped or failed:", managerResult.value);
++      } else {
++        console.log("[quote-api] Lead forwarded to Manager App:", {
++          status: managerResult.value.status,
++          leadId: managerResult.value.leadId ?? "unknown",
++        });
++      }
++    }
++
+     return NextResponse.json({
+       ok: true,
+       message: "Thanks. Your request was sent. We will contact you shortly.",
+     });
+-  } catch {
++  } catch (err) {
++    console.error("[quote-api] Fatal error in POST handler:", err);
+     return NextResponse.json(
+       { ok: false, message: "Something went wrong. Please call us directly." },
+       { status: 500 },
+diff --git a/src/app/financing-terms/page.tsx b/src/app/financing-terms/page.tsx
+index 9ff9c91..fa7c1b5 100644
+--- a/src/app/financing-terms/page.tsx
++++ b/src/app/financing-terms/page.tsx
+@@ -4,9 +4,9 @@ import Button from "@/components/ui/Button";
+ import { siteConfig } from "@/content/site";
+ 
+ export const metadata: Metadata = {
+-  title: "Financing Terms & Disclosures | Revision Home Improvements",
++  title: "Financing Terms & Disclosures",
+   description:
+-    "Review financing disclosures, approval conditions, and program variability for Revision Home Improvements projects.",
++    "Review financing disclosures, approval conditions, and program variability for RHI Pros projects.",
+   alternates: { canonical: "/financing-terms" },
+ };
+ 
+diff --git a/src/app/layout.tsx b/src/app/layout.tsx
+index 0ed9bdd..c5e9f97 100644
+--- a/src/app/layout.tsx
++++ b/src/app/layout.tsx
+@@ -4,6 +4,7 @@ import "./globals.css";
+ import Header from "@/components/layout/Header";
+ import EmergencyBar from "@/components/layout/EmergencyBar";
+ import Footer from "@/components/layout/Footer";
++import StickyCTA from "@/components/layout/StickyCTA";
+ import TrackingEvents from "@/components/TrackingEvents";
+ import JsonLd from "@/components/JsonLd";
+ import { siteConfig } from "@/content/site";
+@@ -13,7 +14,7 @@ export const metadata: Metadata = {
+   metadataBase: new URL(siteConfig.domain),
+   title: {
+     default: "RHI Pros | Lehigh Valley Remodeling & Restoration",
+-    template: "%s | Revision Home Improvements",
++    template: "%s | RHI Pros",
+   },
+   description:
+     "Licensed remodeling and restoration contractor serving the Lehigh Valley, Reading, and Berks County. Kitchens, bathrooms, basements, and damage repair.",
+@@ -121,6 +122,7 @@ fbq('track', 'PageView');`}
+         <EmergencyBar />
+         <main className="pb-20 md:pb-0">{children}</main>
+         <Footer />
++        <StickyCTA />
+       </body>
+     </html>
+   );
+diff --git a/src/app/licenses-and-insurance/page.tsx b/src/app/licenses-and-insurance/page.tsx
+index f9d068b..b0ace62 100644
+--- a/src/app/licenses-and-insurance/page.tsx
++++ b/src/app/licenses-and-insurance/page.tsx
+@@ -6,9 +6,9 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+ import { siteConfig } from "@/content/site";
+ 
+ export const metadata: Metadata = {
+-  title: "Licensed & Insured Contractor | Revision Home Improvements",
++  title: "Licensed & Insured Contractor",
+   description:
+-    "Revision Home Improvements is a licensed and insured home improvement contractor in Pennsylvania. Verify our credentials before your project starts.",
++    "RHI Pros is a licensed and insured home improvement contractor in Pennsylvania. Verify our credentials before your project starts.",
+   alternates: { canonical: "/licenses-and-insurance" },
+ };
+ 
+diff --git a/src/app/our-process/page.tsx b/src/app/our-process/page.tsx
+index 700b11c..5183cc0 100644
+--- a/src/app/our-process/page.tsx
++++ b/src/app/our-process/page.tsx
+@@ -7,7 +7,7 @@ import JsonLd from "@/components/JsonLd";
+ import { getBreadcrumbJsonLd, getHowToJsonLd } from "@/lib/structuredData";
+ 
+ export const metadata: Metadata = {
+-  title: "Our Remodeling Process | Revision Home Improvements",
++  title: "Our Remodeling Process",
+   description:
+     "See how we run remodeling and restoration projects from discovery to final walkthrough, with clear scopes and predictable schedules.",
+   alternates: { canonical: "/our-process" },
+diff --git a/src/app/privacy/page.tsx b/src/app/privacy/page.tsx
+index 19ddd72..e25bd3b 100644
+--- a/src/app/privacy/page.tsx
++++ b/src/app/privacy/page.tsx
+@@ -7,7 +7,7 @@ import { siteConfig } from "@/content/site";
+ 
+ export const metadata: Metadata = {
+   title: "Privacy Policy",
+-  description: "How Revision Home Improvements collects, uses, and protects your information.",
++  description: "How RHI Pros collects, uses, and protects your information.",
+   alternates: { canonical: "/privacy" },
+ };
+ 
+diff --git a/src/app/services/page.tsx b/src/app/services/page.tsx
+index 2d33460..85cb5ce 100644
+--- a/src/app/services/page.tsx
++++ b/src/app/services/page.tsx
+@@ -3,6 +3,7 @@ import Image from "next/image";
+ import Link from "next/link";
+ import Container from "@/components/ui/Container";
+ import Button from "@/components/ui/Button";
++import FadeIn from "@/components/ui/FadeIn";
+ import JsonLd from "@/components/JsonLd";
+ import ConfidenceSection from "@/components/sections/ConfidenceSection";
+ import { primaryServices } from "@/content/services";
+@@ -21,68 +22,79 @@ export default function ServicesHubPage() {
+     <>
+       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Services", href: "/services" }])} />
+ 
+-      <section className="py-14">
++      <section className="py-14 md:py-24">
+         <Container>
+-          <h1 className="text-4xl font-extrabold text-[var(--accent)]">Our Services</h1>
+-          <p className="mt-3 max-w-3xl text-[var(--muted)]">
+-            From kitchens and bathrooms to emergency restoration, every project gets a written scope, a clear timeline, and a team that communicates.
+-          </p>
+-          <div className="mt-5 flex flex-wrap gap-3">
+-            <Button href="/request-a-quote">Request a Quote</Button>
+-            <Button href={siteConfig.phoneHref} variant="secondary">
+-              Call {siteConfig.phoneDisplay}
+-            </Button>
+-          </div>
++          <FadeIn>
++            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
++              Lehigh Valley &amp; Berks County
++            </p>
++            <h1 className="heading-serif mt-2 text-4xl text-[var(--accent)] md:text-5xl">Our Services</h1>
++            <p className="mt-4 max-w-3xl text-[0.9375rem] leading-relaxed text-[var(--muted)] md:text-base">
++              From kitchens and bathrooms to emergency restoration, every project gets a written scope, a clear timeline, and a team that communicates.
++            </p>
++            <div className="mt-6 flex flex-wrap gap-3">
++              <Button href="/request-a-quote">Request a Quote</Button>
++              <Button href={siteConfig.phoneHref} variant="secondary">
++                Call {siteConfig.phoneDisplay}
++              </Button>
++            </div>
++          </FadeIn>
+ 
+-          <div className="mt-8 grid gap-4 md:grid-cols-2">
+-            {primaryServices.map((service) => (
+-              <Link
+-                key={service.slug}
+-                href={`/services/${service.slug}`}
+-                className="surface group overflow-hidden rounded-xl transition hover:border-[var(--brand)]"
+-              >
+-                {service.image.src && (
+-                  <div className="relative h-48 overflow-hidden">
+-                    <Image
+-                      src={service.image.src}
+-                      alt={service.image.alt}
+-                      width={900}
+-                      height={500}
+-                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+-                    />
++          <FadeIn delay={0.15}>
++            <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2">
++              {primaryServices.map((service) => (
++                <Link
++                  key={service.slug}
++                  href={`/services/${service.slug}`}
++                  className="surface group overflow-hidden rounded-2xl transition hover:ring-1 hover:ring-[var(--brand)]"
++                >
++                  {service.image.src && (
++                    <div className="relative h-56 overflow-hidden md:h-64">
++                      <Image
++                        src={service.image.src}
++                        alt={service.image.alt}
++                        width={900}
++                        height={500}
++                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
++                      />
++                    </div>
++                  )}
++                  <div className="p-5 md:p-6">
++                    <h2 className="heading-serif text-xl text-[var(--accent)] md:text-2xl">{service.name}</h2>
++                    <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{service.short}</p>
++                    <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)] transition-transform group-hover:translate-x-1">
++                      Learn more &rarr;
++                    </span>
+                   </div>
+-                )}
+-                <div className="p-5">
+-                  <h2 className="text-xl font-semibold text-[var(--accent)]">{service.name}</h2>
+-                  <p className="mt-1 text-sm text-[var(--muted)]">{service.short}</p>
+-                  <span className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
+-                    Learn more &rarr;
+-                  </span>
+-                </div>
+-              </Link>
+-            ))}
+-          </div>
++                </Link>
++              ))}
++            </div>
++          </FadeIn>
+ 
+-          <ConfidenceSection
+-            className="mt-10"
+-            title="What Stays Consistent Across Every Service"
+-            intro="No matter the project type, we run the same standards for scope clarity, communication, and closeout quality."
+-          />
++          <FadeIn delay={0.2}>
++            <ConfidenceSection
++              className="mt-14 md:mt-20"
++              title="What Stays Consistent Across Every Service"
++              intro="No matter the project type, we run the same standards for scope clarity, communication, and closeout quality."
++            />
++          </FadeIn>
+         </Container>
+       </section>
+ 
+-      <section className="py-10">
++      <section className="surface-soft py-14 md:py-20">
+         <Container>
+-          <div className="surface rounded-2xl p-8 text-center">
+-            <h2 className="text-2xl font-bold text-[var(--accent)]">Not sure which service fits your project?</h2>
+-            <p className="mx-auto mt-2 max-w-2xl text-sm text-[var(--muted)]">
+-              Tell us what you are planning and we will point you in the right direction.
+-            </p>
+-            <div className="mt-5 flex flex-wrap justify-center gap-3">
+-              <Button href="/request-a-quote">Describe Your Project</Button>
+-              <Button href="/projects" variant="secondary">See Our Work</Button>
++          <FadeIn>
++            <div className="mx-auto max-w-3xl text-center">
++              <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">Not sure which service fits your project?</h2>
++              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)] md:text-base">
++                Tell us what you are planning and we will point you in the right direction.
++              </p>
++              <div className="mt-6 flex flex-wrap justify-center gap-3">
++                <Button href="/request-a-quote">Describe Your Project</Button>
++                <Button href="/projects" variant="secondary">See Our Work</Button>
++              </div>
+             </div>
+-          </div>
++          </FadeIn>
+         </Container>
+       </section>
+     </>
+diff --git a/src/app/warranty/page.tsx b/src/app/warranty/page.tsx
+index 7a367c3..9b7f1e8 100644
+--- a/src/app/warranty/page.tsx
++++ b/src/app/warranty/page.tsx
+@@ -6,9 +6,9 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+ import { siteConfig } from "@/content/site";
+ 
+ export const metadata: Metadata = {
+-  title: "Workmanship Warranty | Revision Home Improvements",
++  title: "Workmanship Warranty",
+   description:
+-    "Every Revision Home Improvements project includes a 12-month workmanship warranty plus any applicable manufacturer warranties. See what is covered and how to request service.",
++    "Every RHI Pros project includes a 12-month workmanship warranty plus any applicable manufacturer warranties. See what is covered and how to request service.",
+   alternates: { canonical: "/warranty" },
+ };
+ 
+diff --git a/src/components/TrackingEvents.tsx b/src/components/TrackingEvents.tsx
+index 5d33141..3e1e939 100644
+--- a/src/components/TrackingEvents.tsx
++++ b/src/components/TrackingEvents.tsx
+@@ -59,6 +59,18 @@ export default function TrackingEvents() {
+       emitWithParams("quote_submit_error", detail);
+     };
+     const onStepBack = () => emit("quote_step_back");
++    const onStickyCta = (event: Event) => {
++      const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
++      emitWithParams("sticky_cta_click", detail);
++    };
++    const onScrollToForm = (event: Event) => {
++      const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
++      emitWithParams("scroll_to_form", detail);
++    };
++    const onFormStart = (event: Event) => {
++      const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
++      emitWithParams("form_start", detail);
++    };
+ 
+     document.addEventListener("click", onClick);
+     window.addEventListener("rhi:generate_lead", onLead);
+@@ -68,6 +80,9 @@ export default function TrackingEvents() {
+     window.addEventListener("rhi:quote_submit_attempt", onSubmitAttempt);
+     window.addEventListener("rhi:quote_submit_error", onSubmitError);
+     window.addEventListener("rhi:quote_step_back", onStepBack);
++    window.addEventListener("rhi:sticky_cta_click", onStickyCta);
++    window.addEventListener("rhi:scroll_to_form", onScrollToForm);
++    window.addEventListener("rhi:form_start", onFormStart);
+ 
+     return () => {
+       document.removeEventListener("click", onClick);
+@@ -78,6 +93,9 @@ export default function TrackingEvents() {
+       window.removeEventListener("rhi:quote_submit_attempt", onSubmitAttempt);
+       window.removeEventListener("rhi:quote_submit_error", onSubmitError);
+       window.removeEventListener("rhi:quote_step_back", onStepBack);
++      window.removeEventListener("rhi:sticky_cta_click", onStickyCta);
++      window.removeEventListener("rhi:scroll_to_form", onScrollToForm);
++      window.removeEventListener("rhi:form_start", onFormStart);
+     };
+   }, []);
+ 
+diff --git a/src/components/forms/QuoteForm.tsx b/src/components/forms/QuoteForm.tsx
+index 589bc92..f9a725d 100644
+--- a/src/components/forms/QuoteForm.tsx
++++ b/src/components/forms/QuoteForm.tsx
+@@ -61,6 +61,7 @@ export default function QuoteForm() {
+   const [step, setStep] = useState<1 | 2>(1);
+   const [submitted, setSubmitted] = useState(false);
+   const [stepOneData, setStepOneData] = useState<StepOneData>(initialStepOneData);
++  const [formStarted, setFormStarted] = useState(false);
+   const [utmData, setUtmData] = useState<UtmData>({ utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "", landing_path: "" });
+ 
+   useEffect(() => {
+@@ -140,7 +141,7 @@ export default function QuoteForm() {
+   /* ΓöÇΓöÇ Success state ΓöÇΓöÇ */
+   if (submitted) {
+     return (
+-      <div className="surface rounded-2xl p-6 text-center">
++      <div id="quote-form-section" className="surface rounded-2xl p-6 text-center">
+         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
+           <svg className="h-7 w-7 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+@@ -173,7 +174,7 @@ export default function QuoteForm() {
+ 
+   /* ΓöÇΓöÇ Form ΓöÇΓöÇ */
+   return (
+-    <form onSubmit={onSubmit} className="surface rounded-2xl p-6" noValidate>
++    <form id="quote-form-section" onSubmit={onSubmit} className="surface rounded-2xl p-6" noValidate onFocusCapture={() => { if (!formStarted) { setFormStarted(true); track("rhi:form_start", { page: typeof window !== "undefined" ? window.location.pathname : "" }); } }}>
+       <div className="mb-4 flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+         <span>Request Your Quote</span>
+         <span>Step {step} of 2</span>
+diff --git a/src/components/layout/EmergencyBar.tsx b/src/components/layout/EmergencyBar.tsx
+index 36f17c1..40ac9ff 100644
+--- a/src/components/layout/EmergencyBar.tsx
++++ b/src/components/layout/EmergencyBar.tsx
+@@ -5,36 +5,70 @@ import { usePathname } from "next/navigation";
+ import { siteConfig } from "@/content/site";
+ import Container from "@/components/ui/Container";
+ 
++/** Paths where the emergency banner shows at full prominence */
++const RESTORATION_PATHS = [
++  "/fire-water-damage-restoration",
++  "/services/fire-damage-restoration",
++  "/services/water-damage-restoration",
++  "/insurance-claims",
++];
++
+ export default function EmergencyBar() {
+   const pathname = usePathname();
+ 
+-  // Hide on homepage to preserve luxury aesthetic
+-  if (pathname === "/") {
+-    return null;
++  // Hide completely on homepage
++  if (pathname === "/") return null;
++
++  const isRestorationPage = RESTORATION_PATHS.some(
++    (p) => pathname === p || pathname.startsWith(p + "/"),
++  );
++
++  // On restoration pages: full emergency banner
++  if (isRestorationPage) {
++    return (
++      <div className="border-b border-[var(--border)] bg-[var(--surface-soft)] py-2">
++        <Container className="flex flex-wrap items-center justify-between gap-2 text-sm">
++          <p className="text-[var(--accent)]">
++            <span className="font-semibold">Fire or water damage?</span> Call first for priority scheduling.
++          </p>
++          <div className="flex items-center gap-3">
++            <a
++              href={siteConfig.phoneHref}
++              className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
++              aria-label={`Call ${siteConfig.phoneDisplay} for priority restoration scheduling`}
++            >
++              <span className="md:hidden">Call {siteConfig.phoneDisplay}</span>
++              <span className="hidden md:inline">Call now</span>
++            </a>
++            <Link
++              href="/fire-water-damage-restoration"
++              className="font-semibold text-[var(--accent)] underline-offset-2 hover:underline"
++            >
++              Restoration help
++            </Link>
++          </div>
++        </Container>
++      </div>
++    );
+   }
+ 
++  // On all other pages: slim, demoted utility link
+   return (
+-    <div className="border-b border-[var(--border)] bg-[var(--surface-soft)] py-2">
+-      <Container className="flex flex-wrap items-center justify-between gap-2 text-sm">
+-        <p className="text-[var(--accent)]">
+-          <span className="font-semibold">Fire or water damage?</span> Call first for priority scheduling.
+-        </p>
+-        <div className="flex items-center gap-3">
+-          <a
+-            href={siteConfig.phoneHref}
+-            className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+-            aria-label={`Call ${siteConfig.phoneDisplay} for priority restoration scheduling`}
+-          >
+-            <span className="md:hidden">Call {siteConfig.phoneDisplay}</span>
+-            <span className="hidden md:inline">Call now</span>
+-          </a>
+-          <Link
+-            href="/fire-water-damage-restoration"
+-            className="font-semibold text-[var(--accent)] underline-offset-2 hover:underline"
+-          >
+-            Restoration help
+-          </Link>
+-        </div>
++    <div className="border-b border-[var(--border)] bg-[var(--surface-soft)] py-1.5">
++      <Container className="flex items-center justify-end gap-3 text-xs text-[var(--muted)]">
++        <span>Emergency damage?</span>
++        <a
++          href={siteConfig.phoneHref}
++          className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
++        >
++          Call {siteConfig.phoneDisplay}
++        </a>
++        <Link
++          href="/fire-water-damage-restoration"
++          className="font-semibold underline-offset-2 hover:underline"
++        >
++          Restoration help
++        </Link>
+       </Container>
+     </div>
+   );
+diff --git a/src/components/layout/Header.tsx b/src/components/layout/Header.tsx
+index 9cef8e6..c65f960 100644
+--- a/src/components/layout/Header.tsx
++++ b/src/components/layout/Header.tsx
+@@ -78,7 +78,7 @@ export default function Header() {
+             className={logoClass}
+             priority
+           />
+-          <span className="hidden text-base font-bold leading-tight tracking-tight sm:block">
++          <span className="heading-serif text-lg leading-tight sm:text-xl">
+             {siteConfig.name}
+           </span>
+         </Link>
+diff --git a/src/components/layout/StickyCTA.tsx b/src/components/layout/StickyCTA.tsx
+index 5fb42d4..971fbd7 100644
+--- a/src/components/layout/StickyCTA.tsx
++++ b/src/components/layout/StickyCTA.tsx
+@@ -5,6 +5,36 @@ import { usePathname } from "next/navigation";
+ import { siteConfig } from "@/content/site";
+ import Button from "@/components/ui/Button";
+ 
++/** Restoration service slugs for emergency CTA labels */
++const EMERGENCY_SLUGS = ["fire-damage-restoration", "water-damage-restoration"];
++
++/** Utility / small-scope service slugs */
++const UTILITY_SLUGS = ["drywall-installation-repair"];
++
++function getCtaConfig(pathname: string) {
++  // Emergency / restoration pages
++  if (
++    pathname === "/fire-water-damage-restoration" ||
++    pathname === "/insurance-claims" ||
++    EMERGENCY_SLUGS.some((s) => pathname.includes(s))
++  ) {
++    return { label: "Call for Priority Scheduling", mode: "phone" as const };
++  }
++
++  // Utility / small-scope
++  if (UTILITY_SLUGS.some((s) => pathname.includes(s))) {
++    return { label: "Schedule a Repair", mode: "scroll" as const };
++  }
++
++  // Default: remodeling (visual or technical)
++  return { label: "Get a Written Quote", mode: "scroll" as const };
++}
++
++function emitEvent(name: string, detail?: Record<string, unknown>) {
++  if (typeof window === "undefined") return;
++  window.dispatchEvent(new CustomEvent(`rhi:${name}`, { detail }));
++}
++
+ export default function StickyCTA() {
+   const [visible, setVisible] = useState(false);
+   const pathname = usePathname();
+@@ -18,14 +48,53 @@ export default function StickyCTA() {
+     return () => window.removeEventListener("scroll", onScroll);
+   }, []);
+ 
+-  if (!visible || pathname === "/request-a-quote") return null;
++  // Hide on dedicated quote page and homepage
++  if (!visible || pathname === "/request-a-quote" || pathname === "/") return null;
++
++  const { label, mode } = getCtaConfig(pathname);
++
++  const handleClick = () => {
++    // Derive service identifier from path for analytics
++    const serviceSlug = pathname.startsWith("/services/")
++      ? pathname.replace("/services/", "")
++      : pathname.replace(/^\//, "") || "homepage";
++
++    emitEvent("sticky_cta_click", { label, mode, service: serviceSlug, page: pathname });
++
++    if (mode === "scroll") {
++      // Scroll to the on-page quote form
++      const form = document.getElementById("quote-form-section");
++      if (form) {
++        form.scrollIntoView({ behavior: "smooth", block: "start" });
++        emitEvent("scroll_to_form", { service: serviceSlug, page: pathname });
++        return;
++      }
++      // Fallback: no form on page, navigate to quote page
++      window.location.href = "/request-a-quote";
++    }
++    // Phone mode is handled by the <a> tag below
++  };
+ 
+   return (
+     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--border)] bg-white px-3 pb-[env(safe-area-inset-bottom,8px)] pt-2.5 shadow-lg md:hidden">
+       <div className="mx-auto flex max-w-6xl flex-col gap-1.5">
+-        <Button href="/request-a-quote" className="py-2.5 text-center text-sm">
+-          Request a Quote
+-        </Button>
++        {mode === "phone" ? (
++          <a
++            href={siteConfig.phoneHref}
++            onClick={handleClick}
++            className="block rounded-full bg-[var(--brand)] px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
++          >
++            {label}
++          </a>
++        ) : (
++          <button
++            type="button"
++            onClick={handleClick}
++            className="block w-full rounded-full bg-[var(--brand)] px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
++          >
++            {label}
++          </button>
++        )}
+         <p className="text-center text-xs text-[var(--muted)]">
+           or{" "}
+           <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
+diff --git a/src/content/caseStudies.ts b/src/content/caseStudies.ts
+index e85d142..e9b50db 100644
+--- a/src/content/caseStudies.ts
++++ b/src/content/caseStudies.ts
+@@ -584,6 +584,7 @@ export const caseStudies: CaseStudy[] = [
+     locationSlug: "bethlehem-pa",
+     serviceName: "Drywall Installation and Repair",
+     serviceSlug: "drywall-installation-repair",
++    featureInServiceListings: false,
+     timeline: "3 to 6 days",
+     scope: ["Damaged area repairs", "Seam blending and finish prep", "Final inspection for paint readiness"],
+     challenge:
+@@ -745,6 +746,7 @@ export const caseStudies: CaseStudy[] = [
+     locationSlug: "berks-county-pa",
+     serviceName: "Drywall Installation and Repair",
+     serviceSlug: "drywall-installation-repair",
++    featureInServiceListings: false,
+     timeline: "Several days to 2 weeks",
+     scope: [
+       "Surface prep, patching, and paint-ready finishing for walls and ceiling",
+diff --git a/src/lib/leadIntake.ts b/src/lib/leadIntake.ts
+index c6de6f1..6357cc0 100644
+--- a/src/lib/leadIntake.ts
++++ b/src/lib/leadIntake.ts
+@@ -37,56 +37,75 @@ export async function forwardToManagerAppLead(input: ManagerLeadIntakeInput): Pr
+   }
+ 
+   const externalRef = input.externalRef ?? `${input.source}-${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
++  const intakeUrl = `${managerUrl}/api/leads/intake`;
+ 
+-  try {
+-    const intakeUrl = `${managerUrl}/api/leads/intake`;
+-    const res = await fetch(intakeUrl, {
+-      method: "POST",
+-      headers: {
+-        "Content-Type": "application/json",
+-        "x-lead-intake-key": apiKey,
+-      },
+-      body: JSON.stringify({
+-        externalRef,
+-        contactName: input.contactName,
+-        phone: input.phone,
+-        email: input.email,
+-        address: input.address,
+-        serviceType: input.serviceType,
+-        source: input.source,
+-        notes: input.notes,
+-        utm_source: input.utm_source,
+-        utm_medium: input.utm_medium,
+-        utm_campaign: input.utm_campaign,
+-        utm_content: input.utm_content,
+-        utm_term: input.utm_term,
+-        landing_path: input.landing_path,
+-        city: input.city,
+-        zip: input.zip,
+-        timeline: input.timeline,
+-      }),
+-    });
+-    const text = await res.text();
+-    if (!res.ok) {
++  const payload = {
++    externalRef,
++    contactName: input.contactName,
++    phone: input.phone,
++    email: input.email,
++    address: input.address,
++    serviceType: input.serviceType,
++    source: input.source,
++    notes: input.notes,
++    utm_source: input.utm_source,
++    utm_medium: input.utm_medium,
++    utm_campaign: input.utm_campaign,
++    utm_content: input.utm_content,
++    utm_term: input.utm_term,
++    landing_path: input.landing_path,
++    city: input.city,
++    zip: input.zip,
++    timeline: input.timeline,
++  };
++
++  const maxAttempts = 2;
++  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
++    try {
++      const res = await fetch(intakeUrl, {
++        method: "POST",
++        headers: {
++          "Content-Type": "application/json",
++          "x-lead-intake-key": apiKey,
++        },
++        body: JSON.stringify(payload),
++      });
++      const text = await res.text();
++      if (!res.ok) {
++        if (attempt < maxAttempts) {
++          await new Promise((resolve) => setTimeout(resolve, 250 * attempt));
++          continue;
++        }
++        return {
++          forwarded: false,
++          reason: "non_2xx",
++          status: res.status,
++          responseText: text,
++        };
++      }
++
++      try {
++        const data = JSON.parse(text || "{}") as { leadId?: string };
++        return { forwarded: true, status: res.status, leadId: data.leadId };
++      } catch {
++        return { forwarded: true, status: res.status };
++      }
++    } catch (err) {
++      if (attempt < maxAttempts) {
++        await new Promise((resolve) => setTimeout(resolve, 250 * attempt));
++        continue;
++      }
+       return {
+         forwarded: false,
+-        reason: "non_2xx",
+-        status: res.status,
+-        responseText: text,
++        reason: "request_error",
++        responseText: err instanceof Error ? err.message : String(err),
+       };
+     }
+-
+-    try {
+-      const data = JSON.parse(text || "{}") as { leadId?: string };
+-      return { forwarded: true, status: res.status, leadId: data.leadId };
+-    } catch {
+-      return { forwarded: true, status: res.status };
+-    }
+-  } catch (err) {
+-    return {
+-      forwarded: false,
+-      reason: "request_error",
+-      responseText: err instanceof Error ? err.message : String(err),
+-    };
+   }
++
++  return {
++    forwarded: false,
++    reason: "request_error",
++    responseText: "Lead forwarding failed after retries",
++  };
+ }

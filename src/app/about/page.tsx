@@ -11,7 +11,7 @@ import { siteConfig } from "@/content/site";
 import { testimonials } from "@/content/testimonials";
 
 export const metadata: Metadata = {
-  title: "About Revision Home Improvements | Reading & Lehigh Valley Contractor",
+  title: "About RHI Pros | Lehigh Valley & Berks County Contractor",
   description:
     "Local, licensed, and insured remodeling contractor serving Reading, Berks County, and the Lehigh Valley with clear scopes and reliable schedules.",
   alternates: { canonical: "/about" },

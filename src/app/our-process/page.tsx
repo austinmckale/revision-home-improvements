@@ -7,7 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd, getHowToJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Our Remodeling Process | Revision Home Improvements",
+  title: "Our Remodeling Process",
   description:
     "See how we run remodeling and restoration projects from discovery to final walkthrough, with clear scopes and predictable schedules.",
   alternates: { canonical: "/our-process" },

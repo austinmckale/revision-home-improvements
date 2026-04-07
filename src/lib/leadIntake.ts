@@ -37,56 +37,75 @@ export async function forwardToManagerAppLead(input: ManagerLeadIntakeInput): Pr
   }
 
   const externalRef = input.externalRef ?? `${input.source}-${Date.now()}-${crypto.randomUUID().slice(0, 8)}`;
+  const intakeUrl = `${managerUrl}/api/leads/intake`;
 
-  try {
-    const intakeUrl = `${managerUrl}/api/leads/intake`;
-    const res = await fetch(intakeUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-lead-intake-key": apiKey,
-      },
-      body: JSON.stringify({
-        externalRef,
-        contactName: input.contactName,
-        phone: input.phone,
-        email: input.email,
-        address: input.address,
-        serviceType: input.serviceType,
-        source: input.source,
-        notes: input.notes,
-        utm_source: input.utm_source,
-        utm_medium: input.utm_medium,
-        utm_campaign: input.utm_campaign,
-        utm_content: input.utm_content,
-        utm_term: input.utm_term,
-        landing_path: input.landing_path,
-        city: input.city,
-        zip: input.zip,
-        timeline: input.timeline,
-      }),
-    });
-    const text = await res.text();
-    if (!res.ok) {
+  const payload = {
+    externalRef,
+    contactName: input.contactName,
+    phone: input.phone,
+    email: input.email,
+    address: input.address,
+    serviceType: input.serviceType,
+    source: input.source,
+    notes: input.notes,
+    utm_source: input.utm_source,
+    utm_medium: input.utm_medium,
+    utm_campaign: input.utm_campaign,
+    utm_content: input.utm_content,
+    utm_term: input.utm_term,
+    landing_path: input.landing_path,
+    city: input.city,
+    zip: input.zip,
+    timeline: input.timeline,
+  };
+
+  const maxAttempts = 2;
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    try {
+      const res = await fetch(intakeUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-lead-intake-key": apiKey,
+        },
+        body: JSON.stringify(payload),
+      });
+      const text = await res.text();
+      if (!res.ok) {
+        if (attempt < maxAttempts) {
+          await new Promise((resolve) => setTimeout(resolve, 250 * attempt));
+          continue;
+        }
+        return {
+          forwarded: false,
+          reason: "non_2xx",
+          status: res.status,
+          responseText: text,
+        };
+      }
+
+      try {
+        const data = JSON.parse(text || "{}") as { leadId?: string };
+        return { forwarded: true, status: res.status, leadId: data.leadId };
+      } catch {
+        return { forwarded: true, status: res.status };
+      }
+    } catch (err) {
+      if (attempt < maxAttempts) {
+        await new Promise((resolve) => setTimeout(resolve, 250 * attempt));
+        continue;
+      }
       return {
         forwarded: false,
-        reason: "non_2xx",
-        status: res.status,
-        responseText: text,
+        reason: "request_error",
+        responseText: err instanceof Error ? err.message : String(err),
       };
     }
-
-    try {
-      const data = JSON.parse(text || "{}") as { leadId?: string };
-      return { forwarded: true, status: res.status, leadId: data.leadId };
-    } catch {
-      return { forwarded: true, status: res.status };
-    }
-  } catch (err) {
-    return {
-      forwarded: false,
-      reason: "request_error",
-      responseText: err instanceof Error ? err.message : String(err),
-    };
   }
+
+  return {
+    forwarded: false,
+    reason: "request_error",
+    responseText: "Lead forwarding failed after retries",
+  };
 }

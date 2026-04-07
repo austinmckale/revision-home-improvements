@@ -59,6 +59,18 @@ export default function TrackingEvents() {
       emitWithParams("quote_submit_error", detail);
     };
     const onStepBack = () => emit("quote_step_back");
+    const onStickyCta = (event: Event) => {
+      const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
+      emitWithParams("sticky_cta_click", detail);
+    };
+    const onScrollToForm = (event: Event) => {
+      const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
+      emitWithParams("scroll_to_form", detail);
+    };
+    const onFormStart = (event: Event) => {
+      const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
+      emitWithParams("form_start", detail);
+    };
 
     document.addEventListener("click", onClick);
     window.addEventListener("rhi:generate_lead", onLead);
@@ -68,6 +80,9 @@ export default function TrackingEvents() {
     window.addEventListener("rhi:quote_submit_attempt", onSubmitAttempt);
     window.addEventListener("rhi:quote_submit_error", onSubmitError);
     window.addEventListener("rhi:quote_step_back", onStepBack);
+    window.addEventListener("rhi:sticky_cta_click", onStickyCta);
+    window.addEventListener("rhi:scroll_to_form", onScrollToForm);
+    window.addEventListener("rhi:form_start", onFormStart);
 
     return () => {
       document.removeEventListener("click", onClick);
@@ -78,6 +93,9 @@ export default function TrackingEvents() {
       window.removeEventListener("rhi:quote_submit_attempt", onSubmitAttempt);
       window.removeEventListener("rhi:quote_submit_error", onSubmitError);
       window.removeEventListener("rhi:quote_step_back", onStepBack);
+      window.removeEventListener("rhi:sticky_cta_click", onStickyCta);
+      window.removeEventListener("rhi:scroll_to_form", onScrollToForm);
+      window.removeEventListener("rhi:form_start", onFormStart);
     };
   }, []);
 

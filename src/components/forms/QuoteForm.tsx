@@ -61,6 +61,7 @@ export default function QuoteForm() {
   const [step, setStep] = useState<1 | 2>(1);
   const [submitted, setSubmitted] = useState(false);
   const [stepOneData, setStepOneData] = useState<StepOneData>(initialStepOneData);
+  const [formStarted, setFormStarted] = useState(false);
   const [utmData, setUtmData] = useState<UtmData>({ utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "", landing_path: "" });
 
   useEffect(() => {
@@ -140,7 +141,7 @@ export default function QuoteForm() {
   /* ── Success state ── */
   if (submitted) {
     return (
-      <div className="surface rounded-2xl p-6 text-center">
+      <div id="quote-form-section" className="surface rounded-2xl p-6 text-center">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
           <svg className="h-7 w-7 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -173,7 +174,7 @@ export default function QuoteForm() {
 
   /* ── Form ── */
   return (
-    <form onSubmit={onSubmit} className="surface rounded-2xl p-6" noValidate>
+    <form id="quote-form-section" onSubmit={onSubmit} className="surface rounded-2xl p-6" noValidate onFocusCapture={() => { if (!formStarted) { setFormStarted(true); track("rhi:form_start", { page: typeof window !== "undefined" ? window.location.pathname : "" }); } }}>
       <div className="mb-4 flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
         <span>Request Your Quote</span>
         <span>Step {step} of 2</span>

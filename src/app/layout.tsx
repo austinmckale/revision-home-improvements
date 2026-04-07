@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import EmergencyBar from "@/components/layout/EmergencyBar";
 import Footer from "@/components/layout/Footer";
+import StickyCTA from "@/components/layout/StickyCTA";
 import TrackingEvents from "@/components/TrackingEvents";
 import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/content/site";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.domain),
   title: {
     default: "RHI Pros | Lehigh Valley Remodeling & Restoration",
-    template: "%s | Revision Home Improvements",
+    template: "%s | RHI Pros",
   },
   description:
     "Licensed remodeling and restoration contractor serving the Lehigh Valley, Reading, and Berks County. Kitchens, bathrooms, basements, and damage repair.",
@@ -121,6 +122,7 @@ fbq('track', 'PageView');`}
         <EmergencyBar />
         <main className="pb-20 md:pb-0">{children}</main>
         <Footer />
+        <StickyCTA />
       </body>
     </html>
   );

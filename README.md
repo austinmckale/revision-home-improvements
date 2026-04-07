@@ -51,7 +51,7 @@ Copy `.env.example` to `.env.local` and fill values:
 - `NEXT_PUBLIC_SITE_URL`
 - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
 - `TURNSTILE_SECRET_KEY`
-- `LEADS_TO_EMAIL`
+- `EMAIL_TO`
 - `LEADS_WEBHOOK_URL`
 - `DISCORD_WEBHOOK_URL` (optional alias; use this if you only want Discord delivery)
 - `NEXT_PUBLIC_GA_MEASUREMENT_ID`

@@ -584,6 +584,7 @@ export const caseStudies: CaseStudy[] = [
     locationSlug: "bethlehem-pa",
     serviceName: "Drywall Installation and Repair",
     serviceSlug: "drywall-installation-repair",
+    featureInServiceListings: false,
     timeline: "3 to 6 days",
     scope: ["Damaged area repairs", "Seam blending and finish prep", "Final inspection for paint readiness"],
     challenge:
@@ -745,6 +746,7 @@ export const caseStudies: CaseStudy[] = [
     locationSlug: "berks-county-pa",
     serviceName: "Drywall Installation and Repair",
     serviceSlug: "drywall-installation-repair",
+    featureInServiceListings: false,
     timeline: "Several days to 2 weeks",
     scope: [
       "Surface prep, patching, and paint-ready finishing for walls and ceiling",

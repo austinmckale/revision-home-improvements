@@ -78,7 +78,7 @@ export default function Header() {
             className={logoClass}
             priority
           />
-          <span className="hidden text-base font-bold leading-tight tracking-tight sm:block">
+          <span className="heading-serif text-lg leading-tight sm:text-xl">
             {siteConfig.name}
           </span>
         </Link>
