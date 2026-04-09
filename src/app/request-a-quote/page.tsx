@@ -8,7 +8,7 @@ import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Request a Remodeling Quote | Allentown, Bethlehem & Lehigh Valley",
+  title: { absolute: "Request a Quote | RHI Pros | Lehigh Valley & Berks County" },
   description:
     "Request a kitchen, bathroom, basement, or restoration quote in Allentown, Bethlehem, or the Lehigh Valley. Fast response and clear scope.",
   alternates: { canonical: "/request-a-quote" },

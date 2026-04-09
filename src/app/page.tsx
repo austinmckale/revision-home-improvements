@@ -5,7 +5,7 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import JsonLd from "@/components/JsonLd";
-import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getBreadcrumbJsonLd, getWebSiteJsonLd } from "@/lib/structuredData";
 import { primaryServices } from "@/content/services";
 import { visibleCaseStudies } from "@/content/caseStudies";
 import { testimonials } from "@/content/testimonials";
@@ -43,6 +43,7 @@ export default function HomePage() {
 
   return (
     <>
+      <JsonLd data={getWebSiteJsonLd()} />
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }])} />
 
       {/* Hero */}

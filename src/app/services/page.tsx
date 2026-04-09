@@ -11,7 +11,7 @@ import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Lehigh Valley Remodeling & Restoration Services",
+  title: "Remodeling & Restoration Services",
   description:
     "Kitchen, bathroom, basement, flooring, drywall, exterior, paver, and fire/water restoration services across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.",
   alternates: { canonical: "/services" },

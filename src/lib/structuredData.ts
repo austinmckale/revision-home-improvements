@@ -1,5 +1,14 @@
 import { siteConfig } from "@/content/site";
 
+export function getWebSiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: `${siteConfig.domain}/`,
+  };
+}
+
 export function getLocalBusinessJsonLd() {
   const sameAs = [siteConfig.googleBusinessProfileUrl, siteConfig.facebookPageUrl].filter(Boolean);
   return {
