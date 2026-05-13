@@ -19,7 +19,7 @@ export default function Button({
       ? "bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)] focus-visible:ring-2 focus-visible:ring-[var(--brand)] focus-visible:ring-offset-2"
       : "bg-white text-[var(--brand)] border border-[var(--brand)] hover:bg-[var(--surface-soft)] focus-visible:ring-2 focus-visible:ring-[var(--brand)] focus-visible:ring-offset-2";
 
-  if (href.startsWith("tel:")) {
+  if (href.startsWith("tel:") || href.startsWith("#")) {
     return (
       <a
         href={href}

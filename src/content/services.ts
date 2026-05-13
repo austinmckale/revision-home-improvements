@@ -152,7 +152,7 @@ export const services: Service[] = [
       "Bathroom upgrades with improved storage, tilework, fixtures, and clean modern finishes.",
     intro:
       "A bathroom remodel touches plumbing, waterproofing, tile, electrical, and finishes, all in a space your household uses every day. We plan the work around your daily routine, handle waterproofing properly so nothing fails behind the walls, and keep the jobsite clean throughout. You get a written scope before we start and consistent updates until the final walkthrough.",
-    cta: "Request a Bathroom Quote",
+    cta: "Get My Bathroom Quote",
     bullets: ["Showers and vanities", "Tile and waterproofing", "Efficient layouts"],
     whatIncluded: [
       "Shower/tub area upgrades and fixture replacement",
@@ -207,8 +207,8 @@ export const services: Service[] = [
         "Shown to illustrate build quality and sequencing. Your scope will vary based on layout, conditions, and finish selections.",
     },
     image: {
-      src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
-      alt: "Finished bathroom renovation showing updated vanity, lighting, and new door addition.",
+      src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
+      alt: "Finished bathroom shower with updated tile, fixtures, and clean modern finishes.",
     },
     gallery: [
       { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg", alt: "Finished bathroom renovation showing updated vanity and new door addition." },

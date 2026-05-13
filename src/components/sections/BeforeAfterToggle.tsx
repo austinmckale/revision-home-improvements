@@ -14,8 +14,29 @@ type Props = {
 };
 
 export default function BeforeAfterToggle({ beforeImages, afterImages }: Props) {
+  const hasBeforeImages = beforeImages.length > 0;
   const [activeStage, setActiveStage] = useState<"BEFORE" | "AFTER">("AFTER");
   const activeImages = activeStage === "BEFORE" ? beforeImages : afterImages;
+
+  /* When no before images exist, show after gallery without a misleading toggle */
+  if (!hasBeforeImages) {
+    return (
+      <section className="surface mt-8 rounded-xl p-5">
+        <h3 className="text-lg font-semibold text-[var(--accent)]">Project Photos</h3>
+        <p className="mt-3 text-sm text-[var(--muted)]">After photos for this project.</p>
+        <ExpandableImageGrid
+          images={afterImages.map((image) => ({
+            ...image,
+            caption: "After",
+          }))}
+          gridClassName="mt-4 columns-1 gap-4 lg:columns-2"
+          cardClassName="mb-4 break-inside-avoid overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
+          imageClassName="h-auto w-full"
+          captionClassName="px-3 py-2 text-xs font-semibold uppercase tracking-wide text-[var(--muted)]"
+        />
+      </section>
+    );
+  }
 
   return (
     <section className="surface mt-8 rounded-xl p-5">

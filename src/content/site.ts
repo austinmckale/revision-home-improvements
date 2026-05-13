@@ -17,7 +17,7 @@ export const siteConfig = {
   },
   ogImage: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
   logo: "/images/brand/rhi-logo.png",
-  hicNumber: "PA HIC #PA185945",
+  hicNumber: "PA185945",
   insuranceCarrier: "Provided upon request during estimate review",
   financing: {
     teaser: "0% promotional financing may be available for qualified customers.",

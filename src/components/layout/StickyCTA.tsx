@@ -69,8 +69,13 @@ export default function StickyCTA() {
         emitEvent("scroll_to_form", { service: serviceSlug, page: pathname });
         return;
       }
-      // Fallback: no form on page, navigate to quote page
-      window.location.href = "/request-a-quote";
+      // Fallback: no form on page, navigate to quote page with service context
+      const pathService = pathname.startsWith("/services/")
+        ? pathname.replace("/services/", "")
+        : pathname.split("/").pop() || "";
+      window.location.href = pathService
+        ? `/request-a-quote?service=${encodeURIComponent(pathService)}`
+        : "/request-a-quote";
     }
     // Phone mode is handled by the <a> tag below
   };

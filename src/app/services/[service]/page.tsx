@@ -135,17 +135,19 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       <section className="hero-band py-10 md:py-16">
         <Container className="grid items-center gap-8 md:grid-cols-2 md:gap-10">
           {service.image.src && (
-            <div className="surface order-first overflow-hidden rounded-2xl md:order-none">
+            <div className="surface order-last overflow-hidden rounded-2xl md:order-none">
               <Image
                 src={service.image.src}
                 alt={service.image.alt}
                 width={1200}
                 height={800}
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="h-full w-full object-cover"
               />
             </div>
           )}
-          <div className="order-last md:order-none">
+          <div>
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
               Lehigh Valley &amp; Berks County
             </p>
@@ -167,13 +169,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
               {isEmergencyService ? (
                 <>
                   <Button href={siteConfig.phoneHref}>Call {siteConfig.phoneDisplay}</Button>
-                  <Button href="/request-a-quote" variant="secondary">
+                  <Button href={`/request-a-quote?service=${service.slug}`} variant="secondary">
                     Request a quote
                   </Button>
                 </>
               ) : (
                 <>
-                  <Button href="/request-a-quote">{service.cta}</Button>
+                  <Button href="#quote-form-section">{service.cta}</Button>
                   <Button href={siteConfig.phoneHref} variant="secondary">
                     Call {siteConfig.phoneDisplay}
                   </Button>
@@ -369,7 +371,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                     expandLabel="Tap to expand"
                   />
                   <div className="mt-5">
-                    <Button href="/request-a-quote">
+                    <Button href={`/request-a-quote?service=${service.slug}`}>
                       {isEmergencyService ? "Request a quote" : service.cta}
                     </Button>
                   </div>
@@ -497,7 +499,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             </FadeIn>
           </div>
           <div className="sticky top-24 h-fit pb-14">
-            <QuoteForm />
+            <QuoteForm defaultService={service.name} />
           </div>
         </Container>
       </section>

@@ -5,6 +5,11 @@ import { primaryServices } from "@/content/services";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 
+type QuoteFormProps = {
+  /** Pre-select and hide the service dropdown. Pass the service name (e.g. "Bathroom Remodeling"). */
+  defaultService?: string;
+};
+
 type FormState = {
   ok: boolean;
   message?: string;
@@ -55,7 +60,7 @@ function captureUtmParams(): UtmData {
   };
 }
 
-export default function QuoteForm() {
+export default function QuoteForm({ defaultService }: QuoteFormProps) {
   const [state, setState] = useState<FormState>(initialState);
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
@@ -63,10 +68,27 @@ export default function QuoteForm() {
   const [stepOneData, setStepOneData] = useState<StepOneData>(initialStepOneData);
   const [formStarted, setFormStarted] = useState(false);
   const [utmData, setUtmData] = useState<UtmData>({ utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "", landing_path: "" });
+  const [servicePreselected, setServicePreselected] = useState(false);
 
   useEffect(() => {
     setUtmData(captureUtmParams());
   }, []);
+
+  // Pre-select service from prop or ?service= URL param
+  useEffect(() => {
+    let detected = defaultService || "";
+    if (!detected && typeof window !== "undefined") {
+      const slug = new URLSearchParams(window.location.search).get("service");
+      if (slug) {
+        const matched = primaryServices.find((s) => s.slug === slug || s.name.toLowerCase() === slug.toLowerCase());
+        if (matched) detected = matched.name;
+      }
+    }
+    if (detected) {
+      setStepOneData((prev) => ({ ...prev, service: detected }));
+      setServicePreselected(true);
+    }
+  }, [defaultService]);
 
   const fieldError = (name: string) => state.errors?.[name]?.[0];
   const isEmergencySelection = stepOneData.service.toLowerCase().includes("damage");
@@ -234,33 +256,46 @@ export default function QuoteForm() {
             />
             {fieldError("email") && <span className="mt-1 block text-xs text-red-700">{fieldError("email")}</span>}
           </label>
-          <label className="text-sm">
-            Service
-            <select
-              className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
-              name="service"
-              value={stepOneData.service}
-              required
-              onChange={(event) => {
-                const serviceValue = event.target.value;
-                setStepOneData((prev) => ({
-                  ...prev,
-                  service: serviceValue,
-                }));
-                track("rhi:quote_service_selected", { service: serviceValue });
-              }}
-            >
-              <option value="" disabled>
-                Select service
-              </option>
-              {primaryServices.map((service) => (
-                <option key={service.slug} value={service.name}>
-                  {service.name}
+          {servicePreselected ? (
+            <>
+              <input type="hidden" name="service" value={stepOneData.service} />
+              <div className="text-sm">
+                <span className="text-[var(--muted)]">Service</span>
+                <p className="mt-1 flex items-center gap-2 rounded-md border border-[var(--brand)]/20 bg-[var(--brand)]/5 px-3 py-2 text-sm font-medium text-[var(--accent)]">
+                  <svg className="h-4 w-4 text-[var(--brand)]" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  {stepOneData.service}
+                </p>
+              </div>
+            </>
+          ) : (
+            <label className="text-sm">
+              Service
+              <select
+                className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
+                name="service"
+                value={stepOneData.service}
+                required
+                onChange={(event) => {
+                  const serviceValue = event.target.value;
+                  setStepOneData((prev) => ({
+                    ...prev,
+                    service: serviceValue,
+                  }));
+                  track("rhi:quote_service_selected", { service: serviceValue });
+                }}
+              >
+                <option value="" disabled>
+                  Select service
                 </option>
-              ))}
-            </select>
-            {fieldError("service") && <span className="mt-1 block text-xs text-red-700">{fieldError("service")}</span>}
-          </label>
+                {primaryServices.map((service) => (
+                  <option key={service.slug} value={service.name}>
+                    {service.name}
+                  </option>
+                ))}
+              </select>
+              {fieldError("service") && <span className="mt-1 block text-xs text-red-700">{fieldError("service")}</span>}
+            </label>
+          )}
         </div>
       )}
 

@@ -157,13 +157,13 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               {isEmergencyService ? (
                 <>
                   <Button href={siteConfig.phoneHref}>Call {siteConfig.phoneDisplay}</Button>
-                  <Button href="/request-a-quote" variant="secondary">
+                  <Button href={`/request-a-quote?service=${service.slug}`} variant="secondary">
                     Request a quote
                   </Button>
                 </>
               ) : (
                 <>
-                  <Button href="/request-a-quote">Get a Free Quote</Button>
+                  <Button href="#quote-form-section">Get a Free Quote</Button>
                   <Button href={siteConfig.phoneHref} variant="secondary">
                     Call {siteConfig.phoneDisplay}
                   </Button>
@@ -282,7 +282,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
 
           <div className="lg:row-span-2 lg:col-start-2">
             <div className="lg:sticky lg:top-24">
-              <QuoteForm />
+              <QuoteForm defaultService={service.name} />
             </div>
           </div>
 
@@ -297,7 +297,6 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                     className="surface rounded-lg p-4 hover:border-[var(--brand)]"
                   >
                     <p className="text-sm font-semibold text-[var(--accent)]">{link.anchorText}</p>
-                    <p className="mt-1 text-xs text-[var(--muted)]">{link.reason}</p>
                   </Link>
                 ))}
               </div>
