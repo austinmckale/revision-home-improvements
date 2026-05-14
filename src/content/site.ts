@@ -4,7 +4,7 @@ export const siteConfig = {
   phoneDisplay: "(484) 706-9229",
   phoneHref: "tel:+14847069229",
   primaryEmail: "quotes@rhipros.com",
-  googleBusinessProfileUrl: "https://share.google/ifdjSA3JbwLC33CRa",
+  googleBusinessProfileUrl: "https://www.google.com/maps/place/RHI+Pros/@40.565969,-77.5904957,8z/data=!4m8!3m7!1s0xaacdc9559cf13b27:0xa432cdb7cf5eefa0!8m2!3d40.565969!4d-77.5904957!9m1!1b1!16s%2Fg%2F11x27867dk",
   facebookPageUrl: "https://www.facebook.com/people/Revision-Home-Improvement/61550081845634/",
   serviceAreas:
     "Allentown, Bethlehem, the Lehigh Valley, Reading, Wyomissing, and Berks County",

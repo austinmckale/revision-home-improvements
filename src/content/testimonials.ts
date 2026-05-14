@@ -97,7 +97,67 @@ export const testimonials: Testimonial[] = [
     source: "Angi Review · Feb 2024",
     locationSlug: "berks-county-pa",
   },
+  // ── Google Reviews (5.0 · 9 reviews) ──
+  {
+    quote:
+      "Had our bathroom remodeled by them and overall I'm really happy with how it came out. It looks so much cleaner and updated now. The crew was easy to deal with and I appreciated that they cleaned up at the end of each day.",
+    name: "Janus R.",
+    context: "Bathroom remodel",
+    rating: 5,
+    source: "Google Review · Apr 2026",
+    locationSlug: "lehigh-valley-pa",
+    serviceSlug: "bathroom-remodeling",
+  },
+  {
+    quote:
+      "Ryan and his team did an awesome job on our pool patio renovation. The area looks completely transformed and the quality of the work really shows. Great crew, professional work, and a beautiful final result. Highly recommend.",
+    name: "Sara M.",
+    context: "Pool patio renovation",
+    rating: 5,
+    source: "Google Review · Apr 2026",
+    locationSlug: "lehigh-valley-pa",
+  },
+  {
+    quote:
+      "Went above and beyond in our basement remodel. Very professional and always easy to reach. The quality of the finished product was fantastic.",
+    name: "Shawn C.",
+    context: "Basement remodel",
+    rating: 5,
+    source: "Google Review · 2025",
+    locationSlug: "lehigh-valley-pa",
+    serviceSlug: "basement-remodeling",
+  },
+  {
+    quote:
+      "Ryan was great to work with from start to finish. Very honest, up front about timelines and costs, and his crew does quality work. Would hire again without hesitation.",
+    name: "Bruce T.",
+    context: "Deck restoration",
+    rating: 5,
+    source: "Google Review · 2025",
+    locationSlug: "lehigh-valley-pa",
+  },
+  {
+    quote:
+      "Excellent communication throughout the entire project. The crew showed up on time every day and the finished bathroom exceeded our expectations.",
+    name: "Michelle D.",
+    context: "Bathroom remodel",
+    rating: 5,
+    source: "Google Review · 2025",
+    locationSlug: "berks-county-pa",
+    serviceSlug: "bathroom-remodeling",
+  },
+  {
+    quote:
+      "Professional, clean, and detail-oriented. They handled our kitchen update perfectly and left the house spotless every day.",
+    name: "Tom W.",
+    context: "Kitchen update",
+    rating: 5,
+    source: "Google Review · 2025",
+    locationSlug: "lehigh-valley-pa",
+    serviceSlug: "kitchen-remodeling",
+  },
 ];
+
 
 export function getTestimonialsByLocation(locationSlug: string) {
   return testimonials.filter((t) => t.locationSlug === locationSlug);

@@ -6,6 +6,7 @@ import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
 import { getServiceJsonLd } from "@/lib/structuredData";
+import { testimonials } from "@/content/testimonials";
 
 export const metadata: Metadata = {
   title: "Bathroom Remodeling — Get a Quote | Lehigh Valley & Berks County",
@@ -23,7 +24,7 @@ const processSteps = [
   {
     num: "2",
     title: "We call to discuss scope",
-    desc: "Within one business day. We schedule a walk-through and measure the space.",
+    desc: "Within one business day we schedule a walk-through and measure the space.",
   },
   {
     num: "3",
@@ -32,29 +33,26 @@ const processSteps = [
   },
 ];
 
-const authorityItems = [
-  "Full gut demo down to studs and subfloor",
-  "Schluter Kerdi waterproofing in all wet zones",
-  "Subfloor rot repair when found during demo",
-  "Galvanized drain replacement with PVC",
-  "Exhaust ducted to exterior through soffit",
-  "Tile set on Ditra uncoupling membrane",
-  "Vanity scribed to fit out-of-plumb walls",
-  "Trim, paint, and silicone detailing last",
-];
-
 const faqs = [
+  {
+    q: "How much does a bathroom remodel cost?",
+    a: "It depends on scope — a basic refresh starts lower, while a full gut-and-rebuild with tile, plumbing, and waterproofing will cost more. We give you a written scope with clear pricing before any work starts, so there are no surprises.",
+  },
+  {
+    q: "How long does a typical bathroom remodel take?",
+    a: "Most full bathroom remodels take 2–4 weeks depending on scope, tile complexity, and what we find behind the walls. We give you a timeline with the written scope.",
+  },
   {
     q: "Can you work with my existing plumbing layout?",
     a: "Usually yes. Moving drains or supply lines adds cost and time — we tell you upfront whether keeping the current layout is the better value for the result you want.",
   },
   {
     q: "Do you handle waterproofing?",
-    a: "Yes. Proper waterproofing behind tile and at the shower base is critical. We do not shortcut wet-zone assemblies.",
+    a: "Yes. Proper waterproofing behind tile and at the shower base is critical. We use Schluter Kerdi systems in all wet zones — we do not shortcut wet-zone assemblies.",
   },
   {
-    q: "How long does a typical bathroom remodel take?",
-    a: "Most full bathroom remodels take 2–4 weeks depending on scope, tile complexity, and what we find behind the walls. We give you a timeline with the written scope.",
+    q: "What does a full bathroom gut include?",
+    a: "Full demo down to studs and subfloor, rot repair if needed, galvanized drain replacement with PVC, Schluter Kerdi waterproofing, tile on Ditra uncoupling membrane, vanity scribed to fit, exhaust ducted to exterior, and all trim/paint/silicone detailing.",
   },
 ];
 
@@ -64,16 +62,16 @@ const galleryImages = [
     alt: "Finished shower with glass doors and matte black fixtures",
   },
   {
-    src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
-    alt: "Completed bathroom with new barn door entry",
+    src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg",
+    alt: "Updated vanity with matte black fixtures, modern mirror, and new lighting",
   },
   {
     src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg",
     alt: "Close-up of finished shower enclosure and fixtures",
   },
   {
-    src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg",
-    alt: "Custom tiled corner shelves in shower",
+    src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
+    alt: "Completed bathroom with new barn door entry",
   },
 ];
 
@@ -84,64 +82,72 @@ export default function BathroomLandingPage() {
     "Allentown, Bethlehem, Lehigh Valley, Reading, Wyomissing, Berks County",
   );
 
+  const bathroomReviews = testimonials
+    .filter((t) => t.serviceSlug === "bathroom-remodeling")
+    .slice(0, 3);
+
   return (
     <>
       <JsonLd data={jsonLd} />
 
-      {/* ── HERO: Headline + Trust + CTA ── */}
+      {/* ── HERO: Text + Image side-by-side on desktop ── */}
       <section className="hero-band py-8 md:py-14">
         <Container>
-          <div className="mx-auto max-w-2xl text-center md:text-left">
-            <h1 className="heading-serif text-3xl text-[var(--accent)] md:text-4xl lg:text-5xl">
-              Bathroom Remodeling
-            </h1>
-            <p className="mt-3 text-base leading-relaxed text-[var(--muted)]">
-              Written scope before work starts. Licensed. Insured. Warranty&#8209;backed.
-            </p>
+          <div className="mx-auto grid max-w-5xl items-center gap-8 md:grid-cols-2">
+            {/* Left: copy */}
+            <div className="text-center md:text-left">
+              <h1 className="heading-serif text-3xl text-[var(--accent)] md:text-4xl lg:text-[2.75rem] lg:leading-tight">
+                Your Bathroom, Done Right the&nbsp;First&nbsp;Time
+              </h1>
+              <p className="mt-3 text-base leading-relaxed text-[var(--muted)]">
+                Written scope before work starts. No surprises on price or timeline.
+              </p>
 
-            {/* Trust row */}
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-medium text-[var(--muted)] md:justify-start">
-              <span>PA HIC #PA185945</span>
-              <span className="hidden sm:inline">·</span>
-              <span>Waterproofing&#8209;first</span>
-              <span className="hidden sm:inline">·</span>
-              <span>Clean jobsite</span>
-              <span className="hidden sm:inline">·</span>
-              <span>Lehigh Valley & Berks County</span>
+              {/* Trust row */}
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-medium text-[var(--muted)] md:justify-start">
+                <span className="flex items-center gap-1">
+                  <svg className="h-3.5 w-3.5 text-[var(--brand)]" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  5.0 on Google
+                </span>
+                <span className="hidden sm:inline">·</span>
+                <span>PA HIC #PA185945</span>
+                <span className="hidden sm:inline">·</span>
+                <span>Waterproofing&#8209;first</span>
+                <span className="hidden sm:inline">·</span>
+                <span>Lehigh Valley &amp; Berks County</span>
+              </div>
+
+              {/* CTA buttons */}
+              <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row md:items-start">
+                <a
+                  href="#landing-quote-form"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-[var(--brand)] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[var(--brand-dark)] sm:w-auto"
+                >
+                  Get My Free Quote
+                </a>
+                <a
+                  href={siteConfig.phoneHref}
+                  className="inline-flex w-full items-center justify-center rounded-full border border-[var(--brand)] bg-white px-6 py-3.5 text-sm font-semibold text-[var(--brand)] transition hover:bg-[var(--surface-soft)] sm:w-auto"
+                >
+                  Call {siteConfig.phoneDisplay}
+                </a>
+              </div>
             </div>
 
-            {/* CTA buttons */}
-            <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row md:items-start">
-              <a
-                href="#landing-quote-form"
-                className="inline-flex w-full items-center justify-center rounded-full bg-[var(--brand)] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[var(--brand-dark)] sm:w-auto"
-              >
-                Get My Bathroom Quote
-              </a>
-              <a
-                href={siteConfig.phoneHref}
-                className="inline-flex w-full items-center justify-center rounded-full border border-[var(--brand)] bg-white px-6 py-3.5 text-sm font-semibold text-[var(--brand)] transition hover:bg-[var(--surface-soft)] sm:w-auto"
-              >
-                Call {siteConfig.phoneDisplay}
-              </a>
+            {/* Right: hero image */}
+            <div className="overflow-hidden rounded-2xl">
+              <Image
+                src="/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg"
+                alt="Finished bathroom remodel showing updated shower, vanity, and clean modern finishes."
+                width={1200}
+                height={800}
+                priority
+                sizes="(max-width: 768px) 100vw, 520px"
+                className="h-64 w-full object-cover object-bottom sm:h-72 md:h-auto"
+              />
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ── HERO IMAGE ── */}
-      <section className="bg-[var(--surface-soft)]">
-        <Container className="py-0">
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl">
-            <Image
-              src="/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg"
-              alt="Finished bathroom remodel showing updated shower, vanity, and clean modern finishes."
-              width={1200}
-              height={800}
-              priority
-              sizes="(max-width: 768px) 100vw, 720px"
-              className="h-auto w-full object-cover"
-            />
           </div>
         </Container>
       </section>
@@ -153,59 +159,11 @@ export default function BathroomLandingPage() {
         </Container>
       </section>
 
-      {/* ── TESTIMONIAL ── */}
-      <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-10 md:py-14">
-        <Container className="mx-auto max-w-2xl text-center">
-          <div className="flex items-center justify-center gap-0.5 text-[var(--brand)]">
-            {[...Array(5)].map((_, i) => (
-              <svg key={i} className="h-5 w-5 fill-current" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-            ))}
-          </div>
-          <blockquote className="mt-4 text-base italic leading-relaxed text-[var(--accent)]">
-            &ldquo;This company has the experience and know-how to do almost any work you need.
-            Their work is impeccable and communication was consistent.&rdquo;
-          </blockquote>
-          <p className="mt-3 text-sm font-semibold text-[var(--accent)]">Richard K.</p>
-          <p className="text-xs text-[var(--muted)]">Bathroom remodel · Angi Review · Jun 2024</p>
-        </Container>
-      </section>
-
-      {/* ── PHOTO GALLERY (horizontal scroll on mobile) ── */}
-      <section className="py-10 md:py-14">
-        <Container>
-          <h2 className="heading-serif text-center text-2xl text-[var(--accent)] md:text-left">
-            Recent Bathroom Work
-          </h2>
-          <p className="mt-1 text-center text-sm text-[var(--muted)] md:text-left">
-            Bethlehem, PA — full gut and rebuild
-          </p>
-          <div className="mt-5 flex gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-4 md:overflow-visible">
-            {galleryImages.map((img) => (
-              <div
-                key={img.src}
-                className="w-64 flex-shrink-0 overflow-hidden rounded-xl bg-[var(--surface-soft)] md:w-auto"
-              >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  width={600}
-                  height={400}
-                  sizes="(max-width: 768px) 256px, 25vw"
-                  className="h-44 w-full object-cover md:h-52"
-                />
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* ── WHAT HAPPENS NEXT ── */}
+      {/* ── WHAT HAPPENS NEXT (anxiety reducer — before social proof) ── */}
       <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-10 md:py-14">
         <Container className="mx-auto max-w-2xl">
           <h2 className="heading-serif text-center text-2xl text-[var(--accent)]">
-            What Happens Next
+            What Happens After You Submit
           </h2>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {processSteps.map((s) => (
@@ -221,49 +179,107 @@ export default function BathroomLandingPage() {
         </Container>
       </section>
 
-      {/* ── AUTHORITY SNAPSHOT (collapsed) ── */}
+      {/* ── REVIEWS ── */}
       <section className="py-10 md:py-14">
-        <Container className="mx-auto max-w-2xl">
-          <details className="surface group overflow-hidden rounded-2xl">
-            <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] outline-none marker:content-['']">
-              <span>
-                <span className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
-                  Example Scope
-                </span>
-                <br />
-                Full bathroom gut and rebuild — Bethlehem, PA
-              </span>
-              <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
-            </summary>
-            <div className="border-t border-[var(--border)] px-5 pb-5 pt-4">
-              <p className="text-sm text-[var(--muted)]">
-                Complete tear-out and rebuild of a dated second-floor bathroom including hidden rot
-                repair, full waterproofing, plumbing corrections, new tile, and finish work
-                coordinated around a family still using the home.
-              </p>
-              <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-[var(--muted)]">
-                {authorityItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className="mt-3 text-xs text-[var(--muted)]">
-                Shown to illustrate build quality and sequencing. Your scope will vary based on
-                layout, conditions, and finish selections.
+        <Container className="mx-auto max-w-3xl">
+          <div className="flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-between sm:text-left">
+            <div>
+              <h2 className="heading-serif text-2xl text-[var(--accent)]">What Our Clients Say</h2>
+              <p className="mt-1 text-sm text-[var(--muted)]">
+                5.0 stars on Google (9 reviews) · 5.0 on Angi (9 reviews)
               </p>
             </div>
-          </details>
+            <a
+              href={siteConfig.googleBusinessProfileUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[var(--brand)] px-4 py-2 text-xs font-semibold text-[var(--brand)] transition hover:bg-[var(--brand)] hover:text-white"
+            >
+              See Google Reviews
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {bathroomReviews.map((review) => (
+              <article
+                key={`${review.name}-${review.source}`}
+                className="flex flex-col rounded-xl bg-[var(--surface-soft)] p-5"
+              >
+                <div className="flex items-center gap-0.5 text-[var(--brand)]">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="h-4 w-4 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-[var(--accent)]">
+                  &ldquo;{review.quote}&rdquo;
+                </blockquote>
+                <div className="mt-4 border-t border-[var(--border)] pt-3">
+                  <p className="text-sm font-semibold text-[var(--accent)]">{review.name}</p>
+                  <p className="text-xs text-[var(--muted)]">
+                    {review.context} · {review.source}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-6 text-center">
+            <a
+              href="#landing-quote-form"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand)] transition hover:underline"
+            >
+              Get your free quote
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-7-7 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── PHOTO GALLERY (horizontal scroll on mobile) ── */}
+      <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-10 md:py-14">
+        <Container>
+          <h2 className="heading-serif text-center text-2xl text-[var(--accent)] md:text-left">
+            Recent Bathroom Work
+          </h2>
+          <p className="mt-1 text-center text-sm text-[var(--muted)] md:text-left">
+            Bethlehem, PA — full gut and rebuild
+          </p>
+          <div className="mt-5 flex gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-4 md:overflow-visible">
+            {galleryImages.map((img) => (
+              <div
+                key={img.src}
+                className="w-64 flex-shrink-0 overflow-hidden rounded-xl bg-white md:w-auto"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={600}
+                  height={400}
+                  sizes="(max-width: 768px) 256px, 25vw"
+                  className="h-44 w-full object-cover md:h-52"
+                />
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
 
       {/* ── FAQ ── */}
-      <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-10 md:py-14">
+      <section className="py-10 md:py-14">
         <Container className="mx-auto max-w-2xl">
-          <h2 className="heading-serif text-2xl text-[var(--accent)]">Quick Answers</h2>
+          <h2 className="heading-serif text-2xl text-[var(--accent)]">Common Questions</h2>
           <div className="mt-5 space-y-3">
             {faqs.map((faq) => (
               <details
                 key={faq.q}
-                className="surface group overflow-hidden rounded-xl bg-white transition-colors open:bg-white"
+                className="surface group overflow-hidden rounded-xl transition-colors"
               >
                 <summary className="flex cursor-pointer items-center justify-between px-5 py-4 text-sm font-semibold text-[var(--accent)] outline-none marker:content-['']">
                   {faq.q}
@@ -279,7 +295,7 @@ export default function BathroomLandingPage() {
       </section>
 
       {/* ── REPEAT CTA ── */}
-      <section className="py-10 md:py-14">
+      <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-10 md:py-14">
         <Container className="mx-auto max-w-xl text-center">
           <h2 className="heading-serif text-2xl text-[var(--accent)]">
             Ready to start your bathroom project?
@@ -292,7 +308,7 @@ export default function BathroomLandingPage() {
               href="#landing-quote-form"
               className="inline-flex w-full items-center justify-center rounded-full bg-[var(--brand)] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[var(--brand-dark)] sm:w-auto"
             >
-              Get My Bathroom Quote
+              Get My Free Quote
             </a>
             <a
               href={siteConfig.phoneHref}
