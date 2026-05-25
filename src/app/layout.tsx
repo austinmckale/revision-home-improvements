@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/layout/Header";
@@ -50,11 +51,12 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isMaintenance = (await headers()).get("x-maintenance") === "1";
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-ND2W58Q5";
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
@@ -118,11 +120,19 @@ fbq('track', 'PageView');`}
           </Script>
         )}
         <TrackingEvents />
-        <Header />
-        <EmergencyBar />
-        <main className="pb-20 md:pb-0">{children}</main>
-        <Footer />
-        <StickyCTA />
+        {!isMaintenance && (
+          <>
+            <Header />
+            <EmergencyBar />
+          </>
+        )}
+        <main className={isMaintenance ? "" : "pb-20 md:pb-0"}>{children}</main>
+        {!isMaintenance && (
+          <>
+            <Footer />
+            <StickyCTA />
+          </>
+        )}
       </body>
     </html>
   );
