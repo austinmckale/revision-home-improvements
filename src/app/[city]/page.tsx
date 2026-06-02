@@ -51,7 +51,12 @@ export default async function CityHubPage({ params }: { params: Promise<Params> 
               Emergency restoration →
             </Link>
           </div>
-          <LocalHighlightsSection location={location} serviceItems={primaryServices} className="mt-8" />
+          <LocalHighlightsSection
+            location={location}
+            serviceItems={primaryServices}
+            className="mt-8"
+            maxServices={location.slug === "allentown-pa" ? 9 : undefined}
+          />
           {localTestimonials.length > 0 && (
             <TestimonialStrip items={localTestimonials.slice(0, 3)} title={`What ${location.short} Homeowners Say`} />
           )}
