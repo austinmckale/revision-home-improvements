@@ -23,6 +23,44 @@ const PRIORITY_LOCAL_SEO_KEYS = [
 
 const CANONICAL_ORIGIN = company.domain;
 
+const PRIORITY_FEATURED_CASE_STUDIES = [
+  "lehigh-water-damage-rebuild",
+  "allentown-fire-damage-interior-rebuild",
+  "lehigh-valley-basement-finish-and-detail",
+] as const;
+
+/** Verified image folders per case study slug. Empty array = text-only until real photos are added. */
+const VERIFIED_CASE_STUDY_IMAGE_FOLDERS: Record<string, readonly string[]> = {
+  "lehigh-water-damage-rebuild": [],
+  "allentown-fire-damage-interior-rebuild": ["fireplace-construction-project"],
+  "lehigh-valley-fire-damage-documentation": ["fire-damage-documentation"],
+  "lehigh-valley-basement-finish-and-detail": ["lehigh-valley-basement-theater"],
+};
+
+const STRICT_PHOTO_ACCURACY_SERVICES = new Set([
+  "water-damage-restoration",
+  "fire-damage-restoration",
+  "basement-finishing",
+]);
+
+function imageProjectFolder(src: string): string | null {
+  const match = src.match(/\/images\/projects\/([^/]+)\//);
+  return match ? match[1] : null;
+}
+
+function slugTokens(slug: string): string[] {
+  return slug.split("-").filter((token) => token.length >= 4);
+}
+
+function folderMatchesCaseStudy(caseStudySlug: string, folder: string): boolean {
+  const tokens = slugTokens(caseStudySlug);
+  const folderLower = folder.toLowerCase();
+  const slugLower = caseStudySlug.toLowerCase();
+  if (folderLower.includes(slugLower) || slugLower.includes(folderLower)) return true;
+  const matchedTokens = tokens.filter((token) => folderLower.includes(token));
+  return matchedTokens.length >= 2;
+}
+
 function error(message: string) {
   issues.push({ level: "error", message });
 }
@@ -58,6 +96,77 @@ function checkFeaturedCaseStudies() {
       warn(
         `Service "${service.slug}" featured case study "${slug}" is tagged as service "${match.serviceSlug}".`,
       );
+    }
+    if (PRIORITY_FEATURED_CASE_STUDIES.includes(slug as (typeof PRIORITY_FEATURED_CASE_STUDIES)[number])) {
+      const photoCount =
+        match.images.length + (match.beforeImages?.length ?? 0) + (match.afterImages?.length ?? 0);
+      if (photoCount === 0) {
+        warn(
+          `Featured case study "${slug}" for service "${service.slug}" has no verified photos (text-only is OK; do not add unrelated images).`,
+        );
+      }
+    }
+  }
+}
+
+function checkCaseStudyPhotoAccuracy() {
+  for (const study of caseStudies) {
+    if (study.hidden) continue;
+
+    if (/representative/i.test(study.summary)) {
+      error(`Case study "${study.slug}" summary uses representative photo wording.`);
+    }
+
+    const allImages = [
+      ...study.images,
+      ...(study.beforeImages ?? []),
+      ...(study.afterImages ?? []),
+    ];
+
+    const verifiedFolders = VERIFIED_CASE_STUDY_IMAGE_FOLDERS[study.slug];
+    if (verifiedFolders) {
+      if (verifiedFolders.length === 0 && allImages.length > 0) {
+        error(
+          `Case study "${study.slug}" must remain text-only until verified water-damage photos are added.`,
+        );
+      }
+      for (const img of allImages) {
+        const folder = imageProjectFolder(img.src);
+        if (!folder || !verifiedFolders.includes(folder)) {
+          error(
+            `Case study "${study.slug}" uses unverified image folder "${folder ?? "unknown"}": ${img.src}`,
+          );
+        }
+      }
+      continue;
+    }
+
+    if (!STRICT_PHOTO_ACCURACY_SERVICES.has(study.serviceSlug)) continue;
+
+    for (const img of allImages) {
+      const folder = imageProjectFolder(img.src);
+      if (!folder) continue;
+      if (!folderMatchesCaseStudy(study.slug, folder)) {
+        error(
+          `Case study "${study.slug}" uses image from unrelated folder "${folder}": ${img.src}`,
+        );
+      }
+    }
+  }
+
+  for (const service of services) {
+    if (!service.featuredCaseStudySlug) continue;
+    if (service.gallery.length > 0) {
+      const featured = caseStudies.find((c) => c.slug === service.featuredCaseStudySlug);
+      const featuredPhotoCount =
+        (featured?.images.length ?? 0) +
+        (featured?.beforeImages?.length ?? 0) +
+        (featured?.afterImages?.length ?? 0);
+      if (featuredPhotoCount === 0) {
+        warn(
+          `Service "${service.slug}" has a service.gallery fallback while featured case study "${service.featuredCaseStudySlug}" has no verified photos.`,
+        );
+      }
     }
   }
 }
@@ -185,6 +294,7 @@ function main() {
   checkSitemapOrigin();
   checkBrandSource();
   checkFeaturedCaseStudies();
+  checkCaseStudyPhotoAccuracy();
   checkImageAlts();
   checkPriorityInternalLinks();
   checkMetadataBasics();

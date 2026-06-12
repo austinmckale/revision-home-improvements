@@ -109,9 +109,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   );
   const featuredProjectGalleryImages = getFeaturedCaseStudyGalleryImages(featuredCaseStudy, heroImageSrc);
   const hasFeaturedProjectGallery = featuredProjectGalleryImages.length > 0;
+  const pinnedFeaturedCaseStudy = Boolean(explicitFeaturedCaseStudy);
   const curatedGalleryImages = hasFeaturedProjectGallery
     ? featuredProjectGalleryImages
-    : service.gallery.slice(0, 4);
+    : pinnedFeaturedCaseStudy
+      ? []
+      : service.gallery.slice(0, 4);
   const curatedGalleryIsSingleProject = hasFeaturedProjectGallery;
   const showCuratedGallerySection =
     showCuratedStaticGallery && curatedGalleryImages.length > 0;

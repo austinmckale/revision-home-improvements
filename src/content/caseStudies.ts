@@ -536,7 +536,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "lehigh-water-damage-rebuild",
     title: "Water Damage Interior Rebuild in Lehigh Valley",
     summary:
-      "Interior rebuild after water-related damage with organized scope mapping, phased repairs, and coordinated finish restoration. The work moved from affected-area review to rebuilt bathroom, flooring, and wall finishes with clear communication throughout. Photos show representative rebuild phases from comparable restoration scopes.",
+      "Interior rebuild after water-related damage with organized scope mapping, phased repairs, and coordinated finish restoration. The work moved from affected-area review to rebuilt bathroom, flooring, and wall finishes with clear communication throughout.",
     locationName: "Lehigh Valley, PA",
     locationSlug: "lehigh-valley-pa",
     serviceName: "Water Damage Restoration",
@@ -560,32 +560,7 @@ export const caseStudies: CaseStudy[] = [
       quote: "Fast response and clear next steps made a stressful situation manageable.",
       author: "Lehigh Valley homeowner",
     },
-    images: [
-      {
-        src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
-        alt: "Framing and rough-in work during an interior water-damage rebuild.",
-      },
-      {
-        src: "/images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg",
-        alt: "Drywall and ceiling restoration in progress after moisture-related damage.",
-      },
-      {
-        src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
-        alt: "New flooring installed as part of a finish restoration scope.",
-      },
-      {
-        src: "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg",
-        alt: "Completed bathroom finishes after a phased interior rebuild.",
-      },
-      {
-        src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
-        alt: "Finished living area after drywall and flooring restoration.",
-      },
-      {
-        src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
-        alt: "Paint-ready wall and ceiling surfaces after drywall repair and finish prep.",
-      },
-    ],
+    images: [],
   },
   {
     slug: "allentown-flooring-replacement-upgrade",

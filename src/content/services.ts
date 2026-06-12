@@ -786,23 +786,10 @@ export const services: Service[] = [
         "Shown to illustrate mitigation-to-rebuild sequencing. Every water event is different — your scope will depend on source, duration, and affected materials.",
     },
     image: {
-      src: "/images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg",
-      alt: "Interior wall and ceiling restoration work in progress during a water-damage rebuild.",
+      src: "",
+      alt: "",
     },
-    gallery: [
-      {
-        src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-bathroom-plumbing-rough-in-supply-drain.jpg",
-        alt: "Rough-in plumbing work during an interior water-damage rebuild scope.",
-      },
-      {
-        src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
-        alt: "Paint-ready surfaces after drywall repair in a restoration rebuild.",
-      },
-      {
-        src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
-        alt: "Finished flooring and living space after water-related finish restoration.",
-      },
-    ],
+    gallery: [],
   },
   {
     slug: "insurance-claims",
