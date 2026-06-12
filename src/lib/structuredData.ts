@@ -1,3 +1,4 @@
+import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
 
 export function getWebSiteJsonLd() {
@@ -16,19 +17,12 @@ export function getLocalBusinessJsonLd() {
     "@type": "GeneralContractor",
     name: siteConfig.name,
     url: siteConfig.domain,
-    telephone: "+1-484-706-9229",
-    email: siteConfig.primaryEmail,
+    telephone: company.phone.e164,
+    email: company.email,
     image: `${siteConfig.domain}${siteConfig.ogImage}`,
     logo: `${siteConfig.domain}${siteConfig.logo}`,
     ...(sameAs.length > 0 ? { sameAs } : {}),
-    areaServed: [
-      "Reading, PA",
-      "Wyomissing, PA",
-      "Berks County, PA",
-      "Allentown, PA",
-      "Bethlehem, PA",
-      "Lehigh Valley, PA",
-    ],
+    areaServed: [...company.serviceAreaList],
     address: {
       "@type": "PostalAddress",
       addressLocality: siteConfig.address.city,
@@ -48,7 +42,7 @@ export function getServiceJsonLd(serviceName: string, url: string, areaServed: s
     provider: {
       "@type": "GeneralContractor",
       name: siteConfig.name,
-      telephone: "+1-484-706-9229",
+      telephone: company.phone.e164,
       url: siteConfig.domain,
     },
     areaServed,
@@ -124,7 +118,7 @@ export function getCityServiceJsonLd({
         provider: {
           "@type": "GeneralContractor",
           name: businessName,
-          telephone: "+1-484-706-9229",
+          telephone: company.phone.e164,
           url: siteConfig.domain,
         },
         url,
@@ -134,7 +128,7 @@ export function getCityServiceJsonLd({
         name: `${businessName} - ${serviceName}`,
         ...(image ? { image } : {}),
         url,
-        telephone: "+1-484-706-9229",
+        telephone: company.phone.e164,
         areaServed: {
           "@type": "City",
           name: cityName,

@@ -65,7 +65,9 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
         ])}
       />
       <section className="hero-band py-14">
-        <Container className="grid items-center gap-8 md:grid-cols-2">
+        <Container
+          className={`grid items-center gap-8 ${caseStudy.images[0] ? "md:grid-cols-2" : ""}`}
+        >
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">
               Project Case Study
@@ -98,15 +100,17 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
               </Button>
             </div>
           </div>
-          <div className="surface overflow-hidden rounded-2xl">
-            <Image
-              src={caseStudy.images[0].src}
-              alt={caseStudy.images[0].alt}
-              width={1200}
-              height={800}
-              className="h-full w-full object-cover"
-            />
-          </div>
+          {caseStudy.images[0] ? (
+            <div className="surface overflow-hidden rounded-2xl">
+              <Image
+                src={caseStudy.images[0].src}
+                alt={caseStudy.images[0].alt}
+                width={1200}
+                height={800}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          ) : null}
         </Container>
       </section>
 

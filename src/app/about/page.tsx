@@ -7,6 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
 import { testimonials } from "@/content/testimonials";
 
@@ -31,6 +32,10 @@ export default function AboutPage() {
             </p>
             <p className="mt-3 text-[var(--muted)]">
               Today we serve homeowners across {siteConfig.serviceAreas} with kitchen, bathroom, basement, flooring, outdoor, and restoration projects.
+            </p>
+            <p className="mt-3 text-sm text-[var(--muted)]">
+              We operate as <span className="font-semibold text-[var(--accent)]">{company.name}</span> (Pennsylvania HIC{" "}
+              #{company.license.hic}). Some older listings may still reference {company.formerNames.join(" or ")}.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button href="/request-a-quote">Request a Quote</Button>

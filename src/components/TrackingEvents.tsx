@@ -28,9 +28,26 @@ export default function TrackingEvents() {
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement | null;
-      const anchor = target?.closest("a[href^='tel:']");
-      if (anchor) {
+      const anchor = target?.closest("a");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href") ?? "";
+
+      if (href.startsWith("tel:")) {
         emit("click_to_call");
+        return;
+      }
+
+      if (href.startsWith("/projects/") || href.includes("/projects/")) {
+        emitWithParams("case_study_click", {
+          link_url: href,
+          link_text: anchor.textContent?.trim().slice(0, 120) ?? "",
+        });
+        return;
+      }
+
+      if (href === "/insurance-claims" || href.startsWith("/insurance-claims")) {
+        emit("insurance_claims_click");
       }
     };
 
@@ -71,6 +88,10 @@ export default function TrackingEvents() {
       const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
       emitWithParams("form_start", detail);
     };
+    const onProjectGalleryOpen = (event: Event) => {
+      const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
+      emitWithParams("project_gallery_open", detail);
+    };
 
     document.addEventListener("click", onClick);
     window.addEventListener("rhi:generate_lead", onLead);
@@ -83,6 +104,7 @@ export default function TrackingEvents() {
     window.addEventListener("rhi:sticky_cta_click", onStickyCta);
     window.addEventListener("rhi:scroll_to_form", onScrollToForm);
     window.addEventListener("rhi:form_start", onFormStart);
+    window.addEventListener("rhi:project_gallery_open", onProjectGalleryOpen);
 
     return () => {
       document.removeEventListener("click", onClick);
@@ -96,6 +118,7 @@ export default function TrackingEvents() {
       window.removeEventListener("rhi:sticky_cta_click", onStickyCta);
       window.removeEventListener("rhi:scroll_to_form", onScrollToForm);
       window.removeEventListener("rhi:form_start", onFormStart);
+      window.removeEventListener("rhi:project_gallery_open", onProjectGalleryOpen);
     };
   }, []);
 

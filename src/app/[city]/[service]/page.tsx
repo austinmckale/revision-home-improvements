@@ -11,7 +11,11 @@ import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import { getLocationBySlug, locations } from "@/content/locations";
-import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
+import {
+  getCaseStudyBySlug,
+  visibleCaseStudies,
+  sortCaseStudiesByMarketPriority,
+} from "@/content/caseStudies";
 import { getCityServiceLocalContent } from "@/content/localSeo";
 import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices, services } from "@/content/services";
 import { siteConfig } from "@/content/site";
@@ -81,11 +85,17 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     ),
   );
   const topLocalCaseStudy = localProof[0];
+  const relatedCaseStudyFromConfig = localContent?.relatedCaseStudySlug
+    ? getCaseStudyBySlug(localContent.relatedCaseStudySlug)
+    : undefined;
+  const contextualCaseStudy = topLocalCaseStudy ?? relatedCaseStudyFromConfig;
   const explicitFeaturedCaseStudy = findExplicitFeaturedCaseStudy(service, visibleCaseStudies);
-  const gallerySourceCaseStudy = explicitFeaturedCaseStudy ?? topLocalCaseStudy;
+  const gallerySourceCaseStudy = explicitFeaturedCaseStudy ?? topLocalCaseStudy ?? relatedCaseStudyFromConfig;
   const priorityContextualLocations = new Set(["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"]);
   const showPriorityContextualSentence =
-    priorityContextualLocations.has(location.slug) && Boolean(localContent) && Boolean(topLocalCaseStudy);
+    Boolean(localContent) &&
+    Boolean(contextualCaseStudy) &&
+    (priorityContextualLocations.has(location.slug) || Boolean(localContent.relatedCaseStudySlug));
   const serviceOverviewAnchorText = `${service.name.toLowerCase()} services`;
   const relatedLocalServices = primaryServices.filter((item) => item.slug !== service.slug);
   const isEmergencyService =
@@ -194,11 +204,11 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                   {localContent.localProjectHeading}
                 </h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{localContent.localProjectSnippet}</p>
-                {showPriorityContextualSentence && topLocalCaseStudy ? (
+                {showPriorityContextualSentence && contextualCaseStudy ? (
                   <p className="mt-3 text-sm text-[var(--muted)]">
-                    For a local example, see{" "}
-                    <Link href={`/projects/${topLocalCaseStudy.slug}`} className="font-semibold text-[var(--brand)]">
-                      {topLocalCaseStudy.title}
+                    For a relevant example, see{" "}
+                    <Link href={`/projects/${contextualCaseStudy.slug}`} className="font-semibold text-[var(--brand)]">
+                      {contextualCaseStudy.title}
                     </Link>{" "}
                     or review our{" "}
                     <Link href={`/services/${service.slug}`} className="font-semibold text-[var(--brand)]">

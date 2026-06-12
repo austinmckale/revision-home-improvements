@@ -44,7 +44,14 @@ export default function ExpandableImageGrid({
           <figure key={image.src} className={cardClassName}>
             <button
               type="button"
-              onClick={() => setActiveIndex(index)}
+              onClick={() => {
+                setActiveIndex(index);
+                window.dispatchEvent(
+                  new CustomEvent("rhi:project_gallery_open", {
+                    detail: { image_src: image.src, image_alt: image.alt },
+                  }),
+                );
+              }}
               className="group relative block w-full cursor-zoom-in overflow-hidden text-left"
               aria-label={`Expand photo: ${image.alt}`}
             >

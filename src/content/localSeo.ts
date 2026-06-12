@@ -16,6 +16,8 @@ export type CityServiceLocalContent = {
   localChallenges: string[];
   localizedFaqs: ServiceFaq[];
   internalLinks: InternalLinkSuggestion[];
+  /** When no city-matched case study exists, link to a relevant regional project in the local content block. */
+  relatedCaseStudySlug?: string;
 };
 
 const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
@@ -124,7 +126,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "reading-pa/water-damage-restoration": {
     metadataTitle: "Water Damage Restoration in Reading, PA",
     metadataDescription:
-      "Emergency water damage restoration in Reading, PA with fast response, structured rebuild scopes, and insurance-ready documentation.",
+      "Water damage restoration in Reading, PA with structured rebuild scopes, phased repairs, and insurance-ready documentation.",
     heroHeading: "Water and Flood Damage Restoration in Reading, PA",
     localProjectHeading: "Common Reading Water Damage Scope",
     localProjectSnippet:
@@ -149,6 +151,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         a: "No. Some projects are targeted repairs, while others need deeper reconstruction. We map affected assemblies first so repairs stay right-sized.",
       },
     ],
+    relatedCaseStudySlug: "lehigh-water-damage-rebuild",
     internalLinks: [
       {
         href: "/reading-pa",
@@ -166,9 +169,53 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         reason: "Claim-oriented conversion path",
       },
       {
-        href: "/projects",
-        anchorText: "Recent restoration project outcomes",
-        reason: "Proof of local execution quality",
+        href: "/projects/lehigh-water-damage-rebuild",
+        anchorText: "Water damage interior rebuild in Lehigh Valley",
+        reason: "Regional restoration case study with documented scope",
+      },
+    ],
+  },
+  "reading-pa/fire-damage-restoration": {
+    metadataTitle: "Fire Damage Restoration in Reading, PA",
+    metadataDescription:
+      "Fire damage restoration in Reading, PA with structured rebuild planning, documented repair scopes, and insurance-ready communication.",
+    heroHeading: "Fire Damage Restoration in Reading, PA",
+    localProjectHeading: "Fire damage rebuilds near Reading",
+    localProjectSnippet:
+      "Reading-area fire damage projects often involve older housing stock where smoke travel, phased demolition, and careful documentation matter. We organize rebuild scopes so homeowners can follow what is being restored at each stage.",
+    localChallengesHeading: "Reading-area fire damage challenges we plan for",
+    localChallenges: [
+      "Smoke and soot migration through framing and finish assemblies",
+      "Phased demolition and rebuild sequencing in occupied homes",
+      "Documentation that supports insurance review and homeowner decisions",
+    ],
+    localizedFaqs: [],
+    relatedCaseStudySlug: "allentown-fire-damage-interior-rebuild",
+    internalLinks: [
+      {
+        href: "/reading-pa",
+        anchorText: "Restoration services in Reading, PA",
+        reason: "City hub and related services",
+      },
+      {
+        href: "/services/fire-damage-restoration",
+        anchorText: "Fire damage restoration service details",
+        reason: "Full scope and rebuild process",
+      },
+      {
+        href: "/projects/allentown-fire-damage-interior-rebuild",
+        anchorText: "Fire damage interior rebuild in Allentown",
+        reason: "Regional fire restoration case study",
+      },
+      {
+        href: "/projects/lehigh-valley-fire-damage-documentation",
+        anchorText: "Fire damage rebuild field documentation",
+        reason: "How we document scope and sequencing on complex rebuilds",
+      },
+      {
+        href: "/insurance-claims",
+        anchorText: "Insurance claims assistance for fire damage",
+        reason: "Claim-oriented support",
       },
     ],
   },
@@ -427,6 +474,45 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
     ],
   },
+  "berks-county-pa/basement-finishing": {
+    metadataTitle: "Basement Finishing in Berks County, PA",
+    metadataDescription:
+      "Basement finishing in Berks County, PA with moisture-aware planning, practical layouts, and finish work suited to older foundations and suburban homes.",
+    heroHeading: "Basement Finishing in Berks County, PA",
+    localProjectHeading: "Basement finishing across Berks County",
+    localProjectSnippet:
+      "Berks County basements vary from Reading row-home foundations to larger suburban footprints. We plan around moisture conditions, utility access, and how the finished space will actually be used before framing and finish work begin.",
+    localChallengesHeading: "Berks County basement challenges we plan for",
+    localChallenges: [
+      "Moisture and foundation conditions in older Berks County homes",
+      "Permit and code considerations for egress, electrical, and HVAC",
+      "Balancing finished living areas with storage and mechanical zones",
+    ],
+    localizedFaqs: [],
+    relatedCaseStudySlug: "lehigh-valley-basement-finish-and-detail",
+    internalLinks: [
+      {
+        href: "/berks-county-pa",
+        anchorText: "Remodeling and restoration in Berks County",
+        reason: "County hub and related services",
+      },
+      {
+        href: "/services/basement-finishing",
+        anchorText: "Basement finishing service details",
+        reason: "Full scope and process breakdown",
+      },
+      {
+        href: "/projects/lehigh-valley-basement-finish-and-detail",
+        anchorText: "Full basement theater and entertainment build",
+        reason: "Regional basement finishing case study with photos",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for basement projects",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
   "allentown-pa/drywall-installation-repair": {
     metadataTitle: "Drywall Installation and Repair in Allentown, PA",
     metadataDescription:
@@ -481,8 +567,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "allentown-pa/water-damage-restoration": {
     metadataTitle: "Water Damage Restoration in Allentown, PA",
     metadataDescription:
-      "Emergency water damage restoration in Allentown, PA with rapid response, phased rebuild scopes, and insurance documentation support.",
-    heroHeading: "Emergency Water Damage Restoration in Allentown, PA",
+      "Water damage restoration in Allentown, PA with structured rebuild scopes, phased repairs, and insurance documentation support.",
+    heroHeading: "Water Damage Restoration in Allentown, PA",
     localProjectHeading: "Common Allentown Water Damage Scope",
     localProjectSnippet:
       "Allentown restoration projects often involve multi-room moisture events after storms, plumbing failures, or appliance leaks. We prioritize drying and reconstruction sequencing so affected spaces can return to normal as quickly as possible.",
@@ -506,6 +592,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         a: "Often yes. We phase work by affected zone whenever possible so critical areas stay accessible.",
       },
     ],
+    relatedCaseStudySlug: "lehigh-water-damage-rebuild",
     internalLinks: [
       {
         href: "/allentown-pa",
@@ -523,9 +610,9 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         reason: "High-intent conversion support",
       },
       {
-        href: "/projects",
-        anchorText: "Lehigh Valley restoration project examples",
-        reason: "Proof and credibility",
+        href: "/projects/lehigh-water-damage-rebuild",
+        anchorText: "Water damage interior rebuild in Lehigh Valley",
+        reason: "Regional restoration case study with documented scope",
       },
     ],
   },
@@ -838,7 +925,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "bethlehem-pa/water-damage-restoration": {
     metadataTitle: "Water Damage Restoration in Bethlehem, PA",
     metadataDescription:
-      "Water and flood damage restoration in Bethlehem, PA with emergency response, structured rebuild scopes, and clear insurance-ready documentation.",
+      "Water and flood damage restoration in Bethlehem, PA with structured rebuild scopes, phased repairs, and insurance-ready documentation.",
     heroHeading: "Water and Flood Damage Restoration in Bethlehem, PA",
     localProjectHeading: "Common Bethlehem Water Damage Scope",
     localProjectSnippet:
@@ -863,6 +950,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         a: "Yes. We scope to affected assemblies first and only expand when damage conditions require it.",
       },
     ],
+    relatedCaseStudySlug: "lehigh-water-damage-rebuild",
     internalLinks: [
       {
         href: "/bethlehem-pa",
@@ -880,9 +968,9 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         reason: "Claim-driven user journey",
       },
       {
-        href: "/projects",
-        anchorText: "Recent restoration and rebuild projects",
-        reason: "Proof and trust reinforcement",
+        href: "/projects/lehigh-water-damage-rebuild",
+        anchorText: "Water damage interior rebuild in Lehigh Valley",
+        reason: "Regional restoration case study with documented scope",
       },
     ],
   },

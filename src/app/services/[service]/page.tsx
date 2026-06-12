@@ -50,6 +50,20 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     return {};
   }
   const serviceKey = service.name.toLowerCase();
+  if (service.slug === "water-damage-restoration") {
+    return {
+      title: "Water Damage Restoration | Lehigh Valley & Berks County",
+      description:
+        "Water damage restoration with structured rebuild planning, phased repairs, and insurance-ready documentation across Allentown, Bethlehem, Reading, and Berks County.",
+      keywords: [
+        `${serviceKey} allentown pa`,
+        `${serviceKey} bethlehem pa`,
+        `${serviceKey} lehigh valley`,
+        `${serviceKey} contractor`,
+      ],
+      alternates: { canonical: `/services/${service.slug}` },
+    };
+  }
   return {
     title: `${service.name} | Allentown, Bethlehem & Lehigh Valley`,
     description: `${service.name} services with clear scopes, reliable scheduling, and quality workmanship across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.`,
