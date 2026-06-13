@@ -119,15 +119,25 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
               </p>
             ) : (
             <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {displayedCaseStudies.map((study) => (
+              {displayedCaseStudies.map((study) => {
+                const leadImage = study.images[0];
+                return (
                 <article key={study.slug} className="surface overflow-hidden rounded-xl">
-                  <Image
-                    src={study.images[0].src}
-                    alt={study.images[0].alt}
-                    width={900}
-                    height={600}
-                    className="h-52 w-full object-cover"
-                  />
+                  {leadImage ? (
+                    <Image
+                      src={leadImage.src}
+                      alt={leadImage.alt}
+                      width={900}
+                      height={600}
+                      className="h-52 w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-52 items-center justify-center bg-[var(--surface-soft)] px-6 text-center">
+                      <p className="text-sm text-[var(--muted)]">
+                        Case study details available. Project photos coming soon.
+                      </p>
+                    </div>
+                  )}
                   <div className="p-5">
                     <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
                       {study.locationName}
@@ -147,7 +157,8 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
                     </Link>
                   </div>
                 </article>
-              ))}
+                );
+              })}
             </div>
             )}
           </section>

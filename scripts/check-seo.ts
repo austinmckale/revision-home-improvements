@@ -175,6 +175,10 @@ function checkCaseStudyPhotoAccuracy() {
 function checkImageAlts() {
   for (const study of caseStudies) {
     if (study.hidden) continue;
+    if (study.images.length === 0) {
+      warn(`Case study "${study.slug}" has no lead image (text-only listing is OK on /projects).`);
+    }
+
     const allImages = [
       ...study.images,
       ...(study.beforeImages ?? []),
