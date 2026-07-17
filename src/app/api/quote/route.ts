@@ -54,9 +54,11 @@ async function sendLeadWebhook(payload: Record<string, unknown>) {
     `Details: ${String(payload.details || "")}`,
   ];
 
-  if (payload.utm_source) {
-    leadLines.push(`Source: ${String(payload.utm_source)} / ${String(payload.utm_medium || "")}`);
-  }
+  leadLines.push("", `Traffic Source: ${String(payload.traffic_source || "Direct / Unknown")}`);
+  if (payload.landing_page) leadLines.push(`Landing Page: ${String(payload.landing_page)}`);
+  if (payload.submission_page) leadLines.push(`Submission Page: ${String(payload.submission_page)}`);
+  if (payload.referrer) leadLines.push(`Referrer: ${String(payload.referrer)}`);
+  if (payload.campaign) leadLines.push(`Campaign: ${String(payload.campaign)}`);
 
   const body = isDiscordWebhook
     ? {
@@ -191,7 +193,6 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
     const parsed = quoteSchema.safeParse(body);
-    const rawBody = body as Record<string, unknown>;
 
     if (!parsed.success) {
       return NextResponse.json(
@@ -239,12 +240,18 @@ export async function POST(request: Request) {
         serviceType: parsed.data.service,
         source: "website_form",
         notes: parsed.data.details,
-        utm_source: typeof rawBody.utm_source === "string" ? rawBody.utm_source : undefined,
-        utm_medium: typeof rawBody.utm_medium === "string" ? rawBody.utm_medium : undefined,
-        utm_campaign: typeof rawBody.utm_campaign === "string" ? rawBody.utm_campaign : undefined,
-        utm_content: typeof rawBody.utm_content === "string" ? rawBody.utm_content : undefined,
-        utm_term: typeof rawBody.utm_term === "string" ? rawBody.utm_term : undefined,
-        landing_path: typeof rawBody.landing_path === "string" ? rawBody.landing_path : undefined,
+        utm_source: parsed.data.utm_source || undefined,
+        utm_medium: parsed.data.utm_medium || undefined,
+        utm_campaign: parsed.data.utm_campaign || undefined,
+        utm_content: parsed.data.utm_content || undefined,
+        utm_term: parsed.data.utm_term || undefined,
+        landing_path: parsed.data.landing_path || undefined,
+        traffic_source: parsed.data.traffic_source || "Direct / Unknown",
+        traffic_medium: parsed.data.traffic_medium || "direct",
+        referrer: parsed.data.referrer || undefined,
+        gclid: parsed.data.gclid || undefined,
+        fbclid: parsed.data.fbclid || undefined,
+        submission_page: parsed.data.submission_page || undefined,
         city: parsed.data.city,
         zip: parsed.data.zip,
         timeline: parsed.data.timeline,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { getFirstTouchAttribution } from "@/lib/leadAttribution";
 
 declare global {
   interface Window {
@@ -20,12 +21,24 @@ function emitWithParams(eventName: string, params: Record<string, unknown>) {
   window.dataLayer?.push({ event: eventName, ...params });
 }
 
+function emitLeadConversion() {
+  if (window.gtag) {
+    window.gtag("event", "generate_lead");
+    return;
+  }
+  window.dataLayer?.push({ event: "generate_lead" });
+}
+
 function fbTrack(eventName: string) {
   window.fbq?.("track", eventName);
 }
 
+const sentLeadSubmissionIds = new Set<string>();
+
 export default function TrackingEvents() {
   useEffect(() => {
+    getFirstTouchAttribution();
+
     const onClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement | null;
       const anchor = target?.closest("a");
@@ -51,8 +64,12 @@ export default function TrackingEvents() {
       }
     };
 
-    const onLead = () => {
-      emit("generate_lead");
+    const onLead = (event: Event) => {
+      const submissionId = (event as CustomEvent<{ submissionId?: unknown }>).detail?.submissionId;
+      if (typeof submissionId !== "string" || sentLeadSubmissionIds.has(submissionId)) return;
+
+      sentLeadSubmissionIds.add(submissionId);
+      emitLeadConversion();
       fbTrack("Lead");
     };
     const onStep1Complete = (event: Event) => {

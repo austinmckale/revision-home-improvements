@@ -18,6 +18,20 @@ export const quoteSchema = z.object({
   details: asText.pipe(z.string().min(10, "Please add project details").max(2000, "Details are too long")),
   timeline: asText.pipe(z.string().min(2, "Timeline is required").max(80, "Timeline is too long")),
   website: z.string().max(0).optional(),
+  traffic_source: asText.pipe(z.string().max(100)),
+  traffic_medium: asText.pipe(z.string().max(100)),
+  landing_page: asText.pipe(z.string().max(500)),
+  submission_page: asText.pipe(z.string().max(500)),
+  referrer: asText.pipe(z.string().max(500)),
+  campaign: asText.pipe(z.string().max(200)),
+  utm_source: asText.pipe(z.string().max(200)),
+  utm_medium: asText.pipe(z.string().max(200)),
+  utm_campaign: asText.pipe(z.string().max(200)),
+  utm_content: asText.pipe(z.string().max(500)),
+  utm_term: asText.pipe(z.string().max(500)),
+  gclid: asText.pipe(z.string().max(500)),
+  fbclid: asText.pipe(z.string().max(500)),
+  landing_path: asText.pipe(z.string().max(500)),
 });
 
 export type QuoteInput = z.infer<typeof quoteSchema>;

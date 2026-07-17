@@ -15,6 +15,12 @@ export type ManagerLeadIntakeInput = {
   utm_content?: string;
   utm_term?: string;
   landing_path?: string;
+  traffic_source?: string;
+  traffic_medium?: string;
+  referrer?: string;
+  gclid?: string;
+  fbclid?: string;
+  submission_page?: string;
   city?: string;
   zip?: string;
   timeline?: string;
@@ -54,6 +60,12 @@ export async function forwardToManagerAppLead(input: ManagerLeadIntakeInput): Pr
     utm_content: input.utm_content,
     utm_term: input.utm_term,
     landing_path: input.landing_path,
+    traffic_source: input.traffic_source,
+    traffic_medium: input.traffic_medium,
+    referrer: input.referrer,
+    gclid: input.gclid,
+    fbclid: input.fbclid,
+    submission_page: input.submission_page,
     city: input.city,
     zip: input.zip,
     timeline: input.timeline,

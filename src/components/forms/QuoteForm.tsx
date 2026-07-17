@@ -2,8 +2,8 @@
 
 import { FormEvent, MouseEvent, useEffect, useState } from "react";
 import { primaryServices } from "@/content/services";
-import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
+import { getFirstTouchAttribution, type LeadAttribution } from "@/lib/leadAttribution";
 
 type QuoteFormProps = {
   /** Pre-select and hide the service dropdown. Pass the service name (e.g. "Bathroom Remodeling"). */
@@ -36,27 +36,17 @@ function track(name: string, detail: Record<string, unknown> = {}) {
   window.dispatchEvent(new CustomEvent(name, { detail }));
 }
 
-type UtmData = {
-  utm_source: string;
-  utm_medium: string;
-  utm_campaign: string;
-  utm_content: string;
-  utm_term: string;
+type AttributionData = LeadAttribution & {
   landing_path: string;
+  campaign: string;
 };
 
-function captureUtmParams(): UtmData {
-  if (typeof window === "undefined") {
-    return { utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "", landing_path: "" };
-  }
-  const params = new URLSearchParams(window.location.search);
+function captureAttribution(): AttributionData {
+  const attribution = getFirstTouchAttribution();
   return {
-    utm_source: params.get("utm_source") || "",
-    utm_medium: params.get("utm_medium") || "",
-    utm_campaign: params.get("utm_campaign") || "",
-    utm_content: params.get("utm_content") || "",
-    utm_term: params.get("utm_term") || "",
-    landing_path: window.location.pathname,
+    ...attribution,
+    landing_path: attribution.landing_page,
+    campaign: attribution.utm_campaign,
   };
 }
 
@@ -67,11 +57,25 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [stepOneData, setStepOneData] = useState<StepOneData>(initialStepOneData);
   const [formStarted, setFormStarted] = useState(false);
-  const [utmData, setUtmData] = useState<UtmData>({ utm_source: "", utm_medium: "", utm_campaign: "", utm_content: "", utm_term: "", landing_path: "" });
+  const [attribution, setAttribution] = useState<AttributionData>({
+    traffic_source: "Direct / Unknown",
+    traffic_medium: "direct",
+    landing_page: "",
+    referrer: "",
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: "",
+    utm_content: "",
+    utm_term: "",
+    gclid: "",
+    fbclid: "",
+    landing_path: "",
+    campaign: "",
+  });
   const [servicePreselected, setServicePreselected] = useState(false);
 
   useEffect(() => {
-    setUtmData(captureUtmParams());
+    setAttribution(captureAttribution());
   }, []);
 
   // Pre-select service from prop or ?service= URL param
@@ -128,7 +132,11 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
     setLoading(true);
     setState(initialState);
     const formData = new FormData(event.currentTarget);
-    const payload = { ...Object.fromEntries(formData.entries()), ...utmData };
+    const payload = {
+      ...Object.fromEntries(formData.entries()),
+      ...attribution,
+      submission_page: window.location.pathname,
+    };
 
     try {
       const response = await fetch("/api/quote", {
@@ -141,7 +149,8 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
       setState(data);
 
       if (data.ok) {
-        window.dispatchEvent(new CustomEvent("rhi:generate_lead"));
+        const submissionId = crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`;
+        window.dispatchEvent(new CustomEvent("rhi:generate_lead", { detail: { submissionId } }));
         setSubmitted(true);
         return;
       }
