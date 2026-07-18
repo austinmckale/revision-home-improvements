@@ -226,18 +226,19 @@ export const services: Service[] = [
     description:
       "Basement finishing and remodeling for family rooms, offices, guest spaces, and storage zones.",
     intro:
-      "Most basements sit unused: too damp, too dark, or too awkward to feel like real living space. We plan around your foundation conditions, moisture concerns, and mechanical systems so the finished space is comfortable, dry, and built to last. The result is a basement that feels like part of your home, not an afterthought.",
+      "Most basements sit unused because they are dark, awkward, or not organized around how the household needs to use the space. We review existing conditions, utility access, and the intended room layout before defining a finish scope that feels connected to the rest of the home.",
     cta: "Request a Basement Quote",
     bullets: ["Framing and drywall", "Flooring and trim", "Moisture-aware planning"],
     whatIncluded: [
       "Basement layout planning for multi-use living",
       "Framing, drywall, and finish carpentry",
       "Lighting and comfort-focused room setup",
+      "Review of egress, insulation, electrical, ceiling, and HVAC needs tied to the intended use",
       "Storage integration and utility-area planning",
     ],
     qualityFactors: [
-      "Moisture-aware material choices and wall assembly details",
-      "Lighting design that avoids dark corner zones",
+      "Existing moisture conditions reviewed before finish materials are selected",
+      "Lighting and ceiling planning around the room layout and utilities",
       "Clean mechanical access planning for long-term maintenance",
     ],
     pricingFactors: [
@@ -248,39 +249,20 @@ export const services: Service[] = [
     outcomes: ["More usable living space", "Improved comfort and lighting", "Flexible layouts for family needs"],
     process: [
       "Space planning and constraints review",
-      "Permit and inspection coordination",
+      "Scope review for existing conditions and required specialty work",
       "Framing/electrical/mechanical coordination",
       "Finish material installation and final punch-list completion",
     ],
     faqs: [
       {
         q: "What about moisture or water in the basement?",
-        a: "We assess conditions before finishing. Active water issues get addressed first; assemblies and materials are chosen for below-grade risk, and ventilation is planned so the space stays comfortable long term.",
+        a: "Existing conditions should be reviewed before finishing. Active water issues need to be resolved before finish work begins, and the final scope should account for below-grade moisture risk, ventilation, and material selection.",
       },
       {
         q: "Can I add a bathroom in the basement?",
         a: "Often yes. An existing rough-in makes it straightforward; without one, we walk through options and cost during the estimate.",
       },
     ],
-    authoritySnapshot: {
-      title: "Basement buildout, Fogelsville, PA",
-      location: "Fogelsville, PA (Lehigh County)",
-      summary:
-        "Example scope for a partially unfinished basement covering layout, utilities, drainage, insulation, and finish sequencing.",
-      scope: [
-        "Framing for mechanical room, fitness room, workshop, wet bar zone, and custom built-ins",
-        "Pressure-treated bottom plates at concrete contact points and required fire blocking",
-        "Recessed lighting, dedicated 20-amp fitness circuits, wet bar electrical, and hardwired smoke/CO detectors",
-        "Wet bar plumbing rough-in plus sump and drainage coordination",
-        "Exterior wall insulation, 6-mil vapor barrier, and Rockwool in ceiling cavities",
-        "Slab prep with vapor barrier and LVP flooring in finished areas",
-        "Interior French drain and up to two sump pump systems for water management",
-      ],
-      compliance:
-        "Scope aligned with local building, electrical, plumbing, and energy-code requirements.",
-      note:
-        "Shown to illustrate planning depth. Your scope will vary based on home conditions, access, and finish selections.",
-    },
     image: {
       src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
       alt: "Finished basement media room with large screen.",
@@ -291,54 +273,6 @@ export const services: Service[] = [
       { src: "/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg", alt: "Wide basement view showing finished layout and floor detail." },
       { src: "/images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg", alt: "Basement wide-angle finish showing completed room flow." },
     ],
-    processGallery: {
-      title: "What Happens Before the Walls Close Up",
-      intro:
-        "Finished walls hide a lot of work. These photos show what framing, insulation, plumbing, and HVAC look like before drywall goes up.",
-      inlineCount: 6,
-      images: [
-        {
-          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
-          alt: "Wide view of basement framing with insulation and bathroom rough-in visible.",
-          caption: "Layout taking shape: insulation going in, bathroom roughed in toward the back.",
-        },
-        {
-          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-metal-stud-framing-bathroom-rough-in.jpg",
-          alt: "Metal stud partition walls framing out a basement bathroom.",
-          caption: "Bathroom walls framed and squared before plumbing goes in.",
-        },
-        {
-          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-bathroom-plumbing-rough-in-supply-drain.jpg",
-          alt: "Basement bathroom plumbing rough-in with supply lines and drain piping.",
-          caption: "Supply lines, drain piping, and pump installed before walls close up.",
-        },
-        {
-          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-mechanical-room-framing-tankless-water-heater.jpg",
-          alt: "Framed mechanical room with tankless water heater and copper piping.",
-          caption: "Mechanical room framed with tankless water heater mounted and connected.",
-        },
-        {
-          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-staircase-framing-ceiling-grid-aquarium-wall.jpg",
-          alt: "Basement staircase framing with ceiling grid and open floor area.",
-          caption: "Staircase framed in with ceiling grid overhead, showing the scale of the finished space.",
-        },
-        {
-          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-hallway-framing-drywall-stairway-electrical-boxes.jpg",
-          alt: "Basement hallway with drywall going up and electrical boxes placed.",
-          caption: "Drywall going up with electrical boxes set. Framing turning into finished rooms.",
-        },
-        {
-          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-stairway-view-framing-electrical-panel.jpg",
-          alt: "View down basement stairway showing steel stud framing and electrical panel.",
-          caption: "Steel stud framing along the foundation with electrical panel access kept clear.",
-        },
-        {
-          src: "/images/projects/fogelsville-basement-in-progress/process/basement-process-wide-view-ceiling-framing-insulation-hvac.jpg",
-          alt: "Wide angle of basement ceiling framing with insulation and HVAC register placement.",
-          caption: "Ceiling insulation between joists with HVAC register placed for the finished layout.",
-        },
-      ],
-    },
   },
   {
     slug: "drywall-installation-repair",
@@ -511,23 +445,23 @@ export const services: Service[] = [
     featuredCaseStudySlug: "reading-paver-patio-buildout",
     portfolioTag: "paver-installation",
     name: "Paver Installation",
-    short: "Patios and walkways built to last.",
+    short: "Paver patios, substantial renovations, and connected outdoor living areas.",
     description:
-      "Patios, walkways, and paver hardscape upgrades designed for drainage, durability, and curb appeal.",
+      "Paver patio installation, substantial patio renovation, pool surrounds, and connected outdoor-living projects.",
     intro:
-      "A patio or poolside hardscape area is only as good as what is underneath it. We spend the time on proper base prep, compaction, and drainage so your pavers do not shift, sink, or pool water. The result is outdoor space you can actually enjoy year-round.",
+      "Paver patio installation starts with the site, not just the surface. We review the layout, access, existing grade, drainage path, and edge conditions before defining the work for a new patio, substantial renovation, pool surround, or connected outdoor-living project.",
     cta: "Request a paver quote",
-    bullets: ["Patios and poolside hardscapes", "Walkways and edging", "Base prep and grading"],
+    bullets: ["Patios and pool surrounds", "Substantial patio renovation", "Base preparation and grading"],
     whatIncluded: [
-      "Site layout and drainage-aware design planning for patios, walkways, and poolside hardscape areas",
-      "Excavation, base prep, and compaction",
-      "Paver installation with edge restraint and joint fill",
-      "Final grading and cleanup",
+      "Site layout and drainage-aware planning for patios, pool surrounds, and connected walkways",
+      "Excavation depth and base preparation matched to site and soil conditions",
+      "Consistent bedding layer, paver installation, appropriate edge restraint, and joint material matched to the selected system",
+      "Final grading, transitions, and cleanup",
     ],
     qualityFactors: [
-      "Base depth and compaction quality",
-      "Drainage control to avoid settling or pooling",
-      "Edge restraint and pattern lock-in stability",
+      "Prepared and compacted aggregate base, with geotextile where site conditions call for it",
+      "Drainage pitched away from structures before the finished surface is set",
+      "Edge restraint and transitions appropriate to the installation",
     ],
     pricingFactors: [
       "Site access and excavation requirements",
@@ -539,37 +473,17 @@ export const services: Service[] = [
     faqs: [
       {
         q: "What actually makes a paver patio last?",
-        a: "Base depth, compaction, and drainage matter more than the pavers themselves. We scope prep honestly so the surface does not shift or hold water.",
+        a: "The preparation below and around the surface matters. Site conditions, base preparation, drainage, grading, and edge restraint all affect the scope, so they should be reviewed before a patio layout is finalized.",
       },
       {
         q: "Can you build on a sloped yard?",
-        a: "Yes. Grading, retaining, and drainage are part of the job; slopes mean more prep, which we call out in the estimate.",
+        a: "A sloped site may still support a patio, but grading, drainage, access, and the required preparation need to be evaluated before the scope is defined.",
       },
       {
         q: "Do you work on pool surrounds?",
-        a: "Yes when the scope is the same class of work: layout, base, edge restraint, and clean radius detail at the pool.",
+        a: "Yes. Pool-surround installation or renovation can be part of the work when the site, layout, and surrounding hardscape call for a substantial scope.",
       },
     ],
-    authoritySnapshot: {
-      title: "Backyard patio and walkway buildout, Reading, PA",
-      location: "Reading, PA (Berks County)",
-      summary:
-        "New paver patio and connecting walkway installed over a graded yard with soft soil conditions, requiring full excavation, base build-up, and drainage pitch to keep the surface stable and dry long term.",
-      scope: [
-        "Existing sod and topsoil stripped and excavated to 10 inches below finished grade across the full patio footprint and walkway corridor",
-        "Geotextile fabric laid over exposed subgrade to separate native clay soil from aggregate base and prevent migration",
-        "6 inches of recycled concrete aggregate installed in two lifts, each compacted with a plate tamper to 95% density before the next lift",
-        "1-inch bedding layer of coarse concrete sand screeded to final grade with pipe rails for consistent depth across the patio field",
-        "Pavers set in a running bond pattern with uniform joint spacing; cuts made with a wet saw at all perimeter edges and radius curves",
-        "Snap-edge restraint spiked into compacted base along all open sides; restraint set below final paver height so it disappears under backfill",
-        "Finished surface pitched at 1/8 inch per foot away from the house foundation to move water toward the yard without pooling on the patio",
-        "Polymeric sand swept into joints and activated per manufacturer instructions; transitions detailed where pavers meet the concrete stoop and lawn edging",
-      ],
-      compliance:
-        "Base depth and compaction meet ICPI residential standards. Drainage pitch directed away from foundation per local grading requirements.",
-      note:
-        "Shown to illustrate base-prep depth. Your scope will vary based on soil conditions, site access, and paver selection.",
-    },
     image: {
       src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
       alt: "Finished patio, pavilion roof, and hardscape outdoor living space.",

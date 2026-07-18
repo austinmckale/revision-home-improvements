@@ -29,6 +29,17 @@ export const revalidate = 3600;
 
 type Params = { city: string; service: string };
 
+const contextualGalleryKeys = new Set([
+  "reading-pa/paver-installation",
+  "allentown-pa/paver-installation",
+  "bethlehem-pa/paver-installation",
+  "lehigh-valley-pa/paver-installation",
+  "reading-pa/basement-finishing",
+  "berks-county-pa/basement-finishing",
+  "lehigh-valley-pa/basement-finishing",
+  "berks-county-pa/kitchen-remodeling",
+]);
+
 export function generateStaticParams() {
   return locations.flatMap((location) =>
     services.map((service) => ({ city: location.slug, service: service.slug })),
@@ -90,7 +101,10 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     : undefined;
   const contextualCaseStudy = topLocalCaseStudy ?? relatedCaseStudyFromConfig;
   const explicitFeaturedCaseStudy = findExplicitFeaturedCaseStudy(service, visibleCaseStudies);
-  const gallerySourceCaseStudy = explicitFeaturedCaseStudy ?? topLocalCaseStudy ?? relatedCaseStudyFromConfig;
+  const useContextualGallery = contextualGalleryKeys.has(`${location.slug}/${service.slug}`);
+  const gallerySourceCaseStudy = useContextualGallery
+    ? topLocalCaseStudy ?? relatedCaseStudyFromConfig ?? explicitFeaturedCaseStudy
+    : explicitFeaturedCaseStudy ?? topLocalCaseStudy ?? relatedCaseStudyFromConfig;
   const priorityContextualLocations = new Set(["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"]);
   const showPriorityContextualSentence =
     Boolean(localContent) &&
@@ -100,6 +114,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
   const relatedLocalServices = primaryServices.filter((item) => item.slug !== service.slug);
   const showCabinetPlanningBlock =
     location.slug === "berks-county-pa" && service.slug === "kitchen-remodeling";
+  const showAuthoritySnapshot = Boolean(service.authoritySnapshot) && !showCabinetPlanningBlock;
   const isEmergencyService =
     service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
@@ -163,7 +178,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               {localContent?.heroHeading ?? `${service.name} in ${location.short}`}
             </h1>
             <p className="mt-3 text-[var(--muted)]">
-              {service.intro} {location.localAngle}
+              {localContent?.heroIntro ?? `${service.intro} ${location.localAngle}`}
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               {isEmergencyService ? (
@@ -278,7 +293,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </section>
             )}
 
-            {service.authoritySnapshot && (
+            {showAuthoritySnapshot && service.authoritySnapshot && (
               <section className="surface mt-8 rounded-xl p-5">
                 <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
                   Example project scope
@@ -338,6 +353,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 servicesTitle={`Other services in ${location.short}`}
                 priorityTitle={`Areas we serve near ${location.short}`}
                 showCityHubLink
+                showWhySection={!useContextualGallery}
               />
             </section>
 

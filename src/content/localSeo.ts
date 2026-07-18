@@ -10,6 +10,7 @@ export type CityServiceLocalContent = {
   metadataTitle: string;
   metadataDescription: string;
   heroHeading: string;
+  heroIntro?: string;
   localProjectHeading: string;
   localProjectSnippet: string;
   localChallengesHeading: string;
@@ -321,6 +322,97 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
     ],
   },
+  "reading-pa/paver-installation": {
+    metadataTitle: "Paver Patio Installation in Reading, PA",
+    metadataDescription:
+      "Paver patio installation in Reading, PA for new patios, substantial renovations, connected walkways, and integrated outdoor-living projects.",
+    heroHeading: "Paver Patio Installation in Reading, PA",
+    heroIntro:
+      "Plan a new paver patio, substantial patio renovation, or integrated outdoor-living project around the property’s access, grade, drainage, and connection to the home.",
+    localProjectHeading: "Reading paver patio and pavilion project",
+    localProjectSnippet:
+      "A documented Reading project combined a new paver patio with a gable-roof pavilion, finished ceiling, drainage-aware transitions, and landscape edge details. The project page shows the completed outdoor area and construction context.",
+    localChallengesHeading: "What affects a Reading paver project",
+    localChallenges: [
+      "Access for excavation, base materials, and installation equipment",
+      "Existing grade and the drainage path away from the home",
+      "Transitions between the patio, pavilion, house, lawn, and connected walkways",
+    ],
+    localizedFaqs: [
+      {
+        q: "Can a pavilion and paver patio be planned as one project?",
+        a: "Yes. The layout, base work, drainage, structure, and finish transitions should be coordinated so the covered and open areas work as one outdoor space.",
+      },
+      {
+        q: "Do you evaluate existing patios in Reading?",
+        a: "Yes, when the proposed renovation is substantial. The existing surface, base, drainage, access, and intended new layout need to be reviewed before the scope is defined.",
+      },
+    ],
+    relatedCaseStudySlug: "reading-paver-patio-buildout",
+    internalLinks: [
+      {
+        href: "/reading-pa",
+        anchorText: "Remodeling and outdoor projects in Reading",
+        reason: "Reading service-area hub",
+      },
+      {
+        href: "/services/paver-installation",
+        anchorText: "Paver patio installation service details",
+        reason: "Broader project types and planning factors",
+      },
+      {
+        href: "/projects/reading-paver-patio-buildout",
+        anchorText: "Reading paver patio and pavilion project",
+        reason: "Verified local project proof",
+      },
+      {
+        href: "#quote-form-section",
+        anchorText: "Request a paver project quote",
+        reason: "Project inquiry form",
+      },
+    ],
+  },
+  "reading-pa/basement-finishing": {
+    metadataTitle: "Basement Finishing in Reading, PA",
+    metadataDescription:
+      "Basement finishing in Reading, PA with practical planning for existing conditions, moisture concerns, utilities, lighting, ceilings, and finished-room use.",
+    heroHeading: "Basement Finishing in Reading, PA",
+    heroIntro:
+      "Plan a finished basement around the space’s existing conditions, utility access, ceiling constraints, lighting, and intended use before framing and finish selections begin.",
+    localProjectHeading: "Planning a basement finish in Reading",
+    localProjectSnippet:
+      "The completed theater and entertainment basement linked below is located in Lehigh Valley, PA. It is included as a clearly labeled example of the company’s basement finishing work.",
+    localChallengesHeading: "Basement conditions to review before finishing",
+    localChallenges: [
+      "Existing moisture conditions and any active water concerns",
+      "Egress, electrical, insulation, ceiling, and HVAC needs tied to the proposed use",
+      "Storage and mechanical access that must remain practical after finishing",
+    ],
+    localizedFaqs: [],
+    relatedCaseStudySlug: "lehigh-valley-basement-finish-and-detail",
+    internalLinks: [
+      {
+        href: "/reading-pa",
+        anchorText: "Remodeling services in Reading",
+        reason: "Reading service-area hub",
+      },
+      {
+        href: "/services/basement-finishing",
+        anchorText: "Basement finishing service details",
+        reason: "Broader scope and planning information",
+      },
+      {
+        href: "/projects/lehigh-valley-basement-finish-and-detail",
+        anchorText: "Lehigh Valley basement theater project",
+        reason: "Clearly labeled regional project example",
+      },
+      {
+        href: "#quote-form-section",
+        anchorText: "Request a basement finishing quote",
+        reason: "Project inquiry form",
+      },
+    ],
+  },
   "allentown-pa/kitchen-remodeling": {
     metadataTitle: "Kitchen Remodeling in Allentown, PA",
     metadataDescription:
@@ -474,18 +566,66 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
     ],
   },
+  "allentown-pa/paver-installation": {
+    metadataTitle: "Paver Patio Installation in Allentown, PA",
+    metadataDescription:
+      "Paver patio installation in Allentown, PA for new patios, substantial renovations, pool surrounds, and connected outdoor-living projects.",
+    heroHeading: "Paver Patio Installation in Allentown, PA",
+    heroIntro:
+      "Plan a new paver patio or substantial renovation around the property’s access, existing grade, drainage path, edge conditions, and connection to the home.",
+    localProjectHeading: "Planning an Allentown paver patio project",
+    localProjectSnippet:
+      "The Bethlehem pool-patio renovation linked below is a nearby Lehigh Valley example, with its actual project location shown throughout the page.",
+    localChallengesHeading: "What affects an Allentown patio scope",
+    localChallenges: [
+      "Access for excavation, aggregate, pavers, and installation equipment",
+      "Existing grade and drainage around the proposed patio area",
+      "Transitions at the home, lawn, pool area, or connected walkway",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do you take on small isolated paver repairs?",
+        a: "RHI Pros currently prioritizes new patios, substantial patio renovations, pool surrounds, and larger connected outdoor projects. Existing conditions can be reviewed to determine whether a renovation fits that scope.",
+      },
+    ],
+    relatedCaseStudySlug: "bethlehem-pool-patio-renovation",
+    internalLinks: [
+      {
+        href: "/allentown-pa",
+        anchorText: "Remodeling and outdoor projects in Allentown",
+        reason: "Allentown service-area hub",
+      },
+      {
+        href: "/services/paver-installation",
+        anchorText: "Paver patio installation service details",
+        reason: "Broader scope and planning factors",
+      },
+      {
+        href: "/projects/bethlehem-pool-patio-renovation",
+        anchorText: "Bethlehem pool-patio renovation",
+        reason: "Nearby project example with accurate location",
+      },
+      {
+        href: "#quote-form-section",
+        anchorText: "Request a paver project quote",
+        reason: "Project inquiry form",
+      },
+    ],
+  },
   "berks-county-pa/basement-finishing": {
     metadataTitle: "Basement Finishing in Berks County, PA",
     metadataDescription:
       "Basement finishing in Berks County, PA with moisture-aware planning, practical layouts, and finish work suited to older foundations and suburban homes.",
     heroHeading: "Basement Finishing in Berks County, PA",
-    localProjectHeading: "Basement finishing across Berks County",
+    heroIntro:
+      "Plan a finished basement around existing moisture conditions, utility access, ceiling constraints, lighting, HVAC coordination, storage, and the intended room use.",
+    localProjectHeading: "Planning a basement finish in Berks County",
     localProjectSnippet:
-      "Berks County basements vary from Reading row-home foundations to larger suburban footprints. We plan around moisture conditions, utility access, and how the finished space will actually be used before framing and finish work begin.",
+      "The completed theater and entertainment basement linked below is located in Lehigh Valley, PA and is shown as a clearly labeled regional example of the company’s basement work.",
     localChallengesHeading: "Berks County basement challenges we plan for",
     localChallenges: [
       "Moisture and foundation conditions in older Berks County homes",
-      "Permit and code considerations for egress, electrical, and HVAC",
+      "Egress, electrical, insulation, ceiling, and HVAC needs tied to the proposed use",
       "Balancing finished living areas with storage and mechanical zones",
     ],
     localizedFaqs: [],
@@ -1077,14 +1217,16 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     ],
   },
   "bethlehem-pa/paver-installation": {
-    metadataTitle: "Paver Installation in Bethlehem, PA",
+    metadataTitle: "Paver Patio Installation in Bethlehem, PA",
     metadataDescription:
-      "Paver and pool patio installation in Bethlehem, PA with drainage-aware planning, curved layout detailing, and outdoor hardscape upgrades that improve curb appeal and usability.",
-    heroHeading: "Paver Installation in Bethlehem, PA",
-    localProjectHeading: "Common Bethlehem Pool Patio and Paver Scope",
+      "Paver patio installation and substantial pool-surround renovation in Bethlehem, PA, planned around access, drainage, layout, and existing conditions.",
+    heroHeading: "Paver Patio Installation in Bethlehem, PA",
+    heroIntro:
+      "Plan a new paver patio, substantial renovation, or pool-surround project around access, existing grade, drainage, edge conditions, and how the outdoor area will be used.",
+    localProjectHeading: "Bethlehem pool-patio renovation",
     localProjectSnippet:
-      "Bethlehem outdoor projects often need more than a surface swap. Recent pool patio work in Bethlehem reflects the kind of scope we handle around patios and pool decks: layout flow, edge detailing, and cleaner hardscape finishes that upgrade the space without awkward transitions or mismatched contours.",
-    localChallengesHeading: "Bethlehem Hardscape Challenges We Plan For",
+      "A documented Bethlehem project renovated the hardscape around an existing curved pool. It is one example of RHI Pros’ paver work; patio projects without pools are also part of the supported scope.",
+    localChallengesHeading: "What affects a Bethlehem paver project",
     localChallenges: [
       "Curved pool edges and irregular patio shapes",
       "Surface wear that makes outdoor areas look dated",
@@ -1093,11 +1235,11 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     localizedFaqs: [
       {
         q: "Can you renovate a pool patio without changing the whole backyard?",
-        a: "Yes. Many Bethlehem pool patio projects focus on the hardscape immediately around the pool so the space looks dramatically better without a full backyard rebuild.",
+        a: "Yes. A pool-patio renovation can focus on the substantial hardscape area around the pool without requiring a full backyard rebuild.",
       },
       {
         q: "Do curved pool shapes make patio installation harder?",
-        a: "They require better layout planning and finish control, but yes, we handle curved edges and irregular shapes regularly.",
+        a: "Curved edges and irregular shapes affect layout, cuts, transitions, and finish detailing, so those conditions are reviewed when the project is scoped.",
       },
       {
         q: "What makes a pool patio renovation look high quality?",
@@ -1116,16 +1258,17 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         reason: "Service authority and process details",
       },
       {
-        href: "/projects",
-        anchorText: "Pool patio and hardscape project gallery",
-        reason: "Proof of workmanship and outcomes",
+        href: "/projects/bethlehem-pool-patio-renovation",
+        anchorText: "Bethlehem pool-patio renovation",
+        reason: "Verified local project proof",
       },
       {
-        href: "/financing",
-        anchorText: "Financing options for outdoor projects",
-        reason: "Decision-stage support",
+        href: "#quote-form-section",
+        anchorText: "Request a paver project quote",
+        reason: "Project inquiry form",
       },
     ],
+    relatedCaseStudySlug: "bethlehem-pool-patio-renovation",
   },
   "lehigh-valley-pa/kitchen-remodeling": {
     metadataTitle: "Kitchen Remodeling in Lehigh Valley, PA",
@@ -1234,9 +1377,11 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataDescription:
       "Basement finishing in Lehigh Valley, PA with moisture-conscious planning, lighting upgrades, and flexible layouts for family rooms, offices, and entertainment space.",
     heroHeading: "Basement Finishing in Lehigh Valley, PA",
+    heroIntro:
+      "Plan a finished basement around existing conditions, utility access, ceiling and lighting needs, HVAC coordination, and the way each room will be used.",
     localProjectHeading: "What a Recent Lehigh Valley Basement Finish Included",
     localProjectSnippet:
-      "Our recent full basement theater and entertainment build in Lehigh Valley shows the kind of planning these projects need: lighting, drywall, finish sequencing, and room layout that turn blank lower levels into space the household actually uses.",
+      "A documented Lehigh Valley project transformed a mostly unfinished basement with framing, drywall, recessed lighting, an entertainment wall, integrated audio and fireplace, epoxy flooring, and finish detailing.",
     localChallengesHeading: "Lehigh Valley Basement Challenges We Plan For",
     localChallenges: [
       "Layout planning around lower ceilings, utilities, and storage needs",
@@ -1269,14 +1414,61 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         reason: "Full scope and planning expectations",
       },
       {
-        href: "/projects",
-        anchorText: "Basement and interior project examples",
+        href: "/projects/lehigh-valley-basement-finish-and-detail",
+        anchorText: "Lehigh Valley basement theater project",
         reason: "Direct Lehigh Valley proof and finished results",
       },
       {
         href: "/financing",
         anchorText: "Financing options for basement projects",
         reason: "Decision-stage support",
+      },
+    ],
+    relatedCaseStudySlug: "lehigh-valley-basement-finish-and-detail",
+  },
+  "lehigh-valley-pa/paver-installation": {
+    metadataTitle: "Paver Patio Installation in Lehigh Valley, PA",
+    metadataDescription:
+      "Paver patio installation across Lehigh Valley for new patios, substantial renovations, pool surrounds, and integrated outdoor-living projects.",
+    heroHeading: "Paver Patio Installation in Lehigh Valley, PA",
+    heroIntro:
+      "Plan a new paver patio, substantial renovation, pool surround, or connected outdoor-living project around access, grade, drainage, edge conditions, and the surrounding property.",
+    localProjectHeading: "Paver project proof from Lehigh Valley",
+    localProjectSnippet:
+      "A documented Bethlehem pool-patio renovation provides Lehigh Valley proof for curved-edge and pool-surround work. RHI Pros also documents a larger patio-and-pavilion project in Reading, PA, outside Lehigh Valley.",
+    localChallengesHeading: "What affects a regional paver project",
+    localChallenges: [
+      "Site access for excavation, aggregate, pavers, and equipment",
+      "Existing grade and drainage around homes, pools, and structures",
+      "Coordination between patios, connected walkways, pavilions, and landscape edges",
+    ],
+    localizedFaqs: [
+      {
+        q: "What paver projects does RHI Pros prioritize?",
+        a: "The primary focus is new paver patios, substantial patio replacements or renovations, pool surrounds, integrated patio-and-pavilion work, and larger patio projects with connected walkways.",
+      },
+    ],
+    relatedCaseStudySlug: "bethlehem-pool-patio-renovation",
+    internalLinks: [
+      {
+        href: "/lehigh-valley-pa",
+        anchorText: "Remodeling and outdoor projects in Lehigh Valley",
+        reason: "Regional service-area hub",
+      },
+      {
+        href: "/services/paver-installation",
+        anchorText: "Paver patio installation service details",
+        reason: "Broader scope and planning factors",
+      },
+      {
+        href: "/projects/bethlehem-pool-patio-renovation",
+        anchorText: "Bethlehem pool-patio renovation",
+        reason: "Verified Lehigh Valley project proof",
+      },
+      {
+        href: "/projects/reading-paver-patio-buildout",
+        anchorText: "Reading patio and pavilion project",
+        reason: "Additional project example with accurate location",
       },
     ],
   },

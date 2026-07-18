@@ -11,6 +11,7 @@ type LocalHighlightsSectionProps = {
   servicesTitle?: string;
   priorityTitle?: string;
   showCityHubLink?: boolean;
+  showWhySection?: boolean;
 };
 
 export default function LocalHighlightsSection({
@@ -22,21 +23,24 @@ export default function LocalHighlightsSection({
   servicesTitle,
   priorityTitle = "Areas We Serve",
   showCityHubLink = false,
+  showWhySection = true,
 }: LocalHighlightsSectionProps) {
   const visibleServices = serviceItems.slice(0, maxServices);
 
   return (
     <section className={className}>
-      <article className="surface rounded-xl p-5">
-        <h2 className="text-xl font-bold text-[var(--accent)]">{whyTitle || `Why ${location.short} homeowners choose us`}</h2>
-        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-          {location.whyUs.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </article>
+      {showWhySection ? (
+        <article className="surface rounded-xl p-5">
+          <h2 className="text-xl font-bold text-[var(--accent)]">{whyTitle || `Why ${location.short} homeowners choose us`}</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+            {location.whyUs.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
+      ) : null}
 
-      <h3 className="mt-8 text-xl font-bold text-[var(--accent)]">
+      <h3 className={`${showWhySection ? "mt-8" : ""} text-xl font-bold text-[var(--accent)]`}>
         {servicesTitle || `Services in ${location.short}`}
       </h3>
       <div className="mt-3 grid gap-2 md:grid-cols-2">

@@ -30,10 +30,10 @@ type Params = { service: string };
 const priorityLocationSlugsByService: Partial<Record<string, string[]>> = {
   "kitchen-remodeling": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
   "bathroom-remodeling": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
-  "basement-finishing": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "basement-finishing": ["lehigh-valley-pa", "reading-pa", "berks-county-pa"],
   "drywall-installation-repair": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
   "flooring-installation": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
-  "paver-installation": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
+  "paver-installation": ["reading-pa", "bethlehem-pa", "allentown-pa", "lehigh-valley-pa"],
   "exterior-remodeling": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
   "fire-damage-restoration": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
   "water-damage-restoration": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
@@ -56,6 +56,14 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const service = getServiceBySlug(serviceSlug);
   if (!service || service.slug === "insurance-claims") {
     return {};
+  }
+  if (service.slug === "paver-installation") {
+    return {
+      title: "Paver Patio Installation | Lehigh Valley & Berks County",
+      description:
+        "Paver patio installation for new patios, substantial renovations, pool surrounds, and integrated outdoor-living projects across Lehigh Valley and Berks County.",
+      alternates: { canonical: `/services/${service.slug}` },
+    };
   }
   const serviceKey = service.name.toLowerCase();
   if (service.slug === "water-damage-restoration") {
@@ -140,6 +148,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
     ? []
     : await getPortfolioImages({ serviceTags: [portfolioTag], limit: 6 });
   const wholeHomeCrossLink = wholeHomeCrossLinkCopy[service.slug];
+  const pageHeading = service.slug === "paver-installation" ? "Paver Patio Installation" : service.name;
   const jsonLd = getServiceJsonLd(
     service.name,
     absoluteUrl(`/services/${service.slug}`),
@@ -177,7 +186,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
               Lehigh Valley &amp; Berks County
             </p>
-            <h1 className="heading-serif mt-2 text-3xl text-[var(--accent)] md:text-4xl lg:text-5xl">{service.name}</h1>
+            <h1 className="heading-serif mt-2 text-3xl text-[var(--accent)] md:text-4xl lg:text-5xl">{pageHeading}</h1>
             <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--muted)] md:mt-4 md:text-base">{service.intro}</p>
             {isEmergencyService && (
               <div className="mt-4 rounded-xl border border-[var(--brand)] bg-[var(--surface-soft)] p-4">
@@ -450,14 +459,28 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                     </Link>
                   </article>
                   {moreCaseStudyCount > 0 ? (
-                    <p className="mt-4 text-sm text-[var(--muted)]">
-                      <Link
-                        href={`/projects?service=${encodeURIComponent(service.slug)}`}
-                        className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
-                      >
-                        Explore more {service.name.toLowerCase()} projects
-                      </Link>
-                    </p>
+                    <>
+                      {service.slug === "paver-installation" ? (
+                        <p className="mt-4 text-sm text-[var(--muted)]">
+                          For a different paver scope, see the{" "}
+                          <Link
+                            href="/projects/bethlehem-pool-patio-renovation"
+                            className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                          >
+                            pool-patio renovation in Bethlehem, PA
+                          </Link>
+                          .
+                        </p>
+                      ) : null}
+                      <p className="mt-4 text-sm text-[var(--muted)]">
+                        <Link
+                          href={`/projects?service=${encodeURIComponent(service.slug)}`}
+                          className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                        >
+                          Explore more {service.name.toLowerCase()} projects
+                        </Link>
+                      </p>
+                    </>
                   ) : null}
                 </section>
               </FadeIn>
