@@ -49,3 +49,6 @@ next-env.d.ts
 # local archives / sensitive exports
 backup/
 Joist Examples/
+
+# local editor / workspace config
+app and website workspace - Ryan.code-workspace
