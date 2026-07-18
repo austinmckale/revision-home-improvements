@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, MouseEvent, useEffect, useState } from "react";
+import { FormEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { primaryServices } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getFirstTouchAttribution, type LeadAttribution } from "@/lib/leadAttribution";
@@ -57,6 +57,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [stepOneData, setStepOneData] = useState<StepOneData>(initialStepOneData);
   const [formStarted, setFormStarted] = useState(false);
+  const submissionIdRef = useRef<string | null>(null);
   const [attribution, setAttribution] = useState<AttributionData>({
     traffic_source: "Direct / Unknown",
     traffic_medium: "direct",
@@ -124,6 +125,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
     setStep(1);
     setStepOneData(initialStepOneData);
     setSubmitted(false);
+    submissionIdRef.current = null;
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -132,6 +134,8 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
     setLoading(true);
     setState(initialState);
     const formData = new FormData(event.currentTarget);
+    const submissionId = submissionIdRef.current ?? (crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`);
+    submissionIdRef.current = submissionId;
     const payload = {
       ...Object.fromEntries(formData.entries()),
       ...attribution,
@@ -149,12 +153,12 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
       setState(data);
 
       if (data.ok) {
-        const submissionId = crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`;
         window.dispatchEvent(new CustomEvent("rhi:generate_lead", { detail: { submissionId } }));
         setSubmitted(true);
         return;
       }
 
+      submissionIdRef.current = null;
       const errorFields = Object.keys(data.errors || {});
       track("rhi:quote_submit_error", { fields: errorFields.join(","), step });
 
@@ -163,6 +167,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
         setStep(1);
       }
     } catch {
+      submissionIdRef.current = null;
       setState({ ok: false, message: "Something went wrong. Please try again or call us directly." });
     } finally {
       setLoading(false);

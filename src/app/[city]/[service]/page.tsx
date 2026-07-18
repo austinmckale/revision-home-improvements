@@ -98,6 +98,8 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     (priorityContextualLocations.has(location.slug) || Boolean(localContent.relatedCaseStudySlug));
   const serviceOverviewAnchorText = `${service.name.toLowerCase()} services`;
   const relatedLocalServices = primaryServices.filter((item) => item.slug !== service.slug);
+  const showCabinetPlanningBlock =
+    location.slug === "berks-county-pa" && service.slug === "kitchen-remodeling";
   const isEmergencyService =
     service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
@@ -227,6 +229,23 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 </ul>
               </section>
             )}
+
+            {showCabinetPlanningBlock ? (
+              <aside className="surface-soft rounded-xl border border-[var(--border)] p-5 md:p-6">
+                <h2 className="heading-serif text-2xl text-[var(--accent)]">
+                  Primarily planning new cabinets?
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                  If cabinet replacement, layout and installation are the main focus, review our Berks County cabinet service. For projects involving the full room, continue with the complete kitchen-remodeling information on this page.
+                </p>
+                <Link
+                  href="/berks-county-pa/kitchen-cabinet-installation"
+                  className="mt-4 inline-block text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                >
+                  Explore Kitchen Cabinet Installation →
+                </Link>
+              </aside>
+            ) : null}
 
             {localProof.length > 0 && (
               <section className="mt-8">

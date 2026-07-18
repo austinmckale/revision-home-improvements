@@ -71,6 +71,30 @@ export default function ServicesHubPage() {
             </div>
           </FadeIn>
 
+          <FadeIn delay={0.18}>
+            <aside className="surface-soft mt-8 rounded-2xl border border-[var(--border)] p-5 md:flex md:items-center md:justify-between md:gap-8 md:p-6">
+              <div className="max-w-2xl">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
+                  Larger, Connected Projects
+                </p>
+                <h2 className="heading-serif mt-2 text-2xl text-[var(--accent)]">
+                  Planning several rooms at once?
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                  When kitchen, bathroom, flooring, drywall or other interior work overlaps, it may make more sense to develop one coordinated scope. See how RHI Pros approaches multi-room and whole-home remodeling.
+                </p>
+              </div>
+              <div className="mt-5 flex shrink-0 flex-wrap gap-3 md:mt-0 md:justify-end">
+                <Button href="/services/whole-home-remodeling">
+                  Explore Whole-Home Remodeling →
+                </Button>
+                <Button href="/services/whole-home-remodeling#quote-form-section" variant="secondary">
+                  Describe Your Project
+                </Button>
+              </div>
+            </aside>
+          </FadeIn>
+
           <FadeIn delay={0.2}>
             <ConfidenceSection
               className="mt-14 md:mt-20"

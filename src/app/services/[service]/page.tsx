@@ -39,6 +39,14 @@ const priorityLocationSlugsByService: Partial<Record<string, string[]>> = {
   "water-damage-restoration": ["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"],
 };
 
+const wholeHomeCrossLinkCopy: Partial<Record<string, string>> = {
+  "kitchen-remodeling": "Planning connected updates beyond the kitchen? Explore whole-home remodeling.",
+  "bathroom-remodeling": "Updating several rooms together? See our whole-home remodeling approach.",
+  "basement-finishing": "Connecting the basement with other interior work? Explore whole-home remodeling.",
+  "flooring-installation": "Planning flooring as part of a larger renovation? Explore whole-home remodeling.",
+  "drywall-installation-repair": "Coordinating walls and ceilings across several rooms? Explore whole-home remodeling.",
+};
+
 export function generateStaticParams() {
   return primaryServices.map((service) => ({ service: service.slug }));
 }
@@ -131,6 +139,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   const portfolioImages = showCuratedStaticGallery
     ? []
     : await getPortfolioImages({ serviceTags: [portfolioTag], limit: 6 });
+  const wholeHomeCrossLink = wholeHomeCrossLinkCopy[service.slug];
   const jsonLd = getServiceJsonLd(
     service.name,
     absoluteUrl(`/services/${service.slug}`),
@@ -462,6 +471,34 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
 
 
+
+            {wholeHomeCrossLink ? (
+              <FadeIn>
+                <aside
+                  className="surface-soft mt-10 rounded-xl border border-[var(--border)] p-5 text-sm leading-relaxed text-[var(--muted)]"
+                  aria-label="Related project planning"
+                >
+                  <p>
+                    <Link
+                      href="/services/whole-home-remodeling"
+                      className="font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                    >
+                      {wholeHomeCrossLink}
+                    </Link>
+                  </p>
+                  {service.slug === "kitchen-remodeling" ? (
+                    <p className="mt-3">
+                      <Link
+                        href="/berks-county-pa/kitchen-cabinet-installation"
+                        className="font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                      >
+                        Planning a cabinet-focused project in Berks County?
+                      </Link>
+                    </p>
+                  ) : null}
+                </aside>
+              </FadeIn>
+            ) : null}
 
             <FadeIn>
               <nav

@@ -22,11 +22,22 @@ function emitWithParams(eventName: string, params: Record<string, unknown>) {
 }
 
 function emitLeadConversion() {
-  if (window.gtag) {
-    window.gtag("event", "generate_lead");
-    return;
-  }
-  window.dataLayer?.push({ event: "generate_lead" });
+  if (typeof window.gtag !== "function") return;
+
+  const utmParams = new URLSearchParams(window.location.search);
+  const source = utmParams.get("utm_source") || undefined;
+  const medium = utmParams.get("utm_medium") || undefined;
+  const campaign = utmParams.get("utm_campaign") || undefined;
+
+  window.gtag("event", "generate_lead", {
+    form_name: "quote_form",
+    landing_page: window.location.pathname + window.location.search,
+    page_location: window.location.href,
+    page_referrer: document.referrer || "(direct)",
+    source,
+    medium,
+    campaign,
+  });
 }
 
 function fbTrack(eventName: string) {

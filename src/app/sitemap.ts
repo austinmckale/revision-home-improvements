@@ -8,7 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/services",
+    "/services/whole-home-remodeling",
     "/service-areas",
+    "/berks-county-pa/kitchen-cabinet-installation",
     "/request-a-quote",
     "/projects",
     "/about",
