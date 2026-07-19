@@ -1,4 +1,4 @@
-import { testimonials, Testimonial } from "@/content/testimonials";
+import { getFeaturedTestimonials, Testimonial } from "@/content/testimonials";
 import { siteConfig } from "@/content/site";
 
 type TestimonialStripProps = {
@@ -18,35 +18,49 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
+const profileLinks = [
+  {
+    href: siteConfig.googleBusinessProfileUrl,
+    label: "Google Reviews",
+    ariaLabel: "Read RHI Pros reviews on Google (opens in a new tab)",
+  },
+  {
+    href: siteConfig.angiUrl,
+    label: "Angi Reviews",
+    ariaLabel: "Read RHI Pros reviews on Angi (opens in a new tab)",
+  },
+  {
+    href: siteConfig.facebookPageUrl,
+    label: "Facebook",
+    ariaLabel: "Visit the RHI Pros Facebook page (opens in a new tab)",
+  },
+] as const;
+
 export default function TestimonialStrip({ items, title = "What Our Clients Say" }: TestimonialStripProps) {
-  const displayItems = items ?? testimonials.slice(0, 3);
+  const displayItems = items ?? getFeaturedTestimonials();
 
   return (
     <section className="mt-10">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="text-2xl font-bold text-[var(--accent)]">{title}</h3>
-        <div className="flex items-center gap-3">
-          <a
-            href={siteConfig.googleBusinessProfileUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm font-semibold text-[var(--brand)]"
-          >
-            Google Reviews
-          </a>
-          <a
-            href={siteConfig.facebookPageUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm font-semibold text-[var(--brand)]"
-          >
-            Facebook Page
-          </a>
+        <div className="flex flex-wrap items-center gap-3">
+          {profileLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.ariaLabel}
+              className="text-sm font-semibold text-[var(--brand)]"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
       <div className="mt-4 grid gap-3 md:grid-cols-3">
         {displayItems.map((item) => (
-          <article key={item.context} className="surface rounded-lg p-4">
+          <article key={`${item.name}-${item.context}`} className="surface rounded-lg p-4">
             <StarRating rating={item.rating} />
             <p className="mt-2 text-sm text-[var(--muted)]">&ldquo;{item.quote}&rdquo;</p>
             <p className="mt-3 text-sm font-semibold">{item.name}</p>

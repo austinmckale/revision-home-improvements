@@ -4,8 +4,8 @@
  */
 export const company = {
   name: "RHI Pros",
-  /** Legal entity name when it matches public branding. Update if the registered name differs. */
-  legalName: "RHI Pros",
+  /** Registered legal entity (PA HIC registration). */
+  legalName: "RHI Solutions LLC",
   /** Older public listings still in circulation (e.g. legacy social profiles). */
   formerNames: ["Revision Home Improvement"] as const,
   domain: "https://www.rhipros.com",
@@ -30,16 +30,21 @@ export const company = {
     "Lehigh Valley, PA",
   ] as const,
   address: {
+    /** Market label only — not a residential street address. */
     street: "Lehigh Valley, PA",
     city: "Lehigh Valley",
     region: "PA",
-    postalCode: "18101",
     country: "US",
   },
   social: {
     googleBusinessProfile:
       "https://www.google.com/maps/place/RHI+Pros/@40.565969,-77.5904957,8z/data=!4m8!3m7!1s0xaacdc9559cf13b27:0xa432cdb7cf5eefa0!8m2!3d40.565969!4d-77.5904957!9m1!1b1!16s%2Fg%2F11x27867dk",
     facebook: "https://www.facebook.com/people/Revision-Home-Improvement/61550081845634/",
+    angi: "https://www.angi.com/companylist/us/pa/temple/rhi-solutions-llc-reviews-1.htm",
+    houzz: "https://www.houzz.com/pro/webuser-588755560/rhi-pros",
+    yelp: "https://www.yelp.com/biz/rhi-pros-allentown",
+    /** Official PA HIC lookup — link from Licenses page only; do not put in sameAs. */
+    paHicSearch: "https://hicsearch.attorneygeneral.gov/",
   },
   assets: {
     logo: "/images/brand/rhi-logo.png",

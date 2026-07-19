@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
-import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
+import { galleryCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { getServiceBySlug } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
@@ -68,7 +68,7 @@ type ProjectsPageProps = {
 
 export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
   const portfolioImages = await getPortfolioImages({ limit: 12 });
-  const orderedCaseStudies = sortCaseStudiesByMarketPriority(visibleCaseStudies);
+  const orderedCaseStudies = sortCaseStudiesByMarketPriority(galleryCaseStudies);
   const params = searchParams ? await searchParams : {};
   const serviceParam = typeof params.service === "string" ? params.service : undefined;
   const filterServiceSlug =
@@ -134,7 +134,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
                   ) : (
                     <div className="flex h-52 items-center justify-center bg-[var(--surface-soft)] px-6 text-center">
                       <p className="text-sm text-[var(--muted)]">
-                        Case study details available. Project photos coming soon.
+                        Case study details available. Photos not yet published for this project.
                       </p>
                     </div>
                   )}

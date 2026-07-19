@@ -9,10 +9,10 @@ import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
-import { testimonials } from "@/content/testimonials";
+import { getFeaturedTestimonials } from "@/content/testimonials";
 
 export const metadata: Metadata = {
-  title: "About RHI Pros | Lehigh Valley & Berks County Contractor",
+  title: "About Us | Lehigh Valley & Berks County Contractor",
   description:
     "Local, licensed, and insured remodeling contractor serving Reading, Berks County, and the Lehigh Valley with clear scopes and reliable schedules.",
   alternates: { canonical: "/about" },
@@ -107,7 +107,7 @@ export default function AboutPage() {
             <Link href="/projects" className="font-semibold text-[var(--brand)]">See Our Work</Link>
           </div>
 
-          <TestimonialStrip items={testimonials.slice(0, 3)} title="What Homeowners Say About Working With Us" />
+          <TestimonialStrip items={getFeaturedTestimonials()} title="What Homeowners Say About Working With Us" />
         </Container>
       </section>
 

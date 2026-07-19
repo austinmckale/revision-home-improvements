@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const location = getLocationBySlug(city);
   if (!location) return {};
   return {
-    title: `Remodeling & Restoration in ${location.name} | RHI Pros`,
+    title: `Remodeling & Restoration in ${location.name}`,
     description: `Kitchen, bathroom, basement, flooring, and restoration services in ${location.name}. RHI Pros delivers clear scopes, reliable scheduling, and quality workmanship.`,
     alternates: { canonical: `/${location.slug}` },
   };

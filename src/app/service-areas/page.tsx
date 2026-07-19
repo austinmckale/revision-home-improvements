@@ -8,7 +8,7 @@ import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
-  title: "Service Areas | Allentown, Bethlehem, Lehigh Valley & Berks County | RHI Pros",
+  title: "Service Areas | Allentown, Bethlehem, Lehigh Valley & Berks County",
   description:
     "RHI Pros serves homeowners across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County with remodeling and restoration projects. Find your area.",
   alternates: { canonical: "/service-areas" },

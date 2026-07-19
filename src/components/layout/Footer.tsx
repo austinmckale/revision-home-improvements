@@ -2,6 +2,29 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { siteConfig } from "@/content/site";
 
+const externalProfileLinks = [
+  {
+    href: siteConfig.googleBusinessProfileUrl,
+    label: "Google",
+    ariaLabel: "RHI Pros on Google Business Profile (opens in a new tab)",
+  },
+  {
+    href: siteConfig.facebookPageUrl,
+    label: "Facebook",
+    ariaLabel: "RHI Pros on Facebook (opens in a new tab)",
+  },
+  {
+    href: siteConfig.angiUrl,
+    label: "Angi",
+    ariaLabel: "RHI Pros reviews on Angi (opens in a new tab)",
+  },
+  {
+    href: siteConfig.yelpUrl,
+    label: "Yelp",
+    ariaLabel: "RHI Pros on Yelp (opens in a new tab)",
+  },
+] as const;
+
 export default function Footer() {
   return (
     <footer className="bg-[var(--accent)] text-white/70">
@@ -47,10 +70,26 @@ export default function Footer() {
       </Container>
       <div className="border-t border-white/10">
         <Container className="flex flex-col-reverse md:flex-row items-center justify-between gap-6 py-8 text-xs text-white/40">
-          <p>&copy; {new Date().getFullYear()} {siteConfig.name}. PA HIC #{siteConfig.hicNumber}.</p>
+          <p>
+            &copy; {new Date().getFullYear()} {siteConfig.name}.{" "}
+            <Link href="/licenses-and-insurance" className="hover:text-white transition-colors">
+              {siteConfig.hicLabel}
+            </Link>
+            .
+          </p>
           <div className="flex flex-wrap justify-center gap-6 font-medium">
-            <a href={siteConfig.facebookPageUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Facebook</a>
-            <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Google Reviews</a>
+            {externalProfileLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.ariaLabel}
+                className="hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
           </div>
         </Container>

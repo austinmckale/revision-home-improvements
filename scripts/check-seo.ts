@@ -8,6 +8,7 @@ import { getCityServiceLocalContent } from "../src/content/localSeo";
 import { locations } from "../src/content/locations";
 import { primaryServices, services } from "../src/content/services";
 import { siteConfig } from "../src/content/site";
+import { getLocalBusinessJsonLd } from "../src/lib/structuredData";
 
 type Issue = { level: "error" | "warn"; message: string };
 
@@ -19,6 +20,8 @@ const PRIORITY_LOCAL_SEO_KEYS = [
   "reading-pa/water-damage-restoration",
   "reading-pa/fire-damage-restoration",
   "berks-county-pa/basement-finishing",
+  "berks-county-pa/kitchen-remodeling",
+  "berks-county-pa/bathroom-remodeling",
 ] as const;
 
 const CANONICAL_ORIGIN = company.domain;
@@ -287,9 +290,103 @@ function checkBrandSource() {
   if (siteConfig.name !== company.name) {
     error("siteConfig.name diverges from company.name");
   }
-  if (!company.license.hic) {
-    warn("company.license.hic is empty");
+  if (company.name !== "RHI Pros") {
+    error(`Unexpected public brand name: ${company.name}`);
   }
+  if (company.legalName !== "RHI Solutions LLC") {
+    error(`legalName must be "RHI Solutions LLC" — got ${company.legalName}`);
+  }
+  if (!company.license.hic || /X{3,}|XXXXXX/i.test(company.license.hic)) {
+    error(`Invalid or placeholder HIC number: ${company.license.hic}`);
+  }
+  if (company.license.hic !== "PA185945") {
+    warn(`HIC number differs from expected PA185945: ${company.license.hic}`);
+  }
+  if (company.phone.display !== "(484) 706-9229" || company.phone.href !== "tel:+14847069229") {
+    error(`Unexpected phone configuration: ${company.phone.display} / ${company.phone.href}`);
+  }
+  if ("postalCode" in company.address) {
+    error("company.address must not include postalCode until a verified public business ZIP is confirmed.");
+  }
+  if (!company.social.googleBusinessProfile || !company.social.facebook) {
+    error("Google Business Profile and Facebook URLs are required in company.social.");
+  }
+  if (!company.social.angi || !company.social.houzz) {
+    error("Angi and Houzz verified profile URLs are required in company.social.");
+  }
+  if (!company.social.yelp?.includes("yelp.com/biz/rhi-pros-allentown")) {
+    error("Verified Yelp listing URL is required in company.social.yelp.");
+  }
+  if (!company.social.paHicSearch?.includes("hicsearch.attorneygeneral.gov")) {
+    error("company.social.paHicSearch must point to the official PA HIC search.");
+  }
+}
+
+function checkStructuredDataBasics() {
+  const jsonLd = getLocalBusinessJsonLd();
+  try {
+    JSON.stringify(jsonLd);
+  } catch {
+    error("LocalBusiness JSON-LD is not serializable.");
+  }
+  if (jsonLd.legalName !== "RHI Solutions LLC") {
+    error(`JSON-LD legalName must be RHI Solutions LLC — got ${jsonLd.legalName}`);
+  }
+  if ("priceRange" in jsonLd) {
+    error("JSON-LD must not include priceRange until verified.");
+  }
+  if (jsonLd.address && "postalCode" in jsonLd.address) {
+    error("JSON-LD address must not include postalCode until verified.");
+  }
+  const sameAs = (Array.isArray(jsonLd.sameAs) ? jsonLd.sameAs : []).map(String);
+  for (const required of [
+    company.social.googleBusinessProfile,
+    company.social.facebook,
+    company.social.angi,
+    company.social.houzz,
+    company.social.yelp,
+  ]) {
+    if (!sameAs.includes(required)) {
+      error(`JSON-LD sameAs missing verified profile: ${required}`);
+    }
+  }
+  if (sameAs.includes(String(company.social.paHicSearch))) {
+    error("JSON-LD sameAs must not include the Pennsylvania HIC search page.");
+  }
+  const identifierValue =
+    jsonLd.identifier && typeof jsonLd.identifier === "object" && "value" in jsonLd.identifier
+      ? String((jsonLd.identifier as { value: string }).value)
+      : "";
+  if (identifierValue !== company.license.hic) {
+    error(`JSON-LD identifier must use HIC ${company.license.hic}.`);
+  }
+}
+
+function checkGalleryPublicationRules() {
+  for (const study of caseStudies) {
+    if (study.hidden) continue;
+    const photoCount =
+      study.images.length + (study.beforeImages?.length ?? 0) + (study.afterImages?.length ?? 0);
+    if (photoCount === 0 && study.showInGallery !== false) {
+      error(
+        `Case study "${study.slug}" has no photos but showInGallery is not false — hide from gallery or add verified photos.`,
+      );
+    }
+  }
+}
+
+function checkDuplicateBrandedTitles() {
+  // Titles that already end with "| RHI Pros" will double with layout template "%s | RHI Pros".
+  const suspicious = [
+    { fileHint: "city hub", pattern: /\| RHI Pros$/ },
+  ];
+  for (const location of locations) {
+    const title = `Remodeling & Restoration in ${location.name}`;
+    if (/\|\s*RHI Pros\s*$/i.test(title) || /RHI Pros.*RHI Pros/i.test(title)) {
+      error(`City hub title risk for ${location.slug}: ${title}`);
+    }
+  }
+  void suspicious;
 }
 
 function main() {
@@ -297,11 +394,14 @@ function main() {
 
   checkSitemapOrigin();
   checkBrandSource();
+  checkStructuredDataBasics();
   checkFeaturedCaseStudies();
   checkCaseStudyPhotoAccuracy();
   checkImageAlts();
+  checkGalleryPublicationRules();
   checkPriorityInternalLinks();
   checkMetadataBasics();
+  checkDuplicateBrandedTitles();
 
   const errors = issues.filter((i) => i.level === "error");
   const warnings = issues.filter((i) => i.level === "warn");

@@ -116,6 +116,7 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     source: "Google Review · Apr 2026",
     locationSlug: "lehigh-valley-pa",
+    serviceSlug: "paver-installation",
   },
   {
     quote:
@@ -125,7 +126,7 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     source: "Google Review · 2025",
     locationSlug: "lehigh-valley-pa",
-    serviceSlug: "basement-remodeling",
+    serviceSlug: "basement-finishing",
   },
   {
     quote:
@@ -158,6 +159,23 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
+
+/** Homepage / About featured set: bathroom, kitchen, and outdoor/paver proof. */
+export const FEATURED_TESTIMONIAL_KEYS = [
+  { name: "Janus R.", context: "Bathroom remodel" },
+  { name: "Albert S.", context: "Kitchen remodel" },
+  { name: "Sara M.", context: "Pool patio renovation" },
+] as const;
+
+export function getFeaturedTestimonials(): Testimonial[] {
+  return FEATURED_TESTIMONIAL_KEYS.map((key) => {
+    const match = testimonials.find((t) => t.name === key.name && t.context === key.context);
+    if (!match) {
+      throw new Error(`Featured testimonial missing: ${key.name} / ${key.context}`);
+    }
+    return match;
+  });
+}
 
 export function getTestimonialsByLocation(locationSlug: string) {
   return testimonials.filter((t) => t.locationSlug === locationSlug);

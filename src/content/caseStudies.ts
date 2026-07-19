@@ -10,6 +10,11 @@ export type CaseStudy = {
   featureInServiceListings?: boolean;
   /** When true, this case study is excluded from all public listings. */
   hidden?: boolean;
+  /**
+   * When false, hide from the visual /projects gallery grid while keeping the
+   * detail page live, indexable, and in the sitemap (e.g. useful text-only studies).
+   */
+  showInGallery?: boolean;
   scope: string[];
   challenge: string;
   solution: string;
@@ -561,6 +566,7 @@ export const caseStudies: CaseStudy[] = [
       author: "Lehigh Valley homeowner",
     },
     images: [],
+    showInGallery: false,
   },
   {
     slug: "allentown-flooring-replacement-upgrade",
@@ -1008,6 +1014,9 @@ const caseStudyLocationPriority = [
 ] as const;
 
 export const visibleCaseStudies = caseStudies.filter((cs) => !cs.hidden);
+
+/** Visible case studies intended for the visual /projects gallery grid. */
+export const galleryCaseStudies = visibleCaseStudies.filter((cs) => cs.showInGallery !== false);
 
 export function sortCaseStudiesByMarketPriority(items: CaseStudy[]) {
   return [...items].sort((a, b) => {

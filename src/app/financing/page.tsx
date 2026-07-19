@@ -8,7 +8,7 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Project Financing | Allentown, Lehigh Valley & Berks County | RHI Pros",
+  title: "Project Financing | Allentown, Lehigh Valley & Berks County",
   description:
     "Promotional financing options for qualified homeowners in Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County. Clear terms and quick next steps.",
   alternates: { canonical: "/financing" },

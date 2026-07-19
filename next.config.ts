@@ -13,10 +13,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     const redirects = [
-      { source: "/hvac-additions-repairs-remodels-lehigh-valley", destination: "/services", permanent: true },
       { source: "/request-an-estimate", destination: "/request-a-quote", permanent: true },
       { source: "/gallery", destination: "/projects", permanent: true },
-      { source: "/lehigh-county-contractor-locations-served", destination: "/lehigh-valley-pa", permanent: true },
+      { source: "/lehigh-county-contractor-locations-served", destination: "/service-areas", permanent: true },
       { source: "/kitchen-remodeling", destination: "/services/kitchen-remodeling", permanent: true },
       { source: "/bathroom-renovations", destination: "/services/bathroom-remodeling", permanent: true },
       { source: "/about-us", destination: "/about", permanent: true },

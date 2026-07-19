@@ -612,6 +612,114 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
     ],
   },
+  "berks-county-pa/kitchen-remodeling": {
+    metadataTitle: "Kitchen Remodeling in Berks County, PA",
+    metadataDescription:
+      "Kitchen remodeling in Berks County, PA with clear scopes, cabinet and countertop coordination, and local project proof from completed Berks County work.",
+    heroHeading: "Kitchen Remodeling in Berks County, PA",
+    heroIntro:
+      "Plan a Berks County kitchen remodel around layout, cabinets, counters, and finish details so the room works better day to day. RHI Pros coordinates the scope in writing before work begins.",
+    localProjectHeading: "Berks County kitchen project proof",
+    localProjectSnippet:
+      "A documented Berks County kitchen remodel shows a complete kitchen reset: dated cabinets and finishes replaced with a coordinated cabinet, counter, and fixture package on a phased schedule the household could plan around.",
+    localChallengesHeading: "Berks County kitchen challenges we plan for",
+    localChallenges: [
+      "Balancing cabinet, countertop, and fixture decisions so the finished kitchen feels coordinated",
+      "Planning around an occupied home with a clear build sequence",
+      "Connecting kitchen work to adjoining flooring or finish updates when the scope overlaps",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do you remodel kitchens across Berks County?",
+        a: "Yes. RHI Pros serves homeowners across Berks County, including Reading, Wyomissing, and nearby townships. Project availability depends on location, scope, and scheduling.",
+      },
+      {
+        q: "Can a Berks County kitchen remodel stay focused on cabinets?",
+        a: "Sometimes. If cabinet replacement is the main focus, review our Berks County cabinet installation service. When counters, layout, or adjoining finishes are part of the plan, the full kitchen remodeling scope is usually the better fit.",
+      },
+      {
+        q: "What should I prepare before requesting a kitchen quote?",
+        a: "Photos, a rough idea of the rooms involved, and any priorities for layout, cabinets, or counters are enough to start. A written scope comes after we review the project details.",
+      },
+    ],
+    relatedCaseStudySlug: "ryan-kitchen-remodel",
+    internalLinks: [
+      {
+        href: "/berks-county-pa",
+        anchorText: "Remodeling and restoration in Berks County",
+        reason: "County hub and related services",
+      },
+      {
+        href: "/services/kitchen-remodeling",
+        anchorText: "Kitchen remodeling service details",
+        reason: "Full scope and process breakdown",
+      },
+      {
+        href: "/projects/ryan-kitchen-remodel",
+        anchorText: "Kitchen remodel in Berks County",
+        reason: "Verified local project proof",
+      },
+      {
+        href: "/berks-county-pa/kitchen-cabinet-installation",
+        anchorText: "Kitchen cabinet installation in Berks County",
+        reason: "Cabinet-focused alternative when that is the main need",
+      },
+    ],
+  },
+  "berks-county-pa/bathroom-remodeling": {
+    metadataTitle: "Bathroom Remodeling in Berks County, PA",
+    metadataDescription:
+      "Bathroom remodeling in Berks County, PA with moisture-aware planning, durable finishes, and local project proof from completed Berks County work.",
+    heroHeading: "Bathroom Remodeling in Berks County, PA",
+    heroIntro:
+      "Plan a Berks County bathroom remodel around waterproofing, fixtures, storage, and finish details that hold up to daily use. RHI Pros confirms the written scope before construction starts.",
+    localProjectHeading: "Berks County bathroom project proof",
+    localProjectSnippet:
+      "A documented Berks County bathroom remodel refreshed a compact half bath: darker dated finishes were swapped for a brighter, modern palette with a coordinated vanity, wall, and floor package.",
+    localChallengesHeading: "Berks County bathroom challenges we plan for",
+    localChallenges: [
+      "Improving layout and storage without overcrowding a compact bathroom footprint",
+      "Moisture-aware prep in wet-adjacent zones before finish work",
+      "Coordinating vanity, wall, and floor finishes so the room reads as one update",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do you remodel bathrooms across Berks County?",
+        a: "Yes. RHI Pros serves homeowners across Berks County. Availability depends on location, scope, and scheduling.",
+      },
+      {
+        q: "Can a bathroom update stay inside the existing footprint?",
+        a: "Often yes. Many Berks County bathroom projects improve fixtures and finishes without expanding the room. Layout changes are discussed during the estimate when they affect plumbing or access.",
+      },
+      {
+        q: "What helps a bathroom remodel feel durable long term?",
+        a: "Moisture-aware planning, careful finish transitions, and a clear written scope usually make the biggest difference in how well the room holds up.",
+      },
+    ],
+    relatedCaseStudySlug: "ryan-bathroom-remodel",
+    internalLinks: [
+      {
+        href: "/berks-county-pa",
+        anchorText: "Remodeling services in Berks County",
+        reason: "County hub and related services",
+      },
+      {
+        href: "/services/bathroom-remodeling",
+        anchorText: "Bathroom remodeling service details",
+        reason: "Full process and quality factors",
+      },
+      {
+        href: "/projects/ryan-bathroom-remodel",
+        anchorText: "Bathroom remodel in Berks County",
+        reason: "Verified local project proof",
+      },
+      {
+        href: "/financing",
+        anchorText: "Financing options for bathroom projects",
+        reason: "Decision-stage support",
+      },
+    ],
+  },
   "berks-county-pa/basement-finishing": {
     metadataTitle: "Basement Finishing in Berks County, PA",
     metadataDescription:

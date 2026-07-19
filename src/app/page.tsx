@@ -2,13 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
 import FadeIn from "@/components/ui/FadeIn";
 import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd, getWebSiteJsonLd } from "@/lib/structuredData";
 import { primaryServices } from "@/content/services";
 import { visibleCaseStudies } from "@/content/caseStudies";
-import { testimonials } from "@/content/testimonials";
+import { getFeaturedTestimonials } from "@/content/testimonials";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -39,7 +38,7 @@ export default function HomePage() {
   const featuredCaseStudies = homepageSlugs
     .map((slug) => visibleCaseStudies.find((s) => s.slug === slug)!)
     .filter(Boolean);
-  const featuredReviews = testimonials.slice(0, 3);
+  const featuredReviews = getFeaturedTestimonials();
 
   return (
     <>
@@ -201,18 +200,29 @@ export default function HomePage() {
               <a
                 href={siteConfig.googleBusinessProfileUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                aria-label="Read RHI Pros reviews on Google (opens in a new tab)"
                 className="rounded-full border border-[var(--border)] px-3 py-1.5 font-semibold text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
               >
                 Google Reviews
               </a>
               <a
-                href={siteConfig.facebookPageUrl}
+                href={siteConfig.angiUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                aria-label="Read RHI Pros reviews on Angi (opens in a new tab)"
                 className="rounded-full border border-[var(--border)] px-3 py-1.5 font-semibold text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
               >
-                Facebook Page
+                Angi Reviews
+              </a>
+              <a
+                href={siteConfig.facebookPageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit the RHI Pros Facebook page (opens in a new tab)"
+                className="rounded-full border border-[var(--border)] px-3 py-1.5 font-semibold text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
+              >
+                Facebook
               </a>
             </div>
           </div>

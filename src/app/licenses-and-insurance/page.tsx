@@ -3,6 +3,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -32,7 +33,22 @@ export default function LicensesAndInsurancePage() {
                   <p className="mt-1 text-lg font-bold text-[var(--accent)]">{siteConfig.hicNumber}</p>
                 </div>
                 <p className="text-sm">
-                  Registered with the Pennsylvania Attorney General&apos;s Office as required for all home improvement contractors operating in the state.
+                  Registered with the Pennsylvania Attorney General&apos;s Office as required for home improvement contractors operating in the state.
+                </p>
+                <a
+                  href={company.social.paHicSearch}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Verify our Pennsylvania contractor registration on the Attorney General website"
+                  className="inline-flex items-center justify-center rounded-md bg-[var(--brand)] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
+                >
+                  Verify Our PA Contractor Registration
+                </a>
+                <p className="text-sm">
+                  Search registration number <span className="font-semibold text-[var(--accent)]">{company.license.hic}</span> in the Pennsylvania Attorney General&apos;s contractor database.
+                </p>
+                <p className="text-xs leading-relaxed text-[var(--muted)]">
+                  Pennsylvania Home Improvement Contractor registration confirms that {company.legalName} is registered as required by state law. Registration is not a state endorsement of workmanship or competency.
                 </p>
               </div>
             </article>
@@ -57,7 +73,7 @@ export default function LicensesAndInsurancePage() {
           <div className="surface mt-6 rounded-2xl p-6">
             <h2 className="text-2xl font-semibold text-[var(--accent)]">Why This Matters</h2>
             <p className="mt-2 text-[var(--muted)]">
-              Hiring an unlicensed or uninsured contractor puts your home and your wallet at risk. A valid PA HIC registration means the contractor meets state requirements. Active insurance means you are protected if something goes wrong on the job.
+              Hiring an unlicensed or uninsured contractor puts your home and your wallet at risk. A valid PA HIC registration means the contractor meets state registration requirements. Active insurance means you are protected if something goes wrong on the job.
             </p>
             <p className="mt-3 text-sm text-[var(--muted)]">
               We provide credential verification as part of every estimate, before you sign anything.

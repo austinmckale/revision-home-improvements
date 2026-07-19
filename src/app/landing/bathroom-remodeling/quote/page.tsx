@@ -4,7 +4,7 @@ import QuoteForm from "@/components/forms/QuoteForm";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Get Your Bathroom Quote | RHI Pros",
+  title: "Get Your Bathroom Quote",
   description:
     "Request a bathroom remodeling quote. Written scope before work begins. Licensed, insured, warranty-backed.",
   robots: { index: false, follow: false },

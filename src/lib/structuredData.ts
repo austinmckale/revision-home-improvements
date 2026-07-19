@@ -11,26 +11,37 @@ export function getWebSiteJsonLd() {
 }
 
 export function getLocalBusinessJsonLd() {
-  const sameAs = [siteConfig.googleBusinessProfileUrl, siteConfig.facebookPageUrl].filter(Boolean);
+  const sameAs = [
+    company.social.googleBusinessProfile,
+    company.social.facebook,
+    company.social.angi,
+    company.social.houzz,
+    company.social.yelp,
+  ].filter(Boolean);
+
   return {
     "@context": "https://schema.org",
     "@type": "GeneralContractor",
-    name: siteConfig.name,
-    url: siteConfig.domain,
+    name: company.name,
+    legalName: company.legalName,
+    url: company.domain,
     telephone: company.phone.e164,
     email: company.email,
-    image: `${siteConfig.domain}${siteConfig.ogImage}`,
-    logo: `${siteConfig.domain}${siteConfig.logo}`,
+    image: `${company.domain}${company.assets.ogImage}`,
+    logo: `${company.domain}${company.assets.logo}`,
     ...(sameAs.length > 0 ? { sameAs } : {}),
+    identifier: {
+      "@type": "PropertyValue",
+      name: "Pennsylvania Home Improvement Contractor Registration",
+      value: company.license.hic,
+    },
     areaServed: [...company.serviceAreaList],
     address: {
       "@type": "PostalAddress",
-      addressLocality: siteConfig.address.city,
-      addressRegion: siteConfig.address.region,
-      postalCode: siteConfig.address.postalCode,
-      addressCountry: siteConfig.address.country,
+      addressLocality: company.address.city,
+      addressRegion: company.address.region,
+      addressCountry: company.address.country,
     },
-    priceRange: "$$",
   };
 }
 
@@ -41,9 +52,10 @@ export function getServiceJsonLd(serviceName: string, url: string, areaServed: s
     serviceType: serviceName,
     provider: {
       "@type": "GeneralContractor",
-      name: siteConfig.name,
+      name: company.name,
+      legalName: company.legalName,
       telephone: company.phone.e164,
-      url: siteConfig.domain,
+      url: company.domain,
     },
     areaServed,
     url,
@@ -118,8 +130,9 @@ export function getCityServiceJsonLd({
         provider: {
           "@type": "GeneralContractor",
           name: businessName,
+          legalName: company.legalName,
           telephone: company.phone.e164,
-          url: siteConfig.domain,
+          url: company.domain,
         },
         url,
       },
