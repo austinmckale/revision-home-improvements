@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     const redirects = [
+      {
+        source: "/review",
+        destination: "https://g.page/r/CaDvXs-3zTKkEAE/review",
+        permanent: false,
+      },
       { source: "/request-an-estimate", destination: "/request-a-quote", permanent: true },
       { source: "/gallery", destination: "/projects", permanent: true },
       { source: "/lehigh-county-contractor-locations-served", destination: "/service-areas", permanent: true },
