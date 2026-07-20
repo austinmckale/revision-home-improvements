@@ -2,6 +2,8 @@
  * SEO guardrails — run with: npm run check:seo
  * Fails on issues that commonly hurt crawlability or the conservative local SEO strategy.
  */
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { join, relative } from "node:path";
 import { company } from "../src/content/company";
 import { caseStudies, visibleCaseStudies } from "../src/content/caseStudies";
 import { getCityServiceLocalContent } from "../src/content/localSeo";
@@ -317,8 +319,8 @@ function checkBrandSource() {
   if (!company.social.yelp?.includes("yelp.com/biz/rhi-pros-allentown")) {
     error("Verified Yelp listing URL is required in company.social.yelp.");
   }
-  if (!company.social.paHicSearch?.includes("hicsearch.attorneygeneral.gov")) {
-    error("company.social.paHicSearch must point to the official PA HIC search.");
+  if ("paHicSearch" in company.social) {
+    error("company.social must not include paHicSearch — do not link the HIC lookup site from public pages.");
   }
 }
 
@@ -350,7 +352,7 @@ function checkStructuredDataBasics() {
       error(`JSON-LD sameAs missing verified profile: ${required}`);
     }
   }
-  if (sameAs.includes(String(company.social.paHicSearch))) {
+  if (sameAs.some((url) => url.includes("hicsearch.attorneygeneral.gov"))) {
     error("JSON-LD sameAs must not include the Pennsylvania HIC search page.");
   }
   const identifierValue =
@@ -389,6 +391,50 @@ function checkDuplicateBrandedTitles() {
   void suspicious;
 }
 
+/** Phrases that incorrectly present PA HIC registration as a state contractor license. */
+const FORBIDDEN_HIC_AS_LICENSE_PHRASES = ["PA Licensed", "PA licensed", "Licensed in PA"] as const;
+
+function walkSourceFiles(dir: string, acc: string[] = []): string[] {
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    const st = statSync(full);
+    if (st.isDirectory()) {
+      if (entry === "node_modules" || entry === ".next") continue;
+      walkSourceFiles(full, acc);
+    } else if (/\.(tsx?|jsx?|md)$/.test(entry)) {
+      acc.push(full);
+    }
+  }
+  return acc;
+}
+
+function checkHicNotFramedAsLicense() {
+  const roots = [join(process.cwd(), "src"), join(process.cwd(), "scripts")];
+  for (const root of roots) {
+    for (const file of walkSourceFiles(root)) {
+      const rel = relative(process.cwd(), file).replace(/\\/g, "/");
+      // Allow this guardrail file to mention the forbidden phrases as string literals.
+      if (rel === "scripts/check-seo.ts") continue;
+      const text = readFileSync(file, "utf8");
+      // Strip metadata export blocks so legacy title/description wording is not flagged.
+      const withoutMetadata = text.replace(
+        /export const metadata(?:\s*:\s*Metadata)?\s*=\s*\{[\s\S]*?\n\};/g,
+        "",
+      );
+      for (const phrase of FORBIDDEN_HIC_AS_LICENSE_PHRASES) {
+        if (withoutMetadata.includes(phrase)) {
+          error(
+            `${rel} contains "${phrase}" — PA185945 is HIC registration, not a PA contractor license. Use "PA HIC registered".`,
+          );
+        }
+      }
+      if (withoutMetadata.includes("hicsearch.attorneygeneral.gov")) {
+        error(`${rel} links to the PA HIC search site — remove public HIC lookup links.`);
+      }
+    }
+  }
+}
+
 function main() {
   console.log("RHI Pros SEO guardrails\n");
 
@@ -402,6 +448,7 @@ function main() {
   checkPriorityInternalLinks();
   checkMetadataBasics();
   checkDuplicateBrandedTitles();
+  checkHicNotFramedAsLicense();
 
   const errors = issues.filter((i) => i.level === "error");
   const warnings = issues.filter((i) => i.level === "warn");

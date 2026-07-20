@@ -43,8 +43,6 @@ export const company = {
     angi: "https://www.angi.com/companylist/us/pa/temple/rhi-solutions-llc-reviews-1.htm",
     houzz: "https://www.houzz.com/pro/webuser-588755560/rhi-pros",
     yelp: "https://www.yelp.com/biz/rhi-pros-allentown",
-    /** Official PA HIC lookup — link from Licenses page only; do not put in sameAs. */
-    paHicSearch: "https://hicsearch.attorneygeneral.gov/",
   },
   assets: {
     logo: "/images/brand/rhi-logo.png",

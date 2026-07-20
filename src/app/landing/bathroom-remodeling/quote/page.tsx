@@ -23,11 +23,7 @@ export default function BathroomLandingQuotePage() {
             Written scope before work begins. No obligation.
           </p>
           <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs font-medium text-[var(--muted)]">
-            <span>Licensed · PA HIC #PA185945</span>
-            <span>·</span>
-            <span>Insured</span>
-            <span>·</span>
-            <span>Warranty&#8209;backed</span>
+            <span>PA HIC registered · Insured · Warranty-backed</span>
           </div>
         </div>
 

@@ -276,7 +276,7 @@ export default function HomePage() {
             <div className="mx-auto max-w-4xl text-center">
               {/* Trust signals — elegant clean line above massive CTA */}
               <p className="mx-auto mb-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm font-medium text-white/70 md:mb-12 md:gap-x-5 md:text-base">
-                <span>PA Licensed &amp; Insured</span>
+                <span>PA HIC registered · Insured</span>
                 <span className="text-[var(--brand)] opacity-80" aria-hidden="true">·</span>
                 <span>Written Estimates</span>
                 <span className="text-[var(--brand)] opacity-80" aria-hidden="true">·</span>

@@ -59,7 +59,7 @@ export default function RequestQuotePage() {
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-sm text-[var(--muted)]">
-                <p className="surface rounded-lg px-3 py-2">PA licensed · HIC #PA185945</p>
+                <p className="surface rounded-lg px-3 py-2">PA HIC registered · PA185945</p>
                 <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed</p>
                 <p className="surface rounded-lg px-3 py-2">Written scope before work begins</p>
                 <p className="surface rounded-lg px-3 py-2">No obligation, honest assessment upfront</p>

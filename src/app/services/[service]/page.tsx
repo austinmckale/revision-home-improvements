@@ -196,7 +196,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             )}
             <div className="mt-5 grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
               <p className="surface rounded-lg px-3 py-2">Written scope before work begins</p>
-              <p className="surface rounded-lg px-3 py-2">Licensed in PA · HIC #PA185945</p>
+              <p className="surface rounded-lg px-3 py-2">PA HIC registered · PA185945</p>
               <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed</p>
               <p className="surface rounded-lg px-3 py-2">Clear communication throughout</p>
             </div>

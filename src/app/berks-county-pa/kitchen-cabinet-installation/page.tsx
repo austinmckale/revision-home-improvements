@@ -243,7 +243,7 @@ export default function KitchenCabinetInstallationPage() {
                 Written scope before work begins
               </p>
               <p className="surface rounded-lg px-3 py-2">
-                Licensed in Pennsylvania · HIC #{siteConfig.hicNumber}
+                PA HIC registered · {siteConfig.hicNumber}
               </p>
               <p className="surface rounded-lg px-3 py-2">
                 Insured and warranty-backed

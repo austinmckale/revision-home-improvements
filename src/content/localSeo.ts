@@ -77,7 +77,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Bathroom Remodeling in Reading, PA",
     metadataDescription:
       "Bathroom remodeling in Reading, PA with waterproofing-first builds, code-aware electrical updates, and finish quality for older homes.",
-    heroHeading: "Licensed Bathroom Remodelers in Reading, PA",
+    heroHeading: "Bathroom Remodelers in Reading, PA",
     localProjectHeading: "Common Reading Bathroom Scope",
     localProjectSnippet:
       "In Reading bathrooms, we often uncover moisture damage, aging drain lines, and ventilation gaps during demo. We prioritize waterproofing, drainage corrections, and code-compliant electrical updates before tile and finish work.",

@@ -13,7 +13,6 @@ export const siteConfig = {
   angiUrl: company.social.angi,
   houzzUrl: company.social.houzz,
   yelpUrl: company.social.yelp,
-  paHicSearchUrl: company.social.paHicSearch,
   serviceAreas: company.serviceAreas,
   address: company.address,
   ogImage: company.assets.ogImage,

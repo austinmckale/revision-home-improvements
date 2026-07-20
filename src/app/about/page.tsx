@@ -34,8 +34,9 @@ export default function AboutPage() {
               Today we serve homeowners across {siteConfig.serviceAreas} with kitchen, bathroom, basement, flooring, outdoor, and restoration projects.
             </p>
             <p className="mt-3 text-sm text-[var(--muted)]">
-              We operate as <span className="font-semibold text-[var(--accent)]">{company.name}</span> (Pennsylvania HIC{" "}
-              #{company.license.hic}). Some older listings may still reference {company.formerNames.join(" or ")}.
+              We operate as <span className="font-semibold text-[var(--accent)]">{company.name}</span>.{" "}
+              {company.name} is registered as a Pennsylvania home improvement contractor under {company.license.hic}.
+              Some older listings may still reference {company.formerNames.join(" or ")}.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button href="/request-a-quote">Request a Quote</Button>
@@ -96,7 +97,7 @@ export default function AboutPage() {
 
           <div className="surface mt-8 rounded-xl p-5 text-center">
             <p className="text-sm text-[var(--muted)]">
-              <span className="font-semibold text-[var(--accent)]">{siteConfig.hicNumber}</span> · Licensed and insured in Pennsylvania · 12-month workmanship warranty + applicable manufacturer warranties
+              <span className="font-semibold text-[var(--accent)]">{siteConfig.hicNumber}</span> · PA HIC registered · Insured · Warranty-backed · 12-month workmanship warranty + applicable manufacturer warranties
             </p>
           </div>
 
