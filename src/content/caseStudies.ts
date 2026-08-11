@@ -938,6 +938,66 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
+    slug: "hamburg-laundry-bathroom-remodel",
+    title: "Laundry and Half-Bath Remodel in Hamburg, PA",
+    summary:
+      "A tight Hamburg laundry and half-bath was rebuilt into one brighter utility room with new flooring, finishes, storage, and a clear bath zone.",
+    locationName: "Hamburg, PA",
+    locationSlug: "berks-county-pa",
+    serviceName: "Bathroom Remodeling",
+    serviceSlug: "bathroom-remodeling",
+    timeline: "About 2 to 4 weeks",
+    scope: [
+      "Finish reset in a combined laundry and half-bath footprint",
+      "Flooring, paint, trim, and lighting for a brighter daily-use space",
+      "Vanity with utility sink, toilet, and open wood laundry shelving",
+      "Window trim and shade with an appliance-ready laundry bay",
+    ],
+    challenge:
+      "Dated finishes and limited storage made the laundry-and-bath combo feel cramped. The homeowner needed both uses to work cleanly in one small footprint.",
+    solution:
+      "We treated it as one coordinated utility room: light walls and wood-look flooring, a vanity with stainless utility sink beside the toilet, open wood shelving, and a dedicated bay for a front-load washer. Window casing, shade, and lighting finished the space.",
+    results: [
+      "Brighter laundry and half-bath that function as one room",
+      "Clear zones for sink, toilet, storage, and appliances",
+      "Updated floors, paint, trim, and lighting throughout",
+    ],
+    testimonial: {
+      quote: "Great price. I would recommend them for great work that they did.",
+      author: "Tammy Y. · Google Review",
+    },
+    images: [
+      {
+        src: "/images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-doorway-view.jpg",
+        alt: "Doorway view of the finished Hamburg laundry and half-bath with gray flooring and charcoal washer.",
+      },
+      {
+        src: "/images/projects/hamburg-laundry-bathroom/after/vanity-toilet-and-shelving.jpg",
+        alt: "Vanity with stainless utility sink, white toilet, and light wood shelving after remodel.",
+      },
+      {
+        src: "/images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-full-view.jpg",
+        alt: "Full view of the remodeled laundry bathroom with washer, open shelves, and LED ceiling light.",
+      },
+      {
+        src: "/images/projects/hamburg-laundry-bathroom/after/window-trim-and-washer.jpg",
+        alt: "Finished white window trim and roller shade beside the laundry appliance.",
+      },
+    ],
+    beforeImages: [
+      {
+        src: "/images/projects/hamburg-laundry-bathroom/before/laundry-bathroom-before.jpg",
+        alt: "Laundry and half-bath before remodel with dated vinyl flooring, older toilet, and unfinished wall opening.",
+      },
+    ],
+    afterImages: [
+      {
+        src: "/images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-doorway-view.jpg",
+        alt: "Same laundry and half-bath after remodel, viewed from the doorway with updated finishes and washer bay.",
+      },
+    ],
+  },
+  {
     slug: "lehigh-valley-fire-damage-documentation",
     title: "Fire damage rebuild: field documentation",
     summary:
