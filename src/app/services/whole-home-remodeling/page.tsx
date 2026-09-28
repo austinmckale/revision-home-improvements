@@ -1,9 +1,9 @@
+import ServiceHero from "@/components/sections/ServiceHero";
+import ProjectCard from "@/components/sections/ProjectCard";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import QuoteForm from "@/components/forms/QuoteForm";
-import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import FadeIn from "@/components/ui/FadeIn";
 import {
@@ -142,46 +142,6 @@ const faqItems = [
   },
 ];
 
-function ProjectCard({ project }: { project: CaseStudy }) {
-  const image = project.images[0];
-
-  return (
-    <article className="surface overflow-hidden rounded-2xl">
-      <Link
-        href={`/projects/${project.slug}`}
-        className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)]"
-      >
-        {image ? (
-          <div className="relative h-48 overflow-hidden bg-[var(--surface-soft)]">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={900}
-              height={600}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-          </div>
-        ) : null}
-        <div className="p-5">
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--brand)]">
-            {project.locationName}
-          </p>
-          <h3 className="mt-1 text-lg font-semibold text-[var(--accent)]">
-            {project.title}
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-            {project.summary}
-          </p>
-          <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
-            View project →
-          </span>
-        </div>
-      </Link>
-    </article>
-  );
-}
-
 export default function WholeHomeRemodelingPage() {
   return (
     <>
@@ -200,47 +160,7 @@ export default function WholeHomeRemodelingPage() {
         ])}
       />
 
-      <section className="hero-band py-10 md:py-16">
-        <Container>
-          <FadeIn className="max-w-4xl">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
-              Lehigh Valley &amp; Berks County
-            </p>
-            <h1 className="heading-serif mt-2 text-4xl text-[var(--accent)] md:text-5xl">
-              Whole-Home Remodeling in the Lehigh Valley
-            </h1>
-            <p className="mt-4 max-w-3xl text-[0.9375rem] leading-relaxed text-[var(--muted)] md:text-base">
-              When a renovation affects several rooms, decisions about layout,
-              flooring, walls, fixtures and finishes begin to overlap. RHI Pros
-              develops one written scope for the connected work so homeowners can
-              understand what is included, how the pieces relate and what needs to
-              happen first.
-            </p>
-            <div className="mt-6 grid max-w-3xl gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
-              <p className="surface rounded-lg px-3 py-2">
-                Written scope before work begins
-              </p>
-              <p className="surface rounded-lg px-3 py-2">
-                PA HIC registered · {siteConfig.hicNumber}
-              </p>
-              <p className="surface rounded-lg px-3 py-2">
-                Insured and warranty-backed
-              </p>
-              <p className="surface rounded-lg px-3 py-2">
-                Clear communication throughout
-              </p>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button href="#quote-form-section">
-                Request a Remodeling Quote
-              </Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
-                Call {siteConfig.phoneDisplay}
-              </Button>
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <ServiceHero eyebrow="Lehigh Valley & Berks County" title="Whole-home remodeling in the Lehigh Valley." intro="When a renovation connects several rooms, every decision affects the next. Bring layout, flooring, walls, and finishes together in one considered plan." image={{ src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg", alt: "Connected rooms with updated flooring and finishes from a Bethlehem interior remodeling project." }} primaryHref="#quote-form-section" primaryLabel="Plan your project" secondaryHref={siteConfig.phoneHref} secondaryLabel={`Call ${siteConfig.phoneDisplay}`} />
 
       <section className="py-12 md:py-16">
         <Container>
@@ -264,7 +184,7 @@ export default function WholeHomeRemodelingPage() {
             </div>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               {connectedSpaces.map((item) => (
-                <article className="surface rounded-2xl p-5 md:p-6" key={item.heading}>
+                <article className="surface rounded-sm p-5 md:p-6" key={item.heading}>
                   <h3 className="text-lg font-semibold text-[var(--accent)]">
                     {item.heading}
                   </h3>
@@ -303,7 +223,7 @@ export default function WholeHomeRemodelingPage() {
               </p>
             </div>
             <div className="mt-8 grid gap-5 md:grid-cols-2">
-              <div className="surface rounded-2xl p-5 md:p-6">
+              <div className="surface rounded-sm p-5 md:p-6">
                 <h3 className="text-xl font-semibold text-[var(--accent)]">
                   A strong fit
                 </h3>
@@ -316,7 +236,7 @@ export default function WholeHomeRemodelingPage() {
                   <li>Multiple scopes that need one written plan</li>
                 </ul>
               </div>
-              <div className="surface rounded-2xl p-5 md:p-6">
+              <div className="surface rounded-sm p-5 md:p-6">
                 <h3 className="text-xl font-semibold text-[var(--accent)]">
                   A focused service may be enough
                 </h3>
@@ -360,7 +280,7 @@ export default function WholeHomeRemodelingPage() {
             </div>
             <ol className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {planningSteps.map((item, index) => (
-                <li className="surface rounded-2xl p-5" key={item.heading}>
+                <li className="surface rounded-sm p-5" key={item.heading}>
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--brand)] text-sm font-bold text-white">
                     {index + 1}
                   </span>
@@ -398,7 +318,7 @@ export default function WholeHomeRemodelingPage() {
                 construction access will work.
               </p>
             </div>
-            <div className="surface rounded-2xl p-5 md:p-6">
+            <div className="surface rounded-sm p-5 md:p-6">
               <p className="font-semibold text-[var(--accent)]">
                 Before the scope is finalized, it is useful to discuss:
               </p>
@@ -435,7 +355,7 @@ export default function WholeHomeRemodelingPage() {
             </div>
             <div className="mt-8 grid gap-5 md:grid-cols-2">
               {wholeHomeProjects.map((project) => (
-                <ProjectCard key={project.slug} project={project} />
+                <ProjectCard key={project.slug} study={project} />
               ))}
             </div>
           </FadeIn>
@@ -458,7 +378,7 @@ export default function WholeHomeRemodelingPage() {
                 available, but they do not need to be perfect or final.
               </p>
             </div>
-            <ul className="surface grid gap-3 rounded-2xl p-5 text-sm text-[var(--muted)] sm:grid-cols-2 md:p-6">
+            <ul className="surface grid gap-3 rounded-sm p-5 text-sm text-[var(--muted)] sm:grid-cols-2 md:p-6">
               <li>Which rooms are included?</li>
               <li>What problems are you trying to solve?</li>
               <li>Are you considering layout changes?</li>
@@ -480,7 +400,7 @@ export default function WholeHomeRemodelingPage() {
             </h2>
             <div className="mt-6 grid gap-3 lg:grid-cols-2">
               {faqItems.map((item) => (
-                <details className="surface group rounded-xl p-5" key={item.q}>
+                <details className="surface group rounded-sm p-5" key={item.q}>
                   <summary className="cursor-pointer font-semibold text-[var(--accent)]">
                     {item.q}
                   </summary>

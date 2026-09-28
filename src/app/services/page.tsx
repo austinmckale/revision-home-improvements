@@ -3,127 +3,79 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
-import FadeIn from "@/components/ui/FadeIn";
 import JsonLd from "@/components/JsonLd";
+import PageIntro from "@/components/sections/PageIntro";
+import BottomCTA from "@/components/sections/BottomCTA";
 import ConfidenceSection from "@/components/sections/ConfidenceSection";
 import { primaryServices } from "@/content/services";
+import { getProjectImageProps } from "@/content/projectImagePreviews";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
   title: "Remodeling & Restoration Services",
-  description:
-    "Kitchen, bathroom, basement, flooring, drywall, exterior, paver, and fire/water restoration services across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.",
+  description: "Explore kitchen, bathroom, basement and outdoor remodeling, plus fire and water damage restoration in the Lehigh Valley and Berks County. See real project examples.",
   alternates: { canonical: "/services" },
 };
+
+const remodelingOrder = ["kitchen-remodeling", "bathroom-remodeling", "basement-finishing", "paver-installation", "flooring-installation", "exterior-remodeling", "drywall-installation-repair"];
+const remodeling = remodelingOrder.flatMap((slug) => primaryServices.filter((service) => service.slug === slug));
+const restoration = primaryServices.filter((service) => service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration");
 
 export default function ServicesHubPage() {
   return (
     <>
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Services", href: "/services" }])} />
-
-      <section className="py-14 md:py-24">
+      <PageIntro eyebrow="Lehigh Valley & Berks County" title="Remodeling & restoration, with every detail considered.">
+        <p>From the kitchen you gather in to the patio you unwind on, explore work that makes home feel more like you.</p>
+        <nav aria-label="Service categories" className="mt-7 flex flex-wrap gap-3">
+          <Button href="#remodeling">Explore remodeling</Button>
+          <Button href="#restoration" variant="secondary">Restoration support</Button>
+        </nav>
+      </PageIntro>
+      <section id="remodeling" className="scroll-mt-24 py-12 sm:py-20">
         <Container>
-          <FadeIn>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
-              Lehigh Valley &amp; Berks County
-            </p>
-            <h1 className="heading-serif mt-2 text-4xl text-[var(--accent)] md:text-5xl">Our Services</h1>
-            <p className="mt-4 max-w-3xl text-[0.9375rem] leading-relaxed text-[var(--muted)] md:text-base">
-              From kitchens and bathrooms to emergency restoration, every project gets a written scope, a clear timeline, and a team that communicates.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button href="/request-a-quote">Request a Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
-                Call {siteConfig.phoneDisplay}
-              </Button>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.15}>
-            <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-2">
-              {primaryServices.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="group overflow-hidden border border-[var(--border)] bg-[var(--surface)] transition-colors hover:border-[var(--brand)]"
-                >
-                  {service.image.src ? (
-                    <div className="relative h-56 overflow-hidden md:h-64">
-                      <Image
-                        src={service.image.src}
-                        alt={service.image.alt}
-                        width={900}
-                        height={500}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                  ) : (
-                    <div className="media-placeholder h-56 md:h-64" aria-hidden="true" />
-                  )}
-                  <div className="p-5 md:p-7">
-                    <p className="text-[0.65rem] font-semibold uppercase tracking-[.16em] text-[var(--brand)]">Service overview</p>
-                    <h2 className="heading-serif mt-2 text-2xl text-[var(--accent)] md:text-3xl">{service.name}</h2>
-                    <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{service.short}</p>
-                    <span className="mt-5 inline-flex items-center gap-3 border-b border-[var(--border)] pb-2 text-sm font-semibold text-[var(--accent)] transition-colors group-hover:border-[var(--brand)] group-hover:text-[var(--brand)]">
-                      Explore this service <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.18}>
-            <aside className="surface-soft mt-8 rounded-2xl border border-[var(--border)] p-5 md:flex md:items-center md:justify-between md:gap-8 md:p-6">
-              <div className="max-w-2xl">
-                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
-                  Larger, Connected Projects
-                </p>
-                <h2 className="heading-serif mt-2 text-2xl text-[var(--accent)]">
-                  Planning several rooms at once?
-                </h2>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                  When kitchen, bathroom, flooring, drywall or other interior work overlaps, it may make more sense to develop one coordinated scope. See how RHI Pros approaches multi-room and whole-home remodeling.
-                </p>
-              </div>
-              <div className="mt-5 flex shrink-0 flex-wrap gap-3 md:mt-0 md:justify-end">
-                <Button href="/services/whole-home-remodeling">
-                  Explore Whole-Home Remodeling →
-                </Button>
-                <Button href="/services/whole-home-remodeling#quote-form-section" variant="secondary">
-                  Describe Your Project
-                </Button>
-              </div>
-            </aside>
-          </FadeIn>
-
-          <FadeIn delay={0.2}>
-            <ConfidenceSection
-              className="mt-14 md:mt-20"
-              title="What Stays Consistent Across Every Service"
-              intro="No matter the project type, we run the same standards for scope clarity, communication, and closeout quality."
-            />
-          </FadeIn>
+          <div className="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div><p className="eyebrow">Make room for possibility</p><h2 className="heading-serif mt-3 text-3xl text-[var(--accent)] sm:text-4xl">Your home. Your next chapter.</h2></div>
+            <Link href="/projects" className="inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-[var(--brand)]">Explore our projects <span aria-hidden="true">↗</span></Link>
+          </div>
+          <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {remodeling.map((service, index) => (
+              <Link key={service.slug} href={`/services/${service.slug}`} className="home-service-card group min-w-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)]">
+                <div className="relative aspect-[4/3] overflow-hidden bg-[var(--surface-soft)]">
+                  <Image {...getProjectImageProps(service.image)} alt={service.image.alt} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="home-service-image object-cover" />
+                  <span className="absolute left-4 top-4 bg-[var(--surface)] px-3 py-2 text-xs font-semibold text-[var(--accent)]">{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <div className="flex items-start justify-between gap-3 pt-5">
+                  <h3 className="heading-serif text-2xl text-[var(--accent)] sm:text-3xl">{service.slug === "paver-installation" ? "Patios & outdoor living" : service.name}</h3>
+                  <span aria-hidden="true" className="pt-1 text-xl text-[var(--brand)]">↗</span>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{service.short}</p>
+              </Link>
+            ))}
+            <article className="flex min-w-0 flex-col justify-between bg-[var(--accent)] p-6 text-white sm:p-9 lg:col-span-2">
+              <div><p className="eyebrow eyebrow-light">One connected plan</p><h3 className="heading-serif mt-5 max-w-xl text-3xl sm:text-4xl">Several rooms. One thoughtful renovation.</h3><p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80">When kitchens, bathrooms, floors, and finishes overlap, a coordinated scope keeps the decisions and the work moving together.</p></div>
+              <Link href="/services/whole-home-remodeling" className="mt-8 inline-flex min-h-12 items-center justify-between gap-4 border-t border-white/30 pt-4 text-sm font-semibold">Explore whole-home remodeling <span aria-hidden="true">↗</span></Link>
+            </article>
+          </div>
+          <div className="mt-12 border-y border-[var(--border)] py-6 sm:flex sm:items-center sm:justify-between sm:gap-8">
+            <div><h3 className="heading-serif text-2xl text-[var(--accent)]">Starting with the cabinets?</h3><p className="mt-2 text-sm text-[var(--muted)]">Explore cabinet replacement and installation as part of a coordinated kitchen project.</p></div>
+            <Link href="/berks-county-pa/kitchen-cabinet-installation" className="mt-3 inline-flex min-h-11 shrink-0 items-center text-sm font-semibold text-[var(--brand)] sm:mt-0">Cabinet installation in Berks County ↗</Link>
+          </div>
         </Container>
       </section>
-
-      <section className="surface-soft py-14 md:py-20">
+      <section id="restoration" className="scroll-mt-24 bg-[var(--surface-soft)] py-12 sm:py-20">
         <Container>
-          <FadeIn>
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">Not sure which service fits your project?</h2>
-              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)] md:text-base">
-                Tell us what you are planning and we will point you in the right direction.
-              </p>
-              <div className="mt-6 flex flex-wrap justify-center gap-3">
-                <Button href="/request-a-quote">Describe Your Project</Button>
-                <Button href="/projects" variant="secondary">See Our Work</Button>
-              </div>
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
+            <div><p className="eyebrow">When the unexpected happens</p><h2 className="heading-serif mt-4 text-3xl text-[var(--accent)] sm:text-4xl">A clearer path to recovery.</h2><p className="mt-4 text-base leading-relaxed text-[var(--muted)]">Fire and water damage call for careful assessment, practical rebuild planning, and steady communication.</p><Button href={siteConfig.phoneHref} className="mt-6">Call {siteConfig.phoneDisplay}</Button><Link href="/fire-water-damage-restoration" className="mt-4 flex min-h-11 items-center text-sm font-semibold text-[var(--brand)]">Emergency restoration guidance ↗</Link></div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {restoration.map((service, index) => <Link key={service.slug} href={`/services/${service.slug}`} className="group flex flex-col justify-between border border-[var(--border)] bg-[var(--surface)] p-6 transition-colors hover:border-[var(--brand)]"><span className="heading-serif text-5xl text-[var(--brand)]">0{index + 1}</span><div><h3 className="heading-serif mt-8 text-3xl text-[var(--accent)]">{service.name}</h3><p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{service.short}</p><span className="mt-6 block text-sm font-semibold text-[var(--brand)]">Explore restoration support ↗</span></div></Link>)}
             </div>
-          </FadeIn>
+          </div>
         </Container>
       </section>
+      <section className="py-12 sm:py-20"><Container><ConfidenceSection title="Good work starts with clear expectations." intro="Across every service: a written scope, steady communication, and a considered finish." /></Container></section>
+      <BottomCTA title="What do you have in mind?" description="Tell us what you want to change. We will help you find the right starting point." showFinancing={false} />
     </>
   );
 }

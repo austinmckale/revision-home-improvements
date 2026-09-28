@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import ImageLightbox from "@/components/ui/ImageLightbox";
+import { getProjectImageProps } from "@/content/projectImagePreviews";
 
 export type ExpandableImage = {
   src: string;
@@ -56,10 +57,11 @@ export default function ExpandableImageGrid({
               aria-label={`Expand photo: ${image.alt}`}
             >
               <Image
-                src={image.src}
+                {...getProjectImageProps(image)}
                 alt={image.alt}
                 width={1200}
                 height={900}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
                 className={`${imageClassName} transition-transform duration-200 group-hover:scale-105`}
               />
               <span className="absolute right-2 top-2 rounded-full bg-black/60 px-2 py-1 text-xs font-semibold text-white">

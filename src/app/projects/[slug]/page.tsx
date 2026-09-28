@@ -18,6 +18,23 @@ import { getProjectImageProps } from "@/content/projectImagePreviews";
 
 type Params = { slug: string };
 
+const localPlanningLinks: Record<string, { href: string; label: string }[]> = {
+  "kitchen-remodeling": [
+    { href: "/lehigh-valley-pa/kitchen-remodeling", label: "Kitchen remodeling in the Lehigh Valley" },
+    { href: "/berks-county-pa/kitchen-remodeling", label: "Kitchen remodeling in Berks County" },
+    { href: "/berks-county-pa/kitchen-cabinet-installation", label: "Cabinet replacement in Berks County" },
+  ],
+  "basement-finishing": [
+    { href: "/reading-pa/basement-finishing", label: "Basement finishing in Reading" },
+    { href: "/berks-county-pa/basement-finishing", label: "Basement finishing in Berks County" },
+  ],
+  "paver-installation": [
+    { href: "/reading-pa/paver-installation", label: "Paver patio installation in Reading" },
+    { href: "/allentown-pa/paver-installation", label: "Paver patio installation in Allentown" },
+    { href: "/berks-county-pa/paver-installation", label: "Paver patios in Berks County" },
+  ],
+};
+
 export function generateStaticParams() {
   return visibleCaseStudies.map((item) => ({ slug: item.slug }));
 }
@@ -80,7 +97,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
         ) : null}
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(18,23,20,.88)_0%,rgba(18,23,20,.56)_55%,rgba(18,23,20,.12)_100%)]" aria-hidden="true" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(18,23,20,.48)_0%,transparent_55%)]" aria-hidden="true" />
-        <Container className="relative z-10 flex flex-1 flex-col justify-end pt-20">
+        <Container className="relative z-10 flex flex-1 flex-col justify-end pt-4 sm:pt-16">
           <div className="max-w-4xl">
             <p className="eyebrow eyebrow-light">{caseStudy.serviceName} · {caseStudy.locationName}</p>
             <h1 className="heading-serif mt-5 max-w-4xl text-4xl leading-[1.03] tracking-[-.03em] text-white sm:text-5xl lg:text-7xl">{caseStudy.title}</h1>
@@ -194,6 +211,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                   Service area details: {locationShort}
                 </Link>
               </p>
+              {localPlanningLinks[caseStudy.serviceSlug] && <nav aria-label="Plan a project in your area" className="mt-6 border-t border-[var(--border)] pt-5"><p className="text-sm font-semibold text-[var(--accent)]">Planning similar work in your area?</p><ul className="mt-2 space-y-1">{localPlanningLinks[caseStudy.serviceSlug].map((link) => <li key={link.href}><Link href={link.href} className="inline-flex min-h-11 items-center text-sm text-[var(--brand)] underline-offset-4 hover:underline">{link.label} ↗</Link></li>)}</ul></nav>}
               <p className="mt-3 text-sm text-[var(--muted)]">
                 Ready to talk about your space?{" "}
                 <Link href="/request-a-quote" className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline">

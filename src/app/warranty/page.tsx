@@ -1,3 +1,4 @@
+import PageIntro from "@/components/sections/PageIntro";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
@@ -16,15 +17,14 @@ export default function WarrantyPage() {
   return (
     <>
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Warranty", href: "/warranty" }])} />
-      <section className="py-14">
-        <Container className="max-w-4xl">
-          <h1 className="text-4xl font-extrabold text-[var(--accent)]">1-Year / 12-Month Workmanship Warranty</h1>
-          <p className="mt-4 text-[var(--muted)]">
+      <PageIntro eyebrow="Care beyond completion" title="Our work. Backed for 12 months."><p >
             Every project we complete includes a <strong>12-month workmanship warranty</strong> covering installation quality and finish standards, plus any applicable manufacturer warranties on installed products. Terms are documented in your project proposal before work begins.
-          </p>
+          </p></PageIntro>
+      <section className="support-content py-12 sm:py-20">
+        <Container className="max-w-5xl">
 
-          <div className="surface mt-6 rounded-2xl border-2 border-[var(--brand)] p-6">
-            <h2 className="text-2xl font-semibold text-[var(--accent)]">What Is Covered</h2>
+          <div className="surface mt-6 rounded-sm border-2 border-[var(--brand)] p-6">
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">What Is Covered</h2>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
               <li>Workmanship-related installation defects for <strong>12 months</strong> from project completion</li>
               <li>Finish corrections tied to approved scope and closeout standards</li>
@@ -38,23 +38,23 @@ export default function WarrantyPage() {
             </ul>
           </div>
 
-          <h2 className="mt-8 text-2xl font-semibold text-[var(--accent)]">How to Report a Warranty Issue</h2>
+          <h2 className="mt-8 heading-serif text-3xl text-[var(--accent)]">How to Report a Warranty Issue</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
-            <article className="surface rounded-2xl p-5">
+            <article className="surface rounded-sm p-5">
               <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Step 1: Report</p>
               <p className="mt-2 text-sm text-[var(--muted)]">Call or email us with your project reference, a description of the issue, and supporting photos.</p>
             </article>
-            <article className="surface rounded-2xl p-5">
+            <article className="surface rounded-sm p-5">
               <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Step 2: Review</p>
               <p className="mt-2 text-sm text-[var(--muted)]">We evaluate coverage, review documentation, and schedule an on-site inspection if needed.</p>
             </article>
-            <article className="surface rounded-2xl p-5">
+            <article className="surface rounded-sm p-5">
               <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Step 3: Resolve</p>
               <p className="mt-2 text-sm text-[var(--muted)]">If covered, we define correction steps, schedule the work, and confirm completion with you.</p>
             </article>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-3 text-sm">
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 text-sm">
             <Link href="/our-process" className="font-semibold text-[var(--brand)]">Our Process</Link>
             <Link href="/licenses-and-insurance" className="font-semibold text-[var(--brand)]">Licenses &amp; Insurance</Link>
             <Link href="/about" className="font-semibold text-[var(--brand)]">About Us</Link>

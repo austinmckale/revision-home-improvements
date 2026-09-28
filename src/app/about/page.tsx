@@ -33,23 +33,23 @@ export default function AboutPage() {
 
       <section className="py-14">
         <Container className="max-w-5xl">
-          <h2 className="text-2xl font-bold text-[var(--accent)]">Who We Work Best With</h2>
+          <h2 className="heading-serif text-3xl text-[var(--accent)]">Who We Work Best With</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
-            <article className="surface rounded-xl p-5">
+            <article className="surface rounded-sm p-5">
               <h3 className="font-semibold text-[var(--accent)]">Homeowners Who Value Transparency</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">You want a written scope and clear options before any work begins, not surprises halfway through.</p>
             </article>
-            <article className="surface rounded-xl p-5">
+            <article className="surface rounded-sm p-5">
               <h3 className="font-semibold text-[var(--accent)]">Families Balancing Budget and Quality</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">We present tiered options so you can prioritize what matters most without overbuilding your budget.</p>
             </article>
-            <article className="surface rounded-xl p-5">
+            <article className="surface rounded-sm p-5">
               <h3 className="font-semibold text-[var(--accent)]">Property Owners Facing Damage</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">Fire or water damage requires fast response and clear planning. We handle restoration and remodeling under one team.</p>
             </article>
           </div>
 
-          <h2 className="mt-10 text-2xl font-bold text-[var(--accent)]">How We Run Every Project</h2>
+          <h2 className="mt-10 heading-serif text-3xl text-[var(--accent)]">How We Run Every Project</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             <article className="surface rounded-lg p-5">
               <h3 className="font-semibold text-[var(--accent)]">Scope Before Demo</h3>
@@ -69,7 +69,7 @@ export default function AboutPage() {
             </article>
           </div>
 
-          <div className="surface mt-8 rounded-xl p-5 text-center">
+          <div className="surface mt-8 rounded-sm p-5 text-center">
             <p className="text-sm text-[var(--muted)]">
               <span className="font-semibold text-[var(--accent)]">{siteConfig.hicNumber}</span> · PA HIC registered · Insured · Warranty-backed · 12-month workmanship warranty + applicable manufacturer warranties
             </p>

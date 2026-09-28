@@ -58,39 +58,30 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!service || service.slug === "insurance-claims") {
     return {};
   }
-  if (service.slug === "paver-installation") {
-    return {
-      title: "Paver Patio Installation | Lehigh Valley & Berks County",
-      description:
-        "Paver patio installation for new patios, substantial renovations, pool surrounds, and integrated outdoor-living projects across Lehigh Valley and Berks County.",
-      alternates: { canonical: `/services/${service.slug}` },
-    };
-  }
-  const serviceKey = service.name.toLowerCase();
-  if (service.slug === "water-damage-restoration") {
-    return {
-      title: "Water Damage Restoration | Lehigh Valley & Berks County",
-      description:
-        "Water damage restoration with structured rebuild planning, phased repairs, and insurance-ready documentation across Allentown, Bethlehem, Reading, and Berks County.",
-      keywords: [
-        `${serviceKey} allentown pa`,
-        `${serviceKey} bethlehem pa`,
-        `${serviceKey} lehigh valley`,
-        `${serviceKey} contractor`,
-      ],
-      alternates: { canonical: `/services/${service.slug}` },
-    };
-  }
+  const titles: Record<string, string> = {
+    "paver-installation": "Paver Patio Installation | Lehigh Valley & Berks County",
+    "drywall-installation-repair": "Drywall Installation & Repair | Lehigh Valley",
+  };
+  const descriptions: Record<string, string> = {
+    "kitchen-remodeling": "Plan a kitchen remodel in the Lehigh Valley or Berks County. Explore real cabinet, countertop and layout projects, then request a written scope from RHI Pros.",
+    "bathroom-remodeling": "Bathroom remodeling in the Lehigh Valley and Berks County. See finished showers and bathrooms, explore tile and fixture options, and request a written quote.",
+    "basement-finishing": "Turn an unfinished basement into living or entertainment space. See a real basement theater and plan layout, lighting and finishes with RHI Pros.",
+    "paver-installation": "Paver patios, pool surrounds and outdoor living in the Lehigh Valley and Berks County. See a Reading patio and pavilion, then plan your installation.",
+    "flooring-installation": "Flooring installation with subfloor preparation, smooth transitions and coordinated trim. Explore completed local projects and request a scope for your home.",
+    "drywall-installation-repair": "Drywall installation and repair in the Lehigh Valley and Berks County. Explore smooth walls, ceiling repairs and paint-ready finishes from RHI Pros.",
+    "exterior-remodeling": "Explore exterior remodeling across the Lehigh Valley and Berks County: siding, trim, stairs and curb-appeal updates with documented project examples.",
+    "fire-damage-restoration": "Fire damage restoration and interior rebuilding across the Lehigh Valley and Berks County. Call for assessment, a written repair scope and claim documentation support.",
+    "water-damage-restoration": "Water damage restoration in the Lehigh Valley and Berks County. Discuss affected rooms, phased repairs and insurance documentation with RHI Pros.",
+  };
+  const title = titles[service.slug] ?? `${service.name} | Lehigh Valley & Berks County`;
+  const description = descriptions[service.slug] ?? service.intro;
+  const url = `/services/${service.slug}`;
   return {
-    title: `${service.name} | Allentown, Bethlehem & Lehigh Valley`,
-    description: `${service.name} services with clear scopes, reliable scheduling, and quality workmanship across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.`,
-    keywords: [
-      `${serviceKey} allentown pa`,
-      `${serviceKey} bethlehem pa`,
-      `${serviceKey} lehigh valley`,
-      `${serviceKey} contractor`,
-    ],
-    alternates: { canonical: `/services/${service.slug}` },
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title: `${title} | RHI Pros`, description, url, ...(service.image.src ? { images: [{ url: service.image.src, alt: service.image.alt }] } : {}) },
+    twitter: { title: `${title} | RHI Pros`, description },
   };
 }
 
@@ -181,7 +172,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
       {/* ── MAIN CONTENT ── */}
       <section className="py-14 md:py-24">
-        <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+        <Container className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,.8fr)]">
           <div>
             <FadeIn>
               {curatedGalleryIsSingleProject && featuredCaseStudy?.beforeImages && featuredCaseStudy?.afterImages ? (
@@ -265,7 +256,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 <h2 className="heading-serif mb-5 text-2xl text-[var(--accent)] md:text-3xl">Service Breakdown</h2>
                 
                 <details className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]">
-                  <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] outline-none marker:content-['']">
+                  <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-[var(--brand)] marker:content-['']">
                     What&apos;s Included
                     <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
                   </summary>
@@ -279,7 +270,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 </details>
 
                 <details className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]">
-                  <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] outline-none marker:content-['']">
+                  <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-[var(--brand)] marker:content-['']">
                     What You Can Expect
                     <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
                   </summary>
@@ -293,7 +284,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 </details>
 
                 <details className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]">
-                  <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] outline-none marker:content-['']">
+                  <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-[var(--brand)] marker:content-['']">
                     Where Quality Matters Most
                     <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
                   </summary>
@@ -307,7 +298,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 </details>
 
                 <details className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]">
-                  <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] outline-none marker:content-['']">
+                  <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-[var(--brand)] marker:content-['']">
                     What Affects the Price
                     <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
                   </summary>

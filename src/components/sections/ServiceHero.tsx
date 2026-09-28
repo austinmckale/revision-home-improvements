@@ -42,17 +42,17 @@ export default function ServiceHero({
       )}
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(18,23,20,.9)_0%,rgba(18,23,20,.62)_55%,rgba(18,23,20,.18)_100%)]" aria-hidden="true" />
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(18,23,20,.4)_0%,transparent_60%)]" aria-hidden="true" />
-      <Container className="relative z-10 flex flex-1 flex-col justify-end pt-20">
+      <Container className="relative z-10 flex min-w-0 flex-1 flex-col justify-end pt-4 sm:pt-16">
         <div className="max-w-4xl">
           <p className="eyebrow eyebrow-light">{eyebrow}</p>
           <h1 className="heading-serif mt-5 max-w-4xl text-4xl leading-[1.04] tracking-[-.03em] text-white sm:text-5xl lg:text-7xl">{title}</h1>
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/80 sm:text-lg">{intro}</p>
           {notice ? (
-            <p className="mt-4 inline-flex items-center gap-3 border-l-2 border-[var(--brand)] bg-black/20 px-4 py-3 text-sm text-white/90">
+            <p className="mt-4 border-l-2 border-[var(--brand)] bg-black/20 px-4 py-3 text-sm leading-relaxed text-white/90">
               <span className="font-semibold text-white">Urgent project?</span> {notice}
             </p>
           ) : null}
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="mt-7 grid gap-3 sm:flex sm:flex-wrap">
             <Link href={primaryHref} className="inline-flex min-h-12 items-center justify-center gap-3 bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
               {primaryLabel} <span aria-hidden="true">↗</span>
             </Link>
@@ -61,7 +61,7 @@ export default function ServiceHero({
             </a>
           </div>
         </div>
-        <div className="mt-12 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/25 pt-4 text-[0.65rem] font-semibold uppercase tracking-[.14em] text-white/65 sm:mt-16 sm:text-xs">
+        <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/25 pt-4 text-[0.65rem] font-semibold uppercase tracking-[.14em] text-white/75 sm:mt-12 sm:text-xs">
           <span>PA HIC registered</span>
           <span>Insured</span>
           <span>Written scope before work begins</span>

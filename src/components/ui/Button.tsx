@@ -23,7 +23,7 @@ export default function Button({
     return (
       <a
         href={href}
-        className={`inline-flex min-h-12 items-center justify-center rounded-sm px-6 py-3 text-sm font-semibold transition-colors duration-300 ${styles} ${className}`}
+        className={`inline-flex min-h-12 max-w-full items-center justify-center rounded-sm px-6 py-3 text-center text-sm font-semibold transition-colors duration-300 ${styles} ${className}`}
       >
         {children}
       </a>
@@ -33,7 +33,7 @@ export default function Button({
   return (
     <Link
       href={href}
-      className={`inline-flex min-h-12 items-center justify-center rounded-sm px-6 py-3 text-sm font-semibold transition-colors duration-300 ${styles} ${className}`}
+      className={`inline-flex min-h-12 max-w-full items-center justify-center rounded-sm px-6 py-3 text-center text-sm font-semibold transition-colors duration-300 ${styles} ${className}`}
     >
       {children}
     </Link>

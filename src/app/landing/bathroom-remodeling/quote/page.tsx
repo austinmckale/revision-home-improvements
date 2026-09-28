@@ -16,7 +16,7 @@ export default function BathroomLandingQuotePage() {
       <Container className="mx-auto max-w-xl">
         {/* Trust headline */}
         <div className="mb-6 text-center">
-          <h1 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">
+          <h1 className="heading-serif text-3xl leading-tight text-[var(--accent)] md:text-4xl">
             Get Your Bathroom Quote
           </h1>
           <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
@@ -31,7 +31,7 @@ export default function BathroomLandingQuotePage() {
         <QuoteForm defaultService="Bathroom Remodeling" />
 
         {/* Testimonial below form */}
-        <div className="mt-8 rounded-2xl bg-[var(--surface-soft)] p-5 text-center">
+        <div className="mt-8 border-t border-[var(--border)] bg-[var(--surface-soft)] p-5 text-center">
           <div className="flex items-center justify-center gap-0.5 text-[var(--brand)]">
             {[...Array(5)].map((_, i) => (
               <svg key={i} className="h-4 w-4 fill-current" viewBox="0 0 20 20">

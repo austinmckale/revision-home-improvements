@@ -8,6 +8,7 @@ export type InternalLinkSuggestion = {
 
 export type CityServiceLocalContent = {
   metadataTitle: string;
+  planningGuide?: { title: string; items: { title: string; copy: string }[] };
   metadataDescription: string;
   heroHeading: string;
   heroIntro?: string;
@@ -274,8 +275,17 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "reading-pa/flooring-installation": {
     metadataTitle: "Flooring Installation in Reading, PA",
     metadataDescription:
-      "Flooring installation in Reading, PA for hardwood, finish refreshes, and room-to-room interior upgrades. Strong prep, clean trim lines, and better flow through older homes.",
+      "Flooring installation in Reading, PA with subfloor preparation, clean transitions and coordinated trim. Explore real flooring projects and request a written scope.",
     heroHeading: "Flooring Installation in Reading, PA",
+    heroIntro: "Connect your rooms with flooring that feels considered from edge to edge. Plan the surface, subfloor preparation, transitions, and trim before installation begins.",
+    planningGuide: {
+      title: "What belongs in a flooring installation quote?",
+      items: [
+        { title: "Preparation and removal", copy: "Identify the existing flooring, affected rooms, and any known soft spots, uneven areas, or previous moisture concerns. Removal and subfloor preparation should be clear in the scope." },
+        { title: "Transitions and finish details", copy: "Review where the new floor meets stairs, thresholds, adjoining rooms, baseboards, and cabinets. These connections affect how the finished installation looks and functions." },
+        { title: "An installation sequence for your household", copy: "Discuss furniture, storage, room access, and any connected paint or trim work. Planning the sequence helps keep those decisions out of the middle of the installation." },
+      ],
+    },
     localProjectHeading: "Common Reading Flooring Scope",
     localProjectSnippet:
       "Reading flooring projects often turn into broader finish upgrades because once the floors improve, the walls, lighting, and windows need to feel just as clean. We plan connected finish work together so the room does not look pieced together.",
@@ -375,7 +385,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "reading-pa/basement-finishing": {
     metadataTitle: "Basement Finishing in Reading, PA",
     metadataDescription:
-      "Basement finishing in Reading, PA with practical planning for existing conditions, moisture concerns, utilities, lighting, ceilings, and finished-room use.",
+      "Basement finishing and remodeling in Reading, PA. Plan a family room, theater or flexible living space with moisture, ceiling and utility access considered.",
     heroHeading: "Basement Finishing in Reading, PA",
     heroIntro:
       "Plan a finished basement around the space’s existing conditions, utility access, ceiling constraints, lighting, and intended use before framing and finish selections begin.",
@@ -388,7 +398,19 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       "Egress, electrical, insulation, ceiling, and HVAC needs tied to the proposed use",
       "Storage and mechanical access that must remain practical after finishing",
     ],
-    localizedFaqs: [],
+    planningGuide: {
+      title: "Plan the room before choosing the finishes.",
+      items: [
+        { title: "Set a purpose for the space", copy: "A movie room, work area, play space, or general family room has different lighting, electrical, storage, and layout needs. A clear intended use helps define the build." },
+        { title: "Review the existing conditions", copy: "Share any history of moisture, photos of walls and floors, and the locations of equipment, pipes, and ducts. Access and ceiling constraints should be considered before framing begins." },
+        { title: "Compare a complete written scope", copy: "Ask which preparation, framing, insulation, electrical coordination, ceiling work, flooring, trim, and painting are included. Those details make estimates easier to compare." },
+      ],
+    },
+    localizedFaqs: [
+      { q: "What affects the cost of finishing a basement in Reading?", a: "The usable area, existing conditions, intended room use, ceiling constraints, utilities, and finish selections all affect the scope. Photos and approximate dimensions help start the conversation; a written estimate follows review of the space." },
+      { q: "What if the basement has had moisture problems?", a: "Tell us about past leaks, damp walls or floors, and any work already completed. Active moisture concerns should be assessed before new finished walls or flooring are planned." },
+      { q: "Can the basement be planned as a theater or entertainment room?", a: "Yes. Screen placement, seating, lighting, outlets, sound considerations, storage, and equipment access can be coordinated in the scope. The linked Lehigh Valley theater is a documented example of our work outside Reading." },
+    ],
     relatedCaseStudySlug: "lehigh-valley-basement-finish-and-detail",
     internalLinks: [
       {
@@ -615,7 +637,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "berks-county-pa/kitchen-remodeling": {
     metadataTitle: "Kitchen Remodeling in Berks County, PA",
     metadataDescription:
-      "Kitchen remodeling in Berks County, PA with clear scopes, cabinet and countertop coordination, and local project proof from completed Berks County work.",
+      "Kitchen remodeling in Berks County: cabinets, countertops, layout and finishes. See a completed local kitchen and compare cabinet-focused and full-room scopes.",
     heroHeading: "Kitchen Remodeling in Berks County, PA",
     heroIntro:
       "Plan a Berks County kitchen remodel around layout, cabinets, counters, and finish details so the room works better day to day. RHI Pros coordinates the scope in writing before work begins.",
@@ -1381,8 +1403,17 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "lehigh-valley-pa/kitchen-remodeling": {
     metadataTitle: "Kitchen Remodeling in Lehigh Valley, PA",
     metadataDescription:
-      "Kitchen remodeling in Lehigh Valley, PA with thoughtful layout improvements, finish coordination, and clear planning for both older homes and newer properties.",
+      "Lehigh Valley kitchen remodeling with cabinet, countertop and layout planning. See an Allentown kitchen transformation and request a written project scope.",
     heroHeading: "Kitchen Remodeling in Lehigh Valley, PA",
+    heroIntro: "Bring cabinets, countertops, lighting, and layout together in a kitchen that works for your everyday life. Explore a local project and plan the scope with RHI Pros.",
+    planningGuide: {
+      title: "Decide what your kitchen needs to do better.",
+      items: [
+        { title: "Keep the footprint or change the flow?", copy: "Start with what gets in the way: crowded walkways, appliance clearances, limited counter space, or a sink in the wrong place. Keeping the layout and moving plumbing or appliances involve different scopes." },
+        { title: "Plan cabinets and counters together", copy: "Cabinet dimensions, appliance specifications, storage needs, and the sink position affect countertop measurements. Make those decisions together before final installation planning." },
+        { title: "Include the surrounding finishes", copy: "Cabinet removal can expose gaps in floors or walls. Identify backsplash, flooring, lighting, trim, and paint work in the same proposal so the finished room feels complete." },
+      ],
+    },
     localProjectHeading: "How Lehigh Valley Kitchen Projects Usually Come Together",
     localProjectSnippet:
       "A nearby kitchen layout upgrade in Allentown reflects what many Lehigh Valley homeowners need: better workflow, cleaner cabinet-to-finish transitions, and planning that works as well in older homes as it does in newer properties.",
@@ -1418,8 +1449,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         reason: "Full scope and planning expectations",
       },
       {
-        href: "/projects",
-        anchorText: "Kitchen and renovation project examples",
+        href: "/projects/allentown-kitchen-layout-upgrade",
+        anchorText: "Allentown kitchen layout and cabinet project",
         reason: "Nearby proof and visual outcomes",
       },
       {

@@ -37,42 +37,50 @@ export default function Footer() {
                 {siteConfig.name}
               </span>
             </Link>
-            <p className="mt-3 text-xs font-semibold uppercase tracking-[.15em] text-white/40">Reimagine · Build · Enjoy</p>
+            <p className="mt-3 text-xs font-semibold uppercase tracking-[.15em] text-white/65">Reimagine · Build · Enjoy</p>
             <p className="mt-6 text-sm leading-relaxed text-white/60">
               Remodeling and restoration across the Lehigh Valley and Berks County, with clear scopes and steady communication from the first conversation to closeout.
             </p>
           </div>
 
           <div>
-            <h3 className="text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/40">Expertise</h3>
-            <ul className="mt-5 space-y-3 text-sm font-medium">
-              <li><Link href="/services" className="transition-colors hover:text-white">All services</Link></li>
-              <li><Link href="/projects" className="transition-colors hover:text-white">Selected projects</Link></li>
-              <li><Link href="/fire-water-damage-restoration" className="transition-colors hover:text-white">Emergency restoration</Link></li>
+            <h3 className="text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/65">Expertise</h3>
+            <ul className="mt-4 space-y-1 text-sm font-medium">
+              <li><Link href="/services" className="inline-flex min-h-11 items-center transition-colors hover:text-white">All services</Link></li>
+              <li><Link href="/projects" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Selected projects</Link></li>
+              <li><Link href="/fire-water-damage-restoration" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Emergency restoration</Link></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/40">Company</h3>
+            <h3 className="text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/65">Company</h3>
             <ul className="mt-5 space-y-3 text-sm font-medium">
-              <li><Link href="/about" className="transition-colors hover:text-white">About RHI Pros</Link></li>
-              <li><Link href="/our-process" className="transition-colors hover:text-white">Our process</Link></li>
-              <li><Link href="/warranty" className="transition-colors hover:text-white">Workmanship warranty</Link></li>
-              <li><Link href="/service-areas" className="transition-colors hover:text-white">Service areas</Link></li>
+              <li><Link href="/about" className="inline-flex min-h-11 items-center transition-colors hover:text-white">About RHI Pros</Link></li>
+              <li><Link href="/our-process" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Our process</Link></li>
+              <li><Link href="/warranty" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Workmanship warranty</Link></li>
+              <li><Link href="/service-areas" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Service areas</Link></li>
             </ul>
           </div>
 
           <div>
-            <p className="text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/40">Talk with our team</p>
+            <p className="text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/65">Talk with our team</p>
             <a href={siteConfig.phoneHref} className="heading-serif mt-4 block text-2xl text-white transition-colors hover:text-white/80">{siteConfig.phoneDisplay}</a>
             <a href={`mailto:${siteConfig.primaryEmail}`} className="mt-2 inline-block text-sm transition-colors hover:text-white">{siteConfig.primaryEmail}</a>
-            <p className="mt-4 text-xs text-white/45">{siteConfig.address.street}</p>
+            <p className="mt-4 text-xs text-white/65">{siteConfig.address.street}</p>
             <Link href="/request-a-quote" className="mt-6 inline-flex min-h-11 items-center justify-center bg-[var(--brand)] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]">Request a quote <span className="ml-3" aria-hidden="true">↗</span></Link>
           </div>
         </div>
+        <nav aria-label="Local service areas" className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm">
+          <span className="mr-2 text-xs font-semibold uppercase tracking-widest text-white/65">Close to home</span>
+          <Link href="/lehigh-valley-pa" className="inline-flex min-h-11 items-center hover:text-white">Lehigh Valley</Link>
+          <Link href="/allentown-pa" className="inline-flex min-h-11 items-center hover:text-white">Allentown</Link>
+          <Link href="/bethlehem-pa" className="inline-flex min-h-11 items-center hover:text-white">Bethlehem</Link>
+          <Link href="/reading-pa" className="inline-flex min-h-11 items-center hover:text-white">Reading</Link>
+          <Link href="/berks-county-pa" className="inline-flex min-h-11 items-center hover:text-white">Berks County</Link>
+        </nav>
       </Container>
       <div className="border-t border-white/10">
-        <Container className="flex flex-col-reverse items-center justify-between gap-5 py-6 text-xs text-white/45 md:flex-row">
+        <Container className="flex flex-col-reverse items-center justify-between gap-5 py-6 text-xs text-white/65 md:flex-row">
           <p>
             &copy; {new Date().getFullYear()} {siteConfig.name}.{" "}
             <Link href="/licenses-and-insurance" className="hover:text-white transition-colors">

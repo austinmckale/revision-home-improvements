@@ -1,3 +1,5 @@
+import ServiceHero from "@/components/sections/ServiceHero";
+import { getProjectImageProps } from "@/content/projectImagePreviews";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
@@ -91,66 +93,7 @@ export default function BathroomLandingPage() {
       <JsonLd data={jsonLd} />
 
       {/* ── HERO: Text + Image side-by-side on desktop ── */}
-      <section className="hero-band py-8 md:py-14">
-        <Container>
-          <div className="mx-auto grid max-w-5xl items-center gap-8 md:grid-cols-2">
-            {/* Left: copy */}
-            <div className="text-center md:text-left">
-              <h1 className="heading-serif text-3xl text-[var(--accent)] md:text-4xl lg:text-[2.75rem] lg:leading-tight">
-                Your Bathroom, Done Right the&nbsp;First&nbsp;Time
-              </h1>
-              <p className="mt-3 text-base leading-relaxed text-[var(--muted)]">
-                Written scope before work starts. No surprises on price or timeline.
-              </p>
-
-              {/* Trust row */}
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs font-medium text-[var(--muted)] md:justify-start">
-                <span className="flex items-center gap-1">
-                  <svg className="h-3.5 w-3.5 text-[var(--brand)]" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                  5.0 on Google
-                </span>
-                <span className="hidden sm:inline">·</span>
-                <span>PA HIC #PA185945</span>
-                <span className="hidden sm:inline">·</span>
-                <span>Waterproofing&#8209;first</span>
-                <span className="hidden sm:inline">·</span>
-                <span>Lehigh Valley &amp; Berks County</span>
-              </div>
-
-              {/* CTA buttons */}
-              <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row md:items-start">
-                <a
-                  href="#landing-quote-form"
-                  className="inline-flex w-full items-center justify-center rounded-full bg-[var(--brand)] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[var(--brand-dark)] sm:w-auto"
-                >
-                  Get My Free Quote
-                </a>
-                <a
-                  href={siteConfig.phoneHref}
-                  className="inline-flex w-full items-center justify-center rounded-full border border-[var(--brand)] bg-white px-6 py-3.5 text-sm font-semibold text-[var(--brand)] transition hover:bg-[var(--surface-soft)] sm:w-auto"
-                >
-                  Call {siteConfig.phoneDisplay}
-                </a>
-              </div>
-            </div>
-
-            {/* Right: hero image */}
-            <div className="overflow-hidden rounded-2xl">
-              <Image
-                src="/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg"
-                alt="Finished bathroom remodel showing updated shower, vanity, and clean modern finishes."
-                width={1200}
-                height={800}
-                priority
-                sizes="(max-width: 768px) 100vw, 520px"
-                className="h-64 w-full object-cover object-bottom sm:h-72 md:h-auto"
-              />
-            </div>
-          </div>
-        </Container>
-      </section>
+      <ServiceHero eyebrow="Bathroom remodeling · Lehigh Valley & Berks County" title="A bathroom, thoughtfully rebuilt." intro="Start with a written scope. Bring tile, fixtures, waterproofing, and finish details together in a bathroom designed around your home." image={galleryImages[0]} primaryHref="#landing-quote-form" primaryLabel="Request a bathroom quote" secondaryHref={siteConfig.phoneHref} secondaryLabel={`Call ${siteConfig.phoneDisplay}`} />
 
       {/* ── INLINE QUOTE FORM ── */}
       <section id="landing-quote-form" className="py-10 md:py-16">
@@ -186,7 +129,7 @@ export default function BathroomLandingPage() {
             <div>
               <h2 className="heading-serif text-2xl text-[var(--accent)]">What Our Clients Say</h2>
               <p className="mt-1 text-sm text-[var(--muted)]">
-                5.0 stars on Google (9 reviews) · 5.0 on Angi (9 reviews)
+                Read homeowner feedback and explore our bathroom projects.
               </p>
             </div>
             <a
@@ -258,7 +201,7 @@ export default function BathroomLandingPage() {
                 className="w-64 flex-shrink-0 overflow-hidden rounded-xl bg-white md:w-auto"
               >
                 <Image
-                  src={img.src}
+                  {...getProjectImageProps(img)}
                   alt={img.alt}
                   width={600}
                   height={400}

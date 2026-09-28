@@ -1,5 +1,9 @@
 // Prepared from the matching original project photos; originals remain available in galleries.
 export const projectImagePreviews: Record<string, string> = {
+  "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg": "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail-preview.webp",
+  "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg": "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity-preview.webp",
+  "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg": "/images/projects/frontier-patio-gable-roof/after/angle-1-preview.webp",
+  "/images/projects/fire-damage-documentation/after/14-img_8459.jpg": "/images/projects/fire-damage-documentation/after/14-img_8459-preview.webp",
   "/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg": "/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero-preview.webp",
   "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg": "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open-preview.webp",
   "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png": "/images/projects/allentown-commercial-bathroom/after/sink-area-after-preview.webp",

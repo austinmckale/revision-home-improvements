@@ -1,3 +1,4 @@
+import PageIntro from "@/components/sections/PageIntro";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
@@ -17,16 +18,15 @@ export default function LicensesAndInsurancePage() {
   return (
     <>
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Licenses & Insurance", href: "/licenses-and-insurance" }])} />
-      <section className="py-14">
-        <Container className="max-w-4xl">
-          <h1 className="text-4xl font-extrabold text-[var(--accent)]">Registration and Insurance</h1>
-          <p className="mt-4 text-[var(--muted)]">
+      <PageIntro eyebrow="Confidence from the start" title="Registration & insurance."><p >
             We believe you should be able to review contractor credentials before signing anything. Here is how we are registered and insured.
-          </p>
+          </p></PageIntro>
+      <section className="support-content py-12 sm:py-20">
+        <Container className="max-w-5xl">
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <article className="surface rounded-2xl p-6">
-              <h2 className="text-2xl font-semibold text-[var(--accent)]">PA HIC Registration</h2>
+            <article className="surface rounded-sm p-6">
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">PA HIC Registration</h2>
               <div className="mt-3 space-y-3 text-[var(--muted)]">
                 <div className="rounded-lg border border-[var(--border)] p-3">
                   <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
@@ -44,8 +44,8 @@ export default function LicensesAndInsurancePage() {
                 </p>
               </div>
             </article>
-            <article className="surface rounded-2xl p-6">
-              <h2 className="text-2xl font-semibold text-[var(--accent)]">Insurance</h2>
+            <article className="surface rounded-sm p-6">
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Insurance</h2>
               <div className="mt-3 space-y-3 text-[var(--muted)]">
                 <div className="rounded-lg border border-[var(--border)] p-3">
                   <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">General Liability</p>
@@ -62,8 +62,8 @@ export default function LicensesAndInsurancePage() {
             </article>
           </div>
 
-          <div className="surface mt-6 rounded-2xl p-6">
-            <h2 className="text-2xl font-semibold text-[var(--accent)]">Why This Matters</h2>
+          <div className="surface mt-6 rounded-sm p-6">
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">Why This Matters</h2>
             <p className="mt-2 text-[var(--muted)]">
               Hiring an unregistered or uninsured contractor puts your home and your wallet at risk. A valid PA HIC
               registration means the contractor meets Pennsylvania&apos;s registration requirements. Active insurance
@@ -74,7 +74,7 @@ export default function LicensesAndInsurancePage() {
             </p>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-3 text-sm">
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 text-sm">
             <Link href="/warranty" className="font-semibold text-[var(--brand)]">Workmanship Warranty</Link>
             <Link href="/our-process" className="font-semibold text-[var(--brand)]">Our Process</Link>
             <Link href="/about" className="font-semibold text-[var(--brand)]">About Us</Link>

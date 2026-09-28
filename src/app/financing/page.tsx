@@ -1,3 +1,4 @@
+import PageIntro from "@/components/sections/PageIntro";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
@@ -44,32 +45,13 @@ export default function FinancingPage() {
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Financing", href: "/financing" }])} />
 
       {/* ── Hero ── */}
-      <section className="hero-band py-10 md:py-14">
-        <Container className="max-w-3xl">
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
-            Lehigh Valley &amp; Berks County
-          </p>
-          <h1 className="heading-serif mt-2 text-3xl text-[var(--accent)] md:text-4xl">
-            Project Financing
-          </h1>
-          <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--muted)] md:text-base">
-            Don&apos;t let budget hold back the project your home needs. We offer promotional
-            financing options so you can get started now and pay over time.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Button href="/request-a-quote">Request a Financing-Ready Quote</Button>
-            <Button href={siteConfig.phoneHref} variant="secondary">
-              Call {siteConfig.phoneDisplay}
-            </Button>
-          </div>
-        </Container>
-      </section>
+      <PageIntro eyebrow="Plan your project" title="Project financing."><p>Explore payment options alongside a clear project scope. Financing is subject to lender approval and program terms.</p><div className="mt-6 flex flex-wrap gap-3"><Button href="/request-a-quote">Request a financing-ready quote</Button><Button href={siteConfig.phoneHref} variant="secondary">Call {siteConfig.phoneDisplay}</Button></div></PageIntro>
 
       {/* ── Promo card ── */}
-      <section className="py-10 md:py-14">
-        <Container className="max-w-3xl">
-          <div className="surface rounded-2xl border-2 border-[var(--brand)] p-6">
-            <h2 className="heading-serif text-2xl text-[var(--accent)]">
+      <section className="support-content py-12 sm:py-20">
+        <Container className="max-w-5xl">
+          <div className="surface rounded-sm border-2 border-[var(--brand)] p-6">
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">
               Promotional Financing Options
             </h2>
             <p className="mt-2 text-[var(--muted)]">
@@ -87,7 +69,7 @@ export default function FinancingPage() {
           <h2 className="heading-serif mt-10 text-2xl text-[var(--accent)]">How It Works</h2>
           <div className="mt-5 grid gap-5 md:grid-cols-3">
             {steps.map((s) => (
-              <div key={s.num} className="surface rounded-xl p-5">
+              <div key={s.num} className="surface rounded-sm p-5">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--brand)] text-sm font-bold text-white">
                   {s.num}
                 </span>
@@ -98,8 +80,8 @@ export default function FinancingPage() {
           </div>
 
           {/* ── Scope planning ── */}
-          <div className="surface mt-10 rounded-2xl p-6">
-            <h2 className="heading-serif text-2xl text-[var(--accent)]">
+          <div className="surface mt-10 rounded-sm p-6">
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">
               Financing-Ready Scope Planning
             </h2>
             <p className="mt-2 text-sm text-[var(--muted)]">

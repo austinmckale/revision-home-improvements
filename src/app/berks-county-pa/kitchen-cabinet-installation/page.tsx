@@ -1,9 +1,9 @@
+import ServiceHero from "@/components/sections/ServiceHero";
+import ProjectCard from "@/components/sections/ProjectCard";
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import QuoteForm from "@/components/forms/QuoteForm";
-import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import FadeIn from "@/components/ui/FadeIn";
 import {
@@ -24,7 +24,7 @@ const heroImage = {
 };
 
 export const metadata: Metadata = {
-  title: { absolute: "Kitchen Cabinet Installation in Berks County | RHI Pros" },
+  title: { absolute: "Kitchen Cabinet Replacement in Berks County | RHI Pros" },
   description:
     "Planning new kitchen cabinets in Berks County? RHI Pros coordinates cabinet replacement and installation with counters, fixtures and surrounding kitchen work.",
   alternates: { canonical: route },
@@ -126,6 +126,7 @@ const cabinetProjects = cabinetProjectSlugs
   .filter((project): project is CaseStudy => Boolean(project));
 
 const faqItems = [
+  { q: "Is cabinet replacement the same as cabinet refacing?", a: "No. Refacing generally retains the existing cabinet boxes and changes exposed surfaces or doors. Replacement installs new cabinets and may change the layout. This page covers replacement and installation as part of a coordinated kitchen project; tell us your intended scope when requesting a quote." },
   {
     q: "Can cabinets be replaced without remodeling the entire kitchen?",
     a:
@@ -158,51 +159,6 @@ const faqItems = [
   },
 ];
 
-function ProjectCard({ project }: { project: CaseStudy }) {
-  const image = project.images[0];
-
-  return (
-    <article className="surface overflow-hidden rounded-2xl">
-      <Link
-        href={`/projects/${project.slug}`}
-        className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand)]"
-      >
-        {image ? (
-          <div className="relative h-56 overflow-hidden bg-[var(--surface-soft)]">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={900}
-              height={600}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            />
-          </div>
-        ) : null}
-        <div className="p-5 md:p-6">
-          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--brand)]">
-            {project.locationName}
-          </p>
-          <h3 className="mt-1 text-xl font-semibold text-[var(--accent)]">
-            {project.title}
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-            {project.summary}
-          </p>
-          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
-            {project.scope.slice(0, 2).map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-          <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
-            View project →
-          </span>
-        </div>
-      </Link>
-    </article>
-  );
-}
-
 export default function KitchenCabinetInstallationPage() {
   return (
     <>
@@ -222,58 +178,7 @@ export default function KitchenCabinetInstallationPage() {
         ])}
       />
 
-      <section className="hero-band py-10 md:py-16">
-        <Container className="grid items-center gap-8 md:grid-cols-2 md:gap-10">
-          <FadeIn>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
-              Berks County, PA
-            </p>
-            <h1 className="heading-serif mt-2 text-4xl text-[var(--accent)] md:text-5xl">
-              Kitchen Cabinet Replacement and Installation in Berks County
-            </h1>
-            <p className="mt-4 text-[0.9375rem] leading-relaxed text-[var(--muted)] md:text-base">
-              Cabinets affect more than storage. Their dimensions and layout
-              influence countertops, appliances, sinks, backsplashes, flooring and
-              the surrounding walls. RHI Pros plans cabinet replacement and
-              installation as part of a coordinated kitchen scope so those
-              connections are addressed before work begins.
-            </p>
-            <div className="mt-6 grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
-              <p className="surface rounded-lg px-3 py-2">
-                Written scope before work begins
-              </p>
-              <p className="surface rounded-lg px-3 py-2">
-                PA HIC registered · {siteConfig.hicNumber}
-              </p>
-              <p className="surface rounded-lg px-3 py-2">
-                Insured and warranty-backed
-              </p>
-              <p className="surface rounded-lg px-3 py-2">
-                Clear communication throughout
-              </p>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button href="#quote-form-section">Request a Kitchen Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
-                Call {siteConfig.phoneDisplay}
-              </Button>
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.15}>
-            <div className="surface overflow-hidden rounded-2xl">
-              <Image
-                src={heroImage.src}
-                alt={heroImage.alt}
-                width={900}
-                height={1100}
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="aspect-[4/3] w-full object-cover"
-              />
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
+      <ServiceHero eyebrow="Lehigh Valley & Berks County" title="Kitchen cabinet replacement & installation in Berks County." intro="Plan the cabinets around the way you use your kitchen. We coordinate installation with countertops, appliances, flooring, and the surrounding finishes." image={heroImage} primaryHref="#quote-form-section" primaryLabel="Plan your project" secondaryHref={siteConfig.phoneHref} secondaryLabel={`Call ${siteConfig.phoneDisplay}`} />
 
       <section className="py-12 md:py-16">
         <Container>
@@ -291,7 +196,7 @@ export default function KitchenCabinetInstallationPage() {
             </div>
             <div className="mt-8 grid gap-4 md:grid-cols-3">
               {scopeOptions.map((item) => (
-                <article className="surface rounded-2xl p-5 md:p-6" key={item.heading}>
+                <article className="surface rounded-sm p-5 md:p-6" key={item.heading}>
                   <h3 className="text-lg font-semibold text-[var(--accent)]">
                     {item.heading}
                   </h3>
@@ -324,7 +229,7 @@ export default function KitchenCabinetInstallationPage() {
             </h2>
             <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {scopeFactors.map((item, index) => (
-                <article className="surface rounded-2xl p-5" key={item.heading}>
+                <article className="surface rounded-sm p-5" key={item.heading}>
                   <p className="text-sm font-bold text-[var(--brand)]">
                     {String(index + 1).padStart(2, "0")}
                   </p>
@@ -355,7 +260,7 @@ export default function KitchenCabinetInstallationPage() {
             </div>
             <ol className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               {coordinationSteps.map((item, index) => (
-                <li className="surface rounded-2xl p-5" key={item.heading}>
+                <li className="surface rounded-sm p-5" key={item.heading}>
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--brand)] text-sm font-bold text-white">
                     {index + 1}
                   </span>
@@ -386,7 +291,7 @@ export default function KitchenCabinetInstallationPage() {
             </div>
             <div className="mt-8 grid gap-5 md:grid-cols-2">
               {cabinetProjects.map((project) => (
-                <ProjectCard key={project.slug} project={project} />
+                <ProjectCard key={project.slug} study={project} />
               ))}
             </div>
           </FadeIn>
@@ -406,7 +311,7 @@ export default function KitchenCabinetInstallationPage() {
                 identify the next decisions.
               </p>
             </div>
-            <ul className="surface grid gap-3 rounded-2xl p-5 text-sm text-[var(--muted)] sm:grid-cols-2 md:p-6">
+            <ul className="surface grid gap-3 rounded-sm p-5 text-sm text-[var(--muted)] sm:grid-cols-2 md:p-6">
               <li>Photos of the current kitchen</li>
               <li>Approximate room dimensions</li>
               <li>Whether the existing layout will remain</li>
@@ -428,7 +333,7 @@ export default function KitchenCabinetInstallationPage() {
             </h2>
             <div className="mt-6 grid gap-3 lg:grid-cols-2">
               {faqItems.map((item) => (
-                <details className="surface group rounded-xl p-5" key={item.q}>
+                <details className="surface group rounded-sm p-5" key={item.q}>
                   <summary className="cursor-pointer font-semibold text-[var(--accent)]">
                     {item.q}
                   </summary>
