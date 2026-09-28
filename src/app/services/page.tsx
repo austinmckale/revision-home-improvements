@@ -46,9 +46,9 @@ export default function ServicesHubPage() {
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}`}
-                  className="surface group overflow-hidden rounded-2xl transition hover:ring-1 hover:ring-[var(--brand)]"
+                  className="group overflow-hidden border border-[var(--border)] bg-[var(--surface)] transition-colors hover:border-[var(--brand)]"
                 >
-                  {service.image.src && (
+                  {service.image.src ? (
                     <div className="relative h-56 overflow-hidden md:h-64">
                       <Image
                         src={service.image.src}
@@ -58,12 +58,15 @@ export default function ServicesHubPage() {
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
+                  ) : (
+                    <div className="media-placeholder h-56 md:h-64" aria-hidden="true" />
                   )}
-                  <div className="p-5 md:p-6">
-                    <h2 className="heading-serif text-xl text-[var(--accent)] md:text-2xl">{service.name}</h2>
+                  <div className="p-5 md:p-7">
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[.16em] text-[var(--brand)]">Service overview</p>
+                    <h2 className="heading-serif mt-2 text-2xl text-[var(--accent)] md:text-3xl">{service.name}</h2>
                     <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{service.short}</p>
-                    <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)] transition-transform group-hover:translate-x-1">
-                      Learn more &rarr;
+                    <span className="mt-5 inline-flex items-center gap-3 border-b border-[var(--border)] pb-2 text-sm font-semibold text-[var(--accent)] transition-colors group-hover:border-[var(--brand)] group-hover:text-[var(--brand)]">
+                      Explore this service <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
                     </span>
                   </div>
                 </Link>

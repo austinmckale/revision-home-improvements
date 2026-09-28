@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
 import QuoteForm from "@/components/forms/QuoteForm";
 import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
 import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
+import ServiceHero from "@/components/sections/ServiceHero";
 import { getLocationBySlug, locations } from "@/content/locations";
 import {
   getCaseStudyBySlug,
@@ -168,49 +167,17 @@ export default async function CityServicePage({ params }: { params: Promise<Para
         ])}
       />
 
-      <section className="hero-band py-14">
-        <Container className="grid items-center gap-8 md:grid-cols-2">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">
-              {location.name}
-            </p>
-            <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">
-              {localContent?.heroHeading ?? `${service.name} in ${location.short}`}
-            </h1>
-            <p className="mt-3 text-[var(--muted)]">
-              {localContent?.heroIntro ?? `${service.intro} ${location.localAngle}`}
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              {isEmergencyService ? (
-                <>
-                  <Button href={siteConfig.phoneHref}>Call {siteConfig.phoneDisplay}</Button>
-                  <Button href={`/request-a-quote?service=${service.slug}`} variant="secondary">
-                    Request a quote
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button href="#quote-form-section">Get a Free Quote</Button>
-                  <Button href={siteConfig.phoneHref} variant="secondary">
-                    Call {siteConfig.phoneDisplay}
-                  </Button>
-                </>
-              )}
-            </div>
-          </div>
-          {service.image.src && (
-            <div className="surface overflow-hidden rounded-2xl">
-              <Image
-                src={service.image.src}
-                alt={service.image.alt}
-                width={1200}
-                height={800}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          )}
-        </Container>
-      </section>
+      <ServiceHero
+        eyebrow={location.name}
+        title={localContent?.heroHeading ?? `${service.name} in ${location.short}`}
+        intro={localContent?.heroIntro ?? `${service.intro} ${location.localAngle}`}
+        image={service.image.src ? service.image : undefined}
+        primaryHref={isEmergencyService ? siteConfig.phoneHref : "#quote-form-section"}
+        primaryLabel={isEmergencyService ? `Call ${siteConfig.phoneDisplay}` : "Get a free quote"}
+        secondaryHref={isEmergencyService ? `/request-a-quote?service=${service.slug}` : siteConfig.phoneHref}
+        secondaryLabel={isEmergencyService ? "Request a quote" : `Call ${siteConfig.phoneDisplay}`}
+        notice={isEmergencyService ? "Call us directly for priority scheduling." : undefined}
+      />
 
       <section className="py-14">
         <Container className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">

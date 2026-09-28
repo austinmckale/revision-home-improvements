@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import EmergencyBar from "@/components/layout/EmergencyBar";
@@ -9,6 +10,9 @@ import TrackingEvents from "@/components/TrackingEvents";
 import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/content/site";
 import { getLocalBusinessJsonLd } from "@/lib/structuredData";
+
+const sans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap" });
+const serif = DM_Serif_Display({ subsets: ["latin"], weight: "400", variable: "--font-dm-serif", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.domain),
@@ -63,15 +67,7 @@ export default function RootLayout({
   const gtagId = gaId || googleAdsId;
 
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
       <body className="antialiased">
         <JsonLd data={getLocalBusinessJsonLd()} />
         {gtmId && (

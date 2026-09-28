@@ -51,19 +51,20 @@ export default function TestimonialStrip({ items, title = "What Our Clients Say"
               target="_blank"
               rel="noopener noreferrer"
               aria-label={link.ariaLabel}
-              className="text-sm font-semibold text-[var(--brand)]"
+              className="border-b border-transparent pb-1 text-xs font-semibold text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
             >
               {link.label}
             </a>
           ))}
         </div>
       </div>
-      <div className="mt-4 grid gap-3 md:grid-cols-3">
-        {displayItems.map((item) => (
-          <article key={`${item.name}-${item.context}`} className="surface rounded-lg p-4">
+      <div className="mt-6 grid gap-px bg-[var(--border)] md:grid-cols-3">
+        {displayItems.map((item, index) => (
+          <article key={`${item.name}-${item.context}`} className="bg-[var(--surface)] p-5 sm:p-6">
+            <p className="mb-4 font-mono text-[0.65rem] tracking-[.14em] text-[var(--brand)]">0{index + 1} / CLIENT NOTE</p>
             <StarRating rating={item.rating} />
-            <p className="mt-2 text-sm text-[var(--muted)]">&ldquo;{item.quote}&rdquo;</p>
-            <p className="mt-3 text-sm font-semibold">{item.name}</p>
+            <p className="heading-serif mt-3 text-xl leading-snug text-[var(--accent)]">&ldquo;{item.quote}&rdquo;</p>
+            <p className="mt-5 border-t border-[var(--border)] pt-3 text-sm font-semibold">{item.name}</p>
             <p className="text-xs text-[var(--muted)]">{item.context}</p>
             {item.source ? <p className="mt-1 text-[11px] text-[var(--muted)]">{item.source}</p> : null}
           </article>

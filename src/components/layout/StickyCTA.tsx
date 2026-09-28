@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/content/site";
-import Button from "@/components/ui/Button";
 
 /** Restoration service slugs for emergency CTA labels */
 const EMERGENCY_SLUGS = ["fire-damage-restoration", "water-damage-restoration"];
@@ -81,13 +80,13 @@ export default function StickyCTA() {
   };
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--border)] bg-white px-3 pb-[env(safe-area-inset-bottom,8px)] pt-2.5 shadow-lg md:hidden">
-      <div className="mx-auto flex max-w-6xl flex-col gap-1.5">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--border)] bg-[var(--surface)]/95 px-3 pb-[env(safe-area-inset-bottom,8px)] pt-2.5 shadow-[0_-10px_30px_rgba(30,42,34,.08)] backdrop-blur-xl md:hidden">
+      <div className="mx-auto flex max-w-7xl flex-col gap-1.5">
         {mode === "phone" ? (
           <a
             href={siteConfig.phoneHref}
             onClick={handleClick}
-            className="block rounded-full bg-[var(--brand)] px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
+            className="block min-h-12 bg-[var(--brand)] px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand)]"
           >
             {label}
           </a>
@@ -95,7 +94,7 @@ export default function StickyCTA() {
           <button
             type="button"
             onClick={handleClick}
-            className="block w-full rounded-full bg-[var(--brand)] px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
+            className="block min-h-12 w-full bg-[var(--brand)] px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand)]"
           >
             {label}
           </button>

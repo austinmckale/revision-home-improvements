@@ -32,14 +32,15 @@ export default function ConfidenceSection({
   className = "",
 }: ConfidenceSectionProps) {
   return (
-    <section className={`surface rounded-2xl p-6 ${className}`}>
-      <h2 className="text-2xl font-bold text-[var(--accent)]">{title}</h2>
-      <p className="mt-2 text-sm text-[var(--muted)]">{intro}</p>
-      <div className="mt-5 grid gap-3 md:grid-cols-2">
-        {confidenceItems.map((item) => (
-          <article key={item.title} className="rounded-xl border border-[var(--border)] bg-white p-4">
-            <h3 className="text-sm font-semibold text-[var(--accent)]">{item.title}</h3>
-            <p className="mt-2 text-sm text-[var(--muted)]">{item.detail}</p>
+    <section className={`border-y border-[var(--border)] py-8 sm:py-10 ${className}`}>
+      <h2 className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">{title}</h2>
+      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[var(--muted)]">{intro}</p>
+      <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+        {confidenceItems.map((item, index) => (
+          <article key={item.title} className="border-t border-[var(--border)] pt-4">
+            <p className="font-mono text-[0.65rem] tracking-[.14em] text-[var(--brand)]">0{index + 1}</p>
+            <h3 className="heading-serif mt-2 text-xl text-[var(--accent)]">{item.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{item.detail}</p>
           </article>
         ))}
       </div>

@@ -21,8 +21,8 @@ export default function BeforeAfterToggle({ beforeImages, afterImages }: Props) 
   /* When no before images exist, show after gallery without a misleading toggle */
   if (!hasBeforeImages) {
     return (
-      <section className="surface mt-8 rounded-xl p-5">
-        <h3 className="text-lg font-semibold text-[var(--accent)]">Project Photos</h3>
+      <section className="mt-8 border-y border-[var(--border)] bg-[var(--surface)] py-6 sm:py-8">
+        <h3 className="heading-serif text-2xl text-[var(--accent)]">Project photos</h3>
         <p className="mt-3 text-sm text-[var(--muted)]">After photos for this project.</p>
         <ExpandableImageGrid
           images={afterImages.map((image) => ({
@@ -39,16 +39,17 @@ export default function BeforeAfterToggle({ beforeImages, afterImages }: Props) 
   }
 
   return (
-    <section className="surface mt-8 rounded-xl p-5">
-      <h3 className="text-lg font-semibold text-[var(--accent)]">Before and After</h3>
-      <div className="mt-4 inline-flex rounded-lg border border-[var(--border)] p-1">
+    <section className="mt-8 border-y border-[var(--border)] bg-[var(--surface)] py-6 sm:py-8">
+      <h3 className="heading-serif text-2xl text-[var(--accent)]">Before and after</h3>
+      <div className="mt-4 inline-flex border-b border-[var(--border)]" role="group" aria-label="Choose which project photos to view">
         <button
           type="button"
           onClick={() => setActiveStage("BEFORE")}
-          className={`rounded-md px-3 py-1.5 text-sm font-semibold ${
+          aria-pressed={activeStage === "BEFORE"}
+          className={`border-b-2 px-4 py-2 text-sm font-semibold transition-colors ${
             activeStage === "BEFORE"
-              ? "bg-[var(--accent)] text-white"
-              : "text-[var(--muted)]"
+              ? "border-[var(--brand)] text-[var(--accent)]"
+              : "border-transparent text-[var(--muted)] hover:text-[var(--accent)]"
           }`}
         >
           Before
@@ -56,10 +57,11 @@ export default function BeforeAfterToggle({ beforeImages, afterImages }: Props) 
         <button
           type="button"
           onClick={() => setActiveStage("AFTER")}
-          className={`rounded-md px-3 py-1.5 text-sm font-semibold ${
+          aria-pressed={activeStage === "AFTER"}
+          className={`border-b-2 px-4 py-2 text-sm font-semibold transition-colors ${
             activeStage === "AFTER"
-              ? "bg-[var(--accent)] text-white"
-              : "text-[var(--muted)]"
+              ? "border-[var(--brand)] text-[var(--accent)]"
+              : "border-transparent text-[var(--muted)] hover:text-[var(--accent)]"
           }`}
         >
           After

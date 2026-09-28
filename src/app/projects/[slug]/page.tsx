@@ -13,6 +13,8 @@ import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getProjectGalleryImages } from "@/lib/projectPageMedia";
+import { getProjectPresentation } from "@/content/projectShowcase";
+import { getProjectImageProps } from "@/content/projectImagePreviews";
 
 type Params = { slug: string };
 
@@ -38,6 +40,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   const locationShort = caseStudy.locationName.replace(/, PA$/, "");
   const similarCaseStudies = getSimilarCaseStudiesForProject(caseStudy, 4);
   const galleryImages = getProjectGalleryImages(caseStudy);
+  const heroImage = getProjectPresentation(caseStudy).image;
   const showProjectPhotosAside = galleryImages.length > 0;
 
   const jsonLd = {
@@ -64,55 +67,53 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
           { name: caseStudy.title, href: "/projects/" + caseStudy.slug },
         ])}
       />
-      <section className="hero-band py-14">
-        <Container
-          className={`grid items-center gap-8 ${caseStudy.images[0] ? "md:grid-cols-2" : ""}`}
-        >
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">
-              Project Case Study
-            </p>
-            <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">{caseStudy.title}</h1>
-            <p className="mt-3 text-[var(--muted)]">{caseStudy.summary}</p>
-            <div className="mt-5 grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
-              <p className="surface rounded-lg px-3 py-2">Location: {caseStudy.locationName}</p>
-              <p className="surface rounded-lg px-3 py-2">Service: {caseStudy.serviceName}</p>
+      <section className="relative isolate flex min-h-[min(760px,82svh)] overflow-hidden bg-[#202823] py-14 text-white md:py-20">
+        {heroImage ? (
+          <Image
+            {...getProjectImageProps(heroImage)}
+            alt={heroImage.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="absolute inset-0 -z-20 object-cover"
+          />
+        ) : null}
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(18,23,20,.88)_0%,rgba(18,23,20,.56)_55%,rgba(18,23,20,.12)_100%)]" aria-hidden="true" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(18,23,20,.48)_0%,transparent_55%)]" aria-hidden="true" />
+        <Container className="relative z-10 flex flex-1 flex-col justify-end pt-20">
+          <div className="max-w-4xl">
+            <p className="eyebrow eyebrow-light">{caseStudy.serviceName} · {caseStudy.locationName}</p>
+            <h1 className="heading-serif mt-5 max-w-4xl text-4xl leading-[1.03] tracking-[-.03em] text-white sm:text-5xl lg:text-7xl">{caseStudy.title}</h1>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{caseStudy.summary}</p>
+            <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-[.13em] text-white/65">
+              <span>{caseStudy.locationName}</span>
+              <span>{caseStudy.serviceName}</span>
+              <span>{caseStudy.timeline}</span>
             </div>
-            <div className="mt-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                Scope Highlights
-              </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {caseStudy.scope.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-sm text-[var(--muted)]"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Button href="/request-a-quote">Request a Similar Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Button href="/request-a-quote" className="!text-white">Request a Similar Quote</Button>
+              <a href={siteConfig.phoneHref} className="inline-flex min-h-12 items-center justify-center border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
                 Call {siteConfig.phoneDisplay}
-              </Button>
+              </a>
             </div>
           </div>
-          {caseStudy.images[0] ? (
-            <div className="surface overflow-hidden rounded-2xl">
-              <Image
-                src={caseStudy.images[0].src}
-                alt={caseStudy.images[0].alt}
-                width={1200}
-                height={800}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          ) : null}
+          <div className="mt-12 border-t border-white/25 pt-4">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[.18em] text-white/55">Project scope</p>
+            <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/85">
+              {caseStudy.scope.slice(0, 3).map((item) => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
         </Container>
       </section>
+
+      {caseStudy.beforeImages?.length && caseStudy.afterImages?.length ? (
+        <section className="bg-[var(--surface-soft)] py-12 sm:py-16">
+          <Container>
+            <p className="eyebrow">The transformation</p>
+            <BeforeAfterToggle beforeImages={caseStudy.beforeImages} afterImages={caseStudy.afterImages} />
+          </Container>
+        </section>
+      ) : null}
 
       <section className="py-14">
         <Container className={`grid gap-8 ${showProjectPhotosAside ? "lg:grid-cols-[1.2fr_0.8fr]" : ""}`}>
@@ -143,13 +144,6 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                 <li key={item}>{item}</li>
               ))}
             </ul>
-
-            {caseStudy.beforeImages?.length && caseStudy.afterImages?.length ? (
-              <BeforeAfterToggle
-                beforeImages={caseStudy.beforeImages}
-                afterImages={caseStudy.afterImages}
-              />
-            ) : null}
 
             {caseStudy.testimonial ? (
               <blockquote className="surface mt-8 rounded-xl p-5">

@@ -11,12 +11,15 @@ export default function FaqList({ title, items }: FaqListProps) {
   return (
     <section className="mt-10">
       <JsonLd data={getFaqJsonLd(items)} />
-      <h3 className="text-2xl font-bold text-[var(--accent)]">{title}</h3>
-      <div className="mt-4 space-y-3">
+      <h3 className="heading-serif text-3xl text-[var(--accent)]">{title}</h3>
+      <div className="mt-4 border-y border-[var(--border)]">
         {items.map((item) => (
-          <details key={item.q} className="surface rounded-lg p-4">
-            <summary className="cursor-pointer text-sm font-semibold">{item.q}</summary>
-            <p className="mt-2 text-sm text-[var(--muted)]">{item.a}</p>
+          <details key={item.q} className="group border-b border-[var(--border)] py-4 last:border-b-0">
+            <summary className="flex cursor-pointer list-none items-start justify-between gap-5 text-sm font-semibold text-[var(--accent)] marker:hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)] [&::-webkit-details-marker]:hidden">
+              {item.q}
+              <span className="shrink-0 text-xl font-normal text-[var(--brand)] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p className="mt-3 max-w-4xl pr-8 text-sm leading-relaxed text-[var(--muted)]">{item.a}</p>
           </details>
         ))}
       </div>

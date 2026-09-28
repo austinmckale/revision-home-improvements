@@ -177,7 +177,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
   /* ── Success state ── */
   if (submitted) {
     return (
-      <div id="quote-form-section" className="surface rounded-2xl p-6 text-center">
+      <div id="quote-form-section" className="quote-form-shell text-center">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
           <svg className="h-7 w-7 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -210,10 +210,13 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
 
   /* ── Form ── */
   return (
-    <form id="quote-form-section" onSubmit={onSubmit} className="surface rounded-2xl p-6" noValidate onFocusCapture={() => { if (!formStarted) { setFormStarted(true); track("rhi:form_start", { page: typeof window !== "undefined" ? window.location.pathname : "" }); } }}>
-      <div className="mb-4 flex items-center justify-between text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+    <form id="quote-form-section" onSubmit={onSubmit} className="quote-form-shell" noValidate onFocusCapture={() => { if (!formStarted) { setFormStarted(true); track("rhi:form_start", { page: typeof window !== "undefined" ? window.location.pathname : "" }); } }}>
+      <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase tracking-[.14em] text-[var(--brand)]">
         <span>Request Your Quote</span>
         <span>Step {step} of 2</span>
+      </div>
+      <div className="quote-progress" role="progressbar" aria-label="Quote request progress" aria-valuemin={1} aria-valuemax={2} aria-valuenow={step}>
+        <span className={step === 1 ? "w-1/2" : "w-full"} />
       </div>
 
       <p className="mt-1 text-sm text-[var(--muted)]">
@@ -225,7 +228,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           <label className="text-sm">
             Name
             <input
-              className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
+              className="form-control mt-1 w-full"
               name="name"
               required
               value={stepOneData.name}
@@ -241,7 +244,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           <label className="text-sm">
             Phone
             <input
-              className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
+              className="form-control mt-1 w-full"
               name="phone"
               required
               value={stepOneData.phone}
@@ -257,7 +260,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           <label className="text-sm">
             Email
             <input
-              className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
+              className="form-control mt-1 w-full"
               name="email"
               required
               value={stepOneData.email}
@@ -285,7 +288,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
             <label className="text-sm">
               Service
               <select
-                className="mt-1 w-full rounded-md border border-[var(--border)] p-2"
+                className="form-control mt-1 w-full"
                 name="service"
                 value={stepOneData.service}
                 required
@@ -328,24 +331,24 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           <div className="mt-5 grid gap-3 md:grid-cols-2">
             <label className="text-sm">
               City
-              <input className="mt-1 w-full rounded-md border border-[var(--border)] bg-transparent p-2" name="city" type="text" placeholder="e.g. Allentown" required />
+              <input className="form-control mt-1 w-full" name="city" type="text" placeholder="e.g. Allentown" required />
               {fieldError("city") && <span className="mt-1 block text-xs text-red-700">{fieldError("city")}</span>}
             </label>
             <label className="text-sm">
               ZIP
-              <input className="mt-1 w-full rounded-md border border-[var(--border)] p-2" name="zip" required />
+              <input className="form-control mt-1 w-full" name="zip" required />
               {fieldError("zip") && <span className="mt-1 block text-xs text-red-700">{fieldError("zip")}</span>}
             </label>
           </div>
           <label className="mt-3 block text-sm">
             Timeline
-            <input className="mt-1 w-full rounded-md border border-[var(--border)] p-2" name="timeline" required />
+            <input className="form-control mt-1 w-full" name="timeline" required />
             {fieldError("timeline") && <span className="mt-1 block text-xs text-red-700">{fieldError("timeline")}</span>}
           </label>
           <label className="mt-3 block text-sm">
             Project details
             <textarea
-              className="mt-1 min-h-30 w-full rounded-md border border-[var(--border)] p-2"
+              className="form-control mt-1 min-h-30 w-full"
               name="details"
               placeholder="Share scope, rooms, and goals (at least 10 characters)"
               required
@@ -363,7 +366,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           <button
             type="button"
             onClick={goToStepTwo}
-            className="rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white"
+            className="min-h-12 bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)]"
           >
             Continue
           </button>
@@ -375,14 +378,14 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
                 setStep(1);
                 track("rhi:quote_step_back");
               }}
-              className="rounded-full border border-[var(--brand)] bg-white px-5 py-3 text-sm font-semibold text-[var(--brand)]"
+              className="min-h-12 border border-[var(--border)] bg-[var(--surface)] px-6 py-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:bg-[var(--surface-soft)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)]"
             >
               Back
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="rounded-full bg-[var(--brand)] px-5 py-3 text-sm font-semibold text-white disabled:opacity-60"
+              className="min-h-12 bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)] disabled:opacity-60"
             >
               {loading ? "Sending..." : "Submit Request"}
             </button>

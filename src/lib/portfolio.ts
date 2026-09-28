@@ -15,6 +15,18 @@ export type PortfolioImage = {
 
 const bucket = process.env.PORTFOLIO_STORAGE_BUCKET ?? "site-public";
 
+type PortfolioAssetRow = {
+  id: string;
+  storageKey: string;
+  fileName: string | null;
+  stage: PortfolioImage["stage"];
+  area: string | null;
+  tags: string[] | null;
+  description: string | null;
+  takenAt: string | null;
+  Job: { jobName: string; categoryTags: string[] | null } | null;
+};
+
 /**
  * Build a public CDN URL for a portfolio image.
  * Uses Supabase image transforms (width param) which also strips EXIF
@@ -58,7 +70,7 @@ async function fetchPortfolioImages(options?: {
     const { data, error } = await query;
     if (error || !data) return [];
 
-    return (data as any[])
+    return (data as unknown as PortfolioAssetRow[])
       .filter((row) => {
         if (!options?.serviceTags?.length) return true;
         const jobTags: string[] = row.Job?.categoryTags ?? [];

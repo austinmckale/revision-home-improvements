@@ -12,6 +12,7 @@ import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import BeforeAfterToggle from "@/components/sections/BeforeAfterToggle";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
+import ServiceHero from "@/components/sections/ServiceHero";
 import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices } from "@/content/services";
 import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
@@ -166,60 +167,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         ])}
       />
 
-      {/* ── HERO ── */}
-      <section className="hero-band py-10 md:py-16">
-        <Container className="grid items-center gap-8 md:grid-cols-2 md:gap-10">
-          {service.image.src && (
-            <div className="surface order-last overflow-hidden rounded-2xl md:order-none">
-              <Image
-                src={service.image.src}
-                alt={service.image.alt}
-                width={1200}
-                height={800}
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          )}
-          <div>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
-              Lehigh Valley &amp; Berks County
-            </p>
-            <h1 className="heading-serif mt-2 text-3xl text-[var(--accent)] md:text-4xl lg:text-5xl">{pageHeading}</h1>
-            <p className="mt-3 text-[0.9375rem] leading-relaxed text-[var(--muted)] md:mt-4 md:text-base">{service.intro}</p>
-            {isEmergencyService && (
-              <div className="mt-4 rounded-xl border border-[var(--brand)] bg-[var(--surface-soft)] p-4">
-                <p className="text-sm font-semibold text-[var(--accent)]">Dealing with damage right now?</p>
-                <p className="mt-1 text-sm text-[var(--muted)]">Call us directly for priority scheduling.</p>
-              </div>
-            )}
-            <div className="mt-5 grid gap-2 text-sm text-[var(--muted)] sm:grid-cols-2">
-              <p className="surface rounded-lg px-3 py-2">Written scope before work begins</p>
-              <p className="surface rounded-lg px-3 py-2">PA HIC registered · PA185945</p>
-              <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed</p>
-              <p className="surface rounded-lg px-3 py-2">Clear communication throughout</p>
-            </div>
-            <div className="mt-5 flex flex-wrap gap-3 md:mt-6">
-              {isEmergencyService ? (
-                <>
-                  <Button href={siteConfig.phoneHref}>Call {siteConfig.phoneDisplay}</Button>
-                  <Button href={`/request-a-quote?service=${service.slug}`} variant="secondary">
-                    Request a quote
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button href="#quote-form-section">{service.cta}</Button>
-                  <Button href={siteConfig.phoneHref} variant="secondary">
-                    Call {siteConfig.phoneDisplay}
-                  </Button>
-                </>
-              )}
-            </div>
-          </div>
-        </Container>
-      </section>
+      <ServiceHero
+        eyebrow="Lehigh Valley & Berks County"
+        title={pageHeading}
+        intro={service.intro}
+        image={service.image.src ? service.image : undefined}
+        primaryHref={isEmergencyService ? siteConfig.phoneHref : "#quote-form-section"}
+        primaryLabel={isEmergencyService ? `Call ${siteConfig.phoneDisplay}` : service.cta}
+        secondaryHref={isEmergencyService ? `/request-a-quote?service=${service.slug}` : siteConfig.phoneHref}
+        secondaryLabel={isEmergencyService ? "Request a quote" : `Call ${siteConfig.phoneDisplay}`}
+        notice={isEmergencyService ? "Call us directly for priority scheduling." : undefined}
+      />
 
       {/* ── MAIN CONTENT ── */}
       <section className="py-14 md:py-24">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 type LightboxImage = {
@@ -17,17 +17,49 @@ type Props = {
 };
 
 export default function ImageLightbox({ images, activeIndex, onClose, onNavigate }: Props) {
-  useEffect(() => {
-    const currentIndex = activeIndex;
-    if (currentIndex === null) return;
-    const resolvedIndex = currentIndex;
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const isOpen = activeIndex !== null;
 
+  useEffect(() => {
+    if (!isOpen) return;
     const previousOverflow = document.body.style.overflow;
+    const previouslyFocused = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
     document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      previouslyFocused?.focus();
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (activeIndex === null) return;
+    const resolvedIndex = activeIndex;
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         onClose();
+        return;
+      }
+
+      if (event.key === "Tab") {
+        const focusableElements = dialogRef.current?.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        if (!focusableElements?.length) return;
+        const first = focusableElements[0];
+        const last = focusableElements[focusableElements.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
         return;
       }
 
@@ -40,11 +72,11 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
       if (event.key === "ArrowLeft") {
         onNavigate((resolvedIndex - 1 + images.length) % images.length);
       }
+
     }
 
     window.addEventListener("keydown", onKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [activeIndex, images.length, onClose, onNavigate]);
@@ -56,6 +88,7 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 sm:p-6"
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label="Expanded project photo"
@@ -64,6 +97,7 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
       <div className="relative w-full max-w-6xl" onClick={(event) => event.stopPropagation()}>
         <button
           type="button"
+          ref={closeButtonRef}
           onClick={onClose}
           className="absolute right-0 top-0 z-10 rounded-full bg-black/70 px-3 py-2 text-sm font-semibold text-white"
           aria-label="Close expanded photo"

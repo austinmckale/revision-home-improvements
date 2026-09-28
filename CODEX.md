@@ -14,6 +14,15 @@
 - Page integration: `src/app/projects/[slug]/page.tsx`
 - Bathroom case study data: `src/content/caseStudies.ts`
 
+## Portfolio Presentation
+
+- Curate the largest project placements explicitly in `src/content/projectShowcase.ts`; never let alphabetical or location sorting choose the hero.
+- Lead the homepage and Projects page with the Allentown kitchen, Reading patio and pavilion, and Lehigh Valley basement theater unless a reviewed editorial decision changes that selection.
+- Keep commercial jobs in the separate commercial section, with the same card size as supporting residential work.
+- Keep planning boards and construction documentation separate from completed residential galleries. Preserve their detail pages and URLs.
+- Review the actual photos, crops, card order, filters, and mobile layout before publishing portfolio changes.
+- Prepared `-preview.webp` assets are derived from the matching real project photos; keep original photos available for the detailed galleries.
+
 ## Current Live Content Control (Plan Ahead)
 
 ### What the app already controls safely

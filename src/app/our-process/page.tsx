@@ -3,6 +3,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
 import JsonLd from "@/components/JsonLd";
+import BottomCTA from "@/components/sections/BottomCTA";
 
 import { getBreadcrumbJsonLd, getHowToJsonLd } from "@/lib/structuredData";
 
@@ -27,33 +28,39 @@ export default function OurProcessPage() {
     <>
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Our Process", href: "/our-process" }])} />
       <JsonLd data={getHowToJsonLd("Home Improvement Project Process", processSteps)} />
-      <section className="py-14">
-        <Container className="max-w-5xl">
-          <h1 className="text-4xl font-extrabold text-[var(--accent)]">Our Process</h1>
-          <p className="mt-4 text-[var(--muted)]">
+      <section className="bg-[var(--background)] py-16 sm:py-20 lg:py-28">
+        <Container>
+          <div className="max-w-4xl">
+          <p className="eyebrow">How we work</p>
+          <h1 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-7xl">A clear path from first conversation to final walkthrough.</h1>
+          <p className="mt-5 max-w-3xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
             The goal is not just quality work. The goal is a project you can follow without guessing what comes next.
           </p>
+          </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <article className="surface rounded-xl p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Before Build</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">Scope clarity, budget alignment, and schedule mapping happen before work starts.</p>
+          <div className="mt-10 grid gap-px bg-[var(--border)] md:mt-14 md:grid-cols-3">
+            <article className="bg-[var(--surface)] p-6 sm:p-7">
+              <h2 className="text-xs font-semibold uppercase tracking-[.16em] text-[var(--brand)]">Before build</h2>
+              <p className="heading-serif mt-3 text-2xl text-[var(--accent)]">Know the plan.</p>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">Scope clarity, budget alignment, and schedule mapping happen before work starts.</p>
             </article>
-            <article className="surface rounded-xl p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">During Build</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">Milestones, sequencing, and communication stay structured as work progresses.</p>
+            <article className="bg-[var(--surface)] p-6 sm:p-7">
+              <h2 className="text-xs font-semibold uppercase tracking-[.16em] text-[var(--brand)]">During build</h2>
+              <p className="heading-serif mt-3 text-2xl text-[var(--accent)]">Stay in the loop.</p>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">Milestones, sequencing, and communication stay structured as work progresses.</p>
             </article>
-            <article className="surface rounded-xl p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Closeout</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">We finish with walkthrough standards, punch-list completion, and documented handoff.</p>
+            <article className="bg-[var(--surface)] p-6 sm:p-7">
+              <h2 className="text-xs font-semibold uppercase tracking-[.16em] text-[var(--brand)]">Closeout</h2>
+              <p className="heading-serif mt-3 text-2xl text-[var(--accent)]">Finish with care.</p>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">We finish with walkthrough standards, punch-list completion, and documented handoff.</p>
             </article>
           </div>
 
           <ProcessTimeline title="Project Delivery Workflow" steps={processSteps} />
 
-          <div className="surface mt-8 rounded-2xl p-6">
-            <h2 className="text-2xl font-semibold text-[var(--accent)]">What Homeowners Notice Most</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
+          <div className="mt-12 grid gap-8 border-t border-[var(--border)] pt-8 md:grid-cols-[.7fr_1.3fr] md:pt-10">
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">What homeowners notice most</h2>
+            <ul className="grid gap-3 text-[var(--muted)] sm:grid-cols-3">
               <li>Clear decisions upfront so changes are minimized later.</li>
               <li>Predictable checkpoints instead of reactive updates.</li>
               <li>Accountable finish standards at final handoff.</li>
@@ -68,14 +75,11 @@ export default function OurProcessPage() {
         </Container>
       </section>
 
-      <section className="pb-14">
-        <Container className="max-w-4xl">
-          <p className="text-sm text-[var(--muted)]">
-            Ready to start?{" "}
-            <Link href="/request-a-quote" className="font-semibold text-[var(--brand)]">Tell us about your project</Link> and we will walk you through each step.
-          </p>
-        </Container>
-      </section>
+      <BottomCTA
+        title="Ready to take the first step?"
+        description="Tell us what you are thinking. We will walk you through scope, timing, and what happens next."
+        showFinancing={false}
+      />
     </>
   );
 }

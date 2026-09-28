@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { siteConfig } from "@/content/site";
 
 import Portal from "@/components/ui/Portal";
@@ -25,21 +24,43 @@ interface MobileNavProps {
 
 export default function MobileNav({ isTransparent = false }: MobileNavProps) {
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const pathname = usePathname();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (!open) return;
+    const trigger = triggerRef.current;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+      if (event.key !== "Tab") return;
+      const items = panelRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
+      if (!items?.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const handleResize = (event: MediaQueryListEvent) => { if (event.matches) setOpen(false); };
+    desktop.addEventListener("change", handleResize);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      desktop.removeEventListener("change", handleResize);
+      trigger?.focus();
+    };
+  }, [open]);
 
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+    if (!open) return;
 
-  useEffect(() => {
-    if (!mounted || !open) return;
-
-    let scrollPosition = window.pageYOffset;
+    const scrollPosition = window.pageYOffset;
     
     // CAPTURE POSITION AND DISABLE SCROLL
     const originalStyles = {
@@ -66,19 +87,12 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
         window.scrollTo(0, scrollPosition);
       }
     };
-  }, [open, mounted]);
-
-  if (!mounted) {
-    return (
-      <div className="md:hidden">
-        <div className="h-10 w-10" />
-      </div>
-    );
-  }
+  }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
+        ref={triggerRef}
         onClick={() => setOpen(true)}
         className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
           isTransparent && !open
@@ -86,6 +100,8 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
             : "text-[var(--accent)] hover:bg-[var(--surface-soft)]"
         }`}
         aria-label="Open menu"
+        aria-expanded={open}
+        aria-controls="mobile-navigation-panel"
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
           <line x1="3" y1="7" x2="21" y2="7" />
@@ -98,11 +114,16 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
         {open && (
           <Portal>
             <motion.div
-              initial={{ opacity: 0, x: "100%" }}
+              ref={panelRef}
+              id="mobile-navigation-panel"
+              role="dialog"
+              aria-modal="true"
+              aria-label="RHI Pros navigation"
+              initial={{ opacity: 0, x: reduceMotion ? 0 : "100%" }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-[9999] flex flex-col bg-[#194734] bg-opacity-100 shadow-2xl selection:bg-brand selection:text-white"
+              exit={{ opacity: 0, x: reduceMotion ? 0 : "100%" }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-0 z-[9999] flex flex-col bg-[var(--accent)] shadow-2xl selection:bg-brand selection:text-white"
             >
               {/* Header in Overlay */}
               <div className="flex h-16 items-center justify-between px-4 shrink-0 border-b border-white/5">
@@ -110,6 +131,7 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
                   {siteConfig.name}
                 </span>
                 <button
+                  ref={(element) => { element?.focus(); }}
                   onClick={() => setOpen(false)}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
                   aria-label="Close menu"
@@ -122,13 +144,13 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
               </div>
 
               <div className="flex-1 overflow-y-auto px-6 py-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <nav className="flex flex-col space-y-5">
+                <nav className="flex flex-col space-y-5" onClick={(event) => { if ((event.target as HTMLElement).closest("a")) setOpen(false); }}>
                   <div className="grid grid-cols-2 gap-3 mb-6">
                     <a
                       href={siteConfig.phoneHref}
                       className="flex flex-col items-center justify-center rounded-sm border border-white/20 bg-white/5 p-4 text-center text-white transition-colors hover:bg-white/10 active:bg-white/20"
                     >
-                      <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/40 mb-1">Direct Call</span>
+                      <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/70 mb-1">Direct Call</span>
                       <span className="text-sm font-semibold tracking-tight">{siteConfig.phoneDisplay}</span>
                     </a>
                     <Link
@@ -144,16 +166,16 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
                     {navLinks.map((link, i) => (
                       <motion.div
                         key={link.href}
-                        initial={{ opacity: 0, x: -10 }}
+                        initial={{ opacity: 0, x: reduceMotion ? 0 : -10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.04 + 0.1 }}
+                        transition={reduceMotion ? { duration: 0 } : { delay: i * 0.04 + 0.1, duration: 0.3 }}
                       >
                         <Link
                           href={link.href}
                           className={`block py-2.5 transition-all active:scale-[0.98] ${
                             link.primary 
                               ? "heading-serif text-4xl text-white" 
-                              : "text-lg text-white/40 hover:text-white"
+                              : "text-lg text-white/75 hover:text-white"
                           }`}
                         >
                           {link.label}
@@ -166,19 +188,19 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
                 <div className="mt-auto pt-12">
                   <div className="border-t border-white/10 pt-8 pb-4">
                     <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-[0.65rem] font-bold uppercase tracking-[0.2em]">
-                      <a href={siteConfig.facebookPageUrl} target="_blank" rel="noreferrer" className="text-white/30 hover:text-[var(--brand)] transition-colors">
+                      <a href={siteConfig.facebookPageUrl} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-colors">
                         Facebook
                       </a>
-                      <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noreferrer" className="text-white/40 hover:text-[var(--brand)] transition-colors">
+                      <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-colors">
                         Google Reviews
                       </a>
                     </div>
 
-                    <p className="text-[0.55rem] font-bold uppercase tracking-[0.3em] text-white/20 mb-2.5">Service Location</p>
+                    <p className="text-[0.55rem] font-bold uppercase tracking-[0.3em] text-white/65 mb-2.5">Service Location</p>
                     <p className="text-sm text-white/70 font-medium tracking-tight">
                       Lehigh Valley, PA
                     </p>
-                    <p className="mt-4 text-[0.65rem] font-bold tracking-[0.1em] text-white/20 uppercase">
+                    <p className="mt-4 text-[0.65rem] font-bold tracking-[0.1em] text-white/65 uppercase">
                       {siteConfig.hicNumber}
                     </p>
                   </div>

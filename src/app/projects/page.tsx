@@ -1,222 +1,129 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
+import ProjectCard from "@/components/sections/ProjectCard";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
-import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
-import { galleryCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
+import BottomCTA from "@/components/sections/BottomCTA";
+import { featuredProjects, getProjectCollection, getProjectPresentation, orderedShowcaseProjects } from "@/content/projectShowcase";
 import { getServiceBySlug } from "@/content/services";
-import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
-import { getSupplementalImagesForFilteredCaseStudies } from "@/lib/projectsPageMedia";
-
-/** Unfiltered /projects only: curated mix of trades (not tied to one service). */
-const crossServiceHighlightImages = [
-  {
-    src: "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
-    alt: "Kitchen remodel with updated finishes and fixtures.",
-  },
-  {
-    src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.png",
-    alt: "Finished bathroom renovation with updated fixtures.",
-  },
-  {
-    src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
-    alt: "Finished basement media room with large screen.",
-  },
-  {
-    src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
-    alt: "Basement epoxy flooring finish detail.",
-  },
-  {
-    src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
-    alt: "Finished interior room after flooring upgrade.",
-  },
-  {
-    src: "/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
-    alt: "Fireplace wall renovation during living room refresh.",
-  },
-  {
-    src: "/images/projects/frontier-patio-gable-roof/process/patio-construction.jpg",
-    alt: "Patio construction phase during build.",
-  },
-  {
-    src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
-    alt: "Finished patio, pavilion roof, and hardscape outdoor living space.",
-  },
-  {
-    src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
-    alt: "Living room finish detail after interior renovation.",
-  },
-];
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Remodeling Projects & Case Studies | Allentown, Bethlehem & Lehigh Valley",
-  description:
-    "Browse recent kitchen, bathroom, basement, flooring, and restoration projects across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.",
+  description: "Explore finished kitchens, basement theaters, patios, bathrooms, and home renovations across the Lehigh Valley and Berks County. See the scope and story behind each project.",
   alternates: { canonical: "/projects" },
 };
 
-type ProjectsPageProps = {
-  searchParams?: Promise<{ service?: string }>;
-};
+const filters = [
+  { slug: "", label: "All projects" },
+  { slug: "kitchen-remodeling", label: "Kitchens" },
+  { slug: "bathroom-remodeling", label: "Bathrooms" },
+  { slug: "basement-finishing", label: "Basements" },
+  { slug: "paver-installation", label: "Outdoor living" },
+  { slug: "exterior-remodeling", label: "Exteriors" },
+  { slug: "flooring-installation", label: "Flooring" },
+  { slug: "drywall-installation-repair", label: "Interior finishes" },
+  { slug: "fire-damage-restoration", label: "Fire restoration" },
+];
+
+type ProjectsPageProps = { searchParams?: Promise<{ service?: string }> };
 
 export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
-  const portfolioImages = await getPortfolioImages({ limit: 12 });
-  const orderedCaseStudies = sortCaseStudiesByMarketPriority(galleryCaseStudies);
   const params = searchParams ? await searchParams : {};
-  const serviceParam = typeof params.service === "string" ? params.service : undefined;
-  const filterServiceSlug =
-    serviceParam && getServiceBySlug(serviceParam) ? serviceParam : undefined;
-  const filteredService = filterServiceSlug ? getServiceBySlug(filterServiceSlug) : undefined;
-  const displayedCaseStudies = filterServiceSlug
-    ? orderedCaseStudies.filter((study) => study.serviceSlug === filterServiceSlug)
-    : orderedCaseStudies;
-
-  const serviceFilteredSupplementalImages = filterServiceSlug
-    ? getSupplementalImagesForFilteredCaseStudies(displayedCaseStudies, { maxImages: 12 })
-    : [];
+  const selectedService = typeof params.service === "string" ? getServiceBySlug(params.service) : undefined;
+  const selectedSlug = selectedService?.slug;
+  const projects = selectedSlug ? orderedShowcaseProjects.filter((study) => study.serviceSlug === selectedSlug) : orderedShowcaseProjects;
+  const residential = projects.filter((study) => getProjectCollection(study) === "residential" && (selectedSlug || !featuredProjects.some((featured) => featured.slug === study.slug)));
+  const commercial = projects.filter((study) => getProjectCollection(study) === "commercial");
+  const process = projects.filter((study) => getProjectCollection(study) === "process");
+  const portfolioImages = await getPortfolioImages({
+    stage: "AFTER",
+    serviceTags: selectedSlug ? [selectedService?.portfolioTag ?? selectedSlug] : undefined,
+    limit: 12,
+  });
 
   return (
     <>
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Projects", href: "/projects" }])} />
-      <section className="py-14">
+      <section className="bg-[var(--background)] pb-16 pt-12 sm:pb-24 sm:pt-16">
         <Container>
-          <h1 className="text-4xl font-extrabold text-[var(--accent)]">Project Gallery</h1>
-          <p className="mt-3 max-w-3xl text-[var(--muted)]">
-            {filteredService ? (
-              <>
-                Case studies tagged{" "}
-                <span className="font-medium text-[var(--accent)]">{filteredService.name.toLowerCase()}</span>.{" "}
-                <Link href="/projects" className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline">
-                  Show all projects
-                </Link>
-              </>
-            ) : (
-              <>
-                See what we have built for homeowners across Allentown, Bethlehem, the Lehigh Valley, and nearby markets.
-                Each project shows real scope, real challenges, and real results.
-              </>
-            )}
-          </p>
-
-          <section className="mt-8">
-            <h2 className="text-2xl font-bold text-[var(--accent)]">
-              {filteredService ? `${filteredService.name} case studies` : "Featured Case Studies"}
-            </h2>
-            {displayedCaseStudies.length === 0 ? (
-              <p className="mt-4 text-sm text-[var(--muted)]">
-                No case studies are published in this category yet.{" "}
-                <Link href="/projects" className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline">
-                  Browse all projects
-                </Link>
-                .
-              </p>
-            ) : (
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {displayedCaseStudies.map((study) => {
-                const leadImage = study.images[0];
-                return (
-                <article key={study.slug} className="surface overflow-hidden rounded-xl">
-                  {leadImage ? (
-                    <Image
-                      src={leadImage.src}
-                      alt={leadImage.alt}
-                      width={900}
-                      height={600}
-                      className="h-52 w-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-52 items-center justify-center bg-[var(--surface-soft)] px-6 text-center">
-                      <p className="text-sm text-[var(--muted)]">
-                        Case study details available. Photos not yet published for this project.
-                      </p>
-                    </div>
-                  )}
-                  <div className="p-5">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                      {study.locationName}
-                    </p>
-                    <h3 className="mt-1 text-lg font-semibold text-[var(--accent)]">{study.title}</h3>
-                    <p className="mt-2 text-sm text-[var(--muted)]">{study.summary}</p>
-                    <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
-                      {study.scope.slice(0, 2).map((scopeItem) => (
-                        <li key={scopeItem}>{scopeItem}</li>
-                      ))}
-                    </ul>
-                    <Link
-                      href={`/projects/${study.slug}`}
-                      className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]"
-                    >
-                      View full case study
-                    </Link>
-                  </div>
-                </article>
-                );
-              })}
+          <div className="grid gap-6 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
+            <div>
+              <p className="eyebrow">Our work, in real homes</p>
+              <h1 className="heading-serif mt-5 max-w-3xl text-[2.6rem] leading-[1.02] tracking-[-.035em] text-[var(--accent)] sm:text-6xl lg:text-7xl">Spaces worth<br />coming home to<span className="text-[var(--brand)]">.</span></h1>
             </div>
-            )}
-          </section>
+            <p className="max-w-md text-base leading-relaxed text-[var(--muted)] lg:pb-2">Kitchens that bring people together. Basements made for movie nights. Patios that open up a whole new room. Explore the work, then see how it came together.</p>
+          </div>
 
-          {portfolioImages.length > 0 && (
-            <PortfolioGallery images={portfolioImages} title="Portfolio" showStageLabels />
-          )}
+          <nav className="mb-8 mt-8 flex gap-2 overflow-x-auto overscroll-x-contain border-y border-[var(--border)] py-4 [scrollbar-width:thin] sm:mb-10 sm:mt-10 sm:flex-wrap sm:py-5" aria-label="Filter projects by service">
+            {filters.map((filter) => {
+              const active = (selectedSlug ?? "") === filter.slug;
+              return (
+                <Link key={filter.slug} href={filter.slug ? `/projects?service=${filter.slug}` : "/projects"} aria-current={active ? "page" : undefined} className={`inline-flex min-h-11 shrink-0 items-center whitespace-nowrap border px-4 py-2 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand)] ${active ? "border-[var(--accent)] bg-[var(--accent)] text-white" : "border-transparent text-[var(--muted)] hover:border-[var(--border)] hover:text-[var(--accent)]"}`}>{filter.label}</Link>
+              );
+            })}
+          </nav>
 
-          {filterServiceSlug && filteredService ? (
-            serviceFilteredSupplementalImages.length > 0 ? (
-              <section className="mt-10">
-                <h2 className="text-2xl font-bold text-[var(--accent)]">
-                  More {filteredService.name.toLowerCase()} photos
-                </h2>
-                <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-                  Extra angles from the {filteredService.name.toLowerCase()} case studies above. These are not the same
-                  images as the card thumbnails.
-                </p>
-                <ExpandableImageGrid
-                  images={serviceFilteredSupplementalImages.map((image) => ({ ...image, caption: image.alt }))}
-                  gridClassName="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-                  cardClassName="surface overflow-hidden rounded-xl"
-                  imageClassName="h-44 w-full object-cover"
-                />
-              </section>
-            ) : null
-          ) : (
-            <section className="mt-10">
-              <h2 className="text-2xl font-bold text-[var(--accent)]">More photos across our services</h2>
-              <p className="mt-2 max-w-3xl text-sm text-[var(--muted)]">
-                A wider slice of kitchen, bath, basement, interior, and exterior work, not limited to one trade. For
-                focused proof, open a case study or use the service filter on this page.
-              </p>
-              <ExpandableImageGrid
-                images={crossServiceHighlightImages.map((image) => ({ ...image, caption: image.alt }))}
-                gridClassName="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
-                cardClassName="surface overflow-hidden rounded-xl"
-                imageClassName="h-44 w-full object-cover"
-              />
+          {!selectedSlug && (
+            <section aria-labelledby="signature-projects">
+              <div className="mb-5 flex items-baseline justify-between gap-4">
+                <h2 id="signature-projects" className="eyebrow">Signature transformations</h2>
+                <span className="hidden text-xs text-[var(--muted)] sm:block">Explore the full project stories ↗</span>
+              </div>
+              <div className="grid gap-5 lg:auto-rows-[19rem] lg:grid-cols-12">
+                {featuredProjects.map((study, index) => <ProjectCard key={study.slug} study={study} variant={index === 0 ? "lead" : "support"} />)}
+              </div>
             </section>
           )}
 
-          <section className="surface mt-10 rounded-2xl p-8 text-center">
-            <h2 className="text-2xl font-bold text-[var(--accent)]">
-              Want results like these for your home?
-            </h2>
-            <p className="mx-auto mt-2 max-w-2xl text-sm text-[var(--muted)]">
-              Tell us about your project and we will scope a plan based on your goals, budget, and needs.
-            </p>
-            <div className="mt-5 flex flex-wrap justify-center gap-3">
-              <Button href="/request-a-quote">Request a Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
-                Call {siteConfig.phoneDisplay}
-              </Button>
-            </div>
-          </section>
+          {residential.length > 0 && (
+            <section className={selectedSlug ? "" : "mt-16 sm:mt-24"} aria-labelledby="residential-projects">
+              <div className="mb-8 flex flex-col gap-3 border-b border-[var(--border)] pb-6 sm:flex-row sm:items-end sm:justify-between">
+                <h2 id="residential-projects" className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">{selectedService ? selectedService.name : "More homes. More possibilities."}</h2>
+                <p className="max-w-sm text-sm leading-relaxed text-[var(--muted)]">Finished spaces, thoughtful details, and the stories behind the work.</p>
+              </div>
+              <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                {residential.map((study) => <ProjectCard key={study.slug} study={study} />)}
+              </div>
+            </section>
+          )}
+
+          {projects.length === 0 && <p className="py-10 text-[var(--muted)]">We are gathering photos for this service. <Link href="/projects" className="font-semibold text-[var(--brand)] underline">Explore our other projects</Link> or <Link href="/request-a-quote" className="font-semibold text-[var(--brand)] underline">tell us about your plans</Link>.</p>}
+
+          {commercial.length > 0 && (
+            <section className="mt-16 border-t border-[var(--border)] pt-10 sm:mt-24" aria-labelledby="commercial-projects">
+              <p className="eyebrow">For local businesses</p>
+              <h2 id="commercial-projects" className="heading-serif mt-3 text-3xl text-[var(--accent)] sm:text-4xl">Commercial improvements.</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">Durable finishes and practical updates for spaces that work hard every day.</p>
+              <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {commercial.map((study) => <ProjectCard key={study.slug} study={study} />)}
+              </div>
+            </section>
+          )}
+
+          {process.length > 0 && (
+            <section className="mt-14 border-t border-[var(--border)] pt-8" aria-labelledby="project-process-stories">
+              <h2 id="project-process-stories" className="heading-serif text-3xl text-[var(--accent)]">Planning &amp; progress.</h2>
+              <p className="mt-3 text-sm text-[var(--muted)]">A closer look at design decisions and the work that happens before the finish.</p>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                {process.map((study) => (
+                  <Link key={study.slug} href={`/projects/${study.slug}`} className="group flex items-center justify-between gap-4 border border-[var(--border)] p-5 transition-colors hover:border-[var(--brand)]">
+                    <span><span className="text-xs text-[var(--muted)]">{study.locationName}</span><span className="heading-serif mt-2 block text-xl text-[var(--accent)]">{getProjectPresentation(study).title}</span></span>
+                    <span className="text-[var(--brand)] transition-transform group-hover:translate-x-1" aria-hidden="true">↗</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {portfolioImages.length > 0 && <PortfolioGallery images={portfolioImages} title="More finished work from our team" showStageLabels={false} />}
         </Container>
       </section>
+      <BottomCTA title="What would you love to change?" description="Bring your ideas. We will help you shape the scope, the details, and the next steps for your home." showFinancing={false} />
     </>
   );
 }

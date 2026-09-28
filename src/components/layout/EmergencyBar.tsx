@@ -56,10 +56,10 @@ export default function EmergencyBar() {
   return (
     <div className="border-b border-[var(--border)] bg-[var(--surface-soft)] py-1.5">
       <Container className="flex items-center justify-end gap-3 text-xs text-[var(--muted)]">
-        <span>Emergency damage?</span>
+        <span className="hidden sm:inline">Emergency damage?</span>
         <a
           href={siteConfig.phoneHref}
-          className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+          className="whitespace-nowrap font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
         >
           Call {siteConfig.phoneDisplay}
         </a>

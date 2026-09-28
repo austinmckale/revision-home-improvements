@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 import TestimonialStrip from "@/components/sections/TestimonialStrip";
+import ServiceHero from "@/components/sections/ServiceHero";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
-import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
 import { getFeaturedTestimonials } from "@/content/testimonials";
 
@@ -22,40 +20,16 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "About", href: "/about" }])} />
-      <section className="hero-band py-14">
-        <Container className="grid items-center gap-8 md:grid-cols-2">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-[var(--brand)]">About Us</p>
-            <h1 className="mt-2 text-4xl font-extrabold text-[var(--accent)]">Built on Clarity, Delivered with Care</h1>
-            <p className="mt-4 text-[var(--muted)]">
-              We started this company because too many homeowners were getting vague estimates, missed timelines, and surprise costs. We decided to do it differently: written scopes, predictable schedules, and honest communication from day one.
-            </p>
-            <p className="mt-3 text-[var(--muted)]">
-              Today we serve homeowners across {siteConfig.serviceAreas} with kitchen, bathroom, basement, flooring, outdoor, and restoration projects.
-            </p>
-            <p className="mt-3 text-sm text-[var(--muted)]">
-              We operate as <span className="font-semibold text-[var(--accent)]">{company.name}</span>.{" "}
-              {company.name} is registered as a Pennsylvania home improvement contractor under {company.license.hic}.
-              Some older listings may still reference {company.formerNames.join(" or ")}.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Button href="/request-a-quote">Request a Quote</Button>
-              <Button href={siteConfig.phoneHref} variant="secondary">
-                Call {siteConfig.phoneDisplay}
-              </Button>
-            </div>
-          </div>
-          <div className="surface overflow-hidden rounded-2xl">
-            <Image
-              src="/images/projects/frontier-patio-gable-roof/after/angle-1.jpg"
-              alt="Outdoor project site by RHI Pros in Reading, PA."
-              width={1200}
-              height={800}
-              className="h-full w-full object-cover"
-            />
-          </div>
-        </Container>
-      </section>
+      <ServiceHero
+        eyebrow={`About RHI Pros · ${siteConfig.serviceAreas}`}
+        title="Built on clarity, delivered with care."
+        intro="We started this company because too many homeowners were getting vague estimates, missed timelines, and surprise costs. We decided to do it differently: written scopes, predictable schedules, and honest communication from day one."
+        image={{ src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg", alt: "Outdoor project site by RHI Pros in Reading, PA." }}
+        primaryHref="/request-a-quote"
+        primaryLabel="Request a quote"
+        secondaryHref={siteConfig.phoneHref}
+        secondaryLabel={`Call ${siteConfig.phoneDisplay}`}
+      />
 
       <section className="py-14">
         <Container className="max-w-5xl">
