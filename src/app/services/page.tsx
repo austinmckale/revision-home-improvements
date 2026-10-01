@@ -13,13 +13,14 @@ import { getCaseStudyBySlug } from "@/content/caseStudies";
 import { getProjectPresentation } from "@/content/projectShowcase";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "Remodeling & Restoration Services",
   description:
     "Explore kitchen, bathroom, basement and outdoor remodeling, plus fire and water damage restoration in the Lehigh Valley and Berks County. Explore photo collections and planning guidance.",
-  alternates: { canonical: "/services" },
-};
+  path: "/services",
+});
 
 const remodelingOrder = [
   "kitchen-remodeling",

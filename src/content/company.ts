@@ -44,7 +44,7 @@ export const company = {
     yelp: "https://www.yelp.com/biz/rhi-pros-allentown",
   },
   assets: {
-    logo: "/images/brand/rhi-logo.png",
+    logo: "/images/brand/chat-logo.png",
     ogImage: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
   },
   insuranceCarrier: "Provided upon request during estimate review",

@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     "basement-finishing":
       "Turn an unfinished basement into living or entertainment space. See a real basement theater and plan layout, lighting and finishes with RHI Pros.",
     "paver-installation":
-      "Paver patios, pool surrounds and outdoor living in the Lehigh Valley and Berks County. See a Reading patio and pavilion, then plan your installation.",
+      "Paver patios, pool surrounds and outdoor living in the Lehigh Valley and Berks County. Explore patio and pavilion photos, then plan your installation.",
     "flooring-installation":
       "Flooring installation with subfloor preparation, smooth transitions and coordinated trim. Explore photo collections and request a scope for your home.",
     "drywall-installation-repair":
@@ -92,6 +92,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const title = titles[service.slug] ?? `${service.name} | Lehigh Valley & Berks County`;
   const description = descriptions[service.slug] ?? service.intro;
   const url = `/services/${service.slug}`;
+  const shareImages = service.image.src
+    ? [{ url: service.image.src, alt: service.image.alt }]
+    : [{ url: "/images/brand/rhi-pros-share.png", alt: "RHI Pros · rhipros.com" }];
   return {
     title,
     description,
@@ -100,9 +103,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       title: `${title} | RHI Pros`,
       description,
       url,
-      ...(service.image.src ? { images: [{ url: service.image.src, alt: service.image.alt }] } : {}),
+      images: shareImages,
     },
-    twitter: { title: `${title} | RHI Pros`, description },
+    twitter: { card: "summary_large_image", title: `${title} | RHI Pros`, description, images: shareImages },
   };
 }
 

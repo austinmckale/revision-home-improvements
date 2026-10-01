@@ -7,13 +7,14 @@ import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "Project Financing | Allentown, Lehigh Valley & Berks County",
   description:
     "Discuss project scope, current financing options, lender approval and payment terms for remodeling in the Lehigh Valley and Berks County.",
-  alternates: { canonical: "/financing" },
-};
+  path: "/financing",
+});
 
 const steps = [
   {

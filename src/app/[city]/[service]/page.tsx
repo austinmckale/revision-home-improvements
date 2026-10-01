@@ -56,11 +56,16 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const localContent = getCityServiceLocalContent(location.slug, selectedService.slug);
   const serviceKey = selectedService.name.toLowerCase();
   const locationKey = location.name.toLowerCase();
+  const title = localContent?.metadataTitle ?? `${selectedService.name} in ${location.name}`;
+  const description =
+    localContent?.metadataDescription ??
+    `Discuss ${selectedService.name.toLowerCase()} in ${location.name}. Review scope, responsibilities and next steps with RHI Pros.`;
+  const shareImages = selectedService.image.src
+    ? [{ url: selectedService.image.src, alt: selectedService.image.alt }]
+    : [{ url: "/images/brand/rhi-pros-share.png", alt: "RHI Pros · rhipros.com" }];
   return {
-    title: localContent?.metadataTitle ?? `${selectedService.name} in ${location.name}`,
-    description:
-      localContent?.metadataDescription ??
-      `Local ${selectedService.name.toLowerCase()} contractor in ${location.name} with clear scopes, reliable scheduling, and quality workmanship.`,
+    title,
+    description,
     keywords: [
       `${serviceKey} ${locationKey}`,
       `${serviceKey} contractor ${location.short.toLowerCase()}`,
@@ -69,16 +74,16 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     ],
     alternates: { canonical: `/${location.slug}/${selectedService.slug}` },
     openGraph: {
-      title: `${localContent?.metadataTitle ?? `${selectedService.name} in ${location.name}`} | RHI Pros`,
-      description: localContent?.metadataDescription ?? selectedService.intro,
+      title: `${title} | RHI Pros`,
+      description,
       url: `/${location.slug}/${selectedService.slug}`,
-      ...(selectedService.image.src
-        ? { images: [{ url: selectedService.image.src, alt: selectedService.image.alt }] }
-        : {}),
+      images: shareImages,
     },
     twitter: {
-      title: `${localContent?.metadataTitle ?? `${selectedService.name} in ${location.name}`} | RHI Pros`,
-      description: localContent?.metadataDescription ?? selectedService.intro,
+      card: "summary_large_image",
+      title: `${title} | RHI Pros`,
+      description,
+      images: shareImages,
     },
   };
 }

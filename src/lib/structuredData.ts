@@ -39,12 +39,7 @@ export function getLocalBusinessJsonLd() {
       value: company.license.hic,
     },
     areaServed: [...company.serviceAreaList],
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: company.address.city,
-      addressRegion: company.address.region,
-      addressCountry: company.address.country,
-    },
+    // The configured market label is a service area, not a verified public business address.
   };
 }
 

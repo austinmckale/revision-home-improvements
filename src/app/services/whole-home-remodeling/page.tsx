@@ -10,21 +10,16 @@ import { getCaseStudyBySlug, type CaseStudy } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd, getServiceJsonLd } from "@/lib/structuredData";
 import { absoluteUrl } from "@/lib/url";
+import { getPageMetadata } from "@/lib/metadata";
 
 const route = "/services/whole-home-remodeling";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: { absolute: "Whole-Home Remodeling in Lehigh Valley, PA | RHI Pros" },
   description:
     "Whole-home and multi-room remodeling across the Lehigh Valley and Berks County. RHI Pros coordinates kitchens, bathrooms, flooring and interior finish work.",
-  alternates: { canonical: route },
-  openGraph: {
-    title: "Whole-Home Remodeling in the Lehigh Valley | RHI Pros",
-    description:
-      "Plan connected kitchen, bathroom, flooring, drywall and interior remodeling under one coordinated scope.",
-    url: route,
-  },
-};
+  path: route,
+});
 
 const connectedSpaces = [
   {

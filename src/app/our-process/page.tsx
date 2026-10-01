@@ -6,13 +6,14 @@ import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 
 import { getBreadcrumbJsonLd, getHowToJsonLd } from "@/lib/structuredData";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "Our Remodeling Process",
   description:
     "Explore remodeling and restoration planning from first conversation to final walkthrough, including written scope, scheduling and approval of changes.",
-  alternates: { canonical: "/our-process" },
-};
+  path: "/our-process",
+});
 
 const processSteps = [
   "Discovery call and high-level scope review",

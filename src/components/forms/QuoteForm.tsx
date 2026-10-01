@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useId, useRef, useState } from "react";
+import { FormEvent, useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { primaryServices } from "@/content/services";
 import { siteConfig } from "@/content/site";
@@ -15,6 +15,9 @@ type AttributionData = LeadAttribution & { landing_path: string; campaign: strin
 
 const emptyContact: ContactData = { name: "", phone: "", email: "", service: "" };
 const emptyProject: ProjectData = { city: "", zip: "", timeline: "", details: "" };
+const subscribeToReadiness = () => () => {};
+const getClientReadiness = () => true;
+const getServerReadiness = () => false;
 const contactFields = ["name", "phone", "email", "service"] as const;
 const serviceOptions = [
   ...primaryServices.map(({ slug, name }) => ({ slug, name })),
@@ -47,6 +50,7 @@ function resolveService(value?: string | null) {
 }
 
 export default function QuoteForm({ defaultService }: QuoteFormProps) {
+  const ready = useSyncExternalStore(subscribeToReadiness, getClientReadiness, getServerReadiness);
   const [state, setState] = useState<FormState>({ ok: false });
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState<1 | 2>(1);
@@ -93,7 +97,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
   const errorId = (name: string) => `${formId}-${name}-error`;
   const fieldProps = (name: string, descriptionId?: string) => ({
     id: `${formId}-${name}`,
-    disabled: loading,
+    disabled: !ready || loading,
     "aria-labelledby": `${formId}-${name}-label`,
     "aria-invalid": Boolean(state.errors?.[name]?.length),
     "aria-describedby":
@@ -151,7 +155,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (submittingRef.current) return;
+    if (!ready || submittingRef.current) return;
 
     // Enter and the Continue button must both advance, never submit step one.
     if (step === 1) {
@@ -272,8 +276,10 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
       ref={formRef}
       id="quote-form-section"
       onSubmit={onSubmit}
+      method="post"
+      action="/api/quote"
       noValidate
-      aria-busy={loading}
+      aria-busy={!ready || loading}
       className="quote-form-shell"
       onFocusCapture={() => {
         if (!formStartedRef.current) {
@@ -310,6 +316,21 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           : "An early idea is enough. Share what you know and we will work through the details together."}
       </p>
       <p className="mt-3 text-xs text-[var(--muted)]">All fields are required.</p>
+
+      {!ready && (
+        <p className="mt-4 text-sm text-[var(--muted)]" role="status">
+          Loading the quote form. You can also{" "}
+          <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)] underline underline-offset-4">
+            call {siteConfig.phoneDisplay}
+          </a>{" "}
+          to discuss your project.
+        </p>
+      )}
+      <noscript>
+        <p className="mt-3 text-sm text-[var(--muted)]">
+          This form needs JavaScript to send a request. Please call us using the link above.
+        </p>
+      </noscript>
 
       {step === 1 ? (
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -493,7 +514,15 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
         </div>
       )}
 
-      <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+      <input
+        type="text"
+        name="website"
+        disabled={!ready || loading}
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+      />
       {state.message && (
         <p
           ref={messageRef}
@@ -516,10 +545,16 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
       <div className="mt-5 grid gap-3">
         <button
           type="submit"
-          disabled={loading}
+          disabled={!ready || loading}
           className="inline-flex min-h-12 items-center justify-center gap-3 bg-[var(--brand)] px-5 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)] disabled:opacity-60"
         >
-          {step === 1 ? "Continue to your project" : loading ? "Sending your request…" : "Send my project request"}
+          {!ready
+            ? "Loading form…"
+            : step === 1
+              ? "Continue to your project"
+              : loading
+                ? "Sending your request…"
+                : "Send my project request"}
           <span aria-hidden="true">{loading ? "" : "↗"}</span>
         </button>
       </div>

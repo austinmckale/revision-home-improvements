@@ -11,13 +11,14 @@ import { insuranceClaimsClarification } from "@/content/restoration";
 import { getFeaturedTestimonials } from "@/content/testimonials";
 import { absoluteUrl } from "@/lib/url";
 import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "Fire & Water Damage Restoration | Reading PA & Lehigh Valley",
   description:
     "Fire and water damage restoration in Reading, Berks County and the Lehigh Valley. Call RHI Pros for assessment, repair scopes and insurance documentation support.",
-  alternates: { canonical: "/fire-water-damage-restoration" },
-};
+  path: "/fire-water-damage-restoration",
+});
 
 const firstSteps = [
   { title: "Put safety first", copy: "Protect occupants and avoid entering unsafe areas." },

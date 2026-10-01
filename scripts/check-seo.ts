@@ -318,8 +318,11 @@ function checkStructuredDataBasics() {
   if ("priceRange" in jsonLd) {
     error("JSON-LD must not include priceRange until verified.");
   }
-  if (jsonLd.address && "postalCode" in jsonLd.address) {
-    error("JSON-LD address must not include postalCode until verified.");
+  if ("address" in jsonLd) {
+    error("JSON-LD must not present the unverified service-market label as a physical business address.");
+  }
+  if (!jsonLd.logo.endsWith("/images/brand/chat-logo.png")) {
+    error("JSON-LD logo must use the reviewed RHI brand asset.");
   }
   const sameAs = (Array.isArray(jsonLd.sameAs) ? jsonLd.sameAs : []).map(String);
   for (const required of [

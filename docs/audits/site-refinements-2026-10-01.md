@@ -51,7 +51,8 @@ Horizontal dragging was tested through the browser's pointer interface; this is 
 - Mixed kitchen rooms retain separate customer-friendly design headings; they are not combined into one authenticated Allentown job.
 - Overlapping exterior photographs retain their existing cross-reference and omitted duplicate showcase placement. Similar appearance does not prove a single contract.
 - The 38 field-documentation photos remain in groups of 27, 8 and 3. No shared property, event chronology or completed rebuild is inferred.
-- Blue kitchen installation protection and unfinished areas remain described accurately. Reordering them into supporting placements does not turn them into fully completed-job evidence.
+- **Correction after renewed full-resolution inspection:** earlier captions misidentified the installed sink accessories in blue-kitchen `after/02`, `after/04` and `after/05` as cardboard or unfinished openings. These views show a faucet and sink with a wood board and slatted rack. The public descriptions now name the visible fixtures and finishes. The `process/01` photo also shows installed countertop and backsplash details; its filename does not establish that installation is underway.
+- Genuine cabinetry-in-progress views remain visible in blue-kitchen `after/01`, `after/03` and `process/02`. Supporting placement is an editorial choice about photo composition, not a blanket judgment that the collection is unfinished. This correction does not establish project completion, RHI authorship, location or history.
 - Water imagery remains a labeled AI-generated generic service illustration on the homepage and main/local water service pages. It does not appear in project or before/after evidence.
 - No new testimonial, customer, crew biography, credential, insurer, certification, mitigation capacity, warranty guarantee or construction scope was invented.
 

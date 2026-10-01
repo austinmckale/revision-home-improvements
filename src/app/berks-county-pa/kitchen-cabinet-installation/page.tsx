@@ -10,6 +10,7 @@ import { getCaseStudyBySlug, type CaseStudy } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd, getServiceJsonLd } from "@/lib/structuredData";
 import { absoluteUrl } from "@/lib/url";
+import { getPageMetadata } from "@/lib/metadata";
 
 const route = "/berks-county-pa/kitchen-cabinet-installation";
 const heroImage = {
@@ -17,19 +18,13 @@ const heroImage = {
   alt: "Kitchen after remodel with updated cabinets, counters, appliances, and lighting.",
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: { absolute: "Kitchen Cabinet Replacement in Berks County | RHI Pros" },
   description:
     "Planning new kitchen cabinets in Berks County? RHI Pros coordinates cabinet replacement and installation with counters, fixtures and surrounding kitchen work.",
-  alternates: { canonical: route },
-  openGraph: {
-    title: "Kitchen Cabinet Replacement & Installation in Berks County",
-    description:
-      "Plan cabinet replacement and installation with the countertops, fixtures, appliances and surrounding kitchen work considered together.",
-    url: route,
-    images: [{ url: heroImage.src, alt: heroImage.alt }],
-  },
-};
+  path: route,
+  image: { url: heroImage.src, alt: heroImage.alt },
+});
 
 const scopeOptions = [
   {

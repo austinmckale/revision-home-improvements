@@ -30,6 +30,18 @@ const imageFocalPoints: Record<string, Record<ImagePlacement, string>> = {
     hero: "object-[48%_36%] md:object-[50%_36%]",
     card: "object-[48%_40%] md:object-[50%_40%]",
   },
+  "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_": {
+    hero: "object-[50%_50%] md:object-[50%_50%]",
+    card: "object-[50%_50%] md:object-[50%_50%]",
+  },
+  "/images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install": {
+    hero: "object-[50%_56%] md:object-[50%_56%]",
+    card: "object-[50%_56%] md:object-[50%_56%]",
+  },
+  "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen": {
+    hero: "object-[50%_72%] md:object-[50%_72%]",
+    card: "object-[50%_72%] md:object-[50%_72%]",
+  },
   "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower": {
     hero: "object-[50%_28%] md:object-[50%_28%]",
     card: "object-[48%_35%] md:object-[50%_32%]",

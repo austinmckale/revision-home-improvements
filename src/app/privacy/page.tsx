@@ -5,17 +5,23 @@ import Container from "@/components/ui/Container";
 import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "Privacy Policy",
   description: "How RHI Pros collects, uses, and protects your information.",
-  alternates: { canonical: "/privacy" },
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
     <>
-      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Privacy Policy", href: "/privacy" }])} />
+      <JsonLd
+        data={getBreadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Privacy Policy", href: "/privacy" },
+        ])}
+      />
       <PageIntro eyebrow="Your information" title="Privacy policy." />
       <section className="support-content py-12 sm:py-20">
         <Container className="max-w-3xl">
@@ -26,9 +32,17 @@ export default function PrivacyPage() {
               <h2 className="heading-serif text-2xl text-[var(--accent)]">Information We Collect</h2>
               <p className="mt-2">When you use our website, we may collect:</p>
               <ul className="mt-2 list-disc space-y-1 pl-5">
-                <li><strong>Contact information</strong> you provide through our quote request form: name, phone number, email address, city, ZIP code, and project details.</li>
-                <li><strong>Usage data</strong> collected automatically: pages visited, time on site, device type, browser, and referring URL.</li>
-                <li><strong>Cookies and tracking data</strong> from analytics and spam protection services.</li>
+                <li>
+                  <strong>Contact information</strong> you provide through our quote request form: name, phone number,
+                  email address, city, ZIP code, and project details.
+                </li>
+                <li>
+                  <strong>Usage data</strong> collected automatically: pages visited, time on site, device type,
+                  browser, and referring URL.
+                </li>
+                <li>
+                  <strong>Cookies and tracking data</strong> from analytics and spam protection services.
+                </li>
               </ul>
             </section>
 
@@ -46,46 +60,83 @@ export default function PrivacyPage() {
               <h2 className="heading-serif text-2xl text-[var(--accent)]">Third-Party Services</h2>
               <p className="mt-2">We use the following third-party services that may collect data:</p>
               <ul className="mt-2 list-disc space-y-1 pl-5">
-                <li><strong>Google Analytics:</strong> website traffic analysis and usage patterns.</li>
-                <li><strong>Meta (Facebook) Pixel:</strong> ad measurement and audience targeting.</li>
-                <li><strong>Cloudflare Turnstile:</strong> spam protection on our quote form.</li>
+                <li>
+                  <strong>Google Analytics:</strong> website traffic analysis and usage patterns.
+                </li>
+                <li>
+                  <strong>Meta (Facebook) Pixel:</strong> ad measurement and audience targeting.
+                </li>
+                <li>
+                  <strong>Cloudflare Turnstile:</strong> spam protection on our quote form.
+                </li>
               </ul>
-              <p className="mt-2">Each service operates under its own privacy policy. We do not sell your personal information to third parties.</p>
+              <p className="mt-2">
+                Each service operates under its own privacy policy. We do not sell your personal information to third
+                parties.
+              </p>
             </section>
 
             <section>
               <h2 className="heading-serif text-2xl text-[var(--accent)]">Cookies</h2>
-              <p className="mt-2">Our site uses cookies for analytics and advertising purposes. You can control cookies through your browser settings. Disabling cookies may affect some site functionality.</p>
+              <p className="mt-2">
+                Our site uses cookies for analytics and advertising purposes. You can control cookies through your
+                browser settings. Disabling cookies may affect some site functionality.
+              </p>
             </section>
 
             <section>
               <h2 className="heading-serif text-2xl text-[var(--accent)]">Data Retention</h2>
-              <p className="mt-2">Quote form submissions are retained for the purpose of following up on your project inquiry. Analytics data is retained according to the policies of each analytics provider.</p>
+              <p className="mt-2">
+                Quote form submissions are retained for the purpose of following up on your project inquiry. Analytics
+                data is retained according to the policies of each analytics provider.
+              </p>
             </section>
 
             <section>
               <h2 className="heading-serif text-2xl text-[var(--accent)]">Your Rights</h2>
-              <p className="mt-2">You may request access to, correction of, or deletion of your personal information by contacting us at <a href={`mailto:${siteConfig.primaryEmail}`} className="font-semibold text-[var(--brand)]">{siteConfig.primaryEmail}</a> or by calling <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">{siteConfig.phoneDisplay}</a>.</p>
+              <p className="mt-2">
+                You may request access to, correction of, or deletion of your personal information by contacting us at{" "}
+                <a href={`mailto:${siteConfig.primaryEmail}`} className="font-semibold text-[var(--brand)]">
+                  {siteConfig.primaryEmail}
+                </a>{" "}
+                or by calling{" "}
+                <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
+                  {siteConfig.phoneDisplay}
+                </a>
+                .
+              </p>
             </section>
 
             <section>
               <h2 className="heading-serif text-2xl text-[var(--accent)]">Changes to This Policy</h2>
-              <p className="mt-2">We may update this privacy policy from time to time. Changes will be posted on this page with an updated date.</p>
+              <p className="mt-2">
+                We may update this privacy policy from time to time. Changes will be posted on this page with an updated
+                date.
+              </p>
             </section>
 
             <section>
               <h2 className="heading-serif text-2xl text-[var(--accent)]">Contact</h2>
               <p className="mt-2">
-                {siteConfig.name}<br />
-                {siteConfig.address.street}<br />
-                <a href={`mailto:${siteConfig.primaryEmail}`} className="font-semibold text-[var(--brand)]">{siteConfig.primaryEmail}</a><br />
-                <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">{siteConfig.phoneDisplay}</a>
+                {siteConfig.name}
+                <br />
+                {siteConfig.address.street}
+                <br />
+                <a href={`mailto:${siteConfig.primaryEmail}`} className="font-semibold text-[var(--brand)]">
+                  {siteConfig.primaryEmail}
+                </a>
+                <br />
+                <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
+                  {siteConfig.phoneDisplay}
+                </a>
               </p>
             </section>
           </div>
 
           <p className="mt-8 text-sm">
-            <Link href="/" className="font-semibold text-[var(--brand)]">Back to home</Link>
+            <Link href="/" className="font-semibold text-[var(--brand)]">
+              Back to home
+            </Link>
           </p>
         </Container>
       </section>

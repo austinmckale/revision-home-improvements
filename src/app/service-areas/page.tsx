@@ -8,13 +8,14 @@ import { locations } from "@/content/locations";
 import { primaryServices } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "Service Areas | Allentown, Bethlehem, Lehigh Valley & Berks County",
   description:
     "RHI Pros serves homeowners across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County with remodeling and restoration projects. Find your area.",
-  alternates: { canonical: "/service-areas" },
-};
+  path: "/service-areas",
+});
 
 const lehighValleySlugs = new Set(["allentown-pa", "bethlehem-pa", "lehigh-valley-pa"]);
 const berksSlugs = new Set(["reading-pa", "wyomissing-pa", "berks-county-pa"]);

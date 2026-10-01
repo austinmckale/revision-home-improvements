@@ -122,6 +122,11 @@ for (const url of urls) {
   );
   check(businesses.length === 1, `${path}: expected a single business entity, found ${businesses.length}.`);
   check(businesses[0]?.["@id"] === `${productionOrigin}/#business`, `${path}: business entity ID missing.`);
+  check(!businesses[0]?.address, `${path}: an unverified market label must not be a physical business address.`);
+  check(
+    businesses[0]?.logo === `${productionOrigin}/images/brand/chat-logo.png`,
+    `${path}: business schema must use the reviewed RHI logo.`,
+  );
   check(
     !structured.some((n) => n.aggregateRating || n["@type"] === "Review"),
     `${path}: review/rating schema needs verified source support.`,
@@ -134,6 +139,72 @@ for (const url of urls) {
     check(hrefs.includes("/services/water-damage-restoration"), "Service Areas: missing water-damage link.");
   if (path === "/request-a-quote") {
     check((html.match(/>Browse Services<\/a>/g) || []).length === 1, "Quote page: expected one Browse Services link.");
+    const form = html.match(/<form\b[^>]*id="quote-form-section"[\s\S]*?<\/form>/)?.[0] || "";
+    const formAttributes = attributes(form.split(">")[0]);
+    check(
+      formAttributes.method === "post" && formAttributes.action === "/api/quote",
+      "Quote page: native submission must not place contact details into a GET URL.",
+    );
+    const controls = [...form.matchAll(/<(?:input|select|button)\b[^>]*>/g)].map((m) => m[0]);
+    for (const name of ["name", "phone", "email", "service"]) {
+      const control = controls.find((tag) => attributes(tag).name === name);
+      check(control && /\bdisabled(?:="")?(?:\s|\/?>)/.test(control), `Quote page: ${name} must wait for hydration.`);
+    }
+    check(
+      controls.some((tag) => attributes(tag).type === "submit" && /\bdisabled(?:="")?(?:\s|\/?>)/.test(tag)),
+      "Quote page: server HTML must not expose an active submit button before its handler is ready.",
+    );
+    check(
+      form.includes("<noscript>") && form.includes("tel:+14847069229"),
+      "Quote page: no-JavaScript phone fallback missing.",
+    );
+  }
+  const description = metas.find((m) => m.name === "description")?.content;
+  // Project document titles also identify the collection/reference type;
+  // their shorter sharing titles are checked against CreativeWork below.
+  if (!path.startsWith("/projects/")) {
+    check(
+      metas.find((m) => m.property === "og:title")?.content === title &&
+        metas.find((m) => m.name === "twitter:title")?.content === title,
+      `${path}: sharing title must match this page's title.`,
+    );
+  }
+  check(
+    metas.find((m) => m.property === "og:description")?.content === description &&
+      metas.find((m) => m.name === "twitter:description")?.content === description,
+    `${path}: sharing description must match this page.`,
+  );
+  check(
+    new URL(metas.find((m) => m.property === "og:url")?.content || "/missing-og-url", productionOrigin).href ===
+      target.href,
+    `${path}: sharing URL must match this page.`,
+  );
+  check(
+    metas.find((m) => m.property === "og:image")?.content === metas.find((m) => m.name === "twitter:image")?.content,
+    `${path}: Open Graph and Twitter must use the same reviewed image.`,
+  );
+  if (
+    [
+      "/about",
+      "/request-a-quote",
+      "/insurance-claims",
+      "/fire-water-damage-restoration",
+      "/financing",
+      "/financing-terms",
+      "/our-process",
+      "/privacy",
+      "/projects",
+      "/licenses-and-insurance",
+      "/service-areas",
+      "/services",
+      "/warranty",
+    ].includes(path) ||
+    /^\/(allentown|bethlehem|reading|wyomissing|berks-county|lehigh-valley)-pa$/.test(path)
+  ) {
+    check(
+      metas.find((m) => m.property === "og:image")?.content === `${productionOrigin}/images/brand/rhi-pros-share.png`,
+      `${path}: information pages must use the neutral RHI sharing image.`,
+    );
   }
   if (/^\/projects\//.test(path)) {
     check(

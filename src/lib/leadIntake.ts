@@ -28,14 +28,35 @@ export type ManagerLeadIntakeInput = {
 
 type ManagerLeadIntakeResult =
   | { forwarded: true; status: number; leadId?: string }
-  | { forwarded: false; reason: "missing_api_key" | "request_error" | "non_2xx"; status?: number; responseText?: string };
+  | {
+      forwarded: false;
+      reason: "missing_api_key" | "request_error" | "non_2xx";
+      status?: number;
+      responseText?: string;
+    };
 
 function getManagerAppUrl() {
   if (process.env.MANAGER_APP_URL) return process.env.MANAGER_APP_URL;
   return process.env.NODE_ENV === "production" ? "https://app.rhipros.com" : "http://localhost:3001";
 }
 
-export async function forwardToManagerAppLead(input: ManagerLeadIntakeInput): Promise<ManagerLeadIntakeResult> {
+async function waitForRetry(delay: number, signal?: AbortSignal) {
+  if (signal?.aborted) return;
+  await new Promise<void>((resolve) => {
+    const finish = () => {
+      clearTimeout(timer);
+      signal?.removeEventListener("abort", finish);
+      resolve();
+    };
+    const timer = setTimeout(finish, delay);
+    signal?.addEventListener("abort", finish, { once: true });
+  });
+}
+
+export async function forwardToManagerAppLead(
+  input: ManagerLeadIntakeInput,
+  signal?: AbortSignal,
+): Promise<ManagerLeadIntakeResult> {
   const managerUrl = getManagerAppUrl();
   const apiKey = process.env.LEAD_INGEST_API_KEY;
   if (!apiKey) {
@@ -73,6 +94,8 @@ export async function forwardToManagerAppLead(input: ManagerLeadIntakeInput): Pr
 
   const maxAttempts = 2;
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    if (signal?.aborted)
+      return { forwarded: false, reason: "request_error", responseText: "Lead forwarding cancelled" };
     try {
       const res = await fetch(intakeUrl, {
         method: "POST",
@@ -81,11 +104,12 @@ export async function forwardToManagerAppLead(input: ManagerLeadIntakeInput): Pr
           "x-lead-intake-key": apiKey,
         },
         body: JSON.stringify(payload),
+        signal,
       });
       const text = await res.text();
       if (!res.ok) {
         if (attempt < maxAttempts) {
-          await new Promise((resolve) => setTimeout(resolve, 250 * attempt));
+          await waitForRetry(250 * attempt, signal);
           continue;
         }
         return {
@@ -103,8 +127,8 @@ export async function forwardToManagerAppLead(input: ManagerLeadIntakeInput): Pr
         return { forwarded: true, status: res.status };
       }
     } catch (err) {
-      if (attempt < maxAttempts) {
-        await new Promise((resolve) => setTimeout(resolve, 250 * attempt));
+      if (!signal?.aborted && attempt < maxAttempts) {
+        await waitForRetry(250 * attempt, signal);
         continue;
       }
       return {

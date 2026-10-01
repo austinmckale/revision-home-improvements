@@ -494,15 +494,15 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     images: [
       photo(
         "blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg",
-        "Kitchen with blue cabinets, countertops, a microwave, and an open sink area covered with cardboard.",
+        "Kitchen with blue cabinets, patterned countertops and backsplash, a microwave, and a sink with a wood board and slatted rack.",
       ),
       photo(
         "blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg",
-        "Blue cabinet run with countertops, microwave, beverage cooler, and an unfinished sink opening.",
+        "Blue cabinet run with patterned countertops and backsplash, a sink and faucet, microwave, and beverage cooler.",
       ),
       photo(
         "blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
-        "Blue cabinet and countertop view with an unfinished sink opening and appliance spaces.",
+        "Wide view of blue cabinets, patterned countertops and backsplash, a sink and faucet, microwave, and beverage cooler.",
       ),
       photo(
         "blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg",
@@ -514,7 +514,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
       ),
       photo(
         "blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg",
-        "Countertop edge and blue cabinetry viewed during installation.",
+        "Close-up of patterned countertop and backsplash beside blue cabinetry, with a faucet and microwave above.",
       ),
       photo(
         "blue-kitchen-cabinet-counters/process/02-blue-kitchen-cabinets-process.jpg",

@@ -14,15 +14,16 @@ import {
 import { getServiceBySlug } from "@/content/services";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
+import { getPageMetadata } from "@/lib/metadata";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "Remodeling Photo Collections | Lehigh Valley & Berks County",
   description:
     "Browse kitchen, bathroom, basement, patio and interior photo collections. Explore visible details and plan remodeling in the Lehigh Valley and Berks County.",
-  alternates: { canonical: "/projects" },
-};
+  path: "/projects",
+});
 
 const filters = [
   { slug: "", label: "All projects" },

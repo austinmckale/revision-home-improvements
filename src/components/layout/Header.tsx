@@ -105,7 +105,7 @@ export default function Header() {
           </a>
           <a
             href={siteConfig.phoneHref}
-            className={`flex h-10 w-10 items-center justify-center transition-colors lg:hidden ${
+            className={`flex h-11 w-11 items-center justify-center transition-colors lg:hidden ${
               isTransparent ? "text-white hover:bg-white/10" : "text-[var(--brand)] hover:bg-[var(--surface-soft)]"
             }`}
             aria-label={`Call ${siteConfig.phoneDisplay}`}

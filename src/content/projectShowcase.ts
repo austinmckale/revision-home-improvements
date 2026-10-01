@@ -36,12 +36,18 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
   "reading-paver-patio-buildout": {
     title: "Outdoor living, all together.",
     image: {
-      src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
-      alt: "Gable-roof pavilion over a patio with planted garden edges beside a house.",
+      src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
+      alt: "Front view of a gable-roof pavilion, patio, and planted garden edges beside a house.",
     },
   },
   "lehigh-valley-basement-finish-and-detail": { title: "Room for movie nights." },
-  "blue-kitchen-cabinet-counters": { title: "Blue cabinets. A fresh perspective." },
+  "blue-kitchen-cabinet-counters": {
+    title: "Blue cabinets. A fresh perspective.",
+    image: {
+      src: "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
+      alt: "Wide view of blue cabinetry with a gray countertop and backsplash, sink and faucet, microwave and beverage cooler.",
+    },
+  },
   "bethlehem-interior-flooring-refresh": { title: "Warm floors, connected rooms." },
   "allentown-exterior-log-home-refresh": { title: "A new chapter for a log home." },
   "hamburg-laundry-bathroom-remodel": { title: "A hardworking laundry & half-bath." },

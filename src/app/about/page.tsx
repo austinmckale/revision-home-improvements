@@ -6,15 +6,17 @@ import BottomCTA from "@/components/sections/BottomCTA";
 import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import ServiceHero from "@/components/sections/ServiceHero";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/content/site";
+import { company } from "@/content/company";
 import { getFeaturedTestimonials } from "@/content/testimonials";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "About Us | Lehigh Valley & Berks County Contractor",
   description:
-    "Remodeling contractor with Pennsylvania HIC number PA185945 serving Reading, Berks County, and the Lehigh Valley with clear scopes and reliable schedules.",
-  alternates: { canonical: "/about" },
-};
+    "Learn about RHI Pros and RHI Solutions LLC, serving Reading, Berks County and the Lehigh Valley. Find contact details, scope guidance and PA HIC information.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
@@ -31,7 +33,7 @@ export default function AboutPage() {
         intro="A renovation starts with understanding the space, agreeing on the scope and knowing the next step. Discuss your priorities with RHI Pros, then review the work, schedule and responsibilities in a written proposal."
         image={{
           src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
-          alt: "Patio, timber pavilion and outdoor seating beside a house.",
+          alt: "Front view of a gable-roof pavilion, patio, and planted garden edges beside a house.",
         }}
         primaryHref="/request-a-quote"
         primaryLabel="Request a quote"
@@ -41,18 +43,62 @@ export default function AboutPage() {
 
       <section className="py-14">
         <Container className="max-w-5xl">
-          <h2 className="heading-serif text-3xl text-[var(--accent)]">Who We Work Best With</h2>
+          <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
+            <div>
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">About RHI Pros</h2>
+              <p className="mt-4 leading-relaxed text-[var(--muted)]">
+                RHI Pros offers remodeling and reconstruction services across {company.serviceAreas}. Our legal company
+                name is {company.legalName}, with PA HIC registration number {company.license.hic}.
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
+                Request current registration and insurance documentation when discussing your project, and review the
+                written warranty terms included in your proposal.
+              </p>
+              <Link
+                href="/licenses-and-insurance"
+                className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--brand)] underline underline-offset-4"
+              >
+                Registration &amp; insurance documents
+              </Link>
+            </div>
+            <div className="surface rounded-sm p-5">
+              <h3 className="font-semibold text-[var(--accent)]">Talk about your project</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                Share your location, the space you want to change and any photos or plans you already have.
+              </p>
+              <div className="mt-4 flex flex-col items-start gap-2 text-sm font-semibold text-[var(--brand)]">
+                <a href={company.phone.href} className="inline-flex min-h-11 items-center underline underline-offset-4">
+                  {company.phone.display}
+                </a>
+                <a
+                  href={`mailto:${company.email}`}
+                  className="inline-flex min-h-11 items-center break-all underline underline-offset-4"
+                >
+                  {company.email}
+                </a>
+                <Link
+                  href="/request-a-quote"
+                  className="inline-flex min-h-11 items-center underline underline-offset-4"
+                >
+                  Send your project details
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <h2 className="mt-10 heading-serif text-3xl text-[var(--accent)]">Planning around your priorities</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             <article className="surface rounded-sm p-5">
               <h3 className="font-semibold text-[var(--accent)]">Homeowners Who Value Transparency</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                You want a written scope and clear options before any work begins, not surprises halfway through.
+                Review the proposed work, assumptions and exclusions so you can compare options before deciding.
               </p>
             </article>
             <article className="surface rounded-sm p-5">
               <h3 className="font-semibold text-[var(--accent)]">Families Balancing Budget and Quality</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                We present tiered options so you can prioritize what matters most without overbuilding your budget.
+                Compare the finishes you want with the preparation and repairs the space needs. Discuss your budget and
+                which priorities belong in the proposed scope.
               </p>
             </article>
             <article className="surface rounded-sm p-5">
@@ -64,34 +110,34 @@ export default function AboutPage() {
             </article>
           </div>
 
-          <h2 className="mt-10 heading-serif text-3xl text-[var(--accent)]">How We Run Every Project</h2>
+          <h2 className="mt-10 heading-serif text-3xl text-[var(--accent)]">What to settle before construction</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             <article className="surface rounded-lg p-5">
               <h3 className="font-semibold text-[var(--accent)]">Scope Before Demo</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                We confirm priorities, budget range, and constraints before construction starts. No work begins until
-                you approve the plan.
+                Review the written proposal, material selections, responsibilities and exclusions before approving the
+                work. Discuss how any changes will be documented and approved.
               </p>
             </article>
             <article className="surface rounded-lg p-5">
               <h3 className="font-semibold text-[var(--accent)]">Milestone Communication</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                You know what is happening, what is next, and what decisions are coming. No guessing, no chasing
-                updates.
+                Agree on your project contact, when to expect progress updates and which decisions need your input.
+                Discuss any scheduling changes as the work develops.
               </p>
             </article>
             <article className="surface rounded-lg p-5">
-              <h3 className="font-semibold text-[var(--accent)]">Value Per Dollar</h3>
+              <h3 className="font-semibold text-[var(--accent)]">Budget Priorities</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                We present options that maximize your outcome without padding the scope. Every dollar goes toward
-                results you can see.
+                A proposal may include both visible finishes and necessary preparation or concealed repairs. Compare
+                those costs and choices against how you want the space to function.
               </p>
             </article>
             <article className="surface rounded-lg p-5">
               <h3 className="font-semibold text-[var(--accent)]">Clean Closeout</h3>
               <p className="mt-2 text-sm text-[var(--muted)]">
-                Final walkthrough, punch-list completion, and warranty documentation are built into delivery, not an
-                afterthought.
+                Confirm the final walkthrough, how remaining items will be tracked and the written warranty terms that
+                apply at handoff.
               </p>
             </article>
           </div>

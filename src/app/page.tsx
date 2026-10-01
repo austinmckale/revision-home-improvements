@@ -4,6 +4,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import FadeIn from "@/components/ui/FadeIn";
 import JsonLd from "@/components/JsonLd";
+import { getPageMetadata } from "@/lib/metadata";
 import { getBreadcrumbJsonLd, getWebSiteJsonLd } from "@/lib/structuredData";
 import { primaryServices } from "@/content/services";
 import { visibleCaseStudies } from "@/content/caseStudies";
@@ -14,10 +15,16 @@ import ProjectCard from "@/components/sections/ProjectCard";
 import { getFeaturedTestimonials } from "@/content/testimonials";
 import { siteConfig } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
+  title: { absolute: "RHI Pros | Lehigh Valley Remodeling & Restoration" },
   description:
-    "Kitchen, bathroom, basement, exterior, and restoration projects with clear scopes, fast communication, and quality workmanship across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County.",
-};
+    "Remodeling and damage repairs in Allentown, Bethlehem, Reading, the Lehigh Valley and Berks County. Explore photos and plan a written scope with RHI Pros.",
+  path: "/",
+  image: {
+    url: siteConfig.ogImage,
+    alt: "Gable-roof pavilion over a patio with planted garden edges beside a house.",
+  },
+});
 
 const priorityServiceSlugs = [
   "kitchen-remodeling",
@@ -90,18 +97,24 @@ const spaceDetails = [
     alt: "Wood pavilion ceiling with dark beams and recessed lights, viewed from below.",
     title: "Warmth overhead",
     caption: "Wood ceiling, dark beams, and recessed lights.",
+    href: "/projects/reading-paver-patio-buildout",
+    linkLabel: "Explore the pavilion",
   },
   {
-    src: "/images/projects/frontier-patio-gable-roof/after/finished-alt.jpg",
-    alt: "Stone edging and planted garden borders beneath the side of the pavilion.",
-    title: "Garden connections",
-    caption: "Stone edging and planted borders beside the pavilion.",
+    src: "/images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg",
+    alt: "Gray patterned countertop and matching backsplash beside blue cabinets and a sink faucet.",
+    title: "A connected finish",
+    caption: "A patterned counter and matching backsplash beside blue cabinetry.",
+    href: "/projects/blue-kitchen-cabinet-counters",
+    linkLabel: "Explore the kitchen",
   },
   {
-    src: "/images/projects/frontier-patio-gable-roof/after/patio-finished.jpg",
-    alt: "Open pavilion roof framing above scaffolds and temporary braces during construction.",
-    title: "Framing in progress",
-    caption: "Open roof framing, scaffolds, and temporary braces.",
+    src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
+    alt: "Glossy floor with gold and dark flowing patterns in front of a basement media wall.",
+    title: "Pattern underfoot",
+    caption: "A glossy patterned floor beneath a media wall and recessed lighting.",
+    href: "/projects/lehigh-valley-basement-finish-and-detail",
+    linkLabel: "Explore the basement",
   },
 ];
 
@@ -149,7 +162,8 @@ export default function HomePage() {
             </h1>
             <div className="home-hero-enter home-hero-enter-3 mt-7 flex flex-col gap-7 sm:mt-9 sm:flex-row sm:items-end sm:justify-between">
               <p className="max-w-xl text-pretty text-base leading-relaxed text-white/85 sm:text-lg md:text-xl">
-                Thoughtful remodeling and restoration, shaped around your home and the way you live.
+                Kitchens, bathrooms, basements, outdoor living, and damage repairs—with a written scope before work
+                begins.
               </p>
               <div className="flex shrink-0 flex-wrap gap-3">
                 <Link
@@ -347,14 +361,14 @@ export default function HomePage() {
                   Details that shape the space.
                 </h2>
                 <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)]">
-                  Look up at the ceiling, follow the garden edges, and explore the framing beneath the roof.
+                  Look closer at ceiling, counter, and floor details across three different spaces.
                 </p>
               </div>
               <Link
-                href="/projects/reading-paver-patio-buildout"
+                href="/projects"
                 className="inline-flex min-h-11 shrink-0 items-center gap-3 text-sm font-semibold text-[var(--accent)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
               >
-                Explore pavilion details <span aria-hidden="true">↗</span>
+                Explore the photo collections <span aria-hidden="true">↗</span>
               </Link>
             </div>
             <div className="mt-9 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
@@ -372,6 +386,12 @@ export default function HomePage() {
                   <figcaption className="border-t border-[var(--border)] pt-4">
                     <h3 className="heading-serif text-2xl text-[var(--accent)]">{detail.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{detail.caption}</p>
+                    <Link
+                      href={detail.href}
+                      className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                    >
+                      {detail.linkLabel} <span aria-hidden="true">↗</span>
+                    </Link>
                   </figcaption>
                 </figure>
               ))}

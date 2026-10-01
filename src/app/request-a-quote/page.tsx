@@ -6,13 +6,14 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: { absolute: "Request a Quote | RHI Pros | Lehigh Valley & Berks County" },
   description:
     "Request a kitchen, bathroom, basement, or restoration quote in Allentown, Bethlehem, or the Lehigh Valley. Discuss scope, scheduling and next steps.",
-  alternates: { canonical: "/request-a-quote" },
-};
+  path: "/request-a-quote",
+});
 
 export default function RequestQuotePage() {
   return (

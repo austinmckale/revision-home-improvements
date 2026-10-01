@@ -13,6 +13,8 @@ import { getLocalBusinessJsonLd } from "@/lib/structuredData";
 
 const sans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap" });
 const serif = DM_Serif_Display({ subsets: ["latin"], weight: "400", variable: "--font-dm-serif", display: "swap" });
+const defaultDescription =
+  "Remodeling and damage repairs in Allentown, Bethlehem, Reading, the Lehigh Valley and Berks County. Explore photos and plan a written scope with RHI Pros.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.domain),
@@ -20,22 +22,24 @@ export const metadata: Metadata = {
     default: "RHI Pros | Lehigh Valley Remodeling & Restoration",
     template: "%s | RHI Pros",
   },
-  description:
-    "Remodeling and restoration contractor with Pennsylvania HIC number PA185945 serving the Lehigh Valley, Reading, and Berks County. Kitchens, bathrooms, basements, and damage repair.",
+  description: defaultDescription,
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: siteConfig.name,
     title: "RHI Pros | Lehigh Valley Remodeling & Restoration",
-    description:
-      "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship across the Lehigh Valley, Reading, and Berks County.",
-    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+    description: defaultDescription,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        alt: "Gable-roof pavilion over a patio with planted garden edges beside a house.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "RHI Pros | Lehigh Valley Remodeling & Restoration",
-    description:
-      "Kitchen, bathroom, basement, and restoration projects with clear scopes, fast communication, and quality workmanship.",
+    description: defaultDescription,
     images: [siteConfig.ogImage],
   },
   alternates: {

@@ -84,7 +84,7 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
         type="button"
         ref={triggerRef}
         onClick={() => setOpen(true)}
-        className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
+        className={`relative z-10 flex h-11 w-11 items-center justify-center rounded-lg transition-colors ${
           isTransparent && !open
             ? "text-white hover:bg-white/10"
             : "text-[var(--accent)] hover:bg-[var(--surface-soft)]"
@@ -133,7 +133,7 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
                   type="button"
                   ref={closeButtonRef}
                   onClick={() => setOpen(false)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
                   aria-label="Close menu"
                 >
                   <svg

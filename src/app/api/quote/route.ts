@@ -1,5 +1,7 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
+import { createConnection, type Socket } from "node:net";
 import nodemailer from "nodemailer";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 import { forwardToManagerAppLead } from "@/lib/leadIntake";
 import { siteConfig } from "@/content/site";
 import { quoteSchema } from "@/lib/quoteSchema";
@@ -7,6 +9,22 @@ import { quoteSchema } from "@/lib/quoteSchema";
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 8;
 const requestBuckets = new Map<string, number[]>();
+const CONTACT_DELIVERY_TIMEOUT_MS = 8_000;
+const ANALYTICS_TIMEOUT_MS = 2_000;
+
+async function withDeliveryDeadline<T>(send: (signal: AbortSignal) => Promise<T>, timeoutMs: number): Promise<T> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => {
+    const error = new Error("Delivery deadline exceeded");
+    error.name = "TimeoutError";
+    controller.abort(error);
+  }, timeoutMs);
+  try {
+    return await send(controller.signal);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 function isRateLimited(ip: string) {
   const now = Date.now();
@@ -38,7 +56,7 @@ function redactPhone(value: unknown) {
   return `***${digits.slice(-4)}`;
 }
 
-async function sendLeadWebhook(payload: Record<string, unknown>) {
+async function sendLeadWebhook(payload: Record<string, unknown>, signal: AbortSignal) {
   const webhookUrl = process.env.LEADS_WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) return { delivered: false, reason: "missing_webhook_url" as const };
 
@@ -83,6 +101,7 @@ async function sendLeadWebhook(payload: Record<string, unknown>) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
+    signal,
   });
 
   if (!response.ok) {
@@ -90,9 +109,10 @@ async function sendLeadWebhook(payload: Record<string, unknown>) {
     throw new Error(`Webhook delivery failed (${response.status}): ${text}`);
   }
 
+  await response.body?.cancel();
   return { delivered: true as const };
 }
-async function sendLeadEmail(payload: Record<string, unknown>) {
+async function sendLeadEmail(payload: Record<string, unknown>, signal: AbortSignal) {
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT || 465);
   const user = process.env.SMTP_USER;
@@ -104,12 +124,34 @@ async function sendLeadEmail(payload: Record<string, unknown>) {
     return { delivered: false, reason: "missing_smtp_config" as const };
   }
 
-  const transporter = nodemailer.createTransport({
+  let socket: Socket | undefined;
+  const transportOptions: SMTPTransport.Options = {
     host,
     port,
     secure: port === 465,
     auth: { user, pass },
-  });
+    dnsTimeout: CONTACT_DELIVERY_TIMEOUT_MS,
+    connectionTimeout: CONTACT_DELIVERY_TIMEOUT_MS,
+    greetingTimeout: CONTACT_DELIVERY_TIMEOUT_MS,
+    socketTimeout: CONTACT_DELIVERY_TIMEOUT_MS,
+    // Own the raw socket so the overall deadline cancels an active SMTP send.
+    // Nodemailer still performs implicit TLS/STARTTLS and authentication.
+    getSocket(_options, callback) {
+      if (signal.aborted) {
+        callback(signal.reason, {});
+        return;
+      }
+      socket = createConnection({ host, port, signal });
+      const pendingSocket = socket;
+      const onError = (error: Error) => callback(error, {});
+      pendingSocket.once("error", onError);
+      pendingSocket.once("connect", () => {
+        pendingSocket.removeListener("error", onError);
+        callback(null, { connection: pendingSocket });
+      });
+    },
+  };
+  const transporter = nodemailer.createTransport(transportOptions);
 
   const subject = `New Quote Request: ${String(payload.name || "Lead")} (${String(payload.service || "Service TBD")})`;
   const body = [
@@ -126,17 +168,22 @@ async function sendLeadEmail(payload: Record<string, unknown>) {
     body.push(`Source: ${String(payload.utm_source)} / ${String(payload.utm_medium || "")}`);
   }
 
-  await transporter.sendMail({
-    from,
-    to,
-    replyTo: payload.email ? String(payload.email) : undefined,
-    subject,
-    text: body.join("\n"),
-  });
-  return { delivered: true as const };
+  try {
+    await transporter.sendMail({
+      from,
+      to,
+      replyTo: payload.email ? String(payload.email) : undefined,
+      subject,
+      text: body.join("\n"),
+    });
+    return { delivered: true as const };
+  } finally {
+    socket?.destroy();
+    transporter.close();
+  }
 }
 
-async function sendFbConversionEvent(payload: Record<string, unknown>, ip?: string, ua?: string) {
+async function sendFbConversionEvent(payload: Record<string, unknown>, signal: AbortSignal, ip?: string, ua?: string) {
   const pixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
   const token = process.env.FB_CONVERSIONS_API_TOKEN;
   if (!pixelId || !token) {
@@ -145,6 +192,7 @@ async function sendFbConversionEvent(payload: Record<string, unknown>, ip?: stri
 
   const res = await fetch(`https://graph.facebook.com/v21.0/${pixelId}/events`, {
     method: "POST",
+    signal,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       data: [
@@ -172,6 +220,7 @@ async function sendFbConversionEvent(payload: Record<string, unknown>, ip?: stri
     throw new Error(`FB CAPI failed (${res.status})`);
   }
 
+  await res.body?.cancel();
   return { delivered: true as const };
 }
 
@@ -242,32 +291,38 @@ export async function POST(request: Request) {
 
     // Keep the acknowledgements: a skipped channel is not a delivered lead.
     const results = await Promise.allSettled([
-      sendLeadWebhook(parsed.data),
-      sendLeadEmail(parsed.data),
-      forwardToManagerAppLead({
-        contactName: parsed.data.name,
-        phone: parsed.data.phone,
-        email: parsed.data.email,
-        serviceType: parsed.data.service,
-        source: "website_form",
-        notes: parsed.data.details,
-        utm_source: parsed.data.utm_source || undefined,
-        utm_medium: parsed.data.utm_medium || undefined,
-        utm_campaign: parsed.data.utm_campaign || undefined,
-        utm_content: parsed.data.utm_content || undefined,
-        utm_term: parsed.data.utm_term || undefined,
-        landing_path: parsed.data.landing_path || undefined,
-        traffic_source: parsed.data.traffic_source || "Direct / Unknown",
-        traffic_medium: parsed.data.traffic_medium || "direct",
-        referrer: parsed.data.referrer || undefined,
-        gclid: parsed.data.gclid || undefined,
-        fbclid: parsed.data.fbclid || undefined,
-        submission_page: parsed.data.submission_page || undefined,
-        city: parsed.data.city,
-        zip: parsed.data.zip,
-        timeline: parsed.data.timeline,
-      }),
-      sendFbConversionEvent(parsed.data, remoteIp, userAgent),
+      withDeliveryDeadline((signal) => sendLeadWebhook(parsed.data, signal), CONTACT_DELIVERY_TIMEOUT_MS),
+      withDeliveryDeadline((signal) => sendLeadEmail(parsed.data, signal), CONTACT_DELIVERY_TIMEOUT_MS),
+      withDeliveryDeadline(
+        (signal) =>
+          forwardToManagerAppLead(
+            {
+              contactName: parsed.data.name,
+              phone: parsed.data.phone,
+              email: parsed.data.email,
+              serviceType: parsed.data.service,
+              source: "website_form",
+              notes: parsed.data.details,
+              utm_source: parsed.data.utm_source || undefined,
+              utm_medium: parsed.data.utm_medium || undefined,
+              utm_campaign: parsed.data.utm_campaign || undefined,
+              utm_content: parsed.data.utm_content || undefined,
+              utm_term: parsed.data.utm_term || undefined,
+              landing_path: parsed.data.landing_path || undefined,
+              traffic_source: parsed.data.traffic_source || "Direct / Unknown",
+              traffic_medium: parsed.data.traffic_medium || "direct",
+              referrer: parsed.data.referrer || undefined,
+              gclid: parsed.data.gclid || undefined,
+              fbclid: parsed.data.fbclid || undefined,
+              submission_page: parsed.data.submission_page || undefined,
+              city: parsed.data.city,
+              zip: parsed.data.zip,
+              timeline: parsed.data.timeline,
+            },
+            signal,
+          ),
+        CONTACT_DELIVERY_TIMEOUT_MS,
+      ),
     ]);
 
     const contactDeliveries = [
@@ -275,8 +330,6 @@ export async function POST(request: Request) {
       logDeliveryResult("Email", results[1]),
       logDeliveryResult("Manager App", results[2]),
     ];
-    // Analytics can succeed without anyone receiving the customer's request.
-    logDeliveryResult("Facebook conversion (analytics)", results[3]);
     if (!contactDeliveries.some(Boolean)) {
       console.error("[quote-api] No contact channel accepted the quote request.");
       return NextResponse.json(
@@ -286,6 +339,22 @@ export async function POST(request: Request) {
         },
         { status: 503 },
       );
+    }
+
+    // Next owns and awaits this bounded post-response task through waitUntil.
+    // Analytics cannot delay or reverse an acknowledged customer request.
+    try {
+      after(async () => {
+        const [result] = await Promise.allSettled([
+          withDeliveryDeadline(
+            (signal) => sendFbConversionEvent(parsed.data, signal, remoteIp, userAgent),
+            ANALYTICS_TIMEOUT_MS,
+          ),
+        ]);
+        logDeliveryResult("Facebook conversion (analytics)", result);
+      });
+    } catch {
+      console.warn("[quote-api] Analytics task was not scheduled.");
     }
 
     return NextResponse.json({

@@ -8,13 +8,14 @@ import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
 import { insuranceClaimsClarification } from "@/content/restoration";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "Insurance Claim Remodeling Support | Reading PA & Lehigh Valley",
   description:
     "Need help with claim-related repair scope? We support insurance-backed remodeling and restoration work across Reading, Berks County, and the Lehigh Valley.",
-  alternates: { canonical: "/insurance-claims" },
-};
+  path: "/insurance-claims",
+});
 
 export default function InsuranceClaimsPage() {
   return (

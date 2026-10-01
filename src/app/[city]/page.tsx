@@ -9,6 +9,7 @@ import TestimonialStrip from "@/components/sections/TestimonialStrip";
 import BottomCTA from "@/components/sections/BottomCTA";
 import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
+import { getPageMetadata } from "@/lib/metadata";
 import { getLocationBySlug, locations } from "@/content/locations";
 import { primaryServices } from "@/content/services";
 import { getFeaturedTestimonials } from "@/content/testimonials";
@@ -25,11 +26,11 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { city } = await params;
   const location = getLocationBySlug(city);
   if (!location) return {};
-  return {
+  return getPageMetadata({
     title: `Remodeling & Restoration in ${location.name}`,
     description: `Kitchen, bathroom, basement, flooring, and restoration services in ${location.name}. RHI Pros delivers clear scopes, reliable scheduling, and quality workmanship.`,
-    alternates: { canonical: `/${location.slug}` },
-  };
+    path: `/${location.slug}`,
+  });
 }
 
 export default async function CityHubPage({ params }: { params: Promise<Params> }) {

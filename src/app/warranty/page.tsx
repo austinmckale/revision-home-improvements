@@ -5,13 +5,14 @@ import Container from "@/components/ui/Container";
 import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { siteConfig } from "@/content/site";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "Workmanship Warranty",
   description:
     "Discuss workmanship warranty duration, coverage, exclusions and manufacturer terms before work begins. Learn how to report a concern about your project.",
-  alternates: { canonical: "/warranty" },
-};
+  path: "/warranty",
+});
 
 export default function WarrantyPage() {
   return (

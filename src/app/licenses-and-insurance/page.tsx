@@ -6,13 +6,14 @@ import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
+import { getPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = getPageMetadata({
   title: "PA HIC Registration & Insurance Details",
   description:
     "Review RHI Pros' Pennsylvania HIC number PA185945 and the registration and insurance documents to check before your project starts.",
-  alternates: { canonical: "/licenses-and-insurance" },
-};
+  path: "/licenses-and-insurance",
+});
 
 export default function LicensesAndInsurancePage() {
   return (
