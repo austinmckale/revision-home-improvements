@@ -1,5 +1,7 @@
 # Project evidence review, 2026-09-30
 
+> Follow-up: [Separate project galleries, 2026-10-01](project-gallery-splits-2026-10-01.md) replaces the earlier same-page kitchen, bathroom/restroom companion and field-documentation grouping with independent entries. This report describes the September 30 implementation.
+
 ## Decision
 
 The supplied media supports descriptions of visible rooms and details. It does not authenticate the contractor responsible, the customer, a project town, contract boundaries, a build duration, hidden construction work, or customer quotations. We cannot manufacture that evidence by reasoning about pictures.

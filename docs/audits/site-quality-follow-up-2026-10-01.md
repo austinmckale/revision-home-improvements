@@ -1,5 +1,7 @@
 # Final quality follow-up — October 1, 2026
 
+> Follow-up: [Separate project galleries, 2026-10-01](project-gallery-splits-2026-10-01.md) corrects the mixed kitchens remaining on one page and detaches other unproven companion-photo groups. This report describes the preceding release.
+
 This pass follows the user's request to evaluate whether the site could be better and finish the authorized improvements. The site is stronger, but passing technical checks does not establish exceptional customer outcomes, rankings or conversion performance.
 
 ## Automatic fixes

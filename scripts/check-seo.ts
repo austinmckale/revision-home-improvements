@@ -8,6 +8,7 @@ import { company } from "../src/content/company";
 import { caseStudies, visibleCaseStudies } from "../src/content/caseStudies";
 import { getCityServiceLocalContent } from "../src/content/localSeo";
 import { locations } from "../src/content/locations";
+import { projectEvidenceSplits } from "../src/content/projectEvidence";
 import { primaryServices, services } from "../src/content/services";
 import { siteConfig } from "../src/content/site";
 import { getLocalBusinessJsonLd } from "../src/lib/structuredData";
@@ -119,9 +120,16 @@ function checkCaseStudyPhotoAccuracy() {
       error(`Case study "${study.slug}" summary uses representative photo wording.`);
     }
 
-    const allImages = [...study.images, ...(study.beforeImages ?? []), ...(study.afterImages ?? [])];
+    const allImages = [
+      ...study.images,
+      ...(study.beforeImages ?? []),
+      ...(study.afterImages ?? []),
+      ...(study.photoGroups ?? []).flatMap((group) => group.images),
+    ];
 
-    const verifiedFolders = VERIFIED_CASE_STUDY_IMAGE_FOLDERS[study.slug];
+    // Splits retain original asset paths; a new public route does not imply a new source folder.
+    const sourceSlug = projectEvidenceSplits[study.slug]?.sourceSlug ?? study.slug;
+    const verifiedFolders = VERIFIED_CASE_STUDY_IMAGE_FOLDERS[sourceSlug];
     if (verifiedFolders) {
       if (verifiedFolders.length === 0 && allImages.length > 0) {
         error(`Case study "${study.slug}" must remain text-only until verified water-damage photos are added.`);
@@ -140,7 +148,7 @@ function checkCaseStudyPhotoAccuracy() {
     for (const img of allImages) {
       const folder = imageProjectFolder(img.src);
       if (!folder) continue;
-      if (!folderMatchesCaseStudy(study.slug, folder)) {
+      if (!folderMatchesCaseStudy(sourceSlug, folder)) {
         error(`Case study "${study.slug}" uses image from unrelated folder "${folder}": ${img.src}`);
       }
     }

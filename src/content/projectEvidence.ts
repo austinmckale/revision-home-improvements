@@ -21,6 +21,7 @@ const overview = (details: Partial<CaseStudy>): Partial<CaseStudy> => ({
   testimonial: undefined,
   beforeImages: [],
   afterImages: [],
+  photoGroups: [],
   ...details,
 });
 
@@ -70,7 +71,7 @@ const fireFrames: Array<[string, string]> = [
   ["28-img_8473.jpg", "Window-side corner with exposed studs and ceiling insulation."],
   ["29-img_8474.jpg", "Exposed framing around a window and interior partition."],
   ["30-img_8475.jpg", "White bathtub and surrounding unfinished wall framing."],
-  ["31-img_8476.jpg", "Unfinished bathroom framing with a bathtub and toilet flange visible."],
+  ["31-img_8476.jpg", "Unfinished interior partitions with overhead insulation and a loose window unit."],
   ["32-img_8477.jpg", "Interior corner with wall studs, wiring, and overhead insulation."],
   ["33-img_8478.jpg", "View through exposed partitions into a room with a window."],
   ["34-img_8479.jpg", "Narrow view beside a window through unfinished framing."],
@@ -86,11 +87,11 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     title: "Island seating & contrasting cabinets",
     summary:
       "Warm wood tones, a dark island, and bright countertops give this kitchen a strong focal point. Pendant lights bring the seating area into focus.",
-    featureInServiceListings: false,
+    featureInServiceListings: true,
     scope: [
       "Island seating and contrasting cabinetry",
       "Pendant and recessed lighting",
-      "Appliance wall and window-side sink",
+      "Stainless appliance wall and bright countertops",
     ],
     evidenceNote: "",
     images: [
@@ -102,23 +103,6 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
         "allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg",
         "Opposite view of the island kitchen showing wood-tone wall cabinets and pendant lights.",
       ),
-    ],
-    photoGroups: [
-      {
-        title: "White cabinetry & open-plan living",
-        description:
-          "A different kitchen style pairs white cabinets with gray wood-look floors and an open living area.",
-        images: [
-          photo(
-            "allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
-            "White-cabinet kitchen opening into a room with gray wood-look flooring and a ceiling fan.",
-          ),
-          photo(
-            "allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg",
-            "Closer view of the separate white-cabinet kitchen with a window above the sink and stainless appliances.",
-          ),
-        ],
-      },
     ],
   }),
   "bethlehem-bathroom-refresh": overview({
@@ -139,18 +123,6 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
         "bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
         "White shower enclosure with a dark frame beside a gray vanity and toilet.",
       ),
-    ],
-    photoGroups: [
-      {
-        title: "Tub & pink tile reference",
-        description: "An additional bathroom reference with a pink tile band and a tub-mounted shower fitting.",
-        images: [
-          photo(
-            "bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg",
-            "Tub with a mounted shower fitting and a pink tile band on the surrounding walls.",
-          ),
-        ],
-      },
     ],
   }),
   "allentown-commercial-bathroom-renovation": overview({
@@ -180,18 +152,6 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
         "allentown-commercial-bathroom/after/hallway-after.png",
         "Matching corridor view with light painted walls and dark floor surfaces.",
       ),
-    ],
-    photoGroups: [
-      {
-        title: "Dark partitions & tile",
-        description: "An additional restroom reference with dark partitions and rectangular floor tile.",
-        images: [
-          photo(
-            "allentown-commercial-bathroom/after/stall-finished.jpg",
-            "Toilet stall with dark partitions, gray walls, and rectangular floor tile.",
-          ),
-        ],
-      },
     ],
   }),
   "allentown-exterior-log-home-refresh": overview({
@@ -565,12 +525,12 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "ryan-bathroom-remodel": overview({
     title: "A dark vanity & warm floor finishes",
     summary:
-      "A dark double-sink vanity anchors the bathroom, with light walls and warm wood-look flooring. Windows bring daylight across the counter and bathing area.",
+      "A dark double-sink vanity anchors the bathroom, with light walls and warm wood-look flooring. The window brings daylight across the counter and bathing area.",
     scope: ["Double-sink vanity and mirror", "Wall, window, and floor finishes", "Bathing area beside the vanity"],
     images: [
       photo(
         "ryan-bathroom/after/ryans-bathroom-finished.jpg",
-        "Bathroom with a dark double-sink vanity, windows, wood-look floor, toilet, and bathing area.",
+        "Bathroom with a dark double-sink vanity, a window, wood-look floor, toilet, and bathing area.",
       ),
     ],
     photoGroups: [
@@ -623,29 +583,17 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "lehigh-valley-fire-damage-documentation": overview({
-    title: "Open framing & damaged spaces",
+    title: "Open framing & interior conditions",
     summary:
-      "Exposed studs, ceiling framing, stairways, and damaged exterior surfaces show the conditions that reconstruction planning has to account for.",
+      "Exposed studs, ceiling framing, and stairways show the interior conditions that reconstruction planning has to account for. Explore the entry, room partitions, and upper landing.",
     featureInServiceListings: false,
     scope: [
       "Exposed interior framing and stairways",
       "Unfinished room and bathroom conditions",
-      "Boarded dormers and damaged exterior surfaces",
+      "Entry, room partitions, and upper landing",
     ],
-    evidenceNote: "Condition references showing unfinished interiors and damaged exterior spaces.",
+    evidenceNote: "Interior condition references for reconstruction planning.",
     images: fieldPhotos.slice(8, 35),
-    photoGroups: [
-      {
-        title: "Boarded dormers & exposed walls",
-        description: "Window openings, wall studs, and roof details in unfinished spaces.",
-        images: fieldPhotos.slice(0, 8),
-      },
-      {
-        title: "Winter exterior conditions",
-        description: "Boarded windows, a brick chimney, and damaged upper walls above a stone-faced lower story.",
-        images: fieldPhotos.slice(35),
-      },
-    ],
   }),
   "beige-bathroom-before-after": overview({
     title: "Bathroom comparison boards",
@@ -665,4 +613,98 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
       ),
     ],
   }),
+};
+
+/** Distinct spaces get their own public entry while retaining their original asset lineage. */
+export const projectEvidenceSplits: Record<string, { sourceSlug: string; evidence: Partial<CaseStudy> }> = {
+  "white-cabinet-open-plan-kitchen": {
+    sourceSlug: "allentown-kitchen-layout-upgrade",
+    evidence: overview({
+      title: "White cabinetry & open-plan living",
+      summary:
+        "White cabinets and stainless appliances open onto a bright living area. Gray wood-look flooring connects the kitchen and adjoining room, with daylight from windows along both spaces.",
+      featureInServiceListings: true,
+      scope: [
+        "White cabinetry and stainless appliances",
+        "Window-side sink and patterned countertops",
+        "Open living area and gray wood-look flooring",
+      ],
+      images: [
+        photo(
+          "allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
+          "White-cabinet kitchen opening into a room with gray wood-look flooring and a ceiling fan.",
+        ),
+        photo(
+          "allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg",
+          "Closer view of the white-cabinet kitchen with a window above the sink and stainless appliances.",
+        ),
+      ],
+    }),
+  },
+  "pink-tile-tub-reference": {
+    sourceSlug: "bethlehem-bathroom-refresh",
+    evidence: overview({
+      title: "Pink tile & a jetted tub",
+      summary:
+        "Pink tile bands surround a white jetted tub, with grab bars and a wall-mounted handheld shower. This condition reference can help frame a conversation about an existing bathroom.",
+      featureInServiceListings: false,
+      scope: ["Pink tile bands and white wall tile", "Jetted tub and handheld shower", "Wall-mounted grab bars"],
+      evidenceNote: "Existing-condition reference for bathroom planning.",
+      images: [
+        photo(
+          "bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg",
+          "White jetted tub with pink tile bands, grab bars, and a wall-mounted handheld shower.",
+        ),
+      ],
+    }),
+  },
+  "dark-partition-commercial-restroom": {
+    sourceSlug: "allentown-commercial-bathroom-renovation",
+    evidence: overview({
+      title: "Dark partitions & restroom tile",
+      summary:
+        "Dark stall partitions contrast with light gray walls and rectangular floor tile. Take a closer look at the fixture, partition, and ceiling details in this commercial restroom reference.",
+      featureInServiceListings: false,
+      scope: [
+        "Dark restroom partitions",
+        "Rectangular floor tile and gray walls",
+        "Toilet fixture and suspended ceiling",
+      ],
+      evidenceNote: "Commercial restroom finish reference.",
+      images: [
+        photo(
+          "allentown-commercial-bathroom/after/stall-finished.jpg",
+          "Toilet stall with dark partitions, gray walls, and rectangular floor tile.",
+        ),
+      ],
+    }),
+  },
+  "boarded-dormer-condition-photos": {
+    sourceSlug: "lehigh-valley-fire-damage-documentation",
+    evidence: overview({
+      title: "Boarded dormers & exposed walls",
+      summary:
+        "Boarded window openings, roof trim, and stripped interior walls show existing conditions before finish work. Explore the dormer details and exposed wall framing.",
+      featureInServiceListings: false,
+      scope: [
+        "Boarded dormer windows and roof trim",
+        "Exposed wall studs and ceiling framing",
+        "Stripped interior window openings",
+      ],
+      evidenceNote: "Condition references for reconstruction planning.",
+      images: fieldPhotos.slice(0, 8),
+    }),
+  },
+  "winter-exterior-damage-photos": {
+    sourceSlug: "lehigh-valley-fire-damage-documentation",
+    evidence: overview({
+      title: "Winter exterior conditions",
+      summary:
+        "Snow surrounds a house with boarded windows, a brick chimney, and visible damage above a stone-faced lower story. These exterior views document conditions for reconstruction planning.",
+      featureInServiceListings: false,
+      scope: ["Boarded windows and brick chimney", "Damaged upper exterior walls", "Stone-faced lower story"],
+      evidenceNote: "Exterior condition references for reconstruction planning.",
+      images: fieldPhotos.slice(35),
+    }),
+  },
 };

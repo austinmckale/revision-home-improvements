@@ -10,6 +10,7 @@ export const featuredProjectSlugs = [
 const residentialOrder = [
   ...featuredProjectSlugs,
   "allentown-kitchen-layout-upgrade",
+  "white-cabinet-open-plan-kitchen",
   "bethlehem-interior-flooring-refresh",
   "allentown-exterior-log-home-refresh",
   "hamburg-laundry-bathroom-remodel",
@@ -27,12 +28,23 @@ const residentialOrder = [
   "allentown-fire-damage-interior-rebuild",
 ];
 
-const commercialSlugs = new Set(["allentown-commercial-bathroom-renovation", "reading-commercial-bar-window-upgrade"]);
+const commercialSlugs = new Set([
+  "allentown-commercial-bathroom-renovation",
+  "dark-partition-commercial-restroom",
+  "reading-commercial-bar-window-upgrade",
+]);
 
-const processSlugs = new Set(["lehigh-valley-fire-damage-documentation", "beige-bathroom-before-after"]);
+const processSlugs = new Set([
+  "lehigh-valley-fire-damage-documentation",
+  "boarded-dormer-condition-photos",
+  "winter-exterior-damage-photos",
+  "pink-tile-tub-reference",
+  "beige-bathroom-before-after",
+]);
 
 const presentation: Record<string, { title: string; image?: CaseStudy["images"][number] }> = {
   "allentown-kitchen-layout-upgrade": { title: "Room to gather. Space to cook." },
+  "white-cabinet-open-plan-kitchen": { title: "White cabinetry & open-plan living." },
   "reading-paver-patio-buildout": {
     title: "Outdoor living, all together.",
     image: {
@@ -60,7 +72,7 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
     },
   },
   "bethlehem-pool-patio-renovation": { title: "A place to spend the summer." },
-  "lehigh-valley-fire-damage-documentation": { title: "Open framing & damaged spaces" },
+  "lehigh-valley-fire-damage-documentation": { title: "Open framing & interior conditions" },
   "beige-bathroom-before-after": { title: "Bathroom layout & finish ideas" },
 };
 

@@ -1,4 +1,4 @@
-import { projectEvidenceOverrides } from "./projectEvidence";
+import { projectEvidenceOverrides, projectEvidenceSplits } from "./projectEvidence";
 
 export type CaseStudy = {
   slug: string;
@@ -1157,11 +1157,24 @@ const legacyCaseStudyRecords: CaseStudy[] = [
   },
 ];
 
-export const caseStudies: CaseStudy[] = legacyCaseStudyRecords.map((record) => {
-  const evidence = projectEvidenceOverrides[record.slug];
-  if (!evidence) throw new Error(`Project evidence review missing: ${record.slug}`);
-  return { ...record, ...evidence };
-});
+const legacyCaseStudiesBySlug = new Map(legacyCaseStudyRecords.map((record) => [record.slug, record]));
+
+export const caseStudies: CaseStudy[] = [
+  ...legacyCaseStudyRecords.map((record) => {
+    const evidence = projectEvidenceOverrides[record.slug];
+    if (!evidence) throw new Error(`Project evidence review missing: ${record.slug}`);
+    return { ...record, ...evidence };
+  }),
+  ...Object.entries(projectEvidenceSplits).map(([slug, split]) => {
+    if (!slug.trim() || legacyCaseStudiesBySlug.has(slug)) {
+      throw new Error(`Split project slug must be new: ${slug}`);
+    }
+    const original = legacyCaseStudiesBySlug.get(split.sourceSlug);
+    if (!original) throw new Error(`Split project source missing: ${split.sourceSlug}`);
+    // Keep original records intact while exposing only the reviewed photos and descriptions.
+    return { ...original, ...split.evidence, slug };
+  }),
+];
 
 const caseStudyLocationPriority = [
   "allentown-pa",

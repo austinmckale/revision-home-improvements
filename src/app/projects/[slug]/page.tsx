@@ -75,7 +75,9 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   const similarCaseStudies = getSimilarCaseStudiesForProject(caseStudy, 4);
   const galleryImages = getProjectGalleryImages(caseStudy);
   const heroImage = getProjectPresentation(caseStudy).image;
-  const isCommercial = getProjectCollection(caseStudy) === "commercial";
+  const collection = getProjectCollection(caseStudy);
+  const isCommercial = collection === "commercial";
+  const isProcess = collection === "process";
   const isPlanning = caseStudy.mediaType === "planning";
   const isPhotoOverview = caseStudy.mediaType === "photos";
   const overviewImages = isPhotoOverview ? caseStudy.images : galleryImages;
@@ -127,7 +129,8 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
         <Container className="relative z-10 flex flex-1 flex-col justify-end pt-4 sm:pt-16">
           <div className="max-w-4xl">
             <p className="eyebrow eyebrow-light">
-              {caseStudy.serviceName} · {isPlanning ? "Planning ideas" : "Design & finish details"}
+              {caseStudy.serviceName} ·{" "}
+              {isPlanning ? "Planning ideas" : isProcess ? "Existing conditions" : "Design & finish details"}
             </p>
             <h1 className="heading-serif mt-5 max-w-4xl text-4xl leading-[1.03] tracking-[-.03em] text-white sm:text-5xl lg:text-7xl">
               {caseStudy.title}
@@ -151,7 +154,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
           </div>
           <div className="mt-12 border-t border-white/25 pt-4">
             <p className="text-[0.65rem] font-semibold uppercase tracking-[.18em] text-white/55">
-              {isPhotoOverview ? "Design highlights" : "Planning topics"}
+              {isPlanning ? "Planning topics" : isProcess ? "Condition details" : "Design highlights"}
             </p>
             <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/85">
               {caseStudy.scope.slice(0, 3).map((item) => (
@@ -351,7 +354,11 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
 
       <BottomCTA
         quoteHref={quoteHref}
-        title={`Want a similar ${caseStudy.serviceName.toLowerCase()} project?`}
+        title={
+          isProcess
+            ? "Plan the next steps for your space"
+            : `Want a similar ${caseStudy.serviceName.toLowerCase()} project?`
+        }
         description="Tell us about your space, location and priorities, and we will help you define the next steps."
         showFinancing={!isCommercial}
         links={[

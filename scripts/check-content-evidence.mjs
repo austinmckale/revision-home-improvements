@@ -35,30 +35,103 @@ const photos = (record) => [
   ...(record.photoGroups ?? []).flatMap((group) => group.images),
 ];
 
-test("every original route receives reviewed public content without unsupported job assertions", () => {
-  assert.equal(content.caseStudies.length, inventory.projects.length);
+const expectedSplitSources = {
+  "white-cabinet-open-plan-kitchen": "allentown-kitchen-layout-upgrade",
+  "pink-tile-tub-reference": "bethlehem-bathroom-refresh",
+  "dark-partition-commercial-restroom": "allentown-commercial-bathroom-renovation",
+  "boarded-dormer-condition-photos": "lehigh-valley-fire-damage-documentation",
+  "winter-exterior-damage-photos": "lehigh-valley-fire-damage-documentation",
+};
+
+function getCollection(slug) {
+  const current = content.getCaseStudyBySlug(slug);
+  assert.ok(current, `Missing public collection: ${slug}`);
+  return current;
+}
+
+function assertSeparateCollections(slugs, imageCounts) {
+  const seen = new Set();
+  for (const [index, slug] of slugs.entries()) {
+    const current = getCollection(slug);
+    assert.equal(current.images.length, imageCounts[index], slug);
+    assert.equal(current.photoGroups?.length ?? 0, 0, `${slug}: unrelated photo group remains`);
+    for (const image of current.images) {
+      assert.ok(!seen.has(image.src), `${slug}: photo still shared between separated collections: ${image.src}`);
+      seen.add(image.src);
+    }
+  }
+}
+
+test("every original route and declared split receives reviewed content without unsupported job assertions", () => {
+  assert.equal(inventory.projects.length, 24);
+  assert.equal(content.caseStudies.length, 29);
+  assert.equal(
+    content.caseStudies.length,
+    inventory.projects.length + Object.keys(evidence.projectEvidenceSplits).length,
+  );
+  assert.equal(new Set(content.caseStudies.map((record) => record.slug)).size, content.caseStudies.length);
+  assert.deepEqual(Object.keys(evidence.projectEvidenceSplits).sort(), Object.keys(expectedSplitSources).sort());
   for (const original of inventory.projects) {
     const slug = original.route.split("/").pop();
-    const current = content.getCaseStudyBySlug(slug);
-    assert.ok(current, `Missing preserved route: ${slug}`);
+    getCollection(slug);
     assert.ok(evidence.projectEvidenceOverrides[slug]);
-    assert.equal(current.timeline, "");
-    assert.equal(current.locationSlug, "");
-    assert.equal(current.testimonial, undefined);
-    assert.equal(current.challenge, "");
-    assert.equal(current.solution, "");
-    assert.equal(current.results.length, 0);
-    assert.ok(["photos", "planning"].includes(current.mediaType));
+  }
+  const originalSlugs = new Set(inventory.projects.map((original) => original.route.split("/").pop()));
+  for (const [slug, split] of Object.entries(evidence.projectEvidenceSplits)) {
+    assert.equal(split.sourceSlug, expectedSplitSources[slug]);
+    assert.ok(originalSlugs.has(split.sourceSlug), `${slug}: source is not a preserved original record`);
+    getCollection(slug);
+  }
+  for (const current of content.caseStudies) {
+    assert.equal(current.timeline, "", current.slug);
+    assert.equal(current.locationSlug, "", current.slug);
+    assert.equal(current.testimonial, undefined, current.slug);
+    assert.equal(current.challenge, "", current.slug);
+    assert.equal(current.solution, "", current.slug);
+    assert.equal(current.results.length, 0, current.slug);
+    assert.ok(["photos", "planning"].includes(current.mediaType), current.slug);
   }
 });
 
-test("all original photos remain referenced in their own route and unchanged on disk", () => {
+test("split exports reject a missing original source or a colliding public slug", () => {
+  assert.throws(
+    () =>
+      evaluateModule("../src/content/caseStudies.ts", {
+        "./projectEvidence": {
+          ...evidence,
+          projectEvidenceSplits: { "new-collection": { sourceSlug: "missing-original", evidence: {} } },
+        },
+      }),
+    /Split project source missing: missing-original/,
+  );
+  assert.throws(
+    () =>
+      evaluateModule("../src/content/caseStudies.ts", {
+        "./projectEvidence": {
+          ...evidence,
+          projectEvidenceSplits: {
+            "allentown-kitchen-layout-upgrade": { sourceSlug: "allentown-kitchen-layout-upgrade", evidence: {} },
+          },
+        },
+      }),
+    /Split project slug must be new: allentown-kitchen-layout-upgrade/,
+  );
+});
+
+test("every source photo remains in its original lineage and unchanged on disk after splitting", () => {
   const checked = new Set();
   for (const original of inventory.projects) {
-    const current = content.getCaseStudyBySlug(original.route.split("/").pop());
-    const paths = new Set(photos(current).map((image) => image.src));
+    const sourceSlug = original.route.split("/").pop();
+    const lineageSlugs = [
+      sourceSlug,
+      ...Object.entries(evidence.projectEvidenceSplits)
+        .filter(([, split]) => split.sourceSlug === sourceSlug)
+        .map(([slug]) => slug),
+    ];
+    const paths = new Set(lineageSlugs.flatMap((slug) => photos(getCollection(slug))).map((image) => image.src));
+    const originalPaths = new Set(original.images.map((image) => image.src));
+    assert.deepEqual([...paths].sort(), [...originalPaths].sort(), `Photo lineage changed: ${original.route}`);
     for (const image of original.images) {
-      assert.ok(paths.has(image.src), `Photo lost from ${original.route}: ${image.src}`);
       if (checked.has(image.src)) continue;
       const file = new URL(`../public${image.src}`, import.meta.url);
       assert.ok(existsSync(file), `Missing asset: ${image.src}`);
@@ -69,16 +142,39 @@ test("all original photos remain referenced in their own route and unchanged on 
   assert.equal(checked.size, 103);
 });
 
-test("mixed kitchen and field documentation stay in separate named visual groups", () => {
-  const kitchen = content.getCaseStudyBySlug("allentown-kitchen-layout-upgrade");
-  assert.equal(kitchen.images.length, 2);
-  assert.equal(kitchen.photoGroups.length, 1);
-  assert.equal(kitchen.photoGroups[0].images.length, 2);
-  assert.equal(kitchen.featureInServiceListings, false);
-  const field = content.getCaseStudyBySlug("lehigh-valley-fire-damage-documentation");
-  assert.equal(field.images.length, 27);
-  assert.equal(field.photoGroups[0].images.length, 8);
-  assert.equal(field.photoGroups[1].images.length, 3);
+test("different kitchens have separate listed pages with disjoint photo sets", () => {
+  const slugs = ["allentown-kitchen-layout-upgrade", "white-cabinet-open-plan-kitchen"];
+  assertSeparateCollections(slugs, [2, 2]);
+  for (const slug of slugs) {
+    assert.ok(
+      content.galleryCaseStudies.some((record) => record.slug === slug),
+      `${slug}: missing gallery listing`,
+    );
+    const current = getCollection(slug);
+    assert.equal(current.serviceSlug, "kitchen-remodeling");
+    assert.equal(current.beforeImages.length, 0, slug);
+    assert.equal(current.afterImages.length, 0, slug);
+  }
+});
+
+test("unrelated bathroom references have their own pages and preserve the matching commercial corridor comparison", () => {
+  assertSeparateCollections(["bethlehem-bathroom-refresh", "pink-tile-tub-reference"], [2, 1]);
+  assertSeparateCollections(["allentown-commercial-bathroom-renovation", "dark-partition-commercial-restroom"], [2, 1]);
+  const commercial = getCollection("allentown-commercial-bathroom-renovation");
+  assert.equal(commercial.beforeImages.length, 1);
+  assert.equal(commercial.afterImages.length, 1);
+  assert.equal(
+    commercial.beforeImages[0].src,
+    "/images/projects/allentown-commercial-bathroom/before/hallway-before.png",
+  );
+  assert.equal(commercial.afterImages[0].src, "/images/projects/allentown-commercial-bathroom/after/hallway-after.png");
+});
+
+test("unproven building relationships are not presented as one field-documentation gallery", () => {
+  assertSeparateCollections(
+    ["lehigh-valley-fire-damage-documentation", "boarded-dormer-condition-photos", "winter-exterior-damage-photos"],
+    [27, 8, 3],
+  );
 });
 
 test("unproven transformations, fire-loss attribution and duplicate showcase are withheld", () => {

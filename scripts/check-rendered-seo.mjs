@@ -49,6 +49,11 @@ for (const path of [
   "/services/whole-home-remodeling",
   "/projects/hamburg-laundry-bathroom-remodel",
   "/projects/berks-county-ranch-exterior-refresh",
+  "/projects/white-cabinet-open-plan-kitchen",
+  "/projects/pink-tile-tub-reference",
+  "/projects/dark-partition-commercial-restroom",
+  "/projects/boarded-dormer-condition-photos",
+  "/projects/winter-exterior-damage-photos",
 ]) {
   check(urls.includes(productionOrigin + path), `Missing required sitemap route: ${path}`);
 }
@@ -240,11 +245,62 @@ for (const url of urls) {
     check(photoSection.includes("<img"), `${path}: curated photo gallery is empty.`);
     check(!photoSection.includes("After photos for this project."), `${path}: empty comparison fallback rendered.`);
   }
+  const renderedImages = [...html.matchAll(/<img\b[^>]*>/g)].map((m) => decodeURIComponent(attributes(m[0]).src || ""));
   if (path === "/projects/allentown-kitchen-layout-upgrade") {
-    check(html.includes("White cabinetry &amp; open-plan living"), `${path}: mixed kitchens must remain separate.`);
+    check(
+      renderedImages.some((src) => src.includes("kitchen-high-end-hero")),
+      `${path}: island kitchen photo missing.`,
+    );
+    check(
+      !renderedImages.some((src) => /kitchen-remodel-finishes|kitchen-white-cabinets/.test(src)),
+      `${path}: white kitchen photos must live on their own route.`,
+    );
     check(!html.includes("The transformation"), `${path}: unsupported kitchen transformation claim.`);
   }
-  if (/^\/projects\/(allentown-commercial-bathroom-renovation|reading-commercial-bar-window-upgrade)$/.test(path)) {
+  if (path === "/projects/white-cabinet-open-plan-kitchen") {
+    check(
+      renderedImages.some((src) => src.includes("kitchen-remodel-finishes")) &&
+        renderedImages.some((src) => src.includes("kitchen-white-cabinets")),
+      `${path}: both white kitchen photos must render.`,
+    );
+    check(
+      !renderedImages.some((src) => src.includes("kitchen-high-end")),
+      `${path}: island kitchen photos must stay on their own route.`,
+    );
+  }
+  if (path === "/projects/bethlehem-bathroom-refresh") {
+    check(
+      !renderedImages.some((src) => src.includes("bathroom-before-shower")),
+      `${path}: unrelated pink tub reference remains in the shower gallery.`,
+    );
+  }
+  if (path === "/projects/allentown-commercial-bathroom-renovation") {
+    check(
+      !renderedImages.some((src) => src.includes("stall-finished")),
+      `${path}: unproven dark-partition association remains in the blue restroom gallery.`,
+    );
+  }
+  if (path === "/projects/lehigh-valley-fire-damage-documentation") {
+    check(
+      !renderedImages.some((src) => /01-img_7761|02-img_7762|36-img_8933|37-img_8934|38-img_8935/.test(src)),
+      `${path}: unlinked dormer/exterior photos remain in the framed-interior gallery.`,
+    );
+  }
+  if (
+    /^\/projects\/(pink-tile-tub-reference|lehigh-valley-fire-damage-documentation|boarded-dormer-condition-photos|winter-exterior-damage-photos|beige-bathroom-before-after)$/.test(
+      path,
+    )
+  ) {
+    check(
+      html.includes("Plan the next steps for your space") && !html.includes("Want a similar "),
+      `${path}: references must invite planning rather than a similar damaged/unfinished result.`,
+    );
+  }
+  if (
+    /^\/projects\/(allentown-commercial-bathroom-renovation|dark-partition-commercial-restroom|reading-commercial-bar-window-upgrade)$/.test(
+      path,
+    )
+  ) {
     check(!html.includes("We serve homeowners across"), `${path}: residential-only project CTA.`);
   }
   pages.push({

@@ -2,6 +2,10 @@ export type ImagePlacement = "hero" | "card";
 
 /** Reviewed crops for the actual photos; prepared previews share their original's focal point. */
 const imageFocalPoints: Record<string, Record<ImagePlacement, string>> = {
+  "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes": {
+    hero: "object-[0%_50%] md:object-center",
+    card: "object-center",
+  },
   "/images/projects/frontier-patio-gable-roof/after/finished-overview": {
     hero: "object-[52%_0%] md:object-[50%_0%]",
     card: "object-[54%_42%] md:object-[50%_36%]",
