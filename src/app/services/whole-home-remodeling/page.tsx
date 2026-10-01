@@ -6,15 +6,9 @@ import JsonLd from "@/components/JsonLd";
 import QuoteForm from "@/components/forms/QuoteForm";
 import Container from "@/components/ui/Container";
 import FadeIn from "@/components/ui/FadeIn";
-import {
-  getCaseStudyBySlug,
-  type CaseStudy,
-} from "@/content/caseStudies";
+import { getCaseStudyBySlug, type CaseStudy } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
-import {
-  getBreadcrumbJsonLd,
-  getServiceJsonLd,
-} from "@/lib/structuredData";
+import { getBreadcrumbJsonLd, getServiceJsonLd } from "@/lib/structuredData";
 import { absoluteUrl } from "@/lib/url";
 
 const route = "/services/whole-home-remodeling";
@@ -35,26 +29,22 @@ export const metadata: Metadata = {
 const connectedSpaces = [
   {
     heading: "Kitchen and adjoining living spaces",
-    copy:
-      "Coordinate cabinets, counters, fixtures, flooring and surrounding finishes when the kitchen affects more than its original footprint.",
+    copy: "Coordinate cabinets, counters, fixtures, flooring and surrounding finishes when the kitchen affects more than its original footprint.",
     links: [{ href: "/services/kitchen-remodeling", label: "Kitchen Remodeling" }],
   },
   {
     heading: "Bathrooms and private spaces",
-    copy:
-      "Plan bathroom updates alongside nearby bedrooms, hallways, flooring or finish work when the scopes overlap.",
+    copy: "Plan bathroom updates alongside nearby bedrooms, hallways, flooring or finish work when the scopes overlap.",
     links: [{ href: "/services/bathroom-remodeling", label: "Bathroom Remodeling" }],
   },
   {
     heading: "Basements and finished living areas",
-    copy:
-      "Account for moisture conditions, mechanical access, framing, drywall, flooring and the intended use of the finished space.",
+    copy: "Account for moisture conditions, mechanical access, framing, drywall, flooring and the intended use of the finished space.",
     links: [{ href: "/services/basement-finishing", label: "Basement Finishing" }],
   },
   {
     heading: "Flooring, drywall and interior finishes",
-    copy:
-      "Connect details that continue from room to room, including flooring transitions, walls, ceilings, trim and paint-ready surfaces.",
+    copy: "Connect details that continue from room to room, including flooring transitions, walls, ceilings, trim and paint-ready surfaces.",
     links: [
       { href: "/services/flooring-installation", label: "Flooring Installation" },
       {
@@ -68,33 +58,27 @@ const connectedSpaces = [
 const planningSteps = [
   {
     heading: "Priorities",
-    copy:
-      "Identify the rooms involved, the problems that need to be solved and which outcomes matter most.",
+    copy: "Identify the rooms involved, the problems that need to be solved and which outcomes matter most.",
   },
   {
     heading: "Existing conditions",
-    copy:
-      "Review the current layout and visible conditions that may affect access, sequencing or the proposed work.",
+    copy: "Review the current layout and visible conditions that may affect access, sequencing or the proposed work.",
   },
   {
     heading: "Dependencies",
-    copy:
-      "Identify where one decision affects another, such as cabinets and countertops, flooring and trim, or plumbing access and wall repair.",
+    copy: "Identify where one decision affects another, such as cabinets and countertops, flooring and trim, or plumbing access and wall repair.",
   },
   {
     heading: "Written scope",
-    copy:
-      "Document the included work, known responsibilities and project boundaries before construction begins.",
+    copy: "Document the included work, known responsibilities and project boundaries before construction begins.",
   },
   {
     heading: "Sequence and phases",
-    copy:
-      "Organize the work in a practical order and determine whether the scope should happen together or in planned phases.",
+    copy: "Organize the work in a practical order and determine whether the scope should happen together or in planned phases.",
   },
   {
     heading: "Closeout",
-    copy:
-      "Complete the final walkthrough, address the agreed punch list and provide applicable warranty information.",
+    copy: "Complete the final walkthrough, address the agreed punch list and provide applicable warranty information.",
   },
 ];
 
@@ -112,33 +96,27 @@ const wholeHomeProjects = wholeHomeProjectSlugs
 const faqItems = [
   {
     q: "What does whole-home remodeling include?",
-    a:
-      "The scope can involve several connected rooms rather than every room in the house. Depending on the project, it may combine kitchen, bathroom, basement, flooring, drywall and interior-finish work under one written plan.",
+    a: "The scope can involve several connected rooms rather than every room in the house. Depending on the project, it may combine kitchen, bathroom, basement, flooring, drywall and interior-finish work under one written plan.",
   },
   {
     q: "Can a larger renovation happen in phases?",
-    a:
-      "Sometimes. Phasing depends on how the rooms and trades affect one another. RHI Pros can discuss whether separate phases are practical while the scope is being developed.",
+    a: "Sometimes. Phasing depends on how the rooms and trades affect one another. RHI Pros can discuss whether separate phases are practical while the scope is being developed.",
   },
   {
     q: "Can we remain in the home during construction?",
-    a:
-      "That depends on the affected rooms, available bathroom or kitchen facilities, construction access and the overall scope. Occupancy should be discussed before the sequence is finalized.",
+    a: "That depends on the affected rooms, available bathroom or kitchen facilities, construction access and the overall scope. Occupancy should be discussed before the sequence is finalized.",
   },
   {
     q: "Do we need completed architectural plans before requesting a quote?",
-    a:
-      "Not necessarily. Homeowners can begin with the rooms involved, the problems they want to solve and any available photos or ideas. If the project requires drawings or other professional documentation, that can be identified during planning.",
+    a: "Not necessarily. Homeowners can begin with the rooms involved, the problems they want to solve and any available photos or ideas. If the project requires drawings or other professional documentation, that can be identified during planning.",
   },
   {
     q: "Will permits be required?",
-    a:
-      "Permit requirements depend on the municipality and the work included. Applicable requirements should be reviewed as the project scope becomes clear.",
+    a: "Permit requirements depend on the municipality and the work included. Applicable requirements should be reviewed as the project scope becomes clear.",
   },
   {
     q: "Where does RHI Pros provide remodeling services?",
-    a:
-      "RHI Pros serves homeowners across the Lehigh Valley and Berks County. Project availability depends on location, scope and scheduling.",
+    a: "RHI Pros serves homeowners across the Lehigh Valley and Berks County. Project availability depends on location, scope and scheduling.",
   },
 ];
 
@@ -160,37 +138,40 @@ export default function WholeHomeRemodelingPage() {
         ])}
       />
 
-      <ServiceHero eyebrow="Lehigh Valley & Berks County" title="Whole-home remodeling in the Lehigh Valley." intro="When a renovation connects several rooms, every decision affects the next. Bring layout, flooring, walls, and finishes together in one considered plan." image={{ src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg", alt: "Connected rooms with updated flooring and finishes from a Bethlehem interior remodeling project." }} primaryHref="#quote-form-section" primaryLabel="Plan your project" secondaryHref={siteConfig.phoneHref} secondaryLabel={`Call ${siteConfig.phoneDisplay}`} />
+      <ServiceHero
+        eyebrow="Lehigh Valley & Berks County"
+        title="Whole-home remodeling in the Lehigh Valley."
+        intro="When a renovation connects several rooms, every decision affects the next. Bring layout, flooring, walls, and finishes together in one considered plan."
+        image={{
+          src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
+          alt: "Connected rooms with wood-look flooring, light walls and dark kitchen cabinetry.",
+        }}
+        primaryHref="#quote-form-section"
+        primaryLabel="Plan your project"
+        secondaryHref={siteConfig.phoneHref}
+        secondaryLabel={`Call ${siteConfig.phoneDisplay}`}
+      />
 
       <section className="py-12 md:py-16">
         <Container>
           <FadeIn>
             <div className="max-w-3xl">
-              <h2 className="heading-serif text-3xl text-[var(--accent)]">
-                When several rooms become one project
-              </h2>
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">When several rooms become one project</h2>
               <p className="mt-3 leading-relaxed text-[var(--muted)]">
-                A whole-home remodel does not always mean changing every room. It
-                can mean planning several connected spaces under one scope instead
-                of treating each room as a separate job.
+                A whole-home remodel does not always mean changing every room. It can mean planning several connected
+                spaces under one scope instead of treating each room as a separate job.
               </p>
               <p className="mt-3 leading-relaxed text-[var(--muted)]">
-                A kitchen may affect the flooring and finishes in an adjoining
-                living area. Bathroom work may involve nearby bedrooms, hallways
-                or plumbing access. New flooring can expose trim, doorway and
-                drywall work throughout the home. Planning those connections early
-                helps reduce conflicting decisions later.
+                A kitchen may affect the flooring and finishes in an adjoining living area. Bathroom work may involve
+                nearby bedrooms, hallways or plumbing access. New flooring can expose trim, doorway and drywall work
+                throughout the home. Planning those connections early helps reduce conflicting decisions later.
               </p>
             </div>
             <div className="mt-8 grid gap-4 md:grid-cols-2">
               {connectedSpaces.map((item) => (
                 <article className="surface rounded-sm p-5 md:p-6" key={item.heading}>
-                  <h3 className="text-lg font-semibold text-[var(--accent)]">
-                    {item.heading}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                    {item.copy}
-                  </p>
+                  <h3 className="text-lg font-semibold text-[var(--accent)]">{item.heading}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{item.copy}</p>
                   <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
                     {item.links.map((link) => (
                       <Link
@@ -213,20 +194,15 @@ export default function WholeHomeRemodelingPage() {
         <Container>
           <FadeIn>
             <div className="max-w-3xl">
-              <h2 className="heading-serif text-3xl text-[var(--accent)]">
-                Is whole-home remodeling the right fit?
-              </h2>
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Is whole-home remodeling the right fit?</h2>
               <p className="mt-3 leading-relaxed text-[var(--muted)]">
-                This service is intended for homeowners whose plans involve
-                multiple rooms, connected trades or a larger sequence of interior
-                work.
+                This service is intended for homeowners whose plans involve multiple rooms, connected trades or a larger
+                sequence of interior work.
               </p>
             </div>
             <div className="mt-8 grid gap-5 md:grid-cols-2">
               <div className="surface rounded-sm p-5 md:p-6">
-                <h3 className="text-xl font-semibold text-[var(--accent)]">
-                  A strong fit
-                </h3>
+                <h3 className="text-xl font-semibold text-[var(--accent)]">A strong fit</h3>
                 <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--muted)]">
                   <li>A kitchen and one or more adjoining rooms</li>
                   <li>Kitchen and bathroom work planned together</li>
@@ -237,9 +213,7 @@ export default function WholeHomeRemodelingPage() {
                 </ul>
               </div>
               <div className="surface rounded-sm p-5 md:p-6">
-                <h3 className="text-xl font-semibold text-[var(--accent)]">
-                  A focused service may be enough
-                </h3>
+                <h3 className="text-xl font-semibold text-[var(--accent)]">A focused service may be enough</h3>
                 <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-[var(--muted)]">
                   <li>One bathroom with no surrounding work</li>
                   <li>An isolated drywall repair</li>
@@ -250,9 +224,8 @@ export default function WholeHomeRemodelingPage() {
               </div>
             </div>
             <p className="mt-6 max-w-3xl text-sm leading-relaxed text-[var(--muted)]">
-              Smaller projects can still be a fit for RHI Pros. The individual
-              service pages provide more focused information when only one area
-              needs to be addressed.
+              Smaller projects can still be a fit for RHI Pros. The individual service pages provide more focused
+              information when only one area needs to be addressed.
             </p>
             <Link
               href="/services"
@@ -268,14 +241,10 @@ export default function WholeHomeRemodelingPage() {
         <Container>
           <FadeIn>
             <div className="max-w-3xl">
-              <h2 className="heading-serif text-3xl text-[var(--accent)]">
-                Building one clear scope
-              </h2>
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Building one clear scope</h2>
               <p className="mt-3 leading-relaxed text-[var(--muted)]">
-                Large renovations become difficult when decisions are made room by
-                room without considering what comes next. RHI Pros organizes the
-                project around the connected spaces, existing conditions and order
-                of work.
+                Large renovations become difficult when decisions are made room by room without considering what comes
+                next. RHI Pros organizes the project around the connected spaces, existing conditions and order of work.
               </p>
             </div>
             <ol className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -284,12 +253,8 @@ export default function WholeHomeRemodelingPage() {
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--brand)] text-sm font-bold text-white">
                     {index + 1}
                   </span>
-                  <h3 className="mt-4 text-lg font-semibold text-[var(--accent)]">
-                    {item.heading}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                    {item.copy}
-                  </p>
+                  <h3 className="mt-4 text-lg font-semibold text-[var(--accent)]">{item.heading}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{item.copy}</p>
                 </li>
               ))}
             </ol>
@@ -307,15 +272,11 @@ export default function WholeHomeRemodelingPage() {
         <Container>
           <FadeIn className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
-              <h2 className="heading-serif text-3xl text-[var(--accent)]">
-                Planning around life in the home
-              </h2>
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Planning around life in the home</h2>
               <p className="mt-3 leading-relaxed text-[var(--muted)]">
-                Some homeowners remain in the house during remodeling, while other
-                scopes make temporary arrangements more practical. The right
-                approach depends on which rooms are affected, whether essential
-                kitchen or bathroom facilities remain available and how
-                construction access will work.
+                Some homeowners remain in the house during remodeling, while other scopes make temporary arrangements
+                more practical. The right approach depends on which rooms are affected, whether essential kitchen or
+                bathroom facilities remain available and how construction access will work.
               </p>
             </div>
             <div className="surface rounded-sm p-5 md:p-6">
@@ -331,8 +292,8 @@ export default function WholeHomeRemodelingPage() {
                 <li>which decisions must be completed before work begins.</li>
               </ul>
               <p className="mt-4 text-sm leading-relaxed text-[var(--muted)]">
-                These details do not need to be solved before the first
-                conversation. They become part of planning a realistic scope.
+                These details do not need to be solved before the first conversation. They become part of planning a
+                realistic scope.
               </p>
             </div>
           </FadeIn>
@@ -343,14 +304,10 @@ export default function WholeHomeRemodelingPage() {
         <Container>
           <FadeIn>
             <div className="max-w-4xl">
-              <h2 className="heading-serif text-3xl text-[var(--accent)]">
-                Examples across RHI Pros remodeling projects
-              </h2>
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Interior photo collections</h2>
               <p className="mt-3 leading-relaxed text-[var(--muted)]">
-                The examples below come from separate RHI Pros projects. They
-                illustrate kitchen, bathroom, basement and interior work that may
-                be combined in a larger renovation; they are not presented as one
-                whole-home project.
+                Explore ideas for kitchens, bathrooms, basements and connected interior spaces. Use the layouts and
+                finishes to help describe the changes you have in mind.
               </p>
             </div>
             <div className="mt-8 grid gap-5 md:grid-cols-2">
@@ -370,12 +327,12 @@ export default function WholeHomeRemodelingPage() {
                 What to consider before requesting a quote
               </h2>
               <p className="mt-3 leading-relaxed text-[var(--muted)]">
-                You do not need a completed design before contacting RHI Pros. A
-                few basic decisions can make the first conversation more useful.
+                You do not need a completed design before contacting RHI Pros. A few basic decisions can make the first
+                conversation more useful.
               </p>
               <p className="mt-4 text-sm leading-relaxed text-[var(--muted)]">
-                Photos, measurements and inspiration images are helpful when
-                available, but they do not need to be perfect or final.
+                Photos, measurements and inspiration images are helpful when available, but they do not need to be
+                perfect or final.
               </p>
             </div>
             <ul className="surface grid gap-3 rounded-sm p-5 text-sm text-[var(--muted)] sm:grid-cols-2 md:p-6">
@@ -395,18 +352,12 @@ export default function WholeHomeRemodelingPage() {
       <section className="py-12 md:py-16">
         <Container>
           <FadeIn>
-            <h2 className="heading-serif text-3xl text-[var(--accent)]">
-              Whole-home remodeling questions
-            </h2>
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">Whole-home remodeling questions</h2>
             <div className="mt-6 grid gap-3 lg:grid-cols-2">
               {faqItems.map((item) => (
                 <details className="surface group rounded-sm p-5" key={item.q}>
-                  <summary className="cursor-pointer font-semibold text-[var(--accent)]">
-                    {item.q}
-                  </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-                    {item.a}
-                  </p>
+                  <summary className="cursor-pointer font-semibold text-[var(--accent)]">{item.q}</summary>
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{item.a}</p>
                 </details>
               ))}
             </div>
@@ -420,13 +371,10 @@ export default function WholeHomeRemodelingPage() {
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
               Request a quote
             </p>
-            <h2 className="heading-serif mt-2 text-3xl text-[var(--accent)]">
-              Planning more than one room?
-            </h2>
+            <h2 className="heading-serif mt-2 text-3xl text-[var(--accent)]">Planning more than one room?</h2>
             <p className="mt-3 leading-relaxed text-[var(--muted)]">
-              Tell us which spaces are involved, what you want to change and any
-              priorities you already have. We will review the request and discuss
-              the appropriate next step.
+              Tell us which spaces are involved, what you want to change and any priorities you already have. We will
+              review the request and discuss the appropriate next step.
             </p>
           </FadeIn>
           <FadeIn delay={0.15}>

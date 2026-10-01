@@ -13,13 +13,20 @@ import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import BeforeAfterToggle from "@/components/sections/BeforeAfterToggle";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import ServiceHero from "@/components/sections/ServiceHero";
-import { curatedStaticGalleryServiceSlugs, getServiceBySlug, primaryServices } from "@/content/services";
+import PageJumpLinks from "@/components/sections/PageJumpLinks";
+import {
+  curatedStaticGalleryServiceSlugs,
+  exampleScopeExplanation,
+  getServiceBySlug,
+  primaryServices,
+} from "@/content/services";
 import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
+import { insuranceClaimsClarification } from "@/content/restoration";
 import { absoluteUrl } from "@/lib/url";
 import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
-import { getTestimonialsByService } from "@/content/testimonials";
+import { getFeaturedTestimonials } from "@/content/testimonials";
 import { getPortfolioImages } from "@/lib/portfolio";
 import { getFeaturedCaseStudyGalleryImages } from "@/lib/servicePageMedia";
 import { findExplicitFeaturedCaseStudy } from "@/lib/serviceFeaturedCaseStudy";
@@ -63,15 +70,24 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     "drywall-installation-repair": "Drywall Installation & Repair | Lehigh Valley",
   };
   const descriptions: Record<string, string> = {
-    "kitchen-remodeling": "Plan a kitchen remodel in the Lehigh Valley or Berks County. Explore real cabinet, countertop and layout projects, then request a written scope from RHI Pros.",
-    "bathroom-remodeling": "Bathroom remodeling in the Lehigh Valley and Berks County. See finished showers and bathrooms, explore tile and fixture options, and request a written quote.",
-    "basement-finishing": "Turn an unfinished basement into living or entertainment space. See a real basement theater and plan layout, lighting and finishes with RHI Pros.",
-    "paver-installation": "Paver patios, pool surrounds and outdoor living in the Lehigh Valley and Berks County. See a Reading patio and pavilion, then plan your installation.",
-    "flooring-installation": "Flooring installation with subfloor preparation, smooth transitions and coordinated trim. Explore completed local projects and request a scope for your home.",
-    "drywall-installation-repair": "Drywall installation and repair in the Lehigh Valley and Berks County. Explore smooth walls, ceiling repairs and paint-ready finishes from RHI Pros.",
-    "exterior-remodeling": "Explore exterior remodeling across the Lehigh Valley and Berks County: siding, trim, stairs and curb-appeal updates with documented project examples.",
-    "fire-damage-restoration": "Fire damage restoration and interior rebuilding across the Lehigh Valley and Berks County. Call for assessment, a written repair scope and claim documentation support.",
-    "water-damage-restoration": "Water damage restoration in the Lehigh Valley and Berks County. Discuss affected rooms, phased repairs and insurance documentation with RHI Pros.",
+    "kitchen-remodeling":
+      "Plan a kitchen remodel in the Lehigh Valley or Berks County. Explore cabinet, countertop and layout photo collections, then request a written scope from RHI Pros.",
+    "bathroom-remodeling":
+      "Bathroom remodeling in the Lehigh Valley and Berks County. See finished showers and bathrooms, explore tile and fixture options, and request a written quote.",
+    "basement-finishing":
+      "Turn an unfinished basement into living or entertainment space. See a real basement theater and plan layout, lighting and finishes with RHI Pros.",
+    "paver-installation":
+      "Paver patios, pool surrounds and outdoor living in the Lehigh Valley and Berks County. See a Reading patio and pavilion, then plan your installation.",
+    "flooring-installation":
+      "Flooring installation with subfloor preparation, smooth transitions and coordinated trim. Explore photo collections and request a scope for your home.",
+    "drywall-installation-repair":
+      "Drywall installation and repair in the Lehigh Valley and Berks County. Explore smooth walls, ceiling repairs and paint-ready finishes from RHI Pros.",
+    "exterior-remodeling":
+      "Explore exterior remodeling across the Lehigh Valley and Berks County: siding, trim, stairs and curb-appeal updates with photo collections and project-planning guidance.",
+    "fire-damage-restoration":
+      "Fire damage restoration and interior rebuilding across the Lehigh Valley and Berks County. Call for assessment, a written repair scope and claim documentation support.",
+    "water-damage-restoration":
+      "Water damage restoration in the Lehigh Valley and Berks County. Discuss affected rooms, phased repairs and insurance documentation with RHI Pros.",
   };
   const title = titles[service.slug] ?? `${service.name} | Lehigh Valley & Berks County`;
   const description = descriptions[service.slug] ?? service.intro;
@@ -80,7 +96,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title,
     description,
     alternates: { canonical: url },
-    openGraph: { title: `${title} | RHI Pros`, description, url, ...(service.image.src ? { images: [{ url: service.image.src, alt: service.image.alt }] } : {}) },
+    openGraph: {
+      title: `${title} | RHI Pros`,
+      description,
+      url,
+      ...(service.image.src ? { images: [{ url: service.image.src, alt: service.image.alt }] } : {}),
+    },
     twitter: { title: `${title} | RHI Pros`, description },
   };
 }
@@ -106,12 +127,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
     featuredCaseStudy &&
     (heroImageSrc
       ? (featuredCaseStudy.afterImages?.find((img) => img.src !== heroImageSrc) ??
-         featuredCaseStudy.images.find((img) => img.src !== heroImageSrc))
+        featuredCaseStudy.images.find((img) => img.src !== heroImageSrc))
       : (featuredCaseStudy.afterImages?.[0] ?? featuredCaseStudy.images[0]));
   const showFeaturedCaseStudyThumb = Boolean(featuredCaseStudyThumb);
-  const serviceTestimonials = getTestimonialsByService(service.slug);
-  const isEmergencyService =
-    service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
+  const serviceTestimonials = getFeaturedTestimonials();
+  const isEmergencyService = service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
   );
@@ -124,10 +144,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
       ? []
       : service.gallery.slice(0, 4);
   const curatedGalleryIsSingleProject = hasFeaturedProjectGallery;
-  const showCuratedGallerySection =
-    showCuratedStaticGallery && curatedGalleryImages.length > 0;
-  const galleryGridClassName =
-    curatedGalleryImages.length > 1 ? "mt-4 columns-1 gap-4 md:columns-2" : "mt-4 max-w-3xl";
+  const showCuratedGallerySection = showCuratedStaticGallery && curatedGalleryImages.length > 0;
+  const galleryGridClassName = curatedGalleryImages.length > 1 ? "mt-4 columns-1 gap-4 md:columns-2" : "mt-4 max-w-3xl";
   const priorityLocationSlugs = priorityLocationSlugsByService[service.slug];
   const availableLocations = priorityLocationSlugs
     ? priorityLocationSlugs
@@ -167,40 +185,43 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         primaryLabel={isEmergencyService ? `Call ${siteConfig.phoneDisplay}` : service.cta}
         secondaryHref={isEmergencyService ? `/request-a-quote?service=${service.slug}` : siteConfig.phoneHref}
         secondaryLabel={isEmergencyService ? "Request a quote" : `Call ${siteConfig.phoneDisplay}`}
-        notice={isEmergencyService ? "Call us directly for priority scheduling." : undefined}
+        notice={isEmergencyService ? "Call us to discuss repair scope and current availability." : undefined}
+      />
+
+      <PageJumpLinks
+        items={[
+          { href: "#service-details", label: "Scope & cost" },
+          ...(showCuratedGallerySection ||
+          portfolioImages.length > 0 ||
+          service.gallery.length > 0 ||
+          service.processGallery
+            ? [
+                {
+                  href: !showCuratedGallerySection && service.processGallery ? "#condition-photos" : "#project-photos",
+                  label: "Photos",
+                },
+              ]
+            : []),
+          ...(service.faqs.length > 0 ? [{ href: "#questions", label: "Common questions" }] : []),
+          { href: "#quote-form-section", label: "Request a quote" },
+        ]}
       />
 
       {/* ── MAIN CONTENT ── */}
       <section className="py-14 md:py-24">
         <Container className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,.8fr)]">
           <div>
+            {isEmergencyService && (
+              <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">{insuranceClaimsClarification}</p>
+            )}
             <FadeIn>
-              {curatedGalleryIsSingleProject && featuredCaseStudy?.beforeImages && featuredCaseStudy?.afterImages ? (
-                <div className="mb-14 md:mb-20">
-                  <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">Transformation</h2>
-                  <p className="mt-2 mb-5 text-sm text-[var(--muted)]">
-                    From{" "}
-                    <Link
-                      href={`/projects/${featuredCaseStudy.slug}`}
-                      className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
-                    >
-                      {featuredCaseStudy.title}
-                    </Link>
-                    {" · "}
-                    {featuredCaseStudy.locationName}
-                  </p>
-                  <BeforeAfterToggle 
-                    beforeImages={featuredCaseStudy.beforeImages} 
-                    afterImages={featuredCaseStudy.afterImages} 
-                  />
-                </div>
-              ) : showCuratedGallerySection ? (
-                <section className="mb-14 md:mb-20">
-                  <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">
-                    {curatedGalleryIsSingleProject ? "From This Project" : "Recent Work"}
-                  </h2>
-                  {curatedGalleryIsSingleProject && featuredCaseStudy ? (
-                    <p className="mt-2 text-sm text-[var(--muted)]">
+              <div id="project-photos">
+                {curatedGalleryIsSingleProject &&
+                featuredCaseStudy?.beforeImages?.length &&
+                featuredCaseStudy?.afterImages?.length ? (
+                  <div className="mb-14 md:mb-20">
+                    <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">Before &amp; after</h2>
+                    <p className="mt-2 mb-5 text-sm text-[var(--muted)]">
                       From{" "}
                       <Link
                         href={`/projects/${featuredCaseStudy.slug}`}
@@ -211,51 +232,76 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                       {" · "}
                       {featuredCaseStudy.locationName}
                     </p>
-                  ) : (
-                    <p className="mt-2 text-sm text-[var(--muted)]">
-                      A selection of recently completed work.
-                    </p>
-                  )}
-                  <ExpandableImageGrid
-                    images={curatedGalleryImages}
-                    inlineCount={4}
-                    expandLabel="View all project photos"
-                    gridClassName={galleryGridClassName}
-                    cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-xl bg-[var(--surface-soft)]"
-                    imageClassName="h-auto w-full"
-                  />
-                </section>
-              ) : portfolioImages.length > 0 ? (
-                <div className="mb-14 md:mb-20"><PortfolioGallery images={portfolioImages} /></div>
-              ) : service.gallery.length > 0 ? (
-                <section className="mb-14 md:mb-20">
-                  <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">Recent Work</h2>
-                  <ExpandableImageGrid
-                    images={service.gallery}
-                    inlineCount={4}
-                    expandLabel="View all recent work"
-                    gridClassName={galleryGridClassName}
-                    cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-xl bg-[var(--surface-soft)]"
-                    imageClassName="h-auto w-full"
-                  />
-                </section>
-              ) : null}
+                    <BeforeAfterToggle
+                      beforeImages={featuredCaseStudy.beforeImages}
+                      afterImages={featuredCaseStudy.afterImages}
+                    />
+                  </div>
+                ) : showCuratedGallerySection ? (
+                  <section className="mb-14 md:mb-20">
+                    <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">
+                      {curatedGalleryIsSingleProject ? "Design & finish ideas" : "Explore the photos"}
+                    </h2>
+                    {curatedGalleryIsSingleProject && featuredCaseStudy ? (
+                      <p className="mt-2 text-sm text-[var(--muted)]">
+                        From{" "}
+                        <Link
+                          href={`/projects/${featuredCaseStudy.slug}`}
+                          className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                        >
+                          {featuredCaseStudy.title}
+                        </Link>
+                        {" · "}
+                        {featuredCaseStudy.locationName}
+                      </p>
+                    ) : (
+                      <p className="mt-2 text-sm text-[var(--muted)]">Explore spaces, finishes and details.</p>
+                    )}
+                    <ExpandableImageGrid
+                      images={curatedGalleryImages}
+                      inlineCount={4}
+                      expandLabel="View photos"
+                      gridClassName={galleryGridClassName}
+                      cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-xl bg-[var(--surface-soft)]"
+                      imageClassName="h-auto w-full"
+                    />
+                  </section>
+                ) : portfolioImages.length > 0 ? (
+                  <div className="mb-14 md:mb-20">
+                    <PortfolioGallery images={portfolioImages} />
+                  </div>
+                ) : service.gallery.length > 0 ? (
+                  <section className="mb-14 md:mb-20">
+                    <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">Explore the photos</h2>
+                    <ExpandableImageGrid
+                      images={service.gallery}
+                      inlineCount={4}
+                      expandLabel="View all recent work"
+                      gridClassName={galleryGridClassName}
+                      cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-xl bg-[var(--surface-soft)]"
+                      imageClassName="h-auto w-full"
+                    />
+                  </section>
+                ) : null}
+              </div>
             </FadeIn>
 
             {serviceTestimonials.length > 0 && (
               <FadeIn>
                 <div className="mb-14 md:mb-20">
-                  <TestimonialStrip items={serviceTestimonials.slice(0, 3)} title="What Clients Say" />
+                  <TestimonialStrip items={serviceTestimonials.slice(0, 3)} title="Independent company reviews" />
                 </div>
               </FadeIn>
             )}
 
-            {!service.authoritySnapshot && (
             <FadeIn>
-              <div className="mt-8 space-y-3">
+              <div id="service-details" className="mt-8 space-y-3">
                 <h2 className="heading-serif mb-5 text-2xl text-[var(--accent)] md:text-3xl">Service Breakdown</h2>
-                
-                <details className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]">
+
+                <details
+                  open
+                  className="surface group relative overflow-hidden rounded-xl bg-[var(--surface-soft)] transition-colors open:bg-[var(--surface)]"
+                >
                   <summary className="flex cursor-pointer items-center justify-between px-5 py-4 font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-[var(--brand)] marker:content-['']">
                     What&apos;s Included
                     <span className="text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
@@ -312,18 +358,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 </details>
               </div>
             </FadeIn>
-            )}
 
             {service.authoritySnapshot && (
               <FadeIn>
                 <section className="surface mt-14 rounded-2xl p-6 md:mt-20 md:p-8">
                   <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--brand)]">
-                    Example Scope Snapshot
+                    Example project scope
                   </p>
                   <h2 className="heading-serif mt-2 text-2xl text-[var(--accent)]">
                     {service.authoritySnapshot.title}
                   </h2>
-                  <p className="mt-2 text-sm text-[var(--muted)]">{service.authoritySnapshot.location}</p>
+                  <p className="mt-2 text-sm text-[var(--muted)]">{exampleScopeExplanation}</p>
                   <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
                   <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
                     {service.authoritySnapshot.scope.map((item) => (
@@ -338,13 +383,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
             {service.processGallery && (
               <FadeIn>
-                <section className="mt-14 md:mt-20">
+                <section id="condition-photos" className="mt-14 md:mt-20">
                   <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">
                     {service.processGallery.title}
                   </h2>
-                  <p className="mt-2 text-sm text-[var(--muted)]">
-                    {service.processGallery.intro}
-                  </p>
+                  <p className="mt-2 text-sm text-[var(--muted)]">{service.processGallery.intro}</p>
                   <ExpandableImageGrid
                     images={service.processGallery.images}
                     inlineCount={service.processGallery.inlineCount}
@@ -366,17 +409,13 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
             {featuredCaseStudy ? (
               <FadeIn>
                 <section className="mt-14 md:mt-20">
-                  <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">Featured Project</h2>
-                  <p className="mt-2 text-sm text-[var(--muted)]">
-                    A closer look at a recent project.
-                  </p>
+                  <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">A closer look</h2>
+                  <p className="mt-2 text-sm text-[var(--muted)]">A closer look at the visible space and details.</p>
                   <article className="surface mt-5 overflow-hidden rounded-2xl">
                     <Link
                       href={`/projects/${featuredCaseStudy.slug}`}
                       className={`block transition-opacity hover:opacity-[0.98] ${
-                        showFeaturedCaseStudyThumb
-                          ? "md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]"
-                          : ""
+                        showFeaturedCaseStudyThumb ? "md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]" : ""
                       }`}
                     >
                       {showFeaturedCaseStudyThumb && featuredCaseStudyThumb ? (
@@ -402,7 +441,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                           ))}
                         </ul>
                         <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
-                          See the full project →
+                          Explore the photo collection →
                         </span>
                       </div>
                     </Link>
@@ -411,12 +450,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                     <>
                       {service.slug === "paver-installation" ? (
                         <p className="mt-4 text-sm text-[var(--muted)]">
-                          For a different paver scope, see the{" "}
+                          For a different outdoor setting, see the{" "}
                           <Link
                             href="/projects/bethlehem-pool-patio-renovation"
                             className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
                           >
-                            pool-patio renovation in Bethlehem, PA
+                            pool-surround and border photo collection
                           </Link>
                           .
                         </p>
@@ -426,7 +465,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                           href={`/projects?service=${encodeURIComponent(service.slug)}`}
                           className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
                         >
-                          Explore more {service.name.toLowerCase()} projects
+                          Explore more {service.name.toLowerCase()} photos
                         </Link>
                       </p>
                     </>
@@ -437,12 +476,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
             {service.faqs.length > 0 ? (
               <FadeIn>
-                <FaqList title="Quick answers" items={service.faqs} />
+                <FaqList id="questions" title="Quick answers" items={service.faqs} />
               </FadeIn>
             ) : null}
-
-
-
 
             {wholeHomeCrossLink ? (
               <FadeIn>
@@ -504,7 +540,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                   </Link>
                   {" · "}
                   <Link href="/licenses-and-insurance" className="underline-offset-2 hover:underline">
-                    Licenses &amp; insurance
+                    Registration &amp; insurance
                   </Link>
                 </p>
                 <p className="mt-3">

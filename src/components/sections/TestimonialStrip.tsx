@@ -1,4 +1,4 @@
-import { getFeaturedTestimonials, Testimonial } from "@/content/testimonials";
+import { getFeaturedTestimonials, isSourceCheckedTestimonial, Testimonial } from "@/content/testimonials";
 import { siteConfig } from "@/content/site";
 
 type TestimonialStripProps = {
@@ -36,13 +36,15 @@ const profileLinks = [
   },
 ] as const;
 
-export default function TestimonialStrip({ items, title = "What Our Clients Say" }: TestimonialStripProps) {
-  const displayItems = items ?? getFeaturedTestimonials();
+export default function TestimonialStrip({ items, title = "Independent Company Reviews" }: TestimonialStripProps) {
+  const displayItems = (items ?? getFeaturedTestimonials()).filter(isSourceCheckedTestimonial);
 
   return (
     <section className="mt-10">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className="text-2xl font-bold text-[var(--accent)]">{title}</h3>
+        <h3 className="text-2xl font-bold text-[var(--accent)]">
+          {displayItems.length ? title : "Read Independent Reviews"}
+        </h3>
         <div className="flex flex-wrap items-center gap-3">
           {profileLinks.map((link) => (
             <a
@@ -58,18 +60,35 @@ export default function TestimonialStrip({ items, title = "What Our Clients Say"
           ))}
         </div>
       </div>
-      <div className="mt-6 grid gap-px bg-[var(--border)] md:grid-cols-3">
-        {displayItems.map((item, index) => (
-          <article key={`${item.name}-${item.context}`} className="bg-[var(--surface)] p-5 sm:p-6">
-            <p className="mb-4 font-mono text-[0.65rem] tracking-[.14em] text-[var(--brand)]">0{index + 1} / CLIENT NOTE</p>
-            <StarRating rating={item.rating} />
-            <p className="heading-serif mt-3 text-xl leading-snug text-[var(--accent)]">&ldquo;{item.quote}&rdquo;</p>
-            <p className="mt-5 border-t border-[var(--border)] pt-3 text-sm font-semibold">{item.name}</p>
-            <p className="text-xs text-[var(--muted)]">{item.context}</p>
-            {item.source ? <p className="mt-1 text-[11px] text-[var(--muted)]">{item.source}</p> : null}
-          </article>
-        ))}
-      </div>
+      <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
+        {displayItems.length
+          ? "Company review excerpts from Angi. Each source link opens the original profile for context."
+          : "Explore the company profiles for customer feedback and review details."}
+      </p>
+      {displayItems.length ? (
+        <div className="mt-6 grid gap-px bg-[var(--border)] md:grid-cols-3">
+          {displayItems.map((item, index) => (
+            <article key={`${item.name}-${item.context}`} className="bg-[var(--surface)] p-5 sm:p-6">
+              <p className="mb-4 font-mono text-[0.65rem] tracking-[.14em] text-[var(--brand)]">
+                0{index + 1} / CLIENT NOTE
+              </p>
+              <StarRating rating={item.rating} />
+              <p className="heading-serif mt-3 text-xl leading-snug text-[var(--accent)]">&ldquo;{item.quote}&rdquo;</p>
+              <p className="mt-5 border-t border-[var(--border)] pt-3 text-sm font-semibold">{item.name}</p>
+              <p className="text-xs text-[var(--muted)]">{item.context}</p>
+              <a
+                href={item.verification.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Read ${item.name}'s original review on ${item.verification.platform} (opens in a new tab)`}
+                className="mt-2 inline-block text-xs font-semibold text-[var(--brand)] underline underline-offset-4"
+              >
+                {item.source} ↗
+              </a>
+            </article>
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 }

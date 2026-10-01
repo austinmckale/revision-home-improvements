@@ -14,6 +14,8 @@ export type PortfolioImage = {
 };
 
 const bucket = process.env.PORTFOLIO_STORAGE_BUCKET ?? "site-public";
+const filteredPageSize = 100;
+const maxFilteredRows = 1000;
 
 type PortfolioAssetRow = {
   id: string;
@@ -47,48 +49,75 @@ async function fetchPortfolioImages(options?: {
   limit?: number;
 }): Promise<PortfolioImage[]> {
   if (!supabase) return [];
+  const client = supabase;
 
   try {
-    let query = supabase
-      .from("FileAsset")
-      .select(
-        `id, storageKey, fileName, stage, area, tags, description, takenAt,
+    const buildQuery = () => {
+      let query = client
+        .from("FileAsset")
+        .select(
+          `id, storageKey, fileName, stage, area, tags, description, takenAt,
          Job:jobId ( jobName, categoryTags )`,
-      )
-      .eq("isPortfolio", true)
-      .eq("type", "PHOTO")
-      .order("takenAt", { ascending: false });
+        )
+        .eq("isPortfolio", true)
+        .eq("type", "PHOTO")
+        .order("takenAt", { ascending: false });
 
-    if (options?.stage) {
-      query = query.eq("stage", options.stage);
-    }
+      if (options?.stage) {
+        query = query.eq("stage", options.stage);
+      }
 
-    if (options?.limit) {
-      query = query.limit(options.limit);
-    }
+      return query;
+    };
 
-    const { data, error } = await query;
-    if (error || !data) return [];
+    const serviceTags = options?.serviceTags;
+    let rows: PortfolioAssetRow[];
 
-    return (data as unknown as PortfolioAssetRow[])
-      .filter((row) => {
-        if (!options?.serviceTags?.length) return true;
-        const jobTags: string[] = row.Job?.categoryTags ?? [];
-        return options.serviceTags.some((tag) =>
-          jobTags.some((jt) => jt.toLowerCase().includes(tag.toLowerCase())),
+    if (!serviceTags?.length) {
+      let query = buildQuery();
+      if (options?.limit) query = query.limit(options.limit);
+
+      const { data, error } = await query;
+      if (error || !data) return [];
+      rows = data as unknown as PortfolioAssetRow[];
+    } else {
+      // The limit counts matching images, not unrelated recent portfolio rows.
+      // Bound the scan so a sparse category cannot trigger an unbounded fetch.
+      const requestedLimit = options?.limit || maxFilteredRows;
+      if (requestedLimit < 0) return [];
+      const matches: PortfolioAssetRow[] = [];
+
+      for (let offset = 0; offset < maxFilteredRows; offset += filteredPageSize) {
+        const { data, error } = await buildQuery()
+          .order("id", { ascending: true })
+          .range(offset, offset + filteredPageSize - 1);
+        if (error || !data) return [];
+
+        const page = data as unknown as PortfolioAssetRow[];
+        matches.push(
+          ...page.filter((row) => {
+            const jobTags = row.Job?.categoryTags ?? [];
+            return serviceTags.some((tag) => jobTags.some((jt) => jt.toLowerCase().includes(tag.toLowerCase())));
+          }),
         );
-      })
-      .map((row) => ({
-        id: row.id,
-        url: publicUrl(row.storageKey),
-        thumbnail: thumbnailUrl(row.storageKey),
-        alt: row.description || row.fileName || "Project photo",
-        stage: row.stage,
-        area: row.area,
-        tags: row.tags ?? [],
-        jobName: row.Job?.jobName ?? "",
-        takenAt: row.takenAt,
-      }));
+
+        if (matches.length >= requestedLimit || page.length < filteredPageSize) break;
+      }
+
+      rows = matches.slice(0, requestedLimit);
+    }
+
+    return rows.map((row) => ({
+      id: row.id,
+      url: publicUrl(row.storageKey),
+      thumbnail: thumbnailUrl(row.storageKey),
+      alt: row.description || row.fileName || "Project photo",
+      stage: row.stage,
+      area: row.area,
+      tags: row.tags ?? [],
+      jobName: row.Job?.jobName ?? "",
+      takenAt: row.takenAt,
+    }));
   } catch {
     return [];
   }
@@ -100,11 +129,10 @@ async function fetchPortfolioImages(options?: {
  * Results are cached and tagged "portfolio" -- call revalidateTag("portfolio")
  * to bust the cache instantly when new photos are published.
  */
-export const getPortfolioImages = unstable_cache(
-  fetchPortfolioImages,
-  ["portfolio-images"],
-  { tags: ["portfolio"], revalidate: 3600 },
-);
+export const getPortfolioImages = unstable_cache(fetchPortfolioImages, ["portfolio-images"], {
+  tags: ["portfolio"],
+  revalidate: 3600,
+});
 
 /**
  * Grouped before/during/after for a single project showcase.

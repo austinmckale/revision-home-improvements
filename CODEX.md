@@ -17,7 +17,9 @@
 ## Portfolio Presentation
 
 - Curate the largest project placements explicitly in `src/content/projectShowcase.ts`; never let alphabetical or location sorting choose the hero.
-- Lead the homepage and Projects page with the Allentown kitchen, Reading patio and pavilion, and Lehigh Valley basement theater unless a reviewed editorial decision changes that selection.
+- Lead the homepage and Projects page with the blue-cabinet kitchen collection, patio and pavilion collection, and basement media-room collection. The September 30 evidence review replaced the mixed kitchen feature; historic slug towns do not authenticate project locations.
+- Public project exports apply `projectEvidence.ts`. Preserve the original records for traceability; do not publish their unsupported towns, durations, customer quotes or hidden construction stories without primary job records. Keep separately labeled photo groups separate and source-link published company review excerpts.
+- Customer-facing titles and descriptions should describe the space, design and finishes in plain language. Keep internal evidence/audit explanations in the audit reports. Separate different rooms with clear design headings; never use a headline such as "Two kitchens. Separate photo groups." Label generated service imagery as illustrative and keep it out of project galleries.
 - Keep commercial jobs in the separate commercial section, with the same card size as supporting residential work.
 - Keep planning boards and construction documentation separate from completed residential galleries. Preserve their detail pages and URLs.
 - Review the actual photos, crops, card order, filters, and mobile layout before publishing portfolio changes.

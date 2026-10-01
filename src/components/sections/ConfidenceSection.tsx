@@ -10,7 +10,8 @@ type ConfidenceSectionProps = {
 const confidenceItems = [
   {
     title: "Written Scope and Milestones",
-    detail: "Every project starts with a clear scope, timeline checkpoints, and approval path before build work starts.",
+    detail:
+      "Every project starts with a clear scope, timeline checkpoints, and approval path before build work starts.",
   },
   {
     title: "Workmanship Warranty Terms",
@@ -18,7 +19,8 @@ const confidenceItems = [
   },
   {
     title: "Clean Jobsite Standards",
-    detail: "Daily site care, organized sequencing, and final walkthrough punch-list completion are built into the process.",
+    detail:
+      "Daily site care, organized sequencing, and final walkthrough punch-list completion are built into the process.",
   },
   {
     title: "Financing and Budget Options",
@@ -57,7 +59,7 @@ export default function ConfidenceSection({
           Workmanship Warranty
         </Link>
         <Link href="/licenses-and-insurance" className="font-semibold text-[var(--accent)]">
-          Licenses and Insurance
+          Registration and Insurance
         </Link>
       </div>
     </section>

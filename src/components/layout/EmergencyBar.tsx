@@ -19,9 +19,7 @@ export default function EmergencyBar() {
   // Hide completely on homepage
   if (pathname === "/") return null;
 
-  const isRestorationPage = RESTORATION_PATHS.some(
-    (p) => pathname === p || pathname.startsWith(p + "/"),
-  );
+  const isRestorationPage = RESTORATION_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/"));
 
   // On restoration pages: full emergency banner
   if (isRestorationPage) {
@@ -29,13 +27,13 @@ export default function EmergencyBar() {
       <div className="border-b border-[var(--border)] bg-[var(--surface-soft)] py-2">
         <Container className="flex flex-wrap items-center justify-between gap-2 text-sm">
           <p className="text-[var(--accent)]">
-            <span className="font-semibold">Fire or water damage?</span> Call first for priority scheduling.
+            <span className="font-semibold">Fire or water damage?</span> Call to discuss repair scope and availability.
           </p>
           <div className="flex items-center gap-3">
             <a
               href={siteConfig.phoneHref}
               className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
-              aria-label={`Call ${siteConfig.phoneDisplay} for priority restoration scheduling`}
+              aria-label={`Call ${siteConfig.phoneDisplay} to discuss restoration availability`}
             >
               <span className="md:hidden">Call {siteConfig.phoneDisplay}</span>
               <span className="hidden md:inline">Call now</span>
@@ -63,10 +61,7 @@ export default function EmergencyBar() {
         >
           Call {siteConfig.phoneDisplay}
         </a>
-        <Link
-          href="/fire-water-damage-restoration"
-          className="font-semibold underline-offset-2 hover:underline"
-        >
+        <Link href="/fire-water-damage-restoration" className="font-semibold underline-offset-2 hover:underline">
           Restoration help
         </Link>
       </Container>

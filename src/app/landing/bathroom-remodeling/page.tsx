@@ -8,12 +8,12 @@ import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
 import { getServiceJsonLd } from "@/lib/structuredData";
-import { testimonials } from "@/content/testimonials";
+import { getFeaturedTestimonials } from "@/content/testimonials";
 
 export const metadata: Metadata = {
   title: "Bathroom Remodeling — Get a Quote | Lehigh Valley & Berks County",
   description:
-    "Request a bathroom remodeling quote from RHI Pros. Licensed, insured, warranty-backed. Serving Allentown, Bethlehem, Lehigh Valley, Reading, and Berks County.",
+    "Request a bathroom remodeling quote from RHI Pros. Pennsylvania HIC number PA185945. Written scope and estimate. Serving Allentown, Bethlehem, Lehigh Valley, Reading, and Berks County.",
   robots: { index: false, follow: false },
 };
 
@@ -26,7 +26,7 @@ const processSteps = [
   {
     num: "2",
     title: "We call to discuss scope",
-    desc: "Within one business day we schedule a walk-through and measure the space.",
+    desc: "Discuss your priorities, location and availability, then agree on the next step.",
   },
   {
     num: "3",
@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: "How long does a typical bathroom remodel take?",
-    a: "Most full bathroom remodels take 2–4 weeks depending on scope, tile complexity, and what we find behind the walls. We give you a timeline with the written scope.",
+    a: "Timing depends on the agreed scope, material availability, room access and existing conditions. Confirm the schedule and any dependencies alongside your written scope.",
   },
   {
     q: "Can you work with my existing plumbing layout?",
@@ -50,11 +50,11 @@ const faqs = [
   },
   {
     q: "Do you handle waterproofing?",
-    a: "Yes. Proper waterproofing behind tile and at the shower base is critical. We use Schluter Kerdi systems in all wet zones — we do not shortcut wet-zone assemblies.",
+    a: "Discuss the wet areas, selected fixtures and proposed waterproofing assembly during scope planning. The system, preparation and installation responsibilities should be named in the written proposal.",
   },
   {
     q: "What does a full bathroom gut include?",
-    a: "Full demo down to studs and subfloor, rot repair if needed, galvanized drain replacement with PVC, Schluter Kerdi waterproofing, tile on Ditra uncoupling membrane, vanity scribed to fit, exhaust ducted to exterior, and all trim/paint/silicone detailing.",
+    a: "The scope depends on the room and existing conditions. Agree on demolition limits, plumbing and electrical responsibilities, ventilation, wet-area preparation, fixtures, surfaces and finish work before construction. Repairs to concealed conditions need assessment rather than an assumption that every bathroom needs the same work.",
   },
 ];
 
@@ -73,7 +73,7 @@ const galleryImages = [
   },
   {
     src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
-    alt: "Completed bathroom with new barn door entry",
+    alt: "Bathroom doorway with a sliding door, gray vanity and black-framed shower enclosure",
   },
 ];
 
@@ -84,16 +84,23 @@ export default function BathroomLandingPage() {
     "Allentown, Bethlehem, Lehigh Valley, Reading, Wyomissing, Berks County",
   );
 
-  const bathroomReviews = testimonials
-    .filter((t) => t.serviceSlug === "bathroom-remodeling")
-    .slice(0, 3);
+  const bathroomReviews = getFeaturedTestimonials();
 
   return (
     <>
       <JsonLd data={jsonLd} />
 
       {/* ── HERO: Text + Image side-by-side on desktop ── */}
-      <ServiceHero eyebrow="Bathroom remodeling · Lehigh Valley & Berks County" title="A bathroom, thoughtfully rebuilt." intro="Start with a written scope. Bring tile, fixtures, waterproofing, and finish details together in a bathroom designed around your home." image={galleryImages[0]} primaryHref="#landing-quote-form" primaryLabel="Request a bathroom quote" secondaryHref={siteConfig.phoneHref} secondaryLabel={`Call ${siteConfig.phoneDisplay}`} />
+      <ServiceHero
+        eyebrow="Bathroom remodeling · Lehigh Valley & Berks County"
+        title="A bathroom, thoughtfully rebuilt."
+        intro="Start with a written scope. Bring tile, fixtures, waterproofing, and finish details together in a bathroom designed around your home."
+        image={galleryImages[0]}
+        primaryHref="#landing-quote-form"
+        primaryLabel="Request a bathroom quote"
+        secondaryHref={siteConfig.phoneHref}
+        secondaryLabel={`Call ${siteConfig.phoneDisplay}`}
+      />
 
       {/* ── INLINE QUOTE FORM ── */}
       <section id="landing-quote-form" className="py-10 md:py-16">
@@ -105,9 +112,7 @@ export default function BathroomLandingPage() {
       {/* ── WHAT HAPPENS NEXT (anxiety reducer — before social proof) ── */}
       <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-10 md:py-14">
         <Container className="mx-auto max-w-2xl">
-          <h2 className="heading-serif text-center text-2xl text-[var(--accent)]">
-            What Happens After You Submit
-          </h2>
+          <h2 className="heading-serif text-center text-2xl text-[var(--accent)]">What Happens After You Submit</h2>
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             {processSteps.map((s) => (
               <div key={s.num} className="text-center md:text-left">
@@ -127,9 +132,9 @@ export default function BathroomLandingPage() {
         <Container className="mx-auto max-w-3xl">
           <div className="flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-between sm:text-left">
             <div>
-              <h2 className="heading-serif text-2xl text-[var(--accent)]">What Our Clients Say</h2>
+              <h2 className="heading-serif text-2xl text-[var(--accent)]">Independent company reviews</h2>
               <p className="mt-1 text-sm text-[var(--muted)]">
-                Read homeowner feedback and explore our bathroom projects.
+                Company review excerpts from Angi, with links to the original source.
               </p>
             </div>
             <a
@@ -163,9 +168,14 @@ export default function BathroomLandingPage() {
                 </blockquote>
                 <div className="mt-4 border-t border-[var(--border)] pt-3">
                   <p className="text-sm font-semibold text-[var(--accent)]">{review.name}</p>
-                  <p className="text-xs text-[var(--muted)]">
+                  <a
+                    href={review.verification.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold text-[var(--brand)] underline underline-offset-4"
+                  >
                     {review.context} · {review.source}
-                  </p>
+                  </a>
                 </div>
               </article>
             ))}
@@ -189,17 +199,14 @@ export default function BathroomLandingPage() {
       <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-10 md:py-14">
         <Container>
           <h2 className="heading-serif text-center text-2xl text-[var(--accent)] md:text-left">
-            Recent Bathroom Work
+            Bathroom details, up close
           </h2>
           <p className="mt-1 text-center text-sm text-[var(--muted)] md:text-left">
-            Bethlehem, PA — full gut and rebuild
+            Explore shower, vanity and finish details.
           </p>
           <div className="mt-5 flex gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-4 md:overflow-visible">
             {galleryImages.map((img) => (
-              <div
-                key={img.src}
-                className="w-64 flex-shrink-0 overflow-hidden rounded-xl bg-white md:w-auto"
-              >
+              <div key={img.src} className="w-64 flex-shrink-0 overflow-hidden rounded-xl bg-white md:w-auto">
                 <Image
                   {...getProjectImageProps(img)}
                   alt={img.alt}
@@ -220,15 +227,10 @@ export default function BathroomLandingPage() {
           <h2 className="heading-serif text-2xl text-[var(--accent)]">Common Questions</h2>
           <div className="mt-5 space-y-3">
             {faqs.map((faq) => (
-              <details
-                key={faq.q}
-                className="surface group overflow-hidden rounded-xl transition-colors"
-              >
+              <details key={faq.q} className="surface group overflow-hidden rounded-xl transition-colors">
                 <summary className="flex cursor-pointer items-center justify-between px-5 py-4 text-sm font-semibold text-[var(--accent)] outline-none marker:content-['']">
                   {faq.q}
-                  <span className="ml-2 text-[var(--brand)] transition-transform group-open:rotate-180">
-                    ↓
-                  </span>
+                  <span className="ml-2 text-[var(--brand)] transition-transform group-open:rotate-180">↓</span>
                 </summary>
                 <div className="px-5 pb-4 pt-0 text-sm text-[var(--muted)]">{faq.a}</div>
               </details>
@@ -240,12 +242,8 @@ export default function BathroomLandingPage() {
       {/* ── REPEAT CTA ── */}
       <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-10 md:py-14">
         <Container className="mx-auto max-w-xl text-center">
-          <h2 className="heading-serif text-2xl text-[var(--accent)]">
-            Ready to start your bathroom project?
-          </h2>
-          <p className="mt-2 text-sm text-[var(--muted)]">
-            No obligation. Written scope before any work begins.
-          </p>
+          <h2 className="heading-serif text-2xl text-[var(--accent)]">Ready to start your bathroom project?</h2>
+          <p className="mt-2 text-sm text-[var(--muted)]">No obligation. Written scope before any work begins.</p>
           <div className="mt-5 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <a
               href="#landing-quote-form"

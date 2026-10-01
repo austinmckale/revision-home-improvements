@@ -101,13 +101,6 @@ async function sendLeadEmail(payload: Record<string, unknown>) {
   const from = process.env.EMAIL_FROM || user;
 
   if (!host || !user || !pass || !to || !from) {
-    console.error("[quote-api] Email delivery skipped: Missing SMTP configuration", {
-      host: Boolean(host),
-      user: Boolean(user),
-      pass: Boolean(pass),
-      to: Boolean(to),
-      from: Boolean(from),
-    });
     return { delivered: false, reason: "missing_smtp_config" as const };
   }
 
@@ -133,19 +126,14 @@ async function sendLeadEmail(payload: Record<string, unknown>) {
     body.push(`Source: ${String(payload.utm_source)} / ${String(payload.utm_medium || "")}`);
   }
 
-  try {
-    await transporter.sendMail({
-      from,
-      to,
-      replyTo: payload.email ? String(payload.email) : undefined,
-      subject,
-      text: body.join("\n"),
-    });
-    return { delivered: true as const };
-  } catch (err) {
-    console.error("[quote-api] Email delivery failed:", err);
-    throw err;
-  }
+  await transporter.sendMail({
+    from,
+    to,
+    replyTo: payload.email ? String(payload.email) : undefined,
+    subject,
+    text: body.join("\n"),
+  });
+  return { delivered: true as const };
 }
 
 async function sendFbConversionEvent(payload: Record<string, unknown>, ip?: string, ua?: string) {
@@ -181,12 +169,35 @@ async function sendFbConversionEvent(payload: Record<string, unknown>, ip?: stri
   });
 
   if (!res.ok) {
-    const text = await res.text();
-    console.error("[quote-api] FB Conversions API failed:", res.status, text);
     throw new Error(`FB CAPI failed (${res.status})`);
   }
 
   return { delivered: true as const };
+}
+
+function logDeliveryResult(
+  channel: string,
+  result: PromiseSettledResult<{ delivered?: boolean; forwarded?: boolean; reason?: string; status?: number }>,
+) {
+  if (result.status === "rejected") {
+    // Delivery exceptions may contain provider responses, credentials or lead details.
+    console.warn("[quote-api] Delivery channel result:", { channel, outcome: "failed", reason: "request_error" });
+    return false;
+  }
+
+  const delivered = result.value.delivered === true || result.value.forwarded === true;
+  if (delivered) {
+    console.log("[quote-api] Delivery channel result:", { channel, outcome: "delivered" });
+  } else {
+    const reason = result.value.reason || "not_acknowledged";
+    console.warn("[quote-api] Delivery channel result:", {
+      channel,
+      outcome: reason.startsWith("missing_") ? "skipped" : "failed",
+      reason,
+      status: result.value.status,
+    });
+  }
+  return delivered;
 }
 
 export async function POST(request: Request) {
@@ -229,10 +240,10 @@ export async function POST(request: Request) {
       ip: remoteIp || "unknown",
     });
 
-    // Send to all channels and log results
+    // Keep the acknowledgements: a skipped channel is not a delivered lead.
     const results = await Promise.allSettled([
-      sendLeadWebhook(parsed.data).then(() => "Webhook"),
-      sendLeadEmail(parsed.data).then(() => "Email"),
+      sendLeadWebhook(parsed.data),
+      sendLeadEmail(parsed.data),
       forwardToManagerAppLead({
         contactName: parsed.data.name,
         phone: parsed.data.phone,
@@ -256,26 +267,25 @@ export async function POST(request: Request) {
         zip: parsed.data.zip,
         timeline: parsed.data.timeline,
       }),
-      sendFbConversionEvent(parsed.data, remoteIp, userAgent).then(() => "FB Ads"),
+      sendFbConversionEvent(parsed.data, remoteIp, userAgent),
     ]);
 
-    const failures = results.filter((r) => r.status === "rejected");
-    if (failures.length > 0) {
-      console.warn(`[quote-api] Some delivery channels failed:`, failures.map(f => (f as PromiseRejectedResult).reason));
-    } else {
-      console.log("[quote-api] Lead delivered successfully to all configured channels.");
-    }
-
-    const managerResult = results[2];
-    if (managerResult.status === "fulfilled") {
-      if (!managerResult.value.forwarded) {
-        console.warn("[quote-api] Manager App delivery skipped or failed:", managerResult.value);
-      } else {
-        console.log("[quote-api] Lead forwarded to Manager App:", {
-          status: managerResult.value.status,
-          leadId: managerResult.value.leadId ?? "unknown",
-        });
-      }
+    const contactDeliveries = [
+      logDeliveryResult("Webhook", results[0]),
+      logDeliveryResult("Email", results[1]),
+      logDeliveryResult("Manager App", results[2]),
+    ];
+    // Analytics can succeed without anyone receiving the customer's request.
+    logDeliveryResult("Facebook conversion (analytics)", results[3]);
+    if (!contactDeliveries.some(Boolean)) {
+      console.error("[quote-api] No contact channel accepted the quote request.");
+      return NextResponse.json(
+        {
+          ok: false,
+          message: `We could not send your request. Please try again or call ${siteConfig.phoneDisplay}.`,
+        },
+        { status: 503 },
+      );
     }
 
     return NextResponse.json({
@@ -284,9 +294,6 @@ export async function POST(request: Request) {
     });
   } catch (err) {
     console.error("[quote-api] Fatal error in POST handler:", err);
-    return NextResponse.json(
-      { ok: false, message: "Something went wrong. Please call us directly." },
-      { status: 500 },
-    );
+    return NextResponse.json({ ok: false, message: "Something went wrong. Please call us directly." }, { status: 500 });
   }
 }

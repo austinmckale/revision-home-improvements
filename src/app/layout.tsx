@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | RHI Pros",
   },
   description:
-    "Licensed remodeling and restoration contractor serving the Lehigh Valley, Reading, and Berks County. Kitchens, bathrooms, basements, and damage repair.",
+    "Remodeling and restoration contractor with Pennsylvania HIC number PA185945 serving the Lehigh Valley, Reading, and Berks County. Kitchens, bathrooms, basements, and damage repair.",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -67,8 +67,14 @@ export default function RootLayout({
   const gtagId = gaId || googleAdsId;
 
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${sans.variable} ${serif.variable}`}>
       <body className="antialiased">
+        <a
+          href="#main-content"
+          className="fixed left-4 top-4 z-[10000] -translate-y-24 bg-[var(--accent)] px-5 py-3 font-semibold text-white focus:translate-y-0 focus:outline-2 focus:outline-offset-2 focus:outline-[var(--brand)]"
+        >
+          Skip to content
+        </a>
         <JsonLd data={getLocalBusinessJsonLd()} />
         {gtmId && (
           <Script id="gtm-init" strategy="afterInteractive">
@@ -87,14 +93,18 @@ export default function RootLayout({
               function gtag(){dataLayer.push(arguments);}
               window.gtag = gtag;
               gtag('js', new Date());${
-                gaId ? `
-              gtag('config', '${gaId}');` : ""
+                gaId
+                  ? `
+              gtag('config', '${gaId}');`
+                  : ""
               }${
-                googleAdsId ? `
+                googleAdsId
+                  ? `
               gtag('config', '${googleAdsId}');
               gtag('config', '${googleAdsPhoneConversionId}', {
                 'phone_conversion_number': '${siteConfig.phoneDisplay}'
-              });` : ""
+              });`
+                  : ""
               }`}
             </Script>
           </>
@@ -116,7 +126,9 @@ fbq('track', 'PageView');`}
         <TrackingEvents />
         <Header />
         <EmergencyBar />
-        <main className="pb-20 md:pb-0">{children}</main>
+        <main id="main-content" tabIndex={-1} className="pb-20 outline-none md:pb-0">
+          {children}
+        </main>
         <Footer />
         <StickyCTA />
       </body>

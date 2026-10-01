@@ -1,0 +1,1392 @@
+{
+  "date": "2026-09-30",
+  "limitation": "Visual continuity and asset reuse are observable; they do not authenticate the property, customer, project location, or work performed by RHI Pros.",
+  "uniquePhotoPaths": 103,
+  "crossCaseAssetReuse": [
+    [
+      {
+        "slug": "lehigh-valley-full-exterior-refresh",
+        "src": "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg"
+      },
+      {
+        "slug": "lehigh-valley-dormer-shutter-detail-refresh",
+        "src": "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg"
+      }
+    ],
+    [
+      {
+        "slug": "lehigh-valley-full-exterior-refresh",
+        "src": "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg"
+      },
+      {
+        "slug": "lehigh-valley-dormer-shutter-detail-refresh",
+        "src": "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg"
+      }
+    ],
+    [
+      {
+        "slug": "lehigh-valley-full-exterior-refresh",
+        "src": "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg"
+      },
+      {
+        "slug": "lehigh-valley-dormer-shutter-detail-refresh",
+        "src": "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg"
+      }
+    ]
+  ],
+  "projects": [
+    {
+      "route": "/projects/allentown-kitchen-layout-upgrade",
+      "title": "Kitchen Layout Upgrade in Allentown",
+      "location": "Allentown, PA",
+      "service": "kitchen-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "MANUAL: two visibly different kitchens; no authoritative mapping to the Allentown case study. Images and claims unchanged. See priority finding below.",
+      "testimonial": {
+        "quote": "Clear communication from estimate to closeout and the final details came out excellent.",
+        "author": "Allentown homeowner"
+      },
+      "images": [
+        {
+          "src": "/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg",
+          "sha256": "161d3f8c4993e73dd1704d03a7013f8ff6e5a48aee10a4a4c4d7225ead836a81",
+          "width": 1440,
+          "height": 1080,
+          "usedIn": ["images"],
+          "alt": "High-end kitchen remodel with island, premium appliances, and coordinated perimeter cabinetry.",
+          "identicalSourceFiles": ["public/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg"]
+        },
+        {
+          "src": "/images/projects/allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg",
+          "sha256": "9bf08fb46eb6c16aeab2fa99d97ef5d7a7dfedc624f9ca895837a9896647dcf5",
+          "width": 1440,
+          "height": 1080,
+          "usedIn": ["images"],
+          "alt": "Same kitchen after remodel: island, pendant lighting, and appliance wall.",
+          "identicalSourceFiles": ["public/images/projects/allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg"]
+        },
+        {
+          "src": "/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
+          "sha256": "f35ea1b2aeadc1d0ef1ec18335c7c9b3e31deda4da9e7912eac61d848b0cd968",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Kitchen remodel with updated finishes, flooring transition, and fixture detailing.",
+          "identicalSourceFiles": [
+            "public/images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
+            "public/images/projects/_review/duplicates/kitchen-1-2.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg",
+          "sha256": "8033773705cd9c9eff494153a64f516e1b609b975f7e0bbec985762a6d1a09db",
+          "width": 1500,
+          "height": 2000,
+          "usedIn": ["images"],
+          "alt": "Perimeter cabinet run and work zone after kitchen layout upgrade.",
+          "identicalSourceFiles": ["public/images/projects/allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/bethlehem-bathroom-refresh",
+      "title": "Bathroom Refresh in Bethlehem",
+      "location": "Bethlehem, PA",
+      "service": "bathroom-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "MANUAL: shower before/after appears compatible, but the doorway hero is a later separate import; source/job identity is not proven. Location and testimonial were relabeled in Git history. Unchanged.",
+      "testimonial": {
+        "quote": "The process was straightforward and we felt informed at every stage.",
+        "author": "Bethlehem homeowner"
+      },
+      "images": [
+        {
+          "src": "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
+          "sha256": "c37ed8dc45fa5085cf85e5a32bcb54590343fb7d4d8993f7d0d48c50c7b6ce7f",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Finished bathroom after remodel with gray vanity, black fixtures, and new door addition.",
+          "identicalSourceFiles": ["public/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg"]
+        },
+        {
+          "src": "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
+          "sha256": "24ff559e0b52fb0eef9c101aa39d31bafb3c9045f3482aafd2236adc1598f9ee",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images", "afterImages"],
+          "alt": "Finished bathroom shower enclosure after remodel.",
+          "identicalSourceFiles": [
+            "public/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
+            "public/images/projects/_review/duplicates/bathroom-after-4-2.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg",
+          "sha256": "7d5d3f9e0ef0396507715fb2da961b2be6f73e735677006f71c2d2ddfcd2c8b6",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["beforeImages"],
+          "alt": "Bathroom before remodel with original shower layout, viewed through the door.",
+          "identicalSourceFiles": [
+            "public/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg",
+            "public/images/projects/_review/duplicates/bathroom-before-3-2.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/projects/allentown-commercial-bathroom-renovation",
+      "title": "Commercial Bathroom Renovation in Allentown",
+      "location": "Allentown, PA",
+      "service": "bathroom-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "FIXED: neutral project CTA and no residential financing teaser; corrected sink-area-after.png alt to describe visible stalls/floor. Corridor pair appears coherent. MANUAL: stall-finished.jpg has different floor/stall finishes from the blue-stall views; confirm phase or restroom identity and testimonial.",
+      "testimonial": {
+        "quote": "They took a worn, outdated space and turned it into a clean, modern, professional-looking bathroom and hallway area. The finished work looks sharp, durable, and well thought out.",
+        "author": "Allentown commercial client"
+      },
+      "images": [
+        {
+          "src": "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png",
+          "sha256": "9dc10f15c7bbaf98cbad4668d2d2576361e78d90a51e90d609df13277a9ae69d",
+          "width": 470,
+          "height": 788,
+          "usedIn": ["images"],
+          "alt": "Commercial restroom interior with blue stall doors and refreshed floor surfaces.",
+          "identicalSourceFiles": ["public/images/projects/allentown-commercial-bathroom/after/sink-area-after.png"]
+        },
+        {
+          "src": "/images/projects/allentown-commercial-bathroom/after/stall-finished.jpg",
+          "sha256": "79f13dc8d2b15696a288cdd1a62d4cb61f00150a987156d56f7e9cd2dedccbb6",
+          "width": 768,
+          "height": 1024,
+          "usedIn": ["images"],
+          "alt": "Finished commercial restroom stall run after renovation in Allentown.",
+          "identicalSourceFiles": [
+            "public/images/projects/allentown-commercial-bathroom/after/stall-finished.jpg",
+            "Photos Labeled/Allentown Commercial Bathroom/allentown-commercial-bathroom-stall-finished.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/allentown-commercial-bathroom/after/floor-after.png",
+          "sha256": "1699d61fc27d40f2ade40c041bf48906570d1b78ed50ae121256d554f6deeb0a",
+          "width": 470,
+          "height": 788,
+          "usedIn": ["images"],
+          "alt": "Restroom floor zone after refresh with durable finish and cleaner transitions.",
+          "identicalSourceFiles": ["public/images/projects/allentown-commercial-bathroom/after/floor-after.png"]
+        },
+        {
+          "src": "/images/projects/allentown-commercial-bathroom/before/hallway-before.png",
+          "sha256": "64ee4eac86098c09a98f194fcc77647e57cd87e86f6834a84c88c2d8ba66a3e6",
+          "width": 470,
+          "height": 788,
+          "usedIn": ["beforeImages"],
+          "alt": "Commercial restroom corridor before renovation with worn walls and flooring.",
+          "identicalSourceFiles": ["public/images/projects/allentown-commercial-bathroom/before/hallway-before.png"]
+        },
+        {
+          "src": "/images/projects/allentown-commercial-bathroom/after/hallway-after.png",
+          "sha256": "69f4705991922b867a6c60317d2c9febfc8e81b362abacf01f52fdeed6dc5271",
+          "width": 470,
+          "height": 788,
+          "usedIn": ["afterImages"],
+          "alt": "Same corridor after renovation with brighter surfaces, refreshed flooring, and cleaner sightlines.",
+          "identicalSourceFiles": ["public/images/projects/allentown-commercial-bathroom/after/hallway-after.png"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/allentown-exterior-log-home-refresh",
+      "title": "Log-Style Exterior Home Refresh in Allentown",
+      "location": "Allentown, PA",
+      "service": "exterior-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Visually coherent log-style house with matching windows and garage. No cross-case duplicate found. MANUAL: actual town and RHI scope remain unverified. Photos unchanged.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/allentown-exterior-log-home/after/front-finished.jpg",
+          "sha256": "0fbf65a50736107ef58c8b0458d8b009992362a198aceead2c7d7b5660bbd06b",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Finished log-style home exterior after remodeling work in Allentown.",
+          "identicalSourceFiles": ["public/images/projects/allentown-exterior-log-home/after/front-finished.jpg"]
+        },
+        {
+          "src": "/images/projects/allentown-exterior-log-home/after/garage-elevation.jpg",
+          "sha256": "a08a5cc32194bd5a4c6eb16c8def398679202b1b5c271e555bc8765de12016ef",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Garage-side exterior elevation during remodeling work on a log-style home in Allentown.",
+          "identicalSourceFiles": ["public/images/projects/allentown-exterior-log-home/after/garage-elevation.jpg"]
+        },
+        {
+          "src": "/images/projects/allentown-exterior-log-home/process/lift-access-work.jpg",
+          "sha256": "10f9f30dfad441fe51899351ad381f4b9832267c9fd780d4d6eb23c4d2e3a5ce",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Lift-access exterior remodeling work underway on an Allentown home.",
+          "identicalSourceFiles": ["public/images/projects/allentown-exterior-log-home/process/lift-access-work.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/bethlehem-exterior-staircase-build",
+      "title": "Exterior Staircase Build in Bethlehem",
+      "location": "Bethlehem, PA",
+      "service": "exterior-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "MANUAL: only one photograph. Construction details visible, but structural scope, timeline, and town cannot be authenticated from the image. Unchanged.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/bethlehem-exterior-staircase/after/staircase-finished.jpg",
+          "sha256": "be797f33c001f44f5383cf2a8bc8b49558c87273765c085669d1bd350128b1e8",
+          "width": 560,
+          "height": 760,
+          "usedIn": ["images"],
+          "alt": "Finished exterior staircase and landing build in Bethlehem.",
+          "identicalSourceFiles": ["public/images/projects/bethlehem-exterior-staircase/after/staircase-finished.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/reading-commercial-bar-window-upgrade",
+      "title": "Commercial Bar Window Upgrade in Reading",
+      "location": "Reading, PA",
+      "service": "exterior-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "FIXED: Exterior Remodeling is the existing broader window-related category; featureInServiceListings remains false. Neutral CTA and no residential financing teaser. MANUAL: single photo and timeline/scope verification.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/reading-commercial-bar-window/after/window-upgrade.jpg",
+          "sha256": "3c0fa60f0de26a07716e3d496749714d061bb32ca9d83a630778bb400b984185",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Commercial bar window upgrade with new trim and brighter interior light in Reading.",
+          "identicalSourceFiles": ["public/images/projects/reading-commercial-bar-window/after/window-upgrade.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/lehigh-valley-full-exterior-refresh",
+      "title": "Full Exterior Refresh in Lehigh Valley",
+      "location": "Lehigh Valley, PA",
+      "service": "exterior-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "MANUAL: shares three exact assets with Dormer/Shutter; original source folder is named Wyomissing Exterior Refresh and Git history changes market. No merge, photo removal, or location edit.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
+          "sha256": "7d2a5a839589ec8e3f470ef358c52b783d1fe9ef22b5f6618a03c1d244d6bde7",
+          "width": 720,
+          "height": 1544,
+          "usedIn": ["images", "afterImages"],
+          "alt": "Finished front elevation after the Lehigh Valley exterior refresh.",
+          "identicalSourceFiles": [
+            "public/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
+            "Photos Labeled/Wyomissing Exterior Refresh/wyomissing-exterior-refresh-finished-original.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
+          "sha256": "5f570e0e3f0360a0b8b64cfd54f5bbda8aa59242b883b3699aac77204db98c52",
+          "width": 946,
+          "height": 2048,
+          "usedIn": ["images"],
+          "alt": "Finished full exterior refresh on a historic-style home in the Lehigh Valley.",
+          "identicalSourceFiles": ["public/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg"]
+        },
+        {
+          "src": "/images/projects/lehigh-valley-exterior-refresh/process/exterior-in-progress.jpg",
+          "sha256": "82e7df3b75a40ae9f326a9b95c8d12284bcd6b8a3d559c5d141082953350ed41",
+          "width": 720,
+          "height": 1544,
+          "usedIn": ["images"],
+          "alt": "Exterior refresh in progress on the Lehigh Valley home.",
+          "identicalSourceFiles": [
+            "public/images/projects/lehigh-valley-exterior-refresh/process/exterior-in-progress.jpg",
+            "Photos Labeled/Wyomissing Exterior Refresh/wyomissing-exterior-refresh-in-progress-original.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg",
+          "sha256": "9e0e0c658695ade613897e279f0491de484eac24fc26257c7ae246d5a30d61e9",
+          "width": 946,
+          "height": 2048,
+          "usedIn": ["beforeImages"],
+          "alt": "Home exterior before shutters and finish updates in the Lehigh Valley.",
+          "identicalSourceFiles": ["public/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/lehigh-valley-dormer-shutter-detail-refresh",
+      "title": "Dormer and Shutter Detail Refresh in Lehigh Valley",
+      "location": "Lehigh Valley, PA",
+      "service": "exterior-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "MANUAL: same three exact assets as Full Exterior; separate job/phase not established. No merge, photo removal, or location edit.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
+          "sha256": "5f570e0e3f0360a0b8b64cfd54f5bbda8aa59242b883b3699aac77204db98c52",
+          "width": 946,
+          "height": 2048,
+          "usedIn": ["images", "afterImages"],
+          "alt": "Finished front elevation after dormer, shutter, and exterior detail refresh in the Lehigh Valley.",
+          "identicalSourceFiles": ["public/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg"]
+        },
+        {
+          "src": "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
+          "sha256": "7d2a5a839589ec8e3f470ef358c52b783d1fe9ef22b5f6618a03c1d244d6bde7",
+          "width": 720,
+          "height": 1544,
+          "usedIn": ["images"],
+          "alt": "Refinished dormer and front-entry details after the Lehigh Valley exterior update.",
+          "identicalSourceFiles": [
+            "public/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
+            "Photos Labeled/Wyomissing Exterior Refresh/wyomissing-exterior-refresh-finished-original.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg",
+          "sha256": "9e0e0c658695ade613897e279f0491de484eac24fc26257c7ae246d5a30d61e9",
+          "width": 946,
+          "height": 2048,
+          "usedIn": ["beforeImages"],
+          "alt": "Front elevation before dormer cleanup and shutter updates in the Lehigh Valley.",
+          "identicalSourceFiles": ["public/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/bethlehem-interior-flooring-refresh",
+      "title": "Interior Flooring and Finish Refresh in Bethlehem",
+      "location": "Bethlehem, PA",
+      "service": "flooring-installation",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "MANUAL: one photograph; scope additionally claims paint, recessed lighting, windows, and pass-through work. Git history changed Reading to Bethlehem. Unchanged.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
+          "sha256": "e16b512917c8c2282713378275beb0f66ab494e91fd1f4d106049ba8df3fc6e2",
+          "width": 576,
+          "height": 432,
+          "usedIn": ["images"],
+          "alt": "Interior flooring and finish refresh with updated paint, lighting, and windows in Bethlehem.",
+          "identicalSourceFiles": [
+            "public/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/projects/berks-county-ranch-exterior-refresh",
+      "title": "Ranch Exterior Refresh in Berks County",
+      "location": "Berks County, PA",
+      "service": "exterior-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "MANUAL: single exterior photograph supports appearance only. Route, canonical, sitemap inclusion, and 200 response verified. Photos and claims unchanged.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg",
+          "sha256": "03f722a010f99919aa8b5d1e1783e7ac44f677962d3d17aef5261ea098e81cd4",
+          "width": 2048,
+          "height": 1536,
+          "usedIn": ["images"],
+          "alt": "Ranch-style home exterior refresh in Berks County with updated black accents and clean siding lines.",
+          "identicalSourceFiles": [
+            "public/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg",
+            "Photos Labeled/Berks County Exterior Refresh/berks-county-exterior-refresh.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/projects/lehigh-valley-basement-finish-and-detail",
+      "title": "Full Basement Theater and Entertainment Build in Lehigh Valley",
+      "location": "Lehigh Valley, PA",
+      "service": "basement-finishing",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Matching media wall, fireplace, epoxy floor, and columns look internally coherent. MANUAL: scope ownership, audio/lighting work, testimonial, and regional location require confirmation; history changed the market from Berks. Unchanged.",
+      "testimonial": {
+        "quote": "They took a blank basement and turned it into a space our family actually uses every day.",
+        "author": "Lehigh Valley homeowner"
+      },
+      "images": [
+        {
+          "src": "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
+          "sha256": "dcc6d64ac2b7ee516ff69e8b0764d0dec54245078c6276c37cdd0f866f4b5e90",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Finished basement media room with large screen.",
+          "identicalSourceFiles": [
+            "public/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
+            "public/images/projects/_review/duplicates/big-screen-basement-2.jpg",
+            "public/images/projects/_review/duplicates/pace-2-2.jpg",
+            "public/images/projects/_review/duplicates/pace-2.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
+          "sha256": "5ca13d1b07343acecb56286c2fa75fbb25bc2f5ae9b383663bf67b70fada8493",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Basement epoxy flooring finish detail.",
+          "identicalSourceFiles": [
+            "public/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
+            "public/images/projects/_review/duplicates/basement-epoxy-floor-big-screen-2.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg",
+          "sha256": "fda73e5b94530ee9f096b005fb5e209ab717eaaa4ce30cf27e477cc4b7a12e9d",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Wide basement view showing finished layout and floor detail.",
+          "identicalSourceFiles": [
+            "public/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg",
+            "public/images/projects/_review/duplicates/pace.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg",
+          "sha256": "7837d042af5c9852facc3c3d1e8656f41e5b79fc11196d2c8de593c3c01cb7e9",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Basement wide-angle finish showing completed room flow.",
+          "identicalSourceFiles": [
+            "public/images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/projects/lehigh-water-damage-rebuild",
+      "title": "Water Damage Interior Rebuild in Lehigh Valley",
+      "location": "Lehigh Valley, PA",
+      "service": "water-damage-restoration",
+      "mediaType": "project",
+      "showInGallery": false,
+      "finding": "MANUAL: text-only case study with no verified project photographs; excluded from visual portfolio but retained as an indexed detail page. Story, timeline, and anonymous testimonial need support. No generated or unrelated image added.",
+      "testimonial": {
+        "quote": "Fast response and clear next steps made a stressful situation manageable.",
+        "author": "Lehigh Valley homeowner"
+      },
+      "images": []
+    },
+    {
+      "route": "/projects/allentown-flooring-replacement-upgrade",
+      "title": "Flooring Replacement and Interior Upgrade in Allentown",
+      "location": "Allentown, PA",
+      "service": "flooring-installation",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Two opposite-facing room views appear compatible; kitchen pass-through, floor, and fireplace need owner confirmation as one property. MANUAL: limited proof and anonymous testimonial. Unchanged.",
+      "testimonial": {
+        "quote": "The floor feels solid and the finishing details made a big difference in the final look.",
+        "author": "Allentown homeowner"
+      },
+      "images": [
+        {
+          "src": "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
+          "sha256": "09f50ea8b50b719442d2f2348fb94012599c627ac1cb0b1be63900e8e18b8eba",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Completed light wood flooring installation in an Allentown living area.",
+          "identicalSourceFiles": [
+            "public/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
+          "sha256": "7aa8c1b27f3fe72ca1ce298863b9ef93f8cb4a7cedccbfaaf13fb91da73546d7",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Allentown living area with flooring and trim detailed along the fireplace wall.",
+          "identicalSourceFiles": [
+            "public/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/projects/bethlehem-drywall-and-finish-repair",
+      "title": "Drywall and Finish Repair in Bethlehem",
+      "location": "Bethlehem, PA",
+      "service": "drywall-installation-repair",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "MANUAL: one finished-room photograph does not establish the claimed repair stages or anonymous testimonial. Unchanged.",
+      "testimonial": {
+        "quote": "The repaired walls blended in perfectly and saved us from a bigger remodel.",
+        "author": "Bethlehem homeowner"
+      },
+      "images": [
+        {
+          "src": "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
+          "sha256": "7295ee0732641963c27957ade255236083c66610a126ca04f21b1dba834be438",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Paint-ready room surfaces after drywall repair and finish prep.",
+          "identicalSourceFiles": [
+            "public/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
+            "public/images/projects/_review/duplicates/finished-room-2.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/projects/reading-paver-patio-buildout",
+      "title": "Paver Patio and Gable-Roof Pavilion in Reading",
+      "location": "Reading, PA",
+      "service": "paver-installation",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Same house, gable pavilion, and patio visible across the set. MANUAL: verify pavilion/structural work was RHI scope and authenticate anonymous testimonial. Photos unchanged.",
+      "testimonial": {
+        "quote": "The patio feels like a complete extension of the home now. Great planning and finish.",
+        "author": "Reading homeowner"
+      },
+      "images": [
+        {
+          "src": "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
+          "sha256": "245d8d835b92e6aea2947c7d17999b8ae6fa22b90ca20541b0b019e62314ead5",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Finished paver patio with integrated gable-roof pavilion and landscaped edges in Reading.",
+          "identicalSourceFiles": ["public/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg"]
+        },
+        {
+          "src": "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
+          "sha256": "de8b205621807f5df82ea8396f87c19c5f77ccf23f9f0d5d6b5c4d145e994893",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Outdoor living area showing paver field and pavilion roof structure.",
+          "identicalSourceFiles": ["public/images/projects/frontier-patio-gable-roof/after/angle-1.jpg"]
+        },
+        {
+          "src": "/images/projects/frontier-patio-gable-roof/after/angle-2.jpg",
+          "sha256": "1a89e2b861c00467cb63db62121ef79024748db1302fda705c5643ab44ecb7e3",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Alternate view of finished patio, pavilion, and home tie-in.",
+          "identicalSourceFiles": ["public/images/projects/frontier-patio-gable-roof/after/angle-2.jpg"]
+        },
+        {
+          "src": "/images/projects/frontier-patio-gable-roof/after/finished-alt.jpg",
+          "sha256": "1fae26d756ff929a21663c5807a96170b2b84606d8385775bcc5a2b3b6855ae7",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Finished hardscape and pavilion wood ceiling detail.",
+          "identicalSourceFiles": [
+            "public/images/projects/frontier-patio-gable-roof/after/finished-alt.jpg",
+            "public/images/projects/_review/duplicates/frontier-final-2.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/frontier-patio-gable-roof/process/patio-construction.jpg",
+          "sha256": "9525d4ba92ba9974d8c599a1eacc08728ac7e53ffe214f707d7abadc986a195d",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Pavilion framing and patio area during construction.",
+          "identicalSourceFiles": ["public/images/projects/frontier-patio-gable-roof/process/patio-construction.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/bethlehem-pool-patio-renovation",
+      "title": "Pool Patio Renovation in Bethlehem",
+      "location": "Bethlehem, PA",
+      "service": "paver-installation",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Pool shape and surrounding house look consistent between stages. MANUAL: anonymous testimonial repeats an excerpt of the Sara M. Google-labeled review; exact customer/project relationship is not stored. Unchanged.",
+      "testimonial": {
+        "quote": "Ryan and his team did an awesome job on our pool patio renovation. The area looks completely transformed and the quality of the work really shows.",
+        "author": "Bethlehem homeowner"
+      },
+      "images": [
+        {
+          "src": "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg",
+          "sha256": "ca5adb610265ef816dad40eed32f75cf23f37461882afbfba36859a3bc59b7ab",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images", "afterImages"],
+          "alt": "Finished pool patio: wide view of new hardscape and pool surround in Bethlehem.",
+          "identicalSourceFiles": ["public/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg"]
+        },
+        {
+          "src": "/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg",
+          "sha256": "484ab3dc82354caf170c5c3561eb89b5433d81c6ede51a54cdfcd9a29b71ffce",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Step and radius detail along the pool edge after renovation.",
+          "identicalSourceFiles": ["public/images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg"]
+        },
+        {
+          "src": "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg",
+          "sha256": "1cf7de45569e64b787b3d4a65b76f9e63516559898c1e6cbeb857d60dc21b6ea",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["beforeImages"],
+          "alt": "Pool patio before renovation with worn surface and dated pool surround.",
+          "identicalSourceFiles": ["public/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/allentown-fire-damage-interior-rebuild",
+      "title": "Fire Damage Interior Rebuild in Allentown",
+      "location": "Allentown, PA",
+      "service": "fire-damage-restoration",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "MANUAL: two fireplace/hearth pictures do not independently establish a fire-loss project. No asset overlap or job identifier linking to Fire Field Documentation. One misleading bathroom filename is retained. Unchanged.",
+      "testimonial": {
+        "quote": "They brought structure to a chaotic situation and delivered quality work from start to finish.",
+        "author": "Allentown homeowner"
+      },
+      "images": [
+        {
+          "src": "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg",
+          "sha256": "6e78bdba5920c16b62b0242fb670bea4a48e8be4d6a55b55fd17f03a3d3a9572",
+          "width": 1496,
+          "height": 1496,
+          "usedIn": ["images"],
+          "alt": "Rebuilt interior finish work after a fire-damage restoration project.",
+          "identicalSourceFiles": [
+            "public/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg",
+          "sha256": "e331cee07d4d420af93b8d02d3749b14598615942292cd704bc660092185e555",
+          "width": 1496,
+          "height": 1496,
+          "usedIn": ["images"],
+          "alt": "Repair area prepared during the restoration rebuild phase.",
+          "identicalSourceFiles": [
+            "public/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg"
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/projects/ryan-bedroom-interior-refresh",
+      "title": "Bedroom Interior Refresh (Blue Palette)",
+      "location": "Berks County, PA",
+      "service": "drywall-installation-repair",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Before/process/after views appear visually consistent. MANUAL: visible evidence mainly demonstrates flooring, paint, and finishes; confirm drywall was the principal scope before changing category. Unchanged.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
+          "sha256": "66a811000c607a38221696d6ce4dc5f756c4898c430f8a33f93a2b762d9e1d31",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images", "afterImages"],
+          "alt": "Bedroom refresh showing completed blue palette and cleaned-up finish lines.",
+          "identicalSourceFiles": ["public/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg"]
+        },
+        {
+          "src": "/images/projects/ryan-bedroom/before/02-interior-refresh-blue-before-2.jpg",
+          "sha256": "1c85108c3dc0cf871051ee81c07748503be9b9b051677d62fbe29f7a4bb94c09",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Additional before view of bedroom walls prior to refresh.",
+          "identicalSourceFiles": ["public/images/projects/ryan-bedroom/before/02-interior-refresh-blue-before-2.jpg"]
+        },
+        {
+          "src": "/images/projects/ryan-bedroom/process/01-interior-refresh-blue-2-process.jpg",
+          "sha256": "b865bc22d07d5967e3c6deba3435bac312e514257acbed6e8ed5ce3884a7d558",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Bedroom refresh in progress during paint and finish prep.",
+          "identicalSourceFiles": ["public/images/projects/ryan-bedroom/process/01-interior-refresh-blue-2-process.jpg"]
+        },
+        {
+          "src": "/images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg",
+          "sha256": "4fce78bfeba5fd2a0a637bd38103ede5b433e292110184272bef49153187ae22",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Interior refresh underway with protection and phased finish work.",
+          "identicalSourceFiles": [
+            "public/images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/ryan-bedroom/before/01-interior-refresh-before.jpg",
+          "sha256": "4483a422d6f308f9d96031d7a360bc96d8a3ea44040fb5e59d669fcd74c237dc",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["beforeImages"],
+          "alt": "Bedroom before interior refresh with original wall and trim condition.",
+          "identicalSourceFiles": ["public/images/projects/ryan-bedroom/before/01-interior-refresh-before.jpg"]
+        },
+        {
+          "src": "/images/projects/ryan-bedroom/after/04-interior-refresh-blue-4.jpg",
+          "sha256": "3681b66cbbd8183ec2f4893be4ee28d8f79e51a48a5fbb676718e35b886fe834",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["afterImages"],
+          "alt": "Wide view of refreshed bedroom interior after completion.",
+          "identicalSourceFiles": ["public/images/projects/ryan-bedroom/after/04-interior-refresh-blue-4.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/blue-kitchen-cabinet-counters",
+      "title": "Blue Kitchen Cabinets and Countertops",
+      "location": "Lehigh Valley, PA",
+      "service": "kitchen-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Blue cabinet run, appliances, doorway, and layout diagram appear consistent. All eight assets are grouped under one source directory. MANUAL: verify job/location and scope; photos unchanged.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg",
+          "sha256": "5f73ef63d07cef683d4279c5ee0963ba3432d9b7b1e717efeae65b0b18b45a78",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Finished kitchen with blue cabinets and installed countertops.",
+          "identicalSourceFiles": [
+            "public/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg",
+          "sha256": "1acc0ebdeb2d7b89557afe848177f6b2ff283c7055f0c977268207ee040ff8a9",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Kitchen cabinets and counters complete after installation.",
+          "identicalSourceFiles": [
+            "public/images/projects/blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
+          "sha256": "8d21c636290880eda31e576bc753d64120d1de3171c34321b791e7014eb37f79",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Kitchen after cabinet and counter upgrade.",
+          "identicalSourceFiles": [
+            "public/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg",
+          "sha256": "06f62a203af428b78433be65d49f1b4033782d84b4156735fb9704b7543a746a",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Updated kitchen overview with blue cabinet finish.",
+          "identicalSourceFiles": ["public/images/projects/blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg"]
+        },
+        {
+          "src": "/images/projects/blue-kitchen-cabinet-counters/after/03-blue-kitchen-cabinets-1.jpg",
+          "sha256": "783f9574b5c55b387b57dcfdbe9b427d43febac5b1369c8603c23a0ceadb3f06",
+          "width": 838,
+          "height": 2046,
+          "usedIn": ["images"],
+          "alt": "Cabinet and counter detail after kitchen upgrade.",
+          "identicalSourceFiles": [
+            "public/images/projects/blue-kitchen-cabinet-counters/after/03-blue-kitchen-cabinets-1.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg",
+          "sha256": "b5d0a8494f8c8328f4e0f43433fbee2d5ab4b43d46c0fba1e5727afce54b9558",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Countertop installation phase during kitchen remodel.",
+          "identicalSourceFiles": [
+            "public/images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/blue-kitchen-cabinet-counters/process/02-blue-kitchen-cabinets-process.jpg",
+          "sha256": "267a65178f68ac9cdbbcf1fbefec8509695c04adff79157ae17fbcb99d9b1107",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Kitchen cabinets during installation and alignment.",
+          "identicalSourceFiles": [
+            "public/images/projects/blue-kitchen-cabinet-counters/process/02-blue-kitchen-cabinets-process.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/blue-kitchen-cabinet-counters/marketing/01-blue-kitchen-cabinet-layout-diagram.png",
+          "sha256": "012917256b12fa1c7a8d142ea98a3276a283e32d055191d2bee15a822bdddf79",
+          "width": 2778,
+          "height": 1284,
+          "usedIn": ["images"],
+          "alt": "Cabinet layout diagram used to coordinate the kitchen plan.",
+          "identicalSourceFiles": [
+            "public/images/projects/blue-kitchen-cabinet-counters/marketing/01-blue-kitchen-cabinet-layout-diagram.png"
+          ]
+        }
+      ]
+    },
+    {
+      "route": "/projects/ryan-kitchen-remodel",
+      "title": "Kitchen Remodel in Berks County",
+      "location": "Berks County, PA",
+      "service": "kitchen-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Before/after window, sink, and layout look compatible. MANUAL: two images and no work-order evidence; confirm same job and described scope. Unchanged.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg",
+          "sha256": "a61fe0aec06fa843bb3a3157c51b1ef0b68f6599eb2aa68c67154f884fea2935",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images", "afterImages"],
+          "alt": "Kitchen after remodel with updated cabinets, counters, appliances, and lighting.",
+          "identicalSourceFiles": ["public/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg"]
+        },
+        {
+          "src": "/images/projects/ryan-kitchen/before/01-ryans-kitchen-before.jpg",
+          "sha256": "78c46111b57eabadaff8b156c19b5e14f60b9a748ee4ba2241a553ec31c88eb8",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["beforeImages"],
+          "alt": "Kitchen before remodel showing original cabinets, counters, and layout prior to demolition.",
+          "identicalSourceFiles": ["public/images/projects/ryan-kitchen/before/01-ryans-kitchen-before.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/ryan-bathroom-remodel",
+      "title": "Bathroom Remodel in Berks County",
+      "location": "Berks County, PA",
+      "service": "bathroom-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Two photos appear compatible as a small bathroom. MANUAL: verify waterproofing/ventilation claims and scope in what appears to be a half bath. Unchanged.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg",
+          "sha256": "e57a7ff982e6b61ceb60af561803cafd0e2ade41493d9bf996a1448bca726f8c",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images", "afterImages"],
+          "alt": "Bathroom after remodel with vanity, mirror, and wall finishes in the finished half bath.",
+          "identicalSourceFiles": ["public/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg"]
+        },
+        {
+          "src": "/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg",
+          "sha256": "1b6763f01b03826e44ab04678870ee780125d765c795d1d3c6270756b289d1a7",
+          "width": 1242,
+          "height": 2208,
+          "usedIn": ["beforeImages"],
+          "alt": "Bathroom before remodel with original vanity, mirror wall, and floor at the same viewpoint.",
+          "identicalSourceFiles": ["public/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/hamburg-laundry-bathroom-remodel",
+      "title": "Laundry and Half-Bath Remodel in Hamburg, PA",
+      "location": "Hamburg, PA",
+      "service": "bathroom-remodeling",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "Doorway, window, fixtures, and washer bay appear consistent. Route, collection, canonical, sitemap, and 200 response verified. MANUAL: verify timeline and Tammy Y. review-to-project association. Unchanged.",
+      "testimonial": {
+        "quote": "Great price. I would recommend them for great work that they did.",
+        "author": "Tammy Y. · Google Review"
+      },
+      "images": [
+        {
+          "src": "/images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-doorway-view.jpg",
+          "sha256": "0e15c1bb0618cccd3bbb642acc21cf23b771df38d0c033c7e0524a16d89460f2",
+          "width": 1500,
+          "height": 2000,
+          "usedIn": ["images", "afterImages"],
+          "alt": "Doorway view of the finished Hamburg laundry and half-bath with gray flooring and charcoal washer.",
+          "identicalSourceFiles": [
+            "public/images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-doorway-view.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/hamburg-laundry-bathroom/after/vanity-toilet-and-shelving.jpg",
+          "sha256": "0f293544f18f51f1a1f452017e30f6d38fc514e7c9083d13bef6e10988afd0f2",
+          "width": 1500,
+          "height": 2000,
+          "usedIn": ["images"],
+          "alt": "Vanity with stainless utility sink, white toilet, and light wood shelving after remodel.",
+          "identicalSourceFiles": [
+            "public/images/projects/hamburg-laundry-bathroom/after/vanity-toilet-and-shelving.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-full-view.jpg",
+          "sha256": "3206e0fe104590db4ef829799f0d5e464884f555b0c79d3c88718f8c68ab7746",
+          "width": 1500,
+          "height": 2000,
+          "usedIn": ["images"],
+          "alt": "Full view of the remodeled laundry bathroom with washer, open shelves, and LED ceiling light.",
+          "identicalSourceFiles": [
+            "public/images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-full-view.jpg"
+          ]
+        },
+        {
+          "src": "/images/projects/hamburg-laundry-bathroom/after/window-trim-and-washer.jpg",
+          "sha256": "e5acd454096259fb6385829d2c2b402cd8cc9afb4548accaec1f8ba04406d9bd",
+          "width": 1500,
+          "height": 2000,
+          "usedIn": ["images"],
+          "alt": "Finished white window trim and roller shade beside the laundry appliance.",
+          "identicalSourceFiles": ["public/images/projects/hamburg-laundry-bathroom/after/window-trim-and-washer.jpg"]
+        },
+        {
+          "src": "/images/projects/hamburg-laundry-bathroom/before/laundry-bathroom-before.jpg",
+          "sha256": "23b443055cceaaf1f67fd7d24733909077a50bbbf404b4483822f9cf6bbc80b5",
+          "width": 1500,
+          "height": 2000,
+          "usedIn": ["beforeImages"],
+          "alt": "Laundry and half-bath before remodel with dated vinyl flooring, older toilet, and unfinished wall opening.",
+          "identicalSourceFiles": ["public/images/projects/hamburg-laundry-bathroom/before/laundry-bathroom-before.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/lehigh-valley-fire-damage-documentation",
+      "title": "Fire damage rebuild: field documentation",
+      "location": "Lehigh Valley, PA",
+      "service": "fire-damage-restoration",
+      "mediaType": "project",
+      "showInGallery": true,
+      "finding": "FIXED: 38 per-image alt descriptions replace rotating unsupported captions. All images retained. MANUAL: source import put every photo in after regardless of stage; no completion proof or objective link to the fireplace case. See priority finding.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/fire-damage-documentation/after/01-img_7761.jpg",
+          "sha256": "b78005b06375d043308815c295438131c5e0cb063e95b5eb4c40c9bdb1479544",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Boarded dormer window with light-colored trim above a shingled roof.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/01-img_7761.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/02-img_7762.jpg",
+          "sha256": "2a1c0df4e81a4f7343297f4b0ad1cfe9be9424836ca59ee80f173e2a0c7e2a0e",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Boarded dormer window with darkened gable trim.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/02-img_7762.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/03-img_7764.jpg",
+          "sha256": "d59c5951f1baead3ca4104c72b55eddefc5c7fcb32ffc05cff2fdf213abb5f12",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Exposed interior wall studs, ceiling framing, and floorboards.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/03-img_7764.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/04-img_7765.jpg",
+          "sha256": "e2d3f9e60008e2a398e2c53e93fbf7d5b954eb1975ab9ceff4053feb126bb655",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Open wall framing beside a boarded window.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/04-img_7765.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/05-img_7766.jpg",
+          "sha256": "caec7e5d1d668409e439af0771e85df707ea6943e6c44f7c7f81ac8206255698",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "View through exposed wall partitions and ceiling framing.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/05-img_7766.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/06-img_7768.jpg",
+          "sha256": "24afb66237b81c72294ec07ac212866a094ff720fc9030f2a80dbbb7ddacd0ee",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Boarded window and surrounding exposed wall studs.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/06-img_7768.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/07-img_7769.jpg",
+          "sha256": "f7f8b3e83e52394bdac9841e00fc54485fa0359ac08d1be668323dbbd0585aa6",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Boarded window centered in a wall stripped to framing.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/07-img_7769.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/08-img_7770.jpg",
+          "sha256": "e1de9cdb4282afebef361310023b3130168ce3f55c2e0ed427e0e875fba66598",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Boarded window with daylight visible around the opening.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/08-img_7770.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/09-img_8454.jpg",
+          "sha256": "cdea128c32a2dcb37065df3a1540faf3acb20c12b92aaa0e7c96ce16559ac579",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Open front entry with sidelights and exposed interior framing.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/09-img_8454.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/10-img_8455.jpg",
+          "sha256": "0677e60386951f2b0364c8c59ea361868fcd507b82f257ace274045c0bf4c088",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Inside the front entry, showing wall studs and ceiling joists.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/10-img_8455.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/11-img_8456.jpg",
+          "sha256": "a0921e7531195c71069761856f467b8c55e61be62cc5b0ec37fecb515df2a804",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Exposed framing and wiring along the entry passage.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/11-img_8456.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/12-img_8457.jpg",
+          "sha256": "f82007d2804879ed8e921183e9126d3a7afadb68afa6c2b63d160aecb3efa27d",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Staircase beside open wall framing and an unfinished floor.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/12-img_8457.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/13-img_8458.jpg",
+          "sha256": "43111badb0d12b019c6b212082ffb95d884fa783c34f6a4a36cfef45eac8ffa1",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Wide interior view with open ceiling joists and wall partitions.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/13-img_8458.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/14-img_8459.jpg",
+          "sha256": "320b8b522c247a3245f5a888f14b11719f4a9656a39c0ce979c2e9a5c68bdb87",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Interior room with exposed ceiling framing, wall studs, and materials on the floor.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/14-img_8459.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/15-img_8460.jpg",
+          "sha256": "520a58530b3e045b7af0a24c66d2027c36ded7fb998b58e5018ba0db36194992",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Window-side view across an interior stripped to framing.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/15-img_8460.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/16-img_8461.jpg",
+          "sha256": "e82b313d7cbb58643edb585b00af57580a2a26a91288f5fe060516793f645b88",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Long interior view beneath exposed ceiling framing.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/16-img_8461.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/17-img_8462.jpg",
+          "sha256": "2b55e9a40e3619837518182cc11a6a3e3fc4d9bf5601089608ea6dfbda2a8bcd",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Exposed wall and ceiling framing along an unfinished room.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/17-img_8462.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/18-img_8463.jpg",
+          "sha256": "83ddf5e9e73131c24f841653767eff100b6d6ab3e46e437cf7e61433be68f0b3",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Stair landing beside open framing and bagged materials.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/18-img_8463.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/19-img_8464.jpg",
+          "sha256": "7934b002e2fd0d2df0334617234c3e272f806f1b0e05a0b20c16f567f4bc035f",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "View toward the staircase through the unfinished entry area.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/19-img_8464.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/20-img_8465.jpg",
+          "sha256": "096d9af478a853e2220b404de7732937a34d4a3be0d53adc0599fef43fc9b484",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Staircase leading upward between exposed wall framing.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/20-img_8465.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/21-img_8466.jpg",
+          "sha256": "b2f1491a49d8c0908a7360d85efad53c5d407eb58fd9016044b5da4a5f2a206e",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Upper-level passage with exposed studs and ceiling insulation.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/21-img_8466.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/22-img_8467.jpg",
+          "sha256": "6a097ff0ad98f512eff36f7a2869d19e53ee979ac174ce2e60bf0c25ea86ced7",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Room opening with exposed studs, ceiling insulation, and a window beyond.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/22-img_8467.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/23-img_8468.jpg",
+          "sha256": "dfc028b31dc89a744267378c0105db25a6b3734bd2deb87eed6215b1eec0c90f",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Framed doorway leading into an unfinished room.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/23-img_8468.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/24-img_8469.jpg",
+          "sha256": "6debe0a2addada77353644919baaa59d059407ad0484ae39cf83ce4ef5b17109",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Unfinished room with ceiling insulation and exposed perimeter framing.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/24-img_8469.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/25-img_8470.jpg",
+          "sha256": "5975ed368853906ca8bad06b8ca71fe3f3de2bb4ff74b487e641646908c67d3c",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Open room with bare wall studs and ceiling insulation.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/25-img_8470.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/26-img_8471.jpg",
+          "sha256": "f0d5c1054508a80ea52b46d9e172aff17d148c6cf59e87299fcc4677d3ac0852",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "View across wall partitions toward a sunlit unfinished room.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/26-img_8471.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/27-img_8472.jpg",
+          "sha256": "8e3fd843f6f63723e43e5a7d91601f2c16a1248865705e69c9dfc2df973acfb0",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Sunlight crossing the floor between exposed wall partitions.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/27-img_8472.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/28-img_8473.jpg",
+          "sha256": "4c47ca0510d29f7539cdb67ab213faebeaf919ab2a8d61575e01da1aab316a2e",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Window-side corner with exposed studs and ceiling insulation.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/28-img_8473.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/29-img_8474.jpg",
+          "sha256": "da23d0a1a4b2afa17e8b2f10744080ddceb13cf2b34ac6922b79a7229c07e876",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Exposed framing around a window and interior partition.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/29-img_8474.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/30-img_8475.jpg",
+          "sha256": "616d158ca46847b962657223a87de36044d654e8b6ca0a9bd06f96b750542691",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "White bathtub and surrounding unfinished wall framing.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/30-img_8475.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/31-img_8476.jpg",
+          "sha256": "eeaae09f3ccaf3648ebdd5af083588654a8ee78a59f6930bd1f77628facb37e0",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Unfinished bathroom framing with a bathtub and toilet flange visible.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/31-img_8476.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/32-img_8477.jpg",
+          "sha256": "7702262471b7328be964e712ef1be5945a0fd90231598a62d5ffe7f68c77dd53",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Interior corner with wall studs, wiring, and overhead insulation.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/32-img_8477.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/33-img_8478.jpg",
+          "sha256": "705d25e1859aec000793a7493f2671e9b67796b1fa2cc7676f5f40ca3f679e8a",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "View through exposed partitions into a room with a window.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/33-img_8478.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/34-img_8479.jpg",
+          "sha256": "f56ff18733dae36f1fd7784739ae6b7f8ad4975fe0a01aa3abbc5de49bd92312",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Narrow view beside a window through unfinished framing.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/34-img_8479.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/35-img_8480.jpg",
+          "sha256": "276c348ad9c44bc88a2e91a2ab705d56fd579ce0ea54c0c60a38610c112c55ad",
+          "width": 3024,
+          "height": 4032,
+          "usedIn": ["images"],
+          "alt": "Wide room view with exposed framing and ceiling insulation.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/35-img_8480.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/36-img_8933.jpg",
+          "sha256": "7626facaae27ba2c544d8c1cdc17f9571e6b88a80a3b633e577f8f04da3d320e",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Snow-covered exterior with boarded windows and a brick chimney.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/36-img_8933.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/37-img_8934.jpg",
+          "sha256": "00ac9c95c2de24a15b1d374e94b465c7a7182545c60e1c6b846d4bae951211c8",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Fire-damaged upper exterior above a stone-faced lower story.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/37-img_8934.jpg"]
+        },
+        {
+          "src": "/images/projects/fire-damage-documentation/after/38-img_8935.jpg",
+          "sha256": "d91b632a4f50dc0e8ee9993104474b243a3b288a93b4d92d468200eff23fbb04",
+          "width": 4032,
+          "height": 3024,
+          "usedIn": ["images"],
+          "alt": "Side view of a fire-damaged house with boarded windows in snow.",
+          "identicalSourceFiles": ["public/images/projects/fire-damage-documentation/after/38-img_8935.jpg"]
+        }
+      ]
+    },
+    {
+      "route": "/projects/beige-bathroom-before-after",
+      "title": "Beige Neutral Bathroom Finish Planning in the Lehigh Valley",
+      "location": "Lehigh Valley, PA",
+      "service": "bathroom-remodeling",
+      "mediaType": "planning",
+      "showInGallery": true,
+      "finding": "FIXED: planning classification, title, summary, scope, outcome, timeline label, and gallery heading now agree with source/history describing layout boards. Images and URL unchanged. MANUAL: confirm source photos, property, and whether construction was ever completed.",
+      "testimonial": null,
+      "images": [
+        {
+          "src": "/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-1.png",
+          "sha256": "3b5cfdcb1bd82bb7baba7876780a9e8f5bf11e33f6e0c4dd52ef4070321fe4d2",
+          "width": 1080,
+          "height": 1080,
+          "usedIn": ["images"],
+          "alt": "Before and after layout board for a beige neutral bathroom refresh showing planned finishes and sight lines.",
+          "identicalSourceFiles": [
+            "public/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-1.png"
+          ]
+        },
+        {
+          "src": "/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-2.png",
+          "sha256": "050b3f6daa39be21cd3cad87c8b091e755cc59d89d507d985019cad19bdfa2fb",
+          "width": 1080,
+          "height": 1080,
+          "usedIn": ["images"],
+          "alt": "Second before and after layout view for the same beige bathroom refresh direction.",
+          "identicalSourceFiles": [
+            "public/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-2.png"
+          ]
+        }
+      ]
+    }
+  ]
+}

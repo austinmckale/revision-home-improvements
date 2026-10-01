@@ -12,19 +12,27 @@ import { getFeaturedTestimonials } from "@/content/testimonials";
 export const metadata: Metadata = {
   title: "About Us | Lehigh Valley & Berks County Contractor",
   description:
-    "Local, licensed, and insured remodeling contractor serving Reading, Berks County, and the Lehigh Valley with clear scopes and reliable schedules.",
+    "Remodeling contractor with Pennsylvania HIC number PA185945 serving Reading, Berks County, and the Lehigh Valley with clear scopes and reliable schedules.",
   alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {
   return (
     <>
-      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "About", href: "/about" }])} />
+      <JsonLd
+        data={getBreadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "About", href: "/about" },
+        ])}
+      />
       <ServiceHero
         eyebrow={`About RHI Pros · ${siteConfig.serviceAreas}`}
         title="Built on clarity, delivered with care."
-        intro="We started this company because too many homeowners were getting vague estimates, missed timelines, and surprise costs. We decided to do it differently: written scopes, predictable schedules, and honest communication from day one."
-        image={{ src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg", alt: "Outdoor project site by RHI Pros in Reading, PA." }}
+        intro="A renovation starts with understanding the space, agreeing on the scope and knowing the next step. Discuss your priorities with RHI Pros, then review the work, schedule and responsibilities in a written proposal."
+        image={{
+          src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
+          alt: "Patio, timber pavilion and outdoor seating beside a house.",
+        }}
         primaryHref="/request-a-quote"
         primaryLabel="Request a quote"
         secondaryHref={siteConfig.phoneHref}
@@ -37,15 +45,22 @@ export default function AboutPage() {
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             <article className="surface rounded-sm p-5">
               <h3 className="font-semibold text-[var(--accent)]">Homeowners Who Value Transparency</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">You want a written scope and clear options before any work begins, not surprises halfway through.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                You want a written scope and clear options before any work begins, not surprises halfway through.
+              </p>
             </article>
             <article className="surface rounded-sm p-5">
               <h3 className="font-semibold text-[var(--accent)]">Families Balancing Budget and Quality</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">We present tiered options so you can prioritize what matters most without overbuilding your budget.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                We present tiered options so you can prioritize what matters most without overbuilding your budget.
+              </p>
             </article>
             <article className="surface rounded-sm p-5">
               <h3 className="font-semibold text-[var(--accent)]">Property Owners Facing Damage</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">Fire or water damage requires fast response and clear planning. We handle restoration and remodeling under one team.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                After immediate safety and stabilization needs are addressed, discuss the repair scope, documentation
+                and reconstruction plan. Confirm any specialist work and responsibilities separately.
+              </p>
             </article>
           </div>
 
@@ -53,43 +68,67 @@ export default function AboutPage() {
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             <article className="surface rounded-lg p-5">
               <h3 className="font-semibold text-[var(--accent)]">Scope Before Demo</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">We confirm priorities, budget range, and constraints before construction starts. No work begins until you approve the plan.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                We confirm priorities, budget range, and constraints before construction starts. No work begins until
+                you approve the plan.
+              </p>
             </article>
             <article className="surface rounded-lg p-5">
               <h3 className="font-semibold text-[var(--accent)]">Milestone Communication</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">You know what is happening, what is next, and what decisions are coming. No guessing, no chasing updates.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                You know what is happening, what is next, and what decisions are coming. No guessing, no chasing
+                updates.
+              </p>
             </article>
             <article className="surface rounded-lg p-5">
               <h3 className="font-semibold text-[var(--accent)]">Value Per Dollar</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">We present options that maximize your outcome without padding the scope. Every dollar goes toward results you can see.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                We present options that maximize your outcome without padding the scope. Every dollar goes toward
+                results you can see.
+              </p>
             </article>
             <article className="surface rounded-lg p-5">
               <h3 className="font-semibold text-[var(--accent)]">Clean Closeout</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">Final walkthrough, punch-list completion, and warranty documentation are built into delivery, not an afterthought.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Final walkthrough, punch-list completion, and warranty documentation are built into delivery, not an
+                afterthought.
+              </p>
             </article>
           </div>
 
           <div className="surface mt-8 rounded-sm p-5 text-center">
             <p className="text-sm text-[var(--muted)]">
-              <span className="font-semibold text-[var(--accent)]">{siteConfig.hicNumber}</span> · PA HIC registered · Insured · Warranty-backed · 12-month workmanship warranty + applicable manufacturer warranties
+              <span className="font-semibold text-[var(--accent)]">{siteConfig.hicNumber}</span> · PA HIC registration
+              number · Discuss registration, insurance and written warranty terms
             </p>
           </div>
 
           <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
-            <Link href="/our-process" className="font-semibold text-[var(--brand)]">Our Process</Link>
-            <Link href="/warranty" className="font-semibold text-[var(--brand)]">Workmanship Warranty</Link>
-            <Link href="/licenses-and-insurance" className="font-semibold text-[var(--brand)]">Licenses &amp; Insurance</Link>
-            <Link href="/projects" className="font-semibold text-[var(--brand)]">See Our Work</Link>
+            <Link href="/our-process" className="font-semibold text-[var(--brand)]">
+              Our Process
+            </Link>
+            <Link href="/warranty" className="font-semibold text-[var(--brand)]">
+              Workmanship Warranty
+            </Link>
+            <Link href="/licenses-and-insurance" className="font-semibold text-[var(--brand)]">
+              Registration &amp; Insurance
+            </Link>
+            <Link href="/projects" className="font-semibold text-[var(--brand)]">
+              See Our Work
+            </Link>
           </div>
 
-          <TestimonialStrip items={getFeaturedTestimonials()} title="What Homeowners Say About Working With Us" />
+          <TestimonialStrip items={getFeaturedTestimonials()} title="Independent company reviews" />
         </Container>
       </section>
 
       <BottomCTA
         title="Let's talk about your project"
         description="Whether it's a planned remodel or an urgent repair, we'll walk you through scope, timeline, and next steps."
-        links={[{ href: "/services", label: "Browse Services" }, { href: "/service-areas", label: "Find Your Area" }]}
+        links={[
+          { href: "/services", label: "Browse Services" },
+          { href: "/service-areas", label: "Find Your Area" },
+        ]}
       />
     </>
   );

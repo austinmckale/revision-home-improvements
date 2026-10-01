@@ -1,3 +1,5 @@
+import { projectEvidenceOverrides } from "./projectEvidence";
+
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -7,6 +9,11 @@ export type CaseStudy = {
   serviceName: string;
   serviceSlug: string;
   timeline: string;
+  /** Planning boards are distinct from photographic evidence of completed work. */
+  mediaType?: "planning" | "photos";
+  evidenceNote?: string;
+  photoGroups?: Array<{ title: string; description?: string; images: CaseStudy["images"] }>;
+  sharedCollectionSlug?: string;
   featureInServiceListings?: boolean;
   /** When true, this case study is excluded from all public listings. */
   hidden?: boolean;
@@ -78,21 +85,50 @@ const fireDamageDocumentationAfterFiles = [
   "38-img_8935.jpg",
 ] as const;
 
-const fireDamageDocumentationAltLabels = [
-  "Fire-damage rebuild documentation showing conditions after loss.",
-  "Exposed framing and structure during fire-damage restoration.",
-  "Demolition and stabilization phase of an interior fire rebuild.",
-  "Rough-in mechanical and electrical work during fire-damage reconstruction.",
-  "Restoration progress with documented scope sequencing.",
-  "Interior rebuild phase with finish surfaces removed for assessment.",
-] as const;
+// Descriptions follow the visible subject of each source image; do not cycle generic claims.
+const fireDamageDocumentationAlts: Record<(typeof fireDamageDocumentationAfterFiles)[number], string> = {
+  "01-img_7761.jpg": "Boarded dormer window with light-colored trim above a shingled roof.",
+  "02-img_7762.jpg": "Boarded dormer window with darkened gable trim.",
+  "03-img_7764.jpg": "Exposed interior wall studs, ceiling framing, and floorboards.",
+  "04-img_7765.jpg": "Open wall framing beside a boarded window.",
+  "05-img_7766.jpg": "View through exposed wall partitions and ceiling framing.",
+  "06-img_7768.jpg": "Boarded window and surrounding exposed wall studs.",
+  "07-img_7769.jpg": "Boarded window centered in a wall stripped to framing.",
+  "08-img_7770.jpg": "Boarded window with daylight visible around the opening.",
+  "09-img_8454.jpg": "Open front entry with sidelights and exposed interior framing.",
+  "10-img_8455.jpg": "Inside the front entry, showing wall studs and ceiling joists.",
+  "11-img_8456.jpg": "Exposed framing and wiring along the entry passage.",
+  "12-img_8457.jpg": "Staircase beside open wall framing and an unfinished floor.",
+  "13-img_8458.jpg": "Wide interior view with open ceiling joists and wall partitions.",
+  "14-img_8459.jpg": "Interior room with exposed ceiling framing, wall studs, and materials on the floor.",
+  "15-img_8460.jpg": "Window-side view across an interior stripped to framing.",
+  "16-img_8461.jpg": "Long interior view beneath exposed ceiling framing.",
+  "17-img_8462.jpg": "Exposed wall and ceiling framing along an unfinished room.",
+  "18-img_8463.jpg": "Stair landing beside open framing and bagged materials.",
+  "19-img_8464.jpg": "View toward the staircase through the unfinished entry area.",
+  "20-img_8465.jpg": "Staircase leading upward between exposed wall framing.",
+  "21-img_8466.jpg": "Upper-level passage with exposed studs and ceiling insulation.",
+  "22-img_8467.jpg": "Room opening with exposed studs, ceiling insulation, and a window beyond.",
+  "23-img_8468.jpg": "Framed doorway leading into an unfinished room.",
+  "24-img_8469.jpg": "Unfinished room with ceiling insulation and exposed perimeter framing.",
+  "25-img_8470.jpg": "Open room with bare wall studs and ceiling insulation.",
+  "26-img_8471.jpg": "View across wall partitions toward a sunlit unfinished room.",
+  "27-img_8472.jpg": "Sunlight crossing the floor between exposed wall partitions.",
+  "28-img_8473.jpg": "Window-side corner with exposed studs and ceiling insulation.",
+  "29-img_8474.jpg": "Exposed framing around a window and interior partition.",
+  "30-img_8475.jpg": "White bathtub and surrounding unfinished wall framing.",
+  "31-img_8476.jpg": "Unfinished bathroom framing with a bathtub and toilet flange visible.",
+  "32-img_8477.jpg": "Interior corner with wall studs, wiring, and overhead insulation.",
+  "33-img_8478.jpg": "View through exposed partitions into a room with a window.",
+  "34-img_8479.jpg": "Narrow view beside a window through unfinished framing.",
+  "35-img_8480.jpg": "Wide room view with exposed framing and ceiling insulation.",
+  "36-img_8933.jpg": "Snow-covered exterior with boarded windows and a brick chimney.",
+  "37-img_8934.jpg": "Fire-damaged upper exterior above a stone-faced lower story.",
+  "38-img_8935.jpg": "Side view of a fire-damaged house with boarded windows in snow.",
+};
 
-function fireDamageDocumentationAlt(file: string, index: number) {
-  const label = fireDamageDocumentationAltLabels[index % fireDamageDocumentationAltLabels.length];
-  return `${label} (${file.replace(/\.jpg$/i, "")})`;
-}
-
-export const caseStudies: CaseStudy[] = [
+/** Original editorial records retained for traceability; public exports use reviewed photo evidence below. */
+const legacyCaseStudyRecords: CaseStudy[] = [
   {
     slug: "allentown-kitchen-layout-upgrade",
     title: "Kitchen Layout Upgrade in Allentown",
@@ -149,11 +185,13 @@ export const caseStudies: CaseStudy[] = [
     serviceName: "Bathroom Remodeling",
     serviceSlug: "bathroom-remodeling",
     timeline: "2 to 3 weeks",
-    scope: ["Vanity and fixture replacement", "Moisture-aware wall and floor finishes", "Final cleanup and walkthrough"],
-    challenge:
-      "The homeowner needed a cleaner layout and better material durability in a high-use bathroom footprint.",
-    solution:
-      "The team upgraded key fixtures and finishes with attention to waterproofing and long-term maintenance.",
+    scope: [
+      "Vanity and fixture replacement",
+      "Moisture-aware wall and floor finishes",
+      "Final cleanup and walkthrough",
+    ],
+    challenge: "The homeowner needed a cleaner layout and better material durability in a high-use bathroom footprint.",
+    solution: "The team upgraded key fixtures and finishes with attention to waterproofing and long-term maintenance.",
     results: [
       "Improved bathroom storage and function",
       "More durable daily-use surfaces",
@@ -168,10 +206,16 @@ export const caseStudies: CaseStudy[] = [
         src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
         alt: "Finished bathroom after remodel with gray vanity, black fixtures, and new door addition.",
       },
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom shower enclosure after remodel." },
+      {
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
+        alt: "Finished bathroom shower enclosure after remodel.",
+      },
     ],
     beforeImages: [
-      { src: "/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg", alt: "Bathroom before remodel with original shower layout, viewed through the door." },
+      {
+        src: "/images/projects/bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg",
+        alt: "Bathroom before remodel with original shower layout, viewed through the door.",
+      },
     ],
     afterImages: [
       {
@@ -213,7 +257,7 @@ export const caseStudies: CaseStudy[] = [
     images: [
       {
         src: "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png",
-        alt: "Sink and mirror wall after renovation with updated surfaces and lighting-ready finishes.",
+        alt: "Commercial restroom interior with blue stall doors and refreshed floor surfaces.",
       },
       {
         src: "/images/projects/allentown-commercial-bathroom/after/stall-finished.jpg",
@@ -314,8 +358,8 @@ export const caseStudies: CaseStudy[] = [
       "Commercial window replacement and trim refresh that brightened a bar interior and gave the wall line a cleaner, more polished finish.",
     locationName: "Reading, PA",
     locationSlug: "reading-pa",
-    serviceName: "Drywall Installation and Repair",
-    serviceSlug: "drywall-installation-repair",
+    serviceName: "Exterior Remodeling",
+    serviceSlug: "exterior-remodeling",
     timeline: "Several days to 2 weeks",
     featureInServiceListings: false,
     scope: [
@@ -531,10 +575,22 @@ export const caseStudies: CaseStudy[] = [
       author: "Lehigh Valley homeowner",
     },
     images: [
-      { src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg", alt: "Finished basement media room with large screen." },
-      { src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg", alt: "Basement epoxy flooring finish detail." },
-      { src: "/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg", alt: "Wide basement view showing finished layout and floor detail." },
-      { src: "/images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg", alt: "Basement wide-angle finish showing completed room flow." },
+      {
+        src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
+        alt: "Finished basement media room with large screen.",
+      },
+      {
+        src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
+        alt: "Basement epoxy flooring finish detail.",
+      },
+      {
+        src: "/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg",
+        alt: "Wide basement view showing finished layout and floor detail.",
+      },
+      {
+        src: "/images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg",
+        alt: "Basement wide-angle finish showing completed room flow.",
+      },
     ],
   },
   {
@@ -578,17 +634,23 @@ export const caseStudies: CaseStudy[] = [
     serviceSlug: "flooring-installation",
     timeline: "1 to 2 weeks",
     scope: ["Subfloor preparation and leveling", "New flooring installation", "Trim and transition detailing"],
-    challenge:
-      "The existing floor had uneven sections and inconsistent transitions between connected rooms.",
+    challenge: "The existing floor had uneven sections and inconsistent transitions between connected rooms.",
     solution:
       "The team corrected prep conditions first, then installed new flooring with tighter transition and trim alignment.",
-    results: ["Smoother floor performance", "Cleaner connected-room transitions", "A refreshed interior look with lower maintenance"],
+    results: [
+      "Smoother floor performance",
+      "Cleaner connected-room transitions",
+      "A refreshed interior look with lower maintenance",
+    ],
     testimonial: {
       quote: "The floor feels solid and the finishing details made a big difference in the final look.",
       author: "Allentown homeowner",
     },
     images: [
-      { src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg", alt: "Completed light wood flooring installation in an Allentown living area." },
+      {
+        src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
+        alt: "Completed light wood flooring installation in an Allentown living area.",
+      },
       {
         src: "/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
         alt: "Allentown living area with flooring and trim detailed along the fireplace wall.",
@@ -606,8 +668,7 @@ export const caseStudies: CaseStudy[] = [
     featureInServiceListings: false,
     timeline: "3 to 6 days",
     scope: ["Damaged area repairs", "Seam blending and finish prep", "Final inspection for paint readiness"],
-    challenge:
-      "Visible wall damage and uneven surfaces needed to be corrected without obvious patch lines.",
+    challenge: "Visible wall damage and uneven surfaces needed to be corrected without obvious patch lines.",
     solution:
       "Repair zones were rebuilt and blended through staged tape/mud/sand cycles to deliver consistent finish quality.",
     results: ["Cleaner wall appearance", "Better prep for final paint", "Faster closeout for connected room upgrades"],
@@ -616,7 +677,10 @@ export const caseStudies: CaseStudy[] = [
       author: "Bethlehem homeowner",
     },
     images: [
-      { src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg", alt: "Paint-ready room surfaces after drywall repair and finish prep." },
+      {
+        src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
+        alt: "Paint-ready room surfaces after drywall repair and finish prep.",
+      },
     ],
   },
   {
@@ -752,8 +816,14 @@ export const caseStudies: CaseStudy[] = [
       author: "Allentown homeowner",
     },
     images: [
-      { src: "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg", alt: "Rebuilt interior finish work after a fire-damage restoration project." },
-      { src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg", alt: "Repair area prepared during the restoration rebuild phase." },
+      {
+        src: "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg",
+        alt: "Rebuilt interior finish work after a fire-damage restoration project.",
+      },
+      {
+        src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg",
+        alt: "Repair area prepared during the restoration rebuild phase.",
+      },
     ],
   },
   {
@@ -841,14 +911,38 @@ export const caseStudies: CaseStudy[] = [
       "A kitchen that feels more custom without unnecessary scope creep",
     ],
     images: [
-      { src: "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg", alt: "Finished kitchen with blue cabinets and installed countertops." },
-      { src: "/images/projects/blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg", alt: "Kitchen cabinets and counters complete after installation." },
-      { src: "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg", alt: "Kitchen after cabinet and counter upgrade." },
-      { src: "/images/projects/blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg", alt: "Updated kitchen overview with blue cabinet finish." },
-      { src: "/images/projects/blue-kitchen-cabinet-counters/after/03-blue-kitchen-cabinets-1.jpg", alt: "Cabinet and counter detail after kitchen upgrade." },
-      { src: "/images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg", alt: "Countertop installation phase during kitchen remodel." },
-      { src: "/images/projects/blue-kitchen-cabinet-counters/process/02-blue-kitchen-cabinets-process.jpg", alt: "Kitchen cabinets during installation and alignment." },
-      { src: "/images/projects/blue-kitchen-cabinet-counters/marketing/01-blue-kitchen-cabinet-layout-diagram.png", alt: "Cabinet layout diagram used to coordinate the kitchen plan." },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg",
+        alt: "Finished kitchen with blue cabinets and installed countertops.",
+      },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg",
+        alt: "Kitchen cabinets and counters complete after installation.",
+      },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
+        alt: "Kitchen after cabinet and counter upgrade.",
+      },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg",
+        alt: "Updated kitchen overview with blue cabinet finish.",
+      },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/after/03-blue-kitchen-cabinets-1.jpg",
+        alt: "Cabinet and counter detail after kitchen upgrade.",
+      },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg",
+        alt: "Countertop installation phase during kitchen remodel.",
+      },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/process/02-blue-kitchen-cabinets-process.jpg",
+        alt: "Kitchen cabinets during installation and alignment.",
+      },
+      {
+        src: "/images/projects/blue-kitchen-cabinet-counters/marketing/01-blue-kitchen-cabinet-layout-diagram.png",
+        alt: "Cabinet layout diagram used to coordinate the kitchen plan.",
+      },
     ],
   },
   {
@@ -1021,35 +1115,34 @@ export const caseStudies: CaseStudy[] = [
       "Clearer communication during a high-stress rebuild",
       "Better support for insurance-related documentation needs",
     ],
-    images: fireDamageDocumentationAfterFiles.map((file, i) => ({
+    images: fireDamageDocumentationAfterFiles.map((file) => ({
       src: `/images/projects/fire-damage-documentation/after/${file}`,
-      alt: fireDamageDocumentationAlt(file, i),
+      alt: fireDamageDocumentationAlts[file],
     })),
   },
   {
     slug: "beige-bathroom-before-after",
-    title: "Beige Neutral Bathroom Refresh in the Lehigh Valley",
+    title: "Beige Neutral Bathroom Finish Planning in the Lehigh Valley",
     summary:
-      "A warm, neutral beige bathroom direction with cleaner sight lines and updated finishes. Before and after layout boards here were used to align on materials, fixtures, and the overall look before construction.",
+      "Bathroom layout and finish boards showing a warm, neutral direction for materials, fixtures, and sight lines. These boards present planning references rather than verified photographs of completed construction.",
     locationName: "Lehigh Valley, PA",
     locationSlug: "lehigh-valley-pa",
     serviceName: "Bathroom Remodeling",
     serviceSlug: "bathroom-remodeling",
-    timeline: "2 to 4 weeks",
+    timeline: "Planning and finish selection",
+    mediaType: "planning",
     scope: [
-      "Finish and fixture refresh in a compact bathroom footprint",
-      "Coordinated beige/neutral palette across tile, paint, and accents",
-      "Vanity, mirror, lighting, and hardware updates tied to the layout plan",
-      "Moisture-aware details in wet zones with a clean final walkthrough",
+      "Review finish and fixture options for a compact bathroom footprint",
+      "Coordinate a beige/neutral palette across tile, paint, and accents",
+      "Compare vanity, mirror, lighting, and hardware with the layout direction",
     ],
     challenge:
       "The space needed a clearer visual direction so fixture and finish decisions would feel cohesive rather than pieced together mid-project.",
     solution:
-      "We used paired before/after layout boards to lock the beige neutral story early, then executed the refresh against that plan with consistent detailing at transitions and wet areas.",
+      "The paired layout boards bring fixture and finish references together to illustrate a coordinated bathroom direction before construction.",
     results: [
-      "A calmer, more intentional neutral palette across the full room",
-      "Better alignment between layout planning and what was built",
-      "A bathroom that reads more finished without unnecessary scope creep",
+      "A visual reference for a coordinated neutral palette",
+      "Fixture and finish options shown together for planning",
     ],
     images: [
       {
@@ -1063,6 +1156,12 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
 ];
+
+export const caseStudies: CaseStudy[] = legacyCaseStudyRecords.map((record) => {
+  const evidence = projectEvidenceOverrides[record.slug];
+  if (!evidence) throw new Error(`Project evidence review missing: ${record.slug}`);
+  return { ...record, ...evidence };
+});
 
 const caseStudyLocationPriority = [
   "allentown-pa",
@@ -1080,12 +1179,8 @@ export const galleryCaseStudies = visibleCaseStudies.filter((cs) => cs.showInGal
 
 export function sortCaseStudiesByMarketPriority(items: CaseStudy[]) {
   return [...items].sort((a, b) => {
-    const aPriority = caseStudyLocationPriority.indexOf(
-      a.locationSlug as (typeof caseStudyLocationPriority)[number],
-    );
-    const bPriority = caseStudyLocationPriority.indexOf(
-      b.locationSlug as (typeof caseStudyLocationPriority)[number],
-    );
+    const aPriority = caseStudyLocationPriority.indexOf(a.locationSlug as (typeof caseStudyLocationPriority)[number]);
+    const bPriority = caseStudyLocationPriority.indexOf(b.locationSlug as (typeof caseStudyLocationPriority)[number]);
     const normalizedAPriority = aPriority === -1 ? caseStudyLocationPriority.length : aPriority;
     const normalizedBPriority = bPriority === -1 ? caseStudyLocationPriority.length : bPriority;
 
@@ -1103,14 +1198,13 @@ export function getCaseStudyBySlug(slug: string) {
 
 /** Other visible case studies for project detail “similar work” blocks: same service first, then same market. */
 export function getSimilarCaseStudiesForProject(current: CaseStudy, limit = 4): CaseStudy[] {
-  const byService = visibleCaseStudies.filter(
-    (c) => c.slug !== current.slug && c.serviceSlug === current.serviceSlug,
-  );
+  const byService = visibleCaseStudies.filter((c) => c.slug !== current.slug && c.serviceSlug === current.serviceSlug);
   const serviceOrdered = sortCaseStudiesByMarketPriority(byService);
   if (serviceOrdered.length >= limit) return serviceOrdered.slice(0, limit);
 
   const byLocation = visibleCaseStudies.filter(
     (c) =>
+      Boolean(current.locationSlug) &&
       c.slug !== current.slug &&
       c.locationSlug === current.locationSlug &&
       !serviceOrdered.some((s) => s.slug === c.slug),

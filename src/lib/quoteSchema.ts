@@ -9,7 +9,11 @@ export const quoteSchema = z.object({
       .string()
       .min(7, "Phone is required")
       .max(25, "Phone is too long")
-      .regex(/^[\d\s\-().+]{7,}$/, "Enter a valid phone number"),
+      .regex(/^[\d\s\-().+]{7,}$/, "Enter a valid phone number")
+      .refine((value) => {
+        const digitCount = value.replace(/\D/g, "").length;
+        return digitCount >= 7 && digitCount <= 15;
+      }, "Enter a phone number with 7–15 digits"),
   ),
   email: asText.pipe(z.string().min(1, "Email is required").max(254, "Email is too long").email("Enter a valid email")),
   city: asText.pipe(z.string().min(2, "City is required").max(100, "City is too long")),
@@ -35,3 +39,7 @@ export const quoteSchema = z.object({
 });
 
 export type QuoteInput = z.infer<typeof quoteSchema>;
+
+// Keep the two browser steps aligned with the API's validation rules.
+export const quoteContactSchema = quoteSchema.pick({ name: true, phone: true, email: true, service: true });
+export const quoteProjectSchema = quoteSchema.pick({ city: true, zip: true, timeline: true, details: true });

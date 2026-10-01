@@ -11,7 +11,7 @@ import { siteConfig } from "@/content/site";
 export const metadata: Metadata = {
   title: "Project Financing | Allentown, Lehigh Valley & Berks County",
   description:
-    "Promotional financing options for qualified homeowners in Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County. Clear terms and quick next steps.",
+    "Discuss project scope, current financing options, lender approval and payment terms for remodeling in the Lehigh Valley and Berks County.",
   alternates: { canonical: "/financing" },
 };
 
@@ -28,8 +28,8 @@ const steps = [
   },
   {
     num: "3",
-    title: "Lock Your Schedule",
-    desc: "Once terms are approved, we lock your project schedule and begin coordinating materials and timeline.",
+    title: "Confirm Your Schedule",
+    desc: "After scope and payment terms are agreed, confirm availability, material lead times and the proposed schedule in writing.",
   },
 ];
 
@@ -42,18 +42,32 @@ const scopeTips = [
 export default function FinancingPage() {
   return (
     <>
-      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Financing", href: "/financing" }])} />
+      <JsonLd
+        data={getBreadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Financing", href: "/financing" },
+        ])}
+      />
 
       {/* ── Hero ── */}
-      <PageIntro eyebrow="Plan your project" title="Project financing."><p>Explore payment options alongside a clear project scope. Financing is subject to lender approval and program terms.</p><div className="mt-6 flex flex-wrap gap-3"><Button href="/request-a-quote">Request a financing-ready quote</Button><Button href={siteConfig.phoneHref} variant="secondary">Call {siteConfig.phoneDisplay}</Button></div></PageIntro>
+      <PageIntro eyebrow="Plan your project" title="Project financing.">
+        <p>
+          Explore payment options alongside a clear project scope. Financing is subject to lender approval and program
+          terms.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Button href="/request-a-quote">Request a financing-ready quote</Button>
+          <Button href={siteConfig.phoneHref} variant="secondary">
+            Call {siteConfig.phoneDisplay}
+          </Button>
+        </div>
+      </PageIntro>
 
       {/* ── Promo card ── */}
       <section className="support-content py-12 sm:py-20">
         <Container className="max-w-5xl">
           <div className="surface rounded-sm border-2 border-[var(--brand)] p-6">
-            <h2 className="heading-serif text-3xl text-[var(--accent)]">
-              Promotional Financing Options
-            </h2>
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">Discuss Current Financing Options</h2>
             <p className="mt-2 text-[var(--muted)]">
               {siteConfig.financing.teaser} {siteConfig.financing.disclosure}
             </p>
@@ -81,9 +95,7 @@ export default function FinancingPage() {
 
           {/* ── Scope planning ── */}
           <div className="surface mt-10 rounded-sm p-6">
-            <h2 className="heading-serif text-3xl text-[var(--accent)]">
-              Financing-Ready Scope Planning
-            </h2>
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">Financing-Ready Scope Planning</h2>
             <p className="mt-2 text-sm text-[var(--muted)]">
               We structure quotes so financing decisions are straightforward:
             </p>
@@ -103,7 +115,7 @@ export default function FinancingPage() {
               Our Process
             </Link>
             <Link href="/projects" className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline">
-              See Our Work
+              Explore Photo Collections
             </Link>
           </nav>
         </Container>
@@ -111,7 +123,7 @@ export default function FinancingPage() {
 
       <BottomCTA
         title="Ready to explore financing for your project?"
-        description="Request a quote and we will include financing options alongside your scope and estimate."
+        description="Request a quote and ask about current financing options alongside your scope and estimate."
         showFinancing={false}
       />
     </>

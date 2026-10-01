@@ -98,13 +98,10 @@ function checkFeaturedCaseStudies() {
       error(`Service "${service.slug}" featuredCaseStudySlug "${slug}" is hidden.`);
     }
     if (match.serviceSlug !== service.slug) {
-      warn(
-        `Service "${service.slug}" featured case study "${slug}" is tagged as service "${match.serviceSlug}".`,
-      );
+      warn(`Service "${service.slug}" featured case study "${slug}" is tagged as service "${match.serviceSlug}".`);
     }
     if (PRIORITY_FEATURED_CASE_STUDIES.includes(slug as (typeof PRIORITY_FEATURED_CASE_STUDIES)[number])) {
-      const photoCount =
-        match.images.length + (match.beforeImages?.length ?? 0) + (match.afterImages?.length ?? 0);
+      const photoCount = match.images.length + (match.beforeImages?.length ?? 0) + (match.afterImages?.length ?? 0);
       if (photoCount === 0) {
         warn(
           `Featured case study "${slug}" for service "${service.slug}" has no verified photos (text-only is OK; do not add unrelated images).`,
@@ -122,25 +119,17 @@ function checkCaseStudyPhotoAccuracy() {
       error(`Case study "${study.slug}" summary uses representative photo wording.`);
     }
 
-    const allImages = [
-      ...study.images,
-      ...(study.beforeImages ?? []),
-      ...(study.afterImages ?? []),
-    ];
+    const allImages = [...study.images, ...(study.beforeImages ?? []), ...(study.afterImages ?? [])];
 
     const verifiedFolders = VERIFIED_CASE_STUDY_IMAGE_FOLDERS[study.slug];
     if (verifiedFolders) {
       if (verifiedFolders.length === 0 && allImages.length > 0) {
-        error(
-          `Case study "${study.slug}" must remain text-only until verified water-damage photos are added.`,
-        );
+        error(`Case study "${study.slug}" must remain text-only until verified water-damage photos are added.`);
       }
       for (const img of allImages) {
         const folder = imageProjectFolder(img.src);
         if (!folder || !verifiedFolders.includes(folder)) {
-          error(
-            `Case study "${study.slug}" uses unverified image folder "${folder ?? "unknown"}": ${img.src}`,
-          );
+          error(`Case study "${study.slug}" uses unverified image folder "${folder ?? "unknown"}": ${img.src}`);
         }
       }
       continue;
@@ -152,9 +141,7 @@ function checkCaseStudyPhotoAccuracy() {
       const folder = imageProjectFolder(img.src);
       if (!folder) continue;
       if (!folderMatchesCaseStudy(study.slug, folder)) {
-        error(
-          `Case study "${study.slug}" uses image from unrelated folder "${folder}": ${img.src}`,
-        );
+        error(`Case study "${study.slug}" uses image from unrelated folder "${folder}": ${img.src}`);
       }
     }
   }
@@ -164,9 +151,7 @@ function checkCaseStudyPhotoAccuracy() {
     if (service.gallery.length > 0) {
       const featured = caseStudies.find((c) => c.slug === service.featuredCaseStudySlug);
       const featuredPhotoCount =
-        (featured?.images.length ?? 0) +
-        (featured?.beforeImages?.length ?? 0) +
-        (featured?.afterImages?.length ?? 0);
+        (featured?.images.length ?? 0) + (featured?.beforeImages?.length ?? 0) + (featured?.afterImages?.length ?? 0);
       if (featuredPhotoCount === 0) {
         warn(
           `Service "${service.slug}" has a service.gallery fallback while featured case study "${service.featuredCaseStudySlug}" has no verified photos.`,
@@ -184,11 +169,7 @@ function checkImageAlts() {
       warn(`Case study "${study.slug}" has no lead image (text-only listing is OK on /projects).`);
     }
 
-    const allImages = [
-      ...study.images,
-      ...(study.beforeImages ?? []),
-      ...(study.afterImages ?? []),
-    ];
+    const allImages = [...study.images, ...(study.beforeImages ?? []), ...(study.afterImages ?? [])];
     for (const img of allImages) {
       if (!img.alt?.trim()) {
         error(`Case study "${study.slug}" has an image with empty alt: ${img.src}`);
@@ -367,8 +348,7 @@ function checkStructuredDataBasics() {
 function checkGalleryPublicationRules() {
   for (const study of caseStudies) {
     if (study.hidden) continue;
-    const photoCount =
-      study.images.length + (study.beforeImages?.length ?? 0) + (study.afterImages?.length ?? 0);
+    const photoCount = study.images.length + (study.beforeImages?.length ?? 0) + (study.afterImages?.length ?? 0);
     if (photoCount === 0 && study.showInGallery !== false) {
       error(
         `Case study "${study.slug}" has no photos but showInGallery is not false — hide from gallery or add verified photos.`,
@@ -379,9 +359,7 @@ function checkGalleryPublicationRules() {
 
 function checkDuplicateBrandedTitles() {
   // Titles that already end with "| RHI Pros" will double with layout template "%s | RHI Pros".
-  const suspicious = [
-    { fileHint: "city hub", pattern: /\| RHI Pros$/ },
-  ];
+  const suspicious = [{ fileHint: "city hub", pattern: /\| RHI Pros$/ }];
   for (const location of locations) {
     const title = `Remodeling & Restoration in ${location.name}`;
     if (/\|\s*RHI Pros\s*$/i.test(title) || /RHI Pros.*RHI Pros/i.test(title)) {
@@ -392,7 +370,13 @@ function checkDuplicateBrandedTitles() {
 }
 
 /** Phrases that incorrectly present PA HIC registration as a state contractor license. */
-const FORBIDDEN_HIC_AS_LICENSE_PHRASES = ["PA Licensed", "PA licensed", "Licensed in PA"] as const;
+const FORBIDDEN_HIC_AS_LICENSE_PHRASES = [
+  /\bPA\s+licensed\b/i,
+  /\blicensed\s+in\s+PA\b/i,
+  /\blicensed(?:\s*,)?\s+(?:and\s+|&(?:amp;)?\s+)?insured\b/i,
+  /\blicensed\s+(?:home improvement|remodeling|restoration|contractor)\b/i,
+  /\b(?:HIC|PA)\s+license\b/i,
+] as const;
 
 function walkSourceFiles(dir: string, acc: string[] = []): string[] {
   for (const entry of readdirSync(dir)) {
@@ -416,19 +400,15 @@ function checkHicNotFramedAsLicense() {
       // Allow this guardrail file to mention the forbidden phrases as string literals.
       if (rel === "scripts/check-seo.ts") continue;
       const text = readFileSync(file, "utf8");
-      // Strip metadata export blocks so legacy title/description wording is not flagged.
-      const withoutMetadata = text.replace(
-        /export const metadata(?:\s*:\s*Metadata)?\s*=\s*\{[\s\S]*?\n\};/g,
-        "",
-      );
+      // Metadata is public-facing copy too; check it with the rest of the source.
       for (const phrase of FORBIDDEN_HIC_AS_LICENSE_PHRASES) {
-        if (withoutMetadata.includes(phrase)) {
+        if (phrase.test(text)) {
           error(
             `${rel} contains "${phrase}" — PA185945 is HIC registration, not a PA contractor license. Use "PA HIC registered".`,
           );
         }
       }
-      if (withoutMetadata.includes("hicsearch.attorneygeneral.gov")) {
+      if (text.includes("hicsearch.attorneygeneral.gov")) {
         error(`${rel} links to the PA HIC search site — remove public HIC lookup links.`);
       }
     }

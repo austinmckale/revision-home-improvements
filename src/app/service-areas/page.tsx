@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 import { locations } from "@/content/locations";
+import { primaryServices } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
@@ -31,9 +32,7 @@ function LocationCard({ location }: { location: (typeof locations)[number] }) {
       <div>
         <p className="heading-serif text-2xl text-[var(--accent)]">{location.name}</p>
         <p className="mt-1 text-sm text-[var(--muted)]">{firstSentence}</p>
-        <p className="mt-1.5 text-xs text-[var(--muted)]">
-          {location.priorityAreas.slice(0, 4).join(" · ")}
-        </p>
+        <p className="mt-1.5 text-xs text-[var(--muted)]">{location.priorityAreas.slice(0, 4).join(" · ")}</p>
       </div>
       <span className="mt-1 shrink-0 text-sm font-semibold text-[var(--brand)] transition-transform group-hover:translate-x-0.5">
         →
@@ -45,10 +44,27 @@ function LocationCard({ location }: { location: (typeof locations)[number] }) {
 export default function ServiceAreasPage() {
   return (
     <>
-      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Service Areas", href: "/service-areas" }])} />
+      <JsonLd
+        data={getBreadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Service Areas", href: "/service-areas" },
+        ])}
+      />
 
       {/* ── Hero ── */}
-      <PageIntro eyebrow="Lehigh Valley & Berks County" title="Good work, close to home."><p>Choose your area to explore local remodeling services, project stories, and the details that matter for your home.</p><p className="mt-4 text-sm">Just outside these areas? <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">Call {siteConfig.phoneDisplay}</a> and we will confirm coverage.</p></PageIntro>
+      <PageIntro eyebrow="Lehigh Valley & Berks County" title="Good work, close to home.">
+        <p>
+          Choose your area to explore local remodeling services, planning topics, and the details that matter for your
+          home.
+        </p>
+        <p className="mt-4 text-sm">
+          Just outside these areas?{" "}
+          <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
+            Call {siteConfig.phoneDisplay}
+          </a>{" "}
+          and we will confirm coverage.
+        </p>
+      </PageIntro>
 
       {/* ── Region cards ── */}
       <section className="py-12 sm:py-20">
@@ -57,9 +73,7 @@ export default function ServiceAreasPage() {
             {/* Lehigh Valley Region */}
             <div>
               <h2 className="heading-serif text-4xl text-[var(--accent)]">Lehigh Valley</h2>
-              <p className="mt-1 text-sm text-[var(--muted)]">
-                Allentown, Bethlehem, and surrounding areas
-              </p>
+              <p className="mt-1 text-sm text-[var(--muted)]">Allentown, Bethlehem, and surrounding areas</p>
               <div className="mt-4 grid gap-3">
                 {lehighValleyLocations.map((location) => (
                   <LocationCard key={location.slug} location={location} />
@@ -70,9 +84,7 @@ export default function ServiceAreasPage() {
             {/* Berks County Region */}
             <div>
               <h2 className="heading-serif text-4xl text-[var(--accent)]">Berks County</h2>
-              <p className="mt-1 text-sm text-[var(--muted)]">
-                Reading, Wyomissing, and surrounding areas
-              </p>
+              <p className="mt-1 text-sm text-[var(--muted)]">Reading, Wyomissing, and surrounding areas</p>
               <div className="mt-4 grid gap-3">
                 {berksLocations.map((location) => (
                   <LocationCard key={location.slug} location={location} />
@@ -80,6 +92,20 @@ export default function ServiceAreasPage() {
               </div>
             </div>
           </div>
+          <nav aria-label="Services across our service areas" className="mt-10 border-t border-[var(--border)] pt-6">
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">Explore our services</h2>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {primaryServices.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  className="text-sm font-semibold text-[var(--brand)] hover:underline"
+                >
+                  {service.name}
+                </Link>
+              ))}
+            </div>
+          </nav>
         </Container>
       </section>
 

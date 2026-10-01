@@ -1,3 +1,8 @@
+import { insuranceClaimsClarification } from "@/content/restoration";
+
+export const exampleScopeExplanation =
+  "A sample scope to help you plan. Your written proposal will reflect your home, priorities and existing conditions.";
+
 export type ServiceFaq = {
   q: string;
   a: string;
@@ -20,9 +25,9 @@ export type Service = {
   outcomes: string[];
   process: string[];
   faqs: ServiceFaq[];
+  /** Hypothetical planning content; never use as project evidence. */
   authoritySnapshot?: {
     title: string;
-    location: string;
     summary: string;
     scope: string[];
     compliance: string;
@@ -31,6 +36,7 @@ export type Service = {
   image: {
     src: string;
     alt: string;
+    caption?: string;
   };
   /** Optional: pin featured case study + “Featured project photos” to this slug (visible case study for this service). */
   featuredCaseStudySlug?: string;
@@ -70,8 +76,7 @@ export const services: Service[] = [
     featuredCaseStudySlug: "blue-kitchen-cabinet-counters",
     name: "Kitchen Remodeling",
     short: "Layout, cabinets, countertops, and finishes planned around your daily life.",
-    description:
-      "Full kitchen renovations including layout updates, cabinets, countertops, lighting, and finishes.",
+    description: "Full kitchen renovations including layout updates, cabinets, countertops, lighting, and finishes.",
     intro:
       "Kitchen remodels touch layout, cabinets, countertops, electrical, and plumbing, all in the room you use most. We coordinate materials before demo, keep disruption short, and give you a written scope before work begins.",
     cta: "Request a Kitchen Quote",
@@ -92,8 +97,17 @@ export const services: Service[] = [
       "Countertop material choice and edge complexity",
       "Layout changes that require plumbing/electrical moves",
     ],
-    outcomes: ["Better traffic flow and work zones", "Durable finish selections", "Higher resale and day-to-day usability"],
-    process: ["Discovery call and photo review", "In-home scope and estimate", "Material coordination and schedule lock", "Build execution and final walkthrough"],
+    outcomes: [
+      "Better traffic flow and work zones",
+      "Durable finish selections",
+      "Higher resale and day-to-day usability",
+    ],
+    process: [
+      "Discovery call and photo review",
+      "In-home scope and estimate",
+      "Material coordination and schedule lock",
+      "Build execution and final walkthrough",
+    ],
     faqs: [
       {
         q: "Can you remodel my kitchen in phases?",
@@ -105,33 +119,31 @@ export const services: Service[] = [
       },
     ],
     authoritySnapshot: {
-      title: "Full kitchen gut and rebuild, Bethlehem, PA",
-      location: "Bethlehem, PA (Lehigh Valley)",
+      title: "Kitchen gut and rebuild",
       summary:
-        "Complete demo-to-finish kitchen remodel covering layout changes, new cabinetry, countertops, electrical upgrades, and coordinated finish work in a home that stayed occupied throughout.",
+        "An example scope for an occupied home might combine layout changes, cabinetry, countertops, electrical updates, and coordinated finish work.",
       scope: [
-        "Full gut demo including soffit removal to open sight lines to the living area",
-        "Layout revision: relocated sink run, added prep counter opposite the range, and reconfigured storage zones around the refrigerator landing",
-        "Cabinet install with scribe rails and filler strips to fit against out-of-plumb walls and an uneven ceiling line",
-        "Dedicated 20-amp circuits for range, microwave, dishwasher, and disposal; relocated panel feeds to clear the new cabinet layout",
-        "Countertop template after cabinets set, with field-verified cutouts for undermount sink and cooktop",
-        "Tile backsplash sequenced after countertop set to get clean top-edge termination without exposed cut lines",
-        "LVP flooring run under cabinets for moisture protection, with transition detailing at the dining room threshold",
-        "Adjacent hallway and dining area protected with dust barriers and negative-pressure fan during demo and drywall phases",
+        "Plan demolition and any soffit removal around the proposed sight lines and existing systems",
+        "Review sink, range, refrigerator, prep-counter, and storage positions before confirming a revised layout",
+        "Allow for cabinet scribe rails and filler strips where walls or ceilings are out of square",
+        "Review appliance circuit requirements and any electrical changes before cabinet installation",
+        "Template countertops after cabinets are set, with sink and cooktop cutouts checked against the selected products",
+        "Sequence backsplash installation after countertop placement for clean edge transitions",
+        "Plan flooring and transitions around cabinetry, moisture conditions, and the flooring manufacturer’s requirements",
+        "Protect adjacent occupied spaces and plan dust control for demolition and drywall work",
       ],
       compliance:
-        "Electrical work permitted and inspected per local code. Plumbing relocated under existing permit scope.",
-      note:
-        "Shown to illustrate planning depth. Your scope will vary based on layout, conditions, and finish selections.",
+        "Confirm applicable electrical and plumbing permits and inspections when the actual scope is defined.",
+      note: "Actual scope depends on the layout, existing conditions, and finish selections.",
     },
     image: {
       src: "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg",
-      alt: "Finished kitchen remodel with blue cabinets and new countertops.",
+      alt: "Kitchen with blue cabinets and light countertops.",
     },
     gallery: [
       {
         src: "/images/projects/blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg",
-        alt: "Kitchen cabinets and counters complete after installation.",
+        alt: "Blue kitchen cabinetry and light countertops.",
       },
       {
         src: "/images/projects/blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg",
@@ -139,7 +151,7 @@ export const services: Service[] = [
       },
       {
         src: "/images/projects/blue-kitchen-cabinet-counters/after/03-blue-kitchen-cabinets-1.jpg",
-        alt: "Cabinet and counter detail after kitchen upgrade.",
+        alt: "Cabinet and counter detail.",
       },
     ],
   },
@@ -148,10 +160,9 @@ export const services: Service[] = [
     featuredCaseStudySlug: "bethlehem-bathroom-refresh",
     name: "Bathroom Remodeling",
     short: "Bathrooms built right: tile, waterproofing, fixtures, and finishes you can count on.",
-    description:
-      "Bathroom upgrades with improved storage, tilework, fixtures, and clean modern finishes.",
+    description: "Bathroom upgrades with improved storage, tilework, fixtures, and clean modern finishes.",
     intro:
-      "A bathroom remodel touches plumbing, waterproofing, tile, electrical, and finishes, all in a space your household uses every day. We plan the work around your daily routine, handle waterproofing properly so nothing fails behind the walls, and keep the jobsite clean throughout. You get a written scope before we start and consistent updates until the final walkthrough.",
+      "A bathroom remodel touches plumbing, waterproofing, tile, electrical, and finishes, all in a space your household uses every day. Plan wet-zone assemblies, ventilation, work-zone protection, and temporary access before construction begins. You get a written scope before we start and consistent updates until the final walkthrough.",
     cta: "Get My Bathroom Quote",
     bullets: ["Showers and vanities", "Tile and waterproofing", "Efficient layouts"],
     whatIncluded: [
@@ -171,7 +182,12 @@ export const services: Service[] = [
       "Subfloor/wall condition after demo",
     ],
     outcomes: ["Better storage and usability", "Moisture-aware build details", "Modernized look and function"],
-    process: ["Initial needs review", "Measurement and scope confirmation", "Fixture/tile planning", "Build and quality walkthrough"],
+    process: [
+      "Initial needs review",
+      "Measurement and scope confirmation",
+      "Fixture/tile planning",
+      "Build and quality walkthrough",
+    ],
     faqs: [
       {
         q: "Can you work with my existing plumbing layout?",
@@ -187,34 +203,43 @@ export const services: Service[] = [
       },
     ],
     authoritySnapshot: {
-      title: "Full bathroom gut and rebuild, Bethlehem, PA",
-      location: "Bethlehem, PA (Lehigh Valley)",
+      title: "Bathroom gut and rebuild",
       summary:
-        "Complete tear-out and rebuild of a dated second-floor bathroom including hidden rot repair, full waterproofing, plumbing corrections, new tile, and finish work coordinated around a family still using the home.",
+        "An example bathroom scope may include tear-out, repairs to moisture-damaged materials, waterproofing, plumbing changes, tile, and finish work.",
       scope: [
-        "Full gut demo of tile, drywall, vanity, and fixtures down to studs and subfloor",
-        "Subfloor section replaced after demo revealed moisture damage and soft spots around the toilet flange area",
-        "Shower pan built to slope with Schluter Kerdi waterproofing membrane carried up walls to full wet-zone height before any tile set",
-        "Supply lines rerouted for new valve placement; existing galvanized drain section replaced with PVC to clear a slow-drain issue found during demo",
-        "Exhaust fan ducted to exterior through soffit with insulated duct run to prevent condensation in the joist bay",
-        "Floor tile set on Ditra uncoupling membrane over patched subfloor for crack isolation, with consistent grout joints carried into the shower threshold",
-        "Vanity scribed to fit against an out-of-plumb wall; plumbing trim centered on the new countertop cutout",
-        "Trim, paint, and silicone detailing completed last to keep finish surfaces clean through the tile and fixture phases",
+        "Plan removal of tile, drywall, vanity, and fixtures where a full tear-out is needed",
+        "Inspect the subfloor around the toilet flange and replace damaged sections if found",
+        "Select a shower-pan and waterproofing system, such as Schluter Kerdi, suited to the assembly and installation requirements",
+        "Review supply-line routing, valve placement, and any drain repairs revealed during demolition",
+        "Plan an exhaust duct route to the exterior and insulation where required to control condensation",
+        "Select floor-tile underlayment, such as Ditra, to suit the substrate and coordinate the shower threshold",
+        "Fit the vanity to the wall conditions and coordinate plumbing trim with the countertop cutout",
+        "Sequence trim, paint, and silicone detailing after tile and fixture work",
       ],
-      compliance:
-        "Plumbing modifications inspected per local code. Ventilation routed to exterior per IRC mechanical requirements.",
-      note:
-        "Shown to illustrate build quality and sequencing. Your scope will vary based on layout, conditions, and finish selections.",
+      compliance: "Confirm plumbing inspection and ventilation requirements for the actual design and location.",
+      note: "Actual scope depends on the layout, existing conditions, and finish selections.",
     },
     image: {
       src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
-      alt: "Finished bathroom shower with updated tile, fixtures, and clean modern finishes.",
+      alt: "Bathroom with a white shower enclosure, dark frame, and gray vanity.",
     },
     gallery: [
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg", alt: "Finished bathroom renovation showing updated vanity and new door addition." },
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg", alt: "Finished bathroom renovation with updated shower and vanity." },
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg", alt: "Finished shower detail with updated fixtures and trim." },
-      { src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg", alt: "Bathroom shelving and storage detail after remodel." },
+      {
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
+        alt: "Bathroom doorway and vanity.",
+      },
+      {
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
+        alt: "Bathroom shower and vanity.",
+      },
+      {
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg",
+        alt: "Shower fixtures and trim detail.",
+      },
+      {
+        src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg",
+        alt: "Bathroom shelving and storage detail.",
+      },
     ],
   },
   {
@@ -223,8 +248,7 @@ export const services: Service[] = [
     portfolioTag: "basement-finishing",
     name: "Basement Finishing",
     short: "Turn your basement into space you actually use.",
-    description:
-      "Basement finishing and remodeling for family rooms, offices, guest spaces, and storage zones.",
+    description: "Basement finishing and remodeling for family rooms, offices, guest spaces, and storage zones.",
     intro:
       "Most basements sit unused because they are dark, awkward, or not organized around how the household needs to use the space. We review existing conditions, utility access, and the intended room layout before defining a finish scope that feels connected to the rest of the home.",
     cta: "Request a Basement Quote",
@@ -268,10 +292,22 @@ export const services: Service[] = [
       alt: "Finished basement media room with large screen.",
     },
     gallery: [
-      { src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg", alt: "Finished basement media room with large screen." },
-      { src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg", alt: "Basement epoxy flooring finish detail." },
-      { src: "/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg", alt: "Wide basement view showing finished layout and floor detail." },
-      { src: "/images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg", alt: "Basement wide-angle finish showing completed room flow." },
+      {
+        src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
+        alt: "Finished basement media room with large screen.",
+      },
+      {
+        src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
+        alt: "Reflective patterned basement floor finish.",
+      },
+      {
+        src: "/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg",
+        alt: "Wide basement view showing finished layout and floor detail.",
+      },
+      {
+        src: "/images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg",
+        alt: "Basement wide-angle finish showing completed room flow.",
+      },
     ],
   },
   {
@@ -279,10 +315,9 @@ export const services: Service[] = [
     portfolioTag: "drywall",
     name: "Drywall Installation and Repair",
     short: "Walls and ceilings that look like new.",
-    description:
-      "Drywall hanging, patching, skim coating, and paint-ready finishing for remodel and restoration jobs.",
+    description: "Drywall hanging, patching, skim coating, and paint-ready finishing for remodel and restoration jobs.",
     intro:
-      "Whether you need a full room of drywall hung or a few patches blended invisible, we get your walls smooth, flat, and ready for paint. No visible seams, no bumps, no shortcuts.",
+      "Whether you need a full room of drywall hung or a few patches blended invisibly, we get your walls smooth, flat, and ready for paint. No visible seams, no bumps, no shortcuts.",
     cta: "Request a drywall quote",
     bullets: ["New drywall install", "Repair and patching", "Smooth finish prep"],
     whatIncluded: [
@@ -302,7 +337,12 @@ export const services: Service[] = [
       "Texture matching and finish level expectations",
     ],
     outcomes: ["Paint-ready surfaces", "Cleaner transitions at repairs", "Faster closeout on restoration scopes"],
-    process: ["Damage and substrate review", "Board install or repair patching", "Tape/mud/sand cycles", "Final finish inspection"],
+    process: [
+      "Damage and substrate review",
+      "Board install or repair patching",
+      "Tape/mud/sand cycles",
+      "Final finish inspection",
+    ],
     faqs: [
       {
         q: "Will the repair be visible after painting?",
@@ -314,25 +354,23 @@ export const services: Service[] = [
       },
     ],
     authoritySnapshot: {
-      title: "Multi-room drywall repair and finish prep, Bethlehem, PA",
-      location: "Bethlehem, PA (Lehigh Valley)",
+      title: "Multi-room drywall repair and finish preparation",
       summary:
-        "Targeted drywall repairs across a hallway and two bedrooms with patch blending, texture matching, and dust-controlled work in an occupied home.",
+        "An example scope for an occupied home may include repairs across a hallway and bedrooms, patch blending, texture matching, and dust control.",
       scope: [
-        "Damaged sections cut back to solid substrate and re-boarded with matching thickness drywall",
-        "Tape, mud, and sand cycles run until patches blended flush with surrounding wall plane — no ridges or shadow lines under raking light",
-        "Existing orange-peel texture matched on repaired zones so the finished wall reads consistent after paint",
-        "Work areas sealed with plastic and floor protection; sanding dust managed with shop vac at the tool to keep the rest of the home clean",
-        "All surfaces left paint-ready with corner bead, nail spots, and seams finished to Level 4",
+        "Cut damaged sections back to sound material and use replacement drywall of the appropriate thickness",
+        "Tape, mud, and sand repaired areas to blend with the surrounding wall plane",
+        "Match existing texture where needed before painting",
+        "Protect floors, isolate work areas, and manage sanding dust at the tool",
+        "Prepare corner bead, fastener spots, and seams for the agreed paint finish",
       ],
       compliance:
-        "Finish work completed to Level 4 smooth per industry standards.",
-      note:
-        "Shown to illustrate repair quality. Your scope will vary based on damage extent and finish requirements.",
+        "Agree on the required finish level, such as Level 4, for the planned surface and lighting conditions.",
+      note: "Actual scope depends on the damage extent and finish requirements.",
     },
     image: {
       src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
-      alt: "Completed bedroom interior with smooth wall and ceiling finish after a blue palette refresh in Berks County.",
+      alt: "Bedroom interior with blue walls and a light ceiling.",
     },
     gallery: [
       {
@@ -357,7 +395,7 @@ export const services: Service[] = [
       },
       {
         src: "/images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg",
-        alt: "Interior refresh underway with protection and phased finish work.",
+        alt: "Interior room with work-area protection and unfinished surfaces.",
       },
     ],
   },
@@ -367,10 +405,9 @@ export const services: Service[] = [
     portfolioTag: "flooring",
     name: "Flooring Installation",
     short: "Floors that look great and hold up to real life.",
-    description:
-      "Install and replace flooring systems that fit your budget, style, and daily wear requirements.",
+    description: "Install and replace flooring systems that fit your budget, style, and daily wear requirements.",
     intro:
-      "Good flooring starts with proper subfloor prep because that is where most installers cut corners. We level, prep, and install with tight transitions between rooms so your floors look and feel right for years.",
+      "Proper subfloor preparation is critical to a durable, even finished floor. We level, prep, and install with tight transitions between rooms so your floors look and feel right for years.",
     cta: "Request flooring quote",
     bullets: ["Subfloor prep", "Precision installation", "Trim and transition details"],
     whatIncluded: [
@@ -390,7 +427,12 @@ export const services: Service[] = [
       "Room count, stairs, and transition complexity",
     ],
     outcomes: ["Smoother, quieter floors", "Cleaner transitions and trim", "Longer-lasting finish performance"],
-    process: ["Material and use-case review", "Subfloor prep and leveling", "Install and trim detailing", "Final walkthrough and care guidance"],
+    process: [
+      "Material and use-case review",
+      "Subfloor prep and leveling",
+      "Install and trim detailing",
+      "Final walkthrough and care guidance",
+    ],
     faqs: [
       {
         q: "Do I need to clear the room completely?",
@@ -402,41 +444,39 @@ export const services: Service[] = [
       },
     ],
     authoritySnapshot: {
-      title: "Multi-room flooring replacement, Allentown, PA",
-      location: "Allentown, PA (Lehigh Valley)",
+      title: "Multi-room flooring replacement",
       summary:
-        "Full flooring replacement across living room, hallway, and two bedrooms in a 1960s home with subfloor issues that had to be corrected before any finish material went down.",
+        "An example flooring scope may cover a living room, hallway, and bedrooms, with subfloor corrections before new finish materials are installed.",
       scope: [
-        "Existing carpet and pad pulled; vinyl adhesive residue scraped and cleaned from plywood subfloor across all rooms",
-        "Subfloor mapped for flatness with a 6-ft straightedge — two crowns shimmed and three dip zones filled with self-leveling compound to bring the surface within spec",
-        "Loose and squeaking subfloor panels re-fastened with ring-shank screws into joists every 6 inches through the hallway and living room",
-        "Moisture testing with pin meter at 12 locations before underlayment selection; readings confirmed standard foam underlayment was appropriate (no vapor barrier needed)",
-        "LVP click-lock installed with staggered joints and consistent expansion gaps maintained at every wall, cabinet, and door frame",
-        "All door jambs and casings undercut with oscillating tool so flooring slides under cleanly — no visible caulk fills or trim gaps",
-        "T-molding transitions set at bedroom-to-hallway thresholds where floor heights changed; reducer strip at the kitchen tile edge to eliminate the trip lip",
-        "Base trim reinstalled with nail holes filled, caulked, and touch-up painted so the room looked finished, not just re-floored",
+        "Remove existing flooring and prepare the substrate for the selected replacement material",
+        "Check subfloor flatness and plan corrections for high spots and dips to meet product requirements",
+        "Assess loose or squeaking panels and specify appropriate repairs and fasteners",
+        "Test moisture conditions before selecting underlayment or deciding whether a vapor-control layer is required",
+        "Plan LVP joint layout and expansion clearances according to the selected product",
+        "Coordinate door-jamb and casing details so the flooring fits cleanly",
+        "Plan transitions and reducers where floor materials or heights change",
+        "Reinstall and finish base trim as included in the agreed scope",
       ],
       compliance:
-        "Installed per manufacturer specs for expansion, underlayment, and acclimation requirements.",
-      note:
-        "Shown to illustrate prep depth. Your scope will vary based on subfloor condition, room count, and material choice.",
+        "Confirm manufacturer requirements for flatness, moisture, underlayment, expansion, and acclimation before installation.",
+      note: "Actual scope depends on subfloor condition, room count, and material choice.",
     },
     image: {
       src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
-      alt: "Light wood flooring installation in a finished living area.",
+      alt: "Light wood-look flooring in a furnished living area.",
     },
     gallery: [
       {
         src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
-        alt: "Completed light wood flooring installation in an Allentown living area.",
+        alt: "Light wood-look flooring.",
       },
       {
         src: "/images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
-        alt: "Allentown living area with flooring and trim detailed along the fireplace wall.",
+        alt: "Living area with flooring and trim along a fireplace wall.",
       },
       {
         src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
-        alt: "Bethlehem interior refresh with new wood-look flooring, paint, and lighting.",
+        alt: "Interior room showing wood-look flooring, wall finishes, and ceiling lighting.",
       },
     ],
   },
@@ -469,7 +509,12 @@ export const services: Service[] = [
       "Drainage and grading corrections needed",
     ],
     outcomes: ["Improved outdoor usability", "Better drainage and durability", "Stronger curb appeal"],
-    process: ["Site and grade review", "Layout and material planning", "Base prep and install", "Compaction and final finish"],
+    process: [
+      "Site and grade review",
+      "Layout and material planning",
+      "Base prep and install",
+      "Compaction and final finish",
+    ],
     faqs: [
       {
         q: "What actually makes a paver patio last?",
@@ -489,11 +534,26 @@ export const services: Service[] = [
       alt: "Finished patio, pavilion roof, and hardscape outdoor living space.",
     },
     gallery: [
-      { src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg", alt: "Finished patio, pavilion roof, and hardscape outdoor living space." },
-      { src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg", alt: "Outdoor living area with paver patio and pavilion roof detail." },
-      { src: "/images/projects/frontier-patio-gable-roof/after/angle-2.jpg", alt: "Alternate view of finished patio and integrated pavilion structure." },
-      { src: "/images/projects/frontier-patio-gable-roof/after/finished-alt.jpg", alt: "Finished hardscape and pavilion from another angle." },
-      { src: "/images/projects/frontier-patio-gable-roof/process/patio-construction.jpg", alt: "Patio and pavilion structure during construction." },
+      {
+        src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
+        alt: "Finished patio, pavilion roof, and hardscape outdoor living space.",
+      },
+      {
+        src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
+        alt: "Outdoor living area with paver patio and pavilion roof detail.",
+      },
+      {
+        src: "/images/projects/frontier-patio-gable-roof/after/angle-2.jpg",
+        alt: "Alternate view of finished patio and integrated pavilion structure.",
+      },
+      {
+        src: "/images/projects/frontier-patio-gable-roof/after/finished-alt.jpg",
+        alt: "Finished hardscape and pavilion from another angle.",
+      },
+      {
+        src: "/images/projects/frontier-patio-gable-roof/process/patio-construction.jpg",
+        alt: "Patio and pavilion structure during construction.",
+      },
     ],
   },
   {
@@ -501,8 +561,7 @@ export const services: Service[] = [
     featuredCaseStudySlug: "allentown-exterior-log-home-refresh",
     name: "Exterior Remodeling",
     short: "Exterior updates that improve curb appeal, access, and weather resistance.",
-    description:
-      "Exterior remodeling for siding, trim, windows, stairs, garage facades, and weather-worn elevations.",
+    description: "Exterior remodeling for siding, trim, windows, stairs, garage facades, and weather-worn elevations.",
     intro:
       "Exterior work has to do more than look better. We plan around access, exposure, and finish durability so siding, trim, window, stair, and facade updates hold up through weather and daily use.",
     cta: "Request an exterior quote",
@@ -525,8 +584,17 @@ export const services: Service[] = [
       "Extent of surface wear, repairs, or prep needed",
       "Amount of siding, trim, window, stair, and facade work included in scope",
     ],
-    outcomes: ["Stronger curb appeal", "Safer and cleaner exterior access", "Better protection for weather-exposed surfaces"],
-    process: ["Site review and photo assessment", "Access and scope planning", "Exterior prep and improvement work", "Final detail walk and touch-ups"],
+    outcomes: [
+      "Stronger curb appeal",
+      "Safer and cleaner exterior access",
+      "Better protection for weather-exposed surfaces",
+    ],
+    process: [
+      "Site review and photo assessment",
+      "Access and scope planning",
+      "Exterior prep and improvement work",
+      "Final detail walk and touch-ups",
+    ],
     faqs: [
       {
         q: "Do you work on second-story or hard-to-reach elevations?",
@@ -538,58 +606,72 @@ export const services: Service[] = [
       },
     ],
     authoritySnapshot: {
-      title: "Full-elevation exterior refresh, Lehigh Valley, PA",
-      location: "Lehigh Valley, PA",
+      title: "Exterior elevation and finish refresh",
       summary:
-        "Front and side elevation refresh on a two-story home with weathered trim, failing caulk joints, and inconsistent cladding transitions that were letting moisture behind the siding.",
+        "An example exterior scope may address weathered trim, failed joints, and cladding transitions, with inspection of concealed materials as repairs proceed.",
       scope: [
-        "Damaged siding and trim sections removed to inspect sheathing condition underneath; two areas of soft sheathing replaced before new cladding went back on",
-        "House-wrap laps checked and corrected where previous work had reversed the overlap, restoring top-over-bottom drainage continuity across the repair zones",
-        "Window and door head flashing integrated under the weather barrier so water hitting the wall above sheds over the flashing and out, not behind the frame",
-        "New fiber-cement siding installed bottom-to-top with proper reveal spacing and nailing to allow thermal movement without buckling",
-        "Soffit-to-fascia transitions detailed with aluminum trim and drip edge so water at the roofline moves into the gutter, not behind the fascia board",
-        "Exterior trim joints sealed with paintable polyurethane sealant at prescribed locations only — not used to mask gaps from poor fit",
-        "All upper-story work accessed with extension ladders and staged scaffolding; ground protection in place for landscaping along the foundation",
-        "Final coat of exterior acrylic applied after all caulk, flashing, and trim work cured — not before — so the paint film bridges clean surfaces, not wet sealant",
+        "Remove damaged siding and trim where needed to inspect and repair underlying sheathing",
+        "Check weather-barrier overlaps and drainage continuity at repair areas",
+        "Coordinate window and door head flashing with the weather barrier",
+        "Install replacement siding, such as fiber cement, to the selected product’s spacing and fastening requirements",
+        "Review soffit, fascia, drip-edge, and gutter transitions for water management",
+        "Seal trim joints only where the assembly and product requirements call for it",
+        "Plan appropriate access equipment and protection for landscaping near the work",
+        "Sequence exterior paint after preparation and the required sealant cure time",
       ],
       compliance:
-        "Flashing and weather-barrier details follow manufacturer installation requirements and IRC water-resistive barrier standards.",
-      note:
-        "Shown to illustrate weatherproofing depth. Your scope will vary based on existing conditions, elevation count, and material selections.",
+        "Confirm flashing, weather-barrier, and manufacturer installation requirements for the selected assembly.",
+      note: "Actual scope depends on existing conditions, elevation count, and material selections.",
     },
     image: {
       src: "/images/projects/allentown-exterior-log-home/after/front-finished.jpg",
-      alt: "Finished log-style home exterior after remodeling work in Allentown.",
+      alt: "Log-style house exterior.",
     },
     gallery: [
-      { src: "/images/projects/allentown-exterior-log-home/after/front-finished.jpg", alt: "Finished exterior remodeling project on a log-style home in Allentown." },
-      { src: "/images/projects/allentown-exterior-log-home/after/garage-elevation.jpg", alt: "Garage-side exterior elevation during remodeling work on a log-style home." },
-      { src: "/images/projects/allentown-exterior-log-home/process/lift-access-work.jpg", alt: "Lift-access exterior remodeling work underway on an Allentown home." },
-      { src: "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg", alt: "Ranch-style home exterior refresh in Berks County with crisp black accents." },
-      { src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg", alt: "Full exterior refresh with updated shutters and paint in the Lehigh Valley." },
-      { src: "/images/projects/bethlehem-exterior-staircase/after/staircase-finished.jpg", alt: "Finished exterior staircase build with landing and rail system in Bethlehem." },
+      {
+        src: "/images/projects/allentown-exterior-log-home/after/front-finished.jpg",
+        alt: "Log-style house exterior with dark trim and garage doors.",
+      },
+      {
+        src: "/images/projects/allentown-exterior-log-home/after/garage-elevation.jpg",
+        alt: "Garage-side exterior elevation of a log-style house.",
+      },
+      {
+        src: "/images/projects/allentown-exterior-log-home/process/lift-access-work.jpg",
+        alt: "Lift equipment beside a log-style house exterior.",
+      },
+      {
+        src: "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg",
+        alt: "Ranch-style house exterior with dark accents.",
+      },
+      {
+        src: "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
+        alt: "House exterior with shutters and light wall finishes.",
+      },
+      {
+        src: "/images/projects/bethlehem-exterior-staircase/after/staircase-finished.jpg",
+        alt: "Exterior staircase with landing and railings.",
+      },
     ],
   },
   {
     slug: "fire-damage-restoration",
-    featuredCaseStudySlug: "allentown-fire-damage-interior-rebuild",
     portfolioTag: "fire-damage",
     name: "Fire Damage Restoration",
-    short: "Damage assessment, structured rebuild planning, and insurance-ready documentation.",
-    description:
-      "Emergency stabilization, rebuild planning, and full restoration work after fire damage.",
+    short: "Reconstruction planning, affected finish repairs, and construction-scope documentation.",
+    description: "Fire-damage reconstruction planning and repairs to affected interior finishes.",
     intro:
-      "After a fire, you need a clear path forward, not more confusion. We start with a damage assessment and safety review, then build a structured reconstruction plan with documented scope for insurance. You get consistent communication through every phase of the rebuild so you always know what is happening and what comes next.",
-    cta: "Call for Immediate Help",
-    bullets: ["Urgent response", "Damage assessment", "Rebuild coordination"],
+      "After a fire, reconstruction should follow any required emergency response, safety clearance, and specialist cleanup. Contact RHI Pros to discuss affected rooms, repair priorities, and current availability. The written construction scope should identify the work included, any separate specialist responsibilities, and the sequence for rebuilding drywall, flooring, trim, and finishes.",
+    cta: "Discuss Fire-Damage Repairs",
+    bullets: ["Reconstruction planning", "Affected finish repairs", "Construction-scope documentation"],
     whatIncluded: [
-      "Initial damage assessment and safety-first planning",
+      "Affected-room review for a proposed construction scope",
       "Reconstruction scope for affected structural and finish areas",
       "Coordination for staged rebuild work",
       "Documentation support for claim-related communication",
     ],
     qualityFactors: [
-      "Accurate early scope to avoid mid-project surprises",
+      "Documented scope and a process for reviewing concealed conditions",
       "Sequencing discipline across trades",
       "Clear communication through each rebuild phase",
     ],
@@ -598,67 +680,86 @@ export const services: Service[] = [
       "Size of affected area and rebuild depth",
       "Special materials or phased reconstruction requirements",
     ],
-    outcomes: ["Faster path to recovery", "Structured rebuild scope", "Clear communication through claim-driven work"],
-    process: ["Initial site evaluation", "Safety and damage scope planning", "Rebuild sequence and materials", "Final quality and handoff"],
+    outcomes: ["Defined repair priorities", "Structured rebuild scope", "Documented construction work"],
+    process: [
+      "Confirm site access and any specialist work needed before reconstruction",
+      "Affected-room review and construction-scope planning",
+      "Rebuild sequence and materials",
+      "Final quality and handoff",
+    ],
     faqs: [
       {
         q: "How do you support the insurance side of a fire rebuild?",
-        a: "We do not negotiate on your behalf, but we supply clear scope write-ups, photos, and cost detail so adjusters can review the work fairly.",
+        a: insuranceClaimsClarification,
       },
       {
         q: "How quickly can you respond after a fire?",
-        a: "Call as soon as you can. We prioritize stabilization and same-day phone or on-site contact when the situation is active.",
+        a: "Call to confirm current availability and whether your repair scope is a fit. A quote request does not confirm an emergency dispatch or same-day visit. Emergency response, safety clearance, and any specialist cleanup should be addressed before reconstruction begins.",
       },
     ],
     authoritySnapshot: {
-      title: "Interior fire-damage rebuild, Allentown, PA",
-      location: "Allentown, PA (Lehigh Valley)",
+      title: "Interior fire-damage rebuild",
       summary:
-        "Phased interior rebuild after fire damage affected multiple rooms. Work moved from safety assessment through selective demo, smoke decontamination, and coordinated finish restoration with documented scope at each stage for insurance communication.",
+        "An illustrative fire-loss reconstruction plan separates emergency response and specialist cleanup from the subsequent demolition, repairs, and finish work. Confirm who performs each part before work starts.",
       scope: [
-        "Initial site walk with safety check — structural stability verified, utilities confirmed off, and affected zones marked before any work began",
-        "Selective demo of fire-damaged drywall, trim, and insulation down to framing; salvageable structure separated from unsalvageable material to control rebuild scope and cost",
-        "Smoke and soot residue cleaned from exposed framing, subfloor, and mechanical surfaces using dry sponge and HEPA-filtered vacuum before any new material went in",
-        "Suppression-water moisture mapped with pin meter across subfloor and wall cavities; wet zones dried and verified before closing up walls",
-        "Framing and sheathing inspected for char depth and structural integrity; two ceiling joists sistered where fire had weakened the original members",
-        "Rebuild sequenced from rough electrical and mechanical through drywall, tape, mud, paint, and finish trim so each trade worked on clean surfaces, not over wet or unfinished work",
-        "Photo documentation captured at site evaluation, after demo, at rough-in, and at final finish — organized by room for clear claim communication with the adjuster",
-        "Final walkthrough included surface-condition check across all rebuilt areas and confirmation that smoke odor was resolved before the homeowner moved back in",
+        "Confirm that appropriate professionals have addressed structural and utility safety and established access for construction",
+        "Plan selective removal of damaged drywall, trim, and insulation, separating salvageable materials where appropriate",
+        "Identify whether smoke, soot, or odor cleanup requires a separate specialist scope",
+        "Request available drying records for suppression-water damage and define readiness checks before enclosure",
+        "Confirm any required structural assessment and repair design before specifying framing changes",
+        "Sequence rough electrical and mechanical work before drywall, paint, and trim",
+        "Organize photos by room and stage to support construction-scope communication with the adjuster",
+        "Review completed finish work and identify any unresolved specialist-cleanup items before closeout",
       ],
       compliance:
-        "Electrical rough-in inspected per local code before wall close-up. Structural repairs documented for insurance scope review.",
-      note:
-        "Shown to illustrate rebuild sequencing and documentation depth. Every fire is different — your scope will depend on damage extent and affected systems.",
+        "Confirm required rough-in inspections before closing walls and document structural repairs for scope review.",
+      note: "Actual scope depends on the damage extent, affected systems, and work required after assessment.",
     },
     image: {
-      src: "/images/projects/fire-damage-documentation/after/14-img_8459.jpg",
-      alt: "Active interior rebuild of a fire-damaged home with exposed framing, rough-in electrical, and restoration in progress.",
+      src: "/images/projects/fire-damage-documentation/after/37-img_8934.jpg",
+      alt: "House with charred upper siding and boarded openings in snow.",
     },
-    gallery: [
-      { src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg", alt: "Interior rebuild work in progress during a fire-damage restoration project." },
-      { src: "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg", alt: "Completed interior finishes after restoration and rebuild work." },
-    ],
+    gallery: [],
+    processGallery: {
+      title: "Damage & repair details",
+      intro: "Exterior conditions that affect access, safety and the reconstruction scope.",
+      images: [
+        {
+          src: "/images/projects/fire-damage-documentation/after/36-img_8933.jpg",
+          alt: "Snow-covered exterior with boarded windows and a brick chimney.",
+          caption: "Boarded openings and exterior access",
+        },
+        {
+          src: "/images/projects/fire-damage-documentation/after/37-img_8934.jpg",
+          alt: "Damaged upper exterior above a stone-faced lower story.",
+          caption: "Damage at the upper exterior",
+        },
+        {
+          src: "/images/projects/fire-damage-documentation/after/38-img_8935.jpg",
+          alt: "Side view of a damaged house with boarded windows in snow.",
+          caption: "Side elevation and site conditions",
+        },
+      ],
+    },
   },
   {
     slug: "water-damage-restoration",
-    featuredCaseStudySlug: "lehigh-water-damage-rebuild",
     portfolioTag: "water-damage",
     name: "Water Damage Restoration",
-    short: "Fast damage assessment, structured rebuild, and insurance-ready documentation.",
-    description:
-      "Water-damage rebuild services for drywall, flooring, trim, and affected finished spaces.",
+    short: "Water-damage reconstruction planning and repairs to affected interior finishes.",
+    description: "Water-damage rebuild services for drywall, flooring, trim, and affected finished spaces.",
     intro:
-      "Water damage gets worse the longer you wait. Call us to start with a damage assessment. We identify what is affected, map the rebuild scope, and document everything for insurance if needed. From there, we handle the full restoration: drywall, flooring, trim, and finishes, with clear communication at every stage so you know exactly where things stand.",
-    cta: "Call for Immediate Help",
-    bullets: ["Rapid mitigation support", "Structural and finish repairs", "Insurance-ready documentation"],
+      "Bring your space back together after water damage. Once the water source, drying and cleanup needs have been addressed, we help plan repairs to drywall, flooring, trim and interior finishes.",
+    cta: "Discuss Water-Damage Repairs",
+    bullets: ["Affected-room planning", "Drywall and finish repairs", "Construction-scope documentation"],
     whatIncluded: [
-      "Damage mapping and affected-area reconstruction planning",
+      "Affected-area review for a proposed reconstruction scope",
       "Drywall, flooring, trim, and finish restoration",
       "Phased work to return spaces to functional condition",
       "Documentation support for claim communication",
     ],
     qualityFactors: [
-      "Complete identification of affected assemblies",
+      "Review of affected assemblies and any available mitigation records",
       "Clean sequencing from repair to finish restoration",
       "Durable material choices in previously affected areas",
     ],
@@ -667,8 +768,13 @@ export const services: Service[] = [
       "Number of finishes needing replacement",
       "Project phasing and access constraints",
     ],
-    outcomes: ["Stabilized damaged areas", "Coordinated rebuild sequencing", "Cleaner closeout with documented scope"],
-    process: ["Damage mapping and scope", "Material removal/repair planning", "Rebuild and finish restoration", "Final review and cleanup"],
+    outcomes: ["Defined reconstruction scope", "Coordinated rebuild sequencing", "Documented finish repairs"],
+    process: [
+      "Existing conditions and reconstruction scope",
+      "Material removal/repair planning",
+      "Rebuild and finish restoration",
+      "Final review and cleanup",
+    ],
     faqs: [
       {
         q: "Can we upgrade finishes while you are already replacing damaged areas?",
@@ -680,28 +786,26 @@ export const services: Service[] = [
       },
     ],
     authoritySnapshot: {
-      title: "Water-damage mitigation and interior rebuild, Lehigh Valley, PA",
-      location: "Lehigh Valley, PA",
+      title: "Planning an interior rebuild after water damage",
       summary:
-        "Interior water damage from a second-floor supply-line failure affected ceilings, walls, and flooring across two levels. Work was sequenced from immediate moisture containment through verified drying and phased finish rebuild with documented scope for the homeowner's insurance claim.",
+        "An illustrative water-loss scenario could affect ceilings, walls, and flooring. Reconstruction planning should establish which mitigation steps are complete, what conditions remain, and who is responsible for each part of the work.",
       scope: [
-        "Affected areas mapped with pin-type and non-invasive moisture meters to identify every wet zone — including wall cavities and subfloor sections that looked dry on the surface",
-        "Standing water extracted and containment set up to stop spread into unaffected rooms before any demolition began",
-        "Saturated drywall, base trim, and insulation selectively removed to expose framing and allow airflow; salvageable material left in place to control rebuild scope",
-        "Air movers and commercial dehumidifiers positioned based on the moisture map and monitored with daily readings until all affected assemblies hit target moisture content",
-        "Subfloor moisture verified with pin meter at every rebuild zone before new flooring or drywall went back on — nothing was closed up wet",
-        "Framing and sheathing checked for early mold indicators; affected surfaces treated and dried before being enclosed",
-        "Rebuild phased from subfloor repair through drywall, tape, mud, paint, and finish trim so each stage started on verified-dry, clean substrate",
-        "Photo documentation and moisture readings captured at intake, during drying, and at rebuild milestones — organized for clear insurance claim communication",
+        "Request available affected-area assessments and drying records from the mitigation provider",
+        "Confirm responsibility for any extraction, drying, or specialist cleanup still needed",
+        "Define selective removal and replacement of damaged drywall, trim, and insulation in the construction scope",
+        "Agree on the documentation and substrate-readiness checks needed before new materials are installed",
+        "Resolve any remaining moisture or contamination concerns with an appropriate specialist before enclosure",
+        "Sequence subfloor repairs, drywall, paint, and trim around dry, prepared substrates",
+        "Keep construction photos, written repair details, and approved scope changes together for homeowner and claim communication",
       ],
       compliance:
-        "Drying targets followed IICRC S500 water-damage restoration guidelines. Rebuild materials installed on verified-dry substrate only.",
-      note:
-        "Shown to illustrate mitigation-to-rebuild sequencing. Every water event is different — your scope will depend on source, duration, and affected materials.",
+        "Confirm applicable construction requirements and readiness for reconstruction; the written scope should identify any separate mitigation or remediation responsibilities.",
+      note: "Actual scope depends on the water source, duration, affected materials, and assessment of the site.",
     },
     image: {
-      src: "",
-      alt: "",
+      src: "/images/service-illustrations/water-damage-interior.png",
+      alt: "AI-generated illustration of a water-damaged room with stained walls, exposed lower framing and damaged flooring.",
+      caption: "AI-generated illustration of water damage",
     },
     gallery: [],
   },
@@ -710,10 +814,9 @@ export const services: Service[] = [
     portfolioTag: "insurance-restoration",
     name: "Insurance Claims Assistance",
     short: "Help navigating insurance-related repairs.",
-    description:
-      "Support for homeowners through claim-related repairs with clear scopes and communication.",
+    description: "Support for homeowners through claim-related repairs with clear scopes and communication.",
     intro:
-      "Dealing with insurance after property damage is stressful. We help by providing clear documentation, detailed scope breakdowns, and consistent communication so the repair process moves forward without you having to manage every detail.",
+      "For insurance-related construction work, a written repair scope, photos, cost details, and approved changes help explain the proposed work. RHI Pros supports construction planning and documentation. Coverage and claim decisions remain with your insurer and the people authorized to represent you.",
     cta: "Request claim help",
     bullets: ["Claim-friendly scope writing", "Photo documentation", "Project communication"],
     whatIncluded: [
@@ -732,8 +835,17 @@ export const services: Service[] = [
       "Material and finish replacement level",
       "Coordination complexity across project phases",
     ],
-    outcomes: ["Clearer next steps for approval", "Coordinated repair planning", "Reduced friction in project communication"],
-    process: ["Damage and claim context review", "Scope drafting and documentation", "Repair planning and sequencing", "Project execution updates"],
+    outcomes: [
+      "Clearer construction-scope documentation",
+      "Coordinated repair planning",
+      "Reduced friction in project communication",
+    ],
+    process: [
+      "Damage and claim context review",
+      "Scope drafting and documentation",
+      "Repair planning and sequencing",
+      "Project execution updates",
+    ],
     faqs: [
       {
         q: "Can you guarantee my claim gets approved?",
@@ -745,12 +857,10 @@ export const services: Service[] = [
       },
     ],
     image: {
-      src: "/images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg",
-      alt: "Insurance-supported interior repair and finish restoration project.",
+      src: "",
+      alt: "",
     },
-    gallery: [
-      { src: "/images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg", alt: "Repair-in-progress detail from insurance-supported project." },
-    ],
+    gallery: [],
   },
 ];
 

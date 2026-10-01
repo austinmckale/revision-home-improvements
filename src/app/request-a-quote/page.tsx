@@ -10,37 +10,48 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 export const metadata: Metadata = {
   title: { absolute: "Request a Quote | RHI Pros | Lehigh Valley & Berks County" },
   description:
-    "Request a kitchen, bathroom, basement, or restoration quote in Allentown, Bethlehem, or the Lehigh Valley. Fast response and clear scope.",
+    "Request a kitchen, bathroom, basement, or restoration quote in Allentown, Bethlehem, or the Lehigh Valley. Discuss scope, scheduling and next steps.",
   alternates: { canonical: "/request-a-quote" },
 };
 
 export default function RequestQuotePage() {
   return (
     <>
-      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Request a Quote", href: "/request-a-quote" }])} />
+      <JsonLd
+        data={getBreadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Request a Quote", href: "/request-a-quote" },
+        ])}
+      />
       <section className="bg-[var(--background)] py-12 sm:py-16 lg:py-20">
         <Container>
           <div className="grid gap-6 lg:gap-10 lg:grid-cols-[1.2fr_0.8fr]">
             {/* Headline + intro first */}
             <div className="order-1 lg:order-none">
               <p className="eyebrow">A good place to start</p>
-              <h1 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">Tell us what you have in mind.</h1>
+              <h1 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
+                Tell us what you have in mind.
+              </h1>
               <p className="mt-4 max-w-2xl leading-relaxed text-[var(--muted)] sm:text-lg">
-                You do not need a full plan to start. Tell us about the project and we will
-                help you figure out scope, timeline, and next steps.
+                You do not need a full plan to start. Tell us about the project and we will help you figure out scope, a
+                realistic timeline, and next steps across {siteConfig.serviceAreas}.
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <Button href={siteConfig.phoneHref} variant="secondary">
                   Call {siteConfig.phoneDisplay}
                 </Button>
-                <Link href="/services" className="text-sm font-semibold text-[var(--brand)] hover:underline lg:hidden">Browse Services</Link>
-                <span className="hidden lg:inline-flex"><Button href="/services" variant="secondary">Browse Services</Button></span>
+                <Link
+                  href="/services"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--brand)] hover:underline lg:rounded-md lg:border lg:border-[var(--border)] lg:px-5 lg:py-3"
+                >
+                  Browse Services
+                </Link>
               </div>
             </div>
 
             {/* Form: after intro on mobile, sticky sidebar on desktop */}
             <div className="order-2 lg:row-span-3 lg:order-none">
-              <div className="lg:sticky lg:top-6">
+              <div className="lg:sticky lg:top-24">
                 <QuoteForm />
               </div>
             </div>
@@ -60,26 +71,40 @@ export default function RequestQuotePage() {
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-sm text-[var(--muted)]">
-                <p className="surface rounded-lg px-3 py-2">PA HIC registered · PA185945</p>
-                <p className="surface rounded-lg px-3 py-2">Insured and warranty-backed</p>
+                <p className="surface rounded-lg px-3 py-2">PA HIC #PA185945</p>
+                <p className="surface rounded-lg px-3 py-2">Discuss insurance and warranty terms</p>
                 <p className="surface rounded-lg px-3 py-2">Written scope before work begins</p>
                 <p className="surface rounded-lg px-3 py-2">No obligation, honest assessment upfront</p>
               </div>
 
-              <blockquote className="border-t border-[var(--border)] py-4 lg:py-5">
+              <div className="border-t border-[var(--border)] py-4 lg:py-5">
                 <p className="text-sm text-[var(--muted)]">
-                  &ldquo;This company has the experience and know-how to do almost any work you need.
-                  Their work is impeccable and communication was consistent.&rdquo;
+                  Explore independent company feedback before discussing your project.
                 </p>
-                <p className="mt-2 text-sm font-semibold text-[var(--accent)]">Richard K.</p>
-                <p className="text-xs text-[var(--muted)]">Bathroom remodel · Berks County</p>
-              </blockquote>
+                <a
+                  href={siteConfig.angiUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-block text-sm font-semibold text-[var(--brand)] underline underline-offset-4"
+                >
+                  Read reviews on Angi ↗
+                </a>
+              </div>
 
               <p className="text-sm text-[var(--muted)]">
                 Want to learn more first?{" "}
-                <Link href="/our-process" className="font-semibold text-[var(--brand)]">Our process</Link>,{" "}
-                <Link href="/projects" className="font-semibold text-[var(--brand)]">recent work</Link>, or{" "}
-                <Link href="/licenses-and-insurance" className="font-semibold text-[var(--brand)]">licenses &amp; insurance</Link>.
+                <Link href="/our-process" className="font-semibold text-[var(--brand)]">
+                  Our process
+                </Link>
+                ,{" "}
+                <Link href="/projects" className="font-semibold text-[var(--brand)]">
+                  recent work
+                </Link>
+                , or{" "}
+                <Link href="/licenses-and-insurance" className="font-semibold text-[var(--brand)]">
+                  registration &amp; insurance
+                </Link>
+                .
               </p>
             </div>
           </div>

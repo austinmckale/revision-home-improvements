@@ -1,5 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
-
 const url = process.env.SUPABASE_URL;
 const key = process.env.SUPABASE_SERVICE_ROLE;
 if (!url || !key) throw new Error("Missing env");
@@ -16,7 +14,34 @@ if (!res.ok) {
 }
 const openapi = await res.json();
 
-const tables = ["Kpi", "KpiTarget", "ActivityLog", "AuditLog", "ChangeOrderLineItem", "EstimateLineItem", "InvoiceLineItem", "JobAssignment", "JobScheduleEvent", "PortalMessage", "TimeEntry", "Task", "ShareLink", "PortalLink", "Payment", "Expense", "Lead", "ChangeOrder", "Estimate", "Invoice", "FileAsset", "Job", "Customer", "UserProfile", "Organization", "OrganizationSetting"];
+const tables = [
+  "Kpi",
+  "KpiTarget",
+  "ActivityLog",
+  "AuditLog",
+  "ChangeOrderLineItem",
+  "EstimateLineItem",
+  "InvoiceLineItem",
+  "JobAssignment",
+  "JobScheduleEvent",
+  "PortalMessage",
+  "TimeEntry",
+  "Task",
+  "ShareLink",
+  "PortalLink",
+  "Payment",
+  "Expense",
+  "Lead",
+  "ChangeOrder",
+  "Estimate",
+  "Invoice",
+  "FileAsset",
+  "Job",
+  "Customer",
+  "UserProfile",
+  "Organization",
+  "OrganizationSetting",
+];
 for (const table of tables) {
   const schema = openapi.components?.schemas?.[table];
   const props = schema?.properties ? Object.keys(schema.properties) : [];

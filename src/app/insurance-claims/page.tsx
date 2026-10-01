@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import { locations } from "@/content/locations";
 import { siteConfig } from "@/content/site";
+import { insuranceClaimsClarification } from "@/content/restoration";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 
 export const metadata: Metadata = {
@@ -18,17 +19,27 @@ export const metadata: Metadata = {
 export default function InsuranceClaimsPage() {
   return (
     <>
-      <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }, { name: "Insurance Claims", href: "/insurance-claims" }])} />
-      <PageIntro eyebrow="Restoration, clearly documented" title="Insurance claims assistance."><p >
-            Claim-driven projects need clean documentation, disciplined scope writing, and predictable communication. That is where we focus.
-          </p></PageIntro>
+      <JsonLd
+        data={getBreadcrumbJsonLd([
+          { name: "Home", href: "/" },
+          { name: "Insurance Claims", href: "/insurance-claims" },
+        ])}
+      />
+      <PageIntro eyebrow="Restoration, clearly documented" title="Insurance claims assistance.">
+        <p>
+          Claim-driven projects need clean documentation, disciplined scope writing, and predictable communication. That
+          is where we focus.
+        </p>
+      </PageIntro>
       <section className="support-content py-12 sm:py-20">
         <Container className="max-w-5xl">
+          <p className="text-sm leading-relaxed text-[var(--muted)]">{insuranceClaimsClarification}</p>
 
           <div className="surface mt-6 rounded-sm border-[var(--brand)] p-6">
             <h2 className="heading-serif text-3xl text-[var(--accent)]">Urgent damage situation?</h2>
             <p className="mt-2 text-sm text-[var(--muted)]">
-              Call first for immediate scheduling guidance. We can support both emergency planning and full rebuild execution.
+              Call to discuss the damage, your location and current availability. Confirm any immediate safety or
+              mitigation needs with the appropriate emergency or specialist service before planning reconstruction.
             </p>
             <Button href={siteConfig.phoneHref} className="mt-4">
               Call {siteConfig.phoneDisplay}
@@ -38,15 +49,21 @@ export default function InsuranceClaimsPage() {
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <article className="surface rounded-sm p-5">
               <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Document</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">Capture damage details and immediate priorities for claim communication.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Capture damage details and immediate priorities for claim communication.
+              </p>
             </article>
             <article className="surface rounded-sm p-5">
               <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Scope</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">Build a clear repair scope tied to required restoration outcomes.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Build a clear repair scope tied to required restoration outcomes.
+              </p>
             </article>
             <article className="surface rounded-sm p-5">
               <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Execute</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">Run reconstruction with milestone updates and clean handoff standards.</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                Run reconstruction with milestone updates and clean handoff standards.
+              </p>
             </article>
           </div>
 
@@ -72,9 +89,15 @@ export default function InsuranceClaimsPage() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 text-sm">
-            <Link href="/services" className="font-semibold text-[var(--brand)]">All Services</Link>
-            <Link href="/our-process" className="font-semibold text-[var(--brand)]">Our Process</Link>
-            <Link href="/projects" className="font-semibold text-[var(--brand)]">See Our Work</Link>
+            <Link href="/services" className="font-semibold text-[var(--brand)]">
+              All Services
+            </Link>
+            <Link href="/our-process" className="font-semibold text-[var(--brand)]">
+              Our Process
+            </Link>
+            <Link href="/projects" className="font-semibold text-[var(--brand)]">
+              See Our Work
+            </Link>
           </div>
         </Container>
       </section>

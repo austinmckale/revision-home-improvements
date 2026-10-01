@@ -4,10 +4,9 @@
  */
 import { caseStudies, visibleCaseStudies } from "../src/content/caseStudies";
 import { getCityServiceLocalContent } from "../src/content/localSeo";
-import { locations } from "../src/content/locations";
 import { findExplicitFeaturedCaseStudy } from "../src/lib/serviceFeaturedCaseStudy";
 import { getFeaturedCaseStudyGalleryImages } from "../src/lib/servicePageMedia";
-import { primaryServices, services, getServiceBySlug } from "../src/content/services";
+import { getServiceBySlug } from "../src/content/services";
 
 type GalleryReport = {
   url: string;
@@ -52,31 +51,13 @@ function folderFromSrc(src: string): string | null {
   return match ? match[1] : null;
 }
 
-function collectCaseStudyImages(slug: string | null | undefined) {
-  if (!slug) return { count: 0, folders: [] as string[], alts: [] as string[] };
-  const study = caseStudies.find((c) => c.slug === slug);
-  if (!study) return { count: 0, folders: [] as string[], alts: [] as string[] };
-  const images = [
-    ...study.images,
-    ...(study.beforeImages ?? []),
-    ...(study.afterImages ?? []),
-  ];
-  return {
-    count: images.length,
-    folders: [...new Set(images.map((img) => folderFromSrc(img.src)).filter(Boolean))] as string[],
-    alts: images.map((img) => img.alt),
-  };
-}
-
 function auditServicePage(serviceSlug: string): GalleryReport[] {
   const service = getServiceBySlug(serviceSlug);
   if (!service) return [];
   const reports: GalleryReport[] = [];
   const explicitFeatured = findExplicitFeaturedCaseStudy(service, visibleCaseStudies);
   const hero = service.image.src?.trim() ?? "";
-  const galleryImages = explicitFeatured
-    ? getFeaturedCaseStudyGalleryImages(explicitFeatured, hero)
-    : [];
+  const galleryImages = explicitFeatured ? getFeaturedCaseStudyGalleryImages(explicitFeatured, hero) : [];
   const pinned = Boolean(explicitFeatured);
   const fallbackGallery = pinned ? [] : service.gallery.slice(0, 4);
 
@@ -165,7 +146,17 @@ function auditCityPage(citySlug: string, serviceSlug: string): GalleryReport[] {
 function auditCaseStudyPage(slug: string): GalleryReport[] {
   const study = caseStudies.find((c) => c.slug === slug);
   if (!study || study.hidden) {
-    return [{ url: `/projects/${slug}`, section: "Case study", caseStudySlug: slug, caseStudyTitle: null, imageCount: 0, imageFolders: [], imageAlts: [] }];
+    return [
+      {
+        url: `/projects/${slug}`,
+        section: "Case study",
+        caseStudySlug: slug,
+        caseStudyTitle: null,
+        imageCount: 0,
+        imageFolders: [],
+        imageAlts: [],
+      },
+    ];
   }
   const images = [...study.images, ...(study.beforeImages ?? []), ...(study.afterImages ?? [])];
   return [
@@ -190,7 +181,16 @@ function flagIssues(report: GalleryReport): string[] {
       (f) =>
         !f.includes("water") &&
         !folderFromSrc(report.imageAlts.join(" ") ?? "") &&
-        ["ryan-bathroom", "ryan-bedroom", "fogelsville-basement", "bethlehem-interior-flooring", "allentown-flooring", "blue-kitchen", "bethlehem-bathroom", "lehigh-valley-basement-theater"].includes(f),
+        [
+          "ryan-bathroom",
+          "ryan-bedroom",
+          "fogelsville-basement",
+          "bethlehem-interior-flooring",
+          "allentown-flooring",
+          "blue-kitchen",
+          "bethlehem-bathroom",
+          "lehigh-valley-basement-theater",
+        ].includes(f),
     );
     if (badFolders.length > 0) {
       issues.push(`Water page shows unrelated folders: ${badFolders.join(", ")}`);
@@ -213,10 +213,7 @@ function flagIssues(report: GalleryReport): string[] {
     }
   }
 
-  if (
-    report.section.includes("From This Project") ||
-    report.section.includes("Featured project photos")
-  ) {
+  if (report.section.includes("From This Project") || report.section.includes("Featured project photos")) {
     if (report.imageCount > 0 && !report.caseStudySlug) {
       issues.push("Project-labeled gallery has images but no linked case study");
     }

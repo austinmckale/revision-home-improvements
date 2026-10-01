@@ -19,8 +19,7 @@ export const company = {
     hic: "PA185945",
     label: "PA HIC #PA185945",
   },
-  serviceAreas:
-    "Allentown, Bethlehem, the Lehigh Valley, Reading, Wyomissing, and Berks County",
+  serviceAreas: "Allentown, Bethlehem, the Lehigh Valley, Reading, Wyomissing, and Berks County",
   serviceAreaList: [
     "Reading, PA",
     "Wyomissing, PA",
@@ -50,7 +49,7 @@ export const company = {
   },
   insuranceCarrier: "Provided upon request during estimate review",
   financing: {
-    teaser: "0% promotional financing may be available for qualified customers.",
+    teaser: "Ask about current financing options when reviewing your project scope.",
     shortDisclosure: "Subject to lender approval. Terms vary.",
     disclosure:
       "Financing offers are subject to lender approval. Program availability, rates, and term length vary by borrower profile and project scope.",

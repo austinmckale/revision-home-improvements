@@ -2,10 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { siteConfig } from "@/content/site";
 
 import Portal from "@/components/ui/Portal";
+import useModalFocus from "@/components/ui/useModalFocus";
 
 const navLinks = [
   { href: "/services", label: "Services", primary: true },
@@ -24,36 +26,23 @@ interface MobileNavProps {
 
 export default function MobileNav({ isTransparent = false }: MobileNavProps) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const reduceMotion = useReducedMotion();
+
+  useModalFocus(open, panelRef, closeButtonRef, () => setOpen(false), triggerRef);
 
   useEffect(() => {
     if (!open) return;
-    const trigger = triggerRef.current;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-      if (event.key !== "Tab") return;
-      const items = panelRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
-      if (!items?.length) return;
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
     const desktop = window.matchMedia("(min-width: 1024px)");
-    const handleResize = (event: MediaQueryListEvent) => { if (event.matches) setOpen(false); };
+    const handleResize = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false);
+    };
     desktop.addEventListener("change", handleResize);
-    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
       desktop.removeEventListener("change", handleResize);
-      trigger?.focus();
     };
   }, [open]);
 
@@ -61,14 +50,14 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
     if (!open) return;
 
     const scrollPosition = window.pageYOffset;
-    
+
     // CAPTURE POSITION AND DISABLE SCROLL
     const originalStyles = {
       position: document.body.style.position,
       top: document.body.style.top,
       width: document.body.style.width,
       overflow: document.body.style.overflow,
-      height: document.documentElement.style.height
+      height: document.documentElement.style.height,
     };
 
     document.body.style.position = "fixed";
@@ -84,7 +73,7 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
       document.body.style.overflow = originalStyles.overflow;
       document.documentElement.style.height = originalStyles.height;
       if (scrollPosition !== 0) {
-        window.scrollTo(0, scrollPosition);
+        window.scrollTo({ top: scrollPosition, behavior: "instant" });
       }
     };
   }, [open]);
@@ -92,6 +81,7 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
   return (
     <div className="lg:hidden">
       <button
+        type="button"
         ref={triggerRef}
         onClick={() => setOpen(true)}
         className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
@@ -103,7 +93,15 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
         aria-expanded={open}
         aria-controls="mobile-navigation-panel"
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        >
           <line x1="3" y1="7" x2="21" y2="7" />
           <line x1="3" y1="12" x2="21" y2="12" />
           <line x1="3" y1="17" x2="21" y2="17" />
@@ -119,6 +117,7 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
               role="dialog"
               aria-modal="true"
               aria-label="RHI Pros navigation"
+              tabIndex={-1}
               initial={{ opacity: 0, x: reduceMotion ? 0 : "100%" }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: reduceMotion ? 0 : "100%" }}
@@ -131,12 +130,21 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
                   {siteConfig.name}
                 </span>
                 <button
-                  ref={(element) => { element?.focus(); }}
+                  type="button"
+                  ref={closeButtonRef}
                   onClick={() => setOpen(false)}
                   className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
                   aria-label="Close menu"
                 >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  >
                     <line x1="18" y1="6" x2="6" y2="18" />
                     <line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
@@ -144,20 +152,29 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
               </div>
 
               <div className="flex-1 overflow-y-auto px-6 py-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <nav className="flex flex-col space-y-5" onClick={(event) => { if ((event.target as HTMLElement).closest("a")) setOpen(false); }}>
+                <nav
+                  className="flex flex-col space-y-5"
+                  onClick={(event) => {
+                    if ((event.target as HTMLElement).closest("a")) setOpen(false);
+                  }}
+                >
                   <div className="grid grid-cols-2 gap-3 mb-6">
                     <a
                       href={siteConfig.phoneHref}
                       className="flex flex-col items-center justify-center rounded-sm border border-white/20 bg-white/5 p-4 text-center text-white transition-colors hover:bg-white/10 active:bg-white/20"
                     >
-                      <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/70 mb-1">Direct Call</span>
+                      <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/70 mb-1">
+                        Direct Call
+                      </span>
                       <span className="text-sm font-semibold tracking-tight">{siteConfig.phoneDisplay}</span>
                     </a>
                     <Link
                       href="/request-a-quote"
                       className="flex flex-col items-center justify-center rounded-sm bg-[var(--brand)] p-4 text-center text-white transition-colors hover:bg-[var(--brand-dark)] active:scale-[0.98]"
                     >
-                      <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/70 mb-1">Next Project</span>
+                      <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/70 mb-1">
+                        Next Project
+                      </span>
                       <span className="text-sm font-semibold tracking-tight">Get a Quote</span>
                     </Link>
                   </div>
@@ -172,9 +189,12 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
                       >
                         <Link
                           href={link.href}
+                          aria-current={
+                            pathname === link.href || pathname.startsWith(`${link.href}/`) ? "page" : undefined
+                          }
                           className={`block py-2.5 transition-all active:scale-[0.98] ${
-                            link.primary 
-                              ? "heading-serif text-4xl text-white" 
+                            link.primary
+                              ? "heading-serif text-4xl text-white"
                               : "text-lg text-white/75 hover:text-white"
                           }`}
                         >
@@ -188,18 +208,28 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
                 <div className="mt-auto pt-12">
                   <div className="border-t border-white/10 pt-8 pb-4">
                     <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-[0.65rem] font-bold uppercase tracking-[0.2em]">
-                      <a href={siteConfig.facebookPageUrl} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-colors">
+                      <a
+                        href={siteConfig.facebookPageUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-white/70 hover:text-white transition-colors"
+                      >
                         Facebook
                       </a>
-                      <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noreferrer" className="text-white/70 hover:text-white transition-colors">
+                      <a
+                        href={siteConfig.googleBusinessProfileUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-white/70 hover:text-white transition-colors"
+                      >
                         Google Reviews
                       </a>
                     </div>
 
-                    <p className="text-[0.55rem] font-bold uppercase tracking-[0.3em] text-white/65 mb-2.5">Service Location</p>
-                    <p className="text-sm text-white/70 font-medium tracking-tight">
-                      Lehigh Valley, PA
+                    <p className="text-[0.55rem] font-bold uppercase tracking-[0.3em] text-white/65 mb-2.5">
+                      Service Location
                     </p>
+                    <p className="text-sm text-white/70 font-medium tracking-tight">Lehigh Valley, PA</p>
                     <p className="mt-4 text-[0.65rem] font-bold tracking-[0.1em] text-white/65 uppercase">
                       {siteConfig.hicNumber}
                     </p>

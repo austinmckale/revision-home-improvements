@@ -50,21 +50,37 @@ const localServiceGroups = [
 ];
 
 const processSteps = [
-  { number: "01", title: "Discovery", detail: "Tell us what you want to change, what matters most, and how you use your home." },
-  { number: "02", title: "Assessment", detail: "We look closely at the space, talk through options, and identify the work involved." },
-  { number: "03", title: "Written proposal", detail: "Receive a clear scope, pricing, and next steps before making a decision." },
-  { number: "04", title: "Materials & schedule", detail: "Confirm selections, timing, and the details that help the work run smoothly." },
+  {
+    number: "01",
+    title: "Discovery",
+    detail: "Tell us what you want to change, what matters most, and how you use your home.",
+  },
+  {
+    number: "02",
+    title: "Assessment",
+    detail: "We look closely at the space, talk through options, and identify the work involved.",
+  },
+  {
+    number: "03",
+    title: "Written proposal",
+    detail: "Receive a clear scope, pricing, and next steps before making a decision.",
+  },
+  {
+    number: "04",
+    title: "Materials & schedule",
+    detail: "Confirm selections, timing, and the details that help the work run smoothly.",
+  },
   { number: "05", title: "Build", detail: "Our team keeps you informed as the planned work takes shape." },
-  { number: "06", title: "Final walkthrough", detail: "Review the finished work together and close out any final details." },
+  {
+    number: "06",
+    title: "Final walkthrough",
+    detail: "Review the finished work together and close out any final details.",
+  },
 ];
 
 export default function HomePage() {
-  const priorityServices = primaryServices.filter((service) =>
-    priorityServiceSlugs.includes(service.slug),
-  );
-  const secondaryServices = primaryServices.filter(
-    (service) => !priorityServiceSlugs.includes(service.slug),
-  );
+  const priorityServices = primaryServices.filter((service) => priorityServiceSlugs.includes(service.slug));
+  const secondaryServices = primaryServices.filter((service) => !priorityServiceSlugs.includes(service.slug));
   const featuredReviews = getFeaturedTestimonials();
   const poolStory = visibleCaseStudies.find((study) => study.slug === "bethlehem-pool-patio-renovation");
 
@@ -76,15 +92,21 @@ export default function HomePage() {
       <section className="home-hero relative isolate flex min-h-[min(900px,100svh)] items-end overflow-hidden bg-[#242720] pt-24 text-white">
         <Image
           src="/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg"
-          alt="Completed Allentown kitchen remodel with a large island, warm wood cabinetry, and coordinated lighting."
+          alt="Kitchen with a large island, wood cabinetry and pendant lighting."
           fill
           priority
           sizes="100vw"
           quality={75}
           className="home-hero-image -z-20 object-cover object-[center_58%]"
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(18,23,20,.84)_0%,rgba(18,23,20,.58)_44%,rgba(18,23,20,.08)_100%)]" aria-hidden="true" />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(18,23,20,.58)_0%,transparent_45%)]" aria-hidden="true" />
+        <div
+          className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(18,23,20,.84)_0%,rgba(18,23,20,.58)_44%,rgba(18,23,20,.08)_100%)]"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(18,23,20,.58)_0%,transparent_45%)]"
+          aria-hidden="true"
+        />
 
         <Container className="relative w-full pb-14 pt-24 sm:pb-16 md:pb-20 lg:pb-24">
           <div className="max-w-4xl">
@@ -120,13 +142,22 @@ export default function HomePage() {
           </div>
 
           <div className="mt-14 flex flex-col gap-4 border-t border-white/25 pt-5 text-[0.65rem] font-semibold uppercase tracking-[.16em] text-white/70 sm:mt-20 sm:flex-row sm:items-center sm:justify-between sm:text-xs">
-            <p>PA HIC registered · Insured · Written estimates</p>
-            <Link href="/projects" className="group inline-flex items-center gap-3 text-white transition-colors hover:text-white">
-              Explore recent work <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+            <p>PA HIC #PA185945 · Written estimates</p>
+            <Link
+              href="/projects"
+              className="group inline-flex items-center gap-3 text-white transition-colors hover:text-white"
+            >
+              Explore recent work{" "}
+              <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                →
+              </span>
             </Link>
           </div>
         </Container>
-        <span className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 select-none font-mono text-[10px] tracking-[.35em] text-white/60 [writing-mode:vertical-rl] lg:block" aria-hidden="true">
+        <span
+          className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 select-none font-mono text-[10px] tracking-[.35em] text-white/60 [writing-mode:vertical-rl] lg:block"
+          aria-hidden="true"
+        >
           RHI PROS · BUILT AROUND YOU
         </span>
       </section>
@@ -142,7 +173,8 @@ export default function HomePage() {
                 </h2>
               </div>
               <p className="max-w-2xl text-base leading-relaxed text-[var(--muted)] sm:text-lg lg:justify-self-end">
-                From one room to a full restoration, the right team makes the whole experience feel more manageable. Choose a service to see how we approach the work.
+                From one room to a full restoration, the right team makes the whole experience feel more manageable.
+                Choose a service to see how we approach the work.
               </p>
             </div>
             <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
@@ -163,15 +195,30 @@ export default function HomePage() {
                   ) : (
                     <div className="home-service-placeholder absolute inset-0 -z-20" aria-hidden="true" />
                   )}
-                  <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/20 to-black/5 transition-colors duration-500 group-hover:from-black/90" aria-hidden="true" />
+                  <div
+                    className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/20 to-black/5 transition-colors duration-500 group-hover:from-black/90"
+                    aria-hidden="true"
+                  />
+                  {service.image.caption ? (
+                    <span className="absolute right-4 top-4 max-w-[70%] bg-black/60 px-3 py-2 text-xs text-white/90">
+                      {service.image.caption}
+                    </span>
+                  ) : null}
                   <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-                    <span className="text-[0.65rem] font-semibold uppercase tracking-[.18em] text-white/65">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="text-[0.65rem] font-semibold uppercase tracking-[.18em] text-white/65">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                     <div className="mt-2 flex items-end justify-between gap-4">
                       <div>
                         <h3 className="heading-serif text-2xl text-white sm:text-3xl">{service.name}</h3>
                         <p className="mt-2 max-w-sm text-sm leading-relaxed text-white/75">{service.short}</p>
                       </div>
-                      <span className="mb-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/50 text-white transition-all duration-300 group-hover:border-[var(--brand)] group-hover:bg-[var(--brand)]" aria-hidden="true">↗</span>
+                      <span
+                        className="mb-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/50 text-white transition-all duration-300 group-hover:border-[var(--brand)] group-hover:bg-[var(--brand)]"
+                        aria-hidden="true"
+                      >
+                        ↗
+                      </span>
                     </div>
                   </div>
                 </Link>
@@ -181,7 +228,11 @@ export default function HomePage() {
               <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t border-[var(--border)] pt-5 text-sm text-[var(--muted)]">
                 <span className="font-semibold text-[var(--foreground)]">Also offering</span>
                 {secondaryServices.map((service) => (
-                  <Link key={service.slug} href={`/services/${service.slug}`} className="transition-colors hover:text-[var(--brand)]">
+                  <Link
+                    key={service.slug}
+                    href={`/services/${service.slug}`}
+                    className="transition-colors hover:text-[var(--brand)]"
+                  >
                     {service.name} <span aria-hidden="true">↗</span>
                   </Link>
                 ))}
@@ -191,8 +242,13 @@ export default function HomePage() {
               <div>
                 <p className="eyebrow">Close to home</p>
                 <h3 className="heading-serif mt-3 text-3xl text-[var(--accent)]">Find your local service.</h3>
-                <p className="mt-3 max-w-sm text-sm leading-relaxed text-[var(--muted)]">Explore project details and planning advice for your area.</p>
-                <Link href="/service-areas" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline">
+                <p className="mt-3 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
+                  Explore project details and planning advice for your area.
+                </p>
+                <Link
+                  href="/service-areas"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                >
                   All service areas <span aria-hidden="true">→</span>
                 </Link>
               </div>
@@ -200,12 +256,19 @@ export default function HomePage() {
                 {localServiceGroups.map((group) => (
                   <nav key={group.href} aria-label={`${group.name} services`}>
                     <h4 className="heading-serif text-2xl text-[var(--accent)]">
-                      <Link href={group.href} className="underline-offset-4 hover:underline">{group.name}</Link>
+                      <Link href={group.href} className="underline-offset-4 hover:underline">
+                        {group.name}
+                      </Link>
                     </h4>
                     <ul className="mt-4 space-y-3 text-sm text-[var(--muted)]">
                       {group.links.map((link) => (
                         <li key={link.href}>
-                          <Link href={link.href} className="inline-block py-1 underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline">{link.label}</Link>
+                          <Link
+                            href={link.href}
+                            className="inline-block py-1 underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
+                          >
+                            {link.label}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -223,15 +286,25 @@ export default function HomePage() {
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-2xl">
                 <p className="eyebrow">Selected work</p>
-                <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">Made for real life.</h2>
+                <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
+                  Made for real life.
+                </h2>
               </div>
-              <Link href="/projects" className="group inline-flex items-center gap-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]">
-                View all projects <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+              <Link
+                href="/projects"
+                className="group inline-flex items-center gap-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]"
+              >
+                View all projects{" "}
+                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                  →
+                </span>
               </Link>
             </div>
 
             <div className="mt-10 grid gap-5 lg:mt-14 lg:auto-rows-[19rem] lg:grid-cols-12">
-              {featuredProjects.map((study, index) => <ProjectCard key={study.slug} study={study} variant={index === 0 ? "lead" : "support"} />)}
+              {featuredProjects.map((study, index) => (
+                <ProjectCard key={study.slug} study={study} variant={index === 0 ? "lead" : "support"} />
+              ))}
             </div>
           </FadeIn>
         </Container>
@@ -244,21 +317,45 @@ export default function HomePage() {
               <div className="mb-10 grid gap-6 lg:grid-cols-[1.1fr_.9fr] lg:items-end">
                 <div>
                   <p className="eyebrow eyebrow-light">The transformation</p>
-                  <h2 className="heading-serif mt-4 max-w-xl text-4xl leading-[1.03] tracking-[-.03em] sm:text-5xl lg:text-6xl">A fresh outlook<br />on poolside.</h2>
+                  <h2 className="heading-serif mt-4 max-w-xl text-4xl leading-[1.03] tracking-[-.03em] sm:text-5xl lg:text-6xl">
+                    A fresh outlook
+                    <br />
+                    on poolside.
+                  </h2>
                 </div>
                 <div>
-                  <p className="max-w-lg text-base leading-relaxed text-white/75">A renewed patio, considered edges, and a cleaner finish around the pool. See the before and after from this Bethlehem project.</p>
-                  <Link href={`/projects/${poolStory.slug}`} className="group mt-6 inline-flex items-center gap-3 border-b border-white/45 pb-2 text-sm font-semibold text-white transition-colors hover:border-[var(--brand)]">
-                    See the transformation <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+                  <p className="max-w-lg text-base leading-relaxed text-white/75">
+                    A renewed patio, considered edges, and a cleaner finish around the pool. See the before and after in
+                    the poolside photo gallery.
+                  </p>
+                  <Link
+                    href={`/projects/${poolStory.slug}`}
+                    className="group mt-6 inline-flex items-center gap-3 border-b border-white/45 pb-2 text-sm font-semibold text-white transition-colors hover:border-[var(--brand)]"
+                  >
+                    See the transformation{" "}
+                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                      →
+                    </span>
                   </Link>
                 </div>
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
-                {[{ image: poolStory.beforeImages[0], label: "Before" }, { image: poolStory.afterImages[0], label: "After" }].map(({ image, label }) => (
+                {[
+                  { image: poolStory.beforeImages[0], label: "Before" },
+                  { image: poolStory.afterImages[0], label: "After" },
+                ].map(({ image, label }) => (
                   <figure key={label}>
                     <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image {...getProjectImageProps(image)} alt={image.alt} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" />
-                      <figcaption className="absolute bottom-4 left-4 bg-[#202823]/90 px-4 py-2 text-xs font-semibold uppercase tracking-[.16em] text-white">{label}</figcaption>
+                      <Image
+                        {...getProjectImageProps(image)}
+                        alt={image.alt}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                      <figcaption className="absolute bottom-4 left-4 bg-[#202823]/90 px-4 py-2 text-xs font-semibold uppercase tracking-[.16em] text-white">
+                        {label}
+                      </figcaption>
                     </div>
                   </figure>
                 ))}
@@ -274,10 +371,18 @@ export default function HomePage() {
             <div className="flex flex-col gap-6 border-b border-[var(--border)] pb-8 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="eyebrow">The experience</p>
-                <h2 className="heading-serif mt-4 max-w-2xl text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">A clear process, from first conversation to final walkthrough.</h2>
+                <h2 className="heading-serif mt-4 max-w-2xl text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
+                  A clear process, from first conversation to final walkthrough.
+                </h2>
               </div>
-              <Link href="/our-process" className="group inline-flex shrink-0 items-center gap-3 pb-1 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]">
-                How our process works <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+              <Link
+                href="/our-process"
+                className="group inline-flex shrink-0 items-center gap-3 pb-1 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]"
+              >
+                How our process works{" "}
+                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                  →
+                </span>
               </Link>
             </div>
             <ol className="process-list mt-8 grid gap-0 sm:grid-cols-2 lg:mt-10 lg:grid-cols-3">
@@ -297,25 +402,68 @@ export default function HomePage() {
         <Container>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="eyebrow">From our clients</p>
-              <h2 className="heading-serif mt-4 text-4xl tracking-[-.03em] text-[var(--accent)] sm:text-5xl">Good work, good people.</h2>
+              <p className="eyebrow">Independent company reviews</p>
+              <h2 className="heading-serif mt-4 text-4xl tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
+                Good work, good people.
+              </h2>
             </div>
             <div className="flex flex-wrap gap-2 text-xs font-semibold">
-              <a href={siteConfig.googleBusinessProfileUrl} target="_blank" rel="noopener noreferrer" aria-label="Read RHI Pros reviews on Google (opens in a new tab)" className="border border-[var(--border)] px-3 py-2 text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]">Google Reviews ↗</a>
-              <a href={siteConfig.angiUrl} target="_blank" rel="noopener noreferrer" aria-label="Read RHI Pros reviews on Angi (opens in a new tab)" className="border border-[var(--border)] px-3 py-2 text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]">Angi ↗</a>
-              <a href={siteConfig.facebookPageUrl} target="_blank" rel="noopener noreferrer" aria-label="Visit the RHI Pros Facebook page (opens in a new tab)" className="border border-[var(--border)] px-3 py-2 text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]">Facebook ↗</a>
+              <a
+                href={siteConfig.googleBusinessProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Read RHI Pros reviews on Google (opens in a new tab)"
+                className="border border-[var(--border)] px-3 py-2 text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
+              >
+                Google Reviews ↗
+              </a>
+              <a
+                href={siteConfig.angiUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Read RHI Pros reviews on Angi (opens in a new tab)"
+                className="border border-[var(--border)] px-3 py-2 text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
+              >
+                Angi ↗
+              </a>
+              <a
+                href={siteConfig.facebookPageUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit the RHI Pros Facebook page (opens in a new tab)"
+                className="border border-[var(--border)] px-3 py-2 text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
+              >
+                Facebook ↗
+              </a>
             </div>
           </div>
           <FadeIn>
             <div className="mt-10 grid gap-px bg-[var(--border)] md:grid-cols-3">
               {featuredReviews.map((item, index) => (
-                <article key={`${item.name}-${item.context}`} className="flex min-h-64 flex-col bg-[var(--surface)] p-6 sm:p-8 lg:p-9">
-                  <span className="font-mono text-xs tracking-[.16em] text-[var(--brand)]">0{index + 1} / CLIENT NOTE</span>
-                  <span className="heading-serif mt-5 text-5xl leading-none text-[var(--brand)]/50" aria-hidden="true">“</span>
-                  <blockquote className="-mt-1 flex-1 text-base leading-relaxed text-[var(--foreground)] sm:text-lg">{item.quote}</blockquote>
+                <article
+                  key={`${item.name}-${item.context}`}
+                  className="flex min-h-64 flex-col bg-[var(--surface)] p-6 sm:p-8 lg:p-9"
+                >
+                  <span className="font-mono text-xs tracking-[.16em] text-[var(--brand)]">
+                    0{index + 1} / CLIENT NOTE
+                  </span>
+                  <span className="heading-serif mt-5 text-5xl leading-none text-[var(--brand)]/50" aria-hidden="true">
+                    “
+                  </span>
+                  <blockquote className="-mt-1 flex-1 text-base leading-relaxed text-[var(--foreground)] sm:text-lg">
+                    {item.quote}
+                  </blockquote>
                   <div className="mt-6 border-t border-[var(--border)] pt-4">
                     <p className="text-sm font-semibold text-[var(--accent)]">{item.name}</p>
                     <p className="mt-1 text-xs text-[var(--muted)]">{item.context}</p>
+                    <a
+                      href={item.verification.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-block text-xs font-semibold text-[var(--brand)] underline underline-offset-4"
+                    >
+                      {item.source} ↗
+                    </a>
                   </div>
                 </article>
               ))}
@@ -334,21 +482,41 @@ export default function HomePage() {
             <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
               <div className="max-w-3xl">
                 <p className="eyebrow eyebrow-light">Your home, considered</p>
-                <h2 className="heading-serif mt-5 text-4xl leading-[1.02] tracking-[-.03em] sm:text-5xl lg:text-7xl">Let’s make room for what matters.</h2>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">Start with a conversation. We’ll learn what you have in mind and explain the next steps clearly.</p>
-                <p className="mt-7 text-xs font-medium uppercase tracking-[.14em] text-white/55">PA HIC registered · Insured · Written estimates · Warranty-backed work</p>
+                <h2 className="heading-serif mt-5 text-4xl leading-[1.02] tracking-[-.03em] sm:text-5xl lg:text-7xl">
+                  Let’s make room for what matters.
+                </h2>
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
+                  Start with a conversation. We’ll learn what you have in mind and explain the next steps clearly.
+                </p>
+                <p className="mt-7 text-xs font-medium uppercase tracking-[.14em] text-white/55">
+                  PA HIC #PA185945 · Written estimates · Discuss warranty terms
+                </p>
               </div>
               <div className="flex flex-wrap gap-3 lg:flex-col">
-                <Link href="/request-a-quote" className="inline-flex min-h-13 items-center justify-center gap-3 bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                <Link
+                  href="/request-a-quote"
+                  className="inline-flex min-h-13 items-center justify-center gap-3 bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
                   Request a quote <span aria-hidden="true">↗</span>
                 </Link>
-                <Link href={siteConfig.phoneHref} className="inline-flex min-h-13 items-center justify-center border border-white/45 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Call {siteConfig.phoneDisplay}</Link>
+                <Link
+                  href={siteConfig.phoneHref}
+                  className="inline-flex min-h-13 items-center justify-center border border-white/45 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                  Call {siteConfig.phoneDisplay}
+                </Link>
               </div>
             </div>
             <div className="mt-12 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/15 pt-5 text-xs text-white/55 sm:mt-16 sm:text-sm">
-              <Link href="/our-process" className="transition-colors hover:text-white">Our process</Link>
-              <Link href="/warranty" className="transition-colors hover:text-white">Workmanship warranty</Link>
-              <Link href="/licenses-and-insurance" className="transition-colors hover:text-white">Licenses &amp; insurance</Link>
+              <Link href="/our-process" className="transition-colors hover:text-white">
+                Our process
+              </Link>
+              <Link href="/warranty" className="transition-colors hover:text-white">
+                Workmanship warranty
+              </Link>
+              <Link href="/licenses-and-insurance" className="transition-colors hover:text-white">
+                Registration &amp; insurance
+              </Link>
             </div>
           </FadeIn>
         </Container>

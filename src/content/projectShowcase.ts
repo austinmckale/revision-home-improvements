@@ -2,14 +2,14 @@ import { galleryCaseStudies, type CaseStudy } from "@/content/caseStudies";
 
 /** Editorial placement is explicit: new projects must never inherit the hero slot. */
 export const featuredProjectSlugs = [
-  "allentown-kitchen-layout-upgrade",
+  "blue-kitchen-cabinet-counters",
   "reading-paver-patio-buildout",
   "lehigh-valley-basement-finish-and-detail",
 ] as const;
 
 const residentialOrder = [
   ...featuredProjectSlugs,
-  "blue-kitchen-cabinet-counters",
+  "allentown-kitchen-layout-upgrade",
   "bethlehem-interior-flooring-refresh",
   "allentown-exterior-log-home-refresh",
   "hamburg-laundry-bathroom-remodel",
@@ -27,23 +27,17 @@ const residentialOrder = [
   "allentown-fire-damage-interior-rebuild",
 ];
 
-const commercialSlugs = new Set([
-  "allentown-commercial-bathroom-renovation",
-  "reading-commercial-bar-window-upgrade",
-]);
+const commercialSlugs = new Set(["allentown-commercial-bathroom-renovation", "reading-commercial-bar-window-upgrade"]);
 
-const processSlugs = new Set([
-  "lehigh-valley-fire-damage-documentation",
-  "beige-bathroom-before-after",
-]);
+const processSlugs = new Set(["lehigh-valley-fire-damage-documentation", "beige-bathroom-before-after"]);
 
 const presentation: Record<string, { title: string; image?: CaseStudy["images"][number] }> = {
-  "allentown-kitchen-layout-upgrade": { title: "A kitchen, reimagined." },
+  "allentown-kitchen-layout-upgrade": { title: "Room to gather. Space to cook." },
   "reading-paver-patio-buildout": {
     title: "Outdoor living, all together.",
     image: {
       src: "/images/projects/frontier-patio-gable-roof/after/finished-overview-preview.webp",
-      alt: "Completed paver patio and timber pavilion beside a Reading home.",
+      alt: "Patio and timber pavilion with outdoor seating beside a house.",
     },
   },
   "lehigh-valley-basement-finish-and-detail": { title: "Room for movie nights." },
@@ -53,15 +47,15 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
   "hamburg-laundry-bathroom-remodel": { title: "A hardworking laundry & half-bath." },
   "ryan-bathroom-remodel": { title: "A bathroom made for every day." },
   "bethlehem-bathroom-refresh": {
-    title: "A fresh start for a Bethlehem bath.",
+    title: "Bathroom fixtures & finishes.",
     image: {
       src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
-      alt: "Finished tiled shower with dark fixtures in a Bethlehem bathroom.",
+      alt: "Shower enclosure with a molded white insert and black frame.",
     },
   },
   "bethlehem-pool-patio-renovation": { title: "A place to spend the summer." },
-  "lehigh-valley-fire-damage-documentation": { title: "Inside a fire-damage rebuild" },
-  "beige-bathroom-before-after": { title: "Bathroom planning & finish boards" },
+  "lehigh-valley-fire-damage-documentation": { title: "Open framing & damaged spaces" },
+  "beige-bathroom-before-after": { title: "Bathroom layout & finish ideas" },
 };
 
 export function getProjectPresentation(study: CaseStudy) {

@@ -17,7 +17,7 @@ function getCtaConfig(pathname: string) {
     pathname === "/insurance-claims" ||
     EMERGENCY_SLUGS.some((s) => pathname.includes(s))
   ) {
-    return { label: "Call for Priority Scheduling", mode: "phone" as const };
+    return { label: "Call to Discuss Availability", mode: "phone" as const };
   }
 
   // Utility / small-scope
@@ -36,6 +36,7 @@ function emitEvent(name: string, detail?: Record<string, unknown>) {
 
 export default function StickyCTA() {
   const [visible, setVisible] = useState(false);
+  const [formInView, setFormInView] = useState({ pathname: "", visible: false });
   const pathname = usePathname();
 
   useEffect(() => {
@@ -44,11 +45,26 @@ export default function StickyCTA() {
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const form = document.getElementById("quote-form-section");
+    const observer = new IntersectionObserver(([entry]) => setFormInView({ pathname, visible: entry.isIntersecting }), {
+      rootMargin: "-88px 0px -100px 0px",
+    });
+    if (form) observer.observe(form);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      observer.disconnect();
+    };
+  }, [pathname]);
 
   // Hide on dedicated quote page and homepage
-  if (!visible || pathname === "/request-a-quote" || pathname === "/") return null;
+  if (
+    !visible ||
+    (formInView.pathname === pathname && formInView.visible) ||
+    pathname === "/request-a-quote" ||
+    pathname.endsWith("/quote") ||
+    pathname === "/"
+  )
+    return null;
 
   const { label, mode } = getCtaConfig(pathname);
 
@@ -64,11 +80,21 @@ export default function StickyCTA() {
       // Scroll to the on-page quote form
       const form = document.getElementById("quote-form-section");
       if (form) {
-        form.scrollIntoView({ behavior: "smooth", block: "start" });
+        const heading = form.querySelector<HTMLElement>("h2[tabindex='-1']");
+        heading?.focus({ preventScroll: true });
+        form.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "start",
+        });
         emitEvent("scroll_to_form", { service: serviceSlug, page: pathname });
         return;
       }
       // Fallback: no form on page, navigate to quote page with service context
+      const projectQuoteHref = document.querySelector<HTMLElement>("[data-quote-href]")?.dataset.quoteHref;
+      if (projectQuoteHref) {
+        window.location.href = projectQuoteHref;
+        return;
+      }
       const pathService = pathname.startsWith("/services/")
         ? pathname.replace("/services/", "")
         : pathname.split("/").pop() || "";

@@ -8,7 +8,14 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "check:seo": "npx tsx scripts/check-seo.ts"
+    "check:seo": "npx tsx scripts/check-seo.ts",
+    "check:rendered-seo": "node scripts/check-rendered-seo.mjs",
+    "check:quote": "node scripts/check-quote-validation.mjs",
+    "check:portfolio": "node --test scripts/check-portfolio.mjs",
+    "check:lead-delivery": "node --test scripts/check-lead-delivery.mjs",
+    "check:evidence": "node --test scripts/check-content-evidence.mjs",
+    "check:images": "node scripts/check-site-images.mjs",
+    "images:dimensions": "node scripts/generate-project-image-dimensions.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.97.0",

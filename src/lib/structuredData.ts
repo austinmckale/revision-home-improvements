@@ -1,6 +1,8 @@
 import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
 
+export const businessEntityId = `${company.domain}/#business`;
+
 export function getWebSiteJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -22,6 +24,7 @@ export function getLocalBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "GeneralContractor",
+    "@id": businessEntityId,
     name: company.name,
     legalName: company.legalName,
     url: company.domain,
@@ -51,11 +54,7 @@ export function getServiceJsonLd(serviceName: string, url: string, areaServed: s
     "@type": "Service",
     serviceType: serviceName,
     provider: {
-      "@type": "GeneralContractor",
-      name: company.name,
-      legalName: company.legalName,
-      telephone: company.phone.e164,
-      url: company.domain,
+      "@id": businessEntityId,
     },
     areaServed,
     url,
@@ -123,29 +122,16 @@ export function getCityServiceJsonLd({
         "@type": "Service",
         name: `${serviceName} in ${cityName}`,
         serviceType: serviceName,
+        ...(image ? { image } : {}),
         areaServed: {
-          "@type": "City",
+          "@type": "Place",
           name: cityName,
         },
         provider: {
-          "@type": "GeneralContractor",
+          "@id": businessEntityId,
           name: businessName,
-          legalName: company.legalName,
-          telephone: company.phone.e164,
-          url: company.domain,
         },
         url,
-      },
-      {
-        "@type": "HomeAndConstructionBusiness",
-        name: `${businessName} - ${serviceName}`,
-        ...(image ? { image } : {}),
-        url,
-        telephone: company.phone.e164,
-        areaServed: {
-          "@type": "City",
-          name: cityName,
-        },
       },
     ],
   };

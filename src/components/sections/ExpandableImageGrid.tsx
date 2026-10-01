@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
+import { getProjectImageDimensions } from "@/content/projectImageDimensions";
 
 export type ExpandableImage = {
   src: string;
@@ -41,36 +42,40 @@ export default function ExpandableImageGrid({
   return (
     <>
       <div className={gridClassName}>
-        {visibleImages.map((image, index) => (
-          <figure key={image.src} className={cardClassName}>
-            <button
-              type="button"
-              onClick={() => {
-                setActiveIndex(index);
-                window.dispatchEvent(
-                  new CustomEvent("rhi:project_gallery_open", {
-                    detail: { image_src: image.src, image_alt: image.alt },
-                  }),
-                );
-              }}
-              className="group relative block w-full cursor-zoom-in overflow-hidden text-left"
-              aria-label={`Expand photo: ${image.alt}`}
-            >
-              <Image
-                {...getProjectImageProps(image)}
-                alt={image.alt}
-                width={1200}
-                height={900}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                className={`${imageClassName} transition-transform duration-200 group-hover:scale-105`}
-              />
-              <span className="absolute right-2 top-2 rounded-full bg-black/60 px-2 py-1 text-xs font-semibold text-white">
-                {expandLabel}
-              </span>
-            </button>
-            {image.caption && <figcaption className={captionClassName}>{image.caption}</figcaption>}
-          </figure>
-        ))}
+        {visibleImages.map((image, index) => {
+          const imageProps = getProjectImageProps(image);
+          const dimensions = getProjectImageDimensions(imageProps.src);
+
+          return (
+            <figure key={image.src} className={cardClassName}>
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveIndex(index);
+                  window.dispatchEvent(
+                    new CustomEvent("rhi:project_gallery_open", {
+                      detail: { image_src: image.src, image_alt: image.alt },
+                    }),
+                  );
+                }}
+                className="group relative block w-full cursor-zoom-in overflow-hidden text-left"
+                aria-label={`Expand photo: ${image.alt}`}
+              >
+                <Image
+                  {...imageProps}
+                  {...dimensions}
+                  alt={image.alt}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+                  className={`${imageClassName} transition-transform duration-200 group-hover:scale-105`}
+                />
+                <span className="absolute right-2 top-2 rounded-full bg-black/60 px-2 py-1 text-xs font-semibold text-white">
+                  {expandLabel}
+                </span>
+              </button>
+              {image.caption && <figcaption className={captionClassName}>{image.caption}</figcaption>}
+            </figure>
+          );
+        })}
       </div>
 
       {hiddenCount > 0 && (
