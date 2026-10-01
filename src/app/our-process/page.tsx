@@ -10,7 +10,7 @@ import { getBreadcrumbJsonLd, getHowToJsonLd } from "@/lib/structuredData";
 export const metadata: Metadata = {
   title: "Our Remodeling Process",
   description:
-    "See how we run remodeling and restoration projects from discovery to final walkthrough, with clear scopes and predictable schedules.",
+    "Explore remodeling and restoration planning from first conversation to final walkthrough, including written scope, scheduling and approval of changes.",
   alternates: { canonical: "/our-process" },
 };
 
@@ -21,6 +21,23 @@ const processSteps = [
   "Material and schedule confirmation before start",
   "Build execution with progress communication and approval of scope changes before additional work",
   "Final walkthrough and closeout punch-list completion",
+];
+
+const processTitles = [
+  "Start the conversation",
+  "Assess the space",
+  "Review the proposal",
+  "Confirm the details",
+  "Follow the work",
+  "Walk through together",
+];
+const processDecisions = [
+  "Share your goals, location and priorities.",
+  "Discuss what matters most and your budget range.",
+  "Review included work, exclusions, allowances and timing.",
+  "Confirm selections and any material or access dependencies.",
+  "Review the cost and schedule impact before approving a change.",
+  "Agree on any remaining items and review the handoff details.",
 ];
 
 export default function OurProcessPage() {
@@ -41,7 +58,7 @@ export default function OurProcessPage() {
               A clear path from first conversation to final walkthrough.
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-              The goal is not just quality work. The goal is a project you can follow without guessing what comes next.
+              Know what happens next, which decisions need your input, and how changes to scope are handled.
             </p>
           </div>
 
@@ -73,14 +90,20 @@ export default function OurProcessPage() {
             </article>
           </div>
 
-          <ProcessTimeline title="Project Delivery Workflow" steps={processSteps} />
+          <ProcessTimeline
+            title="Six steps, with clear decisions along the way"
+            steps={processSteps}
+            stepTitles={processTitles}
+            decisions={processDecisions}
+            headingLevel="h2"
+          />
 
           <div className="mt-12 grid gap-8 border-t border-[var(--border)] pt-8 md:grid-cols-[.7fr_1.3fr] md:pt-10">
-            <h2 className="heading-serif text-3xl text-[var(--accent)]">What homeowners notice most</h2>
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">What to confirm along the way</h2>
             <ul className="grid gap-3 text-[var(--muted)] sm:grid-cols-3">
-              <li>Clear decisions upfront so changes are minimized later.</li>
-              <li>Predictable checkpoints instead of reactive updates.</li>
-              <li>Accountable finish standards at final handoff.</li>
+              <li>The agreed scope, selections and exclusions before work begins.</li>
+              <li>Who to contact and when to expect progress updates.</li>
+              <li>Any remaining items and the applicable warranty terms at handoff.</li>
             </ul>
           </div>
 

@@ -2,9 +2,9 @@ import { galleryCaseStudies, type CaseStudy } from "@/content/caseStudies";
 
 /** Editorial placement is explicit: new projects must never inherit the hero slot. */
 export const featuredProjectSlugs = [
-  "blue-kitchen-cabinet-counters",
   "reading-paver-patio-buildout",
   "lehigh-valley-basement-finish-and-detail",
+  "blue-kitchen-cabinet-counters",
 ] as const;
 
 const residentialOrder = [
@@ -36,8 +36,8 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
   "reading-paver-patio-buildout": {
     title: "Outdoor living, all together.",
     image: {
-      src: "/images/projects/frontier-patio-gable-roof/after/finished-overview-preview.webp",
-      alt: "Patio and timber pavilion with outdoor seating beside a house.",
+      src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
+      alt: "Gable-roof pavilion over a patio with planted garden edges beside a house.",
     },
   },
   "lehigh-valley-basement-finish-and-detail": { title: "Room for movie nights." },

@@ -21,7 +21,7 @@ const processSteps = [
   {
     num: "1",
     title: "Tell us about your bathroom",
-    desc: "Fill out the form — takes about 60 seconds.",
+    desc: "Share your location, priorities and the changes you have in mind.",
   },
   {
     num: "2",
@@ -31,14 +31,14 @@ const processSteps = [
   {
     num: "3",
     title: "You get a written scope",
-    desc: "Clear pricing and scope of work before any work begins. No surprises.",
+    desc: "Review the proposed work, pricing and dependencies before construction. Approve any scope changes before additional work proceeds.",
   },
 ];
 
 const faqs = [
   {
     q: "How much does a bathroom remodel cost?",
-    a: "It depends on scope — a basic refresh starts lower, while a full gut-and-rebuild with tile, plumbing, and waterproofing will cost more. We give you a written scope with clear pricing before any work starts, so there are no surprises.",
+    a: "Cost depends on the agreed scope, materials and existing conditions. A surface refresh and a full rebuild involve different work. Review the written proposal, exclusions and allowances before construction; concealed conditions may require assessment and an approved change to scope or pricing.",
   },
   {
     q: "How long does a typical bathroom remodel take?",
@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     q: "Can you work with my existing plumbing layout?",
-    a: "Usually yes. Moving drains or supply lines adds cost and time — we tell you upfront whether keeping the current layout is the better value for the result you want.",
+    a: "Keeping the existing layout may be an option, depending on its condition and your planned fixtures. Moving drains or supply lines can affect cost and timing. Assess both options and confirm plumbing responsibilities in the proposal.",
   },
   {
     q: "Do you handle waterproofing?",

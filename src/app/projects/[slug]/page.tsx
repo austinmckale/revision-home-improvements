@@ -15,6 +15,7 @@ import { businessEntityId, getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getProjectGalleryImages } from "@/lib/projectPageMedia";
 import { getProjectCollection, getProjectPresentation } from "@/content/projectShowcase";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
+import { getImageFocalClass } from "@/content/imageFocalPoints";
 
 type Params = { slug: string };
 
@@ -43,10 +44,26 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) return {};
+  const image = getProjectPresentation(caseStudy).image;
+  const url = absoluteUrl(`/projects/${caseStudy.slug}`);
   return {
     title: `${caseStudy.title} | ${caseStudy.mediaType === "planning" ? "Planning Reference" : "Photo Collection"}`,
     description: caseStudy.summary,
     alternates: { canonical: `/projects/${caseStudy.slug}` },
+    openGraph: {
+      title: `${caseStudy.title} | RHI Pros`,
+      description: caseStudy.summary,
+      url,
+      siteName: "RHI Pros",
+      type: "website",
+      images: image ? [{ url: absoluteUrl(image.src), alt: image.alt }] : [],
+    },
+    twitter: {
+      card: image ? "summary_large_image" : "summary",
+      title: `${caseStudy.title} | RHI Pros`,
+      description: caseStudy.summary,
+      images: image ? [absoluteUrl(image.src)] : [],
+    },
   };
 }
 
@@ -96,7 +113,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
             fill
             priority
             sizes="100vw"
-            className="absolute inset-0 -z-20 object-cover"
+            className={`absolute inset-0 -z-20 object-cover ${getImageFocalClass(heroImage.src, "hero")}`}
           />
         ) : null}
         <div
@@ -296,6 +313,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                 </p>
                 <ExpandableImageGrid
                   images={overviewImages}
+                  inlineCount={6}
                   gridClassName={overviewImages.length > 1 ? "mt-4 columns-1 gap-3 sm:columns-2" : "mt-4 max-w-2xl"}
                   cardClassName="mb-3 break-inside-avoid overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
@@ -307,6 +325,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                   {group.description ? <p className="mt-2 text-sm text-[var(--muted)]">{group.description}</p> : null}
                   <ExpandableImageGrid
                     images={group.images}
+                    inlineCount={4}
                     gridClassName="mt-4 columns-1 gap-3 sm:columns-2"
                     cardClassName="mb-3 break-inside-avoid overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
                     imageClassName="h-auto w-full"

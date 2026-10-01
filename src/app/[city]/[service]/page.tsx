@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
+import Button from "@/components/ui/Button";
 import QuoteForm from "@/components/forms/QuoteForm";
 import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
@@ -137,6 +138,9 @@ export default async function CityServicePage({ params }: { params: Promise<Para
   const showFeaturedProjectGallery = showCuratedStaticGallery && featuredProjectGalleryImages.length > 0;
   const featuredProjectGalleryGridClassName =
     featuredProjectGalleryImages.length > 1 ? "mt-3 columns-1 gap-4 md:columns-2" : "mt-3 max-w-3xl";
+  const additionalLocalProof = localProof.filter(
+    (item) => !showFeaturedProjectGallery || item.slug !== gallerySourceCaseStudy?.slug,
+  );
   const portfolioTag = service.portfolioTag ?? service.slug;
   const portfolioImages = showCuratedStaticGallery
     ? []
@@ -193,6 +197,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
 
       <PageJumpLinks
         items={[
+          { href: "#service-details", label: "Scope & cost" },
           ...(localContent ? [{ href: "#local-planning", label: "Local planning" }] : []),
           ...(localContent?.planningGuide ? [{ href: "#planning-guide", label: "Before you begin" }] : []),
           ...(showFeaturedProjectGallery || portfolioImages.length > 0 || service.processGallery
@@ -209,8 +214,39 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             {(isEmergencyService || service.slug === "insurance-claims") && (
               <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">{insuranceClaimsClarification}</p>
             )}
+            <section id="service-details" className="surface-soft rounded-sm border border-[var(--border)] p-5 md:p-6">
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Scope &amp; price factors</h2>
+              <div className="mt-5 grid gap-6 sm:grid-cols-2">
+                <div>
+                  <h3 className="font-semibold text-[var(--accent)]">Scope to discuss</h3>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                    {service.whatIncluded.slice(0, 3).map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[var(--accent)]">What affects the price</h3>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                    {service.pricingFactors.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+                <Button href="#quote-form-section">Request a quote</Button>
+                <Link
+                  href={serviceOverviewHref}
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                >
+                  Full service guide →
+                </Link>
+              </div>
+            </section>
+
             {localContent && (
-              <section id="local-planning" className="surface rounded-sm p-6">
+              <section id="local-planning" className="surface mt-8 rounded-sm p-6">
                 <h2 className="heading-serif text-3xl text-[var(--accent)]">{localContent.localProjectHeading}</h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{localContent.localProjectSnippet}</p>
                 {showPriorityContextualSentence && contextualCaseStudy ? (
@@ -272,11 +308,11 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               </aside>
             ) : null}
 
-            {localProof.length > 0 && (
+            {additionalLocalProof.length > 0 && (
               <section className="mt-8">
                 <h2 className="heading-serif text-3xl text-[var(--accent)]">Photo collections for {service.name}</h2>
                 <div className="mt-3 grid gap-3 md:grid-cols-2">
-                  {localProof.map((item) => (
+                  {additionalLocalProof.map((item) => (
                     <Link
                       key={item.slug}
                       href={`/projects/${item.slug}`}
@@ -302,28 +338,33 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             )}
 
             {showAuthoritySnapshot && service.authoritySnapshot && (
-              <section className="surface mt-8 rounded-sm p-5">
-                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
+              <details className="surface group mt-8 overflow-hidden rounded-sm bg-[var(--surface-soft)]">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-semibold text-[var(--accent)] marker:content-['']">
                   Example project scope
-                </p>
-                <h2 className="mt-1 text-xl font-bold text-[var(--accent)]">{service.authoritySnapshot.title}</h2>
-                <p className="mt-2 text-sm text-[var(--muted)]">{exampleScopeExplanation}</p>
-                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
-                <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-                  {authoritySnapshotScope.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
-                <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
-                <p className="mt-4 text-sm text-[var(--muted)]">
-                  For full service scope and process details, see{" "}
-                  <Link href={serviceOverviewHref} className="font-semibold text-[var(--brand)]">
-                    {service.name} service overview
-                  </Link>
-                  .
-                </p>
-              </section>
+                  <span aria-hidden="true" className="text-[var(--brand)] transition-transform group-open:rotate-180">
+                    ↓
+                  </span>
+                </summary>
+                <div className="px-5 pb-5">
+                  <h3 className="text-xl font-bold text-[var(--accent)]">{service.authoritySnapshot.title}</h3>
+                  <p className="mt-2 text-sm text-[var(--muted)]">{exampleScopeExplanation}</p>
+                  <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                    {authoritySnapshotScope.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
+                  <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
+                  <p className="mt-4 text-sm text-[var(--muted)]">
+                    For full service scope and process details, see{" "}
+                    <Link href={serviceOverviewHref} className="font-semibold text-[var(--brand)]">
+                      {service.name} service overview
+                    </Link>
+                    .
+                  </p>
+                </div>
+              </details>
             )}
 
             {faqItems.length > 0 ? (
@@ -338,7 +379,59 @@ export default async function CityServicePage({ params }: { params: Promise<Para
           </div>
 
           <div className="lg:col-start-1">
-            <section>
+            <div id="project-photos">
+              {showFeaturedProjectGallery ? (
+                <section>
+                  <h2 className="heading-serif text-3xl text-[var(--accent)]">Design &amp; finish ideas</h2>
+                  {gallerySourceCaseStudy ? (
+                    <>
+                      <p className="mt-1 text-sm text-[var(--muted)]">
+                        From{" "}
+                        <Link
+                          href={`/projects/${gallerySourceCaseStudy.slug}`}
+                          className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                        >
+                          {gallerySourceCaseStudy.title}
+                        </Link>
+                        {" | "}
+                        {gallerySourceCaseStudy.locationName}
+                      </p>
+                      <p className="mt-3 text-sm text-[var(--muted)]">{gallerySourceCaseStudy.summary}</p>
+                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
+                        {gallerySourceCaseStudy.scope.slice(0, 2).map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : null}
+                  <ExpandableImageGrid
+                    images={featuredProjectGalleryImages}
+                    inlineCount={2}
+                    expandLabel="View photos"
+                    gridClassName={featuredProjectGalleryGridClassName}
+                    cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
+                    imageClassName="h-auto w-full"
+                  />
+                </section>
+              ) : service.processGallery ? (
+                <section>
+                  <h2 className="heading-serif text-3xl text-[var(--accent)]">{service.processGallery.title}</h2>
+                  <p className="mt-2 text-sm text-[var(--muted)]">{service.processGallery.intro}</p>
+                  <ExpandableImageGrid
+                    images={service.processGallery.images}
+                    inlineCount={service.processGallery.inlineCount ?? 2}
+                    gridClassName="mt-4 grid gap-4 md:grid-cols-2"
+                    cardClassName="surface overflow-hidden rounded-xl bg-[var(--surface-soft)]"
+                    imageClassName="h-auto w-full"
+                    captionClassName="px-3 py-2 text-xs leading-relaxed text-[var(--muted)]"
+                  />
+                </section>
+              ) : portfolioImages.length > 0 ? (
+                <PortfolioGallery images={portfolioImages} title={`Recent ${service.name} Work`} />
+              ) : null}
+            </div>
+
+            <section className="mt-10 border-t border-[var(--border)] pt-8">
               <h2 className="heading-serif text-3xl text-[var(--accent)]">Related Local Resources</h2>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 {internalLinks.map((link) => (
@@ -359,48 +452,6 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 showWhySection={!useContextualGallery}
               />
             </section>
-
-            <div id="project-photos">
-              {showFeaturedProjectGallery ? (
-                <section className="mt-8">
-                  <h2 className="heading-serif text-3xl text-[var(--accent)]">Design &amp; finish ideas</h2>
-                  {gallerySourceCaseStudy ? (
-                    <p className="mt-1 text-sm text-[var(--muted)]">
-                      From{" "}
-                      <Link
-                        href={`/projects/${gallerySourceCaseStudy.slug}`}
-                        className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
-                      >
-                        {gallerySourceCaseStudy.title}
-                      </Link>
-                      {" | "}
-                      {gallerySourceCaseStudy.locationName}
-                    </p>
-                  ) : null}
-                  <ExpandableImageGrid
-                    images={featuredProjectGalleryImages}
-                    gridClassName={featuredProjectGalleryGridClassName}
-                    cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
-                    imageClassName="h-auto w-full"
-                  />
-                </section>
-              ) : service.processGallery ? (
-                <section className="mt-8">
-                  <h2 className="heading-serif text-3xl text-[var(--accent)]">{service.processGallery.title}</h2>
-                  <p className="mt-2 text-sm text-[var(--muted)]">{service.processGallery.intro}</p>
-                  <ExpandableImageGrid
-                    images={service.processGallery.images}
-                    inlineCount={service.processGallery.inlineCount}
-                    gridClassName="mt-4 grid gap-4 md:grid-cols-2"
-                    cardClassName="surface overflow-hidden rounded-xl bg-[var(--surface-soft)]"
-                    imageClassName="h-auto w-full"
-                    captionClassName="px-3 py-2 text-xs leading-relaxed text-[var(--muted)]"
-                  />
-                </section>
-              ) : portfolioImages.length > 0 ? (
-                <PortfolioGallery images={portfolioImages} title={`Recent ${service.name} Work`} />
-              ) : null}
-            </div>
           </div>
         </Container>
       </section>

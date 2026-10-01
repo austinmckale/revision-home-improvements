@@ -82,7 +82,7 @@ export default function ExpandableImageGrid({
         <button
           type="button"
           onClick={() => setActiveIndex(visibleImages.length)}
-          className="mt-3 text-sm font-semibold text-[var(--brand)] hover:underline"
+          className="mt-3 inline-flex min-h-11 items-center border border-[var(--border)] px-4 py-2 text-sm font-semibold text-[var(--brand)] transition-colors hover:bg-[var(--surface-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand)]"
         >
           +{hiddenCount} more photo{hiddenCount > 1 ? "s" : ""}
         </button>

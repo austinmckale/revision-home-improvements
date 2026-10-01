@@ -67,6 +67,10 @@ export default function StickyCTA() {
     return null;
 
   const { label, mode } = getCtaConfig(pathname);
+  const pathService = pathname.split("/").filter(Boolean).pop() ?? "";
+  const restorationQuoteHref = [...EMERGENCY_SLUGS, "insurance-claims"].includes(pathService)
+    ? `/request-a-quote?service=${encodeURIComponent(pathService)}`
+    : "/request-a-quote";
 
   const handleClick = () => {
     // Derive service identifier from path for analytics
@@ -107,12 +111,12 @@ export default function StickyCTA() {
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--border)] bg-[var(--surface)]/95 px-3 pb-[env(safe-area-inset-bottom,8px)] pt-2.5 shadow-[0_-10px_30px_rgba(30,42,34,.08)] backdrop-blur-xl md:hidden">
-      <div className="mx-auto flex max-w-7xl flex-col gap-1.5">
+      <div className={`mx-auto max-w-7xl gap-2 ${mode === "phone" ? "grid grid-cols-2" : "flex flex-col"}`}>
         {mode === "phone" ? (
           <a
             href={siteConfig.phoneHref}
             onClick={handleClick}
-            className="block min-h-12 bg-[var(--brand)] px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand)]"
+            className="flex min-h-12 items-center justify-center bg-[var(--brand)] px-3 py-3 text-center text-sm font-semibold leading-snug text-white transition-colors hover:bg-[var(--brand-dark)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand)]"
           >
             {label}
           </a>
@@ -125,12 +129,22 @@ export default function StickyCTA() {
             {label}
           </button>
         )}
-        <p className="text-center text-xs text-[var(--muted)]">
-          or{" "}
-          <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
-            call {siteConfig.phoneDisplay}
+        {mode === "phone" ? (
+          <a
+            href={restorationQuoteHref}
+            onClick={() => emitEvent("sticky_cta_click", { label: "Request a Quote", mode: "quote", page: pathname })}
+            className="flex min-h-12 items-center justify-center border border-[var(--brand)]/35 px-3 py-3 text-center text-sm font-semibold text-[var(--brand)] hover:bg-[var(--surface-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand)]"
+          >
+            Request a Quote
           </a>
-        </p>
+        ) : (
+          <p className="text-center text-xs text-[var(--muted)]">
+            or{" "}
+            <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
+              call {siteConfig.phoneDisplay}
+            </a>
+          </p>
+        )}
       </div>
     </div>
   );

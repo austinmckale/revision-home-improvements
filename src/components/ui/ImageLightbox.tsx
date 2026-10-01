@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
+import Image, { getImageProps } from "next/image";
 import Portal from "./Portal";
 import useModalFocus from "./useModalFocus";
 
@@ -21,8 +21,19 @@ type Props = {
 export default function ImageLightbox({ images, activeIndex, onClose, onNavigate }: Props) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const gestureRef = useRef<{ id: number; x: number; y: number; started: number; vertical: boolean } | null>(null);
+  const [retry, setRetry] = useState({ src: "", attempt: 0 });
+  const [photoState, setPhotoState] = useState<{ key: string; status: "loaded" | "error" | "loading" }>({
+    key: "",
+    status: "loading",
+  });
   const image = activeIndex === null ? undefined : images[activeIndex];
   const isOpen = Boolean(image);
+  const attempt = retry.src === image?.src ? retry.attempt : 0;
+  const imageSrc = image?.src
+    ? `${image.src}${attempt ? `${image.src.includes("?") ? "&" : "?"}photo_retry=${attempt}` : ""}`
+    : "";
+  const photoStatus = photoState.key === imageSrc ? photoState.status : "loading";
 
   useModalFocus(isOpen, dialogRef, closeButtonRef, onClose);
 
@@ -60,6 +71,73 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
     };
   }, [activeIndex, images.length, isOpen, onNavigate]);
 
+  useEffect(() => {
+    if (!isOpen || activeIndex === null || images.length < 2) return;
+    // Prepare the same responsive candidates used by the viewer, without
+    // promoting either neighboring image into the current photo's evidence.
+    const adjacent = new Set([(activeIndex + 1) % images.length, (activeIndex - 1 + images.length) % images.length]);
+    const prepared = Array.from(adjacent, (index) => {
+      const next = images[index];
+      const props = getImageProps({ src: next.src, alt: next.alt, width: 1600, height: 1200, sizes: "100vw" }).props;
+      const loader = new window.Image();
+      loader.decoding = "async";
+      if (props.srcSet) loader.srcset = props.srcSet;
+      if (props.sizes) loader.sizes = props.sizes;
+      loader.src = props.src;
+      return loader;
+    });
+    return () => {
+      prepared.forEach((loader) => {
+        loader.onload = null;
+        loader.onerror = null;
+      });
+    };
+  }, [activeIndex, images, isOpen]);
+
+  function beginSwipe(event: PointerEvent<HTMLDivElement>) {
+    if (
+      images.length < 2 ||
+      !event.isPrimary ||
+      (event.pointerType === "mouse" && event.button !== 0) ||
+      (event.target instanceof HTMLElement && event.target.closest("button, a"))
+    )
+      return;
+    gestureRef.current = {
+      id: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      started: Date.now(),
+      vertical: false,
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function updateSwipe(event: PointerEvent<HTMLDivElement>) {
+    const gesture = gestureRef.current;
+    if (!gesture || gesture.id !== event.pointerId) return;
+    const distanceX = Math.abs(event.clientX - gesture.x);
+    const distanceY = Math.abs(event.clientY - gesture.y);
+    if (distanceY > 12 && distanceY > distanceX) gesture.vertical = true;
+  }
+
+  function finishSwipe(event: PointerEvent<HTMLDivElement>) {
+    const gesture = gestureRef.current;
+    gestureRef.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId))
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    if (!gesture || gesture.id !== event.pointerId || gesture.vertical || activeIndex === null) return;
+    const distanceX = event.clientX - gesture.x;
+    const distanceY = event.clientY - gesture.y;
+    const threshold = Math.max(48, Math.min(100, event.currentTarget.clientWidth * 0.12));
+    if (
+      Math.abs(distanceX) >= threshold &&
+      Math.abs(distanceX) > Math.abs(distanceY) * 1.5 &&
+      Date.now() - gesture.started < 1500
+    ) {
+      onNavigate((activeIndex + (distanceX < 0 ? 1 : -1) + images.length) % images.length);
+    }
+  }
+
   if (!image || activeIndex === null) return null;
 
   return (
@@ -71,7 +149,9 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
         aria-modal="true"
         aria-label="Expanded project photo"
         tabIndex={-1}
-        onClick={onClose}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) onClose();
+        }}
       >
         <div
           className="relative mx-auto flex min-h-full w-full max-w-6xl flex-col justify-center"
@@ -81,7 +161,7 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
             type="button"
             ref={closeButtonRef}
             onClick={onClose}
-            className="absolute right-0 top-0 z-10 rounded-full bg-black/70 px-3 py-2 text-sm font-semibold text-white"
+            className="absolute right-0 top-0 z-10 min-h-11 min-w-11 rounded-full bg-black/70 px-4 py-2 text-sm font-semibold text-white"
             aria-label="Close expanded photo"
           >
             Close
@@ -92,7 +172,7 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
               <button
                 type="button"
                 onClick={() => onNavigate((activeIndex - 1 + images.length) % images.length)}
-                className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/70 px-3 py-2 text-sm font-semibold text-white"
+                className="absolute left-2 top-1/2 z-10 min-h-11 min-w-11 -translate-y-1/2 rounded-full bg-black/70 px-4 py-2 text-sm font-semibold text-white"
                 aria-label="Previous photo"
               >
                 Prev
@@ -100,7 +180,7 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
               <button
                 type="button"
                 onClick={() => onNavigate((activeIndex + 1) % images.length)}
-                className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/70 px-3 py-2 text-sm font-semibold text-white"
+                className="absolute right-2 top-1/2 z-10 min-h-11 min-w-11 -translate-y-1/2 rounded-full bg-black/70 px-4 py-2 text-sm font-semibold text-white"
                 aria-label="Next photo"
               >
                 Next
@@ -108,16 +188,50 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
             </>
           )}
 
-          <div className="flex h-[75dvh] items-center justify-center">
+          <div
+            className="relative flex h-[75dvh] select-none items-center justify-center"
+            style={{ touchAction: "pan-y pinch-zoom" }}
+            aria-busy={photoStatus === "loading"}
+            onPointerDown={beginSwipe}
+            onPointerMove={updateSwipe}
+            onPointerUp={finishSwipe}
+            onPointerCancel={() => {
+              gestureRef.current = null;
+            }}
+          >
             <Image
-              src={image.src}
+              key={imageSrc}
+              src={imageSrc}
               alt={image.alt}
               width={1600}
               height={1200}
-              className="max-h-[75dvh] max-w-full w-auto rounded-xl object-contain"
+              draggable={false}
+              onLoad={() => setPhotoState({ key: imageSrc, status: "loaded" })}
+              onError={() => setPhotoState({ key: imageSrc, status: "error" })}
+              className={`max-h-[75dvh] max-w-full w-auto rounded-xl object-contain transition-opacity duration-150 motion-reduce:transition-none ${photoStatus === "loaded" ? "opacity-100" : "opacity-0"}`}
               sizes="100vw"
               priority
             />
+            {photoStatus !== "loaded" && (
+              <div
+                className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-16 text-center text-sm text-white"
+                role="status"
+              >
+                <p>{photoStatus === "error" ? "This photo could not load." : "Loading photo…"}</p>
+                {photoStatus === "error" && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setRetry((previous) => ({ src: image.src, attempt: previous.attempt + 1 }));
+                      setPhotoState({ key: "", status: "loading" });
+                    }}
+                    className="min-h-11 rounded-full border border-white/60 px-5 py-2 font-semibold hover:bg-white/10"
+                  >
+                    Try photo again
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="mt-4 flex items-start justify-between gap-4 text-white" aria-live="polite" aria-atomic="true">

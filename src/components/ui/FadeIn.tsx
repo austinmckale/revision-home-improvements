@@ -10,7 +10,7 @@ interface FadeInProps {
   yOffset?: number;
 }
 
-export default function FadeIn({ children, className = "", delay = 0.1, duration = 0.8, yOffset = 30 }: FadeInProps) {
+export default function FadeIn({ children, className = "", delay = 0, duration = 0.45, yOffset = 18 }: FadeInProps) {
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

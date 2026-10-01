@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CaseStudy } from "@/content/caseStudies";
 import { getProjectPresentation } from "@/content/projectShowcase";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
+import { getImageFocalClass } from "@/content/imageFocalPoints";
 
 export default function ProjectCard({
   study,
@@ -19,7 +20,7 @@ export default function ProjectCard({
   return (
     <Link
       href={`/projects/${study.slug}`}
-      className={`group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)] ${isFeature ? `relative isolate overflow-hidden bg-[#202823] ${variant === "lead" ? "min-h-[28rem] lg:col-span-7 lg:row-span-2" : "min-h-[19rem] lg:col-span-5"}` : "min-w-0"}`}
+      className={`group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)] ${isFeature ? `relative isolate overflow-hidden bg-[#202823] ${variant === "lead" ? "home-project-feature min-h-[28rem] lg:col-span-7 lg:row-span-2" : "home-project-support min-h-[19rem] lg:col-span-5"}` : "min-w-0"}`}
     >
       <div
         className={
@@ -37,7 +38,7 @@ export default function ProjectCard({
                 ? "(max-width: 1024px) 100vw, 60vw"
                 : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             }
-            className="home-project-image object-cover"
+            className={`home-project-image object-cover ${getImageFocalClass(image.src)}`}
           />
         ) : (
           <div className="media-placeholder absolute inset-0" aria-hidden="true" />

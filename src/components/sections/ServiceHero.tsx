@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
+import { getImageFocalClass } from "@/content/imageFocalPoints";
 
 type ServiceHeroProps = {
   eyebrow: string;
@@ -37,7 +38,7 @@ export default function ServiceHero({
           fill
           priority
           sizes="100vw"
-          className="absolute inset-0 -z-20 object-cover"
+          className={`absolute inset-0 -z-20 object-cover ${getImageFocalClass(image.src, "hero")}`}
         />
       ) : null}
       <div

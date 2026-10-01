@@ -1,0 +1,1727 @@
+{
+  "pages": 126,
+  "sourceReferences": 192,
+  "decodedRasterFiles": 192,
+  "deliveredImageUrls": 79,
+  "errors": [],
+  "routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "contentImages": 15,
+      "waterHero": false
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/basement-finishing",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/bathroom-remodeling",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/drywall-installation-repair",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/exterior-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/fire-damage-restoration",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/flooring-installation",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/insurance-claims",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/kitchen-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/paver-installation",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/allentown-pa/water-damage-restoration",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": true
+    },
+    {
+      "path": "/berks-county-pa",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/basement-finishing",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/bathroom-remodeling",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/drywall-installation-repair",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/exterior-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/fire-damage-restoration",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/flooring-installation",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/insurance-claims",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/kitchen-cabinet-installation",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/kitchen-remodeling",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/paver-installation",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/berks-county-pa/water-damage-restoration",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": true
+    },
+    {
+      "path": "/bethlehem-pa",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/basement-finishing",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/bathroom-remodeling",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/drywall-installation-repair",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/exterior-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/fire-damage-restoration",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/flooring-installation",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/insurance-claims",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/kitchen-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/paver-installation",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/bethlehem-pa/water-damage-restoration",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": true
+    },
+    {
+      "path": "/financing",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/financing-terms",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/fire-water-damage-restoration",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/insurance-claims",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/landing/bathroom-remodeling",
+      "status": 200,
+      "contentImages": 5,
+      "waterHero": false
+    },
+    {
+      "path": "/landing/bathroom-remodeling/quote",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/basement-finishing",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/bathroom-remodeling",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/drywall-installation-repair",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/exterior-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/fire-damage-restoration",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/flooring-installation",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/insurance-claims",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/kitchen-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/paver-installation",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/lehigh-valley-pa/water-damage-restoration",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": true
+    },
+    {
+      "path": "/licenses-and-insurance",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/our-process",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/projects",
+      "status": 200,
+      "contentImages": 20,
+      "waterHero": false
+    },
+    {
+      "path": "/projects?service=basement-finishing",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/projects?service=bathroom-remodeling",
+      "status": 200,
+      "contentImages": 4,
+      "waterHero": false
+    },
+    {
+      "path": "/projects?service=drywall-installation-repair",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/projects?service=exterior-remodeling",
+      "status": 200,
+      "contentImages": 5,
+      "waterHero": false
+    },
+    {
+      "path": "/projects?service=fire-damage-restoration",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/projects?service=flooring-installation",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/projects?service=kitchen-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/projects?service=paver-installation",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/projects?service=water-damage-restoration",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/allentown-commercial-bathroom-renovation",
+      "status": 200,
+      "contentImages": 5,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/allentown-exterior-log-home-refresh",
+      "status": 200,
+      "contentImages": 4,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/allentown-fire-damage-interior-rebuild",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/allentown-flooring-replacement-upgrade",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/allentown-kitchen-layout-upgrade",
+      "status": 200,
+      "contentImages": 5,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/beige-bathroom-before-after",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/berks-county-ranch-exterior-refresh",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/bethlehem-bathroom-refresh",
+      "status": 200,
+      "contentImages": 4,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/bethlehem-drywall-and-finish-repair",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/bethlehem-exterior-staircase-build",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/bethlehem-interior-flooring-refresh",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/bethlehem-pool-patio-renovation",
+      "status": 200,
+      "contentImages": 4,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/blue-kitchen-cabinet-counters",
+      "status": 200,
+      "contentImages": 8,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/hamburg-laundry-bathroom-remodel",
+      "status": 200,
+      "contentImages": 6,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/lehigh-valley-basement-finish-and-detail",
+      "status": 200,
+      "contentImages": 5,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/lehigh-valley-dormer-shutter-detail-refresh",
+      "status": 200,
+      "contentImages": 4,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/lehigh-valley-fire-damage-documentation",
+      "status": 200,
+      "contentImages": 14,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/lehigh-valley-full-exterior-refresh",
+      "status": 200,
+      "contentImages": 5,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/lehigh-water-damage-rebuild",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/reading-commercial-bar-window-upgrade",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/reading-paver-patio-buildout",
+      "status": 200,
+      "contentImages": 6,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/ryan-bathroom-remodel",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/ryan-bedroom-interior-refresh",
+      "status": 200,
+      "contentImages": 7,
+      "waterHero": false
+    },
+    {
+      "path": "/projects/ryan-kitchen-remodel",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/basement-finishing",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/bathroom-remodeling",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/drywall-installation-repair",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/exterior-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/fire-damage-restoration",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/flooring-installation",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/insurance-claims",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/kitchen-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/paver-installation",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/reading-pa/water-damage-restoration",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": true
+    },
+    {
+      "path": "/request-a-quote",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/service-areas",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "contentImages": 8,
+      "waterHero": false
+    },
+    {
+      "path": "/services/basement-finishing",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/services/bathroom-remodeling",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/services/drywall-installation-repair",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/services/exterior-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/services/fire-damage-restoration",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/services/flooring-installation",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/services/kitchen-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/services/paver-installation",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/services/water-damage-restoration",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": true
+    },
+    {
+      "path": "/services/whole-home-remodeling",
+      "status": 200,
+      "contentImages": 5,
+      "waterHero": false
+    },
+    {
+      "path": "/warranty",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/basement-finishing",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/bathroom-remodeling",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/drywall-installation-repair",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/exterior-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/fire-damage-restoration",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/flooring-installation",
+      "status": 200,
+      "contentImages": 2,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/insurance-claims",
+      "status": 200,
+      "contentImages": 0,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/kitchen-remodeling",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/paver-installation",
+      "status": 200,
+      "contentImages": 3,
+      "waterHero": false
+    },
+    {
+      "path": "/wyomissing-pa/water-damage-restoration",
+      "status": 200,
+      "contentImages": 1,
+      "waterHero": true
+    }
+  ],
+  "rasterFiles": [
+    {
+      "path": "images/brand/chat-logo.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "images/brand/rhi-logo.png",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "images/projects/_review/bathroom-after/img_7547.jpg",
+      "width": 1496,
+      "height": 1496
+    },
+    {
+      "path": "images/projects/_review/duplicates/basement-epoxy-floor-big-screen-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-after-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-after-4-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-before-1-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-before-1.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-before-2-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-before-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-before-3-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-before-4-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-finished-2-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-finished1-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-finished1.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/bathroom-shelves-corner-2.jpg",
+      "width": 4284,
+      "height": 5712
+    },
+    {
+      "path": "images/projects/_review/duplicates/before-after-patio_mp4_hd.original.jpg",
+      "width": 858,
+      "height": 720
+    },
+    {
+      "path": "images/projects/_review/duplicates/big-screen-basement-2.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/_review/duplicates/finished-room-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/duplicates/frontier-final-2.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/_review/duplicates/kitchen-1-2.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/_review/duplicates/pace-1-2.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/_review/duplicates/pace-1.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/_review/duplicates/pace-2-2.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/_review/duplicates/pace-2.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/_review/duplicates/pace-5.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/_review/duplicates/pace.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/_review/duplicates/parkway-epoxy.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/_review/exterior-stone-siding/img_8216.jpg",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "path": "images/projects/_review/exterior-stone-siding/img_8219.jpg",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "path": "images/projects/_review/exterior-stone-siding/img_8220.jpg",
+      "width": 2000,
+      "height": 1500
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/after/floor-after.png",
+      "width": 470,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/after/hallway-after.png",
+      "width": 470,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/after/sink-area-after-preview.webp",
+      "width": 470,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/after/sink-area-after.png",
+      "width": 470,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/after/stall-finished.jpg",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/before/floor-before.png",
+      "width": 470,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/before/hallway-before.png",
+      "width": 470,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/before/sink-area-before.png",
+      "width": 470,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/marketing/floor-before-after.png",
+      "width": 940,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/marketing/hallway-before-after.png",
+      "width": 940,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-commercial-bathroom/marketing/sink-area-before-after.png",
+      "width": 940,
+      "height": 788
+    },
+    {
+      "path": "images/projects/allentown-exterior-log-home/after/front-finished-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/allentown-exterior-log-home/after/front-finished.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/allentown-exterior-log-home/after/garage-elevation.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/allentown-exterior-log-home/process/lift-access-work.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/allentown-flooring-replacement/after/fireplace-wall-renovation.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/allentown-flooring-replacement/after/living-room-finished-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/allentown-kitchen-upgrade/after/kitchen-high-end-island.jpg",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "path": "images/projects/allentown-kitchen-upgrade/after/kitchen-remodel-finishes.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/allentown-kitchen-upgrade/after/kitchen-white-cabinets.jpg",
+      "width": 1500,
+      "height": 2000
+    },
+    {
+      "path": "images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero-preview.webp",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "path": "images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "path": "images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-1-preview.webp",
+      "width": 1080,
+      "height": 1080
+    },
+    {
+      "path": "images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-1.png",
+      "width": 1080,
+      "height": 1080
+    },
+    {
+      "path": "images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-2.png",
+      "width": 1080,
+      "height": 1080
+    },
+    {
+      "path": "images/projects/berks-county-ranch-exterior/after/exterior-refresh-preview.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "path": "images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg",
+      "width": 2048,
+      "height": 1536
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.png",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-door-open.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/after/bathroom-shelves-corner.jpg",
+      "width": 4284,
+      "height": 5712
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/before/bathroom-before-shower.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/bethlehem-bathroom-refresh/before/bathroom-before-tile.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/bethlehem-drywall-finish-repair/after/finished-room-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/bethlehem-exterior-staircase/after/staircase-finished-preview.webp",
+      "width": 560,
+      "height": 760
+    },
+    {
+      "path": "images/projects/bethlehem-exterior-staircase/after/staircase-finished.jpg",
+      "width": 560,
+      "height": 760
+    },
+    {
+      "path": "images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh-preview.webp",
+      "width": 576,
+      "height": 432
+    },
+    {
+      "path": "images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
+      "width": 576,
+      "height": 432
+    },
+    {
+      "path": "images/projects/bethlehem-pool-patio/after/pool-patio-overview-preview.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "path": "images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/bethlehem-pool-patio/after/pool-patio-steps.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/bethlehem-pool-patio/before/pool-patio-before-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/blue-kitchen-cabinet-counters/after/03-blue-kitchen-cabinets-1.jpg",
+      "width": 838,
+      "height": 2046
+    },
+    {
+      "path": "images/projects/blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/blue-kitchen-cabinet-counters/marketing/01-blue-kitchen-cabinet-layout-diagram.png",
+      "width": 2778,
+      "height": 1284
+    },
+    {
+      "path": "images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/blue-kitchen-cabinet-counters/process/02-blue-kitchen-cabinets-process.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/01-img_7761-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/01-img_7761.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/02-img_7762.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/03-img_7764.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/04-img_7765.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/05-img_7766.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/06-img_7768.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/07-img_7769.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/08-img_7770.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/09-img_8454.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/10-img_8455.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/11-img_8456.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/12-img_8457.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/13-img_8458.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/14-img_8459-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/14-img_8459.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/15-img_8460.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/16-img_8461.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/17-img_8462.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/18-img_8463.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/19-img_8464.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/20-img_8465.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/21-img_8466.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/22-img_8467.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/23-img_8468.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/24-img_8469.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/25-img_8470.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/26-img_8471.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/27-img_8472.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/28-img_8473.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/29-img_8474.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/30-img_8475.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/31-img_8476.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/32-img_8477.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/33-img_8478.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/34-img_8479.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/35-img_8480.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/36-img_8933.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/37-img_8934.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/fire-damage-documentation/after/38-img_8935.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/fireplace-construction-project/after/bathroom-tile-in-progress.jpg",
+      "width": 1496,
+      "height": 1496
+    },
+    {
+      "path": "images/projects/fireplace-construction-project/after/fireplace-hearth-finished-preview.webp",
+      "width": 1496,
+      "height": 1496
+    },
+    {
+      "path": "images/projects/fireplace-construction-project/after/fireplace-hearth-finished.jpg",
+      "width": 1496,
+      "height": 1496
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-bathroom-plumbing-rough-in-supply-drain.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-hallway-framing-drywall-stairway-electrical-boxes.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-mechanical-room-framing-tankless-water-heater.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-metal-stud-framing-bathroom-rough-in.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-metal-stud-framing-ductwork-chase-detail.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-staircase-framing-ceiling-grid-aquarium-wall.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-stairway-view-framing-electrical-panel.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-utility-area-insulation-ductwork-materials.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-wide-view-ceiling-framing-insulation-hvac.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/fogelsville-basement-in-progress/process/basement-process-wide-view-framing-insulation-bathroom-rough-in.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/frontier-patio-gable-roof/after/angle-1-preview.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "path": "images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/frontier-patio-gable-roof/after/angle-2.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/frontier-patio-gable-roof/after/finished-alt.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/frontier-patio-gable-roof/after/finished-overview-preview.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "path": "images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/frontier-patio-gable-roof/after/patio-finished.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/frontier-patio-gable-roof/process/construction-site.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/frontier-patio-gable-roof/process/patio-construction.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-doorway-view-preview.webp",
+      "width": 1500,
+      "height": 2000
+    },
+    {
+      "path": "images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-doorway-view.jpg",
+      "width": 1500,
+      "height": 2000
+    },
+    {
+      "path": "images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-full-view.jpg",
+      "width": 1500,
+      "height": 2000
+    },
+    {
+      "path": "images/projects/hamburg-laundry-bathroom/after/laundry-bathroom-overview.jpg",
+      "width": 1500,
+      "height": 2000
+    },
+    {
+      "path": "images/projects/hamburg-laundry-bathroom/after/vanity-toilet-and-shelving.jpg",
+      "width": 1500,
+      "height": 2000
+    },
+    {
+      "path": "images/projects/hamburg-laundry-bathroom/after/washer-and-storage-detail.jpg",
+      "width": 1500,
+      "height": 2000
+    },
+    {
+      "path": "images/projects/hamburg-laundry-bathroom/after/window-trim-and-washer.jpg",
+      "width": 1500,
+      "height": 2000
+    },
+    {
+      "path": "images/projects/hamburg-laundry-bathroom/before/laundry-bathroom-before.jpg",
+      "width": 1500,
+      "height": 2000
+    },
+    {
+      "path": "images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/lehigh-valley-basement-theater/after/media-room-big-screen-preview.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "path": "images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/lehigh-valley-basement-theater/after/wide-angle-room-flow.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/lehigh-valley-exterior-refresh/after/exterior-after-preview.webp",
+      "width": 946,
+      "height": 2048
+    },
+    {
+      "path": "images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg",
+      "width": 946,
+      "height": 2048
+    },
+    {
+      "path": "images/projects/lehigh-valley-exterior-refresh/after/exterior-finished-preview.webp",
+      "width": 720,
+      "height": 1544
+    },
+    {
+      "path": "images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
+      "width": 720,
+      "height": 1544
+    },
+    {
+      "path": "images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg",
+      "width": 946,
+      "height": 2048
+    },
+    {
+      "path": "images/projects/lehigh-valley-exterior-refresh/marketing/exterior-before-after.jpg",
+      "width": 1892,
+      "height": 2048
+    },
+    {
+      "path": "images/projects/lehigh-valley-exterior-refresh/process/exterior-in-progress.jpg",
+      "width": 720,
+      "height": 1544
+    },
+    {
+      "path": "images/projects/reading-commercial-bar-window/after/window-upgrade-preview.webp",
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "path": "images/projects/reading-commercial-bar-window/after/window-upgrade.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/ryan-bathroom/after/ryans-bathroom-finished-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "path": "images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg",
+      "width": 1242,
+      "height": 2208
+    },
+    {
+      "path": "images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-bedroom/after/02-interior-refresh-blue-1.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-bedroom/after/03-interior-refresh-blue-3.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-bedroom/after/04-interior-refresh-blue-4.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-bedroom/after/05-interior-refresh-blue-done.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-bedroom/before/01-interior-refresh-before.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-bedroom/before/02-interior-refresh-blue-before-2.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-bedroom/process/01-interior-refresh-blue-2-process.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-bedroom/process/02-interior-refresh-blue-in-progress.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done-preview.webp",
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "path": "images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/projects/ryan-kitchen/before/01-ryans-kitchen-before.jpg",
+      "width": 3024,
+      "height": 4032
+    },
+    {
+      "path": "images/service-illustrations/water-damage-interior.png",
+      "width": 1672,
+      "height": 941
+    }
+  ]
+}

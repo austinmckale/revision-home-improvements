@@ -9,6 +9,7 @@ import { primaryServices } from "@/content/services";
 import { visibleCaseStudies } from "@/content/caseStudies";
 import { featuredProjects } from "@/content/projectShowcase";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
+import { getImageFocalClass } from "@/content/imageFocalPoints";
 import ProjectCard from "@/components/sections/ProjectCard";
 import { getFeaturedTestimonials } from "@/content/testimonials";
 import { siteConfig } from "@/content/site";
@@ -78,6 +79,32 @@ const processSteps = [
   },
 ];
 
+const homeHeroImage = {
+  src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
+  alt: "Gable-roof pavilion over a patio with planted garden edges beside a house.",
+};
+
+const spaceDetails = [
+  {
+    src: "/images/projects/frontier-patio-gable-roof/after/angle-2.jpg",
+    alt: "Wood pavilion ceiling with dark beams and recessed lights, viewed from below.",
+    title: "Warmth overhead",
+    caption: "Wood ceiling, dark beams, and recessed lights.",
+  },
+  {
+    src: "/images/projects/frontier-patio-gable-roof/after/finished-alt.jpg",
+    alt: "Stone edging and planted garden borders beneath the side of the pavilion.",
+    title: "Garden connections",
+    caption: "Stone edging and planted borders beside the pavilion.",
+  },
+  {
+    src: "/images/projects/frontier-patio-gable-roof/after/patio-finished.jpg",
+    alt: "Open pavilion roof framing above scaffolds and temporary braces during construction.",
+    title: "Framing in progress",
+    caption: "Open roof framing, scaffolds, and temporary braces.",
+  },
+];
+
 export default function HomePage() {
   const priorityServices = primaryServices.filter((service) => priorityServiceSlugs.includes(service.slug));
   const secondaryServices = primaryServices.filter((service) => !priorityServiceSlugs.includes(service.slug));
@@ -91,13 +118,13 @@ export default function HomePage() {
 
       <section className="home-hero relative isolate flex min-h-[min(900px,100svh)] items-end overflow-hidden bg-[#242720] pt-24 text-white">
         <Image
-          src="/images/projects/allentown-kitchen-upgrade/hero/kitchen-high-end-hero.jpg"
-          alt="Kitchen with a large island, wood cabinetry and pendant lighting."
+          {...getProjectImageProps(homeHeroImage)}
+          alt={homeHeroImage.alt}
           fill
           priority
           sizes="100vw"
           quality={75}
-          className="home-hero-image -z-20 object-cover object-[center_58%]"
+          className={`home-hero-image -z-20 object-cover ${getImageFocalClass(homeHeroImage.src, "hero")}`}
         />
         <div
           className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(18,23,20,.84)_0%,rgba(18,23,20,.58)_44%,rgba(18,23,20,.08)_100%)]"
@@ -190,7 +217,7 @@ export default function HomePage() {
                       alt={service.image.alt}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="home-service-image -z-20 object-cover"
+                      className={`home-service-image -z-20 object-cover ${getImageFocalClass(service.image.src)}`}
                     />
                   ) : (
                     <div className="home-service-placeholder absolute inset-0 -z-20" aria-hidden="true" />
@@ -310,6 +337,49 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <section className="bg-[var(--background)] py-16 sm:py-20 lg:py-24">
+        <Container>
+          <FadeIn>
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+              <div className="max-w-2xl">
+                <p className="eyebrow">A closer look</p>
+                <h2 className="heading-serif mt-4 text-3xl leading-[1.06] tracking-[-.03em] text-[var(--accent)] sm:text-4xl lg:text-5xl">
+                  Details that shape the space.
+                </h2>
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)]">
+                  Look up at the ceiling, follow the garden edges, and explore the framing beneath the roof.
+                </p>
+              </div>
+              <Link
+                href="/projects/reading-paver-patio-buildout"
+                className="inline-flex min-h-11 shrink-0 items-center gap-3 text-sm font-semibold text-[var(--accent)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
+              >
+                Explore pavilion details <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+            <div className="mt-9 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+              {spaceDetails.map((detail) => (
+                <figure key={detail.src} className="min-w-0">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[var(--surface-soft)]">
+                    <Image
+                      {...getProjectImageProps(detail)}
+                      alt={detail.alt}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className={`object-cover ${getImageFocalClass(detail.src)}`}
+                    />
+                  </div>
+                  <figcaption className="border-t border-[var(--border)] pt-4">
+                    <h3 className="heading-serif text-2xl text-[var(--accent)]">{detail.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{detail.caption}</p>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </FadeIn>
+        </Container>
+      </section>
+
       {poolStory?.beforeImages?.[0] && poolStory.afterImages?.[0] && (
         <section className="overflow-hidden bg-[var(--accent)] py-20 text-white sm:py-24 lg:py-32">
           <Container>
@@ -351,7 +421,7 @@ export default function HomePage() {
                         alt={image.alt}
                         fill
                         sizes="(max-width: 640px) 100vw, 50vw"
-                        className="object-cover"
+                        className={`object-cover ${getImageFocalClass(image.src)}`}
                       />
                       <figcaption className="absolute bottom-4 left-4 bg-[#202823]/90 px-4 py-2 text-xs font-semibold uppercase tracking-[.16em] text-white">
                         {label}

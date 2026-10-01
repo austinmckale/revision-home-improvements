@@ -147,6 +147,22 @@ for (const url of urls) {
       `${path}: collection schema must identify the publisher without asserting job provenance.`,
     );
     check(!/Case Study/.test(title), `${path}: unsupported case-study metadata.`);
+    const shareTitle = `${collections[0]?.name} | RHI Pros`;
+    check(
+      metas.find((m) => m.property === "og:title")?.content === shareTitle &&
+        metas.find((m) => m.name === "twitter:title")?.content === shareTitle,
+      `${path}: sharing titles must identify this collection.`,
+    );
+    check(
+      metas.find((m) => m.property === "og:description")?.content === collections[0]?.description &&
+        metas.find((m) => m.name === "twitter:description")?.content === collections[0]?.description,
+      `${path}: sharing descriptions must match this collection.`,
+    );
+    check(metas.find((m) => m.property === "og:url")?.content === url, `${path}: incorrect sharing URL.`);
+    check(
+      !metas.some((m) => m.property === "og:image" && m.content?.includes("/service-illustrations/")),
+      `${path}: generic generated imagery must not be a collection's sharing image.`,
+    );
   }
   if (/^\/services\/(kitchen-remodeling|bathroom-remodeling|basement-finishing)$/.test(path)) {
     const photoSection = html.split('id="project-photos"')[1]?.split("</section>")[0] || "";
