@@ -805,7 +805,6 @@ export const services: Service[] = [
     image: {
       src: "/images/service-illustrations/water-damage-interior.png",
       alt: "AI-generated illustration of a water-damaged room with stained walls, exposed lower framing and damaged flooring.",
-      caption: "AI-generated illustration of water damage",
     },
     gallery: [],
   },
