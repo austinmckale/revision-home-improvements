@@ -105,7 +105,10 @@ await pool([...routes], async (path) => {
         ),
         `${path}: missing water-damage hero`,
       );
-      check(main.includes("AI-generated illustration of water damage"), `${path}: missing illustration disclosure`);
+      check(
+        contentImages.some((i) => i.alt?.startsWith("AI-generated illustration of a water-damaged room")),
+        `${path}: missing water-damage illustration alt text`,
+      );
     }
     check(
       !/Two kitchens\. Separate photo groups\.|supplied photo|authenticated shared job/i.test(main),
