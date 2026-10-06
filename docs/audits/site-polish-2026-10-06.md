@@ -21,7 +21,6 @@ RHI Pros' clearest differentiator is a **written scope before work begins**. The
 | --- | --- | --- |
 | **Scope Builder** | Homepage `#scope-builder`; linked from the quote page and closing CTA | Choose a space, tick items from that service's `whatIncluded`, pick timing, add notes. The sheet lists the service's `pricingFactors` and `qualityFactors`. No prices or estimates. **Send** stores the starter in `sessionStorage` (`rhi:scope-starter`, never the URL), opens `/request-a-quote?service=…`, and the form pre-fills service, details and timing once, then clears it. **Print or save as PDF** prints only the sheet. Events: `scope_builder_send`, `scope_builder_print`. |
 | **Service-area map** | Homepage "Close to home"; `/service-areas` | SVG positioned from real latitude/longitude; links to the four city hubs and two regions; US 222 and I-78 drawn as simplified corridors. Labeled "Schematic map · Approximate positions". Minor community labels hide on phones. |
-| **At-a-glance facts** | Below the homepage hero | Counts computed from content (`orderedShowcaseProjects`, `primaryServices`, `locations`) plus the HIC number. Nothing hard-coded. |
 | **"Straight answers" FAQ** | Homepage, with FAQPage JSON-LD | Six answers built only from facts already stated on the site (service area, written proposal, HIC, `insuranceClaimsClarification`, collection count, financing disclosure). |
 
 ## Accessibility (verified locally with axe-core 4.11)
