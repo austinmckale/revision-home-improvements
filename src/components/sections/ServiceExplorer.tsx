@@ -14,7 +14,7 @@ export type ServiceExplorerItem = {
   projectSlug: string;
   projectTitle: string;
   location: string;
-  image: { src: string; alt: string; unoptimized: boolean };
+  image: { src: string; alt: string };
 };
 
 type PhotoSelection = { index: number; attempt: number };
@@ -143,11 +143,15 @@ export default function ServiceExplorer({ items }: { items: ServiceExplorerItem[
       <Container>
         <div className="grid gap-6 lg:grid-cols-[.95fr_1.05fr] lg:gap-x-14 lg:gap-y-5">
           <div className="order-1 min-w-0 lg:self-end">
-            <p className="eyebrow">Lehigh Valley &amp; Berks County</p>
-            <h1 className="heading-serif mt-5 text-[2.65rem] leading-[1.04] tracking-[-.03em] text-[var(--accent)] sm:text-6xl lg:text-[4.25rem]">
-              Remodeling,
-              <br />
-              made personal.
+            <h1>
+              <span className="eyebrow text-balance">
+                Remodeling &amp; restoration services · Lehigh Valley &amp; Berks County
+              </span>{" "}
+              <span className="heading-serif mt-5 block text-[2.65rem] leading-[1.04] tracking-[-.03em] text-[var(--accent)] sm:text-6xl lg:text-[4.25rem]">
+                Remodeling,{" "}
+                <br />
+                made personal.
+              </span>
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-[var(--muted)]">
               Remodeling and restoration, thoughtfully planned around the way you live. Where would you like to begin?

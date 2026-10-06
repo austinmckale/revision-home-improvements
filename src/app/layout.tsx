@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { DM_Sans, DM_Serif_Display } from "next/font/google";
+import { DM_Sans, DM_Serif_Display, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import EmergencyBar from "@/components/layout/EmergencyBar";
@@ -13,6 +13,8 @@ import { getLocalBusinessJsonLd } from "@/lib/structuredData";
 
 const sans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", display: "swap" });
 const serif = DM_Serif_Display({ subsets: ["latin"], weight: "400", variable: "--font-dm-serif", display: "swap" });
+// One preloaded weight keeps drafting annotations from reflowing after first paint.
+const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: "500", variable: "--font-plex-mono", display: "swap" });
 const defaultDescription =
   "Remodeling and damage repairs in Allentown, Bethlehem, Reading, the Lehigh Valley and Berks County. Explore photos and plan a written scope with RHI Pros.";
 
@@ -71,7 +73,7 @@ export default function RootLayout({
   const gtagId = gaId || googleAdsId;
 
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${sans.variable} ${serif.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${sans.variable} ${serif.variable} ${mono.variable}`}>
       <body className="antialiased">
         <a
           href="#main-content"
@@ -128,6 +130,9 @@ fbq('track', 'PageView');`}
           </Script>
         )}
         <TrackingEvents />
+        <div className="scroll-ruler" aria-hidden="true">
+          <span />
+        </div>
         <Header />
         <EmergencyBar />
         <main id="main-content" tabIndex={-1} className="pb-20 outline-none md:pb-0">

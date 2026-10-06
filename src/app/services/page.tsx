@@ -18,7 +18,7 @@ import { getPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = getPageMetadata({
   title: "Remodeling & Restoration Services",
   description:
-    "Explore kitchen, bathroom, basement and outdoor remodeling, plus fire and water damage restoration in the Lehigh Valley and Berks County. Explore photo collections and planning guidance.",
+    "Kitchen, bathroom, basement and patio remodeling, plus fire and water damage repairs, in the Lehigh Valley and Berks County. See photos and plan a written scope.",
   path: "/services",
 });
 

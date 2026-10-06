@@ -71,11 +71,13 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
         <Container>
           <div className="grid gap-6 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
             <div>
-              <p className="eyebrow">Spaces, finishes & details</p>
-              <h1 className="heading-serif mt-5 max-w-3xl text-[2.6rem] leading-[1.02] tracking-[-.035em] text-[var(--accent)] sm:text-6xl lg:text-7xl">
-                Spaces worth
-                <br />
-                coming home to<span className="text-[var(--brand)]">.</span>
+              <h1>
+                <span className="eyebrow">Remodeling project photos</span>{" "}
+                <span className="heading-serif mt-5 block max-w-3xl text-[2.6rem] leading-[1.02] tracking-[-.035em] text-[var(--accent)] sm:text-6xl lg:text-7xl">
+                  Spaces worth{" "}
+                  <br />
+                  coming home to<span className="text-[var(--brand)]">.</span>
+                </span>
               </h1>
             </div>
             <p className="max-w-md text-base leading-relaxed text-[var(--muted)] lg:pb-2">

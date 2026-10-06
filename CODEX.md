@@ -1,5 +1,18 @@
 # Codex Notes
 
+## Design System: "Drawn to Scope"
+
+The visual identity borrows from architectural drawing sets to echo the written scope behind every project. Details: `docs/audits/site-polish-2026-10-06.md`.
+
+- Colors: use `--brand` (`#b4411b`, AA on every light surface) for text, links and buttons. `--brand-bright` is for decorative accents on dark photography only, never text on light backgrounds.
+- Type: DM Serif Display (headings), DM Sans (body), IBM Plex Mono 500 via `.annotation` / `font-mono` for drafting labels. Keep annotations short and uppercase.
+- Drafting classes live in `@layer components` in `globals.css` so Tailwind utilities can override them: `.annotation`, `.sheet-tag`, `.crop-marks` (tune with `--crop-inset` / `--crop-color`), `.dimension-line` (use `components/ui/DimensionLine.tsx`), `.drafting-grid`, `.blueprint-grid`, `.paper-sheet`.
+- Sheet tags and figure numbers are decorative (`aria-hidden`). Figure captions must still describe only what is visible and link to the matching collection.
+- Headings with a display slogan should include a descriptive eyebrow inside the `h1` (`PageIntro eyebrowInHeading`) and keep a space before any `<br />`.
+- Scope Builder (`components/sections/ScopeBuilder.tsx`) uses each service's `whatIncluded`, `pricingFactors` and `qualityFactors`. Never add prices, durations or outcomes to it. The handoff to `QuoteForm` uses `sessionStorage` (`lib/scopeStarter.ts`), never the URL.
+- The service-area map (`components/sections/ServiceAreaMap.tsx`) positions places from real coordinates. Only add communities that appear in `locations.ts` priority areas.
+- Project preview images go through `next/image`; do not reintroduce `unoptimized`.
+
 ## Proven Pattern: Before/After Case Study Toggle
 
 - Keep `before` photos out of generic "Recent Work" galleries.

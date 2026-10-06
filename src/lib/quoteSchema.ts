@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+/** Timing choices shared by the quote form and the scope builder. */
+export const quoteTimelines = [
+  "As soon as possible",
+  "Within 1–3 months",
+  "Within 3–6 months",
+  "More than 6 months",
+  "Exploring options",
+] as const;
+
 const asText = z.preprocess((value) => (typeof value === "string" ? value : ""), z.string().trim());
 
 export const quoteSchema = z.object({

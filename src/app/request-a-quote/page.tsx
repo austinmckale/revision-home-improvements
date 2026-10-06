@@ -11,7 +11,7 @@ import { getPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = getPageMetadata({
   title: { absolute: "Request a Quote | RHI Pros | Lehigh Valley & Berks County" },
   description:
-    "Request a kitchen, bathroom, basement, or restoration quote in Allentown, Bethlehem, or the Lehigh Valley. Discuss scope, scheduling and next steps.",
+    "Request a kitchen, bathroom, basement or damage-repair quote in the Lehigh Valley, Reading or Berks County. Tell us about the project and get clear next steps.",
   path: "/request-a-quote",
 });
 
@@ -29,9 +29,11 @@ export default function RequestQuotePage() {
           <div className="grid gap-6 lg:gap-10 lg:grid-cols-[1.2fr_0.8fr]">
             {/* Headline + intro first */}
             <div className="order-1 lg:order-none">
-              <p className="eyebrow">A good place to start</p>
-              <h1 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                Tell us what you have in mind.
+              <h1>
+                <span className="eyebrow">Request a quote</span>{" "}
+                <span className="heading-serif mt-4 block text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
+                  Tell us what you have in mind.
+                </span>
               </h1>
               <p className="mt-4 max-w-2xl leading-relaxed text-[var(--muted)] sm:text-lg">
                 You do not need a full plan to start. Tell us about the project and we will help you figure out scope, a
@@ -46,6 +48,12 @@ export default function RequestQuotePage() {
                   className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--brand)] hover:underline lg:rounded-md lg:border lg:border-[var(--border)] lg:px-5 lg:py-3"
                 >
                   Browse Services
+                </Link>
+                <Link
+                  href="/#scope-builder"
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--accent)] underline-offset-4 hover:text-[var(--brand)] hover:underline"
+                >
+                  Not sure yet? Sketch your scope first →
                 </Link>
               </div>
             </div>

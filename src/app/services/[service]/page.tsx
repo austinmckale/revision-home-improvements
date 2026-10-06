@@ -522,9 +522,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
             {wholeHomeCrossLink ? (
               <FadeIn>
-                <aside
+                <div
                   className="surface-soft mt-10 rounded-xl border border-[var(--border)] p-5 text-sm leading-relaxed text-[var(--muted)]"
-                  aria-label="Related project planning"
                 >
                   <p>
                     <Link
@@ -544,7 +543,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                       </Link>
                     </p>
                   ) : null}
-                </aside>
+                </div>
               </FadeIn>
             ) : null}
 

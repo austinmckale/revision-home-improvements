@@ -120,6 +120,14 @@ export default function TrackingEvents() {
       const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
       emitWithParams("project_gallery_open", detail);
     };
+    const onScopeBuilderSend = (event: Event) => {
+      const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
+      emitWithParams("scope_builder_send", detail);
+    };
+    const onScopeBuilderPrint = (event: Event) => {
+      const detail = (event as CustomEvent<Record<string, unknown>>).detail || {};
+      emitWithParams("scope_builder_print", detail);
+    };
 
     document.addEventListener("click", onClick);
     window.addEventListener("rhi:generate_lead", onLead);
@@ -133,6 +141,8 @@ export default function TrackingEvents() {
     window.addEventListener("rhi:scroll_to_form", onScrollToForm);
     window.addEventListener("rhi:form_start", onFormStart);
     window.addEventListener("rhi:project_gallery_open", onProjectGalleryOpen);
+    window.addEventListener("rhi:scope_builder_send", onScopeBuilderSend);
+    window.addEventListener("rhi:scope_builder_print", onScopeBuilderPrint);
 
     return () => {
       document.removeEventListener("click", onClick);
@@ -147,6 +157,8 @@ export default function TrackingEvents() {
       window.removeEventListener("rhi:scroll_to_form", onScrollToForm);
       window.removeEventListener("rhi:form_start", onFormStart);
       window.removeEventListener("rhi:project_gallery_open", onProjectGalleryOpen);
+      window.removeEventListener("rhi:scope_builder_send", onScopeBuilderSend);
+      window.removeEventListener("rhi:scope_builder_print", onScopeBuilderPrint);
     };
   }, []);
 

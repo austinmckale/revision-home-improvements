@@ -6,6 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      // Form and webhook endpoints have no indexable content.
+      disallow: "/api/",
     },
     sitemap: `${siteConfig.domain}/sitemap.xml`,
     host: siteConfig.domain,

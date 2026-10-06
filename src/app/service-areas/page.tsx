@@ -4,6 +4,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
+import ServiceAreaMap from "@/components/sections/ServiceAreaMap";
 import { locations } from "@/content/locations";
 import { primaryServices } from "@/content/services";
 import { siteConfig } from "@/content/site";
@@ -53,7 +54,11 @@ export default function ServiceAreasPage() {
       />
 
       {/* ── Hero ── */}
-      <PageIntro eyebrow="Lehigh Valley & Berks County" title="Good work, close to home.">
+      <PageIntro
+        eyebrow="Service areas · Lehigh Valley & Berks County"
+        title="Good work, close to home."
+        eyebrowInHeading
+      >
         <p>
           Choose your area to explore local remodeling services, planning topics, and the details that matter for your
           home.
@@ -70,6 +75,13 @@ export default function ServiceAreasPage() {
       {/* ── Region cards ── */}
       <section className="py-12 sm:py-20">
         <Container>
+          <div className="paper-sheet mb-14 p-4 sm:p-8 lg:mb-20">
+            <div className="mb-3 flex items-center justify-between gap-4 px-2 pt-1">
+              <p className="annotation text-[0.62rem] text-[var(--muted)]">Service area · Berks ⟷ Lehigh Valley</p>
+              <p className="annotation hidden text-[0.62rem] text-[var(--muted)] sm:block">Select a city to explore</p>
+            </div>
+            <ServiceAreaMap />
+          </div>
           <div className="grid gap-10 lg:grid-cols-2">
             {/* Lehigh Valley Region */}
             <div>

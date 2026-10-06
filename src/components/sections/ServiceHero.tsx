@@ -29,7 +29,7 @@ export default function ServiceHero({
 }: ServiceHeroProps) {
   return (
     <section
-      className={`relative isolate flex ${image?.src ? "min-h-[min(700px,78svh)]" : ""} overflow-hidden bg-[#202823] py-12 text-white sm:py-16`}
+      className={`relative isolate flex ${image?.src ? "crop-marks min-h-[min(700px,78svh)] [--crop-inset:1rem]" : "blueprint-grid"} overflow-hidden bg-[#202823] py-12 text-white sm:py-16`}
     >
       {image?.src ? (
         <Image
@@ -76,7 +76,7 @@ export default function ServiceHero({
             </a>
           </div>
         </div>
-        <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/25 pt-4 text-[0.65rem] font-semibold uppercase tracking-[.14em] text-white/75 sm:mt-12 sm:text-xs">
+        <div className="annotation mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/25 pt-4 text-[0.62rem] text-white/80 sm:mt-12 sm:text-[0.68rem]">
           <span>PA HIC #PA185945</span>
           <span>Discuss scope and scheduling</span>
           <span>Written scope before work begins</span>

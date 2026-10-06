@@ -31,7 +31,10 @@ export const projectImagePreviews: Record<string, string> = {
   "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg": "/images/projects/bethlehem-pool-patio/before/pool-patio-before-preview.webp"
 };
 
+/**
+ * Previews still pass through next/image so phones receive a responsive width
+ * instead of the full 1600px preview file.
+ */
 export function getProjectImageProps(image: { src: string; alt: string }) {
-  const src = projectImagePreviews[image.src] ?? image.src;
-  return { src, unoptimized: src.endsWith("-preview.webp") };
+  return { src: projectImagePreviews[image.src] ?? image.src };
 }

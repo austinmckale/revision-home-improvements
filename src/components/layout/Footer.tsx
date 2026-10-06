@@ -25,12 +25,44 @@ const externalProfileLinks = [
   },
 ] as const;
 
+const serviceLinks = [
+  { href: "/services/kitchen-remodeling", label: "Kitchen remodeling" },
+  { href: "/services/bathroom-remodeling", label: "Bathroom remodeling" },
+  { href: "/services/basement-finishing", label: "Basement finishing" },
+  { href: "/services/paver-installation", label: "Patios & outdoor living" },
+  { href: "/fire-water-damage-restoration", label: "Fire & water damage repair" },
+  { href: "/services", label: "All services" },
+];
+
+const companyLinks = [
+  { href: "/projects", label: "Project photos" },
+  { href: "/about", label: "About RHI Pros" },
+  { href: "/our-process", label: "Our process" },
+  { href: "/warranty", label: "Workmanship warranty" },
+  { href: "/licenses-and-insurance", label: "Registration & insurance" },
+  { href: "/financing", label: "Financing" },
+];
+
+const localLinks = [
+  { href: "/lehigh-valley-pa", label: "Lehigh Valley" },
+  { href: "/allentown-pa", label: "Allentown" },
+  { href: "/bethlehem-pa", label: "Bethlehem" },
+  { href: "/reading-pa", label: "Reading" },
+  { href: "/wyomissing-pa", label: "Wyomissing" },
+  { href: "/berks-county-pa", label: "Berks County" },
+];
+
+const columnHeadingClass = "text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/65";
+const titleCellClass = "border-white/20 px-4 py-3.5";
+const titleLabelClass = "annotation text-[0.58rem] text-white/50";
+const columnLinkClass = "inline-flex min-h-10 items-center transition-colors hover:text-white";
+
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#202823] text-white/70">
       <div className="h-1 w-full bg-[var(--brand)]" />
       <Container className="py-14 sm:py-18 lg:py-24">
-        <div className="grid gap-12 border-b border-white/12 pb-12 md:grid-cols-2 lg:grid-cols-[1.25fr_.7fr_.7fr_1fr] lg:gap-10 lg:pb-16">
+        <div className="grid gap-12 border-b border-white/12 pb-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_.8fr_.8fr_1fr] lg:gap-10 lg:pb-16">
           <div className="max-w-sm">
             <Link href="/" className="group inline-block">
               <span className="heading-serif text-3xl tracking-wide text-white transition-colors group-hover:text-white/80">
@@ -39,56 +71,117 @@ export default function Footer() {
             </Link>
             <p className="mt-3 text-xs font-semibold uppercase tracking-[.15em] text-white/65">Reimagine · Build · Enjoy</p>
             <p className="mt-6 text-sm leading-relaxed text-white/60">
-              Remodeling and restoration across the Lehigh Valley and Berks County, with clear scopes and steady communication from the first conversation to closeout.
+              Remodeling and fire and water damage repairs across the Lehigh Valley and Berks County, with a written
+              scope before work begins.
             </p>
           </div>
 
-          <div>
-            <h3 className="text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/65">Expertise</h3>
-            <ul className="mt-4 space-y-1 text-sm font-medium">
-              <li><Link href="/services" className="inline-flex min-h-11 items-center transition-colors hover:text-white">All services</Link></li>
-              <li><Link href="/projects" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Selected projects</Link></li>
-              <li><Link href="/fire-water-damage-restoration" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Emergency restoration</Link></li>
+          <nav aria-labelledby="footer-services-heading">
+            <h2 id="footer-services-heading" className={columnHeadingClass}>
+              Services
+            </h2>
+            <ul className="mt-4 text-sm font-medium">
+              {serviceLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={columnLinkClass}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
+
+          <nav aria-labelledby="footer-company-heading">
+            <h2 id="footer-company-heading" className={columnHeadingClass}>
+              Company
+            </h2>
+            <ul className="mt-4 text-sm font-medium">
+              {companyLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className={columnLinkClass}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           <div>
-            <h3 className="text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/65">Company</h3>
-            <ul className="mt-5 space-y-3 text-sm font-medium">
-              <li><Link href="/about" className="inline-flex min-h-11 items-center transition-colors hover:text-white">About RHI Pros</Link></li>
-              <li><Link href="/our-process" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Our process</Link></li>
-              <li><Link href="/warranty" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Workmanship warranty</Link></li>
-              <li><Link href="/service-areas" className="inline-flex min-h-11 items-center transition-colors hover:text-white">Service areas</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-[0.65rem] font-bold uppercase tracking-[.2em] text-white/65">Talk with our team</p>
-            <a href={siteConfig.phoneHref} className="heading-serif mt-4 block text-2xl text-white transition-colors hover:text-white/80">{siteConfig.phoneDisplay}</a>
-            <a href={`mailto:${siteConfig.primaryEmail}`} className="mt-2 inline-block text-sm transition-colors hover:text-white">{siteConfig.primaryEmail}</a>
-            <p className="mt-4 text-xs text-white/65">{siteConfig.address.street}</p>
-            <Link href="/request-a-quote" className="mt-6 inline-flex min-h-11 items-center justify-center bg-[var(--brand)] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]">Request a quote <span className="ml-3" aria-hidden="true">↗</span></Link>
+            <h2 className={columnHeadingClass}>Talk with our team</h2>
+            <a
+              href={siteConfig.phoneHref}
+              className="heading-serif mt-4 inline-flex min-h-11 items-center text-2xl text-white transition-colors hover:text-white/80"
+            >
+              {siteConfig.phoneDisplay}
+            </a>
+            <a
+              href={`mailto:${siteConfig.primaryEmail}`}
+              className="flex min-h-8 items-center text-sm transition-colors hover:text-white"
+            >
+              {siteConfig.primaryEmail}
+            </a>
+            <p className="mt-3 text-xs leading-relaxed text-white/65">
+              Serving the Lehigh Valley and Berks County, PA
+            </p>
+            <Link
+              href="/request-a-quote"
+              className="mt-6 inline-flex min-h-11 items-center justify-center bg-[var(--brand)] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
+            >
+              Request a quote{" "}
+              <span className="ml-3" aria-hidden="true">
+                ↗
+              </span>
+            </Link>
           </div>
         </div>
         <nav aria-label="Local service areas" className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm">
           <span className="mr-2 text-xs font-semibold uppercase tracking-widest text-white/65">Close to home</span>
-          <Link href="/lehigh-valley-pa" className="inline-flex min-h-11 items-center hover:text-white">Lehigh Valley</Link>
-          <Link href="/allentown-pa" className="inline-flex min-h-11 items-center hover:text-white">Allentown</Link>
-          <Link href="/bethlehem-pa" className="inline-flex min-h-11 items-center hover:text-white">Bethlehem</Link>
-          <Link href="/reading-pa" className="inline-flex min-h-11 items-center hover:text-white">Reading</Link>
-          <Link href="/berks-county-pa" className="inline-flex min-h-11 items-center hover:text-white">Berks County</Link>
+          {localLinks.map((link) => (
+            <Link key={link.href} href={link.href} className="inline-flex min-h-11 items-center hover:text-white">
+              {link.label}
+            </Link>
+          ))}
         </nav>
       </Container>
-      <div className="border-t border-white/10">
-        <Container className="flex flex-col-reverse items-center justify-between gap-5 py-6 text-xs text-white/65 md:flex-row">
-          <p>
-            &copy; {new Date().getFullYear()} {siteConfig.name}.{" "}
-            <Link href="/licenses-and-insurance" className="hover:text-white transition-colors">
+      <Container className="pb-10">
+        {/* Drafting title block: the firm details found in the corner of every drawing set. */}
+        <div className="grid grid-cols-2 border border-white/20 text-xs text-white/70 md:grid-cols-[1.2fr_1fr_1fr_.8fr] lg:grid-cols-[1.3fr_1fr_1.1fr_1fr_.6fr]">
+          <div className={`${titleCellClass} col-span-2 md:col-span-1`}>
+            <p className={titleLabelClass}>Firm</p>
+            <p className="mt-1.5 font-semibold text-white">
+              {siteConfig.name} · {siteConfig.legalName}
+            </p>
+          </div>
+          <div className={`${titleCellClass} border-t md:border-l md:border-t-0`}>
+            <p className={titleLabelClass}>Registration</p>
+            <Link
+              href="/licenses-and-insurance"
+              className="mt-1 inline-flex min-h-6 items-center font-semibold text-white transition-colors hover:text-white/80"
+            >
               {siteConfig.hicLabel}
             </Link>
-            .
-          </p>
-          <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 font-medium">
+          </div>
+          <div className={`${titleCellClass} border-l border-t md:border-t-0`}>
+            <p className={titleLabelClass}>Service area</p>
+            <p className="mt-1.5 text-white">Lehigh Valley &amp; Berks County, PA</p>
+          </div>
+          <div className={`${titleCellClass} border-t md:border-l md:border-t-0`}>
+            <p className={titleLabelClass}>Contact</p>
+            <a
+              href={siteConfig.phoneHref}
+              className="mt-1 inline-flex min-h-6 items-center font-semibold text-white transition-colors hover:text-white/80"
+            >
+              {siteConfig.phoneDisplay}
+            </a>
+          </div>
+          <div className={`${titleCellClass} border-l border-t md:col-span-4 md:border-l-0 lg:col-span-1 lg:border-l lg:border-t-0`}>
+            <p className={titleLabelClass}>Rev.</p>
+            <p className="mt-1.5 text-white">&copy; {new Date().getFullYear()}</p>
+          </div>
+        </div>
+        <div className="mt-5 flex flex-col-reverse items-center justify-between gap-3 text-xs text-white/65 md:flex-row">
+          <p className="annotation text-[0.6rem] text-white/50">Drawn to scope in Pennsylvania</p>
+          <div className="flex flex-wrap justify-center gap-x-5 font-medium">
             {externalProfileLinks.map((link) => (
               <a
                 key={link.label}
@@ -96,15 +189,17 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.ariaLabel}
-                className="hover:text-white transition-colors"
+                className="inline-flex min-h-8 items-center transition-colors hover:text-white"
               >
                 {link.label}
               </a>
             ))}
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="inline-flex min-h-8 items-center transition-colors hover:text-white">
+              Privacy Policy
+            </Link>
           </div>
-        </Container>
-      </div>
+        </div>
+      </Container>
     </footer>
   );
 }

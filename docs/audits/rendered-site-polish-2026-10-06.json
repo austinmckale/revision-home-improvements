@@ -1,0 +1,848 @@
+{
+  "routes": 120,
+  "projectRoutes": 29,
+  "internalTargets": 120,
+  "errors": [],
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "RHI Pros | Lehigh Valley Remodeling & Restoration",
+      "canonical": "https://www.rhipros.com",
+      "internalLinks": 37
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "title": "Remodeling & Restoration Services | RHI Pros",
+      "canonical": "https://www.rhipros.com/services",
+      "internalLinks": 30
+    },
+    {
+      "path": "/services/whole-home-remodeling",
+      "status": 200,
+      "title": "Whole-Home Remodeling in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/whole-home-remodeling",
+      "internalLinks": 28
+    },
+    {
+      "path": "/service-areas",
+      "status": 200,
+      "title": "Service Areas | Allentown, Bethlehem, Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/service-areas",
+      "internalLinks": 27
+    },
+    {
+      "path": "/berks-county-pa/kitchen-cabinet-installation",
+      "status": 200,
+      "title": "Kitchen Cabinet Replacement in Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/kitchen-cabinet-installation",
+      "internalLinks": 25
+    },
+    {
+      "path": "/request-a-quote",
+      "status": 200,
+      "title": "Request a Quote | RHI Pros | Lehigh Valley & Berks County",
+      "canonical": "https://www.rhipros.com/request-a-quote",
+      "internalLinks": 22
+    },
+    {
+      "path": "/projects",
+      "status": 200,
+      "title": "Remodeling Photo Collections | Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects",
+      "internalLinks": 49
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "title": "About Us | Lehigh Valley & Berks County Contractor | RHI Pros",
+      "canonical": "https://www.rhipros.com/about",
+      "internalLinks": 22
+    },
+    {
+      "path": "/our-process",
+      "status": 200,
+      "title": "Our Remodeling Process | RHI Pros",
+      "canonical": "https://www.rhipros.com/our-process",
+      "internalLinks": 22
+    },
+    {
+      "path": "/warranty",
+      "status": 200,
+      "title": "Workmanship Warranty | RHI Pros",
+      "canonical": "https://www.rhipros.com/warranty",
+      "internalLinks": 22
+    },
+    {
+      "path": "/licenses-and-insurance",
+      "status": 200,
+      "title": "PA HIC Registration & Insurance Details | RHI Pros",
+      "canonical": "https://www.rhipros.com/licenses-and-insurance",
+      "internalLinks": 22
+    },
+    {
+      "path": "/financing",
+      "status": 200,
+      "title": "Project Financing | Allentown, Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/financing",
+      "internalLinks": 23
+    },
+    {
+      "path": "/financing-terms",
+      "status": 200,
+      "title": "Financing Terms & Disclosures | RHI Pros",
+      "canonical": "https://www.rhipros.com/financing-terms",
+      "internalLinks": 22
+    },
+    {
+      "path": "/insurance-claims",
+      "status": 200,
+      "title": "Insurance Claim Remodeling Support | Reading PA & Lehigh Valley | RHI Pros",
+      "canonical": "https://www.rhipros.com/insurance-claims",
+      "internalLinks": 28
+    },
+    {
+      "path": "/fire-water-damage-restoration",
+      "status": 200,
+      "title": "Fire & Water Damage Restoration | Reading PA & Lehigh Valley | RHI Pros",
+      "canonical": "https://www.rhipros.com/fire-water-damage-restoration",
+      "internalLinks": 26
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy Policy | RHI Pros",
+      "canonical": "https://www.rhipros.com/privacy",
+      "internalLinks": 22
+    },
+    {
+      "path": "/services/kitchen-remodeling",
+      "status": 200,
+      "title": "Kitchen Remodeling | Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/kitchen-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/services/bathroom-remodeling",
+      "status": 200,
+      "title": "Bathroom Remodeling | Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/bathroom-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/services/basement-finishing",
+      "status": 200,
+      "title": "Basement Finishing | Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/basement-finishing",
+      "internalLinks": 29
+    },
+    {
+      "path": "/services/drywall-installation-repair",
+      "status": 200,
+      "title": "Drywall Installation & Repair | Lehigh Valley | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/drywall-installation-repair",
+      "internalLinks": 27
+    },
+    {
+      "path": "/services/flooring-installation",
+      "status": 200,
+      "title": "Flooring Installation | Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/flooring-installation",
+      "internalLinks": 28
+    },
+    {
+      "path": "/services/paver-installation",
+      "status": 200,
+      "title": "Paver Patio Installation | Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/paver-installation",
+      "internalLinks": 29
+    },
+    {
+      "path": "/services/exterior-remodeling",
+      "status": 200,
+      "title": "Exterior Remodeling | Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/exterior-remodeling",
+      "internalLinks": 27
+    },
+    {
+      "path": "/services/fire-damage-restoration",
+      "status": 200,
+      "title": "Fire Damage Restoration | Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/fire-damage-restoration",
+      "internalLinks": 26
+    },
+    {
+      "path": "/services/water-damage-restoration",
+      "status": 200,
+      "title": "Water Damage Restoration | Lehigh Valley & Berks County | RHI Pros",
+      "canonical": "https://www.rhipros.com/services/water-damage-restoration",
+      "internalLinks": 26
+    },
+    {
+      "path": "/reading-pa",
+      "status": 200,
+      "title": "Remodeling & Restoration in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa",
+      "internalLinks": 31
+    },
+    {
+      "path": "/wyomissing-pa",
+      "status": 200,
+      "title": "Remodeling & Restoration in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa",
+      "internalLinks": 31
+    },
+    {
+      "path": "/berks-county-pa",
+      "status": 200,
+      "title": "Remodeling & Restoration in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa",
+      "internalLinks": 31
+    },
+    {
+      "path": "/allentown-pa",
+      "status": 200,
+      "title": "Remodeling & Restoration in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa",
+      "internalLinks": 31
+    },
+    {
+      "path": "/bethlehem-pa",
+      "status": 200,
+      "title": "Remodeling & Restoration in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa",
+      "internalLinks": 31
+    },
+    {
+      "path": "/lehigh-valley-pa",
+      "status": 200,
+      "title": "Remodeling & Restoration in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa",
+      "internalLinks": 31
+    },
+    {
+      "path": "/projects/allentown-kitchen-layout-upgrade",
+      "status": 200,
+      "title": "Island seating & contrasting cabinets | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/allentown-kitchen-layout-upgrade",
+      "internalLinks": 28
+    },
+    {
+      "path": "/projects/bethlehem-bathroom-refresh",
+      "status": 200,
+      "title": "Dark fixtures & a sliding wood door | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/bethlehem-bathroom-refresh",
+      "internalLinks": 26
+    },
+    {
+      "path": "/projects/allentown-commercial-bathroom-renovation",
+      "status": 200,
+      "title": "Commercial restroom & corridor finishes | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/allentown-commercial-bathroom-renovation",
+      "internalLinks": 26
+    },
+    {
+      "path": "/projects/allentown-exterior-log-home-refresh",
+      "status": 200,
+      "title": "Log-style siding & contrasting trim | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/allentown-exterior-log-home-refresh",
+      "internalLinks": 27
+    },
+    {
+      "path": "/projects/bethlehem-exterior-staircase-build",
+      "status": 200,
+      "title": "Exterior stairs & elevated landing | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/bethlehem-exterior-staircase-build",
+      "internalLinks": 27
+    },
+    {
+      "path": "/projects/reading-commercial-bar-window-upgrade",
+      "status": 200,
+      "title": "Dark window trim & natural light | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/reading-commercial-bar-window-upgrade",
+      "internalLinks": 27
+    },
+    {
+      "path": "/projects/lehigh-valley-full-exterior-refresh",
+      "status": 200,
+      "title": "Dormers, shutters & a welcoming porch | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/lehigh-valley-full-exterior-refresh",
+      "internalLinks": 27
+    },
+    {
+      "path": "/projects/lehigh-valley-dormer-shutter-detail-refresh",
+      "status": 200,
+      "title": "Dormer & shutter details | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/lehigh-valley-dormer-shutter-detail-refresh",
+      "internalLinks": 27
+    },
+    {
+      "path": "/projects/bethlehem-interior-flooring-refresh",
+      "status": 200,
+      "title": "Warm floors & connected rooms | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/bethlehem-interior-flooring-refresh",
+      "internalLinks": 24
+    },
+    {
+      "path": "/projects/berks-county-ranch-exterior-refresh",
+      "status": 200,
+      "title": "Light siding & dark exterior accents | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/berks-county-ranch-exterior-refresh",
+      "internalLinks": 27
+    },
+    {
+      "path": "/projects/lehigh-valley-basement-finish-and-detail",
+      "status": 200,
+      "title": "A media wall for movie nights | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/lehigh-valley-basement-finish-and-detail",
+      "internalLinks": 24
+    },
+    {
+      "path": "/projects/lehigh-water-damage-rebuild",
+      "status": 200,
+      "title": "Water-damage reconstruction planning | Planning Reference | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/lehigh-water-damage-rebuild",
+      "internalLinks": 23
+    },
+    {
+      "path": "/projects/allentown-flooring-replacement-upgrade",
+      "status": 200,
+      "title": "Light floors & a fireplace focal point | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/allentown-flooring-replacement-upgrade",
+      "internalLinks": 24
+    },
+    {
+      "path": "/projects/bethlehem-drywall-and-finish-repair",
+      "status": 200,
+      "title": "Light walls & simple interior finishes | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/bethlehem-drywall-and-finish-repair",
+      "internalLinks": 25
+    },
+    {
+      "path": "/projects/reading-paver-patio-buildout",
+      "status": 200,
+      "title": "Patio living beneath a gable roof | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/reading-paver-patio-buildout",
+      "internalLinks": 26
+    },
+    {
+      "path": "/projects/bethlehem-pool-patio-renovation",
+      "status": 200,
+      "title": "Curved pool edges & a textured surround | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/bethlehem-pool-patio-renovation",
+      "internalLinks": 26
+    },
+    {
+      "path": "/projects/allentown-fire-damage-interior-rebuild",
+      "status": 200,
+      "title": "A light surround & dark hearth | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/allentown-fire-damage-interior-rebuild",
+      "internalLinks": 25
+    },
+    {
+      "path": "/projects/ryan-bedroom-interior-refresh",
+      "status": 200,
+      "title": "Dark walls & warm bedroom floors | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/ryan-bedroom-interior-refresh",
+      "internalLinks": 25
+    },
+    {
+      "path": "/projects/blue-kitchen-cabinet-counters",
+      "status": 200,
+      "title": "Blue cabinets & countertop details | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/blue-kitchen-cabinet-counters",
+      "internalLinks": 28
+    },
+    {
+      "path": "/projects/ryan-kitchen-remodel",
+      "status": 200,
+      "title": "White cabinets & dark countertops | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/ryan-kitchen-remodel",
+      "internalLinks": 28
+    },
+    {
+      "path": "/projects/ryan-bathroom-remodel",
+      "status": 200,
+      "title": "A dark vanity & warm floor finishes | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/ryan-bathroom-remodel",
+      "internalLinks": 26
+    },
+    {
+      "path": "/projects/hamburg-laundry-bathroom-remodel",
+      "status": 200,
+      "title": "Laundry & half-bath, together | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/hamburg-laundry-bathroom-remodel",
+      "internalLinks": 26
+    },
+    {
+      "path": "/projects/lehigh-valley-fire-damage-documentation",
+      "status": 200,
+      "title": "Open framing & interior conditions | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/lehigh-valley-fire-damage-documentation",
+      "internalLinks": 25
+    },
+    {
+      "path": "/projects/beige-bathroom-before-after",
+      "status": 200,
+      "title": "Bathroom comparison boards | Planning Reference | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/beige-bathroom-before-after",
+      "internalLinks": 26
+    },
+    {
+      "path": "/projects/white-cabinet-open-plan-kitchen",
+      "status": 200,
+      "title": "White cabinetry & open-plan living | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/white-cabinet-open-plan-kitchen",
+      "internalLinks": 28
+    },
+    {
+      "path": "/projects/pink-tile-tub-reference",
+      "status": 200,
+      "title": "Pink tile & a jetted tub | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/pink-tile-tub-reference",
+      "internalLinks": 26
+    },
+    {
+      "path": "/projects/dark-partition-commercial-restroom",
+      "status": 200,
+      "title": "Dark partitions & restroom tile | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/dark-partition-commercial-restroom",
+      "internalLinks": 26
+    },
+    {
+      "path": "/projects/boarded-dormer-condition-photos",
+      "status": 200,
+      "title": "Boarded dormers & exposed walls | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/boarded-dormer-condition-photos",
+      "internalLinks": 25
+    },
+    {
+      "path": "/projects/winter-exterior-damage-photos",
+      "status": 200,
+      "title": "Winter exterior conditions | Photo Collection | RHI Pros",
+      "canonical": "https://www.rhipros.com/projects/winter-exterior-damage-photos",
+      "internalLinks": 25
+    },
+    {
+      "path": "/reading-pa/kitchen-remodeling",
+      "status": 200,
+      "title": "Kitchen Remodeling in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/kitchen-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/reading-pa/bathroom-remodeling",
+      "status": 200,
+      "title": "Bathroom Remodeling in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/bathroom-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/reading-pa/basement-finishing",
+      "status": 200,
+      "title": "Basement Finishing in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/basement-finishing",
+      "internalLinks": 29
+    },
+    {
+      "path": "/reading-pa/drywall-installation-repair",
+      "status": 200,
+      "title": "Drywall Installation and Repair in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/drywall-installation-repair",
+      "internalLinks": 29
+    },
+    {
+      "path": "/reading-pa/flooring-installation",
+      "status": 200,
+      "title": "Flooring Installation in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/flooring-installation",
+      "internalLinks": 30
+    },
+    {
+      "path": "/reading-pa/paver-installation",
+      "status": 200,
+      "title": "Paver Patio Installation in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/paver-installation",
+      "internalLinks": 29
+    },
+    {
+      "path": "/reading-pa/exterior-remodeling",
+      "status": 200,
+      "title": "Exterior Remodeling in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/exterior-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/reading-pa/fire-damage-restoration",
+      "status": 200,
+      "title": "Fire Damage Restoration in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/fire-damage-restoration",
+      "internalLinks": 32
+    },
+    {
+      "path": "/reading-pa/water-damage-restoration",
+      "status": 200,
+      "title": "Water Damage Restoration in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/water-damage-restoration",
+      "internalLinks": 31
+    },
+    {
+      "path": "/reading-pa/insurance-claims",
+      "status": 200,
+      "title": "Insurance Claims Assistance in Reading, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/reading-pa/insurance-claims",
+      "internalLinks": 29
+    },
+    {
+      "path": "/wyomissing-pa/kitchen-remodeling",
+      "status": 200,
+      "title": "Kitchen Remodeling in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/kitchen-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/wyomissing-pa/bathroom-remodeling",
+      "status": 200,
+      "title": "Bathroom Remodeling in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/bathroom-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/wyomissing-pa/basement-finishing",
+      "status": 200,
+      "title": "Basement Finishing in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/basement-finishing",
+      "internalLinks": 29
+    },
+    {
+      "path": "/wyomissing-pa/drywall-installation-repair",
+      "status": 200,
+      "title": "Drywall Installation and Repair in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/drywall-installation-repair",
+      "internalLinks": 29
+    },
+    {
+      "path": "/wyomissing-pa/flooring-installation",
+      "status": 200,
+      "title": "Flooring Installation in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/flooring-installation",
+      "internalLinks": 30
+    },
+    {
+      "path": "/wyomissing-pa/paver-installation",
+      "status": 200,
+      "title": "Paver Installation in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/paver-installation",
+      "internalLinks": 29
+    },
+    {
+      "path": "/wyomissing-pa/exterior-remodeling",
+      "status": 200,
+      "title": "Exterior Remodeling in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/exterior-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/wyomissing-pa/fire-damage-restoration",
+      "status": 200,
+      "title": "Fire Damage Restoration in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/fire-damage-restoration",
+      "internalLinks": 29
+    },
+    {
+      "path": "/wyomissing-pa/water-damage-restoration",
+      "status": 200,
+      "title": "Water Damage Restoration in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/water-damage-restoration",
+      "internalLinks": 30
+    },
+    {
+      "path": "/wyomissing-pa/insurance-claims",
+      "status": 200,
+      "title": "Insurance Claims Assistance in Wyomissing, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/wyomissing-pa/insurance-claims",
+      "internalLinks": 29
+    },
+    {
+      "path": "/berks-county-pa/kitchen-remodeling",
+      "status": 200,
+      "title": "Kitchen Remodeling in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/kitchen-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/berks-county-pa/bathroom-remodeling",
+      "status": 200,
+      "title": "Bathroom Remodeling in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/bathroom-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/berks-county-pa/basement-finishing",
+      "status": 200,
+      "title": "Basement Finishing in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/basement-finishing",
+      "internalLinks": 29
+    },
+    {
+      "path": "/berks-county-pa/drywall-installation-repair",
+      "status": 200,
+      "title": "Drywall Installation and Repair in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/drywall-installation-repair",
+      "internalLinks": 29
+    },
+    {
+      "path": "/berks-county-pa/flooring-installation",
+      "status": 200,
+      "title": "Flooring Installation in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/flooring-installation",
+      "internalLinks": 30
+    },
+    {
+      "path": "/berks-county-pa/paver-installation",
+      "status": 200,
+      "title": "Paver Installation in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/paver-installation",
+      "internalLinks": 29
+    },
+    {
+      "path": "/berks-county-pa/exterior-remodeling",
+      "status": 200,
+      "title": "Exterior Remodeling in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/exterior-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/berks-county-pa/fire-damage-restoration",
+      "status": 200,
+      "title": "Fire Damage Restoration in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/fire-damage-restoration",
+      "internalLinks": 29
+    },
+    {
+      "path": "/berks-county-pa/water-damage-restoration",
+      "status": 200,
+      "title": "Water Damage Restoration in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/water-damage-restoration",
+      "internalLinks": 30
+    },
+    {
+      "path": "/berks-county-pa/insurance-claims",
+      "status": 200,
+      "title": "Insurance Claims Assistance in Berks County, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/berks-county-pa/insurance-claims",
+      "internalLinks": 29
+    },
+    {
+      "path": "/allentown-pa/kitchen-remodeling",
+      "status": 200,
+      "title": "Kitchen Remodeling in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/kitchen-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/allentown-pa/bathroom-remodeling",
+      "status": 200,
+      "title": "Bathroom Remodeling in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/bathroom-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/allentown-pa/basement-finishing",
+      "status": 200,
+      "title": "Basement Finishing in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/basement-finishing",
+      "internalLinks": 29
+    },
+    {
+      "path": "/allentown-pa/drywall-installation-repair",
+      "status": 200,
+      "title": "Drywall Installation and Repair in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/drywall-installation-repair",
+      "internalLinks": 29
+    },
+    {
+      "path": "/allentown-pa/flooring-installation",
+      "status": 200,
+      "title": "Flooring Installation in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/flooring-installation",
+      "internalLinks": 30
+    },
+    {
+      "path": "/allentown-pa/paver-installation",
+      "status": 200,
+      "title": "Paver Patio Installation in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/paver-installation",
+      "internalLinks": 29
+    },
+    {
+      "path": "/allentown-pa/exterior-remodeling",
+      "status": 200,
+      "title": "Exterior Remodeling in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/exterior-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/allentown-pa/fire-damage-restoration",
+      "status": 200,
+      "title": "Fire Damage Restoration in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/fire-damage-restoration",
+      "internalLinks": 30
+    },
+    {
+      "path": "/allentown-pa/water-damage-restoration",
+      "status": 200,
+      "title": "Water Damage Restoration in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/water-damage-restoration",
+      "internalLinks": 31
+    },
+    {
+      "path": "/allentown-pa/insurance-claims",
+      "status": 200,
+      "title": "Insurance Claims Assistance in Allentown, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/allentown-pa/insurance-claims",
+      "internalLinks": 29
+    },
+    {
+      "path": "/bethlehem-pa/kitchen-remodeling",
+      "status": 200,
+      "title": "Kitchen Remodeling in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/kitchen-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/bethlehem-pa/bathroom-remodeling",
+      "status": 200,
+      "title": "Bathroom Remodeling in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/bathroom-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/bethlehem-pa/basement-finishing",
+      "status": 200,
+      "title": "Basement Finishing in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/basement-finishing",
+      "internalLinks": 29
+    },
+    {
+      "path": "/bethlehem-pa/drywall-installation-repair",
+      "status": 200,
+      "title": "Drywall Installation and Repair in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/drywall-installation-repair",
+      "internalLinks": 29
+    },
+    {
+      "path": "/bethlehem-pa/flooring-installation",
+      "status": 200,
+      "title": "Flooring Installation in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/flooring-installation",
+      "internalLinks": 30
+    },
+    {
+      "path": "/bethlehem-pa/paver-installation",
+      "status": 200,
+      "title": "Paver Patio Installation in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/paver-installation",
+      "internalLinks": 29
+    },
+    {
+      "path": "/bethlehem-pa/exterior-remodeling",
+      "status": 200,
+      "title": "Exterior Remodeling in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/exterior-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/bethlehem-pa/fire-damage-restoration",
+      "status": 200,
+      "title": "Fire Damage Restoration in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/fire-damage-restoration",
+      "internalLinks": 30
+    },
+    {
+      "path": "/bethlehem-pa/water-damage-restoration",
+      "status": 200,
+      "title": "Water Damage Restoration in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/water-damage-restoration",
+      "internalLinks": 31
+    },
+    {
+      "path": "/bethlehem-pa/insurance-claims",
+      "status": 200,
+      "title": "Insurance Claims Assistance in Bethlehem, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/bethlehem-pa/insurance-claims",
+      "internalLinks": 29
+    },
+    {
+      "path": "/lehigh-valley-pa/kitchen-remodeling",
+      "status": 200,
+      "title": "Kitchen Remodeling in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/kitchen-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/lehigh-valley-pa/bathroom-remodeling",
+      "status": 200,
+      "title": "Bathroom Remodeling in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/bathroom-remodeling",
+      "internalLinks": 29
+    },
+    {
+      "path": "/lehigh-valley-pa/basement-finishing",
+      "status": 200,
+      "title": "Basement Finishing in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/basement-finishing",
+      "internalLinks": 29
+    },
+    {
+      "path": "/lehigh-valley-pa/drywall-installation-repair",
+      "status": 200,
+      "title": "Drywall Installation and Repair in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/drywall-installation-repair",
+      "internalLinks": 29
+    },
+    {
+      "path": "/lehigh-valley-pa/flooring-installation",
+      "status": 200,
+      "title": "Flooring Installation in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/flooring-installation",
+      "internalLinks": 30
+    },
+    {
+      "path": "/lehigh-valley-pa/paver-installation",
+      "status": 200,
+      "title": "Paver Patio Installation in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/paver-installation",
+      "internalLinks": 30
+    },
+    {
+      "path": "/lehigh-valley-pa/exterior-remodeling",
+      "status": 200,
+      "title": "Exterior Remodeling in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/exterior-remodeling",
+      "internalLinks": 30
+    },
+    {
+      "path": "/lehigh-valley-pa/fire-damage-restoration",
+      "status": 200,
+      "title": "Fire Damage Restoration in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/fire-damage-restoration",
+      "internalLinks": 29
+    },
+    {
+      "path": "/lehigh-valley-pa/water-damage-restoration",
+      "status": 200,
+      "title": "Water Damage Restoration in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/water-damage-restoration",
+      "internalLinks": 30
+    },
+    {
+      "path": "/lehigh-valley-pa/insurance-claims",
+      "status": 200,
+      "title": "Insurance Claims Assistance in Lehigh Valley, PA | RHI Pros",
+      "canonical": "https://www.rhipros.com/lehigh-valley-pa/insurance-claims",
+      "internalLinks": 29
+    }
+  ]
+}

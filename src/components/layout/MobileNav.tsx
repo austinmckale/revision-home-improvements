@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, type CSSProperties } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { siteConfig } from "@/content/site";
 
 import Portal from "@/components/ui/Portal";
@@ -20,19 +19,48 @@ const navLinks = [
   { href: "/service-areas", label: "Service Areas" },
 ];
 
+const serviceShortcuts = [
+  { href: "/services/kitchen-remodeling", label: "Kitchens" },
+  { href: "/services/bathroom-remodeling", label: "Bathrooms" },
+  { href: "/services/basement-finishing", label: "Basements" },
+  { href: "/services/paver-installation", label: "Patios" },
+  { href: "/fire-water-damage-restoration", label: "Fire & water" },
+];
+
+/** Matches the panel's CSS exit animation in globals.css. */
+const EXIT_DURATION_MS = 260;
+
 interface MobileNavProps {
   isTransparent?: boolean;
 }
 
 export default function MobileNav({ isTransparent = false }: MobileNavProps) {
   const [open, setOpen] = useState(false);
+  const [closing, setClosing] = useState(false);
   const pathname = usePathname();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const reduceMotion = useReducedMotion();
 
-  useModalFocus(open, panelRef, closeButtonRef, () => setOpen(false), triggerRef);
+  const requestClose = useCallback(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setOpen(false);
+      return;
+    }
+    setClosing(true);
+  }, []);
+
+  useModalFocus(open, panelRef, closeButtonRef, requestClose, triggerRef);
+
+  useEffect(() => {
+    if (!closing) return;
+    const timer = window.setTimeout(() => {
+      setOpen(false);
+      setClosing(false);
+    }, EXIT_DURATION_MS);
+    return () => window.clearTimeout(timer);
+  }, [closing]);
 
   useEffect(() => {
     if (!open) return;
@@ -101,6 +129,7 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
           stroke="currentColor"
           strokeWidth="2.5"
           strokeLinecap="round"
+          aria-hidden="true"
         >
           <line x1="3" y1="7" x2="21" y2="7" />
           <line x1="3" y1="12" x2="21" y2="12" />
@@ -108,138 +137,153 @@ export default function MobileNav({ isTransparent = false }: MobileNavProps) {
         </svg>
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <Portal>
-            <motion.div
-              ref={panelRef}
-              id="mobile-navigation-panel"
-              role="dialog"
-              aria-modal="true"
-              aria-label="RHI Pros navigation"
-              tabIndex={-1}
-              initial={{ opacity: 0, x: reduceMotion ? 0 : "100%" }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: reduceMotion ? 0 : "100%" }}
-              transition={reduceMotion ? { duration: 0 } : { duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-0 z-[9999] flex flex-col bg-[var(--accent)] shadow-2xl selection:bg-brand selection:text-white"
-            >
-              {/* Header in Overlay */}
-              <div className="flex h-16 items-center justify-between px-4 shrink-0 border-b border-white/5">
-                <span className="heading-serif text-lg font-bold text-white tracking-widest uppercase">
-                  {siteConfig.name}
-                </span>
-                <button
-                  type="button"
-                  ref={closeButtonRef}
-                  onClick={() => setOpen(false)}
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
-                  aria-label="Close menu"
+      {open && (
+        <Portal>
+          <div
+            ref={panelRef}
+            id="mobile-navigation-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="RHI Pros navigation"
+            tabIndex={-1}
+            className={`mobile-nav-panel fixed inset-0 z-[9999] flex flex-col bg-[var(--accent)] shadow-2xl selection:bg-brand selection:text-white ${
+              closing ? "is-closing" : ""
+            }`}
+          >
+            {/* Header in Overlay */}
+            <div className="flex h-16 shrink-0 items-center justify-between border-b border-white/5 px-4">
+              <span className="heading-serif text-lg font-bold uppercase tracking-widest text-white">
+                {siteConfig.name}
+              </span>
+              <button
+                type="button"
+                ref={closeButtonRef}
+                onClick={requestClose}
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                aria-label="Close menu"
+              >
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  aria-hidden="true"
                 >
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto px-6 py-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <nav
+                aria-label="Mobile navigation"
+                className="flex flex-col"
+                onClick={(event) => {
+                  if ((event.target as HTMLElement).closest("a")) setOpen(false);
+                }}
+              >
+                <div className="mb-8 grid grid-cols-2 gap-3">
+                  <a
+                    href={siteConfig.phoneHref}
+                    className="flex flex-col items-center justify-center rounded-sm border border-white/20 bg-white/5 p-4 text-center text-white transition-colors hover:bg-white/10 active:bg-white/20"
                   >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button>
-              </div>
+                    <span className="mb-1 text-[0.6rem] font-bold uppercase tracking-widest text-white/70">
+                      Direct Call
+                    </span>
+                    <span className="text-sm font-semibold tracking-tight">{siteConfig.phoneDisplay}</span>
+                  </a>
+                  <Link
+                    href="/request-a-quote"
+                    className="flex flex-col items-center justify-center rounded-sm bg-[var(--brand)] p-4 text-center text-white transition-colors hover:bg-[var(--brand-dark)] active:scale-[0.98]"
+                  >
+                    <span className="mb-1 text-[0.6rem] font-bold uppercase tracking-widest text-white/80">
+                      Next Project
+                    </span>
+                    <span className="text-sm font-semibold tracking-tight">Get a Quote</span>
+                  </Link>
+                </div>
 
-              <div className="flex-1 overflow-y-auto px-6 py-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                <nav
-                  className="flex flex-col space-y-5"
-                  onClick={(event) => {
-                    if ((event.target as HTMLElement).closest("a")) setOpen(false);
-                  }}
-                >
-                  <div className="grid grid-cols-2 gap-3 mb-6">
-                    <a
-                      href={siteConfig.phoneHref}
-                      className="flex flex-col items-center justify-center rounded-sm border border-white/20 bg-white/5 p-4 text-center text-white transition-colors hover:bg-white/10 active:bg-white/20"
+                <div className="flex flex-col space-y-0.5">
+                  {navLinks.map((link, i) => (
+                    <div
+                      key={link.href}
+                      className="mobile-nav-item"
+                      style={{ "--mobile-nav-delay": `${i * 40 + 100}ms` } as CSSProperties}
                     >
-                      <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/70 mb-1">
-                        Direct Call
-                      </span>
-                      <span className="text-sm font-semibold tracking-tight">{siteConfig.phoneDisplay}</span>
-                    </a>
-                    <Link
-                      href="/request-a-quote"
-                      className="flex flex-col items-center justify-center rounded-sm bg-[var(--brand)] p-4 text-center text-white transition-colors hover:bg-[var(--brand-dark)] active:scale-[0.98]"
-                    >
-                      <span className="text-[0.6rem] font-bold uppercase tracking-widest text-white/70 mb-1">
-                        Next Project
-                      </span>
-                      <span className="text-sm font-semibold tracking-tight">Get a Quote</span>
-                    </Link>
-                  </div>
-
-                  <div className="flex flex-col space-y-0.5">
-                    {navLinks.map((link, i) => (
-                      <motion.div
-                        key={link.href}
-                        initial={{ opacity: 0, x: reduceMotion ? 0 : -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={reduceMotion ? { duration: 0 } : { delay: i * 0.04 + 0.1, duration: 0.3 }}
+                      <Link
+                        href={link.href}
+                        aria-current={
+                          pathname === link.href || pathname.startsWith(`${link.href}/`) ? "page" : undefined
+                        }
+                        className={`block py-2.5 transition-all active:scale-[0.98] ${
+                          link.primary ? "heading-serif text-4xl text-white" : "text-lg text-white/75 hover:text-white"
+                        }`}
                       >
-                        <Link
-                          href={link.href}
-                          aria-current={
-                            pathname === link.href || pathname.startsWith(`${link.href}/`) ? "page" : undefined
-                          }
-                          className={`block py-2.5 transition-all active:scale-[0.98] ${
-                            link.primary
-                              ? "heading-serif text-4xl text-white"
-                              : "text-lg text-white/75 hover:text-white"
-                          }`}
-                        >
-                          {link.label}
-                        </Link>
-                      </motion.div>
-                    ))}
-                  </div>
-                </nav>
-
-                <div className="mt-auto pt-12">
-                  <div className="border-t border-white/10 pt-8 pb-4">
-                    <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6 text-[0.65rem] font-bold uppercase tracking-[0.2em]">
-                      <a
-                        href={siteConfig.facebookPageUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-white/70 hover:text-white transition-colors"
-                      >
-                        Facebook
-                      </a>
-                      <a
-                        href={siteConfig.googleBusinessProfileUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-white/70 hover:text-white transition-colors"
-                      >
-                        Google Reviews
-                      </a>
+                        {link.label}
+                      </Link>
                     </div>
+                  ))}
+                </div>
 
-                    <p className="text-[0.55rem] font-bold uppercase tracking-[0.3em] text-white/65 mb-2.5">
-                      Service Location
-                    </p>
-                    <p className="text-sm text-white/70 font-medium tracking-tight">Lehigh Valley, PA</p>
-                    <p className="mt-4 text-[0.65rem] font-bold tracking-[0.1em] text-white/65 uppercase">
-                      {siteConfig.hicNumber}
-                    </p>
+                <p className="mt-8 text-[0.6rem] font-bold uppercase tracking-[0.2em] text-white/65">
+                  Popular services
+                </p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {serviceShortcuts.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="inline-flex min-h-10 items-center rounded-full border border-white/20 px-4 text-sm text-white/85 transition-colors hover:border-white/50 hover:text-white"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              <div className="mt-auto pt-10">
+                <div className="border-t border-white/10 pb-4 pt-8">
+                  <div className="mb-6 flex flex-wrap gap-x-6 gap-y-2 text-[0.65rem] font-bold uppercase tracking-[0.2em]">
+                    <a
+                      href={siteConfig.facebookPageUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="RHI Pros on Facebook (opens in a new tab)"
+                      className="inline-flex min-h-8 items-center text-white/70 transition-colors hover:text-white"
+                    >
+                      Facebook
+                    </a>
+                    <a
+                      href={siteConfig.googleBusinessProfileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Read RHI Pros reviews on Google (opens in a new tab)"
+                      className="inline-flex min-h-8 items-center text-white/70 transition-colors hover:text-white"
+                    >
+                      Google Reviews
+                    </a>
                   </div>
+
+                  <p className="mb-2.5 text-[0.6rem] font-bold uppercase tracking-[0.3em] text-white/65">
+                    Service area
+                  </p>
+                  <p className="text-sm font-medium tracking-tight text-white/70">
+                    Lehigh Valley &amp; Berks County, PA
+                  </p>
+                  <p className="mt-4 text-[0.65rem] font-bold uppercase tracking-[0.1em] text-white/65">
+                    {siteConfig.hicLabel}
+                  </p>
                 </div>
               </div>
-            </motion.div>
-          </Portal>
-        )}
-      </AnimatePresence>
+            </div>
+          </div>
+        </Portal>
+      )}
     </div>
   );
 }

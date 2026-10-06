@@ -28,9 +28,19 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   if (!location) return {};
   return getPageMetadata({
     title: `Remodeling & Restoration in ${location.name}`,
-    description: `Kitchen, bathroom, basement, flooring, and restoration services in ${location.name}. RHI Pros delivers clear scopes, reliable scheduling, and quality workmanship.`,
+    description: getCityHubDescription(location),
     path: `/${location.slug}`,
   });
+}
+
+/** Unique per-hub description built from the location's own nearby-community list. */
+function getCityHubDescription(location: NonNullable<ReturnType<typeof getLocationBySlug>>) {
+  const isRegion = location.slug === "berks-county-pa" || location.slug === "lehigh-valley-pa";
+  const nearby = location.priorityAreas
+    .slice(0, 2)
+    .map((area) => area.replace(/ area$/, ""))
+    .join(" and ");
+  return `Remodeling and fire and water damage repairs in ${location.name}, ${isRegion ? "including" : "plus nearby"} ${nearby}. Kitchens, bathrooms, basements and more. Request a written scope.`;
 }
 
 export default async function CityHubPage({ params }: { params: Promise<Params> }) {

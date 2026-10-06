@@ -1,5 +1,6 @@
 import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
+import { primaryServices } from "@/content/services";
 
 export const businessEntityId = `${company.domain}/#business`;
 
@@ -9,7 +10,19 @@ export function getWebSiteJsonLd() {
     "@type": "WebSite",
     name: siteConfig.name,
     url: `${siteConfig.domain}/`,
+    inLanguage: "en-US",
+    publisher: { "@id": businessEntityId },
   };
+}
+
+/** Service-area places only; the business has no verified public street address. */
+const regionAreaTypes: Record<string, string> = {
+  "Berks County, PA": "AdministrativeArea",
+  "Lehigh Valley, PA": "Place",
+};
+
+function getAreaServedJsonLd() {
+  return company.serviceAreaList.map((name) => ({ "@type": regionAreaTypes[name] ?? "City", name }));
 }
 
 export function getLocalBusinessJsonLd() {
@@ -38,8 +51,20 @@ export function getLocalBusinessJsonLd() {
       name: "Pennsylvania Home Improvement Contractor Registration",
       value: company.license.hic,
     },
-    areaServed: [...company.serviceAreaList],
+    areaServed: getAreaServedJsonLd(),
     // The configured market label is a service area, not a verified public business address.
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Remodeling and restoration services",
+      itemListElement: primaryServices.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.name,
+          url: `${company.domain}/services/${service.slug}`,
+        },
+      })),
+    },
   };
 }
 

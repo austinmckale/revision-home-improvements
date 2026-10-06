@@ -5,7 +5,8 @@ import Link from "next/link";
 import { primaryServices } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getFirstTouchAttribution, type LeadAttribution } from "@/lib/leadAttribution";
-import { quoteContactSchema, quoteProjectSchema } from "@/lib/quoteSchema";
+import { SCOPE_STARTER_STORAGE_KEY } from "@/lib/scopeStarter";
+import { quoteContactSchema, quoteProjectSchema, quoteTimelines } from "@/lib/quoteSchema";
 
 type QuoteFormProps = { defaultService?: string };
 type FormState = { ok: boolean; message?: string; errors?: Record<string, string[]> };
@@ -24,13 +25,7 @@ const serviceOptions = [
   { slug: "whole-home-remodeling", name: "Whole-Home Remodeling" },
   { slug: "insurance-claims", name: "Insurance Claims Assistance" },
 ];
-const timelines = [
-  "As soon as possible",
-  "Within 1–3 months",
-  "Within 3–6 months",
-  "More than 6 months",
-  "Exploring options",
-];
+const timelines = quoteTimelines;
 const detailHints: Record<string, string> = {
   "Kitchen Remodeling": "Tell us what you would change about the layout, cabinets, counters, or finishes.",
   "Bathroom Remodeling": "Tell us about the bathroom, shower or tub, and the changes you have in mind.",
@@ -42,6 +37,20 @@ const detailHints: Record<string, string> = {
 
 function track(name: string, detail: Record<string, unknown> = {}) {
   window.dispatchEvent(new CustomEvent(name, { detail }));
+}
+
+/** Scope Builder handoff: stored for this tab only, used once, then cleared. */
+function takeScopeStarter(): { service?: string; details?: string; timeline?: string } | null {
+  try {
+    const raw = window.sessionStorage.getItem(SCOPE_STARTER_STORAGE_KEY);
+    if (!raw) return null;
+    window.sessionStorage.removeItem(SCOPE_STARTER_STORAGE_KEY);
+    const parsed = JSON.parse(raw) as { service?: string; details?: string; timeline?: string; savedAt?: number };
+    if (!parsed.savedAt || Date.now() - parsed.savedAt > 2 * 60 * 60 * 1000) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
 }
 
 function resolveService(value?: string | null) {
@@ -58,6 +67,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
   const [contact, setContact] = useState<ContactData>({ ...emptyContact, service: resolveService(defaultService) });
   const [project, setProject] = useState<ProjectData>(emptyProject);
   const [attribution, setAttribution] = useState<AttributionData | null>(null);
+  const [scopeStarterApplied, setScopeStarterApplied] = useState(false);
   const submissionIdRef = useRef<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -73,8 +83,18 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
     const firstTouch = getFirstTouchAttribution();
     setAttribution({ ...firstTouch, landing_path: firstTouch.landing_page, campaign: firstTouch.utm_campaign });
     const requested = new URLSearchParams(window.location.search).get("service");
-    const detected = resolveService(defaultService) || resolveService(requested);
+    const starter = takeScopeStarter();
+    const detected = resolveService(defaultService) || resolveService(requested) || resolveService(starter?.service);
     if (detected) setContact((previous) => ({ ...previous, service: detected }));
+    if (starter?.details) {
+      const timeline = timelines.find((item) => item === starter.timeline) ?? "";
+      setProject((previous) => ({
+        ...previous,
+        details: previous.details || starter.details!.slice(0, 2000),
+        timeline: previous.timeline || timeline,
+      }));
+      setScopeStarterApplied(true);
+    }
   }, [defaultService]);
 
   useEffect(() => {
@@ -316,6 +336,11 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           : "An early idea is enough. Share what you know and we will work through the details together."}
       </p>
       <p className="mt-3 text-xs text-[var(--muted)]">All fields are required.</p>
+      {scopeStarterApplied && (
+        <p className="mt-3 border-l-2 border-[var(--brand)] bg-[var(--surface-soft)] px-3 py-2 text-xs leading-relaxed text-[var(--accent)]">
+          Your scope starter is attached. You will find it in the project details on the next step, ready to edit.
+        </p>
+      )}
 
       {!ready && (
         <p className="mt-4 text-sm text-[var(--muted)]" role="status">

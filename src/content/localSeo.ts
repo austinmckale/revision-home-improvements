@@ -464,7 +464,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "allentown-pa/kitchen-remodeling": {
     metadataTitle: "Kitchen Remodeling in Allentown, PA",
     metadataDescription:
-      "Kitchen remodeling in Allentown, PA for older city homes and newer suburban properties. Strong scope planning, finish quality, and schedule control.",
+      "Kitchen remodeling in Allentown, PA for older city homes and newer suburban properties. Plan layout, cabinets and finishes, then request a written scope.",
     heroHeading: "Kitchen Remodelers in Allentown, PA",
     localProjectHeading: "Common Allentown Kitchen Scope",
     localProjectSnippet:
@@ -1648,7 +1648,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "lehigh-valley-pa/water-damage-restoration": {
     metadataTitle: "Water Damage Restoration in Lehigh Valley, PA",
     metadataDescription:
-      "Water damage restoration in Lehigh Valley, PA with organized rebuild planning, documented repair scopes, and clear communication from damage review through final repairs.",
+      "Water damage reconstruction in the Lehigh Valley, PA: rebuild planning and documented repair scopes for affected drywall, flooring, trim and finishes.",
     heroHeading: "Water Damage Restoration in Lehigh Valley, PA",
     localProjectHeading: "Planning a Water-Damage Rebuild in Lehigh Valley",
     localProjectSnippet:

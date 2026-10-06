@@ -304,7 +304,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
           </div>
 
           {showProjectPhotosAside ? (
-            <aside>
+            <div>
               <div className="surface rounded-xl p-5">
                 <h3 className="text-lg font-semibold text-[var(--accent)]">
                   {isPlanning ? "Layout & finish ideas" : "Explore the photos"}
@@ -347,7 +347,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                   . Explore the wider views alongside these details.
                 </p>
               ) : null}
-            </aside>
+            </div>
           ) : null}
         </Container>
       </section>

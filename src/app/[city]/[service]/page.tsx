@@ -297,7 +297,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             )}
 
             {showCabinetPlanningBlock ? (
-              <aside className="surface-soft mt-6 rounded-sm border border-[var(--border)] p-5 md:p-6">
+              <div className="surface-soft mt-6 rounded-sm border border-[var(--border)] p-5 md:p-6">
                 <h2 className="heading-serif text-2xl text-[var(--accent)]">Primarily planning new cabinets?</h2>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
                   If cabinet replacement, layout and installation are the main focus, review our Berks County cabinet
@@ -310,7 +310,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 >
                   Explore Kitchen Cabinet Installation →
                 </Link>
-              </aside>
+              </div>
             ) : null}
 
             {additionalLocalProof.length > 0 && (

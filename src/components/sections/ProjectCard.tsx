@@ -20,7 +20,7 @@ export default function ProjectCard({
   return (
     <Link
       href={`/projects/${study.slug}`}
-      className={`group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)] ${isFeature ? `relative isolate overflow-hidden bg-[#202823] ${variant === "lead" ? "home-project-feature min-h-[28rem] lg:col-span-7 lg:row-span-2" : "home-project-support min-h-[19rem] lg:col-span-5"}` : "min-w-0"}`}
+      className={`group block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--brand)] ${isFeature ? `crop-marks relative isolate overflow-hidden bg-[#202823] [--crop-inset:.85rem] ${variant === "lead" ? "home-project-feature min-h-[28rem] lg:col-span-7 lg:row-span-2" : "home-project-support min-h-[19rem] lg:col-span-5"}` : "min-w-0"}`}
     >
       <div
         className={
