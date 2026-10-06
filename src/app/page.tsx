@@ -10,7 +10,6 @@ import { getBreadcrumbJsonLd, getFaqJsonLd, getWebSiteJsonLd } from "@/lib/struc
 import { primaryServices } from "@/content/services";
 import { visibleCaseStudies } from "@/content/caseStudies";
 import { featuredProjects, orderedShowcaseProjects } from "@/content/projectShowcase";
-import { locations } from "@/content/locations";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
 import { getImageFocalClass } from "@/content/imageFocalPoints";
 import { insuranceClaimsClarification } from "@/content/restoration";
@@ -187,12 +186,6 @@ export default function HomePage() {
     pricingFactors: service.pricingFactors,
     qualityFactors: service.qualityFactors,
   }));
-  const facts = [
-    { value: String(orderedShowcaseProjects.length), label: "Photo collections to explore", href: "/projects" },
-    { value: String(primaryServices.length), label: "Remodeling & repair services", href: "/services" },
-    { value: String(locations.length), label: "Local service-area guides", href: "/service-areas" },
-    { value: siteConfig.hicNumber, label: "Pennsylvania HIC registration", href: "/licenses-and-insurance" },
-  ];
 
   return (
     <>
@@ -275,30 +268,6 @@ export default function HomePage() {
         >
           SHEET A-01 · DRAWN TO SCOPE · RHI PROS
         </span>
-      </section>
-
-      <section aria-label="RHI Pros at a glance" className="border-b border-[var(--border)] bg-[var(--surface)]">
-        <Container>
-          <dl className="grid grid-cols-2 lg:grid-cols-4">
-            {facts.map((fact, index) => (
-              <div
-                key={fact.label}
-                className={`flex flex-col border-[var(--border)] py-7 sm:py-9 ${index % 2 === 1 ? "border-l pl-5 sm:pl-8" : "pr-5"} ${
-                  index > 1 ? "border-t lg:border-t-0" : ""
-                } ${index === 2 ? "lg:border-l lg:pl-8" : ""} ${index > 0 ? "lg:pl-8" : ""}`}
-              >
-                <dt className="annotation order-2 mt-2 text-[0.62rem] text-[var(--muted)]">
-                  <Link href={fact.href} className="underline-offset-4 hover:text-[var(--brand)] hover:underline">
-                    {fact.label}
-                  </Link>
-                </dt>
-                <dd className="heading-serif order-1 text-4xl leading-none tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
-                  {fact.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Container>
       </section>
 
       <section className="bg-[var(--background)] py-20 sm:py-24 lg:py-32">
