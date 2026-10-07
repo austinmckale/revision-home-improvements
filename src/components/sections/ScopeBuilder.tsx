@@ -1,10 +1,10 @@
 "use client";
 
-import { useId, useState } from "react";
-import { useRouter } from "next/navigation";
-import { quoteTimelines } from "@/lib/quoteSchema";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import Link from "next/link";
+import { quoteTimelines, scopeContactSchema } from "@/lib/quoteSchema";
+import { getFirstTouchAttribution } from "@/lib/leadAttribution";
 import { siteConfig } from "@/content/site";
-import { SCOPE_STARTER_STORAGE_KEY } from "@/lib/scopeStarter";
 
 export type ScopeBuilderService = {
   slug: string;
@@ -15,18 +15,44 @@ export type ScopeBuilderService = {
   qualityFactors: string[];
 };
 
+type ContactFields = { name: string; phone: string; email: string; city: string; zip: string };
+type FieldErrors = Partial<Record<keyof ContactFields, string[]>>;
+
+const emptyContact: ContactFields = { name: "", phone: "", email: "", city: "", zip: "" };
+const contactInputs: Array<{ name: keyof ContactFields; label: string; type: string; autoComplete: string; wide?: boolean }> = [
+  { name: "name", label: "Name", type: "text", autoComplete: "name", wide: true },
+  { name: "phone", label: "Phone", type: "tel", autoComplete: "tel" },
+  { name: "email", label: "Email", type: "email", autoComplete: "email" },
+  { name: "city", label: "City", type: "text", autoComplete: "address-level2" },
+  { name: "zip", label: "ZIP", type: "text", autoComplete: "postal-code" },
+];
+/** The quote API requires timing; an undecided sheet is sent as the matching quote-form option. */
+const UNDECIDED_TIMELINE = "Exploring options";
+
 function emit(name: string, detail: Record<string, unknown>) {
   window.dispatchEvent(new CustomEvent(`rhi:${name}`, { detail }));
 }
 
 export default function ScopeBuilder({ services }: { services: ScopeBuilderService[] }) {
-  const router = useRouter();
   const id = useId();
   const [serviceSlug, setServiceSlug] = useState(services[0]?.slug ?? "");
   const [priorities, setPriorities] = useState<string[]>([]);
   const [timeline, setTimeline] = useState("");
   const [notes, setNotes] = useState("");
+  const [stage, setStage] = useState<"build" | "contact" | "sent">("build");
+  const [contact, setContact] = useState<ContactFields>(emptyContact);
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
+  const submissionIdRef = useRef<string | null>(null);
+  const firstFieldRef = useRef<HTMLInputElement>(null);
+  const sentHeadingRef = useRef<HTMLHeadingElement>(null);
+  const messageRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (stage === "contact") firstFieldRef.current?.focus();
+    if (stage === "sent") sentHeadingRef.current?.focus();
+  }, [stage]);
 
   const service = services.find((item) => item.slug === serviceSlug) ?? services[0];
 
@@ -45,23 +71,87 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
     setPriorities((current) => (current.includes(item) ? current.filter((value) => value !== item) : [...current, item]));
   };
 
-  const send = () => {
-    const lines = [
+  const scopeDetails = () =>
+    [
       `Scope starter from rhipros.com: ${service.name}`,
       priorities.length ? `Priorities:\n${priorities.map((item) => `• ${item}`).join("\n")}` : "",
       notes.trim() ? `Notes: ${notes.trim()}` : "",
-    ].filter(Boolean);
-    try {
-      window.sessionStorage.setItem(
-        SCOPE_STARTER_STORAGE_KEY,
-        JSON.stringify({ service: service.slug, details: lines.join("\n\n").slice(0, 2000), timeline, savedAt: Date.now() }),
-      );
-    } catch {
-      // Storage can be unavailable in private browsing; the service still carries through the URL.
-    }
+    ]
+      .filter(Boolean)
+      .join("\n\n")
+      .slice(0, 2000);
+
+  const openContact = () => {
     emit("scope_builder_send", { service: service.slug, priorities: priorities.length, timeline: timeline || "none" });
+    setStage("contact");
+  };
+
+  const updateContact = (name: keyof ContactFields, value: string) => {
+    setContact((current) => ({ ...current, [name]: value }));
+    if (errors[name]) setErrors((current) => ({ ...current, [name]: undefined }));
+  };
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (sending) return;
+    const parsed = scopeContactSchema.safeParse(contact);
+    if (!parsed.success) {
+      setErrors(parsed.error.flatten().fieldErrors);
+      setMessage("Please check the highlighted details.");
+      requestAnimationFrame(() => messageRef.current?.focus());
+      return;
+    }
+    const honeypot = new FormData(event.currentTarget).get("website");
+    setErrors({});
+    setMessage("");
     setSending(true);
-    router.push(`/request-a-quote?service=${encodeURIComponent(service.slug)}#quote-form-section`);
+    emit("quote_submit_attempt", { service: service.name, source: "scope_builder" });
+    const submissionId = submissionIdRef.current ?? (crypto.randomUUID?.() || `${Date.now()}-${Math.random()}`);
+    submissionIdRef.current = submissionId;
+    const firstTouch = getFirstTouchAttribution();
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...parsed.data,
+          service: service.name,
+          timeline: timeline || UNDECIDED_TIMELINE,
+          details: scopeDetails(),
+          website: typeof honeypot === "string" ? honeypot : "",
+          ...firstTouch,
+          landing_path: firstTouch.landing_page,
+          campaign: firstTouch.utm_campaign,
+          submission_page: window.location.pathname,
+        }),
+      });
+      const data = (await response.json().catch(() => ({}))) as { ok?: boolean; message?: string; errors?: FieldErrors };
+      if (response.ok && data.ok) {
+        emit("generate_lead", { submissionId });
+        setStage("sent");
+        return;
+      }
+      submissionIdRef.current = null;
+      setErrors(data.errors || {});
+      setMessage(data.message || `We could not send your scope. Please try again or call ${siteConfig.phoneDisplay}.`);
+      emit("quote_submit_error", { fields: Object.keys(data.errors || {}).join(","), source: "scope_builder" });
+      requestAnimationFrame(() => messageRef.current?.focus());
+    } catch {
+      submissionIdRef.current = null;
+      setMessage(`We could not send your scope. Your details are still here. Please try again or call ${siteConfig.phoneDisplay}.`);
+      requestAnimationFrame(() => messageRef.current?.focus());
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const startOver = () => {
+    setStage("build");
+    setPriorities([]);
+    setTimeline("");
+    setNotes("");
+    setContact(emptyContact);
+    submissionIdRef.current = null;
   };
 
   const print = () => {
@@ -88,7 +178,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14">
       <div className="min-w-0 space-y-9">
-        <fieldset>
+        <fieldset disabled={stage === "sent"}>
           <legend className="annotation text-[var(--brand)]">01 · Choose a space</legend>
           <div className="mt-4 flex flex-wrap gap-2">
             {services.map((item) => (
@@ -109,30 +199,27 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
           </div>
         </fieldset>
 
-        <fieldset>
+        <fieldset disabled={stage === "sent"}>
           <legend className="annotation text-[var(--brand)]">02 · What is on your list?</legend>
           <div className="mt-4 divide-y divide-[var(--border)] border-y border-[var(--border)]">
-            {service.whatIncluded.map((item) => {
-              const checked = priorities.includes(item);
-              return (
-                <label
-                  key={item}
-                  className="flex min-h-12 cursor-pointer items-start gap-3 py-3 text-sm leading-snug text-[var(--foreground)]"
-                >
-                  <input
-                    type="checkbox"
-                    checked={checked}
-                    onChange={() => togglePriority(item)}
-                    className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--accent)]"
-                  />
-                  <span>{item}</span>
-                </label>
-              );
-            })}
+            {service.whatIncluded.map((item) => (
+              <label
+                key={item}
+                className="flex min-h-12 cursor-pointer items-start gap-3 py-3 text-sm leading-snug text-[var(--foreground)]"
+              >
+                <input
+                  type="checkbox"
+                  checked={priorities.includes(item)}
+                  onChange={() => togglePriority(item)}
+                  className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--accent)]"
+                />
+                <span>{item}</span>
+              </label>
+            ))}
           </div>
         </fieldset>
 
-        <fieldset>
+        <fieldset disabled={stage === "sent"}>
           <legend className="annotation text-[var(--brand)]">03 · When would you like to start?</legend>
           <div className="mt-4 flex flex-wrap gap-2">
             {quoteTimelines.map((item) => (
@@ -162,6 +249,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
             value={notes}
             maxLength={300}
             rows={3}
+            disabled={stage === "sent"}
             onChange={(event) => setNotes(event.target.value)}
             placeholder="Room size, what is not working today, finishes you love…"
             className="form-control mt-3 w-full resize-y"
@@ -248,7 +336,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
             ["Prepared with", "rhipros.com"],
             ["Registration", siteConfig.hicLabel],
             ["Contact", siteConfig.phoneDisplay],
-            ["Status", "Not an estimate"],
+            ["Status", stage === "sent" ? "Sent to RHI Pros" : "Not an estimate"],
           ].map(([label, value], index) => (
             <div
               key={label}
@@ -265,23 +353,123 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
           existing conditions.
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-3" data-print-hide>
-          <button
-            type="button"
-            onClick={send}
-            disabled={sending}
-            className="inline-flex min-h-12 items-center justify-center gap-3 bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] disabled:opacity-70"
-          >
-            {sending ? "Opening your quote request…" : "Send this to RHI Pros"} <span aria-hidden="true">↗</span>
-          </button>
-          <button
-            type="button"
-            onClick={print}
-            className="inline-flex min-h-12 items-center justify-center border border-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:bg-[var(--surface-soft)]"
-          >
-            Print or save as PDF
-          </button>
-        </div>
+        {stage === "build" ? (
+          <div className="mt-6 flex flex-wrap gap-3" data-print-hide>
+            <button
+              type="button"
+              onClick={openContact}
+              className="inline-flex min-h-12 items-center justify-center gap-3 bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
+            >
+              Send this to RHI Pros <span aria-hidden="true">↗</span>
+            </button>
+            <button
+              type="button"
+              onClick={print}
+              className="inline-flex min-h-12 items-center justify-center border border-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:bg-[var(--surface-soft)]"
+            >
+              Print or save as PDF
+            </button>
+          </div>
+        ) : null}
+
+        {stage === "contact" ? (
+          <form onSubmit={submit} noValidate className="mt-8 border-t border-[var(--accent)] pt-6" data-print-hide>
+            <p className="annotation text-[var(--brand)]">Last step · Where should we reach you?</p>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+              We will send this sheet with your details and follow up by phone or email. All fields are required.
+            </p>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              {contactInputs.map((field, index) => {
+                const fieldId = `${id}-${field.name}`;
+                const error = errors[field.name]?.[0];
+                return (
+                  <div key={field.name} className={field.wide ? "sm:col-span-2" : ""}>
+                    <label htmlFor={fieldId} className="block text-sm font-semibold text-[var(--accent)]">
+                      {field.label}
+                    </label>
+                    <input
+                      ref={index === 0 ? firstFieldRef : undefined}
+                      id={fieldId}
+                      name={field.name}
+                      type={field.type}
+                      autoComplete={field.autoComplete}
+                      inputMode={field.name === "zip" ? "numeric" : undefined}
+                      value={contact[field.name]}
+                      onChange={(event) => updateContact(field.name, event.target.value)}
+                      disabled={sending}
+                      aria-invalid={Boolean(error)}
+                      aria-describedby={error ? `${fieldId}-error` : undefined}
+                      className="form-control mt-1.5 w-full"
+                    />
+                    {error ? (
+                      <span id={`${fieldId}-error`} className="mt-1 block text-xs text-red-700">
+                        {error}
+                      </span>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+            <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+            {message ? (
+              <p ref={messageRef} tabIndex={-1} role="alert" className="mt-4 text-sm font-semibold text-red-700 outline-none">
+                {message}
+              </p>
+            ) : null}
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <button
+                type="submit"
+                disabled={sending}
+                className="inline-flex min-h-12 items-center justify-center gap-3 bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] disabled:opacity-70"
+              >
+                {sending ? "Sending…" : "Send my scope"} <span aria-hidden="true">↗</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setStage("build")}
+                disabled={sending}
+                className="inline-flex min-h-12 items-center px-2 text-sm font-semibold text-[var(--accent)] underline underline-offset-4"
+              >
+                Keep editing
+              </button>
+            </div>
+            <p className="mt-3 text-xs text-[var(--muted)]">
+              No obligation. See our{" "}
+              <Link href="/privacy" className="underline underline-offset-4">
+                privacy policy
+              </Link>
+              .
+            </p>
+          </form>
+        ) : null}
+
+        {stage === "sent" ? (
+          <div className="mt-8 border-t border-[var(--accent)] pt-6" data-print-hide>
+            <h4 ref={sentHeadingRef} tabIndex={-1} className="heading-serif text-2xl text-[var(--accent)] outline-none">
+              <span aria-hidden="true">✓ </span>Sent to RHI Pros.
+            </h4>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+              Your scope starter and contact details are on their way. We will review your project and follow up by phone
+              or email to discuss next steps.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={print}
+                className="inline-flex min-h-12 items-center justify-center border border-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:bg-[var(--surface-soft)]"
+              >
+                Print or save a copy
+              </button>
+              <button
+                type="button"
+                onClick={startOver}
+                className="inline-flex min-h-12 items-center px-2 text-sm font-semibold text-[var(--accent)] underline underline-offset-4"
+              >
+                Sketch another scope
+              </button>
+            </div>
+          </div>
+        ) : null}
       </article>
     </div>
   );

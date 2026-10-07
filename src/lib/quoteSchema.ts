@@ -52,3 +52,5 @@ export type QuoteInput = z.infer<typeof quoteSchema>;
 // Keep the two browser steps aligned with the API's validation rules.
 export const quoteContactSchema = quoteSchema.pick({ name: true, phone: true, email: true, service: true });
 export const quoteProjectSchema = quoteSchema.pick({ city: true, zip: true, timeline: true, details: true });
+// The scope builder collects service, timing and details on its sheet, then asks only for contact details.
+export const scopeContactSchema = quoteSchema.pick({ name: true, phone: true, email: true, city: true, zip: true });

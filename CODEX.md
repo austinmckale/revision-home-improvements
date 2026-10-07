@@ -10,7 +10,7 @@ The visual identity borrows from architectural drawing sets to echo the written 
 - Keep the motif in service of the content: no "Sheet A-0x" section tags (removed as noise) and no vanity stat bands. `.sheet-tag` is reserved for the Scope Builder sheet. Figure captions must describe only what is visible and link to the matching collection.
 - Scope Builder printing clones the sheet into `.scope-print-root`; site chrome hides in print via `body > header/aside/footer` and `[data-print-hide]`. Never hide bare `header` or `nav` elements in print.
 - Headings with a display slogan should include a descriptive eyebrow inside the `h1` (`PageIntro eyebrowInHeading`) and keep a space before any `<br />`.
-- Scope Builder (`components/sections/ScopeBuilder.tsx`) uses each service's `whatIncluded`, `pricingFactors` and `qualityFactors`. Never add prices, durations or outcomes to it. The handoff to `QuoteForm` uses `sessionStorage` (`lib/scopeStarter.ts`), never the URL.
+- Scope Builder (`components/sections/ScopeBuilder.tsx`) uses each service's `whatIncluded`, `pricingFactors` and `qualityFactors`. Never add prices, durations or outcomes to it. "Send this to RHI Pros" opens a contact step inside the sheet and posts directly to `/api/quote` with the same validation (`scopeContactSchema`), honeypot, first-touch attribution and `rhi:generate_lead` conversion as `QuoteForm`; the scope text travels in `details`, and undecided timing is sent as "Exploring options".
 - The service-area map (`components/sections/ServiceAreaMap.tsx`) positions places from real coordinates. Only add communities that appear in `locations.ts` priority areas.
 - Project preview images go through `next/image`; do not reintroduce `unoptimized`.
 

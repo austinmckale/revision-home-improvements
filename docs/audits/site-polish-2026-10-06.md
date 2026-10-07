@@ -19,7 +19,7 @@ RHI Pros' clearest differentiator is a **written scope before work begins**. The
 
 | Feature | Where | Notes |
 | --- | --- | --- |
-| **Scope Builder** | Homepage `#scope-builder`; linked from the quote page and closing CTA | Choose a space, tick items from that service's `whatIncluded`, pick timing, add notes. The sheet lists the service's `pricingFactors` and `qualityFactors`. No prices or estimates. **Send** stores the starter in `sessionStorage` (`rhi:scope-starter`, never the URL), opens `/request-a-quote?service=…`, and the form pre-fills service, details and timing once, then clears it. **Print or save as PDF** prints only the sheet. Events: `scope_builder_send`, `scope_builder_print`. |
+| **Scope Builder** | Homepage `#scope-builder`; linked from the quote page and closing CTA | Choose a space, tick items from that service's `whatIncluded`, pick timing, add notes. The sheet lists the service's `pricingFactors` and `qualityFactors`. No prices or estimates. **Send this to RHI Pros** opens a contact step inside the sheet (name, phone, email, city, ZIP) and submits directly to `/api/quote`, so the lead reaches the webhook/Discord, email and Manager App with the scope text in its details; the sheet then shows "Sent to RHI Pros". **Print or save as PDF** prints only the sheet. Events: `scope_builder_send` (contact step opened), `scope_builder_print`, plus the standard `quote_submit_attempt`, `quote_submit_error` and `generate_lead`. |
 | **Service-area map** | Homepage "Close to home"; `/service-areas` | SVG positioned from real latitude/longitude; links to the four city hubs and two regions; US 222 and I-78 drawn as simplified corridors. Labeled "Schematic map · Approximate positions". Minor community labels hide on phones. |
 | **"Straight answers" FAQ** | Homepage, with FAQPage JSON-LD | Six answers built only from facts already stated on the site (service area, written proposal, HIC, `insuranceClaimsClarification`, collection count, financing disclosure). |
 
@@ -76,6 +76,10 @@ A line-by-line review of the full diff and a cross-feature integration run found
 - **Design noise:** removed the homepage stats band and "Sheet A-0x" section tags; increased spacing and contrast for service-card numbers.
 
 An integration suite (30 checks, local build only) covers the scroll indicator, FAQ keyboard use, map focus and navigation, Scope Builder keyboard use, print isolation and cleanup, quote-form handoff, submit fallback without delivery, mobile menu, sticky CTA, emergency bars, the quote page's builder link, the 404 page, footer link resolution and console errors: **30/30 passed**.
+
+## Scope Builder sends directly (October 7)
+
+The first version's "Send this to RHI Pros" only opened the quote page with the scope pre-filled and asked for contact details again, so it did not appear to send. It now collects contact details in the sheet and submits through `/api/quote`. Verified against local stand-ins for all three channels (a strict Discord webhook stand-in enforcing Discord's message limits, an SMTP sink and a Manager App intake): 29/29 checks, including empty-field validation with no request sent, delivery of the full scope to Discord, email and Manager App, one `generate_lead` conversion per send, an undecided sheet sent as "Exploring options", and successful delivery by email and Manager App during a simulated Discord outage. No real lead was sent.
 
 ## Not verified here
 

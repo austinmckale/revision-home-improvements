@@ -78,7 +78,7 @@ Copy `.env.example` to `.env.local` and fill values:
 - Global emergency bar routes fire/water damage users into a call-first path.
 - Mobile sticky CTA keeps call/quote actions visible.
 - Quote form uses a two-step flow, honeypot protection, and Zod validation.
-- Homepage Scope Builder lets visitors draft a "scope starter" from real service checklists, print it, or send it to the quote form (service, details and timing pre-filled via `sessionStorage`).
+- Homepage Scope Builder lets visitors draft a "scope starter" from real service checklists, print it, or send it directly from the sheet (name, phone, email, city, ZIP). It is delivered through `POST /api/quote` like any quote request, so it reaches the webhook/Discord, email and Manager App channels with the scope in the details.
 - If Turnstile keys are set, server validates Turnstile token before accepting lead.
 - If `LEADS_WEBHOOK_URL` or `DISCORD_WEBHOOK_URL` is configured, accepted leads are posted server-side to that endpoint.
 - Client tracking emits events for call clicks, quote steps, quote submit attempts, quote errors, and successful lead submissions.
