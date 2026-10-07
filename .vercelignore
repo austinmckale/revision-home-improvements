@@ -17,3 +17,6 @@ backup
 *.HEIF
 *.mov
 *.MOV
+
+# Unused duplicate/review photos: kept in git, never deployed or publicly served
+public/images/projects/_review
