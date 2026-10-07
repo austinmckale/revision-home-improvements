@@ -386,6 +386,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
             >
               Print or save as PDF
             </button>
+            <p className="w-full text-xs text-[var(--muted)]">Next: your contact details, plus up to 4 photos if you have them.</p>
           </div>
         ) : null}
 

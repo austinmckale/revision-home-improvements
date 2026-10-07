@@ -323,7 +323,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
         {step === 1
-          ? "A few details so we can get in touch about your project."
+          ? "A few details so we can get in touch. Next, describe the space and add photos if you have them."
           : "An early idea is enough. Share what you know and we will work through the details together."}
       </p>
       <p className="mt-3 text-xs text-[var(--muted)]">All fields are required.</p>
