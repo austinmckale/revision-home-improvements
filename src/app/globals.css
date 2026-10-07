@@ -215,6 +215,22 @@ html {
     font-family: var(--font-sans);
   }
 
+  /* SVG links don't reliably draw outlines, so mark keyboard focus on the shapes themselves. */
+  .service-map a:focus {
+    outline: none;
+  }
+
+  .service-map a:focus-visible ellipse,
+  .service-map a:focus-visible circle:first-child {
+    stroke: var(--brand);
+    stroke-width: 4;
+    stroke-dasharray: none;
+  }
+
+  .service-map a:focus-visible text {
+    text-decoration: underline;
+  }
+
   @media (max-width: 640px) {
     .map-minor text {
       display: none;
@@ -240,33 +256,30 @@ html {
   }
 }
 
+/* Scope Builder printing: ScopeBuilder clones the sheet into .scope-print-root for the print job. */
+.scope-print-root {
+  display: none;
+}
+
 @media print {
   .scroll-ruler,
-  header,
-  footer,
-  nav,
-  aside {
+  body > header,
+  body > aside,
+  body > footer,
+  [data-print-hide] {
     display: none !important;
   }
 
-  body.printing-scope * {
-    visibility: hidden;
+  body.printing-scope > :not(.scope-print-root) {
+    display: none !important;
   }
 
-  body.printing-scope [data-print-scope],
-  body.printing-scope [data-print-scope] * {
-    visibility: visible;
+  body.printing-scope > .scope-print-root {
+    display: block;
   }
 
-  body.printing-scope [data-print-scope] {
-    position: absolute;
-    inset: 0 auto auto 0;
-    width: 100%;
+  .scope-print-root .paper-sheet {
     box-shadow: none;
-  }
-
-  body.printing-scope [data-print-hide] {
-    display: none !important;
   }
 }
 

@@ -66,6 +66,17 @@ Throttled phone (390×844, 1.6 Mbps, 150 ms RTT, 4× CPU). "Before" is the live 
 | Browser review | Desktop 1440 and mobile 390: no horizontal overflow, one H1 per page, mobile menu focus trap / Escape / scroll lock verified |
 | Scope Builder → quote form | Service, details and timing carried over and cleared after use; submit returned the expected 503 phone fallback because no delivery channel is configured locally. **No lead was delivered.** |
 
+## Follow-up review (same day)
+
+A line-by-line review of the full diff and a cross-feature integration run found and fixed:
+
+- **Printing:** the print stylesheet hid every `header`, including the scope sheet's own title, and hidden page content still produced blank trailing pages. The sheet is now cloned into a print-only root; printing yields a single page, and normal page printing is restored afterwards.
+- **Map keyboard focus:** SVG links now show a visible focus ring and underline.
+- **Discord delivery:** lead embeds are capped at Discord's 4,096-character limit so long details cannot fail webhook delivery.
+- **Design noise:** removed the homepage stats band and "Sheet A-0x" section tags; increased spacing and contrast for service-card numbers.
+
+An integration suite (30 checks, local build only) covers the scroll indicator, FAQ keyboard use, map focus and navigation, Scope Builder keyboard use, print isolation and cleanup, quote-form handoff, submit fallback without delivery, mobile menu, sticky CTA, emergency bars, the quote page's builder link, the 404 page, footer link resolution and console errors: **30/30 passed**.
+
 ## Not verified here
 
 Real lead receipt, indexing, rankings, rich-result eligibility, Core Web Vitals field data and conversion impact need the live domain, Search Console and analytics after deployment. The new `scope_builder_*` events need a GTM trigger if they should appear as GA4 events.

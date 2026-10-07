@@ -110,7 +110,7 @@ export default function StickyCTA() {
   };
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--border)] bg-[var(--surface)]/95 px-3 pb-[env(safe-area-inset-bottom,8px)] pt-2.5 shadow-[0_-10px_30px_rgba(30,42,34,.08)] backdrop-blur-xl md:hidden">
+    <div data-print-hide className="fixed inset-x-0 bottom-0 z-40 border-t border-[var(--border)] bg-[var(--surface)]/95 px-3 pb-[env(safe-area-inset-bottom,8px)] pt-2.5 shadow-[0_-10px_30px_rgba(30,42,34,.08)] backdrop-blur-xl md:hidden">
       <div className={`mx-auto max-w-7xl gap-2 ${mode === "phone" ? "grid grid-cols-2" : "flex flex-col"}`}>
         {mode === "phone" ? (
           <a

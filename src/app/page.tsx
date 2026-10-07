@@ -165,14 +165,6 @@ const homeFaqs = [
   },
 ];
 
-function SheetTag({ children, className = "" }: { children: string; className?: string }) {
-  return (
-    <span className={`sheet-tag hidden shrink-0 sm:inline-flex ${className}`} aria-hidden="true">
-      {children}
-    </span>
-  );
-}
-
 export default function HomePage() {
   const priorityServices = primaryServices.filter((service) => priorityServiceSlugs.includes(service.slug));
   const secondaryServices = primaryServices.filter((service) => !priorityServiceSlugs.includes(service.slug));
@@ -266,7 +258,7 @@ export default function HomePage() {
           className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 select-none font-mono text-[10px] tracking-[.35em] text-white/60 [writing-mode:vertical-rl] lg:block"
           aria-hidden="true"
         >
-          SHEET A-01 · DRAWN TO SCOPE · RHI PROS
+          DRAWN TO SCOPE · RHI PROS
         </span>
       </section>
 
@@ -281,7 +273,6 @@ export default function HomePage() {
                 </h2>
               </div>
               <div className="lg:justify-self-end">
-                <SheetTag className="mb-6 text-[var(--muted)]">Sheet A-02 · Services</SheetTag>
                 <p className="max-w-2xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
                   From one room to a full restoration, the right team makes the whole experience feel more manageable.
                   Choose a service to see how we approach the work.
@@ -316,10 +307,10 @@ export default function HomePage() {
                     </span>
                   ) : null}
                   <div className="absolute inset-x-0 bottom-0 p-4 sm:p-7">
-                    <span className="annotation hidden text-[0.62rem] text-white/65 sm:block" aria-hidden="true">
+                    <span className="annotation hidden text-[0.62rem] text-white/80 sm:block" aria-hidden="true">
                       {String(index + 1).padStart(2, "0")} / {String(priorityServices.length).padStart(2, "0")}
                     </span>
-                    <div className="mt-2 flex items-end justify-between gap-4">
+                    <div className="mt-3.5 flex items-end justify-between gap-4">
                       <div>
                         <h3 className="heading-serif text-xl leading-tight text-white sm:text-3xl">{service.name}</h3>
                         <p className="mt-2 hidden max-w-sm text-sm leading-relaxed text-white/75 sm:block">
@@ -365,18 +356,15 @@ export default function HomePage() {
                   Made for real life.
                 </h2>
               </div>
-              <div className="flex flex-col items-start gap-4 sm:items-end">
-                <SheetTag className="text-[var(--muted)]">Sheet A-03 · Projects</SheetTag>
-                <Link
-                  href="/projects"
-                  className="group inline-flex min-h-8 items-center gap-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]"
-                >
-                  View all {orderedShowcaseProjects.length} collections{" "}
-                  <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
-              </div>
+              <Link
+                href="/projects"
+                className="group inline-flex min-h-8 items-center gap-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]"
+              >
+                View all {orderedShowcaseProjects.length} collections{" "}
+                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                  →
+                </span>
+              </Link>
             </div>
 
             <div className="mt-10 grid gap-5 lg:mt-14 lg:auto-rows-[19rem] lg:grid-cols-12">
@@ -390,7 +378,7 @@ export default function HomePage() {
 
       <section id="scope-builder" className="drafting-grid border-y border-[var(--border)] py-20 sm:py-24 lg:py-32">
         <Container>
-          <div className="mb-12 grid gap-6 lg:mb-16 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="mb-12 lg:mb-16">
             <div className="max-w-3xl">
               <p className="eyebrow">Scope builder</p>
               <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
@@ -401,7 +389,6 @@ export default function HomePage() {
                 so you can send it with your quote request or save it for later.
               </p>
             </div>
-            <SheetTag className="text-[var(--muted)]">Sheet A-04 · Your project</SheetTag>
           </div>
           <ScopeBuilder services={scopeServices} />
         </Container>
@@ -591,7 +578,7 @@ export default function HomePage() {
             </div>
             <div className="paper-sheet p-4 sm:p-8">
               <div className="mb-3 flex items-center justify-between gap-4 px-2 pt-1">
-                <p className="annotation text-[0.62rem] text-[var(--muted)]">Sheet A-07 · Service area</p>
+                <p className="annotation text-[0.62rem] text-[var(--muted)]">Service area</p>
                 <p className="annotation text-[0.62rem] text-[var(--muted)]">Berks ⟷ Lehigh Valley</p>
               </div>
               <ServiceAreaMap />

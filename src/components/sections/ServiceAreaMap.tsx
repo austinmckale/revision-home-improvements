@@ -66,7 +66,7 @@ export default function ServiceAreaMap({ className = "" }: { className?: string 
     <figure className={`relative ${className}`}>
       <svg
         viewBox="0 0 1200 760"
-        className="h-auto w-full"
+        className="service-map h-auto w-full"
         role="group"
         aria-labelledby="service-area-map-title service-area-map-desc"
       >

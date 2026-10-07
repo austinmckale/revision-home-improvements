@@ -15,7 +15,6 @@ export type ScopeBuilderService = {
   qualityFactors: string[];
 };
 
-
 function emit(name: string, detail: Record<string, unknown>) {
   window.dispatchEvent(new CustomEvent(`rhi:${name}`, { detail }));
 }
@@ -67,8 +66,22 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
 
   const print = () => {
     emit("scope_builder_print", { service: service.slug });
+    const sheet = document.getElementById(`${id}-sheet`);
+    if (!sheet) return window.print();
+    // Print a static copy of just the sheet, so the rest of the page adds no blank pages.
+    const root = document.createElement("div");
+    root.className = "scope-print-root";
+    const copy = sheet.cloneNode(true) as HTMLElement;
+    copy.removeAttribute("id");
+    copy.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+    root.appendChild(copy);
+    document.body.appendChild(root);
     document.body.classList.add("printing-scope");
-    window.addEventListener("afterprint", () => document.body.classList.remove("printing-scope"), { once: true });
+    const cleanUp = () => {
+      document.body.classList.remove("printing-scope");
+      root.remove();
+    };
+    window.addEventListener("afterprint", cleanUp, { once: true });
     window.print();
   };
 
@@ -156,11 +169,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
         </div>
       </div>
 
-      <article
-        className="paper-sheet min-w-0 p-6 sm:p-10"
-        aria-labelledby={`${id}-sheet-title`}
-        data-print-scope
-      >
+      <article id={`${id}-sheet`} className="paper-sheet min-w-0 p-6 sm:p-10" aria-labelledby={`${id}-sheet-title`}>
         <p className="sr-only" aria-live="polite">
           {summary}
         </p>

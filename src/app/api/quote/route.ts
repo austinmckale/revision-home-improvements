@@ -56,6 +56,10 @@ function redactPhone(value: unknown) {
   return `***${digits.slice(-4)}`;
 }
 
+function truncateText(value: string, maxLength: number) {
+  return value.length <= maxLength ? value : `${value.slice(0, maxLength - 1)}…`;
+}
+
 async function sendLeadWebhook(payload: Record<string, unknown>, signal: AbortSignal) {
   const webhookUrl = process.env.LEADS_WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) return { delivered: false, reason: "missing_webhook_url" as const };
@@ -85,7 +89,8 @@ async function sendLeadWebhook(payload: Record<string, unknown>, signal: AbortSi
         embeds: [
           {
             title: "Website Lead Submission",
-            description: leadLines.join("\n"),
+            // Discord rejects embed descriptions over 4,096 characters; keep long details from failing delivery.
+            description: truncateText(leadLines.join("\n"), 4096),
             color: 13678695,
             timestamp: new Date().toISOString(),
           },
