@@ -50,11 +50,16 @@ function route({
   schema = schemaExports.quoteSchema,
   smtpPort = 465,
   schedulerThrows = false,
+  turnstile = "unconfigured",
+  webhookUrl = "https://webhook.example.test/leads",
+  extraEnv = {},
 } = {}) {
   const calls = { fetch: [], mail: [], manager: [], transports: [], sockets: [], closes: 0, logs: [], after: [] };
   const timers = new Set();
   const env = {};
-  if (webhook !== "unconfigured") env.LEADS_WEBHOOK_URL = "https://webhook.example.test/leads";
+  if (webhook !== "unconfigured") env.LEADS_WEBHOOK_URL = webhookUrl;
+  if (turnstile !== "unconfigured") env.TURNSTILE_SECRET_KEY = "synthetic-turnstile-secret";
+  Object.assign(env, extraEnv);
   if (email !== "unconfigured") {
     Object.assign(env, {
       SMTP_HOST: "smtp.example.test",
@@ -71,6 +76,10 @@ function route({
     exports,
     process: { env },
     AbortController,
+    Buffer,
+    FormData,
+    Blob,
+    URLSearchParams,
     setTimeout(callback, delay) {
       const timer = setTimeout(
         () => {
@@ -91,6 +100,10 @@ function route({
     ),
     async fetch(url, options) {
       calls.fetch.push({ url, options });
+      if (url.includes("challenges.cloudflare.com")) {
+        if (turnstile === "throw") throw new Error(providerPrivateText);
+        return { ok: true, status: 200, json: async () => ({ success: turnstile === "pass" }) };
+      }
       const mode = url.includes("graph.facebook.com") ? facebook : webhook;
       if (mode === "hang")
         return new Promise((resolve, reject) => {
@@ -167,7 +180,17 @@ function route({
             return { forwarded: false, reason: "missing_api_key" };
           },
         };
-      if (name === "@/content/site") return { siteConfig: { primaryEmail: "quotes@example.test", phoneDisplay } };
+      if (name === "@/content/site")
+        return {
+          siteConfig: {
+            name: "RHI Pros",
+            legalName: "RHI Solutions LLC",
+            hicLabel: "PA HIC #PA185945",
+            domain: "https://www.rhipros.com",
+            primaryEmail: "quotes@example.test",
+            phoneDisplay,
+          },
+        };
       if (name === "@/lib/quoteSchema") return { quoteSchema: schema };
       throw new Error(`Unexpected import: ${name}`);
     },
@@ -253,7 +276,8 @@ test("partial contact/analytics failure retains success when a contact channel a
   assert.equal((await response.json()).ok, true);
   await api.runAfter();
   assert.equal(api.calls.fetch.length, 2);
-  assert.equal(api.calls.mail.length, 1);
+  assert.equal(api.calls.mail.length, 2, "lead email plus the customer confirmation after the response");
+  assert.equal(api.calls.mail[1].to, lead.email);
   assert.equal(api.calls.manager.length, 1);
 });
 
@@ -264,10 +288,11 @@ test("all real channels can receive the same valid request", async () => {
   assert.equal((await response.json()).ok, true);
   await api.runAfter();
   assert.equal(api.calls.fetch.length, 2);
-  assert.equal(api.calls.mail.length, 1);
+  assert.equal(api.calls.mail.length, 2);
   assert.equal(api.calls.manager.length, 1);
   assert.equal(JSON.parse(api.calls.fetch[0].options.body).lead.name, lead.name);
   assert.equal(api.calls.mail[0].replyTo, lead.email);
+  assert.equal(api.calls.mail[1].to, lead.email);
 });
 
 test("invalid actual schema input returns400 with field errors and no deliveries", async () => {
@@ -398,6 +423,143 @@ test("SMTP cancellation before connection does not send a message or leave a tra
   assert.equal(api.calls.sockets[0].destroyed, true);
   assert.equal(api.calls.closes, 1);
   assert.equal(api.timers.size, 0);
+});
+
+const discordWebhookUrl = "https://discord.com/api/webhooks/1/synthetic-token";
+const jpegPhoto = {
+  name: "kitchen.jpg",
+  type: "image/jpeg",
+  data: Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46]).toString("base64"),
+};
+
+test("the customer confirmation goes to the visitor after the response and never repeats free-text details", async () => {
+  const api = route({ email: "success" });
+  const response = await api.submit({ ...lead, details: "Please visit https://spam.example.test right now" });
+  assert.equal(response.status, 200);
+  assert.equal(api.calls.mail.length, 1, "the receipt waits for the post-response task");
+  await api.runAfter();
+  const receipt = api.calls.mail[1];
+  assert.equal(receipt.to, lead.email);
+  assert.equal(receipt.replyTo, "quotes@example.test");
+  assert.match(receipt.subject, /We received your request/);
+  assert.match(receipt.text, /^Hi Sample,/);
+  assert.match(receipt.text, /Service: Kitchen Remodeling/);
+  assert.match(receipt.text, /Location: Allentown 18101/);
+  assert(!receipt.text.includes("spam.example.test"));
+  assert.equal(api.timers.size, 0);
+});
+
+test("the customer confirmation can be switched off and is skipped without SMTP", async () => {
+  const off = route({ email: "success", extraEnv: { CUSTOMER_CONFIRMATION_EMAIL: "off" } });
+  assert.equal((await off.submit()).status, 200);
+  await off.runAfter();
+  assert.equal(off.calls.mail.length, 1);
+  const noSmtp = route({ manager: "success" });
+  assert.equal((await noSmtp.submit()).status, 200);
+  await noSmtp.runAfter();
+  assert.equal(noSmtp.calls.mail.length, 0);
+});
+
+test("Turnstile, when configured, rejects a missing or failed check before any delivery", async () => {
+  for (const [turnstile, token] of [
+    ["pass", ""],
+    ["fail", "rejected-token"],
+  ]) {
+    const api = route({ webhook: "success", manager: "success", turnstile });
+    const response = await api.submit({ ...lead, turnstile_token: token });
+    const body = await response.json();
+    assert.equal(response.status, 400);
+    assert(body.errors.turnstile_token.length);
+    assert.equal(api.calls.manager.length + api.calls.mail.length, 0);
+    assert(!api.calls.fetch.some((call) => call.url === "https://webhook.example.test/leads"));
+  }
+});
+
+test("Turnstile verifies the token with the visitor IP and never forwards it", async () => {
+  const api = route({ webhook: "success", manager: "success", turnstile: "pass" });
+  const response = await api.submit({ ...lead, turnstile_token: "verified-token" });
+  assert.equal(response.status, 200);
+  const verify = api.calls.fetch.find((call) => call.url.includes("challenges.cloudflare.com"));
+  assert.equal(verify.options.body.get("secret"), "synthetic-turnstile-secret");
+  assert.equal(verify.options.body.get("response"), "verified-token");
+  assert.equal(verify.options.body.get("remoteip"), "192.0.2.1");
+  const webhookCall = api.calls.fetch.find((call) => call.url === "https://webhook.example.test/leads");
+  assert.equal(JSON.parse(webhookCall.options.body).lead.turnstile_token, undefined);
+  assert(!JSON.stringify(api.calls.manager).includes("verified-token"));
+  assert(!JSON.stringify(api.calls.logs).includes("synthetic-turnstile-secret"));
+});
+
+test("an unreachable Turnstile service does not lose a real lead", async () => {
+  const api = route({ manager: "success", turnstile: "throw" });
+  const response = await api.submit({ ...lead, turnstile_token: "any-token" });
+  assert.equal(response.status, 200);
+  assert.equal(api.calls.manager.length, 1);
+});
+
+test("photos are attached to Discord and the lead email and kept out of text channels and logs", async () => {
+  const api = route({ webhook: "success", email: "success", manager: "success", webhookUrl: discordWebhookUrl });
+  const response = await api.submit({ ...lead, form_source: "scope_builder", photos: [jpegPhoto, jpegPhoto] });
+  assert.equal(response.status, 200);
+  const discord = api.calls.fetch[0];
+  assert(discord.options.body instanceof FormData, "Discord receives multipart with files");
+  const message = JSON.parse(discord.options.body.get("payload_json"));
+  assert.equal(message.embeds[0].title, "Website Lead Submission · via Scope Builder");
+  assert.equal(message.embeds[0].image.url, "attachment://photo-1.jpg");
+  assert.deepEqual(message.allowed_mentions, { parse: [] });
+  assert.deepEqual(
+    message.attachments.map((attachment) => attachment.filename),
+    ["photo-1.jpg", "photo-2.jpg"],
+  );
+  assert.equal(discord.options.body.get("files[1]").name, "photo-2.jpg");
+  assert.deepEqual(
+    api.calls.mail[0].attachments.map((attachment) => attachment.filename),
+    ["photo-1.jpg", "photo-2.jpg"],
+  );
+  assert.match(api.calls.mail[0].text, /Submitted via: Scope Builder/);
+  assert.match(api.calls.manager[0].notes, /Photos: 2 attached/);
+  assert(!JSON.stringify(api.calls.logs).includes(jpegPhoto.data));
+  assert(!JSON.stringify(api.calls.manager).includes(jpegPhoto.data));
+});
+
+test("non-image photo data is dropped before delivery", async () => {
+  const api = route({ email: "success" });
+  const fake = { name: "fake.jpg", type: "image/jpeg", data: Buffer.from("not really an image").toString("base64") };
+  const response = await api.submit({ ...lead, photos: [fake] });
+  assert.equal(response.status, 200);
+  assert.equal(api.calls.mail[0].attachments.length, 0);
+});
+
+test("the schema rejects more than four photos before any delivery", async () => {
+  const api = route({ manager: "success" });
+  const response = await api.submit({ ...lead, photos: Array.from({ length: 5 }, () => jpegPhoto) });
+  assert.equal(response.status, 400);
+  assert.equal(api.calls.manager.length, 0);
+});
+
+test("Discord lead embeds stay within Discord's limits at maximum field lengths", async () => {
+  const api = route({ webhook: "success", webhookUrl: discordWebhookUrl });
+  const longest = {
+    ...lead,
+    name: `N${"n".repeat(99)}`,
+    city: `C${"c".repeat(99)}`,
+    details: `D${"d".repeat(1999)}`,
+    traffic_source: "t".repeat(100),
+    landing_page: `/${"l".repeat(499)}`,
+    submission_page: `/${"s".repeat(499)}`,
+    referrer: `https://example.test/${"r".repeat(479)}`,
+    campaign: "g".repeat(200),
+  };
+  assert.equal((await api.submit(longest)).status, 200);
+  const embed = JSON.parse(api.calls.fetch[0].options.body).embeds[0];
+  const total =
+    embed.title.length +
+    embed.description.length +
+    embed.footer.text.length +
+    embed.fields.reduce((sum, field) => sum + field.name.length + field.value.length, 0);
+  assert(embed.description.length <= 4096);
+  assert(embed.fields.every((field) => field.value.length <= 1024 && field.name.length <= 256));
+  assert(embed.fields.length <= 25);
+  assert(total <= 6000, `embed total ${total}`);
 });
 
 const compiledManager = compile("../src/lib/leadIntake.ts");

@@ -6,6 +6,8 @@ import { primaryServices } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getFirstTouchAttribution, type LeadAttribution } from "@/lib/leadAttribution";
 import { quoteContactSchema, quoteProjectSchema, quoteTimelines } from "@/lib/quoteSchema";
+import PhotoPicker, { photosForRequest, type QuotePhoto } from "@/components/forms/PhotoPicker";
+import TurnstileWidget, { turnstileEnabled } from "@/components/forms/TurnstileWidget";
 
 type QuoteFormProps = { defaultService?: string };
 type FormState = { ok: boolean; message?: string; errors?: Record<string, string[]> };
@@ -52,6 +54,9 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
   const [contact, setContact] = useState<ContactData>({ ...emptyContact, service: resolveService(defaultService) });
   const [project, setProject] = useState<ProjectData>(emptyProject);
   const [attribution, setAttribution] = useState<AttributionData | null>(null);
+  const [photos, setPhotos] = useState<QuotePhoto[]>([]);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileReset, setTurnstileReset] = useState(0);
   const submissionIdRef = useRef<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -140,6 +145,8 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
     setState({ ok: false });
     setContact({ ...emptyContact, service: resolveService(defaultService) || contact.service });
     setProject(emptyProject);
+    photos.forEach((photo) => URL.revokeObjectURL(photo.preview));
+    setPhotos([]);
     setSubmitted(false);
     changeStep(1);
     submissionIdRef.current = null;
@@ -181,6 +188,11 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
       });
       return;
     }
+    if (turnstileEnabled && !turnstileToken) {
+      setState({ ok: false, message: "One moment: the security check is still finishing. Please send again." });
+      focusErrorRef.current = true;
+      return;
+    }
     const honeypot = new FormData(event.currentTarget).get("website");
     submittingRef.current = true;
     setLoading(true);
@@ -197,6 +209,9 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
       landing_path: firstTouch.landing_page,
       campaign: firstTouch.utm_campaign,
       submission_page: window.location.pathname,
+      form_source: "quote_form",
+      turnstile_token: turnstileToken,
+      photos: photosForRequest(photos),
     };
     try {
       const response = await fetch("/api/quote", {
@@ -218,10 +233,12 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
         message: data.message || "We could not send your request. Please try again or call us.",
       });
       submissionIdRef.current = null;
+      setTurnstileReset((count) => count + 1);
       track("rhi:quote_submit_error", { fields: Object.keys(data.errors || {}).join(","), step });
       if (contactFields.some((field) => data.errors?.[field]?.length)) changeStep(1);
     } catch {
       submissionIdRef.current = null;
+      setTurnstileReset((count) => count + 1);
       focusErrorRef.current = true;
       setState({
         ok: false,
@@ -505,6 +522,10 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
             </span>
             {errorFor("details")}
           </label>
+          <div className="mt-5">
+            <PhotoPicker photos={photos} onChange={setPhotos} disabled={loading} />
+          </div>
+          <TurnstileWidget onToken={setTurnstileToken} resetKey={turnstileReset} />
         </div>
       )}
 

@@ -14,6 +14,15 @@ The visual identity borrows from architectural drawing sets to echo the written 
 - The service-area map (`components/sections/ServiceAreaMap.tsx`) positions places from real coordinates. Only add communities that appear in `locations.ts` priority areas.
 - Project preview images go through `next/image`; do not reintroduce `unoptimized`.
 
+## Lead Handling (`src/app/api/quote/route.ts`)
+
+- One endpoint serves the quote form and the Scope Builder; `form_source` labels which one sent the lead.
+- Channels: webhook (Discord embed with fields, or generic JSON), lead email, Manager App. Any acknowledged channel is success; otherwise 503 with the phone number.
+- Photos (max 4) are resized client-side in `components/forms/PhotoPicker.tsx` and validated in `quoteSchema` and by image signature. They go to Discord (multipart) and the lead email only; keep photo bytes and the Turnstile token out of generic webhooks, Manager App payloads and logs.
+- The customer confirmation email runs in `after()` with analytics, repeats only service, timing and location (never free text), and can be disabled with `CUSTOMER_CONFIRMATION_EMAIL=off`.
+- Turnstile is enforced only when `TURNSTILE_SECRET_KEY` is set; a Cloudflare outage accepts the lead rather than losing it.
+- `scripts/check-lead-delivery.mjs` runs the real route in a VM with only six allowed imports. New route imports must be added to that harness.
+
 ## Proven Pattern: Before/After Case Study Toggle
 
 - Keep `before` photos out of generic "Recent Work" galleries.

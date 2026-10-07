@@ -81,6 +81,17 @@ An integration suite (30 checks, local build only) covers the scroll indicator, 
 
 The first version's "Send this to RHI Pros" only opened the quote page with the scope pre-filled and asked for contact details again, so it did not appear to send. It now collects contact details in the sheet and submits through `/api/quote`. Verified against local stand-ins for all three channels (a strict Discord webhook stand-in enforcing Discord's message limits, an SMTP sink and a Manager App intake): 29/29 checks, including empty-field validation with no request sent, delivery of the full scope to Discord, email and Manager App, one `generate_lead` conversion per send, an undecided sheet sent as "Exploring options", and successful delivery by email and Manager App during a simulated Discord outage. No real lead was sent.
 
+## Lead handling upgrades (October 7)
+
+Branch `lead-handling-2026-10-07`:
+
+1. **Customer confirmation email** after a delivered lead (service, timing, location and photo count only; no free text, so the form cannot relay arbitrary content). Opt out with `CUSTOMER_CONFIRMATION_EMAIL=off`.
+2. **Project photos** (up to 4) on the quote form and Scope Builder, resized on the device; a 10 MB, 12-megapixel worst case produced a 0.99 MB request. Attached to Discord and the lead email; non-images are rejected.
+3. **Cloudflare Turnstile** verified server-side when keys are configured; missing or failed checks are refused with a visible message, details kept and a fresh check issued; a Cloudflare outage does not lose the lead.
+4. **Discord message** rebuilt with labeled fields, "via Quote form / via Scope Builder", the first photo inline, and mentions disabled. Discord does not make phone numbers tappable, so the number is shown as a plain field.
+
+Verification: lead-delivery unit suite 36/36 (9 new tests); browser end-to-end against local channel stand-ins and Cloudflare's official test keys 24/24, plus 5/5 Turnstile-rejection checks and 3/3 photo-picker keyboard-focus checks; integration 28/28; rendered SEO and image audits 0 errors; accessibility 0 violations on the new steps (desktop and mobile).
+
 ## Not verified here
 
 Real lead receipt, indexing, rankings, rich-result eligibility, Core Web Vitals field data and conversion impact need the live domain, Search Console and analytics after deployment. The new `scope_builder_*` events need a GTM trigger if they should appear as GA4 events.

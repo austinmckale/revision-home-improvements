@@ -5,6 +5,8 @@ import Link from "next/link";
 import { quoteTimelines, scopeContactSchema } from "@/lib/quoteSchema";
 import { getFirstTouchAttribution } from "@/lib/leadAttribution";
 import { siteConfig } from "@/content/site";
+import PhotoPicker, { photosForRequest, type QuotePhoto } from "@/components/forms/PhotoPicker";
+import TurnstileWidget, { turnstileEnabled } from "@/components/forms/TurnstileWidget";
 
 export type ScopeBuilderService = {
   slug: string;
@@ -44,6 +46,9 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
   const [errors, setErrors] = useState<FieldErrors>({});
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
+  const [photos, setPhotos] = useState<QuotePhoto[]>([]);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileReset, setTurnstileReset] = useState(0);
   const submissionIdRef = useRef<string | null>(null);
   const firstFieldRef = useRef<HTMLInputElement>(null);
   const sentHeadingRef = useRef<HTMLHeadingElement>(null);
@@ -101,6 +106,11 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
       requestAnimationFrame(() => messageRef.current?.focus());
       return;
     }
+    if (turnstileEnabled && !turnstileToken) {
+      setMessage("One moment: the security check is still finishing. Please send again.");
+      requestAnimationFrame(() => messageRef.current?.focus());
+      return;
+    }
     const honeypot = new FormData(event.currentTarget).get("website");
     setErrors({});
     setMessage("");
@@ -123,6 +133,9 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
           landing_path: firstTouch.landing_page,
           campaign: firstTouch.utm_campaign,
           submission_page: window.location.pathname,
+          form_source: "scope_builder",
+          turnstile_token: turnstileToken,
+          photos: photosForRequest(photos),
         }),
       });
       const data = (await response.json().catch(() => ({}))) as { ok?: boolean; message?: string; errors?: FieldErrors };
@@ -132,12 +145,14 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
         return;
       }
       submissionIdRef.current = null;
+      setTurnstileReset((count) => count + 1);
       setErrors(data.errors || {});
       setMessage(data.message || `We could not send your scope. Please try again or call ${siteConfig.phoneDisplay}.`);
       emit("quote_submit_error", { fields: Object.keys(data.errors || {}).join(","), source: "scope_builder" });
       requestAnimationFrame(() => messageRef.current?.focus());
     } catch {
       submissionIdRef.current = null;
+      setTurnstileReset((count) => count + 1);
       setMessage(`We could not send your scope. Your details are still here. Please try again or call ${siteConfig.phoneDisplay}.`);
       requestAnimationFrame(() => messageRef.current?.focus());
     } finally {
@@ -151,6 +166,8 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
     setTimeline("");
     setNotes("");
     setContact(emptyContact);
+    photos.forEach((photo) => URL.revokeObjectURL(photo.preview));
+    setPhotos([]);
     submissionIdRef.current = null;
   };
 
@@ -410,6 +427,10 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
                 );
               })}
             </div>
+            <div className="mt-5">
+              <PhotoPicker photos={photos} onChange={setPhotos} disabled={sending} />
+            </div>
+            <TurnstileWidget onToken={setTurnstileToken} resetKey={turnstileReset} />
             <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
             {message ? (
               <p ref={messageRef} tabIndex={-1} role="alert" className="mt-4 text-sm font-semibold text-red-700 outline-none">

@@ -9,7 +9,23 @@ export const quoteTimelines = [
   "Exploring options",
 ] as const;
 
+/** Photos travel inside the JSON request, so the browser resizes them to stay under Vercel's 4.5 MB body limit. */
+export const MAX_QUOTE_PHOTOS = 4;
+export const MAX_QUOTE_PHOTO_BYTES = 900_000;
+export const MAX_QUOTE_PHOTOS_TOTAL_BYTES = 2_800_000;
+export const quotePhotoTypes = ["image/jpeg", "image/png", "image/webp"] as const;
+
 const asText = z.preprocess((value) => (typeof value === "string" ? value : ""), z.string().trim());
+
+const quotePhotoSchema = z.object({
+  name: asText.pipe(z.string().max(120)),
+  type: z.enum(quotePhotoTypes),
+  data: z
+    .string()
+    .min(1)
+    .max(Math.ceil(MAX_QUOTE_PHOTO_BYTES / 3) * 4, "A photo is too large")
+    .regex(/^[A-Za-z0-9+/]+={0,2}$/, "A photo could not be read"),
+});
 
 export const quoteSchema = z.object({
   name: asText.pipe(z.string().min(2, "Name is required").max(100, "Name is too long")),
@@ -45,6 +61,19 @@ export const quoteSchema = z.object({
   gclid: asText.pipe(z.string().max(500)),
   fbclid: asText.pipe(z.string().max(500)),
   landing_path: asText.pipe(z.string().max(500)),
+  /** Which on-site form sent the lead: "quote_form" or "scope_builder". */
+  form_source: asText.pipe(z.string().max(40)),
+  turnstile_token: asText.pipe(z.string().max(4096)),
+  photos: z.preprocess(
+    (value) => (Array.isArray(value) ? value : []),
+    z
+      .array(quotePhotoSchema)
+      .max(MAX_QUOTE_PHOTOS, `Add up to ${MAX_QUOTE_PHOTOS} photos`)
+      .refine(
+        (photos) => photos.reduce((total, photo) => total + (photo.data.length * 3) / 4, 0) <= MAX_QUOTE_PHOTOS_TOTAL_BYTES,
+        "Photos are too large together",
+      ),
+  ),
 });
 
 export type QuoteInput = z.infer<typeof quoteSchema>;

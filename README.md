@@ -61,6 +61,7 @@ Copy `.env.example` to `.env.local` and fill values:
 - `SMTP_PORT`
 - `SMTP_USER`
 - `SMTP_PASS`
+- `CUSTOMER_CONFIRMATION_EMAIL` (optional; set to `off` to stop the automatic receipt email to customers)
 
 ## Current route coverage
 
@@ -79,7 +80,10 @@ Copy `.env.example` to `.env.local` and fill values:
 - Mobile sticky CTA keeps call/quote actions visible.
 - Quote form uses a two-step flow, honeypot protection, and Zod validation.
 - Homepage Scope Builder lets visitors draft a "scope starter" from real service checklists, print it, or send it directly from the sheet (name, phone, email, city, ZIP). It is delivered through `POST /api/quote` like any quote request, so it reaches the webhook/Discord, email and Manager App channels with the scope in the details.
-- If Turnstile keys are set, server validates Turnstile token before accepting lead.
+- If both Turnstile keys are set, the quote form and Scope Builder show Cloudflare Turnstile (usually invisible) and the server verifies the token before accepting a lead. With no keys, the check is off. Add **both** keys together, then redeploy (the site key is built into the page).
+- Visitors can attach up to 4 photos. They are resized in the browser (JPEG, location metadata dropped) to keep requests under Vercel's 4.5 MB limit, then attached to the Discord message and lead email. The Manager App notes record the photo count.
+- After a lead is delivered, the visitor receives a plain confirmation email (service, timing, location; never their free-text notes) when SMTP is configured.
+- Discord messages use labeled fields, show "via Quote form" or "via Scope Builder", display the first photo inline and never ping anyone.
 - If `LEADS_WEBHOOK_URL` or `DISCORD_WEBHOOK_URL` is configured, accepted leads are posted server-side to that endpoint.
 - Client tracking emits events for call clicks, quote steps, quote submit attempts, quote errors, and successful lead submissions.
 

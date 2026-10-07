@@ -11,6 +11,13 @@ const RATE_LIMIT_MAX_REQUESTS = 8;
 const requestBuckets = new Map<string, number[]>();
 const CONTACT_DELIVERY_TIMEOUT_MS = 8_000;
 const ANALYTICS_TIMEOUT_MS = 2_000;
+const TURNSTILE_TIMEOUT_MS = 5_000;
+// Discord embed limits: https://discord.com/developers/docs/resources/message#embed-object-embed-limits
+const DISCORD_DESCRIPTION_LIMIT = 4096;
+const DISCORD_FIELD_VALUE_LIMIT = 1024;
+const DISCORD_EMBED_TOTAL_LIMIT = 6000;
+
+type LeadPhoto = { filename: string; contentType: string; content: Buffer };
 
 async function withDeliveryDeadline<T>(send: (signal: AbortSignal) => Promise<T>, timeoutMs: number): Promise<T> {
   const controller = new AbortController();
@@ -60,54 +67,114 @@ function truncateText(value: string, maxLength: number) {
   return value.length <= maxLength ? value : `${value.slice(0, maxLength - 1)}…`;
 }
 
-async function sendLeadWebhook(payload: Record<string, unknown>, signal: AbortSignal) {
+function formSourceLabel(payload: Record<string, unknown>) {
+  return payload.form_source === "scope_builder" ? "Scope Builder" : "Quote form";
+}
+
+function hasImageSignature(bytes: Buffer, type: string) {
+  if (type === "image/jpeg") return bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  if (type === "image/png") return bytes.toString("hex", 0, 8) === "89504e470d0a1a0a";
+  if (type === "image/webp") return bytes.toString("ascii", 0, 4) === "RIFF" && bytes.toString("ascii", 8, 12) === "WEBP";
+  return false;
+}
+
+/** Decode the browser-resized photos, keeping only real JPEG/PNG/WebP images. */
+function decodePhotos(photos: Array<{ type: string; data: string }>): LeadPhoto[] {
+  const extensions: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
+  return photos
+    .map((photo) => ({ contentType: photo.type, content: Buffer.from(photo.data, "base64") }))
+    .filter((photo) => hasImageSignature(photo.content, photo.contentType))
+    .map((photo, index) => ({ ...photo, filename: `photo-${index + 1}.${extensions[photo.contentType]}` }));
+}
+
+/** Cloudflare Turnstile. Active only when TURNSTILE_SECRET_KEY is configured. */
+async function verifyTurnstile(token: string, ip: string | undefined, signal: AbortSignal) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true;
+  if (!token) return false;
+  const body = new URLSearchParams({ secret, response: token });
+  if (ip) body.set("remoteip", ip);
+  const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    body,
+    signal,
+  });
+  const result = (await response.json()) as { success?: boolean };
+  return result.success === true;
+}
+
+function discordEmbed(payload: Record<string, unknown>, photos: LeadPhoto[]) {
+  const value = (text: unknown, fallback = "—") =>
+    truncateText(String(text || "").trim() || fallback, DISCORD_FIELD_VALUE_LIMIT);
+  const attribution = [
+    `Traffic Source: ${String(payload.traffic_source || "Direct / Unknown")}`,
+    payload.landing_page ? `Landing Page: ${String(payload.landing_page)}` : "",
+    payload.submission_page ? `Submission Page: ${String(payload.submission_page)}` : "",
+    payload.referrer ? `Referrer: ${String(payload.referrer)}` : "",
+    payload.campaign ? `Campaign: ${String(payload.campaign)}` : "",
+  ].filter(Boolean);
+  const fields = [
+    { name: "Name", value: value(payload.name), inline: true },
+    { name: "Phone", value: value(payload.phone), inline: true },
+    { name: "Email", value: value(payload.email), inline: true },
+    { name: "Location", value: value(`${String(payload.city || "")} ${String(payload.zip || "")}`), inline: true },
+    { name: "Service", value: value(payload.service), inline: true },
+    { name: "Timeline", value: value(payload.timeline), inline: true },
+    ...(photos.length ? [{ name: "Photos", value: `${photos.length} attached`, inline: true }] : []),
+    { name: "Source", value: value(attribution.join("\n")), inline: false },
+  ];
+  const title = `Website Lead Submission · via ${formSourceLabel(payload)}`;
+  const fixedLength = title.length + fields.reduce((total, field) => total + field.name.length + field.value.length, 0);
+  const description = truncateText(
+    `**Details**\n${String(payload.details || "")}`,
+    Math.min(DISCORD_DESCRIPTION_LIMIT, DISCORD_EMBED_TOTAL_LIMIT - fixedLength - 100),
+  );
+  return {
+    title,
+    description,
+    color: 13678695,
+    fields,
+    ...(photos[0] ? { image: { url: `attachment://${photos[0].filename}` } } : {}),
+    footer: { text: "rhipros.com" },
+    timestamp: new Date().toISOString(),
+  };
+}
+
+async function sendLeadWebhook(payload: Record<string, unknown>, photos: LeadPhoto[], signal: AbortSignal) {
   const webhookUrl = process.env.LEADS_WEBHOOK_URL || process.env.DISCORD_WEBHOOK_URL;
   if (!webhookUrl) return { delivered: false, reason: "missing_webhook_url" as const };
 
   const isDiscordWebhook = webhookUrl.includes("discord.com/api/webhooks");
-  const leadLines = [
-    `Name: ${String(payload.name || "")}`,
-    `Phone: ${String(payload.phone || "")}`,
-    `Email: ${String(payload.email || "")}`,
-    `City: ${String(payload.city || "")}`,
-    `ZIP: ${String(payload.zip || "")}`,
-    `Service: ${String(payload.service || "")}`,
-    `Timeline: ${String(payload.timeline || "")}`,
-    `Details: ${String(payload.details || "")}`,
-  ];
+  let body: string | FormData;
+  let headers: Record<string, string> | undefined = { "Content-Type": "application/json" };
 
-  leadLines.push("", `Traffic Source: ${String(payload.traffic_source || "Direct / Unknown")}`);
-  if (payload.landing_page) leadLines.push(`Landing Page: ${String(payload.landing_page)}`);
-  if (payload.submission_page) leadLines.push(`Submission Page: ${String(payload.submission_page)}`);
-  if (payload.referrer) leadLines.push(`Referrer: ${String(payload.referrer)}`);
-  if (payload.campaign) leadLines.push(`Campaign: ${String(payload.campaign)}`);
+  if (isDiscordWebhook) {
+    const message = {
+      username: "RHI Leads",
+      content: "New Quote Request",
+      // Lead text is customer-entered; never let it ping anyone.
+      allowed_mentions: { parse: [] },
+      embeds: [discordEmbed(payload, photos)],
+    };
+    if (photos.length) {
+      const form = new FormData();
+      form.append(
+        "payload_json",
+        JSON.stringify({ ...message, attachments: photos.map((photo, id) => ({ id, filename: photo.filename })) }),
+      );
+      photos.forEach((photo, index) =>
+        form.append(`files[${index}]`, new Blob([new Uint8Array(photo.content)], { type: photo.contentType }), photo.filename),
+      );
+      body = form;
+      headers = undefined;
+    } else {
+      body = JSON.stringify(message);
+    }
+  } else {
+    body = JSON.stringify({ event: "quote_submitted", submittedAt: new Date().toISOString(), lead: payload });
+  }
 
-  const body = isDiscordWebhook
-    ? {
-        username: "RHI Leads",
-        content: "New Quote Request",
-        embeds: [
-          {
-            title: "Website Lead Submission",
-            // Discord rejects embed descriptions over 4,096 characters; keep long details from failing delivery.
-            description: truncateText(leadLines.join("\n"), 4096),
-            color: 13678695,
-            timestamp: new Date().toISOString(),
-          },
-        ],
-      }
-    : {
-        event: "quote_submitted",
-        submittedAt: new Date().toISOString(),
-        lead: payload,
-      };
-
-  const response = await fetch(webhookUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-    signal,
-  });
+  const response = await fetch(webhookUrl, { method: "POST", headers, body, signal });
 
   if (!response.ok) {
     const text = await response.text().catch(() => "");
@@ -117,18 +184,24 @@ async function sendLeadWebhook(payload: Record<string, unknown>, signal: AbortSi
   await response.body?.cancel();
   return { delivered: true as const };
 }
-async function sendLeadEmail(payload: Record<string, unknown>, signal: AbortSignal) {
+
+function getSmtpConfig() {
   const host = process.env.SMTP_HOST;
   const port = Number(process.env.SMTP_PORT || 465);
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
-  const to = process.env.EMAIL_TO || siteConfig.primaryEmail;
   const from = process.env.EMAIL_FROM || user;
+  if (!host || !user || !pass || !from) return null;
+  return { host, port, user, pass, from };
+}
 
-  if (!host || !user || !pass || !to || !from) {
-    return { delivered: false, reason: "missing_smtp_config" as const };
-  }
-
+/** Send one message over SMTP within the caller's deadline, owning and cleaning up the raw socket. */
+async function sendSmtpMail(
+  smtp: NonNullable<ReturnType<typeof getSmtpConfig>>,
+  message: nodemailer.SendMailOptions,
+  signal: AbortSignal,
+) {
+  const { host, port, user, pass } = smtp;
   let socket: Socket | undefined;
   const transportOptions: SMTPTransport.Options = {
     host,
@@ -157,6 +230,21 @@ async function sendLeadEmail(payload: Record<string, unknown>, signal: AbortSign
     },
   };
   const transporter = nodemailer.createTransport(transportOptions);
+  try {
+    await transporter.sendMail(message);
+    return { delivered: true as const };
+  } finally {
+    socket?.destroy();
+    transporter.close();
+  }
+}
+
+async function sendLeadEmail(payload: Record<string, unknown>, photos: LeadPhoto[], signal: AbortSignal) {
+  const smtp = getSmtpConfig();
+  const to = process.env.EMAIL_TO || siteConfig.primaryEmail;
+  if (!smtp || !to) {
+    return { delivered: false, reason: "missing_smtp_config" as const };
+  }
 
   const subject = `New Quote Request: ${String(payload.name || "Lead")} (${String(payload.service || "Service TBD")})`;
   const body = [
@@ -168,24 +256,82 @@ async function sendLeadEmail(payload: Record<string, unknown>, signal: AbortSign
     `Service: ${String(payload.service || "")}`,
     `Timeline: ${String(payload.timeline || "")}`,
     `Details: ${String(payload.details || "")}`,
+    `Submitted via: ${formSourceLabel(payload)}`,
   ];
+  if (photos.length) body.push(`Photos: ${photos.length} attached`);
   if (payload.utm_source) {
     body.push(`Source: ${String(payload.utm_source)} / ${String(payload.utm_medium || "")}`);
   }
 
-  try {
-    await transporter.sendMail({
-      from,
+  return sendSmtpMail(
+    smtp,
+    {
+      from: smtp.from,
       to,
       replyTo: payload.email ? String(payload.email) : undefined,
       subject,
       text: body.join("\n"),
-    });
-    return { delivered: true as const };
-  } finally {
-    socket?.destroy();
-    transporter.close();
+      attachments: photos.map((photo) => ({
+        filename: photo.filename,
+        content: photo.content,
+        contentType: photo.contentType,
+      })),
+    },
+    signal,
+  );
+}
+
+/**
+ * Plain receipt to the visitor. It repeats only the chosen service, timing and
+ * location, never free-text details, so the form cannot relay arbitrary text.
+ */
+async function sendCustomerConfirmation(payload: Record<string, unknown>, photoCount: number, signal: AbortSignal) {
+  const smtp = getSmtpConfig();
+  if (!smtp) return { delivered: false, reason: "missing_smtp_config" as const };
+  if (process.env.CUSTOMER_CONFIRMATION_EMAIL === "off") {
+    return { delivered: false, reason: "missing_confirmation_opt_in" as const };
   }
+  const clean = (value: unknown, pattern: RegExp, max: number) =>
+    String(value || "")
+      .replace(pattern, "")
+      .trim()
+      .slice(0, max);
+  const firstName = clean(String(payload.name || "").split(/\s+/)[0], /[^\p{L}'-]/gu, 40) || "there";
+  const service = clean(payload.service, /[^\p{L}\s&–-]/gu, 60) || "remodeling";
+  const timeline = clean(payload.timeline, /[^\p{L}\d\s–-]/gu, 40);
+  const location = `${clean(payload.city, /[^\p{L}\s.'-]/gu, 60)} ${clean(payload.zip, /[^\d-]/g, 10)}`.trim();
+  const businessInbox = process.env.EMAIL_TO || siteConfig.primaryEmail;
+
+  const text = [
+    `Hi ${firstName},`,
+    "",
+    `Thanks for reaching out to ${siteConfig.name}. We received your ${service} request. We will review it and follow up by phone or email to talk through next steps.`,
+    "",
+    "What you sent us",
+    `Service: ${service}`,
+    timeline ? `Timing: ${timeline}` : "",
+    location ? `Location: ${location}` : "",
+    photoCount ? `Photos: ${photoCount} received` : "",
+    "",
+    `Need us sooner? Call ${siteConfig.phoneDisplay}${businessInbox ? ` or reply to this email` : ""}.`,
+    "",
+    `${siteConfig.name} · ${siteConfig.legalName} · ${siteConfig.hicLabel}`,
+    siteConfig.domain,
+    "",
+    "You are receiving this because this email address was entered in a quote request on our website. If that was not you, you can ignore this message.",
+  ].filter((line, index, lines) => line !== "" || lines[index - 1] !== "");
+
+  return sendSmtpMail(
+    smtp,
+    {
+      from: smtp.from,
+      to: String(payload.email),
+      replyTo: businessInbox || undefined,
+      subject: `We received your request – ${siteConfig.name}`,
+      text: text.join("\n"),
+    },
+    signal,
+  );
 }
 
 async function sendFbConversionEvent(payload: Record<string, unknown>, signal: AbortSignal, ip?: string, ua?: string) {
@@ -286,43 +432,76 @@ export async function POST(request: Request) {
       );
     }
 
+    // Keep photo bytes and the security token out of text channels and logs.
+    const { photos: rawPhotos = [], turnstile_token: turnstileToken, ...lead } = parsed.data;
+
+    if (process.env.TURNSTILE_SECRET_KEY) {
+      let verified = true;
+      try {
+        verified = await withDeliveryDeadline(
+          (signal) => verifyTurnstile(String(turnstileToken || ""), remoteIp, signal),
+          TURNSTILE_TIMEOUT_MS,
+        );
+      } catch {
+        // If Cloudflare is unreachable, accept the lead rather than lose a real customer.
+        console.warn("[quote-api] Turnstile verification unavailable; accepting request.");
+      }
+      if (!verified) {
+        return NextResponse.json(
+          {
+            ok: false,
+            message: "Please complete the security check and try again.",
+            errors: { turnstile_token: ["Please complete the security check."] },
+          },
+          { status: 400 },
+        );
+      }
+    }
+
+    const photos = rawPhotos.length ? decodePhotos(rawPhotos) : [];
+    const deliveryLead: Record<string, unknown> = { ...lead, photo_count: photos.length };
+
     console.log("[quote-api] New request received:", {
-      service: parsed.data.service,
-      city: parsed.data.city,
-      email: redactEmail(parsed.data.email),
-      phone: redactPhone(parsed.data.phone),
+      service: lead.service,
+      city: lead.city,
+      email: redactEmail(lead.email),
+      phone: redactPhone(lead.phone),
+      source: formSourceLabel(deliveryLead),
+      photos: photos.length,
       ip: remoteIp || "unknown",
     });
 
     // Keep the acknowledgements: a skipped channel is not a delivered lead.
     const results = await Promise.allSettled([
-      withDeliveryDeadline((signal) => sendLeadWebhook(parsed.data, signal), CONTACT_DELIVERY_TIMEOUT_MS),
-      withDeliveryDeadline((signal) => sendLeadEmail(parsed.data, signal), CONTACT_DELIVERY_TIMEOUT_MS),
+      withDeliveryDeadline((signal) => sendLeadWebhook(deliveryLead, photos, signal), CONTACT_DELIVERY_TIMEOUT_MS),
+      withDeliveryDeadline((signal) => sendLeadEmail(deliveryLead, photos, signal), CONTACT_DELIVERY_TIMEOUT_MS),
       withDeliveryDeadline(
         (signal) =>
           forwardToManagerAppLead(
             {
-              contactName: parsed.data.name,
-              phone: parsed.data.phone,
-              email: parsed.data.email,
-              serviceType: parsed.data.service,
+              contactName: lead.name,
+              phone: lead.phone,
+              email: lead.email,
+              serviceType: lead.service,
               source: "website_form",
-              notes: parsed.data.details,
-              utm_source: parsed.data.utm_source || undefined,
-              utm_medium: parsed.data.utm_medium || undefined,
-              utm_campaign: parsed.data.utm_campaign || undefined,
-              utm_content: parsed.data.utm_content || undefined,
-              utm_term: parsed.data.utm_term || undefined,
-              landing_path: parsed.data.landing_path || undefined,
-              traffic_source: parsed.data.traffic_source || "Direct / Unknown",
-              traffic_medium: parsed.data.traffic_medium || "direct",
-              referrer: parsed.data.referrer || undefined,
-              gclid: parsed.data.gclid || undefined,
-              fbclid: parsed.data.fbclid || undefined,
-              submission_page: parsed.data.submission_page || undefined,
-              city: parsed.data.city,
-              zip: parsed.data.zip,
-              timeline: parsed.data.timeline,
+              notes: photos.length
+                ? `${lead.details}\n\nPhotos: ${photos.length} attached to the lead email and Discord notification.`
+                : lead.details,
+              utm_source: lead.utm_source || undefined,
+              utm_medium: lead.utm_medium || undefined,
+              utm_campaign: lead.utm_campaign || undefined,
+              utm_content: lead.utm_content || undefined,
+              utm_term: lead.utm_term || undefined,
+              landing_path: lead.landing_path || undefined,
+              traffic_source: lead.traffic_source || "Direct / Unknown",
+              traffic_medium: lead.traffic_medium || "direct",
+              referrer: lead.referrer || undefined,
+              gclid: lead.gclid || undefined,
+              fbclid: lead.fbclid || undefined,
+              submission_page: lead.submission_page || undefined,
+              city: lead.city,
+              zip: lead.zip,
+              timeline: lead.timeline,
             },
             signal,
           ),
@@ -346,20 +525,25 @@ export async function POST(request: Request) {
       );
     }
 
-    // Next owns and awaits this bounded post-response task through waitUntil.
-    // Analytics cannot delay or reverse an acknowledged customer request.
+    // Next owns and awaits these bounded post-response tasks through waitUntil.
+    // The customer receipt and analytics cannot delay or reverse an acknowledged request.
     try {
       after(async () => {
-        const [result] = await Promise.allSettled([
+        const [confirmation, analytics] = await Promise.allSettled([
           withDeliveryDeadline(
-            (signal) => sendFbConversionEvent(parsed.data, signal, remoteIp, userAgent),
+            (signal) => sendCustomerConfirmation(deliveryLead, photos.length, signal),
+            CONTACT_DELIVERY_TIMEOUT_MS,
+          ),
+          withDeliveryDeadline(
+            (signal) => sendFbConversionEvent(deliveryLead, signal, remoteIp, userAgent),
             ANALYTICS_TIMEOUT_MS,
           ),
         ]);
-        logDeliveryResult("Facebook conversion (analytics)", result);
+        logDeliveryResult("Customer confirmation email", confirmation);
+        logDeliveryResult("Facebook conversion (analytics)", analytics);
       });
     } catch {
-      console.warn("[quote-api] Analytics task was not scheduled.");
+      console.warn("[quote-api] Post-response tasks were not scheduled.");
     }
 
     return NextResponse.json({
