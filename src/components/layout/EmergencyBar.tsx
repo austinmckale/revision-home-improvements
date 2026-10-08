@@ -30,7 +30,7 @@ export default function EmergencyBar() {
       >
         <Container className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-sm">
           <p className="text-[var(--accent)]">
-            <span className="font-semibold">Fire or water damage?</span> Call to discuss repair scope and availability.
+            <span className="font-semibold">Fire or water damage?</span> Call to talk through the damage and our availability.
           </p>
           <div className="flex items-center gap-3">
             <a

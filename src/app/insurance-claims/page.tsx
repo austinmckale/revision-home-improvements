@@ -4,8 +4,10 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
-import { locations } from "@/content/locations";
+import FaqList from "@/components/sections/FaqList";
+import { locations, placeName } from "@/content/locations";
 import { siteConfig } from "@/content/site";
+import { getServiceBySlug } from "@/content/services";
 import { insuranceClaimsClarification } from "@/content/restoration";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPageMetadata } from "@/lib/metadata";
@@ -13,11 +15,28 @@ import { getPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = getPageMetadata({
   title: "Insurance Claim Remodeling Support | Reading PA & Lehigh Valley",
   description:
-    "Need help with claim-related repair scope? We support insurance-backed remodeling and restoration work across Reading, Berks County, and the Lehigh Valley.",
+    "Insurance claim repairs in Reading, Berks County and the Lehigh Valley: photos, a detailed repair estimate for your adjuster, and the rebuild itself.",
   path: "/insurance-claims",
 });
 
+const steps = [
+  {
+    title: "Document",
+    copy: "Photos and notes of the damage, room by room, ready to share with your adjuster.",
+  },
+  {
+    title: "Estimate",
+    copy: "A detailed repair estimate that matches the damage. Any change is explained and approved in writing first.",
+  },
+  {
+    title: "Rebuild",
+    copy: "Drywall, flooring, trim and finishes put back together, with regular updates through the final walkthrough.",
+  },
+];
+
 export default function InsuranceClaimsPage() {
+  const claimFaqs = getServiceBySlug("insurance-claims")?.faqs ?? [];
+
   return (
     <>
       <JsonLd
@@ -26,79 +45,70 @@ export default function InsuranceClaimsPage() {
           { name: "Insurance Claims", href: "/insurance-claims" },
         ])}
       />
-      <PageIntro eyebrow="Restoration, clearly documented" title="Insurance claims assistance.">
+      <PageIntro eyebrow="Insurance claims" title="Insurance claim repairs, handled clearly.">
         <p>
-          Claim-driven projects need clean documentation, disciplined scope writing, and predictable communication. That
-          is where we focus.
+          After a fire, leak or storm, we document the damage, write a detailed repair estimate and rebuild your home
+          while your claim moves forward.
         </p>
       </PageIntro>
-      <section className="support-content py-12 sm:py-20">
-        <Container className="max-w-5xl">
-          <p className="text-sm leading-relaxed text-[var(--muted)]">{insuranceClaimsClarification}</p>
-
-          <div className="surface mt-6 rounded-sm border-[var(--brand)] p-6">
-            <h2 className="heading-serif text-3xl text-[var(--accent)]">Urgent damage situation?</h2>
-            <p className="mt-2 text-sm text-[var(--muted)]">
-              Call to discuss the damage, your location and current availability. Confirm any immediate safety or
-              mitigation needs with the appropriate emergency or specialist service before planning reconstruction.
-            </p>
-            <Button href={siteConfig.phoneHref} className="mt-4">
-              Call {siteConfig.phoneDisplay}
-            </Button>
+      <section className="py-14 sm:py-20">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[1.3fr_.7fr] lg:gap-16">
+            <div>
+              <h2 className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">How we help.</h2>
+              <ol className="mt-8 border-t border-[var(--accent)]">
+                {steps.map((step, index) => (
+                  <li
+                    key={step.title}
+                    className="grid gap-2 border-b border-[var(--border)] py-6 sm:grid-cols-[3rem_10rem_1fr] sm:items-baseline sm:gap-6"
+                  >
+                    <span className="font-mono text-xs tracking-[.15em] text-[var(--brand)]">0{index + 1}</span>
+                    <h3 className="heading-serif text-2xl text-[var(--accent)]">{step.title}</h3>
+                    <p className="text-sm leading-relaxed text-[var(--muted)] sm:text-base">{step.copy}</p>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">{insuranceClaimsClarification}</p>
+              {claimFaqs.length > 0 ? <FaqList id="questions" title="Common questions" items={claimFaqs} /> : null}
+            </div>
+            <div className="h-fit bg-[var(--accent)] p-6 text-white sm:p-8">
+              <p className="eyebrow eyebrow-light">Urgent damage?</p>
+              <p className="heading-serif mt-4 text-2xl leading-snug">Call us to talk it through.</p>
+              <p className="mt-3 text-sm leading-relaxed text-white/75">
+                If anyone is unsafe or the damage is still active, contact emergency services or a mitigation company
+                first. Then call us about the repairs and our current availability.
+              </p>
+              <div className="mt-6 grid gap-3">
+                <Button href={siteConfig.phoneHref}>Call {siteConfig.phoneDisplay}</Button>
+                <Button href="/request-a-quote?service=insurance-claims" variant="secondary">
+                  Request claim help
+                </Button>
+              </div>
+            </div>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <article className="surface rounded-sm p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Document</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Capture damage details and immediate priorities for claim communication.
-              </p>
-            </article>
-            <article className="surface rounded-sm p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Scope</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Build a clear repair scope tied to required restoration outcomes.
-              </p>
-            </article>
-            <article className="surface rounded-sm p-5">
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--brand)]">Execute</h2>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Run reconstruction with milestone updates and clean handoff standards.
-              </p>
-            </article>
-          </div>
-
-          <div className="surface mt-6 rounded-sm p-6">
-            <h2 className="heading-serif text-3xl text-[var(--accent)]">Support Areas</h2>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              {locations.map((location) => (
-                <Link
-                  key={location.slug}
-                  href={`/${location.slug}/insurance-claims`}
-                  className="rounded-lg border border-[var(--border)] p-3 text-sm hover:border-[var(--brand)]"
-                >
-                  Insurance claim help in {location.name}
-                </Link>
+          <div className="mt-14 border-t border-[var(--border)] pt-6 text-sm leading-relaxed text-[var(--muted)]">
+            <p>
+              Claim repairs across{" "}
+              {locations.map((location, index) => (
+                <span key={location.slug}>
+                  {index > 0 ? (index === locations.length - 1 ? " and " : ", ") : null}
+                  <Link
+                    href={`/${location.slug}/insurance-claims`}
+                    className="font-semibold text-[var(--accent)] underline decoration-[var(--border)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:decoration-[var(--brand)]"
+                  >
+                    {placeName(location)}
+                  </Link>
+                </span>
               ))}
-            </div>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <Button href="/request-a-quote">Request claim support</Button>
-              <Button href="/fire-water-damage-restoration" variant="secondary">
-                Fire + water restoration page
-              </Button>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 text-sm">
-            <Link href="/services" className="font-semibold text-[var(--brand)]">
-              All Services
-            </Link>
-            <Link href="/our-process" className="font-semibold text-[var(--brand)]">
-              Our Process
-            </Link>
-            <Link href="/projects" className="font-semibold text-[var(--brand)]">
-              See Our Work
-            </Link>
+              .{" "}
+              <Link
+                href="/fire-water-damage-restoration"
+                className="font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+              >
+                Fire &amp; water damage restoration →
+              </Link>
+            </p>
           </div>
         </Container>
       </section>

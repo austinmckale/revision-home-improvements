@@ -16,7 +16,7 @@ const serif = DM_Serif_Display({ subsets: ["latin"], weight: "400", variable: "-
 // One preloaded weight keeps drafting annotations from reflowing after first paint.
 const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: "500", variable: "--font-plex-mono", display: "swap" });
 const defaultDescription =
-  "Remodeling and damage repairs in Allentown, Bethlehem, Reading, the Lehigh Valley and Berks County. Explore photos and plan a written scope with RHI Pros.";
+  "Remodeling and damage repairs in Allentown, Bethlehem, Reading, the Lehigh Valley and Berks County. See our work and request a quote from RHI Pros.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.domain),

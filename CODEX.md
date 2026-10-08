@@ -2,15 +2,24 @@
 
 ## Design System: "Drawn to Scope"
 
-The visual identity borrows from architectural drawing sets to echo the written scope behind every project. Details: `docs/audits/site-polish-2026-10-06.md`.
+The visual identity borrows quietly from architectural drawing sets (crop marks, dimension lines, grids). The motif is visual only; never put drafting puns in visible copy ("Drawn to scope", "Sheet SS-01", "Rev."). Details: `docs/audits/site-polish-2026-10-06.md`.
+
+## Voice (owner direction, October 8, 2026)
+
+- Write like a premium local remodeler talking to a homeowner: short, confident, plain. Sentence-case headings.
+- Never use "scope" in visible copy. Say proposal, plan, estimate, the work or the project. Avoid contractor shorthand (closeout, punch list, milestones, sequencing, assemblies, affected-room review).
+- Say each promise once, in the right place. The four trust points live in `ConfidenceSection` on About only; the process lives on `/our-process`.
+- No stacked link rows or link-box grids. End sections with one clear action. Local SEO links go in one sentence (`placeName()` adds "the" to Lehigh Valley; `serviceLabel()` / `inlineServiceName()` give sentence-case names).
+- No "On this page" jump bars, no "Tap to expand" text on photos, no numbered "Client note" labels.
+- Project titles and summaries describe the finished space in plain language; card titles are editorial lines in `projectShowcase.ts` (every visible project has one).
 
 - Colors: use `--brand` (`#b4411b`, AA on every light surface) for text, links and buttons. `--brand-bright` is for decorative accents on dark photography only, never text on light backgrounds.
 - Type: DM Serif Display (headings), DM Sans (body), IBM Plex Mono 500 via `.annotation` / `font-mono` for drafting labels. Keep annotations short and uppercase.
 - Drafting classes live in `@layer components` in `globals.css` so Tailwind utilities can override them: `.annotation`, `.sheet-tag`, `.crop-marks` (tune with `--crop-inset` / `--crop-color`), `.dimension-line` (use `components/ui/DimensionLine.tsx`), `.drafting-grid`, `.blueprint-grid`, `.paper-sheet`.
-- Keep the motif in service of the content: no "Sheet A-0x" section tags (removed as noise) and no vanity stat bands. `.sheet-tag` is reserved for the Scope Builder sheet. Figure captions must describe only what is visible and link to the matching collection.
+- Keep the motif in service of the content: no "Sheet A-0x" section tags (removed as noise) and no vanity stat bands. `.sheet-tag` is reserved for the project planner sheet. Figure captions must describe only what is visible and link to the matching collection.
 - Scope Builder printing clones the sheet into `.scope-print-root`; site chrome hides in print via `body > header/aside/footer` and `[data-print-hide]`. Never hide bare `header` or `nav` elements in print.
 - Headings with a display slogan should include a descriptive eyebrow inside the `h1` (`PageIntro eyebrowInHeading`) and keep a space before any `<br />`.
-- Scope Builder (`components/sections/ScopeBuilder.tsx`) uses each service's `whatIncluded`, `pricingFactors` and `qualityFactors`. Never add prices, durations or outcomes to it. "Send this to RHI Pros" opens a contact step inside the sheet and posts directly to `/api/quote` with the same validation (`scopeContactSchema`), honeypot, first-touch attribution and `rhi:generate_lead` conversion as `QuoteForm`; the scope text travels in `details`, and undecided timing is sent as "Exploring options".
+- Scope Builder (`components/sections/ScopeBuilder.tsx`, shown to visitors as "Project planner"; the internal lead label stays "Scope Builder") uses each service's `whatIncluded`, `pricingFactors` and `qualityFactors`. Never add prices, durations or outcomes to it. "Send this to RHI Pros" opens a contact step inside the sheet and posts directly to `/api/quote` with the same validation (`scopeContactSchema`), honeypot, first-touch attribution and `rhi:generate_lead` conversion as `QuoteForm`; the scope text travels in `details`, and undecided timing is sent as "Exploring options".
 - The service-area map (`components/sections/ServiceAreaMap.tsx`) positions places from real coordinates. Only add communities that appear in `locations.ts` priority areas.
 - Project preview images go through `next/image`; do not reintroduce `unoptimized`.
 
@@ -44,7 +53,8 @@ The visual identity borrows from architectural drawing sets to echo the written 
 - Public project exports apply `projectEvidence.ts`. Preserve the original records for traceability; do not publish their unsupported towns, durations, customer quotes or hidden construction stories without primary job records. Use `projectEvidenceSplits` to publish distinct spaces on separate routes, retaining declared source lineage. Source-link published company review excerpts.
 - Customer-facing titles and descriptions should describe the space, design and finishes in plain language. Keep internal evidence/audit explanations in the audit reports. Different kitchens belong in separate project entries, not different groups on one page. Detach companion bathroom, commercial-restroom or condition photos when their association is unproven; present them as independent references without claiming completed jobs. Keep visually matching construction stages and layout diagrams with their own space. Label generated service imagery as illustrative and keep it out of project galleries.
 - Keep commercial jobs in the separate commercial section, with the same card size as supporting residential work.
-- Keep planning boards and construction documentation separate from completed residential galleries. Preserve their detail pages and URLs.
+- Owner decision, October 8, 2026: condition photos, construction documentation and planning boards are not shown publicly. Retired collections are listed in `src/content/retiredProjects.ts`; their records and originals stay in the repository and their URLs redirect to the matching service page. The paver patio and gable-roof pavilion were both built by RHI Pros (owner-confirmed).
+- Project pages lead with the photos. "More like this" cards sit in a `data-related-projects` section, which the rendered checks exclude when testing that a collection's own photos do not mix.
 - Review the actual photos, crops, card order, filters, and mobile layout before publishing portfolio changes.
 - Prepared `-preview.webp` assets are derived from the matching real project photos; keep original photos available for the detailed galleries.
 

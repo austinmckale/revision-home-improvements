@@ -5,12 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import ProjectCard from "@/components/sections/ProjectCard";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import BottomCTA from "@/components/sections/BottomCTA";
-import {
-  featuredProjects,
-  getProjectCollection,
-  getProjectPresentation,
-  orderedShowcaseProjects,
-} from "@/content/projectShowcase";
+import { featuredProjects, getProjectCollection, orderedShowcaseProjects } from "@/content/projectShowcase";
 import { getServiceBySlug } from "@/content/services";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPortfolioImages } from "@/lib/portfolio";
@@ -52,7 +47,6 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
       (selectedSlug || !featuredProjects.some((featured) => featured.slug === study.slug)),
   );
   const commercial = projects.filter((study) => getProjectCollection(study) === "commercial");
-  const process = projects.filter((study) => getProjectCollection(study) === "process");
   const portfolioImages = await getPortfolioImages({
     stage: "AFTER",
     serviceTags: selectedSlug ? [selectedService?.portfolioTag ?? selectedSlug] : undefined,
@@ -121,7 +115,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
               <span className="font-semibold text-[var(--accent)]">
                 {projects.length} {projects.length === 1 ? "gallery" : "galleries"}
               </span>
-              {selectedService ? ` · ${selectedService.name}` : " · Residential, commercial, planning & progress"}
+              {selectedService ? ` · ${selectedService.name}` : " · Homes and local businesses"}
             </p>
             {selectedService ? (
               <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
@@ -129,7 +123,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
                   href={`/services/${selectedService.slug}`}
                   className="inline-flex min-h-11 items-center text-[var(--accent)] hover:text-[var(--brand)]"
                 >
-                  Explore this service{" "}
+                  About this service{" "}
                   <span className="ml-2" aria-hidden="true">
                     ↗
                   </span>
@@ -172,7 +166,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
             <section className={selectedSlug ? "" : "mt-16 sm:mt-24"} aria-labelledby="residential-projects">
               <div className="mb-8 flex flex-col gap-3 border-b border-[var(--border)] pb-6 sm:flex-row sm:items-end sm:justify-between">
                 <h2 id="residential-projects" className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">
-                  {selectedService ? selectedService.name : "More homes. More possibilities."}
+                  {selectedService ? selectedService.name : "More of our work."}
                 </h2>
                 <p className="max-w-sm text-sm leading-relaxed text-[var(--muted)]">
                   Find ideas in the layouts, materials and finishes.
@@ -219,47 +213,14 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
             >
               <p className="eyebrow">For local businesses</p>
               <h2 id="commercial-projects" className="heading-serif mt-3 text-3xl text-[var(--accent)] sm:text-4xl">
-                Commercial improvements.
+                Commercial work.
               </h2>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-                Durable finishes and practical updates for spaces that work hard every day.
+                Restrooms, corridors and dining spaces for local businesses.
               </p>
               <div className="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {commercial.map((study) => (
                   <ProjectCard key={study.slug} study={study} />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {process.length > 0 && (
-            <section className="mt-14 border-t border-[var(--border)] pt-8" aria-labelledby="project-process-stories">
-              <h2 id="project-process-stories" className="heading-serif text-3xl text-[var(--accent)]">
-                Planning &amp; repair details.
-              </h2>
-              <p className="mt-3 text-sm text-[var(--muted)]">
-                Explore bathroom layouts and the conditions that shape a repair plan.
-              </p>
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                {process.map((study) => (
-                  <Link
-                    key={study.slug}
-                    href={`/projects/${study.slug}`}
-                    className="group flex items-center justify-between gap-4 border border-[var(--border)] p-5 transition-colors hover:border-[var(--brand)]"
-                  >
-                    <span>
-                      <span className="text-xs text-[var(--muted)]">{study.locationName}</span>
-                      <span className="heading-serif mt-2 block text-xl text-[var(--accent)]">
-                        {getProjectPresentation(study).title}
-                      </span>
-                    </span>
-                    <span
-                      className="text-[var(--brand)] transition-transform group-hover:translate-x-1"
-                      aria-hidden="true"
-                    >
-                      ↗
-                    </span>
-                  </Link>
                 ))}
               </div>
             </section>
@@ -276,7 +237,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
       </section>
       <BottomCTA
         title="What would you love to change?"
-        description="Bring your ideas. We will help you shape the scope, the details, and the next steps for your home."
+        description="Bring your ideas. We will help you shape the plan, the details and the next steps for your home."
         showFinancing={false}
       />
     </>

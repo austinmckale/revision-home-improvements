@@ -11,7 +11,7 @@ import { getPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = getPageMetadata({
   title: "PA HIC Registration & Insurance Details",
   description:
-    "Review RHI Pros' Pennsylvania HIC number PA185945 and the registration and insurance documents to check before your project starts.",
+    "RHI Pros is registered as a Pennsylvania home improvement contractor (PA185945). See how to verify registration and request a certificate of insurance.",
   path: "/licenses-and-insurance",
 });
 
@@ -24,102 +24,67 @@ export default function LicensesAndInsurancePage() {
           { name: "Registration & Insurance", href: "/licenses-and-insurance" },
         ])}
       />
-      <PageIntro eyebrow="Confidence from the start" title="Registration & insurance.">
+      <PageIntro eyebrow="Registration & insurance" title="Credentials you can check.">
         <p>
-          Review contractor registration and project-specific insurance documentation before signing. Use the
-          registration number below when checking the official Pennsylvania record.
+          RHI Pros is a registered Pennsylvania home improvement contractor. A current certificate of insurance is
+          available on request when you review your estimate.
         </p>
       </PageIntro>
-      <section className="support-content py-12 sm:py-20">
+      <section className="py-14 sm:py-20">
         <Container className="max-w-5xl">
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <article className="surface rounded-sm p-6">
-              <h2 className="heading-serif text-3xl text-[var(--accent)]">PA HIC Registration</h2>
-              <div className="mt-3 space-y-3 text-[var(--muted)]">
-                <div className="rounded-lg border border-[var(--border)] p-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                    Pennsylvania Home Improvement Contractor
-                  </p>
-                  <p className="mt-1 text-lg font-bold text-[var(--accent)]">{siteConfig.hicNumber}</p>
-                </div>
-                <p className="text-sm">
-                  Pennsylvania HIC number associated with {company.legalName}: {company.license.hic}.
-                </p>
-                <p className="text-sm">
-                  HIC registration is not a state contractor license, certification, endorsement, or proof of
-                  workmanship. Use the{" "}
-                  <a
-                    href="https://www.attorneygeneral.gov/businesses-and-organizations/home-improvement-contractor-registration/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-[var(--brand)] underline"
-                  >
-                    Pennsylvania Attorney General&apos;s registration information
-                  </a>{" "}
-                  to find the official verification options and confirm current status and expiration.
-                </p>
-              </div>
+          <div className="grid gap-10 md:grid-cols-2 md:gap-14">
+            <article className="border-t border-[var(--accent)] pt-6">
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Pennsylvania registration</h2>
+              <p className="annotation mt-5 text-[0.65rem] text-[var(--brand)]">Home Improvement Contractor</p>
+              <p className="heading-serif mt-1 text-4xl text-[var(--accent)]">{siteConfig.hicNumber}</p>
+              <p className="mt-4 leading-relaxed text-[var(--muted)]">
+                Registered to {company.legalName}. You can confirm current status through the{" "}
+                <a
+                  href="https://www.attorneygeneral.gov/businesses-and-organizations/home-improvement-contractor-registration/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[var(--brand)] underline underline-offset-4"
+                >
+                  Pennsylvania Attorney General
+                </a>
+                .
+              </p>
+              <p className="mt-4 text-xs leading-relaxed text-[var(--muted)]">
+                HIC registration is Pennsylvania&apos;s required registration for home improvement contractors. It is
+                not a state license, certification or a guarantee of workmanship.
+              </p>
             </article>
-            <article className="surface rounded-sm p-6">
+            <article className="border-t border-[var(--accent)] pt-6">
               <h2 className="heading-serif text-3xl text-[var(--accent)]">Insurance</h2>
-              <div className="mt-3 space-y-3 text-[var(--muted)]">
-                <div className="rounded-lg border border-[var(--border)] p-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">General Liability</p>
-                  <p className="mt-1 text-sm font-semibold text-[var(--accent)]">
-                    Review current policy dates, limits and the work covered
-                  </p>
+              <p className="mt-5 leading-relaxed text-[var(--muted)]">
+                Ask for a current certificate of insurance when you review your estimate, and check:
+              </p>
+              <dl className="mt-4 border-t border-[var(--border)] text-sm">
+                <div className="grid gap-1 border-b border-[var(--border)] py-4 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                  <dt className="font-semibold text-[var(--accent)]">General liability</dt>
+                  <dd className="text-[var(--muted)]">Policy dates, limits and the work covered</dd>
                 </div>
-                <div className="rounded-lg border border-[var(--border)] p-3">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                    Workers Compensation
-                  </p>
-                  <p className="mt-1 text-sm font-semibold text-[var(--accent)]">
-                    Confirm applicable coverage and who will be working on site
-                  </p>
+                <div className="grid gap-1 border-b border-[var(--border)] py-4 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                  <dt className="font-semibold text-[var(--accent)]">Workers&apos; compensation</dt>
+                  <dd className="text-[var(--muted)]">Coverage for the people working in your home</dd>
                 </div>
-                <p className="text-sm">
-                  Ask for a current certificate of insurance and confirm the named insured, policy period, limits,
-                  exclusions and any subcontractor coverage relevant to your scope. A marketing label does not replace
-                  the policy documents.
-                </p>
-              </div>
+                <div className="grid gap-1 border-b border-[var(--border)] py-4 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                  <dt className="font-semibold text-[var(--accent)]">Named insured</dt>
+                  <dd className="text-[var(--muted)]">The company on the certificate and any subcontractor coverage</dd>
+                </div>
+              </dl>
             </article>
           </div>
-
-          <div className="surface mt-6 rounded-sm p-6">
-            <h2 className="heading-serif text-3xl text-[var(--accent)]">Why This Matters</h2>
-            <p className="mt-2 text-[var(--muted)]">
-              Registration and insurance are different checks. Verify the current registration record and review the
-              insurance documents for your project. Coverage depends on the policy terms and the circumstances of a
-              claim.
-            </p>
-            <p className="mt-3 text-sm text-[var(--muted)]">
-              Confirm the credentials, coverage and responsibilities alongside the written scope before work begins.
-            </p>
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 text-sm">
-            <Link href="/warranty" className="font-semibold text-[var(--brand)]">
-              Workmanship Warranty
-            </Link>
-            <Link href="/our-process" className="font-semibold text-[var(--brand)]">
-              Our Process
-            </Link>
-            <Link href="/about" className="font-semibold text-[var(--brand)]">
-              About Us
-            </Link>
-          </div>
-        </Container>
-      </section>
-
-      <section className="pb-14">
-        <Container className="max-w-4xl">
-          <p className="text-sm text-[var(--muted)]">
-            Ready to get started?{" "}
-            <Link href="/request-a-quote" className="font-semibold text-[var(--brand)]">
-              Request a quote
+          <p className="mt-12 text-sm text-[var(--muted)]">
+            Questions about registration or insurance?{" "}
+            <Link href="/request-a-quote" className="font-semibold text-[var(--brand)] underline-offset-4 hover:underline">
+              Ask with your quote request
             </Link>{" "}
-            and include any questions about registration and insurance with your project details.
+            or call{" "}
+            <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)] underline-offset-4 hover:underline">
+              {siteConfig.phoneDisplay}
+            </a>
+            .
           </p>
         </Container>
       </section>

@@ -6,7 +6,6 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceExplorer from "@/components/sections/ServiceExplorer";
 import BottomCTA from "@/components/sections/BottomCTA";
-import ConfidenceSection from "@/components/sections/ConfidenceSection";
 import { primaryServices } from "@/content/services";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
 import { getCaseStudyBySlug } from "@/content/caseStudies";
@@ -18,7 +17,7 @@ import { getPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = getPageMetadata({
   title: "Remodeling & Restoration Services",
   description:
-    "Kitchen, bathroom, basement and patio remodeling, plus fire and water damage repairs, in the Lehigh Valley and Berks County. See photos and plan a written scope.",
+    "Kitchen, bathroom, basement and patio remodeling, plus fire and water damage repairs, in the Lehigh Valley and Berks County. See our work and request a quote.",
   path: "/services",
 });
 
@@ -40,25 +39,25 @@ const explorerItems = [
     label: "Kitchens",
     slug: "allentown-kitchen-layout-upgrade",
     description:
-      "More room to gather. Better flow for the everyday. Bring layout, cabinetry, surfaces, and finishing details together in one considered plan.",
+      "More room to gather and better flow for every day, with layout, cabinetry, counters and lighting planned together.",
   },
   {
     label: "Bathrooms",
     slug: "bethlehem-bathroom-refresh",
     description:
-      "A better beginning and end to your day. Plan the shower, tile, fixtures, storage, and the details behind the finished surface.",
+      "A better start and end to your day: the shower, tile, fixtures and storage, with the waterproofing done right behind them.",
   },
   {
     label: "Basements",
     slug: "lehigh-valley-basement-finish-and-detail",
     description:
-      "Make room for movie nights, family time, or a quieter corner. Start with the existing conditions and shape a space you will actually use.",
+      "Room for movie nights, family time or a quiet office, planned around the space you already have.",
   },
   {
     label: "Outdoor living",
     slug: "reading-paver-patio-buildout",
     description:
-      "Give home a little more breathing room. Connect patios, gathering areas, and substantial outdoor improvements with a plan that works together.",
+      "A patio, a pavilion and planted edges that work together as one outdoor room.",
   },
 ].flatMap((item) => {
   const study = getCaseStudyBySlug(item.slug);
@@ -101,7 +100,7 @@ export default function ServicesHubPage() {
               href="/projects"
               className="inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-[var(--brand)]"
             >
-              Explore photo collections <span aria-hidden="true">↗</span>
+              See our projects <span aria-hidden="true">↗</span>
             </Link>
           </div>
           <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -125,7 +124,7 @@ export default function ServicesHubPage() {
                 </div>
                 <div className="flex items-start justify-between gap-3 pt-5">
                   <h3 className="heading-serif text-2xl text-[var(--accent)] sm:text-3xl">
-                    {service.slug === "paver-installation" ? "Patios & outdoor living" : service.name}
+                    {service.slug === "paver-installation" ? "Patios & Outdoor Living" : service.name}
                   </h3>
                   <span aria-hidden="true" className="pt-1 text-xl text-[var(--brand)]">
                     ↗
@@ -141,8 +140,8 @@ export default function ServicesHubPage() {
                   Several rooms. One thoughtful renovation.
                 </h3>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80">
-                  When kitchens, bathrooms, floors, and finishes overlap, a coordinated scope keeps the decisions and
-                  the work moving together.
+                  When the kitchen, baths and floors change together, one plan keeps every decision and every trade
+                  moving in step.
                 </p>
               </div>
               <Link
@@ -152,20 +151,6 @@ export default function ServicesHubPage() {
                 Explore whole-home remodeling <span aria-hidden="true">↗</span>
               </Link>
             </article>
-          </div>
-          <div className="mt-12 border-y border-[var(--border)] py-6 sm:flex sm:items-center sm:justify-between sm:gap-8">
-            <div>
-              <h3 className="heading-serif text-2xl text-[var(--accent)]">Starting with the cabinets?</h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Explore cabinet replacement and installation as part of a coordinated kitchen project.
-              </p>
-            </div>
-            <Link
-              href="/berks-county-pa/kitchen-cabinet-installation"
-              className="mt-3 inline-flex min-h-11 shrink-0 items-center text-sm font-semibold text-[var(--brand)] sm:mt-0"
-            >
-              Cabinet installation in Berks County ↗
-            </Link>
           </div>
         </Container>
       </section>
@@ -178,7 +163,8 @@ export default function ServicesHubPage() {
                 A clearer path to recovery.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-[var(--muted)]">
-                Fire and water damage call for careful assessment, practical rebuild planning, and steady communication.
+                After a fire or a leak, we assess the damage, document it for your insurance claim and rebuild the rooms
+                you live in.
               </p>
               <Button href={siteConfig.phoneHref} className="mt-6">
                 Call {siteConfig.phoneDisplay}
@@ -187,7 +173,7 @@ export default function ServicesHubPage() {
                 href="/fire-water-damage-restoration"
                 className="mt-4 flex min-h-11 items-center text-sm font-semibold text-[var(--brand)]"
               >
-                Emergency restoration guidance ↗
+                Fire &amp; water damage overview ↗
               </Link>
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
@@ -202,21 +188,13 @@ export default function ServicesHubPage() {
                     <h3 className="heading-serif mt-8 text-3xl text-[var(--accent)]">{service.name}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{service.short}</p>
                     <span className="mt-6 block text-sm font-semibold text-[var(--brand)]">
-                      Explore restoration support ↗
+                      Learn more ↗
                     </span>
                   </div>
                 </Link>
               ))}
             </div>
           </div>
-        </Container>
-      </section>
-      <section className="py-12 sm:py-20">
-        <Container>
-          <ConfidenceSection
-            title="Good work starts with clear expectations."
-            intro="Across every service: a written scope, steady communication, and a considered finish."
-          />
         </Container>
       </section>
       <BottomCTA

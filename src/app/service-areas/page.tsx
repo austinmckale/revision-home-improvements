@@ -60,8 +60,8 @@ export default function ServiceAreasPage() {
         eyebrowInHeading
       >
         <p>
-          Choose your area to explore local remodeling services, planning topics, and the details that matter for your
-          home.
+          We work across the Lehigh Valley and Berks County. Choose your area to see local services and what we plan
+          for in your town.
         </p>
         <p className="mt-4 text-sm">
           Just outside these areas?{" "}
@@ -124,7 +124,7 @@ export default function ServiceAreasPage() {
 
       <BottomCTA
         title="Not sure which area you fall under?"
-        description="Call us and we will confirm coverage for your address and connect you with the right local service page."
+        description="Call us and we will confirm that we cover your address."
       />
     </>
   );

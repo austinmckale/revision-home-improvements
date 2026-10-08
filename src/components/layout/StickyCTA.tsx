@@ -17,16 +17,16 @@ function getCtaConfig(pathname: string) {
     pathname === "/insurance-claims" ||
     EMERGENCY_SLUGS.some((s) => pathname.includes(s))
   ) {
-    return { label: "Call to Discuss Availability", mode: "phone" as const };
+    return { label: "Call about the damage", mode: "phone" as const };
   }
 
   // Utility / small-scope
   if (UTILITY_SLUGS.some((s) => pathname.includes(s))) {
-    return { label: "Schedule a Repair", mode: "scroll" as const };
+    return { label: "Schedule a repair", mode: "scroll" as const };
   }
 
   // Default: remodeling (visual or technical)
-  return { label: "Get a Written Quote", mode: "scroll" as const };
+  return { label: "Request a quote", mode: "scroll" as const };
 }
 
 function emitEvent(name: string, detail?: Record<string, unknown>) {

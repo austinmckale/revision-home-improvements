@@ -8,16 +8,23 @@ import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 import BeforeAfterToggle from "@/components/sections/BeforeAfterToggle";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
-import { visibleCaseStudies, getCaseStudyBySlug, getSimilarCaseStudiesForProject } from "@/content/caseStudies";
+import ProjectCard from "@/components/sections/ProjectCard";
+import { visibleCaseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
 import { businessEntityId, getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getProjectGalleryImages } from "@/lib/projectPageMedia";
-import { getProjectCollection, getProjectPresentation } from "@/content/projectShowcase";
+import { getProjectCollection, getProjectPresentation, orderedShowcaseProjects } from "@/content/projectShowcase";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
 import { getImageFocalClass } from "@/content/imageFocalPoints";
 
 type Params = { slug: string };
+
+/** Two columns for small sets so none is left empty; three once there are enough photos to fill them. */
+function photoColumns(count: number) {
+  if (count <= 1) return "max-w-2xl";
+  return count > 4 ? "columns-1 gap-4 sm:columns-2 lg:columns-3" : "columns-1 gap-4 sm:columns-2";
+}
 
 const localPlanningLinks: Record<string, { href: string; label: string }[]> = {
   "kitchen-remodeling": [
@@ -30,8 +37,8 @@ const localPlanningLinks: Record<string, { href: string; label: string }[]> = {
     { href: "/berks-county-pa/basement-finishing", label: "Basement finishing in Berks County" },
   ],
   "paver-installation": [
-    { href: "/reading-pa/paver-installation", label: "Paver patio installation in Reading" },
-    { href: "/allentown-pa/paver-installation", label: "Paver patio installation in Allentown" },
+    { href: "/reading-pa/paver-installation", label: "Paver patios in Reading" },
+    { href: "/allentown-pa/paver-installation", label: "Paver patios in Allentown" },
     { href: "/berks-county-pa/paver-installation", label: "Paver patios in Berks County" },
   ],
 };
@@ -71,18 +78,21 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   const { slug } = await params;
   const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) notFound();
-  const locationShort = caseStudy.locationName.replace(/, PA$/, "");
-  const similarCaseStudies = getSimilarCaseStudiesForProject(caseStudy, 4);
   const galleryImages = getProjectGalleryImages(caseStudy);
   const heroImage = getProjectPresentation(caseStudy).image;
   const collection = getProjectCollection(caseStudy);
   const isCommercial = collection === "commercial";
-  const isProcess = collection === "process";
-  const isPlanning = caseStudy.mediaType === "planning";
-  const isPhotoOverview = caseStudy.mediaType === "photos";
-  const overviewImages = isPhotoOverview ? caseStudy.images : galleryImages;
-  const showProjectPhotosAside = overviewImages.length > 0;
+  const photos = caseStudy.mediaType === "photos" ? caseStudy.images : galleryImages;
   const quoteHref = `/request-a-quote?service=${encodeURIComponent(caseStudy.serviceSlug)}`;
+  const localLinks = localPlanningLinks[caseStudy.serviceSlug] ?? [];
+  // Same service first, then the rest of the same collection, so every project ends with somewhere to go.
+  const related = orderedShowcaseProjects.filter(
+    (item) => item.slug !== caseStudy.slug && getProjectCollection(item) === collection,
+  );
+  const moreProjects = [
+    ...related.filter((item) => item.serviceSlug === caseStudy.serviceSlug),
+    ...related.filter((item) => item.serviceSlug !== caseStudy.serviceSlug),
+  ].slice(0, 3);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -128,18 +138,11 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
         />
         <Container className="relative z-10 flex flex-1 flex-col justify-end pt-4 sm:pt-16">
           <div className="max-w-4xl">
-            <p className="eyebrow eyebrow-light">
-              {caseStudy.serviceName} ·{" "}
-              {isPlanning ? "Planning ideas" : isProcess ? "Existing conditions" : "Design & finish details"}
-            </p>
+            <p className="eyebrow eyebrow-light">{isCommercial ? "Commercial project" : caseStudy.serviceName}</p>
             <h1 className="heading-serif mt-5 max-w-4xl text-4xl leading-[1.03] tracking-[-.03em] text-white sm:text-5xl lg:text-7xl">
               {caseStudy.title}
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{caseStudy.summary}</p>
-            <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-[.13em] text-white/65">
-              {caseStudy.locationSlug ? <span>{caseStudy.locationName}</span> : null}
-              {caseStudy.timeline ? <span>{caseStudy.timeline}</span> : null}
-            </div>
             <div className="mt-7 flex flex-wrap gap-3">
               <Button href={quoteHref} className="!text-white">
                 Plan your project
@@ -152,16 +155,16 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
               </a>
             </div>
           </div>
-          <div className="mt-12 border-t border-white/25 pt-4">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[.18em] text-white/55">
-              {isPlanning ? "Planning topics" : isProcess ? "Condition details" : "Design highlights"}
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/85">
-              {caseStudy.scope.slice(0, 3).map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
+          {caseStudy.scope.length > 0 ? (
+            <div className="mt-12 border-t border-white/25 pt-4">
+              <p className="annotation text-[0.62rem] text-white/60">Highlights</p>
+              <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/85">
+                {caseStudy.scope.slice(0, 3).map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </Container>
       </section>
 
@@ -174,198 +177,85 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
         </section>
       ) : null}
 
-      <section className="py-14">
-        <Container className={`grid gap-8 ${showProjectPhotosAside ? "lg:grid-cols-[1.2fr_0.8fr]" : ""}`}>
-          <div>
-            <h2 className="text-2xl font-bold text-[var(--accent)]">
-              {isPhotoOverview ? "Take a closer look" : "Planning topics"}
-            </h2>
+      {photos.length > 0 ? (
+        <section className="py-14 sm:py-20">
+          <Container>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <h2 className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">Photos.</h2>
+              <p className="text-sm text-[var(--muted)]">Select a photo to enlarge it.</p>
+            </div>
             {caseStudy.evidenceNote ? (
-              <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{caseStudy.evidenceNote}</p>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">{caseStudy.evidenceNote}</p>
             ) : null}
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              {caseStudy.scope.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-
-            {caseStudy.challenge ? (
-              <>
-                <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Planning considerations</h3>
-                <p className="mt-2 text-[var(--muted)]">{caseStudy.challenge}</p>
-              </>
-            ) : null}
-
-            {caseStudy.solution ? (
-              <>
-                <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Planning approach</h3>
-                <p className="mt-2 text-[var(--muted)]">{caseStudy.solution}</p>
-              </>
-            ) : null}
-            <p className="mt-3 text-sm text-[var(--muted)]">
-              For your own space, discuss scope, existing conditions, materials and scheduling. Start with our{" "}
-              <Link href={`/services/${caseStudy.serviceSlug}`} className="font-semibold text-[var(--brand)]">
-                {caseStudy.serviceName.toLowerCase()} overview
-              </Link>
-              .
-            </p>
-
-            {caseStudy.results.length ? (
-              <>
-                <h3 className="mt-8 text-xl font-semibold text-[var(--accent)]">Planning direction</h3>
-                <ul className="mt-2 list-disc space-y-2 pl-5 text-[var(--muted)]">
-                  {caseStudy.results.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </>
-            ) : null}
-
-            {caseStudy.testimonial ? (
-              <blockquote className="surface mt-8 rounded-xl p-5">
-                <p className="text-[var(--muted)]">&ldquo;{caseStudy.testimonial.quote}&rdquo;</p>
-                <p className="mt-2 text-sm font-semibold text-[var(--accent)]">{caseStudy.testimonial.author}</p>
-              </blockquote>
-            ) : null}
-
-            <section className="mt-10 border-t border-[var(--border)] pt-8" aria-labelledby="project-explore-next">
-              <h3 id="project-explore-next" className="text-lg font-semibold text-[var(--accent)]">
-                Explore next
-              </h3>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                <Link
-                  href={`/services/${caseStudy.serviceSlug}`}
-                  className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
-                >
-                  Explore {caseStudy.serviceName.toLowerCase()}
-                </Link>{" "}
-                for how we plan work, what affects pricing, and more photos from this trade.
-              </p>
-              {similarCaseStudies.length > 0 ? (
-                <div className="mt-5">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                    More ideas to explore
-                  </p>
-                  <ul className="mt-2 space-y-2 text-sm">
-                    {similarCaseStudies.map((item) => (
-                      <li key={item.slug}>
-                        <Link
-                          href={`/projects/${item.slug}`}
-                          className="text-[var(--muted)] underline-offset-2 hover:text-[var(--brand)] hover:underline"
-                        >
-                          {item.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-              {caseStudy.locationSlug ? (
-                <p className="mt-5 text-xs leading-relaxed text-[var(--muted)]">
-                  <Link
-                    href={`/${caseStudy.locationSlug}/${caseStudy.serviceSlug}`}
-                    className="text-[var(--brand)] underline-offset-2 hover:underline"
-                  >
-                    Service area details: {locationShort}
-                  </Link>
-                </p>
-              ) : null}
-              {localPlanningLinks[caseStudy.serviceSlug] && (
-                <nav aria-label="Plan a project in your area" className="mt-6 border-t border-[var(--border)] pt-5">
-                  <p className="text-sm font-semibold text-[var(--accent)]">Planning similar work in your area?</p>
-                  <ul className="mt-2 space-y-1">
-                    {localPlanningLinks[caseStudy.serviceSlug].map((link) => (
-                      <li key={link.href}>
-                        <Link
-                          href={link.href}
-                          className="inline-flex min-h-11 items-center text-sm text-[var(--brand)] underline-offset-4 hover:underline"
-                        >
-                          {link.label} ↗
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              )}
-              <p className="mt-3 text-sm text-[var(--muted)]">
-                Ready to talk about your space?{" "}
-                <Link href={quoteHref} className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline">
-                  Request a quote
-                </Link>
-                {" · "}
-                <Link
-                  href={siteConfig.phoneHref}
-                  className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
-                >
-                  Call {siteConfig.phoneDisplay}
-                </Link>
-              </p>
-            </section>
-          </div>
-
-          {showProjectPhotosAside ? (
-            <div>
-              <div className="surface rounded-xl p-5">
-                <h3 className="text-lg font-semibold text-[var(--accent)]">
-                  {isPlanning ? "Layout & finish ideas" : "Explore the photos"}
-                </h3>
-                <p className="mt-1 text-xs text-[var(--muted)]">
-                  {isPlanning
-                    ? "Visual references for discussing layout and finish choices."
-                    : "Select a photo for a closer look."}
-                </p>
+            <ExpandableImageGrid
+              images={photos}
+              gridClassName={`mt-8 ${photoColumns(photos.length)}`}
+              cardClassName="mb-4 break-inside-avoid overflow-hidden bg-[var(--surface-soft)]"
+              imageClassName="h-auto w-full"
+            />
+            {caseStudy.photoGroups?.map((group) => (
+              <section key={group.title} className="mt-12 border-t border-[var(--border)] pt-8">
+                <h3 className="heading-serif text-2xl text-[var(--accent)]">{group.title}</h3>
+                {group.description ? <p className="mt-2 text-sm text-[var(--muted)]">{group.description}</p> : null}
                 <ExpandableImageGrid
-                  images={overviewImages}
-                  inlineCount={6}
-                  gridClassName={overviewImages.length > 1 ? "mt-4 columns-1 gap-3 sm:columns-2" : "mt-4 max-w-2xl"}
-                  cardClassName="mb-3 break-inside-avoid overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
+                  images={group.images}
+                  gridClassName={`mt-6 ${photoColumns(group.images.length)}`}
+                  cardClassName="mb-4 break-inside-avoid overflow-hidden bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
                 />
-              </div>
-              {caseStudy.photoGroups?.map((group) => (
-                <section key={group.title} className="surface mt-5 rounded-xl p-5">
-                  <h3 className="text-lg font-semibold text-[var(--accent)]">{group.title}</h3>
-                  {group.description ? <p className="mt-2 text-sm text-[var(--muted)]">{group.description}</p> : null}
-                  <ExpandableImageGrid
-                    images={group.images}
-                    inlineCount={4}
-                    gridClassName="mt-4 columns-1 gap-3 sm:columns-2"
-                    cardClassName="mb-3 break-inside-avoid overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-soft)]"
-                    imageClassName="h-auto w-full"
-                  />
-                </section>
-              ))}
-              {caseStudy.sharedCollectionSlug ? (
-                <p className="mt-5 text-sm text-[var(--muted)]">
-                  These photographs also appear in our{" "}
-                  <Link
-                    href={`/projects/${caseStudy.sharedCollectionSlug}`}
-                    className="font-semibold text-[var(--brand)] underline"
-                  >
-                    exterior photo overview
-                  </Link>
-                  . Explore the wider views alongside these details.
-                </p>
-              ) : null}
-            </div>
-          ) : null}
-        </Container>
-      </section>
+              </section>
+            ))}
+            {caseStudy.sharedCollectionSlug ? (
+              <p className="mt-8 text-sm text-[var(--muted)]">
+                See the wider views in the{" "}
+                <Link
+                  href={`/projects/${caseStudy.sharedCollectionSlug}`}
+                  className="font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                >
+                  full exterior project
+                </Link>
+                .
+              </p>
+            ) : null}
+          </Container>
+        </section>
+      ) : null}
 
-      <BottomCTA
-        quoteHref={quoteHref}
-        title={
-          isProcess
-            ? "Plan the next steps for your space"
-            : `Want a similar ${caseStudy.serviceName.toLowerCase()} project?`
-        }
-        description="Tell us about your space, location and priorities, and we will help you define the next steps."
-        showFinancing={!isCommercial}
-        links={[
-          { href: "/services/" + caseStudy.serviceSlug, label: "Explore " + caseStudy.serviceName.toLowerCase() },
-          { href: "/projects", label: "More projects" },
-        ]}
-      />
+      {moreProjects.length > 0 ? (
+        <section data-related-projects className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-14 sm:py-20">
+          <Container>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <h2 className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">More like this.</h2>
+              <Link
+                href={`/services/${caseStudy.serviceSlug}`}
+                className="text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+              >
+                About {caseStudy.serviceName.toLowerCase()} →
+              </Link>
+            </div>
+            <div className="mt-8 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+              {moreProjects.map((item) => (
+                <ProjectCard key={item.slug} study={item} />
+              ))}
+            </div>
+            {localLinks.length > 0 ? (
+              <p className="mt-10 border-t border-[var(--border)] pt-5 text-sm leading-relaxed text-[var(--muted)]">
+                Near you:{" "}
+                {localLinks.map((link, index) => (
+                  <span key={link.href}>
+                    {index > 0 ? " · " : null}
+                    <Link href={link.href} className="font-semibold text-[var(--accent)] underline-offset-4 hover:text-[var(--brand)] hover:underline">
+                      {link.label}
+                    </Link>
+                  </span>
+                ))}
+              </p>
+            ) : null}
+          </Container>
+        </section>
+      ) : null}
+
+      <BottomCTA quoteHref={quoteHref} title="Planning something similar?" showFinancing={!isCommercial} />
     </>
   );
 }

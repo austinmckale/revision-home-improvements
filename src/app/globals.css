@@ -384,27 +384,6 @@ body {
     auto;
 }
 
-.process-timeline-step {
-  position: relative;
-  border-top: 1px solid var(--border);
-  padding: 0.35rem 0 0 2.75rem;
-}
-
-.process-timeline-step::before {
-  position: absolute;
-  top: 0.35rem;
-  left: 0.55rem;
-  display: grid;
-  width: 0.75rem;
-  height: 0.75rem;
-  place-items: center;
-  border: 2px solid var(--brand);
-  border-radius: 999px;
-  background: var(--background);
-  color: var(--brand);
-  content: "";
-}
-
 .quote-form-shell {
   scroll-margin-top: 6rem;
   border: 1px solid var(--border);
@@ -475,45 +454,6 @@ body {
 @media (min-width: 640px) {
   .quote-form-shell {
     padding: 1.75rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .process-timeline-step {
-    padding: 0.35rem 0 0;
-  }
-
-  .process-timeline-step::before {
-    position: static;
-    margin: 0 0 0.8rem;
-  }
-}
-
-@media (min-width: 1280px) {
-  .process-timeline {
-    position: relative;
-    padding-top: 1rem;
-  }
-
-  .process-timeline::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 1px;
-    background: var(--border);
-    content: "";
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: timeline-draw 1200ms cubic-bezier(0.22, 1, 0.36, 1) 120ms forwards;
-  }
-
-  .process-timeline-step::before {
-    position: absolute;
-    top: -1rem;
-    left: 0;
-    margin: 0;
-    background: var(--surface);
   }
 }
 
@@ -591,12 +531,6 @@ body {
   }
 }
 
-@keyframes timeline-draw {
-  to {
-    transform: scaleX(1);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -621,8 +555,7 @@ body {
 
   .home-service-image,
   .home-project-image,
-  .quote-progress > span,
-  .process-timeline::before {
+  .quote-progress > span {
     transition: none;
     animation: none;
     transform: none;

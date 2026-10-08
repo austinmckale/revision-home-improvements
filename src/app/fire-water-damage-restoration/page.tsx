@@ -16,7 +16,7 @@ import { getPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = getPageMetadata({
   title: "Fire & Water Damage Restoration | Reading PA & Lehigh Valley",
   description:
-    "Fire and water damage restoration in Reading, Berks County and the Lehigh Valley. Call RHI Pros for assessment, repair scopes and insurance documentation support.",
+    "Fire and water damage restoration in Reading, Berks County and the Lehigh Valley. Call RHI Pros for an assessment, a detailed repair estimate and documentation for your claim.",
   path: "/fire-water-damage-restoration",
 });
 
@@ -28,25 +28,25 @@ const firstSteps = [
   },
   {
     title: "Gather the details",
-    copy: "Share available photos and claim information so the repair scope can be reviewed.",
+    copy: "Share photos and any claim information so we can review the repairs.",
   },
-  { title: "Plan the recovery", copy: "We develop a written scope and discuss the sequence of reconstruction work." },
+  { title: "Plan the recovery", copy: "We prepare a written repair plan and walk you through the order of the rebuild." },
 ];
 const recoveryServices = [
   {
     href: "/services/fire-damage-restoration",
     title: "After fire damage",
-    copy: "Interior reconstruction, finish repairs, and a phased rebuild plan.",
+    copy: "Drywall, flooring, trim and finishes rebuilt in clear phases.",
   },
   {
     href: "/services/water-damage-restoration",
     title: "After water damage",
-    copy: "Assessment of affected finishes and a coordinated repair scope.",
+    copy: "Damaged finishes reviewed and rebuilt once the space is dry.",
   },
   {
     href: "/insurance-claims",
     title: "Claim-related repairs",
-    copy: "Documentation and scope support for insurance-related projects.",
+    copy: "Photos and detailed estimates for your insurance claim.",
   },
 ];
 
@@ -75,8 +75,8 @@ export default function FireWaterDamageRestorationPage() {
               Fire &amp; water damage restoration.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--muted)]">
-              When your home has been damaged, start with a conversation. We help define the repairs, document the
-              scope, and plan the rebuild.
+              When your home has been damaged, start with a phone call. We assess the damage, document it for your
+              claim and rebuild the rooms you live in.
             </p>
             <div className="mt-6 grid gap-3 sm:flex sm:flex-wrap">
               <Button href={siteConfig.phoneHref}>Call {siteConfig.phoneDisplay}</Button>
@@ -84,15 +84,10 @@ export default function FireWaterDamageRestorationPage() {
                 Request an assessment
               </Button>
             </div>
-            <p className="mt-4 text-sm leading-relaxed text-[var(--muted)]">
-              For an urgent project, call directly to discuss availability.
-            </p>
             <p className="mt-4 text-sm leading-relaxed text-[var(--muted)]">{insuranceClaimsClarification}</p>
-            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 border-t border-[var(--border)] pt-4 text-xs font-semibold text-[var(--muted)]">
-              <span>PA HIC #PA185945</span>
-              <span>Discuss availability</span>
-              <span>Written repair scopes</span>
-            </div>
+            <p className="annotation mt-7 border-t border-[var(--border)] pt-4 text-[0.62rem] text-[var(--muted)]">
+              {siteConfig.hicLabel}
+            </p>
           </div>
           <figure className="min-w-0">
             <div className="relative aspect-[4/3] overflow-hidden bg-[var(--accent)] lg:aspect-[4/5]">
@@ -136,7 +131,7 @@ export default function FireWaterDamageRestorationPage() {
               >
                 <h3 className="heading-serif text-2xl text-[var(--accent)]">{service.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{service.copy}</p>
-                <span className="mt-5 block text-sm font-semibold text-[var(--brand)]">Explore support ↗</span>
+                <span className="mt-5 block text-sm font-semibold text-[var(--brand)]">Learn more ↗</span>
               </Link>
             ))}
           </div>
@@ -148,18 +143,18 @@ export default function FireWaterDamageRestorationPage() {
             <p className="eyebrow">Tell us what happened</p>
             <h2 className="heading-serif mt-4 text-3xl text-[var(--accent)] sm:text-4xl">Let’s plan your next step.</h2>
             <p className="mt-5 text-base leading-relaxed text-[var(--muted)]">
-              Share the type of damage, affected rooms, location, and any existing claim information. We will review
-              your request and discuss the work involved.
+              Tell us the type of damage, which rooms were affected, where you are and whether a claim is open. We will
+              review it and follow up to talk through the work.
             </p>
             <ul className="mt-6 space-y-3 border-t border-[var(--border)] pt-6 text-sm text-[var(--muted)]">
-              <li>Damage assessment and rebuild scoping</li>
-              <li>Drywall, flooring, trim, and finish reconstruction</li>
-              <li>Milestone updates and a final walkthrough</li>
-              <li>Insurance documentation support when needed</li>
+              <li>Damage assessment and rebuild planning</li>
+              <li>Drywall, flooring, trim and finish reconstruction</li>
+              <li>Regular updates and a final walkthrough</li>
+              <li>Photos and estimates for your insurance claim</li>
             </ul>
             {restorationTestimonials.length > 0 && (
               <div className="mt-8">
-                <TestimonialStrip items={restorationTestimonials} title="Independent company reviews" />
+                <TestimonialStrip items={restorationTestimonials} />
               </div>
             )}
           </div>

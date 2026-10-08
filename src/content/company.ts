@@ -49,9 +49,9 @@ export const company = {
   },
   insuranceCarrier: "Provided upon request during estimate review",
   financing: {
-    teaser: "Ask about current financing options when reviewing your project scope.",
+    teaser: "Ask about financing when you review your proposal.",
     shortDisclosure: "Subject to lender approval. Terms vary.",
     disclosure:
-      "Financing offers are subject to lender approval. Program availability, rates, and term length vary by borrower profile and project scope.",
+      "Financing offers are subject to lender approval. Program availability, rates, and term length vary by borrower profile and project.",
   },
 } as const;

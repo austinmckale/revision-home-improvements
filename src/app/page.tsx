@@ -22,7 +22,7 @@ import { siteConfig } from "@/content/site";
 export const metadata: Metadata = getPageMetadata({
   title: { absolute: "RHI Pros | Lehigh Valley Remodeling & Restoration" },
   description:
-    "Remodeling and damage repairs in Allentown, Bethlehem, Reading, the Lehigh Valley and Berks County. Explore photos and plan a written scope with RHI Pros.",
+    "Remodeling and damage repairs in Allentown, Bethlehem, Reading, the Lehigh Valley and Berks County. See our work and request a quote from RHI Pros.",
   path: "/",
   image: {
     url: siteConfig.ogImage,
@@ -81,29 +81,29 @@ const localServiceGroups = [
 const processSteps = [
   {
     number: "01",
-    title: "Discovery",
-    detail: "Tell us what you want to change, what matters most, and how you use your home.",
+    title: "First conversation",
+    detail: "Tell us what you want to change, what matters most and how you use your home.",
   },
   {
     number: "02",
-    title: "Assessment",
-    detail: "We look closely at the space, talk through options, and identify the work involved.",
+    title: "Site visit",
+    detail: "We see the space, talk through the options and confirm what the work involves.",
   },
   {
     number: "03",
-    title: "Written proposal",
-    detail: "Receive a clear scope, pricing, and next steps before making a decision.",
+    title: "Proposal",
+    detail: "A written proposal with the work, the price and the next steps, before you decide.",
   },
   {
     number: "04",
     title: "Materials & schedule",
-    detail: "Confirm selections, timing, and the details that help the work run smoothly.",
+    detail: "Selections confirmed, materials ordered and the schedule set.",
   },
-  { number: "05", title: "Build", detail: "Our team keeps you informed as the planned work takes shape." },
+  { number: "05", title: "Build", detail: "We keep you updated as the work takes shape." },
   {
     number: "06",
     title: "Final walkthrough",
-    detail: "Review the finished work together and close out any final details.",
+    detail: "We review the finished work together and close out any final details.",
   },
 ];
 
@@ -147,7 +147,7 @@ const homeFaqs = [
   },
   {
     q: "Will I get a written estimate before work starts?",
-    a: "Yes. After we look at the space and talk through options, you receive a written proposal with the scope, pricing and next steps before you decide.",
+    a: "Yes. After we see the space and talk through the options, you receive a written proposal with the work, the price and the next steps before you decide.",
   },
   {
     q: "Are you a registered Pennsylvania contractor?",
@@ -155,11 +155,11 @@ const homeFaqs = [
   },
   {
     q: "Do you repair fire and water damage?",
-    a: `Yes. We plan and rebuild affected areas, including drywall, flooring, trim and finishes, and keep any specialist mitigation or cleanup separate in the scope. ${insuranceClaimsClarification}`,
+    a: `Yes. We rebuild damaged rooms, including drywall, flooring, trim and finishes, once any specialist drying or cleanup is done. ${insuranceClaimsClarification}`,
   },
   {
     q: "Can I see examples of your work?",
-    a: `Yes. Browse ${orderedShowcaseProjects.length} photo collections of kitchens, bathrooms, basements, patios and exteriors, and read source-linked company reviews on Angi.`,
+    a: `Yes. Browse ${orderedShowcaseProjects.length} projects, from kitchens and bathrooms to basements, patios and exteriors, and read our reviews on Google and Angi.`,
   },
   {
     q: "Do you offer financing?",
@@ -222,8 +222,7 @@ export default function HomePage() {
             </h1>
             <div className="home-hero-enter home-hero-enter-3 mt-7 flex flex-col gap-7 sm:mt-9 sm:flex-row sm:items-end sm:justify-between">
               <p className="max-w-xl text-pretty text-base leading-relaxed text-white/85 sm:text-lg md:text-xl">
-                Kitchens, bathrooms, basements, outdoor living, and damage repairs—with a written scope before work
-                begins.
+                Kitchens, bathrooms, basements and outdoor living, planned with you and built with care.
               </p>
               <div className="flex shrink-0 flex-wrap gap-3">
                 <Link
@@ -244,7 +243,7 @@ export default function HomePage() {
 
           <div className="mt-12 grid gap-4 text-white/75 sm:mt-16 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-6">
             <p className="annotation text-[0.65rem]">{siteConfig.hicLabel}</p>
-            <DimensionLine label="Written scope before work begins" className="hidden [--dimension-color:rgb(255_255_255/45%)] [--dimension-label-color:rgb(255_255_255/85%)] sm:flex" />
+            <DimensionLine className="hidden [--dimension-color:rgb(255_255_255/45%)] sm:flex" />
             <Link
               href="/projects/reading-paver-patio-buildout"
               className="annotation group inline-flex min-h-8 items-center gap-2 text-[0.65rem] text-white transition-colors hover:text-white/80"
@@ -260,7 +259,7 @@ export default function HomePage() {
           className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 select-none font-mono text-[10px] tracking-[.35em] text-white/60 [writing-mode:vertical-rl] lg:block"
           aria-hidden="true"
         >
-          DRAWN TO SCOPE · RHI PROS
+          RHI PROS · REMODELING &amp; RESTORATION
         </span>
       </section>
 
@@ -276,8 +275,8 @@ export default function HomePage() {
               </div>
               <div className="lg:justify-self-end">
                 <p className="max-w-2xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                  From one room to a full restoration, the right team makes the whole experience feel more manageable.
-                  Choose a service to see how we approach the work.
+                  From a single room to a full rebuild after damage, we plan the work with you and see it through. Choose
+                  a service to see how we approach it.
                 </p>
               </div>
             </div>
@@ -314,7 +313,9 @@ export default function HomePage() {
                     </span>
                     <div className="mt-3.5 flex items-end justify-between gap-4">
                       <div>
-                        <h3 className="heading-serif text-xl leading-tight text-white sm:text-3xl">{service.name}</h3>
+                        <h3 className="heading-serif text-xl leading-tight text-white sm:text-3xl">
+                          {service.slug === "paver-installation" ? "Patios & Outdoor Living" : service.name}
+                        </h3>
                         <p className="mt-2 hidden max-w-sm text-sm leading-relaxed text-white/75 sm:block">
                           {service.short}
                         </p>
@@ -362,7 +363,7 @@ export default function HomePage() {
                 href="/projects"
                 className="group inline-flex min-h-8 items-center gap-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]"
               >
-                View all {orderedShowcaseProjects.length} collections{" "}
+                View all {orderedShowcaseProjects.length} projects{" "}
                 <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
                   →
                 </span>
@@ -382,13 +383,13 @@ export default function HomePage() {
         <Container>
           <div className="mb-12 lg:mb-16">
             <div className="max-w-3xl">
-              <p className="eyebrow">Scope builder</p>
+              <p className="eyebrow">Project planner</p>
               <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                Sketch your scope before anyone picks up a tool.
+                Plan your project before the first visit.
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                Choose a space and tick what is on your list. We will draw up the questions that shape price and quality,
-                so you can send it with your quote request or save it for later.
+                Choose a room and check off what is on your list. We add the questions that shape price and quality, and
+                you can send it straight to us or save it for later.
               </p>
             </div>
           </div>
@@ -413,7 +414,7 @@ export default function HomePage() {
                 href="/projects"
                 className="inline-flex min-h-11 shrink-0 items-center gap-3 text-sm font-semibold text-[var(--accent)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
               >
-                Explore the photo collections <span aria-hidden="true">↗</span>
+                See all projects <span aria-hidden="true">↗</span>
               </Link>
             </div>
             <div className="-mx-5 mt-9 flex snap-x snap-mandatory scroll-px-5 gap-5 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-7 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
@@ -461,8 +462,8 @@ export default function HomePage() {
                 </div>
                 <div>
                   <p className="max-w-lg text-base leading-relaxed text-white/75">
-                    A renewed patio, considered edges, and a cleaner finish around the pool. See the before and after in
-                    the poolside photo gallery.
+                    A renewed surround, clean stone-pattern edges and a fresh finish around the pool. See the before and
+                    after.
                   </p>
                   <Link
                     href={`/projects/${poolStory.slug}`}
@@ -593,7 +594,7 @@ export default function HomePage() {
         <Container>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="eyebrow">Independent company reviews</p>
+              <p className="eyebrow">Reviews</p>
               <h2 className="heading-serif mt-4 text-4xl tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
                 Good work, good people.
               </h2>
@@ -630,15 +631,12 @@ export default function HomePage() {
           </div>
           <FadeIn>
             <div className="mt-10 grid gap-px bg-[var(--border)] md:grid-cols-3">
-              {featuredReviews.map((item, index) => (
+              {featuredReviews.map((item) => (
                 <article
                   key={`${item.name}-${item.context}`}
                   className="flex min-h-64 flex-col bg-[var(--surface)] p-6 sm:p-8 lg:p-9"
                 >
-                  <span className="font-mono text-xs tracking-[.16em] text-[var(--brand)]">
-                    0{index + 1} / CLIENT NOTE
-                  </span>
-                  <span className="heading-serif mt-5 text-5xl leading-none text-[var(--brand)]/50" aria-hidden="true">
+                  <span className="heading-serif text-5xl leading-none text-[var(--brand)]/50" aria-hidden="true">
                     “
                   </span>
                   <blockquote className="-mt-1 flex-1 text-base leading-relaxed text-[var(--foreground)] sm:text-lg">
@@ -646,13 +644,12 @@ export default function HomePage() {
                   </blockquote>
                   <div className="mt-6 border-t border-[var(--border)] pt-4">
                     <p className="text-sm font-semibold text-[var(--accent)]">{item.name}</p>
-                    <p className="mt-1 text-xs text-[var(--muted)]">{item.context}</p>
                     <a
                       href={item.verification.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={`Read ${item.name}'s original review on ${item.verification.platform} (opens in a new tab)`}
-                      className="mt-1 inline-flex min-h-6 items-center text-xs font-semibold text-[var(--brand)] underline underline-offset-4"
+                      aria-label={`Read ${item.name}'s full review on ${item.verification.platform} (opens in a new tab)`}
+                      className="mt-1 inline-flex min-h-6 items-center text-xs text-[var(--muted)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
                     >
                       {item.source} ↗
                     </a>
@@ -729,7 +726,7 @@ export default function HomePage() {
                   Start with a conversation. We’ll learn what you have in mind and explain the next steps clearly.
                 </p>
                 <p className="annotation mt-7 text-[0.65rem] text-white/60">
-                  {siteConfig.hicLabel} · Written estimates · Discuss warranty terms
+                  {siteConfig.hicLabel} · Lehigh Valley &amp; Berks County
                 </p>
               </div>
               <div className="flex flex-wrap gap-3 lg:flex-col">
@@ -746,23 +743,6 @@ export default function HomePage() {
                   Call {siteConfig.phoneDisplay}
                 </Link>
               </div>
-            </div>
-            <div className="mt-12 flex flex-wrap gap-x-6 gap-y-1 border-t border-white/15 pt-4 text-xs text-white/60 sm:mt-16 sm:text-sm">
-              <Link href="#scope-builder" className="inline-flex min-h-9 items-center transition-colors hover:text-white">
-                Sketch your scope
-              </Link>
-              <Link href="/our-process" className="inline-flex min-h-9 items-center transition-colors hover:text-white">
-                Our process
-              </Link>
-              <Link href="/warranty" className="inline-flex min-h-9 items-center transition-colors hover:text-white">
-                Workmanship warranty
-              </Link>
-              <Link
-                href="/licenses-and-insurance"
-                className="inline-flex min-h-9 items-center transition-colors hover:text-white"
-              >
-                Registration &amp; insurance
-              </Link>
             </div>
           </FadeIn>
         </Container>

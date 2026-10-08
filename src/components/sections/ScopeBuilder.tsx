@@ -63,7 +63,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
 
   if (!service) return null;
 
-  const summary = `${service.name} scope starter: ${priorities.length} ${
+  const summary = `${service.name} plan: ${priorities.length} ${
     priorities.length === 1 ? "priority" : "priorities"
   } selected${timeline ? `, timing ${timeline}` : ""}.`;
 
@@ -147,13 +147,13 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
       submissionIdRef.current = null;
       setTurnstileReset((count) => count + 1);
       setErrors(data.errors || {});
-      setMessage(data.message || `We could not send your scope. Please try again or call ${siteConfig.phoneDisplay}.`);
+      setMessage(data.message || `We could not send your plan. Please try again or call ${siteConfig.phoneDisplay}.`);
       emit("quote_submit_error", { fields: Object.keys(data.errors || {}).join(","), source: "scope_builder" });
       requestAnimationFrame(() => messageRef.current?.focus());
     } catch {
       submissionIdRef.current = null;
       setTurnstileReset((count) => count + 1);
-      setMessage(`We could not send your scope. Your details are still here. Please try again or call ${siteConfig.phoneDisplay}.`);
+      setMessage(`We could not send your plan. Your details are still here. Please try again or call ${siteConfig.phoneDisplay}.`);
       requestAnimationFrame(() => messageRef.current?.focus());
     } finally {
       setSending(false);
@@ -280,12 +280,12 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
         </p>
         <header className="grid gap-4 border-b border-[var(--accent)] pb-5 sm:grid-cols-[1fr_auto] sm:items-end">
           <div>
-            <p className="annotation text-[var(--muted)]">Scope starter · Sheet SS-01</p>
+            <p className="annotation text-[var(--muted)]">Project planner</p>
             <h3 id={`${id}-sheet-title`} className="heading-serif mt-2 text-3xl leading-tight text-[var(--accent)] sm:text-4xl">
               {service.name}
             </h3>
           </div>
-          <p className="sheet-tag w-fit self-start text-[var(--accent)] sm:self-end">Rev. A · Planning aid</p>
+          <p className="sheet-tag w-fit self-start text-[var(--accent)] sm:self-end">Planning aid</p>
         </header>
 
         <dl className="mt-6 space-y-6 text-sm leading-relaxed">
@@ -305,7 +305,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
                 </ul>
               ) : (
                 <p className="border border-dashed border-[var(--border)] px-3 py-2 text-[var(--muted)]">
-                  Tick what is on your list and it will be drawn up here.
+                  Check off what is on your list and it will appear here.
                 </p>
               )}
             </dd>
@@ -444,7 +444,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
                 disabled={sending}
                 className="inline-flex min-h-12 items-center justify-center gap-3 bg-[var(--brand)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)] disabled:opacity-70"
               >
-                {sending ? "Sending…" : "Send my scope"} <span aria-hidden="true">↗</span>
+                {sending ? "Sending…" : "Send my plan"} <span aria-hidden="true">↗</span>
               </button>
               <button
                 type="button"
@@ -471,7 +471,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
               <span aria-hidden="true">✓ </span>Sent to RHI Pros.
             </h4>
             <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-              Your scope starter and contact details are on their way. We will review your project and follow up by phone
+              Your project plan and contact details are on their way. We will review your project and follow up by phone
               or email to discuss next steps.
             </p>
             <div className="mt-5 flex flex-wrap items-center gap-3">
@@ -487,7 +487,7 @@ export default function ScopeBuilder({ services }: { services: ScopeBuilderServi
                 onClick={startOver}
                 className="inline-flex min-h-12 items-center px-2 text-sm font-semibold text-[var(--accent)] underline underline-offset-4"
               >
-                Sketch another scope
+                Start another plan
               </button>
             </div>
           </div>

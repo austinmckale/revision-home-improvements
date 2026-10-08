@@ -78,8 +78,7 @@ export default function ServiceHero({
         </div>
         <div className="annotation mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/25 pt-4 text-[0.62rem] text-white/80 sm:mt-12 sm:text-[0.68rem]">
           <span>PA HIC #PA185945</span>
-          <span>Discuss scope and scheduling</span>
-          <span>Written scope before work begins</span>
+          <span>Lehigh Valley &amp; Berks County</span>
           <Link
             href="/licenses-and-insurance"
             className="underline decoration-white/40 underline-offset-4 transition-colors hover:text-white"

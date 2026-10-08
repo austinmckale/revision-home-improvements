@@ -71,8 +71,7 @@ export default function Footer() {
             </Link>
             <p className="mt-3 text-xs font-semibold uppercase tracking-[.15em] text-white/65">Reimagine · Build · Enjoy</p>
             <p className="mt-6 text-sm leading-relaxed text-white/60">
-              Remodeling and fire and water damage repairs across the Lehigh Valley and Berks County, with a written
-              scope before work begins.
+              Remodeling and restoration for homes across the Lehigh Valley and Berks County.
             </p>
           </div>
 
@@ -120,9 +119,6 @@ export default function Footer() {
             >
               {siteConfig.primaryEmail}
             </a>
-            <p className="mt-3 text-xs leading-relaxed text-white/65">
-              Serving the Lehigh Valley and Berks County, PA
-            </p>
             <Link
               href="/request-a-quote"
               className="mt-6 inline-flex min-h-11 items-center justify-center bg-[var(--brand)] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[var(--brand-dark)]"
@@ -135,7 +131,7 @@ export default function Footer() {
           </div>
         </div>
         <nav aria-label="Local service areas" className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-1 text-sm">
-          <span className="mr-2 text-xs font-semibold uppercase tracking-widest text-white/65">Close to home</span>
+          <span className="mr-2 text-xs font-semibold uppercase tracking-widest text-white/65">Service areas</span>
           {localLinks.map((link) => (
             <Link key={link.href} href={link.href} className="inline-flex min-h-11 items-center hover:text-white">
               {link.label}
@@ -145,7 +141,7 @@ export default function Footer() {
       </Container>
       <Container className="pb-10">
         {/* Drafting title block: the firm details found in the corner of every drawing set. */}
-        <div className="grid grid-cols-2 border border-white/20 text-xs text-white/70 md:grid-cols-[1.2fr_1fr_1fr_.8fr] lg:grid-cols-[1.3fr_1fr_1.1fr_1fr_.6fr]">
+        <div className="grid grid-cols-2 border border-white/20 text-xs text-white/70 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className={`${titleCellClass} col-span-2 md:col-span-1`}>
             <p className={titleLabelClass}>Firm</p>
             <p className="mt-1.5 font-semibold text-white">
@@ -165,22 +161,11 @@ export default function Footer() {
             <p className={titleLabelClass}>Service area</p>
             <p className="mt-1.5 text-white">Lehigh Valley &amp; Berks County, PA</p>
           </div>
-          <div className={`${titleCellClass} border-t md:border-l md:border-t-0`}>
-            <p className={titleLabelClass}>Contact</p>
-            <a
-              href={siteConfig.phoneHref}
-              className="mt-1 inline-flex min-h-6 items-center font-semibold text-white transition-colors hover:text-white/80"
-            >
-              {siteConfig.phoneDisplay}
-            </a>
-          </div>
-          <div className={`${titleCellClass} border-l border-t md:col-span-4 md:border-l-0 lg:col-span-1 lg:border-l lg:border-t-0`}>
-            <p className={titleLabelClass}>Rev.</p>
-            <p className="mt-1.5 text-white">&copy; {new Date().getFullYear()}</p>
-          </div>
         </div>
         <div className="mt-5 flex flex-col-reverse items-center justify-between gap-3 text-xs text-white/65 md:flex-row">
-          <p className="annotation text-[0.6rem] text-white/50">Drawn to scope in Pennsylvania</p>
+          <p className="text-white/50">
+            &copy; {new Date().getFullYear()} {siteConfig.legalName}
+          </p>
           <div className="flex flex-wrap justify-center gap-x-5 font-medium">
             {externalProfileLinks.map((link) => (
               <a

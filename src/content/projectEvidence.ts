@@ -84,9 +84,9 @@ const fieldPhotos = fireFrames.map(([file, alt]) => photo(`fire-damage-documenta
 
 export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "allentown-kitchen-layout-upgrade": overview({
-    title: "Island seating & contrasting cabinets",
+    title: "Two-tone island kitchen",
     summary:
-      "Warm wood tones, a dark island, and bright countertops give this kitchen a strong focal point. Pendant lights bring the seating area into focus.",
+      "A dark island with bright countertops and pendant lights sits at the center of the room, framed by warm wood cabinetry and a full stainless appliance wall.",
     featureInServiceListings: true,
     scope: [
       "Island seating and contrasting cabinetry",
@@ -106,9 +106,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "bethlehem-bathroom-refresh": overview({
-    title: "Dark fixtures & a sliding wood door",
+    title: "Black-framed shower & sliding door",
     summary:
-      "A gray vanity and dark shower frame bring contrast to the white enclosure. A sliding wood door adds warmth at the entrance.",
+      "A white shower with a black frame and a gray vanity keep the palette crisp, while a sliding wood door adds warmth at the entry.",
     scope: [
       "White shower enclosure with a dark frame",
       "Gray vanity and dark hardware",
@@ -126,9 +126,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "allentown-commercial-bathroom-renovation": overview({
-    title: "Commercial restroom & corridor finishes",
+    title: "Commercial restroom & corridor",
     summary:
-      "Blue restroom partitions, gray floors, and light corridor walls offer a straightforward commercial finish palette. Explore the stall and passage details.",
+      "Blue stall partitions and gray flooring in the restroom, and a bright, freshly painted corridor outside it. Compare the corridor before and after.",
     featureInServiceListings: false,
     scope: ["Blue restroom partitions and floor surfaces", "Painted block-wall corridor", "Stall and fixture details"],
     images: [
@@ -155,9 +155,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "allentown-exterior-log-home-refresh": overview({
-    title: "Log-style siding & contrasting trim",
+    title: "Log-style exterior",
     summary:
-      "Log-style walls and contrasting window trim define this home's exterior. Front and garage-side views show how the details carry across the facade.",
+      "Log-style siding and crisp contrasting trim carry from the front of the house around to the garage side.",
     scope: ["Log-style wall surfaces and contrasting trim", "Front and garage-side elevations", "Upper-facade access"],
     images: [
       photo(
@@ -175,9 +175,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "bethlehem-exterior-staircase-build": overview({
-    title: "Exterior stairs & elevated landing",
+    title: "Exterior stair & landing",
     summary:
-      "Light posts and dark railing infill frame an exterior stairway and elevated landing. The compact layout connects the upper entry to ground level.",
+      "A compact exterior stair rises to an elevated landing, with light posts and dark railing infill.",
     scope: ["Elevated exterior landing", "Stair run and support posts", "Light posts with dark railing infill"],
     images: [
       photo(
@@ -187,9 +187,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "reading-commercial-bar-window-upgrade": overview({
-    title: "Dark window trim & natural light",
+    title: "Bar room windows & trim",
     summary:
-      "A row of windows brings natural light along the bar seating area. Dark trim and wall panels give the long wall a consistent rhythm.",
+      "A long run of windows with dark trim and wall panels fills the bar seating area with daylight.",
     featureInServiceListings: false,
     scope: ["Windows along the seating wall", "Dark window trim and wall panels", "Natural light across the bar area"],
     images: [
@@ -200,11 +200,11 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "lehigh-valley-full-exterior-refresh": overview({
-    title: "Dormers, shutters & a welcoming porch",
+    title: "Dormers, shutters & front porch",
     summary:
-      "Contrasting shutters and light siding frame the dormer windows and front porch. Explore the full elevation, closer trim details, and a work-in-progress view.",
+      "Light siding and dark shutters frame the dormers and the front porch. See the full front, the trim up close and a before view.",
     scope: ["Dormer and window trim details", "Contrasting shutters and porch entry", "Front and side elevation views"],
-    evidenceNote: "More dormer and shutter details appear in the companion gallery.",
+    evidenceNote: "",
     images: [
       ...exteriorViews,
       photo(
@@ -217,19 +217,19 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   }),
   "lehigh-valley-dormer-shutter-detail-refresh": overview({
     title: "Dormer & shutter details",
-    summary: "A closer look at the window trim, dark shutters, and porch details featured in the exterior collection.",
+    summary: "A closer look at the window trim, dark shutters and porch from the full exterior project.",
     scope: ["Dormer trim and window arrangement", "Contrasting shutters", "Porch and front-entry details"],
     showInGallery: false,
     featureInServiceListings: false,
     sharedCollectionSlug: "lehigh-valley-full-exterior-refresh",
-    evidenceNote: "Part of the exterior photo collection.",
+    evidenceNote: "",
     images: [exteriorViews[1], exteriorViews[0]],
     photoGroups: [{ title: "Earlier exterior view", images: [exteriorEarlier] }],
   }),
   "bethlehem-interior-flooring-refresh": overview({
-    title: "Warm floors & connected rooms",
+    title: "Warm wood flooring",
     summary:
-      "Warm-toned floorboards stand out against light walls and white trim. A framed wall opening connects the room to the space beyond.",
+      "Rich, warm-toned floorboards against light walls and crisp white trim, with a cased opening into the next room.",
     scope: ["Warm-toned floorboards", "Trimmed opening between rooms", "Light walls and recessed ceiling lights"],
     images: [
       photo(
@@ -239,9 +239,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "berks-county-ranch-exterior-refresh": overview({
-    title: "Light siding & dark exterior accents",
+    title: "Classic ranch exterior",
     summary:
-      "Dark shutters and entry railings bring contrast to this ranch-style home's light siding. Lawn and planting soften the front elevation.",
+      "Light siding, dark shutters and a dark entry railing give this single-story home clean, classic curb appeal.",
     scope: ["Single-story front elevation", "Contrasting shutters and railing", "Front entry and landscaping"],
     images: [
       photo(
@@ -251,9 +251,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "lehigh-valley-basement-finish-and-detail": overview({
-    title: "A media wall for movie nights",
+    title: "Basement media room",
     summary:
-      "A large screen and linear fireplace anchor the media wall. Glossy patterned flooring and recessed lights tie the surrounding room together.",
+      "A large screen and a linear fireplace share one feature wall, with recessed lighting overhead and a high-gloss patterned floor below.",
     scope: [
       "Media wall with screen and linear fireplace",
       "Speaker placement and wall detailing",
@@ -294,9 +294,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     images: [],
   }),
   "allentown-flooring-replacement-upgrade": overview({
-    title: "Light floors & a fireplace focal point",
+    title: "Light floors, open living",
     summary:
-      "Light wood-look flooring connects the living area, kitchen opening, and fireplace wall. Sliding doors bring daylight into the room.",
+      "Light wood-look flooring runs from the living room to the kitchen opening and fireplace wall, with sliding doors bringing in daylight.",
     scope: ["Light wood-look floor surfaces", "Fireplace-wall and trim details", "Kitchen opening and sliding doors"],
     images: [
       photo(
@@ -310,9 +310,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "bethlehem-drywall-and-finish-repair": overview({
-    title: "Light walls & simple interior finishes",
+    title: "Clean interior finishes",
     summary:
-      "Light walls, white closet doors, and a tiled floor create a simple room palette. Ceiling lights and a fan complete the view.",
+      "Smooth light walls, clean corners and white closet doors over a tile floor, finished with ceiling lights and a fan.",
     featureInServiceListings: false,
     scope: ["Walls, corners, and doorways", "Ceiling lights and fan", "Tile floor and closet doors"],
     images: [
@@ -325,7 +325,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "reading-paver-patio-buildout": overview({
     title: "Paver patio & gable-roof pavilion",
     summary:
-      "We built the paver patio and the gable-roof pavilion over it, with a wood ceiling, recessed lights and planting along the edges. Explore the roof, posts, and garden connections.",
+      "We built the paver patio and the gable-roof pavilion over it as one outdoor room, with a warm wood ceiling, recessed lighting and planted edges.",
     scope: ["Patio surface and garden edges", "Gable-roof pavilion and support posts", "Wood ceiling and lighting"],
     images: [
       photo(
@@ -355,9 +355,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "bethlehem-pool-patio-renovation": overview({
-    title: "Curved pool edges & a textured surround",
+    title: "Poolside surround",
     summary:
-      "A light stone-pattern border follows the pool's curves against a gray textured surround. Close views show the step area and rounded edge details.",
+      "A gray textured surround with a light stone-pattern border that follows every curve of the pool, from the steps to the rounded edges.",
     scope: ["Curved poolside surface", "Light stone-pattern border", "Pool-step and radius details"],
     images: [
       photo(
@@ -383,9 +383,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "allentown-fire-damage-interior-rebuild": overview({
-    title: "A light surround & dark hearth",
+    title: "Fireplace surround & hearth",
     summary:
-      "A light fireplace surround meets a dark hearth, creating a clear focal point along the wall. Close views show the adjoining surfaces and floor transitions.",
+      "A light fireplace surround above a dark hearth makes a clean focal point for the room.",
     serviceName: "Drywall Installation and Repair",
     serviceSlug: "drywall-installation-repair",
     featureInServiceListings: false,
@@ -403,9 +403,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "ryan-bedroom-interior-refresh": overview({
-    title: "Dark walls & warm bedroom floors",
+    title: "Bedroom in deep blue",
     summary:
-      "Dark walls and white trim frame the windows, while warm wood-look flooring adds contrast below. Room and work-stage views show the palette from several angles.",
+      "Deep wall color, bright white trim and warm wood-look flooring. Compare the room before and after, and see it mid-project.",
     scope: ["Wall colors and white trim", "Carpet and wood-look floor surfaces", "Windows and ceiling fan"],
     images: [
       photo(
@@ -443,9 +443,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "blue-kitchen-cabinet-counters": overview({
-    title: "Blue cabinets & countertop details",
+    title: "Blue cabinet kitchen",
     summary:
-      "Blue cabinets bring depth to the kitchen, paired with light countertops and simple hardware. Installation views and a layout diagram show how the cabinet run comes together.",
+      "Deep blue cabinetry with patterned gray countertops and a matching backsplash. Follow it from the cabinet layout through installation to the finished kitchen.",
     scope: [
       "Blue cabinet doors and hardware",
       "Countertop and appliance details",
@@ -484,7 +484,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     photoGroups: [
       {
         title: "Cabinet layout",
-        description: "Cabinet sizes, appliance spaces, and the arrangement of the main run.",
+        description: "Cabinet sizes, appliance spaces and the plan for the main run.",
         images: [
           photo(
             "blue-kitchen-cabinet-counters/marketing/01-blue-kitchen-cabinet-layout-diagram.png",
@@ -495,9 +495,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "ryan-kitchen-remodel": overview({
-    title: "White cabinets & dark countertops",
+    title: "Crisp white kitchen",
     summary:
-      "White cabinets and dark countertops define this kitchen corner. Stainless appliances and recessed lights keep the finish palette consistent.",
+      "White cabinets, dark countertops and stainless appliances under recessed lighting. Compare the same corner before and after.",
     scope: [
       "Kitchen corner and window arrangement",
       "White cabinets and dark countertops",
@@ -523,9 +523,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "ryan-bathroom-remodel": overview({
-    title: "A dark vanity & warm floor finishes",
+    title: "Double-vanity bathroom",
     summary:
-      "A dark double-sink vanity anchors the bathroom, with light walls and warm wood-look flooring. The window brings daylight across the counter and bathing area.",
+      "A dark double-sink vanity, light walls and warm wood-look flooring, with a window that fills the room with daylight.",
     scope: ["Double-sink vanity and mirror", "Wall, window, and floor finishes", "Bathing area beside the vanity"],
     images: [
       photo(
@@ -535,8 +535,8 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
     photoGroups: [
       {
-        title: "Wood-tone vanity reference",
-        description: "An additional bathroom view with a wood-tone vanity and darker floor finishes.",
+        title: "Another view",
+        description: "A wood-tone vanity with darker flooring.",
         images: [
           photo(
             "ryan-bathroom/before/ryans-bathroom-before.jpg",
@@ -547,9 +547,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "hamburg-laundry-bathroom-remodel": overview({
-    title: "Laundry & half-bath, together",
+    title: "Laundry & half-bath",
     summary:
-      "A utility sink, laundry appliance, and open shelving share a compact room with the half-bath. Light walls and gray floor finishes keep the small space visually simple.",
+      "One compact room that does double duty: laundry, a utility sink and open shelving beside a half-bath, finished in light walls and gray flooring.",
     scope: ["Utility sink and toilet area", "Laundry appliance and open shelving", "Window trim and floor surfaces"],
     images: [
       photo(
@@ -620,9 +620,9 @@ export const projectEvidenceSplits: Record<string, { sourceSlug: string; evidenc
   "white-cabinet-open-plan-kitchen": {
     sourceSlug: "allentown-kitchen-layout-upgrade",
     evidence: overview({
-      title: "White cabinetry & open-plan living",
+      title: "White open-plan kitchen",
       summary:
-        "White cabinets and stainless appliances open onto a bright living area. Gray wood-look flooring connects the kitchen and adjoining room, with daylight from windows along both spaces.",
+        "Crisp white cabinetry and stainless appliances open straight into the living area, with gray wood-look flooring carrying through both spaces.",
       featureInServiceListings: true,
       scope: [
         "White cabinetry and stainless appliances",
@@ -661,16 +661,16 @@ export const projectEvidenceSplits: Record<string, { sourceSlug: string; evidenc
   "dark-partition-commercial-restroom": {
     sourceSlug: "allentown-commercial-bathroom-renovation",
     evidence: overview({
-      title: "Dark partitions & restroom tile",
+      title: "Charcoal restroom stalls",
       summary:
-        "Dark stall partitions contrast with light gray walls and rectangular floor tile. Take a closer look at the fixture, partition, and ceiling details in this commercial restroom reference.",
+        "Charcoal stall partitions against light gray walls and plank-style floor tile, for a clean, modern commercial restroom.",
       featureInServiceListings: false,
       scope: [
         "Dark restroom partitions",
         "Rectangular floor tile and gray walls",
         "Toilet fixture and suspended ceiling",
       ],
-      evidenceNote: "Commercial restroom finish reference.",
+      evidenceNote: "",
       images: [
         photo(
           "allentown-commercial-bathroom/after/stall-finished.jpg",

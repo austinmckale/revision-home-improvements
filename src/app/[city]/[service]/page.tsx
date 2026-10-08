@@ -6,18 +6,17 @@ import Button from "@/components/ui/Button";
 import QuoteForm from "@/components/forms/QuoteForm";
 import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
-import LocalHighlightsSection from "@/components/sections/LocalHighlightsSection";
 import PortfolioGallery from "@/components/sections/PortfolioGallery";
 import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import ServiceHero from "@/components/sections/ServiceHero";
-import PageJumpLinks from "@/components/sections/PageJumpLinks";
-import { getLocationBySlug, locations } from "@/content/locations";
+import { getLocationBySlug, locations, placeName } from "@/content/locations";
 import { getCaseStudyBySlug, visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { getCityServiceLocalContent } from "@/content/localSeo";
 import {
   curatedStaticGalleryServiceSlugs,
   exampleScopeExplanation,
   getServiceBySlug,
+  inlineServiceName,
   primaryServices,
   services,
 } from "@/content/services";
@@ -59,7 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const title = localContent?.metadataTitle ?? `${selectedService.name} in ${location.name}`;
   const description =
     localContent?.metadataDescription ??
-    `Discuss ${selectedService.name.toLowerCase()} in ${location.name}. Review scope, responsibilities and next steps with RHI Pros.`;
+    `${selectedService.name} in ${location.name} from RHI Pros. See our work, learn what affects the price and request a quote.`;
   const shareImages = selectedService.image.src
     ? [{ url: selectedService.image.src, alt: selectedService.image.alt }]
     : [{ url: "/images/brand/rhi-pros-share.png", alt: "RHI Pros · rhipros.com" }];
@@ -130,7 +129,6 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     Boolean(localContent) &&
     Boolean(contextualCaseStudy) &&
     (priorityContextualLocations.has(location.slug) || Boolean(localContent.relatedCaseStudySlug));
-  const serviceOverviewAnchorText = `${service.name.toLowerCase()} services`;
   const relatedLocalServices = primaryServices.filter((item) => item.slug !== service.slug);
   const showCabinetPlanningBlock = location.slug === "berks-county-pa" && service.slug === "kitchen-remodeling";
   const showAuthoritySnapshot = Boolean(service.authoritySnapshot) && !showCabinetPlanningBlock;
@@ -152,28 +150,24 @@ export default async function CityServicePage({ params }: { params: Promise<Para
     : await getPortfolioImages({ serviceTags: [portfolioTag], limit: 3 });
   const authoritySnapshotScope = service.authoritySnapshot?.scope.slice(0, 4) ?? [];
   const faqItems = localContent?.localizedFaqs ?? [];
-  const internalLinks = localContent?.internalLinks ?? [
-    {
-      href: `/${location.slug}`,
-      anchorText: `Remodeling and restoration in ${location.name}`,
-      reason: "City hub and related services",
-    },
-    {
-      href: serviceOverviewHref,
-      anchorText: `${service.name} service details`,
-      reason: "Service-level scope and process",
-    },
-    {
-      href: "/projects",
-      anchorText: "Photo collections",
-      reason: "Visual trust and case-study proof",
-    },
+  const curatedLinks = localContent?.internalLinks ?? [
+    { href: "/projects", anchorText: "Our project photos", reason: "Visual proof" },
     {
       href: service.slug === "water-damage-restoration" ? "/insurance-claims" : "/financing",
-      anchorText: service.slug === "water-damage-restoration" ? "Insurance claims assistance" : "Financing options",
+      anchorText: service.slug === "water-damage-restoration" ? "Insurance claims help" : "Financing options",
       reason: "Decision-stage support",
     },
   ];
+  // One compact list: the area hub first, then curated links that are not already on the page.
+  const moreLinks = [
+    { href: `/${location.slug}`, anchorText: `All services in ${placeName(location)}` },
+    ...curatedLinks.filter(
+      (link) => !link.href.startsWith("#") && link.href !== `/${location.slug}` && link.href !== serviceOverviewHref,
+    ),
+  ];
+  const place = placeName(location);
+  const inlineLinkClass =
+    "font-semibold text-[var(--accent)] underline decoration-[var(--border)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:decoration-[var(--brand)]";
 
   return (
     <>
@@ -194,23 +188,10 @@ export default async function CityServicePage({ params }: { params: Promise<Para
         }
         image={service.image.src ? service.image : undefined}
         primaryHref={isEmergencyService ? siteConfig.phoneHref : "#quote-form-section"}
-        primaryLabel={isEmergencyService ? `Call ${siteConfig.phoneDisplay}` : "Get a free quote"}
+        primaryLabel={isEmergencyService ? `Call ${siteConfig.phoneDisplay}` : "Request a quote"}
         secondaryHref={isEmergencyService ? `/request-a-quote?service=${service.slug}` : siteConfig.phoneHref}
         secondaryLabel={isEmergencyService ? "Request a quote" : `Call ${siteConfig.phoneDisplay}`}
-        notice={isEmergencyService ? "Call us to discuss repair scope and current availability." : undefined}
-      />
-
-      <PageJumpLinks
-        items={[
-          { href: "#service-details", label: "Scope & cost" },
-          ...(localContent ? [{ href: "#local-planning", label: "Local planning" }] : []),
-          ...(localContent?.planningGuide ? [{ href: "#planning-guide", label: "Before you begin" }] : []),
-          ...(showFeaturedProjectGallery || portfolioImages.length > 0 || service.processGallery
-            ? [{ href: "#project-photos", label: "Photos" }]
-            : []),
-          ...(faqItems.length > 0 ? [{ href: "#questions", label: "Common questions" }] : []),
-          { href: "#quote-form-section", label: "Request a quote" },
-        ]}
+        notice={isEmergencyService ? "Call to talk through the damage and our current availability." : undefined}
       />
 
       <section className="py-14">
@@ -220,10 +201,10 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">{insuranceClaimsClarification}</p>
             )}
             <section id="service-details" className="surface-soft rounded-sm border border-[var(--border)] p-5 md:p-6">
-              <h2 className="heading-serif text-3xl text-[var(--accent)]">Scope &amp; price factors</h2>
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Planning &amp; pricing</h2>
               <div className="mt-5 grid gap-6 sm:grid-cols-2">
                 <div>
-                  <h3 className="font-semibold text-[var(--accent)]">Scope to discuss</h3>
+                  <h3 className="font-semibold text-[var(--accent)]">What&apos;s included</h3>
                   <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
                     {service.whatIncluded.slice(0, 3).map((item) => (
                       <li key={item}>{item}</li>
@@ -245,7 +226,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                   href={serviceOverviewHref}
                   className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
                 >
-                  Full service guide →
+                  More about {service.name.toLowerCase()} →
                 </Link>
               </div>
             </section>
@@ -256,15 +237,10 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 <p className="mt-2 text-sm text-[var(--muted)]">{localContent.localProjectSnippet}</p>
                 {showPriorityContextualSentence && contextualCaseStudy ? (
                   <p className="mt-3 text-sm text-[var(--muted)]">
-                    For a relevant example, see{" "}
+                    Related project:{" "}
                     <Link href={`/projects/${contextualCaseStudy.slug}`} className="font-semibold text-[var(--brand)]">
-                      {contextualCaseStudy.title}
-                    </Link>{" "}
-                    or review our{" "}
-                    <Link href={serviceOverviewHref} className="font-semibold text-[var(--brand)]">
-                      {serviceOverviewAnchorText}
+                      {contextualCaseStudy.title} ↗
                     </Link>
-                    .
                   </p>
                 ) : null}
                 <h3 className="mt-5 text-lg font-semibold text-[var(--accent)]">
@@ -298,24 +274,23 @@ export default async function CityServicePage({ params }: { params: Promise<Para
 
             {showCabinetPlanningBlock ? (
               <div className="surface-soft mt-6 rounded-sm border border-[var(--border)] p-5 md:p-6">
-                <h2 className="heading-serif text-2xl text-[var(--accent)]">Primarily planning new cabinets?</h2>
+                <h2 className="heading-serif text-2xl text-[var(--accent)]">Replacing cabinets only?</h2>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                  If cabinet replacement, layout and installation are the main focus, review our Berks County cabinet
-                  service. For projects involving the full room, continue with the complete kitchen-remodeling
-                  information on this page.
+                  If new cabinets are the main goal, our Berks County cabinet installation page is the better starting
+                  point. For a full-room remodel, everything you need is on this page.
                 </p>
                 <Link
                   href="/berks-county-pa/kitchen-cabinet-installation"
                   className="mt-4 inline-block text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
                 >
-                  Explore Kitchen Cabinet Installation →
+                  Kitchen cabinet installation →
                 </Link>
               </div>
             ) : null}
 
             {additionalLocalProof.length > 0 && (
               <section className="mt-8">
-                <h2 className="heading-serif text-3xl text-[var(--accent)]">Photo collections for {service.name}</h2>
+                <h2 className="heading-serif text-3xl text-[var(--accent)]">Related projects</h2>
                 <div className="mt-3 grid gap-3 md:grid-cols-2">
                   {additionalLocalProof.map((item) => (
                     <Link
@@ -323,18 +298,10 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                       href={`/projects/${item.slug}`}
                       className="surface rounded-lg p-4 hover:border-[var(--brand)]"
                     >
-                      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">
-                        {item.locationName}
-                      </p>
-                      <p className="mt-1 font-semibold">{item.title}</p>
+                      <p className="heading-serif text-xl text-[var(--accent)]">{item.title}</p>
                       <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
-                      <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
-                        {item.scope.slice(0, 2).map((scopeItem) => (
-                          <li key={scopeItem}>{scopeItem}</li>
-                        ))}
-                      </ul>
                       <span className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
-                        Explore photo collection
+                        See the project →
                       </span>
                     </Link>
                   ))}
@@ -345,35 +312,26 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             {showAuthoritySnapshot && service.authoritySnapshot && (
               <details className="surface group mt-8 overflow-hidden rounded-sm bg-[var(--surface-soft)]">
                 <summary className="flex cursor-pointer items-center justify-between gap-4 px-5 py-4 font-semibold text-[var(--accent)] marker:content-['']">
-                  Example project scope
+                  Example: {service.authoritySnapshot.title.replace(/^A /, "a ")}
                   <span aria-hidden="true" className="text-[var(--brand)] transition-transform group-open:rotate-180">
                     ↓
                   </span>
                 </summary>
                 <div className="px-5 pb-5">
-                  <h3 className="text-xl font-bold text-[var(--accent)]">{service.authoritySnapshot.title}</h3>
-                  <p className="mt-2 text-sm text-[var(--muted)]">{exampleScopeExplanation}</p>
-                  <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
+                  <p className="text-sm text-[var(--muted)]">{service.authoritySnapshot.summary}</p>
                   <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
                     {authoritySnapshotScope.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                   <p className="mt-3 text-sm text-[var(--muted)]">{service.authoritySnapshot.compliance}</p>
-                  <p className="mt-2 text-xs text-[var(--muted)]">{service.authoritySnapshot.note}</p>
-                  <p className="mt-4 text-sm text-[var(--muted)]">
-                    For full service scope and process details, see{" "}
-                    <Link href={serviceOverviewHref} className="font-semibold text-[var(--brand)]">
-                      {service.name} service overview
-                    </Link>
-                    .
-                  </p>
+                  <p className="mt-2 text-xs text-[var(--muted)]">{exampleScopeExplanation}</p>
                 </div>
               </details>
             )}
 
             {faqItems.length > 0 ? (
-              <FaqList id="questions" title={`Quick answers for ${location.short}`} items={faqItems} />
+              <FaqList id="questions" title={`Common questions in ${place}`} items={faqItems} />
             ) : null}
           </div>
 
@@ -387,32 +345,23 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             <div id="project-photos">
               {showFeaturedProjectGallery ? (
                 <section>
-                  <h2 className="heading-serif text-3xl text-[var(--accent)]">Design &amp; finish ideas</h2>
+                  <h2 className="heading-serif text-3xl text-[var(--accent)]">
+                    {gallerySourceCaseStudy ? gallerySourceCaseStudy.title : "Recent work"}
+                  </h2>
                   {gallerySourceCaseStudy ? (
-                    <>
-                      <p className="mt-1 text-sm text-[var(--muted)]">
-                        From{" "}
-                        <Link
-                          href={`/projects/${gallerySourceCaseStudy.slug}`}
-                          className="font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
-                        >
-                          {gallerySourceCaseStudy.title}
-                        </Link>
-                        {" | "}
-                        {gallerySourceCaseStudy.locationName}
-                      </p>
-                      <p className="mt-3 text-sm text-[var(--muted)]">{gallerySourceCaseStudy.summary}</p>
-                      <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-[var(--muted)]">
-                        {gallerySourceCaseStudy.scope.slice(0, 2).map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </>
+                    <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
+                      {gallerySourceCaseStudy.summary}{" "}
+                      <Link
+                        href={`/projects/${gallerySourceCaseStudy.slug}`}
+                        className="whitespace-nowrap font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
+                      >
+                        See the project ↗
+                      </Link>
+                    </p>
                   ) : null}
                   <ExpandableImageGrid
                     images={featuredProjectGalleryImages}
                     inlineCount={2}
-                    expandLabel="View photos"
                     gridClassName={featuredProjectGalleryGridClassName}
                     cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-lg bg-[var(--surface-soft)]"
                     imageClassName="h-auto w-full"
@@ -432,30 +381,36 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                   />
                 </section>
               ) : portfolioImages.length > 0 ? (
-                <PortfolioGallery images={portfolioImages} title={`Recent ${service.name} Work`} />
+                <PortfolioGallery images={portfolioImages} title={`Recent ${service.name.toLowerCase()} work`} />
               ) : null}
             </div>
 
-            <section className="mt-10 border-t border-[var(--border)] pt-8">
-              <h2 className="heading-serif text-3xl text-[var(--accent)]">Related Local Resources</h2>
-              <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                {internalLinks.map((link) => (
-                  <Link key={link.href} href={link.href} className="surface rounded-lg p-4 hover:border-[var(--brand)]">
-                    <p className="text-sm font-semibold text-[var(--accent)]">{link.anchorText}</p>
-                  </Link>
+            <section className="mt-10 border-t border-[var(--border)] pt-8" aria-labelledby="more-local-heading">
+              <h2 id="more-local-heading" className="heading-serif text-3xl text-[var(--accent)]">
+                More in {place}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
+                We also handle{" "}
+                {relatedLocalServices.map((item, index) => (
+                  <span key={item.slug}>
+                    {index > 0 ? (index === relatedLocalServices.length - 1 ? " and " : ", ") : null}
+                    <Link href={`/${location.slug}/${item.slug}`} className={inlineLinkClass}>
+                      {inlineServiceName(item)}
+                    </Link>
+                  </span>
+                ))}{" "}
+                in {place}, and work nearby in {location.priorityAreas.slice(0, -1).join(", ")} and{" "}
+                {location.priorityAreas.at(-1)}.
+              </p>
+              <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+                {moreLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-[var(--brand)] underline-offset-4 hover:underline">
+                      {link.anchorText} →
+                    </Link>
+                  </li>
                 ))}
-              </div>
-
-              <LocalHighlightsSection
-                location={location}
-                serviceItems={relatedLocalServices}
-                className="mt-10"
-                maxServices={6}
-                servicesTitle={`Other services in ${location.short}`}
-                priorityTitle={`Areas we serve near ${location.short}`}
-                showCityHubLink
-                showWhySection={!useContextualGallery}
-              />
+              </ul>
             </section>
           </div>
         </Container>

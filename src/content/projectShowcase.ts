@@ -34,14 +34,11 @@ const commercialSlugs = new Set([
   "reading-commercial-bar-window-upgrade",
 ]);
 
-// Planning and condition collections were retired from public view (see retiredProjects.ts).
-const processSlugs = new Set<string>();
-
 const presentation: Record<string, { title: string; image?: CaseStudy["images"][number] }> = {
   "allentown-kitchen-layout-upgrade": { title: "Room to gather. Space to cook." },
-  "white-cabinet-open-plan-kitchen": { title: "White cabinetry & open-plan living." },
+  "white-cabinet-open-plan-kitchen": { title: "Bright, open and easy to live in." },
   "reading-paver-patio-buildout": {
-    title: "Outdoor living, all together.",
+    title: "An outdoor room under a gable roof.",
     image: {
       src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
       alt: "Front view of a gable-roof pavilion, patio, and planted garden edges beside a house.",
@@ -49,24 +46,41 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
   },
   "lehigh-valley-basement-finish-and-detail": { title: "Room for movie nights." },
   "blue-kitchen-cabinet-counters": {
-    title: "Blue cabinets. A fresh perspective.",
+    title: "A kitchen in deep blue.",
     image: {
       src: "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
       alt: "Wide view of blue cabinetry with a gray countertop and backsplash, sink and faucet, microwave and beverage cooler.",
     },
   },
   "bethlehem-interior-flooring-refresh": { title: "Warm floors, connected rooms." },
-  "allentown-exterior-log-home-refresh": { title: "A new chapter for a log home." },
+  "allentown-exterior-log-home-refresh": { title: "Log-style siding, crisp trim." },
   "hamburg-laundry-bathroom-remodel": { title: "A hardworking laundry & half-bath." },
   "ryan-bathroom-remodel": { title: "A bathroom made for every day." },
   "bethlehem-bathroom-refresh": {
-    title: "Bathroom fixtures & finishes.",
+    title: "Black-framed shower, warm wood door.",
     image: {
       src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
       alt: "Shower enclosure with a molded white insert and black frame.",
     },
   },
   "bethlehem-pool-patio-renovation": { title: "A place to spend the summer." },
+  "ryan-kitchen-remodel": { title: "Crisp white, dark counters." },
+  "berks-county-ranch-exterior-refresh": { title: "Classic curb appeal." },
+  "allentown-flooring-replacement-upgrade": { title: "Light floors, open living." },
+  "ryan-bedroom-interior-refresh": { title: "A bedroom in deep blue." },
+  "bethlehem-exterior-staircase-build": { title: "A stair to the upper entry." },
+  "bethlehem-drywall-and-finish-repair": { title: "Clean, simple finishes." },
+  "lehigh-valley-full-exterior-refresh": { title: "Dormers, shutters and a front porch." },
+  "allentown-fire-damage-interior-rebuild": { title: "A fireplace as the focal point." },
+  "reading-commercial-bar-window-upgrade": { title: "Daylight along the bar." },
+  "dark-partition-commercial-restroom": { title: "Charcoal stalls, clean lines." },
+  "allentown-commercial-bathroom-renovation": {
+    title: "Commercial restroom & corridor.",
+    image: {
+      src: "/images/projects/allentown-commercial-bathroom/after/hallway-after.png",
+      alt: "Corridor with light painted walls, a painted block wall and dark floor surfaces.",
+    },
+  },
 };
 
 export function getProjectPresentation(study: CaseStudy) {
@@ -78,7 +92,6 @@ export function getProjectPresentation(study: CaseStudy) {
 
 export function getProjectCollection(study: CaseStudy) {
   if (commercialSlugs.has(study.slug)) return "commercial";
-  if (processSlugs.has(study.slug)) return "process";
   return "residential";
 }
 

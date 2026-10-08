@@ -153,7 +153,7 @@ for (const url of urls) {
   if (path === "/service-areas")
     check(hrefs.includes("/services/water-damage-restoration"), "Service Areas: missing water-damage link.");
   if (path === "/request-a-quote") {
-    check((html.match(/>Browse Services<\/a>/g) || []).length === 1, "Quote page: expected one Browse Services link.");
+    check((html.match(/>Browse services<\/a>/g) || []).length === 1, "Quote page: expected one Browse services link.");
     const form = html.match(/<form\b[^>]*id="quote-form-section"[\s\S]*?<\/form>/)?.[0] || "";
     const formAttributes = attributes(form.split(">")[0]);
     check(
@@ -255,7 +255,10 @@ for (const url of urls) {
     check(photoSection.includes("<img"), `${path}: curated photo gallery is empty.`);
     check(!photoSection.includes("After photos for this project."), `${path}: empty comparison fallback rendered.`);
   }
-  const renderedImages = [...html.matchAll(/<img\b[^>]*>/g)].map((m) => decodeURIComponent(attributes(m[0]).src || ""));
+  // A project's own photos must not mix collections; cards linking to other projects are excluded.
+  const ownHtml = html.replace(/<section\b[^>]*data-related-projects[\s\S]*?<\/section>/g, "");
+  const renderedImages = [...ownHtml.matchAll(/<img\b[^>]*>/g)].map((m) => decodeURIComponent(attributes(m[0]).src || ""));
+  const allRenderedImages = [...html.matchAll(/<img\b[^>]*>/g)].map((m) => decodeURIComponent(attributes(m[0]).src || ""));
   if (path === "/projects/allentown-kitchen-layout-upgrade") {
     check(
       renderedImages.some((src) => src.includes("kitchen-high-end-hero")),
@@ -292,7 +295,7 @@ for (const url of urls) {
   }
   // Retired condition, damage and planning photos must not appear anywhere on the public site.
   check(
-    !renderedImages.some((src) =>
+    !allRenderedImages.some((src) =>
       /fire-damage-documentation\/|beige-bathroom-before-after\/|bathroom-refresh\/before\/bathroom-before-shower/.test(src),
     ),
     `${path}: shows a retired condition, damage or planning photo.`,

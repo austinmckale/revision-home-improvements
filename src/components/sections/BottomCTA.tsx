@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { siteConfig } from "@/content/site";
@@ -7,16 +6,14 @@ type BottomCTAProps = {
   title?: string;
   description?: string;
   showFinancing?: boolean;
-  links?: Array<{ href: string; label: string }>;
   className?: string;
   quoteHref?: string;
 };
 
 export default function BottomCTA({
-  title = "Ready to start your project?",
-  description = "Call for a quick conversation about your project, or send your details for a written scope and quote.",
+  title = "Let’s talk about your project.",
+  description = "Tell us what you have in mind. We will talk it through and set up a visit to see the space.",
   showFinancing = true,
-  links = [],
   className = "",
   quoteHref = "/request-a-quote",
 }: BottomCTAProps) {
@@ -36,25 +33,16 @@ export default function BottomCTA({
             <p className="eyebrow eyebrow-light justify-center">Start a conversation</p>
             <h2 className="heading-serif mt-5 text-3xl leading-tight text-white sm:text-4xl lg:text-5xl">{title}</h2>
             <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-white/70">{description}</p>
-            {showFinancing && <p className="mt-3 text-sm font-semibold text-white/85">{siteConfig.financing.teaser}</p>}
-            <div className="mt-5 flex flex-wrap justify-center gap-3">
-              <Button href={quoteHref}>Request a Quote</Button>
+            <div className="mt-7 flex flex-wrap justify-center gap-3">
+              <Button href={quoteHref}>Request a quote</Button>
               <Button href={siteConfig.phoneHref} variant="secondary">
                 Call {siteConfig.phoneDisplay}
               </Button>
             </div>
-            {links.length > 0 && (
-              <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
-                {links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="font-semibold text-white/70 transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
+            {showFinancing && (
+              <p className="mt-5 text-xs text-white/60">
+                {siteConfig.financing.teaser} {siteConfig.financing.shortDisclosure}
+              </p>
             )}
           </div>
         </div>

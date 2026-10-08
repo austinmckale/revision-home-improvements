@@ -197,7 +197,7 @@ export const testimonials: Testimonial[] = [
     name: "Alice H.",
     context: "Company review",
     rating: 5,
-    source: "Angi · Aug 2024 · excerpt",
+    source: "Angi review · Aug 2024",
     verification: {
       status: "source-checked",
       platform: "Angi",
@@ -212,7 +212,7 @@ export const testimonials: Testimonial[] = [
     name: "Albert S.",
     context: "Company review",
     rating: 5,
-    source: "Angi · Mar 2024 · excerpt",
+    source: "Angi review · Mar 2024",
     verification: {
       status: "source-checked",
       platform: "Angi",
@@ -227,7 +227,7 @@ export const testimonials: Testimonial[] = [
     name: "Ron K.",
     context: "Company review",
     rating: 5,
-    source: "Angi · Feb 2024 · excerpt",
+    source: "Angi review · Feb 2024",
     verification: {
       status: "source-checked",
       platform: "Angi",

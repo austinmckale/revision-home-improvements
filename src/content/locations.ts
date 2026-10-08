@@ -15,7 +15,7 @@ export const locations: Location[] = [
     short: "Reading",
     region: "Berks County",
     localAngle:
-      "Planning a Reading renovation? Consider the home's age, existing layout, plumbing and electrical conditions, and any character details you want to keep.",
+      "Many Reading homes are older, so we plan around existing layouts, plumbing, wiring and the character details worth keeping.",
     priorityAreas: [
       "Wyomissing",
       "Shillington",
@@ -25,9 +25,9 @@ export const locations: Location[] = [
       "Spring Township",
     ],
     whyUs: [
-      "Identify existing layout and utility constraints before choosing finishes",
-      "Confirm required permits, inspections, and who is responsible for each in the written scope",
-      "Ask about current availability and the next step for your Reading address",
+      "Existing layout, plumbing and wiring reviewed before you choose finishes",
+      "Permits and inspections listed in your proposal, with who handles each",
+      "Availability for your Reading address confirmed by phone or online",
     ],
   },
   {
@@ -36,12 +36,12 @@ export const locations: Location[] = [
     short: "Wyomissing",
     region: "Berks County",
     localAngle:
-      "For a Wyomissing remodel, plan finish selections, material lead times, and access together. A clear scope helps you compare priorities before committing to a construction schedule.",
+      "In Wyomissing, we plan finishes, material lead times and access together before the schedule is set.",
     priorityAreas: ["West Reading", "Sinking Spring", "Spring Township", "Lower Heidelberg Township", "Shillington"],
     whyUs: [
-      "Review finish transitions and material choices for the rooms being updated",
-      "Discuss lead times, occupied-room access, and realistic schedule allowances",
-      "Ask for relevant project examples and available references for the proposed scope",
+      "Finishes and transitions planned for every room being updated",
+      "Lead times and access planned around an occupied home",
+      "Photos of related projects to help you plan",
     ],
   },
   {
@@ -50,7 +50,7 @@ export const locations: Location[] = [
     short: "Berks County",
     region: "Southeastern Pennsylvania",
     localAngle:
-      "Planning work in Berks County starts with the property address, site access, existing conditions, and the municipality responsible for permits and inspections.",
+      "Each Berks County township and borough sets its own permit rules, so we confirm them for your address before work begins.",
     priorityAreas: [
       "Wyomissing",
       "Sinking Spring",
@@ -60,9 +60,9 @@ export const locations: Location[] = [
       "Cumru Township",
     ],
     whyUs: [
-      "Confirm service availability for your specific Berks County address",
-      "Separate reconstruction work from any specialist mitigation or cleanup needed",
-      "Identify the applicable municipality and permit responsibilities before work begins",
+      "Availability confirmed for your Berks County address",
+      "Rebuild work kept separate from any specialist mitigation or cleanup",
+      "The right municipality and permits identified before work begins",
     ],
   },
   {
@@ -71,12 +71,12 @@ export const locations: Location[] = [
     short: "Allentown",
     region: "Lehigh County",
     localAngle:
-      "An Allentown project should account for the home's age, room layout, material choices, and daily access needs. Share your priorities and known conditions when requesting a scope.",
+      "From older city homes to newer suburban houses, we plan around your home's age, its layout and how you will live in it during the work.",
     priorityAreas: ["Emmaus", "Macungie", "Upper Macungie Township", "South Whitehall Township", "Whitehall Township"],
     whyUs: [
-      "Review existing room and utility conditions before deciding on layout changes",
-      "Confirm product availability and alternatives before setting the schedule",
-      "Discuss work-zone access and temporary arrangements for an occupied home",
+      "Existing rooms and utilities reviewed before layout changes",
+      "Products and alternatives confirmed before the schedule is set",
+      "Work areas and temporary arrangements planned for an occupied home",
     ],
   },
   {
@@ -85,12 +85,12 @@ export const locations: Location[] = [
     short: "Bethlehem",
     region: "Lehigh/Northampton Counties",
     localAngle:
-      "For a Bethlehem renovation, identify the features you want to retain and check whether historic-district review or other approvals apply to the property and proposed work.",
+      "In Bethlehem, we plan around the original features you want to keep and confirm whether historic-district review applies before work begins.",
     priorityAreas: ["Lower Saucon Township", "Hanover Township", "Nazareth area", "Forks Township", "Hellertown"],
     whyUs: [
-      "List the existing architectural details and materials you want to preserve",
-      "Confirm any historic-district review and permit responsibilities in the written scope",
-      "Discuss how new finish details will meet the retained parts of the home",
+      "The original details you want to keep, planned around from the start",
+      "Historic-district review and permits confirmed in your proposal",
+      "New finishes planned to meet the original parts of the home",
     ],
   },
   {
@@ -99,16 +99,21 @@ export const locations: Location[] = [
     short: "Lehigh Valley",
     region: "Eastern Pennsylvania",
     localAngle:
-      "For a Lehigh Valley remodel or reconstruction project, start with the property location, affected rooms, existing conditions, and budget priorities so the proposed scope fits the work needed.",
+      "Across the Lehigh Valley, every project starts with your address, the rooms involved, existing conditions and your budget priorities.",
     priorityAreas: ["Allentown area", "Bethlehem area", "Easton area", "Emmaus", "Macungie", "Nazareth"],
     whyUs: [
-      "Confirm current service availability for your Lehigh Valley address",
-      "Identify whether the scope is a room update or a larger reconstruction project",
-      "Agree on project contacts, decision points, and update expectations before starting",
+      "Availability confirmed for your Lehigh Valley address",
+      "A clear plan, whether it is one room or a larger rebuild",
+      "Contacts, decisions and updates agreed before work starts",
     ],
   },
 ];
 
 export function getLocationBySlug(slug: string) {
   return locations.find((location) => location.slug === slug);
+}
+
+/** The place name as it reads mid-sentence: "in the Lehigh Valley", "in Reading". */
+export function placeName(location: Pick<Location, "slug" | "short">) {
+  return location.slug === "lehigh-valley-pa" ? "the Lehigh Valley" : location.short;
 }

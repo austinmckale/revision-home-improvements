@@ -1,6 +1,5 @@
 import PageIntro from "@/components/sections/PageIntro";
 import type { Metadata } from "next";
-import Link from "next/link";
 import Container from "@/components/ui/Container";
 import JsonLd from "@/components/JsonLd";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
@@ -10,9 +9,27 @@ import { getPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = getPageMetadata({
   title: "Workmanship Warranty",
   description:
-    "Discuss workmanship warranty duration, coverage, exclusions and manufacturer terms before work begins. Learn how to report a concern about your project.",
+    "RHI Pros workmanship warranty: what your warranty terms cover, typical exclusions, and how to report a concern about your project.",
   path: "/warranty",
 });
+
+const covered = [
+  "Which workmanship defects are covered, and for how long",
+  "How corrections to finishes we installed are handled",
+  "How items noted at the final walkthrough are completed",
+  "Manufacturer warranties, product registration and claim contacts",
+];
+
+const excluded = [
+  "Normal wear and tear, or damage after handoff",
+  "Later changes, skipped maintenance or pre-existing conditions",
+];
+
+const steps = [
+  { title: "Report", copy: "Call or email with your project address, a short description and a few photos." },
+  { title: "Review", copy: "We review the issue against your terms and visit if we need to see it in person." },
+  { title: "Resolve", copy: "If it is covered, we schedule the correction and confirm the result with you." },
+];
 
 export default function WarrantyPage() {
   return (
@@ -23,76 +40,64 @@ export default function WarrantyPage() {
           { name: "Warranty", href: "/warranty" },
         ])}
       />
-      <PageIntro eyebrow="Care beyond completion" title="Understand your warranty terms.">
+      <PageIntro eyebrow="Warranty" title="Our workmanship warranty.">
         <p>
-          Discuss a <strong>12-month workmanship warranty</strong>, any applicable manufacturer warranties, and
-          exclusions when reviewing your proposal. Confirm the coverage, start date and service process in the written
-          project terms before work begins.
+          Our standard workmanship warranty is <strong>12 months</strong>. The exact coverage, start date and exclusions
+          are written into your proposal before work begins, along with any manufacturer warranties.
         </p>
       </PageIntro>
-      <section className="support-content py-12 sm:py-20">
+      <section className="py-14 sm:py-20">
         <Container className="max-w-5xl">
-          <div className="surface mt-6 rounded-sm border-2 border-[var(--brand)] p-6">
-            <h2 className="heading-serif text-3xl text-[var(--accent)]">Coverage to Confirm</h2>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-[var(--muted)]">
-              <li>Which workmanship-related installation defects are covered and for how long</li>
-              <li>How finish corrections relate to the approved scope and closeout standards</li>
-              <li>How punch-list items identified during your final walkthrough are handled</li>
-              <li>Manufacturer warranty terms, registration requirements and claim contacts</li>
-            </ul>
-            <h3 className="mt-4 font-semibold text-[var(--accent)]">Exclusions to Review</h3>
-            <ul className="mt-2 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-              <li>How normal wear and tear or homeowner-caused damage affects coverage</li>
-              <li>How later modifications, maintenance requirements and existing conditions affect coverage</li>
-            </ul>
+          <div className="grid gap-10 md:grid-cols-2 md:gap-14">
+            <div className="border-t border-[var(--accent)] pt-6">
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">What your terms spell out</h2>
+              <ul className="mt-5 space-y-3 text-[var(--muted)]">
+                {covered.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-3 h-px w-3 shrink-0 bg-[var(--brand)]" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="border-t border-[var(--border)] pt-6">
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Typical exclusions</h2>
+              <ul className="mt-5 space-y-3 text-[var(--muted)]">
+                {excluded.map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-3 h-px w-3 shrink-0 bg-[var(--border)]" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-sm text-[var(--muted)]">Your proposal lists the exclusions that apply to your project.</p>
+            </div>
           </div>
 
-          <h2 className="mt-8 heading-serif text-3xl text-[var(--accent)]">How to Report a Warranty Issue</h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
-            <article className="surface rounded-sm p-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Step 1: Report</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                Call or email us with your project reference, a description of the issue, and supporting photos.
-              </p>
-            </article>
-            <article className="surface rounded-sm p-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Step 2: Review</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                We evaluate coverage, review documentation, and schedule an on-site inspection if needed.
-              </p>
-            </article>
-            <article className="surface rounded-sm p-5">
-              <p className="text-xs font-semibold uppercase tracking-wide text-[var(--brand)]">Step 3: Resolve</p>
-              <p className="mt-2 text-sm text-[var(--muted)]">
-                If covered, we define correction steps, schedule the work, and confirm completion with you.
-              </p>
-            </article>
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[var(--border)] pt-6 text-sm">
-            <Link href="/our-process" className="font-semibold text-[var(--brand)]">
-              Our Process
-            </Link>
-            <Link href="/licenses-and-insurance" className="font-semibold text-[var(--brand)]">
-              Registration &amp; Insurance
-            </Link>
-            <Link href="/about" className="font-semibold text-[var(--brand)]">
-              About Us
-            </Link>
-          </div>
-        </Container>
-      </section>
-
-      <section className="pb-14">
-        <Container className="max-w-4xl">
-          <p className="text-sm text-[var(--muted)]">
-            Questions about warranty coverage?{" "}
-            <Link href="/request-a-quote" className="font-semibold text-[var(--brand)]">
-              Request a quote
-            </Link>{" "}
-            to see warranty details in your proposal, or call{" "}
-            <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)]">
+          <h2 className="heading-serif mt-16 text-3xl text-[var(--accent)] sm:text-4xl">If something needs attention.</h2>
+          <ol className="mt-8 border-t border-[var(--accent)]">
+            {steps.map((step, index) => (
+              <li
+                key={step.title}
+                className="grid gap-2 border-b border-[var(--border)] py-6 sm:grid-cols-[3rem_10rem_1fr] sm:items-baseline sm:gap-6"
+              >
+                <span className="font-mono text-xs tracking-[.15em] text-[var(--brand)]">0{index + 1}</span>
+                <h3 className="heading-serif text-2xl text-[var(--accent)]">{step.title}</h3>
+                <p className="text-sm leading-relaxed text-[var(--muted)] sm:text-base">{step.copy}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-8 text-sm text-[var(--muted)]">
+            Questions about the warranty? Call{" "}
+            <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)] underline-offset-4 hover:underline">
               {siteConfig.phoneDisplay}
+            </a>{" "}
+            or email{" "}
+            <a
+              href={`mailto:${siteConfig.primaryEmail}`}
+              className="font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+            >
+              {siteConfig.primaryEmail}
             </a>
             .
           </p>
