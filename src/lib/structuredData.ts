@@ -51,6 +51,7 @@ export function getLocalBusinessJsonLd() {
       name: "Pennsylvania Home Improvement Contractor Registration",
       value: company.license.hic,
     },
+    employee: { "@type": "Person", name: company.owner.name, jobTitle: company.owner.role },
     areaServed: getAreaServedJsonLd(),
     // The configured market label is a service area, not a verified public business address.
     hasOfferCatalog: {

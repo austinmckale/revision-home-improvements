@@ -55,6 +55,11 @@ export default function AboutPage() {
                 fire and water damage across the Lehigh Valley and Berks County.
               </p>
               <p className="mt-4 leading-relaxed text-[var(--muted)]">
+                The company is owned by <span className="font-semibold text-[var(--accent)]">{company.owner.name}</span>.
+                Ryan is a dad, so every project is planned around family life and the rooms your household still needs
+                every day.
+              </p>
+              <p className="mt-4 leading-relaxed text-[var(--muted)]">
                 RHI Pros is the working name of {company.legalName}, a registered Pennsylvania home improvement
                 contractor ({company.license.label}). You may also know us by our earlier name,{" "}
                 {company.formerNames[0]}.
@@ -67,7 +72,9 @@ export default function AboutPage() {
               </Link>
             </div>
             <div className="h-fit border-t border-[var(--accent)] pt-6">
-              <h3 className="heading-serif text-2xl text-[var(--accent)]">Talk to us</h3>
+              <p className="annotation text-[0.62rem] text-[var(--muted)]">{company.owner.role}</p>
+              <p className="heading-serif mt-1 text-2xl text-[var(--accent)]">{company.owner.name}</p>
+              <h3 className="heading-serif mt-8 text-2xl text-[var(--accent)]">Talk to us</h3>
               <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
                 Tell us where you are, what you would like to change and share any photos or plans you have.
               </p>

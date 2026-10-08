@@ -8,6 +8,8 @@ export const company = {
   legalName: "RHI Solutions LLC",
   /** Older public listings still in circulation (e.g. legacy social profiles). */
   formerNames: ["Revision Home Improvement"] as const,
+  /** Owner confirmed by the site team, October 8, 2026. Add a photo or bio only from the owner. */
+  owner: { name: "Ryan Schlappich", role: "Owner" },
   domain: "https://www.rhipros.com",
   phone: {
     display: "(484) 706-9229",
