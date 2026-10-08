@@ -1,4 +1,5 @@
 import { projectEvidenceOverrides, projectEvidenceSplits } from "./projectEvidence";
+import { retiredProjectRedirects } from "./retiredProjects";
 
 export type CaseStudy = {
   slug: string;
@@ -1185,7 +1186,7 @@ const caseStudyLocationPriority = [
   "wyomissing-pa",
 ] as const;
 
-export const visibleCaseStudies = caseStudies.filter((cs) => !cs.hidden);
+export const visibleCaseStudies = caseStudies.filter((cs) => !cs.hidden && !(cs.slug in retiredProjectRedirects));
 
 /** Visible case studies intended for the visual /projects gallery grid. */
 export const galleryCaseStudies = visibleCaseStudies.filter((cs) => cs.showInGallery !== false);

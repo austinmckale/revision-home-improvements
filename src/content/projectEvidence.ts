@@ -323,9 +323,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "reading-paver-patio-buildout": overview({
-    title: "Patio living beneath a gable roof",
+    title: "Paver patio & gable-roof pavilion",
     summary:
-      "A gable-roof pavilion brings shade to the patio, with a wood ceiling overhead and planting along the edges. Explore the roof, posts, and garden connections.",
+      "We built the paver patio and the gable-roof pavilion over it, with a wood ceiling, recessed lights and planting along the edges. Explore the roof, posts, and garden connections.",
     scope: ["Patio surface and garden edges", "Gable-roof pavilion and support posts", "Wood ceiling and lighting"],
     images: [
       photo(

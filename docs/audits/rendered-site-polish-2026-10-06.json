@@ -1,7 +1,7 @@
 {
-  "routes": 120,
-  "projectRoutes": 29,
-  "internalTargets": 120,
+  "routes": 114,
+  "projectRoutes": 23,
+  "internalTargets": 114,
   "errors": [],
   "pages": [
     {
@@ -51,7 +51,7 @@
       "status": 200,
       "title": "Remodeling Photo Collections | Lehigh Valley & Berks County | RHI Pros",
       "canonical": "https://www.rhipros.com/projects",
-      "internalLinks": 49
+      "internalLinks": 44
     },
     {
       "path": "/about",
@@ -107,7 +107,7 @@
       "status": 200,
       "title": "Fire & Water Damage Restoration | Reading PA & Lehigh Valley | RHI Pros",
       "canonical": "https://www.rhipros.com/fire-water-damage-restoration",
-      "internalLinks": 26
+      "internalLinks": 25
     },
     {
       "path": "/privacy",
@@ -299,13 +299,6 @@
       "internalLinks": 24
     },
     {
-      "path": "/projects/lehigh-water-damage-rebuild",
-      "status": 200,
-      "title": "Water-damage reconstruction planning | Planning Reference | RHI Pros",
-      "canonical": "https://www.rhipros.com/projects/lehigh-water-damage-rebuild",
-      "internalLinks": 23
-    },
-    {
       "path": "/projects/allentown-flooring-replacement-upgrade",
       "status": 200,
       "title": "Light floors & a fireplace focal point | Photo Collection | RHI Pros",
@@ -322,7 +315,7 @@
     {
       "path": "/projects/reading-paver-patio-buildout",
       "status": 200,
-      "title": "Patio living beneath a gable roof | Photo Collection | RHI Pros",
+      "title": "Paver patio & gable-roof pavilion | Photo Collection | RHI Pros",
       "canonical": "https://www.rhipros.com/projects/reading-paver-patio-buildout",
       "internalLinks": 26
     },
@@ -376,20 +369,6 @@
       "internalLinks": 26
     },
     {
-      "path": "/projects/lehigh-valley-fire-damage-documentation",
-      "status": 200,
-      "title": "Open framing & interior conditions | Photo Collection | RHI Pros",
-      "canonical": "https://www.rhipros.com/projects/lehigh-valley-fire-damage-documentation",
-      "internalLinks": 25
-    },
-    {
-      "path": "/projects/beige-bathroom-before-after",
-      "status": 200,
-      "title": "Bathroom comparison boards | Planning Reference | RHI Pros",
-      "canonical": "https://www.rhipros.com/projects/beige-bathroom-before-after",
-      "internalLinks": 26
-    },
-    {
       "path": "/projects/white-cabinet-open-plan-kitchen",
       "status": 200,
       "title": "White cabinetry & open-plan living | Photo Collection | RHI Pros",
@@ -397,32 +376,11 @@
       "internalLinks": 28
     },
     {
-      "path": "/projects/pink-tile-tub-reference",
-      "status": 200,
-      "title": "Pink tile & a jetted tub | Photo Collection | RHI Pros",
-      "canonical": "https://www.rhipros.com/projects/pink-tile-tub-reference",
-      "internalLinks": 26
-    },
-    {
       "path": "/projects/dark-partition-commercial-restroom",
       "status": 200,
       "title": "Dark partitions & restroom tile | Photo Collection | RHI Pros",
       "canonical": "https://www.rhipros.com/projects/dark-partition-commercial-restroom",
       "internalLinks": 26
-    },
-    {
-      "path": "/projects/boarded-dormer-condition-photos",
-      "status": 200,
-      "title": "Boarded dormers & exposed walls | Photo Collection | RHI Pros",
-      "canonical": "https://www.rhipros.com/projects/boarded-dormer-condition-photos",
-      "internalLinks": 25
-    },
-    {
-      "path": "/projects/winter-exterior-damage-photos",
-      "status": 200,
-      "title": "Winter exterior conditions | Photo Collection | RHI Pros",
-      "canonical": "https://www.rhipros.com/projects/winter-exterior-damage-photos",
-      "internalLinks": 25
     },
     {
       "path": "/reading-pa/kitchen-remodeling",
@@ -478,14 +436,14 @@
       "status": 200,
       "title": "Fire Damage Restoration in Reading, PA | RHI Pros",
       "canonical": "https://www.rhipros.com/reading-pa/fire-damage-restoration",
-      "internalLinks": 32
+      "internalLinks": 31
     },
     {
       "path": "/reading-pa/water-damage-restoration",
       "status": 200,
       "title": "Water Damage Restoration in Reading, PA | RHI Pros",
       "canonical": "https://www.rhipros.com/reading-pa/water-damage-restoration",
-      "internalLinks": 31
+      "internalLinks": 30
     },
     {
       "path": "/reading-pa/insurance-claims",
@@ -695,7 +653,7 @@
       "status": 200,
       "title": "Water Damage Restoration in Allentown, PA | RHI Pros",
       "canonical": "https://www.rhipros.com/allentown-pa/water-damage-restoration",
-      "internalLinks": 31
+      "internalLinks": 30
     },
     {
       "path": "/allentown-pa/insurance-claims",
@@ -765,7 +723,7 @@
       "status": 200,
       "title": "Water Damage Restoration in Bethlehem, PA | RHI Pros",
       "canonical": "https://www.rhipros.com/bethlehem-pa/water-damage-restoration",
-      "internalLinks": 31
+      "internalLinks": 30
     },
     {
       "path": "/bethlehem-pa/insurance-claims",

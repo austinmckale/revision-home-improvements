@@ -169,11 +169,6 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         anchorText: "Insurance claims assistance for water damage",
         reason: "Claim-oriented conversion path",
       },
-      {
-        href: "/projects/lehigh-water-damage-rebuild",
-        anchorText: "Illustrative water-damage reconstruction plan",
-        reason: "Planning example, not completed-project evidence",
-      },
     ],
   },
   "reading-pa/fire-damage-restoration": {
@@ -206,11 +201,6 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         href: "/projects/allentown-fire-damage-interior-rebuild",
         anchorText: "Fireplace and interior finish details",
         reason: "Hearth materials and interior finish details",
-      },
-      {
-        href: "/projects/lehigh-valley-fire-damage-documentation",
-        anchorText: "Property-damage and construction photos",
-        reason: "Exterior conditions and interior construction details",
       },
       {
         href: "/insurance-claims",
@@ -1010,11 +1000,6 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         anchorText: "Insurance claims assistance for restoration",
         reason: "High-intent conversion support",
       },
-      {
-        href: "/projects/lehigh-water-damage-rebuild",
-        anchorText: "Illustrative water-damage reconstruction plan",
-        reason: "Planning example, not completed-project evidence",
-      },
     ],
   },
   "allentown-pa/fire-damage-restoration": {
@@ -1366,11 +1351,6 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         href: "/insurance-claims",
         anchorText: "Insurance claims assistance for flood damage",
         reason: "Claim-driven user journey",
-      },
-      {
-        href: "/projects/lehigh-water-damage-rebuild",
-        anchorText: "Illustrative water-damage reconstruction plan",
-        reason: "Planning example, not completed-project evidence",
       },
     ],
   },

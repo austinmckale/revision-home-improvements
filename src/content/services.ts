@@ -485,17 +485,18 @@ export const services: Service[] = [
     featuredCaseStudySlug: "reading-paver-patio-buildout",
     portfolioTag: "paver-installation",
     name: "Paver Installation",
-    short: "Paver patios, substantial renovations, and connected outdoor living areas.",
+    short: "Paver patios, gable-roof pavilions, and connected outdoor living areas.",
     description:
-      "Paver patio installation, substantial patio renovation, pool surrounds, and connected outdoor-living projects.",
+      "Paver patio installation, gable-roof pavilions and covered patios, substantial patio renovation, pool surrounds, and connected outdoor-living projects.",
     intro:
       "Paver patio installation starts with the site, not just the surface. We review the layout, access, existing grade, drainage path, and edge conditions before defining the work for a new patio, substantial renovation, pool surround, or connected outdoor-living project.",
     cta: "Request a paver quote",
-    bullets: ["Patios and pool surrounds", "Substantial patio renovation", "Base preparation and grading"],
+    bullets: ["Patios and pool surrounds", "Pavilions and covered patios", "Base preparation and grading"],
     whatIncluded: [
       "Site layout and drainage-aware planning for patios, pool surrounds, and connected walkways",
       "Excavation depth and base preparation matched to site and soil conditions",
       "Consistent bedding layer, paver installation, appropriate edge restraint, and joint material matched to the selected system",
+      "Gable-roof pavilions and covered patios planned with the patio layout",
       "Final grading, transitions, and cleanup",
     ],
     qualityFactors: [
@@ -523,6 +524,10 @@ export const services: Service[] = [
       {
         q: "Can you build on a sloped yard?",
         a: "A sloped site may still support a patio, but grading, drainage, access, and the required preparation need to be evaluated before the scope is defined.",
+      },
+      {
+        q: "Do you build pavilions or covered patios?",
+        a: "Yes. A gable-roof pavilion can be built with the patio so the footings, posts, roof framing, ceiling and lighting are planned together with the layout and drainage.",
       },
       {
         q: "Do you work on pool surrounds?",
@@ -716,31 +721,10 @@ export const services: Service[] = [
       note: "Actual scope depends on the damage extent, affected systems, and work required after assessment.",
     },
     image: {
-      src: "/images/projects/fire-damage-documentation/after/37-img_8934.jpg",
-      alt: "House with charred upper siding and boarded openings in snow.",
+      src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
+      alt: "Finished living area with light wood-look flooring and freshly painted walls.",
     },
     gallery: [],
-    processGallery: {
-      title: "Damage & repair details",
-      intro: "Exterior conditions that affect access, safety and the reconstruction scope.",
-      images: [
-        {
-          src: "/images/projects/fire-damage-documentation/after/36-img_8933.jpg",
-          alt: "Snow-covered exterior with boarded windows and a brick chimney.",
-          caption: "Boarded openings and exterior access",
-        },
-        {
-          src: "/images/projects/fire-damage-documentation/after/37-img_8934.jpg",
-          alt: "Damaged upper exterior above a stone-faced lower story.",
-          caption: "Damage at the upper exterior",
-        },
-        {
-          src: "/images/projects/fire-damage-documentation/after/38-img_8935.jpg",
-          alt: "Side view of a damaged house with boarded windows in snow.",
-          caption: "Side elevation and site conditions",
-        },
-      ],
-    },
   },
   {
     slug: "water-damage-restoration",

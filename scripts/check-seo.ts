@@ -30,7 +30,6 @@ const PRIORITY_LOCAL_SEO_KEYS = [
 const CANONICAL_ORIGIN = company.domain;
 
 const PRIORITY_FEATURED_CASE_STUDIES = [
-  "lehigh-water-damage-rebuild",
   "allentown-fire-damage-interior-rebuild",
   "lehigh-valley-basement-finish-and-detail",
 ] as const;
@@ -171,8 +170,7 @@ function checkCaseStudyPhotoAccuracy() {
 
 // --- Image alt text ---
 function checkImageAlts() {
-  for (const study of caseStudies) {
-    if (study.hidden) continue;
+  for (const study of visibleCaseStudies) {
     if (study.images.length === 0) {
       warn(`Case study "${study.slug}" has no lead image (text-only listing is OK on /projects).`);
     }

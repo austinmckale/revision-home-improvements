@@ -95,6 +95,8 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
               const count = filter.slug
                 ? orderedShowcaseProjects.filter((study) => study.serviceSlug === filter.slug).length
                 : orderedShowcaseProjects.length;
+              // Never offer a filter that leads to an empty page.
+              if (count === 0 && !active) return null;
               return (
                 <Link
                   key={filter.slug}

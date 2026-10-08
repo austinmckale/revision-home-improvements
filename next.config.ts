@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { retiredProjectRedirects } from "./src/content/retiredProjects";
 
 const supabaseHostname = process.env.PORTFOLIO_SUPABASE_URL
   ? new URL(process.env.PORTFOLIO_SUPABASE_URL).hostname
@@ -33,6 +34,11 @@ const nextConfig: NextConfig = {
       { source: "/projects/reading-interior-flooring-refresh", destination: "/projects/bethlehem-interior-flooring-refresh", permanent: true },
       { source: "/projects/berks-basement-finish-and-detail", destination: "/projects/lehigh-valley-basement-finish-and-detail", permanent: true },
       { source: "/projects/berks-fire-damage-interior-rebuild", destination: "/projects/allentown-fire-damage-interior-rebuild", permanent: true },
+      ...Object.entries(retiredProjectRedirects).map(([slug, destination]) => ({
+        source: `/projects/${slug}`,
+        destination,
+        permanent: true,
+      })),
     ];
 
     return [

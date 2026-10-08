@@ -97,8 +97,8 @@ export default function FireWaterDamageRestorationPage() {
           <figure className="min-w-0">
             <div className="relative aspect-[4/3] overflow-hidden bg-[var(--accent)] lg:aspect-[4/5]">
               <Image
-                src="/images/projects/fire-damage-documentation/after/37-img_8934.jpg"
-                alt="Supplied condition photograph showing charred upper siding and boarded windows above a stone-faced lower story."
+                src="/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg"
+                alt="Finished living area with light wood-look flooring and freshly painted walls."
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 45vw"
@@ -106,12 +106,9 @@ export default function FireWaterDamageRestorationPage() {
               />
             </div>
             <figcaption className="flex items-start justify-between gap-4 border-b border-[var(--border)] py-4 text-xs leading-relaxed text-[var(--muted)]">
-              <span>Condition photo · damage visible at the upper exterior</span>
-              <Link
-                href="/projects/lehigh-valley-fire-damage-documentation"
-                className="shrink-0 font-semibold text-[var(--brand)]"
-              >
-                See condition photos ↗
+              <span>Finished interior · new flooring and fresh walls</span>
+              <Link href="/projects" className="shrink-0 font-semibold text-[var(--brand)]">
+                See finished projects ↗
               </Link>
             </figcaption>
           </figure>

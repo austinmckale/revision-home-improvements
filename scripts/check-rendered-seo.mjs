@@ -1,5 +1,5 @@
 /** Crawl a running local production build: npm run check:rendered-seo -- http://127.0.0.1:3107 */
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 
 const base = new URL(process.argv[2] || "http://127.0.0.1:3107");
 if (!["localhost", "127.0.0.1", "[::1]"].includes(base.hostname)) {
@@ -50,12 +50,22 @@ for (const path of [
   "/projects/hamburg-laundry-bathroom-remodel",
   "/projects/berks-county-ranch-exterior-refresh",
   "/projects/white-cabinet-open-plan-kitchen",
-  "/projects/pink-tile-tub-reference",
   "/projects/dark-partition-commercial-restroom",
-  "/projects/boarded-dormer-condition-photos",
-  "/projects/winter-exterior-damage-photos",
 ]) {
   check(urls.includes(productionOrigin + path), `Missing required sitemap route: ${path}`);
+}
+
+// Owner-retired condition, documentation and planning collections: out of the sitemap, permanently redirected.
+const retiredSource = readFileSync(new URL("../src/content/retiredProjects.ts", import.meta.url), "utf8");
+const retiredRedirects = [...retiredSource.matchAll(/"([a-z0-9-]+)":\s*"(\/services\/[a-z-]+)"/g)].map((m) => [m[1], m[2]]);
+check(retiredRedirects.length === 6, `Expected 6 retired project redirects, found ${retiredRedirects.length}.`);
+for (const [slug, destination] of retiredRedirects) {
+  check(!urls.includes(`${productionOrigin}/projects/${slug}`), `Retired project still in sitemap: ${slug}`);
+  const response = await get(`/projects/${slug}`);
+  check(
+    [301, 308].includes(response.status) && (response.headers.get("location") || "").endsWith(destination),
+    `Retired project /projects/${slug} must redirect to ${destination} (got ${response.status}).`,
+  );
 }
 
 for (const url of urls) {
@@ -280,22 +290,13 @@ for (const url of urls) {
       `${path}: unproven dark-partition association remains in the blue restroom gallery.`,
     );
   }
-  if (path === "/projects/lehigh-valley-fire-damage-documentation") {
-    check(
-      !renderedImages.some((src) => /01-img_7761|02-img_7762|36-img_8933|37-img_8934|38-img_8935/.test(src)),
-      `${path}: unlinked dormer/exterior photos remain in the framed-interior gallery.`,
-    );
-  }
-  if (
-    /^\/projects\/(pink-tile-tub-reference|lehigh-valley-fire-damage-documentation|boarded-dormer-condition-photos|winter-exterior-damage-photos|beige-bathroom-before-after)$/.test(
-      path,
-    )
-  ) {
-    check(
-      html.includes("Plan the next steps for your space") && !html.includes("Want a similar "),
-      `${path}: references must invite planning rather than a similar damaged/unfinished result.`,
-    );
-  }
+  // Retired condition, damage and planning photos must not appear anywhere on the public site.
+  check(
+    !renderedImages.some((src) =>
+      /fire-damage-documentation\/|beige-bathroom-before-after\/|bathroom-refresh\/before\/bathroom-before-shower/.test(src),
+    ),
+    `${path}: shows a retired condition, damage or planning photo.`,
+  );
   if (
     /^\/projects\/(allentown-commercial-bathroom-renovation|dark-partition-commercial-restroom|reading-commercial-bar-window-upgrade)$/.test(
       path,

@@ -1,8 +1,8 @@
 {
-  "pages": 131,
+  "pages": 125,
   "sourceReferences": 192,
   "decodedRasterFiles": 193,
-  "deliveredImageUrls": 80,
+  "deliveredImageUrls": 63,
   "errors": [],
   "routes": [
     {
@@ -50,7 +50,7 @@
     {
       "path": "/allentown-pa/fire-damage-restoration",
       "status": 200,
-      "contentImages": 3,
+      "contentImages": 1,
       "waterHero": false
     },
     {
@@ -116,7 +116,7 @@
     {
       "path": "/berks-county-pa/fire-damage-restoration",
       "status": 200,
-      "contentImages": 3,
+      "contentImages": 1,
       "waterHero": false
     },
     {
@@ -188,7 +188,7 @@
     {
       "path": "/bethlehem-pa/fire-damage-restoration",
       "status": 200,
-      "contentImages": 3,
+      "contentImages": 1,
       "waterHero": false
     },
     {
@@ -290,7 +290,7 @@
     {
       "path": "/lehigh-valley-pa/fire-damage-restoration",
       "status": 200,
-      "contentImages": 3,
+      "contentImages": 1,
       "waterHero": false
     },
     {
@@ -432,12 +432,6 @@
       "waterHero": false
     },
     {
-      "path": "/projects/beige-bathroom-before-after",
-      "status": 200,
-      "contentImages": 2,
-      "waterHero": false
-    },
-    {
       "path": "/projects/berks-county-ranch-exterior-refresh",
       "status": 200,
       "contentImages": 2,
@@ -480,12 +474,6 @@
       "waterHero": false
     },
     {
-      "path": "/projects/boarded-dormer-condition-photos",
-      "status": 200,
-      "contentImages": 7,
-      "waterHero": false
-    },
-    {
       "path": "/projects/dark-partition-commercial-restroom",
       "status": 200,
       "contentImages": 2,
@@ -510,27 +498,9 @@
       "waterHero": false
     },
     {
-      "path": "/projects/lehigh-valley-fire-damage-documentation",
-      "status": 200,
-      "contentImages": 7,
-      "waterHero": false
-    },
-    {
       "path": "/projects/lehigh-valley-full-exterior-refresh",
       "status": 200,
       "contentImages": 5,
-      "waterHero": false
-    },
-    {
-      "path": "/projects/lehigh-water-damage-rebuild",
-      "status": 200,
-      "contentImages": 0,
-      "waterHero": false
-    },
-    {
-      "path": "/projects/pink-tile-tub-reference",
-      "status": 200,
-      "contentImages": 2,
       "waterHero": false
     },
     {
@@ -570,12 +540,6 @@
       "waterHero": false
     },
     {
-      "path": "/projects/winter-exterior-damage-photos",
-      "status": 200,
-      "contentImages": 4,
-      "waterHero": false
-    },
-    {
       "path": "/reading-pa",
       "status": 200,
       "contentImages": 1,
@@ -608,7 +572,7 @@
     {
       "path": "/reading-pa/fire-damage-restoration",
       "status": 200,
-      "contentImages": 3,
+      "contentImages": 1,
       "waterHero": false
     },
     {
@@ -686,7 +650,7 @@
     {
       "path": "/services/fire-damage-restoration",
       "status": 200,
-      "contentImages": 3,
+      "contentImages": 1,
       "waterHero": false
     },
     {
@@ -758,7 +722,7 @@
     {
       "path": "/wyomissing-pa/fire-damage-restoration",
       "status": 200,
-      "contentImages": 3,
+      "contentImages": 1,
       "waterHero": false
     },
     {

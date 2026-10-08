@@ -34,13 +34,8 @@ const commercialSlugs = new Set([
   "reading-commercial-bar-window-upgrade",
 ]);
 
-const processSlugs = new Set([
-  "lehigh-valley-fire-damage-documentation",
-  "boarded-dormer-condition-photos",
-  "winter-exterior-damage-photos",
-  "pink-tile-tub-reference",
-  "beige-bathroom-before-after",
-]);
+// Planning and condition collections were retired from public view (see retiredProjects.ts).
+const processSlugs = new Set<string>();
 
 const presentation: Record<string, { title: string; image?: CaseStudy["images"][number] }> = {
   "allentown-kitchen-layout-upgrade": { title: "Room to gather. Space to cook." },
@@ -72,8 +67,6 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
     },
   },
   "bethlehem-pool-patio-renovation": { title: "A place to spend the summer." },
-  "lehigh-valley-fire-damage-documentation": { title: "Open framing & interior conditions" },
-  "beige-bathroom-before-after": { title: "Bathroom layout & finish ideas" },
 };
 
 export function getProjectPresentation(study: CaseStudy) {

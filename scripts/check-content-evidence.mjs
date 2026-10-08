@@ -23,7 +23,11 @@ function evaluateModule(relativePath, imports = {}) {
 }
 
 const evidence = evaluateModule("../src/content/projectEvidence.ts");
-const content = evaluateModule("../src/content/caseStudies.ts", { "./projectEvidence": evidence });
+const retired = evaluateModule("../src/content/retiredProjects.ts");
+const content = evaluateModule("../src/content/caseStudies.ts", {
+  "./projectEvidence": evidence,
+  "./retiredProjects": retired,
+});
 const reviews = evaluateModule("../src/content/testimonials.ts");
 const inventory = JSON.parse(
   readFileSync(new URL("../docs/audits/project-photo-inventory-2026-09-30.json", import.meta.url), "utf8"),
@@ -43,9 +47,10 @@ const expectedSplitSources = {
   "winter-exterior-damage-photos": "lehigh-valley-fire-damage-documentation",
 };
 
+// Evidence integrity covers every preserved record, including collections retired from public view.
 function getCollection(slug) {
-  const current = content.getCaseStudyBySlug(slug);
-  assert.ok(current, `Missing public collection: ${slug}`);
+  const current = content.caseStudies.find((record) => record.slug === slug);
+  assert.ok(current, `Missing collection record: ${slug}`);
   return current;
 }
 
@@ -101,6 +106,7 @@ test("split exports reject a missing original source or a colliding public slug"
           ...evidence,
           projectEvidenceSplits: { "new-collection": { sourceSlug: "missing-original", evidence: {} } },
         },
+        "./retiredProjects": retired,
       }),
     /Split project source missing: missing-original/,
   );
@@ -113,6 +119,7 @@ test("split exports reject a missing original source or a colliding public slug"
             "allentown-kitchen-layout-upgrade": { sourceSlug: "allentown-kitchen-layout-upgrade", evidence: {} },
           },
         },
+        "./retiredProjects": retired,
       }),
     /Split project slug must be new: allentown-kitchen-layout-upgrade/,
   );
@@ -191,8 +198,26 @@ test("unproven transformations, fire-loss attribution and duplicate showcase are
   assert.equal(duplicate.sharedCollectionSlug, "lehigh-valley-full-exterior-refresh");
 });
 
+test("owner-retired condition, documentation and planning collections are hidden but preserved", () => {
+  const expected = [
+    "lehigh-valley-fire-damage-documentation",
+    "boarded-dormer-condition-photos",
+    "winter-exterior-damage-photos",
+    "pink-tile-tub-reference",
+    "beige-bathroom-before-after",
+    "lehigh-water-damage-rebuild",
+  ];
+  assert.deepEqual(Object.keys(retired.retiredProjectRedirects).sort(), [...expected].sort());
+  for (const slug of expected) {
+    assert.ok(getCollection(slug), `${slug}: record must be preserved`);
+    assert.equal(content.getCaseStudyBySlug(slug), undefined, `${slug}: must not be public`);
+    assert.ok(!content.galleryCaseStudies.some((record) => record.slug === slug), `${slug}: must not be listed`);
+    assert.match(retired.retiredProjectRedirects[slug], /^\/services\/[a-z-]+$/, `${slug}: redirect target`);
+  }
+});
+
 test("text-only water content is planning and cannot be promoted as a finished project", () => {
-  const water = content.getCaseStudyBySlug("lehigh-water-damage-rebuild");
+  const water = getCollection("lehigh-water-damage-rebuild");
   assert.equal(water.mediaType, "planning");
   assert.equal(water.showInGallery, false);
   assert.equal(water.featureInServiceListings, false);
