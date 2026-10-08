@@ -159,7 +159,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         .map((slug) => locations.find((location) => location.slug === slug))
         .filter((location): location is (typeof locations)[number] => Boolean(location))
     : locations;
-  const footerLocationLinks = availableLocations.slice(0, 5);
+  // Link every local page for this service, leading with the priority areas, so each one is reachable and described.
+  const nearbyLocations = [
+    ...availableLocations,
+    ...locations.filter((location) => !availableLocations.includes(location)),
+  ];
   const portfolioTag = service.portfolioTag ?? service.slug;
   const portfolioImages = showCuratedStaticGallery
     ? []
@@ -549,24 +553,35 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
 
             <FadeIn>
               <nav
-                className="mt-10 border-t border-[var(--border)] pt-6 text-xs leading-relaxed text-[var(--muted)] md:mt-14"
+                aria-labelledby="service-near-you-heading"
+                className="mt-10 border-t border-[var(--border)] pt-6 md:mt-14"
+              >
+                <h2 id="service-near-you-heading" className="heading-serif text-2xl text-[var(--accent)]">
+                  {pageHeading} near you
+                </h2>
+                <ul className="mt-3 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+                  {nearbyLocations.map((location) => (
+                    <li key={location.slug}>
+                      <Link
+                        href={`/${location.slug}/${service.slug}`}
+                        className="inline-flex min-h-10 items-center text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                      >
+                        {pageHeading} in {location.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </FadeIn>
+
+            <FadeIn>
+              <nav
+                className="mt-8 border-t border-[var(--border)] pt-6 text-xs leading-relaxed text-[var(--muted)]"
                 aria-label="Supporting links"
               >
                 <p>
-                  {footerLocationLinks.map((location, i) => (
-                    <span key={location.slug}>
-                      {i > 0 ? " · " : null}
-                      <Link
-                        href={`/${location.slug}/${service.slug}`}
-                        className="text-[var(--brand)] underline-offset-2 hover:underline"
-                      >
-                        {location.short}
-                      </Link>
-                    </span>
-                  ))}
-                  {" · "}
                   <Link href="/service-areas" className="text-[var(--brand)] underline-offset-2 hover:underline">
-                    All areas
+                    All service areas
                   </Link>
                 </p>
                 <p className="mt-3">

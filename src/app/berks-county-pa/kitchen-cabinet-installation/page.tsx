@@ -19,9 +19,9 @@ const heroImage = {
 };
 
 export const metadata: Metadata = getPageMetadata({
-  title: { absolute: "Kitchen Cabinet Replacement in Berks County | RHI Pros" },
+  title: { absolute: "Kitchen Cabinet Remodeling in Berks County, PA | RHI Pros" },
   description:
-    "Planning new kitchen cabinets in Berks County? RHI Pros coordinates cabinet replacement and installation with counters, fixtures and surrounding kitchen work.",
+    "Planning a kitchen cabinet remodel in Berks County? RHI Pros coordinates cabinet replacement with counters, fixtures and the surrounding kitchen work.",
   path: route,
   image: { url: heroImage.src, alt: heroImage.alt },
 });
@@ -143,13 +143,13 @@ export default function KitchenCabinetInstallationPage() {
           { name: "Home", href: "/" },
           { name: "Service Areas", href: "/service-areas" },
           { name: "Berks County", href: "/berks-county-pa" },
-          { name: "Kitchen Cabinet Installation", href: route },
+          { name: "Kitchen Cabinet Remodeling", href: route },
         ])}
       />
 
       <ServiceHero
         eyebrow="Lehigh Valley & Berks County"
-        title="Kitchen cabinet replacement & installation in Berks County."
+        title="Kitchen cabinet remodeling & replacement in Berks County."
         intro="Plan the cabinets around the way you use your kitchen. We coordinate installation with countertops, appliances, flooring, and the surrounding finishes."
         image={heroImage}
         primaryHref="#quote-form-section"

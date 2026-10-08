@@ -61,6 +61,7 @@ const localServiceGroups = [
       { label: "Kitchen remodeling", href: "/lehigh-valley-pa/kitchen-remodeling" },
       { label: "Basement finishing", href: "/lehigh-valley-pa/basement-finishing" },
       { label: "Paver patios", href: "/lehigh-valley-pa/paver-installation" },
+      { label: "Paver patios in Allentown", href: "/allentown-pa/paver-installation" },
     ],
   },
   {
@@ -70,8 +71,9 @@ const localServiceGroups = [
       { label: "Reading", href: "/reading-pa" },
       { label: "Wyomissing", href: "/wyomissing-pa" },
       { label: "Kitchen remodeling", href: "/berks-county-pa/kitchen-remodeling" },
-      { label: "Kitchen cabinet installation", href: "/berks-county-pa/kitchen-cabinet-installation" },
+      { label: "Kitchen cabinet remodeling", href: "/berks-county-pa/kitchen-cabinet-installation" },
       { label: "Basement finishing in Reading", href: "/reading-pa/basement-finishing" },
+      { label: "Paver patios in Berks County", href: "/berks-county-pa/paver-installation" },
     ],
   },
 ];

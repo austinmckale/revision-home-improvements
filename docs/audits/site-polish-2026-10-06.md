@@ -92,6 +92,19 @@ Branch `lead-handling-2026-10-07`:
 
 Verification: lead-delivery unit suite 36/36 (9 new tests); browser end-to-end against local channel stand-ins and Cloudflare's official test keys 24/24, plus 5/5 Turnstile-rejection checks and 3/3 photo-picker keyboard-focus checks; integration 28/28; rendered SEO and image audits 0 errors; accessibility 0 violations on the new steps (desktop and mobile).
 
+## Search Console follow-up (October 8)
+
+Search Console export, July 6 – October 5 (before the October 7 releases): 32 clicks, 13,427 impressions, average position improving from 36.4 (first four weeks) to 25.5 (last four weeks); 726 queries versus 412 in the May–June export. Kitchen, patio and flooring positions improved. Water-damage impressions fell from about 323 to 26 per week after misleading water-damage photos were removed on June 12; the export cannot prove the cause.
+
+Changes targeting queries at positions 6–15 (URLs unchanged):
+
+- Every service page now has a visible "… near you" section linking all six local pages with descriptive anchors. Previously most services linked only Lehigh Valley towns, so Berks County, Reading and Wyomissing pages had no link from their service page.
+- Titles and headings matched to search wording: Berks cabinet page ("Kitchen Cabinet Remodeling in Berks County, PA"), Reading basements ("Basement Finishing & Remodeling"), Bethlehem drywall ("Drywall Repair & Installation").
+- Unique local content for the Berks County and Wyomissing paver pages (previously template-only), limited to verifiable planning facts.
+- Homepage area links add the Allentown and Berks County patio pages.
+
+Verification: SEO guard 0 errors; unit suites pass; integration 28/28; rendered SEO and image audits 0 errors; 16 desktop/mobile views of changed pages with 0 accessibility violations. Re-export Search Console in about four weeks to measure.
+
 ## Not verified here
 
 Real lead receipt, indexing, rankings, rich-result eligibility, Core Web Vitals field data and conversion impact need the live domain, Search Console and analytics after deployment. The new `scope_builder_*` events need a GTM trigger if they should appear as GA4 events.

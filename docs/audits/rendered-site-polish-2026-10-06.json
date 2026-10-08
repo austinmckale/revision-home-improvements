@@ -9,7 +9,7 @@
       "status": 200,
       "title": "RHI Pros | Lehigh Valley Remodeling & Restoration",
       "canonical": "https://www.rhipros.com",
-      "internalLinks": 37
+      "internalLinks": 39
     },
     {
       "path": "/services",
@@ -35,7 +35,7 @@
     {
       "path": "/berks-county-pa/kitchen-cabinet-installation",
       "status": 200,
-      "title": "Kitchen Cabinet Replacement in Berks County | RHI Pros",
+      "title": "Kitchen Cabinet Remodeling in Berks County, PA | RHI Pros",
       "canonical": "https://www.rhipros.com/berks-county-pa/kitchen-cabinet-installation",
       "internalLinks": 25
     },
@@ -121,63 +121,63 @@
       "status": 200,
       "title": "Kitchen Remodeling | Lehigh Valley & Berks County | RHI Pros",
       "canonical": "https://www.rhipros.com/services/kitchen-remodeling",
-      "internalLinks": 30
+      "internalLinks": 33
     },
     {
       "path": "/services/bathroom-remodeling",
       "status": 200,
       "title": "Bathroom Remodeling | Lehigh Valley & Berks County | RHI Pros",
       "canonical": "https://www.rhipros.com/services/bathroom-remodeling",
-      "internalLinks": 29
+      "internalLinks": 32
     },
     {
       "path": "/services/basement-finishing",
       "status": 200,
       "title": "Basement Finishing | Lehigh Valley & Berks County | RHI Pros",
       "canonical": "https://www.rhipros.com/services/basement-finishing",
-      "internalLinks": 29
+      "internalLinks": 32
     },
     {
       "path": "/services/drywall-installation-repair",
       "status": 200,
       "title": "Drywall Installation & Repair | Lehigh Valley | RHI Pros",
       "canonical": "https://www.rhipros.com/services/drywall-installation-repair",
-      "internalLinks": 27
+      "internalLinks": 30
     },
     {
       "path": "/services/flooring-installation",
       "status": 200,
       "title": "Flooring Installation | Lehigh Valley & Berks County | RHI Pros",
       "canonical": "https://www.rhipros.com/services/flooring-installation",
-      "internalLinks": 28
+      "internalLinks": 31
     },
     {
       "path": "/services/paver-installation",
       "status": 200,
       "title": "Paver Patio Installation | Lehigh Valley & Berks County | RHI Pros",
       "canonical": "https://www.rhipros.com/services/paver-installation",
-      "internalLinks": 29
+      "internalLinks": 31
     },
     {
       "path": "/services/exterior-remodeling",
       "status": 200,
       "title": "Exterior Remodeling | Lehigh Valley & Berks County | RHI Pros",
       "canonical": "https://www.rhipros.com/services/exterior-remodeling",
-      "internalLinks": 27
+      "internalLinks": 30
     },
     {
       "path": "/services/fire-damage-restoration",
       "status": 200,
       "title": "Fire Damage Restoration | Lehigh Valley & Berks County | RHI Pros",
       "canonical": "https://www.rhipros.com/services/fire-damage-restoration",
-      "internalLinks": 26
+      "internalLinks": 29
     },
     {
       "path": "/services/water-damage-restoration",
       "status": 200,
       "title": "Water Damage Restoration | Lehigh Valley & Berks County | RHI Pros",
       "canonical": "https://www.rhipros.com/services/water-damage-restoration",
-      "internalLinks": 26
+      "internalLinks": 29
     },
     {
       "path": "/reading-pa",
@@ -441,7 +441,7 @@
     {
       "path": "/reading-pa/basement-finishing",
       "status": 200,
-      "title": "Basement Finishing in Reading, PA | RHI Pros",
+      "title": "Basement Finishing & Remodeling in Reading, PA | RHI Pros",
       "canonical": "https://www.rhipros.com/reading-pa/basement-finishing",
       "internalLinks": 29
     },
@@ -532,9 +532,9 @@
     {
       "path": "/wyomissing-pa/paver-installation",
       "status": 200,
-      "title": "Paver Installation in Wyomissing, PA | RHI Pros",
+      "title": "Paver Patio Installation in Wyomissing, PA | RHI Pros",
       "canonical": "https://www.rhipros.com/wyomissing-pa/paver-installation",
-      "internalLinks": 29
+      "internalLinks": 30
     },
     {
       "path": "/wyomissing-pa/exterior-remodeling",
@@ -602,9 +602,9 @@
     {
       "path": "/berks-county-pa/paver-installation",
       "status": 200,
-      "title": "Paver Installation in Berks County, PA | RHI Pros",
+      "title": "Paver Patio Installation in Berks County, PA | RHI Pros",
       "canonical": "https://www.rhipros.com/berks-county-pa/paver-installation",
-      "internalLinks": 29
+      "internalLinks": 30
     },
     {
       "path": "/berks-county-pa/exterior-remodeling",
@@ -728,7 +728,7 @@
     {
       "path": "/bethlehem-pa/drywall-installation-repair",
       "status": 200,
-      "title": "Drywall Installation and Repair in Bethlehem, PA | RHI Pros",
+      "title": "Drywall Repair & Installation in Bethlehem, PA | RHI Pros",
       "canonical": "https://www.rhipros.com/bethlehem-pa/drywall-installation-repair",
       "internalLinks": 29
     },

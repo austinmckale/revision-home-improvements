@@ -390,11 +390,117 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
     ],
   },
+  "berks-county-pa/paver-installation": {
+    metadataTitle: "Paver Patio Installation in Berks County, PA",
+    metadataDescription:
+      "Paver patios, walkways and patio renovations in Berks County, PA, from Cumru and Spring Townships to Reading. Plan drainage, base and layout in writing.",
+    heroHeading: "Paver Patio Installation in Berks County, PA",
+    heroIntro:
+      "Plan a new paver patio, connected walkway or substantial patio renovation around your property’s grade, drainage, access and the way you want to use the space.",
+    localProjectHeading: "Planning a patio in Berks County",
+    localProjectSnippet:
+      "Whether the property is a township lot in Cumru or Spring Township or a home closer to Reading, a paver patio starts with the existing grade, the downspouts and the path water takes away from the house. Settling those details, along with access for excavation and base materials, keeps the finished surface level and draining where you want it.",
+    localChallengesHeading: "What affects a Berks County paver project",
+    localChallenges: [
+      "Existing grade, downspouts and where water drains away from the house",
+      "Excavation depth and a compacted base suited to the soil and freeze-thaw cycles",
+      "Township or borough rules on permits, setbacks and impervious coverage",
+      "Underground utilities marked through PA811 before any digging",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do I need a permit for a paver patio in Berks County?",
+        a: "It depends on the municipality and the project. Each township and borough sets its own rules, and some regulate impervious coverage or stormwater for new patios. Confirm the requirements for your address before the scope is finalized.",
+      },
+      {
+        q: "Can you replace or extend an existing patio?",
+        a: "Yes, when the renovation is substantial. The existing surface, base, drainage and access are reviewed first so the written scope reflects what needs to change.",
+      },
+      {
+        q: "Can walkways and the patio be planned together?",
+        a: "Yes. Planning walkways, steps and the patio as one layout keeps the base, slope and drainage consistent across the outdoor space.",
+      },
+    ],
+    relatedCaseStudySlug: "reading-paver-patio-buildout",
+    internalLinks: [
+      {
+        href: "/berks-county-pa",
+        anchorText: "Remodeling and outdoor projects in Berks County",
+        reason: "Berks County service-area hub",
+      },
+      {
+        href: "/reading-pa/paver-installation",
+        anchorText: "Paver patio installation in Reading",
+        reason: "Nearby city patio planning",
+      },
+      {
+        href: "/services/paver-installation",
+        anchorText: "Paver patio installation service details",
+        reason: "Broader project types and planning factors",
+      },
+      {
+        href: "#quote-form-section",
+        anchorText: "Request a paver project quote",
+        reason: "Project inquiry form",
+      },
+    ],
+  },
+  "wyomissing-pa/paver-installation": {
+    metadataTitle: "Paver Patio Installation in Wyomissing, PA",
+    metadataDescription:
+      "Paver patios, walkways and patio renovations in Wyomissing, PA and nearby West Reading and Sinking Spring. Plan layout, drainage and base in writing.",
+    heroHeading: "Paver Patio Installation in Wyomissing, PA",
+    heroIntro:
+      "Design a paver patio or walkway around your yard’s grade, drainage, access and the way it connects to the house.",
+    localProjectHeading: "A patio that fits the lot",
+    localProjectSnippet:
+      "On an established lot, a new patio often has to work around existing landscaping, trees, fences and limited side-yard access. Mapping where equipment can reach, where water drains and how the patio meets doors and steps comes first, so the layout and materials suit the space.",
+    localChallengesHeading: "What affects a Wyomissing paver project",
+    localChallenges: [
+      "Equipment and material access to the back yard",
+      "Grade, downspouts and the drainage path away from the home",
+      "Borough permit and zoning requirements for the property",
+      "Transitions to doors, steps, lawn and existing landscaping",
+    ],
+    localizedFaqs: [
+      {
+        q: "Do I need a permit for a patio in Wyomissing?",
+        a: "Requirements depend on the project and the property. Confirm with the borough whether a permit or zoning review applies, and the written scope will note who handles it.",
+      },
+      {
+        q: "Will a new patio cause drainage problems?",
+        a: "It should not when the base and slope are planned for it. The patio should shed water away from the house, and the scope should note where that water goes.",
+      },
+    ],
+    relatedCaseStudySlug: "reading-paver-patio-buildout",
+    internalLinks: [
+      {
+        href: "/wyomissing-pa",
+        anchorText: "Remodeling and outdoor projects in Wyomissing",
+        reason: "Wyomissing service-area hub",
+      },
+      {
+        href: "/berks-county-pa/paver-installation",
+        anchorText: "Paver patio installation in Berks County",
+        reason: "Regional patio planning",
+      },
+      {
+        href: "/services/paver-installation",
+        anchorText: "Paver patio installation service details",
+        reason: "Broader project types and planning factors",
+      },
+      {
+        href: "#quote-form-section",
+        anchorText: "Request a paver project quote",
+        reason: "Project inquiry form",
+      },
+    ],
+  },
   "reading-pa/basement-finishing": {
-    metadataTitle: "Basement Finishing in Reading, PA",
+    metadataTitle: "Basement Finishing & Remodeling in Reading, PA",
     metadataDescription:
       "Basement finishing and remodeling in Reading, PA. Plan a family room, theater or flexible living space with moisture, ceiling and utility access considered.",
-    heroHeading: "Basement Finishing in Reading, PA",
+    heroHeading: "Basement Finishing & Remodeling in Reading, PA",
     heroIntro:
       "Plan a finished basement around the space’s existing conditions, utility access, ceiling constraints, lighting, and intended use before framing and finish selections begin.",
     localProjectHeading: "Planning a basement finish in Reading",
@@ -1167,10 +1273,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     ],
   },
   "bethlehem-pa/drywall-installation-repair": {
-    metadataTitle: "Drywall Installation and Repair in Bethlehem, PA",
+    metadataTitle: "Drywall Repair & Installation in Bethlehem, PA",
     metadataDescription:
       "Drywall installation and repair in Bethlehem, PA for patches, wall and ceiling repairs, and paint-ready finish work with smooth, clean blending.",
-    heroHeading: "Drywall Installation and Repair in Bethlehem, PA",
+    heroHeading: "Drywall Repair & Installation in Bethlehem, PA",
     localProjectHeading: "Common Bethlehem Drywall Scope",
     localProjectSnippet:
       "For drywall work in Bethlehem, assess existing wall surfaces, damaged areas and earlier patches before planning repairs. Confirm preparation and finish expectations so the repaired areas can blend with the surrounding room under paint.",
