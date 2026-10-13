@@ -40,8 +40,10 @@ export default function StickyCTA() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // On the homepage, wait until the hero (which has its own call and quote buttons) has scrolled away.
+    const homeHero = document.querySelector<HTMLElement>(".home-hero");
     const onScroll = () => {
-      setVisible(window.scrollY > 240);
+      setVisible(homeHero ? homeHero.getBoundingClientRect().bottom < 0 : window.scrollY > 240);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -56,13 +58,12 @@ export default function StickyCTA() {
     };
   }, [pathname]);
 
-  // Hide on dedicated quote page and homepage
+  // Hide on the dedicated quote pages
   if (
     !visible ||
     (formInView.pathname === pathname && formInView.visible) ||
     pathname === "/request-a-quote" ||
-    pathname.endsWith("/quote") ||
-    pathname === "/"
+    pathname.endsWith("/quote")
   )
     return null;
 

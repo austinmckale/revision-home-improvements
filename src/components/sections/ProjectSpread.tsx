@@ -26,15 +26,7 @@ function SpreadPhoto({ image, sizes, className }: { image: Photo; sizes: string;
  * A homepage project shown the way a job file reads: a lead photo, a detail or two from the same
  * project, and what was built. The title carries the link and stretches over the whole spread.
  */
-export default function ProjectSpread({
-  study,
-  number,
-  size = "standard",
-}: {
-  study: CaseStudy;
-  number: number;
-  size?: "lead" | "standard";
-}) {
+export default function ProjectSpread({ study, size = "standard" }: { study: CaseStudy; size?: "lead" | "standard" }) {
   const { title } = getProjectPresentation(study);
   const { lead, details } = getFeaturedProjectPhotos(study);
   const isLead = size === "lead";
@@ -53,11 +45,7 @@ export default function ProjectSpread({
       ) : null}
 
       <div className={`flex flex-col ${isLead ? "lg:col-span-5 lg:py-1" : ""}`}>
-        <p className="annotation flex items-center gap-3 text-[0.62rem] text-[var(--muted)]">
-          <span className="text-[var(--brand)]">{String(number).padStart(2, "0")}</span>
-          <span className="h-px w-8 bg-[var(--border)]" aria-hidden="true" />
-          {label}
-        </p>
+        <p className="annotation text-[0.62rem] text-[var(--brand)]">{label}</p>
         <h3
           className={`heading-serif mt-4 leading-[1.04] tracking-[-.025em] text-[var(--accent)] ${isLead ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl"}`}
         >
@@ -102,7 +90,7 @@ export default function ProjectSpread({
           className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[var(--brand)] underline-offset-4 group-hover:underline"
           aria-hidden="true"
         >
-          See all {study.images.length} photos
+          See the project
           <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </p>
       </div>

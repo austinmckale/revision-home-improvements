@@ -57,34 +57,26 @@ const scopeBuilderLabels: Record<string, string> = {
 
 type AreaLink = { label: string; href: string };
 
-/** Local pages linked from the homepage, one sentence per region. */
-const localAreas: Array<{ region: AreaLink; towns: AreaLink[]; services: AreaLink[]; plus: AreaLink }> = [
-  {
-    region: { label: "the Lehigh Valley", href: "/lehigh-valley-pa" },
-    towns: [
-      { label: "Allentown", href: "/allentown-pa" },
-      { label: "Bethlehem", href: "/bethlehem-pa" },
-    ],
-    services: [
-      { label: "kitchen remodeling", href: "/lehigh-valley-pa/kitchen-remodeling" },
-      { label: "basement finishing", href: "/lehigh-valley-pa/basement-finishing" },
-      { label: "paver patios", href: "/lehigh-valley-pa/paver-installation" },
-    ],
-    plus: { label: "paver patios in Allentown", href: "/allentown-pa/paver-installation" },
-  },
-  {
-    region: { label: "Berks County", href: "/berks-county-pa" },
-    towns: [
-      { label: "Reading", href: "/reading-pa" },
-      { label: "Wyomissing", href: "/wyomissing-pa" },
-    ],
-    services: [
-      { label: "kitchen remodeling", href: "/berks-county-pa/kitchen-remodeling" },
-      { label: "kitchen cabinet remodeling", href: "/berks-county-pa/kitchen-cabinet-installation" },
-      { label: "paver patios in Berks County", href: "/berks-county-pa/paver-installation" },
-    ],
-    plus: { label: "basement finishing in Reading", href: "/reading-pa/basement-finishing" },
-  },
+/** Town and region hubs, read as one sentence along the Reading–Bethlehem strip. */
+const stripLinks = {
+  berks: { label: "Berks County", href: "/berks-county-pa" },
+  reading: { label: "Reading", href: "/reading-pa" },
+  wyomissing: { label: "Wyomissing", href: "/wyomissing-pa" },
+  lehighValley: { label: "the Lehigh Valley", href: "/lehigh-valley-pa" },
+  allentown: { label: "Allentown", href: "/allentown-pa" },
+  bethlehem: { label: "Bethlehem", href: "/bethlehem-pa" },
+} satisfies Record<string, AreaLink>;
+
+/** Local service pages the homepage links for search; kept to one line of small print. */
+const localServiceLinks: AreaLink[] = [
+  { label: "kitchen remodeling in the Lehigh Valley", href: "/lehigh-valley-pa/kitchen-remodeling" },
+  { label: "kitchen remodeling in Berks County", href: "/berks-county-pa/kitchen-remodeling" },
+  { label: "kitchen cabinet remodeling in Berks County", href: "/berks-county-pa/kitchen-cabinet-installation" },
+  { label: "basement finishing in the Lehigh Valley", href: "/lehigh-valley-pa/basement-finishing" },
+  { label: "basement finishing in Reading", href: "/reading-pa/basement-finishing" },
+  { label: "paver patios in the Lehigh Valley", href: "/lehigh-valley-pa/paver-installation" },
+  { label: "paver patios in Allentown", href: "/allentown-pa/paver-installation" },
+  { label: "paver patios in Berks County", href: "/berks-county-pa/paver-installation" },
 ];
 
 const homeHeroImage = {
@@ -128,19 +120,27 @@ const serviceRow = (service: Service): ServiceRow => ({
   short: service.short,
 });
 
+const inlineLinkClass =
+  "text-[var(--accent)] underline decoration-[var(--accent)]/30 underline-offset-4 transition-colors hover:text-[var(--brand)] hover:decoration-current";
+
 /** Joins inline links into a sentence: "A, B and C". */
 function LinkSeries({ links }: { links: AreaLink[] }) {
   return links.map((link, index) => (
     <span key={link.href}>
       {index > 0 ? (index === links.length - 1 ? " and " : ", ") : null}
-      <Link
-        href={link.href}
-        className="text-[var(--accent)] underline decoration-[var(--accent)]/30 underline-offset-4 transition-colors hover:text-[var(--brand)] hover:decoration-current"
-      >
+      <Link href={link.href} className={inlineLinkClass}>
         {link.label}
       </Link>
     </span>
   ));
+}
+
+function InlineLink({ link }: { link: AreaLink }) {
+  return (
+    <Link href={link.href} className={inlineLinkClass}>
+      {link.label}
+    </Link>
+  );
 }
 
 export default function HomePage() {
@@ -153,19 +153,23 @@ export default function HomePage() {
     const index = remodelingServiceOrder.indexOf(slug);
     return index < 0 ? remodelingServiceOrder.length : index;
   };
-  const remodelingRows = primaryServices
-    .filter((service) => !damageRepairSlugs.includes(service.slug))
-    .sort((a, b) => rank(a.slug) - rank(b.slug))
-    .map(serviceRow);
-  const damageRows: ServiceRow[] = [
-    ...primaryServices.filter((service) => damageRepairSlugs.includes(service.slug)).map(serviceRow),
-    ...(insuranceClaims
-      ? [{ href: "/insurance-claims", label: serviceLabel(insuranceClaims), short: insuranceClaims.short }]
-      : []),
-  ];
-  const serviceGroups = [
-    { title: "Remodeling", rows: remodelingRows, start: 1 },
-    { title: "Repairs after fire & water damage", rows: damageRows, start: remodelingRows.length + 1 },
+  const serviceGroups: Array<{ title: string; rows: ServiceRow[] }> = [
+    {
+      title: "Remodeling",
+      rows: primaryServices
+        .filter((service) => !damageRepairSlugs.includes(service.slug))
+        .sort((a, b) => rank(a.slug) - rank(b.slug))
+        .map(serviceRow),
+    },
+    {
+      title: "Repairs after fire & water damage",
+      rows: [
+        ...primaryServices.filter((service) => damageRepairSlugs.includes(service.slug)).map(serviceRow),
+        ...(insuranceClaims
+          ? [{ href: "/insurance-claims", label: serviceLabel(insuranceClaims), short: insuranceClaims.short }]
+          : []),
+      ],
+    },
   ];
   const scopeServices: ScopeBuilderService[] = primaryServices.map((service) => ({
     slug: service.slug,
@@ -182,45 +186,51 @@ export default function HomePage() {
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }])} />
       <JsonLd data={getFaqJsonLd(homeFaqs)} />
 
-      <section className="home-hero crop-marks relative isolate flex min-h-[min(900px,100svh)] items-end overflow-hidden bg-[#242720] pt-24 text-white [--crop-inset:5.25rem_1rem_1rem]">
-        <Image
-          {...getProjectImageProps(homeHeroImage)}
-          alt={homeHeroImage.alt}
-          fill
-          priority
-          sizes="100vw"
-          quality={75}
-          className={`home-hero-image -z-20 object-cover ${getImageFocalClass(homeHeroImage.src, "hero")}`}
-        />
+      {/* Phones get the photo uncropped above the text; larger screens keep it behind the headline. */}
+      <section className="home-hero crop-marks relative isolate flex flex-col overflow-hidden bg-[#242720] text-white [--crop-color:transparent] [--crop-inset:5.25rem_1rem_1rem] sm:min-h-[min(900px,100svh)] sm:justify-end sm:pt-24 sm:[--crop-color:rgb(255_255_255/72%)]">
+        <div className="relative aspect-[4/3] w-full overflow-hidden sm:absolute sm:inset-0 sm:-z-20 sm:aspect-auto">
+          <Image
+            {...getProjectImageProps(homeHeroImage)}
+            alt={homeHeroImage.alt}
+            fill
+            priority
+            sizes="100vw"
+            quality={75}
+            className={`home-hero-image object-cover ${getImageFocalClass(homeHeroImage.src, "hero")}`}
+          />
+          <div
+            className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/60 to-transparent sm:hidden"
+            aria-hidden="true"
+          />
+        </div>
         <div
-          className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(18,23,20,.84)_0%,rgba(18,23,20,.58)_44%,rgba(18,23,20,.08)_100%)]"
+          className="absolute inset-0 -z-10 hidden bg-[linear-gradient(90deg,rgba(18,23,20,.84)_0%,rgba(18,23,20,.58)_44%,rgba(18,23,20,.08)_100%)] sm:block"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(18,23,20,.62)_0%,transparent_45%)]"
+          className="absolute inset-0 -z-10 hidden bg-[linear-gradient(0deg,rgba(18,23,20,.62)_0%,transparent_45%)] sm:block"
           aria-hidden="true"
         />
 
-        <Container className="relative w-full pb-12 pt-24 sm:pb-14 md:pb-16 lg:pb-20">
-          <div className="max-w-4xl">
+        <Container className="relative w-full pb-12 pt-8 sm:pb-14 sm:pt-24 md:pb-16 lg:pb-20">
+          <div className="max-w-5xl">
             <h1>
               <span className="home-hero-enter home-hero-enter-1 flex items-center gap-3 font-sans text-xs font-semibold uppercase tracking-[.2em] text-white/80 sm:text-sm">
                 <span className="h-px w-9 shrink-0 bg-[var(--brand-bright)]" aria-hidden="true" />
-                Remodeling &amp; restoration in the Lehigh Valley and Berks County
+                Home improvement contractor in the Lehigh Valley &amp; Berks County
               </span>{" "}
-              <span className="home-hero-enter home-hero-enter-2 heading-serif mt-6 block text-[clamp(3rem,7.4vw,6.75rem)] leading-[.95] tracking-[-.04em] text-white">
-                Better rooms,{" "}
-                <br />
+              <span className="home-hero-enter home-hero-enter-2 heading-serif mt-5 block text-[clamp(2.6rem,6.2vw,5.75rem)] leading-[.98] tracking-[-.035em] text-white sm:mt-6">
+                Remodeling and repairs, <br className="hidden sm:block" />
                 <span className="text-white/70">
-                  from Reading <br className="hidden sm:block" />
+                  from Reading <br className="hidden lg:block" />
                   to Bethlehem<span className="text-[var(--brand-bright)]">.</span>
                 </span>
               </span>
             </h1>
-            <div className="home-hero-enter home-hero-enter-3 mt-7 flex flex-col gap-7 sm:mt-9 sm:flex-row sm:items-end sm:justify-between">
+            <div className="home-hero-enter home-hero-enter-3 mt-6 flex flex-col gap-7 sm:mt-9 sm:flex-row sm:items-end sm:justify-between">
               <p className="max-w-xl text-pretty text-base leading-relaxed text-white/85 sm:text-lg">
-                Kitchens, bathrooms, basements and outdoor rooms, plus rebuilds after fire and water damage. You see the
-                work and the price in writing before you decide.
+                Kitchens, bathrooms, basements and outdoor rooms, plus rebuilds after fire and water damage. You get a
+                written proposal with the work and the price before we start.
               </p>
               <div className="flex shrink-0 flex-wrap gap-3">
                 <Link
@@ -239,9 +249,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="mt-12 grid gap-4 text-white/75 sm:mt-16 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-6">
+          <div className="mt-16 hidden gap-6 text-white/75 sm:grid sm:grid-cols-[auto_1fr_auto] sm:items-center">
             <p className="annotation text-[0.65rem]">{siteConfig.hicLabel}</p>
-            <DimensionLine className="hidden [--dimension-color:rgb(255_255_255/45%)] sm:flex" />
+            <DimensionLine className="[--dimension-color:rgb(255_255_255/45%)]" />
             <Link
               href="/projects/reading-paver-patio-buildout"
               className="annotation group inline-flex min-h-8 items-center gap-2 text-[0.65rem] text-white transition-colors hover:text-white/80"
@@ -255,14 +265,62 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <section className="bg-[var(--background)] py-16 sm:py-24 lg:py-32">
+        <Container>
+          <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <p className="eyebrow">What we do</p>
+              <h2 className="heading-serif mt-4 max-w-md text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
+                What we build and rebuild.
+              </h2>
+              <p className="mt-5 max-w-sm text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+                From a single room to a full rebuild after damage. Choose a service to see how we approach it.
+              </p>
+            </div>
+            <div className="grid gap-10 sm:gap-12">
+              {serviceGroups.map((group) => (
+                <div key={group.title}>
+                  <h3 className="annotation border-b border-[var(--accent)] pb-3 text-[0.62rem] text-[var(--muted)]">
+                    {group.title}
+                  </h3>
+                  <ul>
+                    {group.rows.map((row) => (
+                      <li key={row.href} className="border-b border-[var(--border)]">
+                        <Link
+                          href={row.href}
+                          className="group grid grid-cols-[1fr_auto] items-center gap-x-4 py-3.5 sm:py-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]"
+                        >
+                          <span className="heading-serif text-[1.375rem] leading-tight text-[var(--accent)] transition-colors group-hover:text-[var(--brand)] sm:text-[1.625rem]">
+                            {row.label}
+                          </span>
+                          <span className="col-start-1 mt-1 hidden text-sm leading-relaxed text-[var(--muted)] sm:block md:col-start-2 md:row-start-1 md:mt-0">
+                            {row.short}
+                          </span>
+                          <span
+                            className="col-start-2 row-start-1 flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-sm text-[var(--accent)] transition-all duration-300 group-hover:border-[var(--brand)] group-hover:bg-[var(--brand)] group-hover:text-white sm:h-9 sm:w-9 md:col-start-3"
+                            aria-hidden="true"
+                          >
+                            →
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {leadProject ? (
-        <section className="bg-[var(--background)] py-20 sm:py-24 lg:py-32">
+        <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-20 sm:py-24 lg:py-32">
           <Container>
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-3xl">
                 <p className="eyebrow">Selected work</p>
                 <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                  An outdoor room, a media room and a kitchen.
+                  A pavilion, a media room and a blue kitchen.
                 </h2>
               </div>
               <Link
@@ -277,13 +335,13 @@ export default function HomePage() {
             </div>
 
             <div className="mt-12 border-t border-[var(--border)] pt-10 lg:mt-16 lg:pt-14">
-              <ProjectSpread study={leadProject} number={1} size="lead" />
+              <ProjectSpread study={leadProject} size="lead" />
             </div>
             {moreProjects.length > 0 ? (
               <FadeIn>
                 <div className="mt-16 grid gap-16 border-t border-[var(--border)] pt-10 lg:mt-24 lg:grid-cols-2 lg:gap-12 lg:pt-14">
-                  {moreProjects.map((study, index) => (
-                    <ProjectSpread key={study.slug} study={study} number={index + 2} />
+                  {moreProjects.map((study) => (
+                    <ProjectSpread key={study.slug} study={study} />
                   ))}
                 </div>
               </FadeIn>
@@ -301,13 +359,13 @@ export default function HomePage() {
                   <p className="eyebrow eyebrow-light">Before &amp; after</p>
                   <h2 className="heading-serif mt-4 max-w-xl text-4xl leading-[1.03] tracking-[-.03em] sm:text-5xl lg:text-6xl">
                     Same pool. <br />
-                    New surround.
+                    New patio around it.
                   </h2>
                 </div>
                 <div>
                   <p className="max-w-lg text-base leading-relaxed text-white/75">
-                    A gray textured surround and a light stone-pattern border now follow every curve of the pool, from
-                    the steps to the rounded edges.
+                    A gray textured patio with a light stone-pattern border now follows every curve of the pool, from the
+                    steps to the rounded edges.
                   </p>
                   <Link
                     href={`/projects/${poolStory.slug}`}
@@ -346,75 +404,6 @@ export default function HomePage() {
         </section>
       )}
 
-      <section className="bg-[var(--background)] py-20 sm:py-24 lg:py-32">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
-            <div className="lg:sticky lg:top-28 lg:self-start">
-              <p className="eyebrow">What we do</p>
-              <h2 className="heading-serif mt-4 max-w-md text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                What we build and rebuild.
-              </h2>
-              <p className="mt-5 max-w-sm text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                From a single room to a full rebuild after damage. Choose a service to see how we approach it.
-              </p>
-            </div>
-            <div className="grid gap-12">
-              {serviceGroups.map((group) => (
-                <div key={group.title}>
-                  <h3 className="annotation border-b border-[var(--accent)] pb-3 text-[0.62rem] text-[var(--muted)]">
-                    {group.title}
-                  </h3>
-                  <ul>
-                    {group.rows.map((row, index) => (
-                      <li key={row.href} className="border-b border-[var(--border)]">
-                        <Link
-                          href={row.href}
-                          className="group grid grid-cols-[1.75rem_1fr_auto] items-center gap-x-3 py-4 sm:grid-cols-[2.5rem_1fr_auto] sm:gap-x-4 sm:py-5 md:grid-cols-[2.5rem_minmax(0,1.1fr)_minmax(0,1fr)_auto]"
-                        >
-                          <span className="annotation text-[0.62rem] text-[var(--brand)]" aria-hidden="true">
-                            {String(group.start + index).padStart(2, "0")}
-                          </span>
-                          <span className="heading-serif text-[1.375rem] leading-tight text-[var(--accent)] transition-colors group-hover:text-[var(--brand)] sm:text-[1.625rem]">
-                            {row.label}
-                          </span>
-                          <span className="col-span-2 col-start-2 mt-1 text-sm leading-relaxed text-[var(--muted)] md:col-span-1 md:col-start-3 md:mt-0">
-                            {row.short}
-                          </span>
-                          <span
-                            className="col-start-3 row-start-1 flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-sm text-[var(--accent)] transition-all duration-300 group-hover:border-[var(--brand)] group-hover:bg-[var(--brand)] group-hover:text-white sm:h-9 sm:w-9 md:col-start-4"
-                            aria-hidden="true"
-                          >
-                            →
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section id="scope-builder" className="drafting-grid border-y border-[var(--border)] py-20 sm:py-24 lg:py-32">
-        <Container>
-          <div className="mb-12 lg:mb-16">
-            <div className="max-w-3xl">
-              <p className="eyebrow">Project planner</p>
-              <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                Plan your project before the first visit.
-              </h2>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                Choose a room and check off what is on your list. We add the questions that shape price and quality, and
-                you can send it straight to us or save it for later.
-              </p>
-            </div>
-          </div>
-          <ScopeBuilder services={scopeServices} />
-        </Container>
-      </section>
-
       <section className="bg-[var(--surface-soft)] py-20 sm:py-24 lg:py-32">
         <Container>
           <FadeIn>
@@ -451,14 +440,11 @@ export default function HomePage() {
 
               {leadReview ? (
                 <div>
-                  <figure className="border-t border-[var(--accent)] pt-8">
-                    <span className="heading-serif block h-10 text-7xl leading-none text-[var(--brand)]/45" aria-hidden="true">
-                      “
-                    </span>
-                    <blockquote className="heading-serif text-3xl leading-[1.18] tracking-[-.015em] text-[var(--accent)] sm:text-4xl">
-                      {leadReview.quote}
+                  <figure className="border-t border-[var(--accent)] pt-7">
+                    <blockquote className="heading-serif text-2xl leading-snug tracking-[-.01em] text-[var(--accent)] sm:text-3xl">
+                      “{leadReview.quote}”
                     </blockquote>
-                    <figcaption className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                    <figcaption className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
                       <span className="font-semibold text-[var(--accent)]">{leadReview.name}</span>
                       <a
                         href={leadReview.verification.url}
@@ -472,7 +458,7 @@ export default function HomePage() {
                     </figcaption>
                   </figure>
                   {moreReviews.length > 0 ? (
-                    <div className="mt-10 grid gap-8 sm:grid-cols-2">
+                    <div className="mt-9 grid gap-8 sm:grid-cols-2">
                       {moreReviews.map((item) => (
                         <figure key={`${item.name}-${item.context}`} className="border-t border-[var(--border)] pt-5">
                           <blockquote className="heading-serif text-xl leading-snug text-[var(--accent)] sm:text-2xl">
@@ -528,29 +514,45 @@ export default function HomePage() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:gap-16">
             <div>
-              <p className="eyebrow">Close to home</p>
+              <p className="eyebrow">Where we work</p>
               <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
-                Two regions. One road between them.
+                Reading, Bethlehem and everywhere between.
               </h2>
-              <div className="mt-8 grid gap-5 border-t border-[var(--border)] pt-6 text-base leading-relaxed text-[var(--muted)]">
-                {localAreas.map((area) => (
-                  <p key={area.region.href}>
-                    We work in <LinkSeries links={[area.region]} />, including <LinkSeries links={area.towns} />. See{" "}
-                    <LinkSeries links={area.services} />, plus <LinkSeries links={[area.plus]} />.
-                  </p>
-                ))}
-              </div>
-              <Link
-                href="/service-areas"
-                className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
-              >
-                All service areas <span aria-hidden="true">→</span>
-              </Link>
+              <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+                We cover the whole stretch: <InlineLink link={stripLinks.reading} />,{" "}
+                <InlineLink link={stripLinks.wyomissing} /> and the rest of <InlineLink link={stripLinks.berks} />,
+                through to <InlineLink link={stripLinks.allentown} />, <InlineLink link={stripLinks.bethlehem} /> and{" "}
+                <InlineLink link={stripLinks.lehighValley} />.
+              </p>
+              <p className="mt-4 max-w-md text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+                Not sure about your street? Call{" "}
+                <a
+                  href={siteConfig.phoneHref}
+                  className="whitespace-nowrap font-semibold text-[var(--brand)] underline underline-offset-4"
+                >
+                  {siteConfig.phoneDisplay}
+                </a>{" "}
+                and ask.
+              </p>
+              <details className="group mt-8 max-w-md border-y border-[var(--border)]">
+                <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-3 text-sm font-semibold text-[var(--accent)] [&::-webkit-details-marker]:hidden">
+                  Find a service in your town
+                  <span
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--border)] transition-transform duration-300 group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="pb-5 text-sm leading-relaxed text-[var(--muted)]">
+                  See <LinkSeries links={localServiceLinks} />.
+                </p>
+              </details>
             </div>
             <div className="paper-sheet p-4 sm:p-8">
               <div className="mb-3 flex items-center justify-between gap-4 px-2 pt-1">
                 <p className="annotation text-[0.62rem] text-[var(--muted)]">Service area</p>
-                <p className="annotation text-[0.62rem] text-[var(--muted)]">Berks ⟷ Lehigh Valley</p>
+                <p className="annotation text-[0.62rem] text-[var(--muted)]">Reading ⟷ Bethlehem</p>
               </div>
               <ServiceAreaMap />
             </div>
@@ -558,7 +560,25 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-20 sm:py-24 lg:py-28">
+      <section id="scope-builder" className="drafting-grid border-y border-[var(--border)] py-20 sm:py-24 lg:py-32">
+        <Container>
+          <div className="mb-12 lg:mb-16">
+            <div className="max-w-3xl">
+              <p className="eyebrow">Project planner</p>
+              <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
+                Plan your project before the first visit.
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+                Choose a room and check off what is on your list. We add the questions that shape price and quality, and
+                you can send it straight to us or save it for later.
+              </p>
+            </div>
+          </div>
+          <ScopeBuilder services={scopeServices} />
+        </Container>
+      </section>
+
+      <section className="bg-[var(--surface-soft)] py-20 sm:py-24 lg:py-28">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
             <div>
@@ -621,7 +641,7 @@ export default function HomePage() {
               <div className="max-w-3xl">
                 <p className="eyebrow eyebrow-light">Start a project</p>
                 <h2 className="heading-serif mt-5 text-4xl leading-[1.02] tracking-[-.03em] sm:text-5xl lg:text-7xl">
-                  What would you change first?
+                  What do you need done?
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
                   Call, or send a few details and photos. We&rsquo;ll come see the space and talk through the options
