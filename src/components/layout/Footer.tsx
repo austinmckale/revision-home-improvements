@@ -69,7 +69,7 @@ export default function Footer() {
                 {siteConfig.name}
               </span>
             </Link>
-            <p className="mt-3 text-xs font-semibold uppercase tracking-[.15em] text-white/65">Reimagine · Build · Enjoy</p>
+            <p className="mt-3 text-xs font-semibold uppercase tracking-[.15em] text-white/65">Reading to Bethlehem</p>
             <p className="mt-6 text-sm leading-relaxed text-white/60">
               Remodeling and restoration for homes across the Lehigh Valley and Berks County.
             </p>

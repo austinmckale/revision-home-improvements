@@ -99,6 +99,41 @@ export const featuredProjects = featuredProjectSlugs
   .map((slug) => galleryCaseStudies.find((study) => study.slug === slug))
   .filter((study): study is CaseStudy => Boolean(study));
 
+/**
+ * Homepage project spreads: a lead photo and one or two details, all from the project's own photos.
+ * The pavilion lead is a different angle from the homepage hero. Basement views that show work in
+ * progress, or repeat the media wall, stay in the project gallery.
+ */
+const featuredProjectPhotoSources: Record<(typeof featuredProjectSlugs)[number], { lead: string; details: string[] }> = {
+  "reading-paver-patio-buildout": {
+    lead: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
+    details: [
+      "/images/projects/frontier-patio-gable-roof/after/angle-2.jpg",
+      "/images/projects/frontier-patio-gable-roof/after/finished-alt.jpg",
+    ],
+  },
+  "lehigh-valley-basement-finish-and-detail": {
+    lead: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
+    details: ["/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg"],
+  },
+  "blue-kitchen-cabinet-counters": {
+    lead: "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
+    details: [
+      "/images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg",
+      "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg",
+    ],
+  },
+};
+
+/** Resolves the spread photos against the project's own images so alt text stays with the reviewed record. */
+export function getFeaturedProjectPhotos(study: CaseStudy) {
+  const sources = featuredProjectPhotoSources[study.slug as (typeof featuredProjectSlugs)[number]];
+  const find = (src: string) => study.images.find((image) => image.src === src);
+  const lead = (sources && find(sources.lead)) ?? getProjectPresentation(study).image;
+  const details = (sources?.details ?? []).map(find).filter((image): image is CaseStudy["images"][number] => Boolean(image));
+  return { lead, details };
+}
+
 export const orderedShowcaseProjects = [...galleryCaseStudies].sort((a, b) => {
   const aIndex = residentialOrder.indexOf(a.slug);
   const bIndex = residentialOrder.indexOf(b.slug);

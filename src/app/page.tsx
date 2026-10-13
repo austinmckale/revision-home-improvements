@@ -7,16 +7,17 @@ import DimensionLine from "@/components/ui/DimensionLine";
 import JsonLd from "@/components/JsonLd";
 import { getPageMetadata } from "@/lib/metadata";
 import { getBreadcrumbJsonLd, getFaqJsonLd, getWebSiteJsonLd } from "@/lib/structuredData";
-import { primaryServices } from "@/content/services";
+import { getServiceBySlug, primaryServices, serviceLabel, type Service } from "@/content/services";
 import { visibleCaseStudies } from "@/content/caseStudies";
 import { featuredProjects, orderedShowcaseProjects } from "@/content/projectShowcase";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
 import { getImageFocalClass } from "@/content/imageFocalPoints";
 import { insuranceClaimsClarification } from "@/content/restoration";
-import ProjectCard from "@/components/sections/ProjectCard";
+import ProjectSpread from "@/components/sections/ProjectSpread";
 import ScopeBuilder, { type ScopeBuilderService } from "@/components/sections/ScopeBuilder";
 import ServiceAreaMap from "@/components/sections/ServiceAreaMap";
 import { getFeaturedTestimonials } from "@/content/testimonials";
+import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = getPageMetadata({
@@ -30,14 +31,17 @@ export const metadata: Metadata = getPageMetadata({
   },
 });
 
-const priorityServiceSlugs = [
+const remodelingServiceOrder = [
   "kitchen-remodeling",
   "bathroom-remodeling",
   "basement-finishing",
   "paver-installation",
-  "water-damage-restoration",
-  "fire-damage-restoration",
+  "flooring-installation",
+  "exterior-remodeling",
+  "drywall-installation-repair",
 ];
+
+const damageRepairSlugs = ["fire-damage-restoration", "water-damage-restoration"];
 
 const scopeBuilderLabels: Record<string, string> = {
   "kitchen-remodeling": "Kitchen",
@@ -51,59 +55,35 @@ const scopeBuilderLabels: Record<string, string> = {
   "water-damage-restoration": "Water damage",
 };
 
-const localServiceGroups = [
+type AreaLink = { label: string; href: string };
+
+/** Local pages linked from the homepage, one sentence per region. */
+const localAreas: Array<{ region: AreaLink; towns: AreaLink[]; services: AreaLink[]; plus: AreaLink }> = [
   {
-    name: "Lehigh Valley",
-    href: "/lehigh-valley-pa",
-    links: [
+    region: { label: "the Lehigh Valley", href: "/lehigh-valley-pa" },
+    towns: [
       { label: "Allentown", href: "/allentown-pa" },
       { label: "Bethlehem", href: "/bethlehem-pa" },
-      { label: "Kitchen remodeling", href: "/lehigh-valley-pa/kitchen-remodeling" },
-      { label: "Basement finishing", href: "/lehigh-valley-pa/basement-finishing" },
-      { label: "Paver patios", href: "/lehigh-valley-pa/paver-installation" },
-      { label: "Paver patios in Allentown", href: "/allentown-pa/paver-installation" },
     ],
+    services: [
+      { label: "kitchen remodeling", href: "/lehigh-valley-pa/kitchen-remodeling" },
+      { label: "basement finishing", href: "/lehigh-valley-pa/basement-finishing" },
+      { label: "paver patios", href: "/lehigh-valley-pa/paver-installation" },
+    ],
+    plus: { label: "paver patios in Allentown", href: "/allentown-pa/paver-installation" },
   },
   {
-    name: "Berks County",
-    href: "/berks-county-pa",
-    links: [
+    region: { label: "Berks County", href: "/berks-county-pa" },
+    towns: [
       { label: "Reading", href: "/reading-pa" },
       { label: "Wyomissing", href: "/wyomissing-pa" },
-      { label: "Kitchen remodeling", href: "/berks-county-pa/kitchen-remodeling" },
-      { label: "Kitchen cabinet remodeling", href: "/berks-county-pa/kitchen-cabinet-installation" },
-      { label: "Basement finishing in Reading", href: "/reading-pa/basement-finishing" },
-      { label: "Paver patios in Berks County", href: "/berks-county-pa/paver-installation" },
     ],
-  },
-];
-
-const processSteps = [
-  {
-    number: "01",
-    title: "First conversation",
-    detail: "Tell us what you want to change, what matters most and how you use your home.",
-  },
-  {
-    number: "02",
-    title: "Site visit",
-    detail: "We see the space, talk through the options and confirm what the work involves.",
-  },
-  {
-    number: "03",
-    title: "Proposal",
-    detail: "A written proposal with the work, the price and the next steps, before you decide.",
-  },
-  {
-    number: "04",
-    title: "Materials & schedule",
-    detail: "Selections confirmed, materials ordered and the schedule set.",
-  },
-  { number: "05", title: "Build", detail: "We keep you updated as the work takes shape." },
-  {
-    number: "06",
-    title: "Final walkthrough",
-    detail: "We review the finished work together and close out any final details.",
+    services: [
+      { label: "kitchen remodeling", href: "/berks-county-pa/kitchen-remodeling" },
+      { label: "kitchen cabinet remodeling", href: "/berks-county-pa/kitchen-cabinet-installation" },
+      { label: "paver patios in Berks County", href: "/berks-county-pa/paver-installation" },
+    ],
+    plus: { label: "basement finishing in Reading", href: "/reading-pa/basement-finishing" },
   },
 ];
 
@@ -111,33 +91,6 @@ const homeHeroImage = {
   src: "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg",
   alt: "Gable-roof pavilion over a patio with planted garden edges beside a house.",
 };
-
-const spaceDetails = [
-  {
-    src: "/images/projects/frontier-patio-gable-roof/after/angle-2.jpg",
-    alt: "Wood pavilion ceiling with dark beams and recessed lights, viewed from below.",
-    title: "Warmth overhead",
-    caption: "Wood ceiling, dark beams, and recessed lights.",
-    href: "/projects/reading-paver-patio-buildout",
-    linkLabel: "Explore the pavilion",
-  },
-  {
-    src: "/images/projects/blue-kitchen-cabinet-counters/process/01-blue-kitchen-cabinets-counter-top-install.jpg",
-    alt: "Gray patterned countertop and matching backsplash beside blue cabinets and a sink faucet.",
-    title: "A connected finish",
-    caption: "A patterned counter and matching backsplash beside blue cabinetry.",
-    href: "/projects/blue-kitchen-cabinet-counters",
-    linkLabel: "Explore the kitchen",
-  },
-  {
-    src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
-    alt: "Glossy floor with gold and dark flowing patterns in front of a basement media wall.",
-    title: "Pattern underfoot",
-    caption: "A glossy patterned floor beneath a media wall and recessed lighting.",
-    href: "/projects/lehigh-valley-basement-finish-and-detail",
-    linkLabel: "Explore the basement",
-  },
-];
 
 /** Plain answers built only from facts stated elsewhere on the site. */
 const homeFaqs = [
@@ -167,11 +120,53 @@ const homeFaqs = [
   },
 ];
 
+type ServiceRow = { href: string; label: string; short: string };
+
+const serviceRow = (service: Service): ServiceRow => ({
+  href: `/services/${service.slug}`,
+  label: serviceLabel(service),
+  short: service.short,
+});
+
+/** Joins inline links into a sentence: "A, B and C". */
+function LinkSeries({ links }: { links: AreaLink[] }) {
+  return links.map((link, index) => (
+    <span key={link.href}>
+      {index > 0 ? (index === links.length - 1 ? " and " : ", ") : null}
+      <Link
+        href={link.href}
+        className="text-[var(--accent)] underline decoration-[var(--accent)]/30 underline-offset-4 transition-colors hover:text-[var(--brand)] hover:decoration-current"
+      >
+        {link.label}
+      </Link>
+    </span>
+  ));
+}
+
 export default function HomePage() {
-  const priorityServices = primaryServices.filter((service) => priorityServiceSlugs.includes(service.slug));
-  const secondaryServices = primaryServices.filter((service) => !priorityServiceSlugs.includes(service.slug));
+  const [leadProject, ...moreProjects] = featuredProjects;
   const featuredReviews = getFeaturedTestimonials();
+  const [leadReview, ...moreReviews] = [...featuredReviews].sort((a, b) => b.quote.length - a.quote.length);
   const poolStory = visibleCaseStudies.find((study) => study.slug === "bethlehem-pool-patio-renovation");
+  const insuranceClaims = getServiceBySlug("insurance-claims");
+  const rank = (slug: string) => {
+    const index = remodelingServiceOrder.indexOf(slug);
+    return index < 0 ? remodelingServiceOrder.length : index;
+  };
+  const remodelingRows = primaryServices
+    .filter((service) => !damageRepairSlugs.includes(service.slug))
+    .sort((a, b) => rank(a.slug) - rank(b.slug))
+    .map(serviceRow);
+  const damageRows: ServiceRow[] = [
+    ...primaryServices.filter((service) => damageRepairSlugs.includes(service.slug)).map(serviceRow),
+    ...(insuranceClaims
+      ? [{ href: "/insurance-claims", label: serviceLabel(insuranceClaims), short: insuranceClaims.short }]
+      : []),
+  ];
+  const serviceGroups = [
+    { title: "Remodeling", rows: remodelingRows, start: 1 },
+    { title: "Repairs after fire & water damage", rows: damageRows, start: remodelingRows.length + 1 },
+  ];
   const scopeServices: ScopeBuilderService[] = primaryServices.map((service) => ({
     slug: service.slug,
     name: service.name,
@@ -213,16 +208,19 @@ export default function HomePage() {
                 <span className="h-px w-9 shrink-0 bg-[var(--brand-bright)]" aria-hidden="true" />
                 Remodeling &amp; restoration in the Lehigh Valley and Berks County
               </span>{" "}
-              <span className="home-hero-enter home-hero-enter-2 heading-serif mt-6 block max-w-4xl text-[clamp(3.5rem,9.2vw,8rem)] leading-[.92] tracking-[-.045em] text-white">
-                Reimagine<span className="text-[var(--brand-bright)]">.</span>{" "}
+              <span className="home-hero-enter home-hero-enter-2 heading-serif mt-6 block text-[clamp(3rem,7.4vw,6.75rem)] leading-[.95] tracking-[-.04em] text-white">
+                Better rooms,{" "}
                 <br />
-                Build<span className="text-[var(--brand-bright)]">.</span>{" "}
-                <br className="sm:hidden" /> <span className="text-white/65">Enjoy.</span>
+                <span className="text-white/70">
+                  from Reading <br className="hidden sm:block" />
+                  to Bethlehem<span className="text-[var(--brand-bright)]">.</span>
+                </span>
               </span>
             </h1>
             <div className="home-hero-enter home-hero-enter-3 mt-7 flex flex-col gap-7 sm:mt-9 sm:flex-row sm:items-end sm:justify-between">
-              <p className="max-w-xl text-pretty text-base leading-relaxed text-white/85 sm:text-lg md:text-xl">
-                Kitchens, bathrooms, basements and outdoor living, planned with you and built with care.
+              <p className="max-w-xl text-pretty text-base leading-relaxed text-white/85 sm:text-lg">
+                Kitchens, bathrooms, basements and outdoor rooms, plus rebuilds after fire and water damage. You see the
+                work and the price in writing before you decide.
               </p>
               <div className="flex shrink-0 flex-wrap gap-3">
                 <Link
@@ -248,120 +246,28 @@ export default function HomePage() {
               href="/projects/reading-paver-patio-buildout"
               className="annotation group inline-flex min-h-8 items-center gap-2 text-[0.65rem] text-white transition-colors hover:text-white/80"
             >
-              Fig. 01 · Pavilion &amp; paver patio{" "}
+              Pictured: patio &amp; gable-roof pavilion{" "}
               <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
                 →
               </span>
             </Link>
           </div>
         </Container>
-        <span
-          className="pointer-events-none absolute right-6 top-1/2 hidden -translate-y-1/2 select-none font-mono text-[10px] tracking-[.35em] text-white/60 [writing-mode:vertical-rl] lg:block"
-          aria-hidden="true"
-        >
-          RHI PROS · REMODELING &amp; RESTORATION
-        </span>
       </section>
 
-      <section className="bg-[var(--background)] py-20 sm:py-24 lg:py-32">
-        <Container>
-          <FadeIn>
-            <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
-              <div>
-                <p className="eyebrow">What we do</p>
-                <h2 className="heading-serif mt-4 max-w-xl text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                  Good work starts with a clear plan.
-                </h2>
-              </div>
-              <div className="lg:justify-self-end">
-                <p className="max-w-2xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                  From a single room to a full rebuild after damage, we plan the work with you and see it through. Choose
-                  a service to see how we approach it.
-                </p>
-              </div>
-            </div>
-            <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:mt-16 lg:grid-cols-3">
-              {priorityServices.map((service, index) => (
-                <Link
-                  key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="home-service-card group relative isolate min-h-52 overflow-hidden bg-[#323731] sm:min-h-64"
-                >
-                  {service.image.src ? (
-                    <Image
-                      {...getProjectImageProps(service.image)}
-                      alt={service.image.alt}
-                      fill
-                      sizes="(max-width: 1024px) 50vw, 33vw"
-                      className={`home-service-image -z-20 object-cover ${getImageFocalClass(service.image.src)}`}
-                    />
-                  ) : (
-                    <div className="home-service-placeholder absolute inset-0 -z-20" aria-hidden="true" />
-                  )}
-                  <div
-                    className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/20 to-black/5 transition-colors duration-500 group-hover:from-black/90"
-                    aria-hidden="true"
-                  />
-                  {service.image.caption ? (
-                    <span className="absolute right-4 top-4 max-w-[70%] bg-black/60 px-3 py-2 text-xs text-white/90">
-                      {service.image.caption}
-                    </span>
-                  ) : null}
-                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-7">
-                    <span className="annotation hidden text-[0.62rem] text-white/80 sm:block" aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")} / {String(priorityServices.length).padStart(2, "0")}
-                    </span>
-                    <div className="mt-3.5 flex items-end justify-between gap-4">
-                      <div>
-                        <h3 className="heading-serif text-xl leading-tight text-white sm:text-3xl">
-                          {service.slug === "paver-installation" ? "Patios & Outdoor Living" : service.name}
-                        </h3>
-                        <p className="mt-2 hidden max-w-sm text-sm leading-relaxed text-white/75 sm:block">
-                          {service.short}
-                        </p>
-                      </div>
-                      <span
-                        className="mb-1 hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/50 text-white transition-all duration-300 group-hover:border-[var(--brand)] group-hover:bg-[var(--brand)] sm:flex"
-                        aria-hidden="true"
-                      >
-                        ↗
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-            {secondaryServices.length > 0 && (
-              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-1 border-t border-[var(--border)] pt-5 text-sm text-[var(--muted)]">
-                <span className="font-semibold text-[var(--foreground)]">Also offering</span>
-                {secondaryServices.map((service) => (
-                  <Link
-                    key={service.slug}
-                    href={`/services/${service.slug}`}
-                    className="inline-flex min-h-8 items-center transition-colors hover:text-[var(--brand)]"
-                  >
-                    {service.name}&nbsp;<span aria-hidden="true">↗</span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </FadeIn>
-        </Container>
-      </section>
-
-      <section className="bg-[var(--surface-soft)] py-20 sm:py-24 lg:py-32">
-        <Container>
-          <FadeIn>
+      {leadProject ? (
+        <section className="bg-[var(--background)] py-20 sm:py-24 lg:py-32">
+          <Container>
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-              <div className="max-w-2xl">
+              <div className="max-w-3xl">
                 <p className="eyebrow">Selected work</p>
                 <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                  Made for real life.
+                  An outdoor room, a media room and a kitchen.
                 </h2>
               </div>
               <Link
                 href="/projects"
-                className="group inline-flex min-h-8 items-center gap-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]"
+                className="group inline-flex min-h-8 shrink-0 items-center gap-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]"
               >
                 View all {orderedShowcaseProjects.length} projects{" "}
                 <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
@@ -370,12 +276,124 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-10 grid gap-5 lg:mt-14 lg:auto-rows-[19rem] lg:grid-cols-12">
-              {featuredProjects.map((study, index) => (
-                <ProjectCard key={study.slug} study={study} variant={index === 0 ? "lead" : "support"} />
+            <div className="mt-12 border-t border-[var(--border)] pt-10 lg:mt-16 lg:pt-14">
+              <ProjectSpread study={leadProject} number={1} size="lead" />
+            </div>
+            {moreProjects.length > 0 ? (
+              <FadeIn>
+                <div className="mt-16 grid gap-16 border-t border-[var(--border)] pt-10 lg:mt-24 lg:grid-cols-2 lg:gap-12 lg:pt-14">
+                  {moreProjects.map((study, index) => (
+                    <ProjectSpread key={study.slug} study={study} number={index + 2} />
+                  ))}
+                </div>
+              </FadeIn>
+            ) : null}
+          </Container>
+        </section>
+      ) : null}
+
+      {poolStory?.beforeImages?.[0] && poolStory.afterImages?.[0] && (
+        <section className="blueprint-grid overflow-hidden bg-[var(--accent)] py-20 text-white sm:py-24 lg:py-32">
+          <Container>
+            <FadeIn>
+              <div className="mb-10 grid gap-6 lg:grid-cols-[1.1fr_.9fr] lg:items-end">
+                <div>
+                  <p className="eyebrow eyebrow-light">Before &amp; after</p>
+                  <h2 className="heading-serif mt-4 max-w-xl text-4xl leading-[1.03] tracking-[-.03em] sm:text-5xl lg:text-6xl">
+                    Same pool. <br />
+                    New surround.
+                  </h2>
+                </div>
+                <div>
+                  <p className="max-w-lg text-base leading-relaxed text-white/75">
+                    A gray textured surround and a light stone-pattern border now follow every curve of the pool, from
+                    the steps to the rounded edges.
+                  </p>
+                  <Link
+                    href={`/projects/${poolStory.slug}`}
+                    className="group mt-6 inline-flex items-center gap-3 border-b border-white/45 pb-2 text-sm font-semibold text-white transition-colors hover:border-[var(--brand-bright)]"
+                  >
+                    See the poolside project{" "}
+                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
+                </div>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                {[
+                  { image: poolStory.beforeImages[0], label: "Before" },
+                  { image: poolStory.afterImages[0], label: "After" },
+                ].map(({ image, label }) => (
+                  <figure key={label}>
+                    <div className="crop-marks relative aspect-[4/3] overflow-hidden">
+                      <Image
+                        {...getProjectImageProps(image)}
+                        alt={image.alt}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
+                        className={`object-cover ${getImageFocalClass(image.src)}`}
+                      />
+                      <figcaption className="absolute bottom-4 left-4 z-[2] bg-[#202823]/90 px-4 py-2 text-xs font-semibold uppercase tracking-[.16em] text-white">
+                        {label}
+                      </figcaption>
+                    </div>
+                  </figure>
+                ))}
+              </div>
+            </FadeIn>
+          </Container>
+        </section>
+      )}
+
+      <section className="bg-[var(--background)] py-20 sm:py-24 lg:py-32">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <p className="eyebrow">What we do</p>
+              <h2 className="heading-serif mt-4 max-w-md text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
+                What we build and rebuild.
+              </h2>
+              <p className="mt-5 max-w-sm text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+                From a single room to a full rebuild after damage. Choose a service to see how we approach it.
+              </p>
+            </div>
+            <div className="grid gap-12">
+              {serviceGroups.map((group) => (
+                <div key={group.title}>
+                  <h3 className="annotation border-b border-[var(--accent)] pb-3 text-[0.62rem] text-[var(--muted)]">
+                    {group.title}
+                  </h3>
+                  <ul>
+                    {group.rows.map((row, index) => (
+                      <li key={row.href} className="border-b border-[var(--border)]">
+                        <Link
+                          href={row.href}
+                          className="group grid grid-cols-[1.75rem_1fr_auto] items-center gap-x-3 py-4 sm:grid-cols-[2.5rem_1fr_auto] sm:gap-x-4 sm:py-5 md:grid-cols-[2.5rem_minmax(0,1.1fr)_minmax(0,1fr)_auto]"
+                        >
+                          <span className="annotation text-[0.62rem] text-[var(--brand)]" aria-hidden="true">
+                            {String(group.start + index).padStart(2, "0")}
+                          </span>
+                          <span className="heading-serif text-[1.375rem] leading-tight text-[var(--accent)] transition-colors group-hover:text-[var(--brand)] sm:text-[1.625rem]">
+                            {row.label}
+                          </span>
+                          <span className="col-span-2 col-start-2 mt-1 text-sm leading-relaxed text-[var(--muted)] md:col-span-1 md:col-start-3 md:mt-0">
+                            {row.short}
+                          </span>
+                          <span
+                            className="col-start-3 row-start-1 flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] text-sm text-[var(--accent)] transition-all duration-300 group-hover:border-[var(--brand)] group-hover:bg-[var(--brand)] group-hover:text-white sm:h-9 sm:w-9 md:col-start-4"
+                            aria-hidden="true"
+                          >
+                            →
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
-          </FadeIn>
+          </div>
         </Container>
       </section>
 
@@ -397,147 +415,116 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-[var(--background)] py-16 sm:py-20 lg:py-24">
+      <section className="bg-[var(--surface-soft)] py-20 sm:py-24 lg:py-32">
         <Container>
           <FadeIn>
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-              <div className="max-w-2xl">
-                <p className="eyebrow">A closer look</p>
-                <h2 className="heading-serif mt-4 text-3xl leading-[1.06] tracking-[-.03em] text-[var(--accent)] sm:text-4xl lg:text-5xl">
-                  Details that shape the space.
+            <div className="grid gap-14 lg:grid-cols-[.85fr_1.15fr] lg:gap-20">
+              <div>
+                <p className="eyebrow">Who you&rsquo;ll work with</p>
+                <h2 className="heading-serif mt-4 max-w-lg text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
+                  A local company, owned by {company.owner.name}.
                 </h2>
-                <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)]">
-                  Look closer at ceiling, counter, and floor details across three different spaces.
+                <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--muted)]">
+                  RHI Pros is the working name of {company.legalName}, a registered Pennsylvania home improvement
+                  contractor.
                 </p>
-              </div>
-              <Link
-                href="/projects"
-                className="inline-flex min-h-11 shrink-0 items-center gap-3 text-sm font-semibold text-[var(--accent)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
-              >
-                See all projects <span aria-hidden="true">↗</span>
-              </Link>
-            </div>
-            <div className="-mx-5 mt-9 flex snap-x snap-mandatory scroll-px-5 gap-5 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-7 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 [&::-webkit-scrollbar]:hidden">
-              {spaceDetails.map((detail, index) => (
-                <figure key={detail.src} className="w-[78%] min-w-0 shrink-0 snap-start sm:w-auto">
-                  <div className="crop-marks relative aspect-[4/3] overflow-hidden bg-[var(--surface-soft)] [--crop-inset:.7rem]">
-                    <Image
-                      {...getProjectImageProps(detail)}
-                      alt={detail.alt}
-                      fill
-                      sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 33vw"
-                      className={`object-cover ${getImageFocalClass(detail.src)}`}
-                    />
+                <dl className="mt-8 grid max-w-md grid-cols-2 border-t border-[var(--accent)]">
+                  <div className="border-b border-r border-[var(--border)] py-4 pr-4">
+                    <dt className="annotation text-[0.58rem] text-[var(--muted)]">Formerly</dt>
+                    <dd className="mt-1.5 text-sm font-semibold text-[var(--accent)]">{company.formerNames[0]}</dd>
                   </div>
-                  <figcaption className="border-t border-[var(--border)] pt-4">
-                    <p className="annotation text-[0.62rem] text-[var(--muted)]">Detail {String.fromCharCode(65 + index)}</p>
-                    <h3 className="heading-serif mt-1 text-2xl text-[var(--accent)]">{detail.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{detail.caption}</p>
-                    <Link
-                      href={detail.href}
-                      className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                  <div className="border-b border-[var(--border)] py-4 pl-4">
+                    <dt className="annotation text-[0.58rem] text-[var(--muted)]">Registration</dt>
+                    <dd className="mt-1.5 text-sm font-semibold text-[var(--accent)]">{company.license.label}</dd>
+                  </div>
+                </dl>
+                <Link
+                  href="/about"
+                  className="group mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                >
+                  About RHI Pros{" "}
+                  <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
+              </div>
+
+              {leadReview ? (
+                <div>
+                  <figure className="border-t border-[var(--accent)] pt-8">
+                    <span className="heading-serif block h-10 text-7xl leading-none text-[var(--brand)]/45" aria-hidden="true">
+                      “
+                    </span>
+                    <blockquote className="heading-serif text-3xl leading-[1.18] tracking-[-.015em] text-[var(--accent)] sm:text-4xl">
+                      {leadReview.quote}
+                    </blockquote>
+                    <figcaption className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                      <span className="font-semibold text-[var(--accent)]">{leadReview.name}</span>
+                      <a
+                        href={leadReview.verification.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Read ${leadReview.name}'s full review on ${leadReview.verification.platform} (opens in a new tab)`}
+                        className="inline-flex min-h-6 items-center text-[var(--muted)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
+                      >
+                        {leadReview.source} ↗
+                      </a>
+                    </figcaption>
+                  </figure>
+                  {moreReviews.length > 0 ? (
+                    <div className="mt-10 grid gap-8 sm:grid-cols-2">
+                      {moreReviews.map((item) => (
+                        <figure key={`${item.name}-${item.context}`} className="border-t border-[var(--border)] pt-5">
+                          <blockquote className="heading-serif text-xl leading-snug text-[var(--accent)] sm:text-2xl">
+                            “{item.quote}”
+                          </blockquote>
+                          <figcaption className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                            <span className="font-semibold text-[var(--accent)]">{item.name}</span>
+                            <a
+                              href={item.verification.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Read ${item.name}'s full review on ${item.verification.platform} (opens in a new tab)`}
+                              className="inline-flex min-h-6 items-center text-[var(--muted)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
+                            >
+                              {item.source} ↗
+                            </a>
+                          </figcaption>
+                        </figure>
+                      ))}
+                    </div>
+                  ) : null}
+                  <p className="mt-10 text-sm text-[var(--muted)]">
+                    Read more reviews on{" "}
+                    <a
+                      href={siteConfig.googleBusinessProfileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Read RHI Pros reviews on Google (opens in a new tab)"
+                      className="font-semibold text-[var(--accent)] underline underline-offset-4 transition-colors hover:text-[var(--brand)]"
                     >
-                      {detail.linkLabel} <span aria-hidden="true">↗</span>
-                    </Link>
-                  </figcaption>
-                </figure>
-              ))}
+                      Google
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href={siteConfig.angiUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Read RHI Pros reviews on Angi (opens in a new tab)"
+                      className="font-semibold text-[var(--accent)] underline underline-offset-4 transition-colors hover:text-[var(--brand)]"
+                    >
+                      Angi
+                    </a>
+                    .
+                  </p>
+                </div>
+              ) : null}
             </div>
           </FadeIn>
         </Container>
       </section>
-
-      {poolStory?.beforeImages?.[0] && poolStory.afterImages?.[0] && (
-        <section className="blueprint-grid overflow-hidden bg-[var(--accent)] py-20 text-white sm:py-24 lg:py-32">
-          <Container>
-            <FadeIn>
-              <div className="mb-10 grid gap-6 lg:grid-cols-[1.1fr_.9fr] lg:items-end">
-                <div>
-                  <p className="eyebrow eyebrow-light">The transformation</p>
-                  <h2 className="heading-serif mt-4 max-w-xl text-4xl leading-[1.03] tracking-[-.03em] sm:text-5xl lg:text-6xl">
-                    A fresh outlook{" "}
-                    <br />
-                    on poolside.
-                  </h2>
-                </div>
-                <div>
-                  <p className="max-w-lg text-base leading-relaxed text-white/75">
-                    A renewed surround, clean stone-pattern edges and a fresh finish around the pool. See the before and
-                    after.
-                  </p>
-                  <Link
-                    href={`/projects/${poolStory.slug}`}
-                    className="group mt-6 inline-flex items-center gap-3 border-b border-white/45 pb-2 text-sm font-semibold text-white transition-colors hover:border-[var(--brand-bright)]"
-                  >
-                    See the transformation{" "}
-                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                      →
-                    </span>
-                  </Link>
-                </div>
-              </div>
-              <div className="grid gap-5 sm:grid-cols-2">
-                {[
-                  { image: poolStory.beforeImages[0], label: "Before", fig: "Fig. 05a" },
-                  { image: poolStory.afterImages[0], label: "After", fig: "Fig. 05b" },
-                ].map(({ image, label, fig }) => (
-                  <figure key={label}>
-                    <div className="crop-marks relative aspect-[4/3] overflow-hidden">
-                      <Image
-                        {...getProjectImageProps(image)}
-                        alt={image.alt}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 50vw"
-                        className={`object-cover ${getImageFocalClass(image.src)}`}
-                      />
-                      <figcaption className="absolute bottom-4 left-4 z-[2] flex items-center gap-3 bg-[#202823]/90 px-4 py-2 text-xs font-semibold uppercase tracking-[.16em] text-white">
-                        <span className="annotation text-[0.6rem] text-white/60">{fig}</span>
-                        {label}
-                      </figcaption>
-                    </div>
-                  </figure>
-                ))}
-              </div>
-            </FadeIn>
-          </Container>
-        </section>
-      )}
 
       <section className="bg-[var(--background)] py-20 sm:py-24 lg:py-32">
-        <Container>
-          <FadeIn>
-            <div className="flex flex-col gap-6 pb-6 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="eyebrow">The experience</p>
-                <h2 className="heading-serif mt-4 max-w-2xl text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                  A clear process, from first conversation to final walkthrough.
-                </h2>
-              </div>
-              <Link
-                href="/our-process"
-                className="group inline-flex min-h-8 shrink-0 items-center gap-3 text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--brand)]"
-              >
-                How our process works{" "}
-                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                  →
-                </span>
-              </Link>
-            </div>
-            <DimensionLine label="Six steps, start to finish" />
-            <ol className="process-list mt-4 grid gap-0 sm:grid-cols-2 lg:mt-6 lg:grid-cols-3">
-              {processSteps.map((step) => (
-                <li key={step.number} className="process-item border-b border-[var(--border)] py-6 sm:px-5 lg:px-7">
-                  <span className="font-mono text-xs tracking-[.15em] text-[var(--brand)]">{step.number} / 06</span>
-                  <h3 className="heading-serif mt-4 text-2xl text-[var(--accent)] sm:text-3xl">{step.title}</h3>
-                  <p className="mt-2 max-w-sm text-sm leading-relaxed text-[var(--muted)]">{step.detail}</p>
-                </li>
-              ))}
-            </ol>
-          </FadeIn>
-        </Container>
-      </section>
-
-      <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-20 sm:py-24 lg:py-32">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-center lg:gap-16">
             <div>
@@ -545,31 +532,12 @@ export default function HomePage() {
               <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
                 Two regions. One road between them.
               </h2>
-              <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--muted)]">
-                We work across the Lehigh Valley and Berks County, from Allentown and Bethlehem to Reading and
-                Wyomissing. Choose your area for local planning guidance and services.
-              </p>
-              <div className="mt-8 grid gap-8 sm:grid-cols-2">
-                {localServiceGroups.map((group) => (
-                  <nav key={group.href} aria-label={`${group.name} services`}>
-                    <h3 className="heading-serif text-2xl text-[var(--accent)]">
-                      <Link href={group.href} className="underline-offset-4 hover:underline">
-                        {group.name}
-                      </Link>
-                    </h3>
-                    <ul className="mt-3 text-sm text-[var(--muted)]">
-                      {group.links.map((link) => (
-                        <li key={link.href}>
-                          <Link
-                            href={link.href}
-                            className="inline-flex min-h-9 items-center underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
-                          >
-                            {link.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
+              <div className="mt-8 grid gap-5 border-t border-[var(--border)] pt-6 text-base leading-relaxed text-[var(--muted)]">
+                {localAreas.map((area) => (
+                  <p key={area.region.href}>
+                    We work in <LinkSeries links={[area.region]} />, including <LinkSeries links={area.towns} />. See{" "}
+                    <LinkSeries links={area.services} />, plus <LinkSeries links={[area.plus]} />.
+                  </p>
                 ))}
               </div>
               <Link
@@ -590,78 +558,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-[#eeeee8] py-20 sm:py-24 lg:py-32">
-        <Container>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="eyebrow">Reviews</p>
-              <h2 className="heading-serif mt-4 text-4xl tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
-                Good work, good people.
-              </h2>
-            </div>
-            <div className="flex flex-wrap gap-2 text-xs font-semibold">
-              <a
-                href={siteConfig.googleBusinessProfileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Read RHI Pros reviews on Google (opens in a new tab)"
-                className="inline-flex min-h-9 items-center border border-[var(--border)] px-3 text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
-              >
-                Google Reviews ↗
-              </a>
-              <a
-                href={siteConfig.angiUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Read RHI Pros reviews on Angi (opens in a new tab)"
-                className="inline-flex min-h-9 items-center border border-[var(--border)] px-3 text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
-              >
-                Angi ↗
-              </a>
-              <a
-                href={siteConfig.facebookPageUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit the RHI Pros Facebook page (opens in a new tab)"
-                className="inline-flex min-h-9 items-center border border-[var(--border)] px-3 text-[var(--accent)] transition-colors hover:border-[var(--brand)] hover:text-[var(--brand)]"
-              >
-                Facebook ↗
-              </a>
-            </div>
-          </div>
-          <FadeIn>
-            <div className="mt-10 grid gap-px bg-[var(--border)] md:grid-cols-3">
-              {featuredReviews.map((item) => (
-                <article
-                  key={`${item.name}-${item.context}`}
-                  className="flex min-h-64 flex-col bg-[var(--surface)] p-6 sm:p-8 lg:p-9"
-                >
-                  <span className="heading-serif text-5xl leading-none text-[var(--brand)]/50" aria-hidden="true">
-                    “
-                  </span>
-                  <blockquote className="-mt-1 flex-1 text-base leading-relaxed text-[var(--foreground)] sm:text-lg">
-                    {item.quote}
-                  </blockquote>
-                  <div className="mt-6 border-t border-[var(--border)] pt-4">
-                    <p className="text-sm font-semibold text-[var(--accent)]">{item.name}</p>
-                    <a
-                      href={item.verification.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Read ${item.name}'s full review on ${item.verification.platform} (opens in a new tab)`}
-                      className="mt-1 inline-flex min-h-6 items-center text-xs text-[var(--muted)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:underline"
-                    >
-                      {item.source} ↗
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </FadeIn>
-        </Container>
-      </section>
-
-      <section className="bg-[var(--background)] py-20 sm:py-24 lg:py-28">
+      <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-20 sm:py-24 lg:py-28">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
             <div>
@@ -681,7 +578,11 @@ export default function HomePage() {
                 >
                   {siteConfig.primaryEmail}
                 </a>
-                .
+                . You can also see{" "}
+                <Link href="/our-process" className="font-semibold text-[var(--brand)] underline underline-offset-4">
+                  how a project runs
+                </Link>
+                , from the first call to the final walkthrough.
               </p>
             </div>
             <div className="border-t border-[var(--accent)]">
@@ -718,12 +619,13 @@ export default function HomePage() {
           <FadeIn>
             <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
               <div className="max-w-3xl">
-                <p className="eyebrow eyebrow-light">Your home, considered</p>
+                <p className="eyebrow eyebrow-light">Start a project</p>
                 <h2 className="heading-serif mt-5 text-4xl leading-[1.02] tracking-[-.03em] sm:text-5xl lg:text-7xl">
-                  Let’s make room for what matters.
+                  What would you change first?
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-                  Start with a conversation. We’ll learn what you have in mind and explain the next steps clearly.
+                  Call, or send a few details and photos. We&rsquo;ll come see the space and talk through the options
+                  with you.
                 </p>
                 <p className="annotation mt-7 text-[0.65rem] text-white/60">
                   {siteConfig.hicLabel} · Lehigh Valley &amp; Berks County

@@ -433,7 +433,9 @@ body {
 .home-project-feature:hover .home-project-image,
 .home-project-feature:focus-visible .home-project-image,
 .home-project-support:hover .home-project-image,
-.home-project-support:focus-visible .home-project-image {
+.home-project-support:focus-visible .home-project-image,
+.project-spread:hover .home-project-image,
+.project-spread:has(a:focus-visible) .home-project-image {
   transform: scale(1.035);
 }
 
