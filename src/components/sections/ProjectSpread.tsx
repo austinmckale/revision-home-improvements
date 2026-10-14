@@ -26,7 +26,19 @@ function SpreadPhoto({ image, sizes, className }: { image: Photo; sizes: string;
  * A homepage project shown the way a job file reads: a lead photo, a detail or two from the same
  * project, and what was built. The title carries the link and stretches over the whole spread.
  */
-export default function ProjectSpread({ study, size = "standard" }: { study: CaseStudy; size?: "lead" | "standard" }) {
+export default function ProjectSpread({
+  study,
+  size = "standard",
+  reverse = false,
+  highlights = size === "lead",
+}: {
+  study: CaseStudy;
+  size?: "lead" | "standard";
+  /** Lead spreads only: photo on the right from 1024px up. */
+  reverse?: boolean;
+  /** Show the project's highlight list under the summary. */
+  highlights?: boolean;
+}) {
   const { title } = getProjectPresentation(study);
   const { lead, details } = getFeaturedProjectPhotos(study);
   const isLead = size === "lead";
@@ -40,11 +52,11 @@ export default function ProjectSpread({ study, size = "standard" }: { study: Cas
         <SpreadPhoto
           image={lead}
           sizes={isLead ? "(max-width: 1024px) 100vw, 58vw" : "(max-width: 1024px) 100vw, 45vw"}
-          className={`crop-marks aspect-[4/3] [--crop-inset:.85rem] ${isLead ? "lg:col-span-7" : ""}`}
+          className={`crop-marks aspect-[4/3] [--crop-inset:.85rem] ${isLead ? `lg:col-span-7 ${reverse ? "lg:order-2" : ""}` : ""}`}
         />
       ) : null}
 
-      <div className={`flex flex-col ${isLead ? "lg:col-span-5 lg:py-1" : ""}`}>
+      <div className={`flex flex-col ${isLead ? `lg:col-span-5 lg:py-1 ${reverse ? "lg:order-1" : ""}` : ""}`}>
         <p className="annotation text-[0.62rem] text-[var(--brand)]">{label}</p>
         <h3
           className={`heading-serif mt-4 leading-[1.04] tracking-[-.025em] text-[var(--accent)] ${isLead ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl"}`}
@@ -59,7 +71,7 @@ export default function ProjectSpread({ study, size = "standard" }: { study: Cas
         </h3>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)]">{study.summary}</p>
 
-        {isLead && study.scope.length > 0 ? (
+        {highlights && study.scope.length > 0 ? (
           <ul className="mt-5 grid gap-1.5 text-sm text-[var(--foreground)]">
             {study.scope.map((item) => (
               <li key={item} className="flex gap-3">

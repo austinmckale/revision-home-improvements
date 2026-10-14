@@ -144,7 +144,6 @@ function InlineLink({ link }: { link: AreaLink }) {
 }
 
 export default function HomePage() {
-  const [leadProject, ...moreProjects] = featuredProjects;
   const featuredReviews = getFeaturedTestimonials();
   const [leadReview, ...moreReviews] = [...featuredReviews].sort((a, b) => b.quote.length - a.quote.length);
   const poolStory = visibleCaseStudies.find((study) => study.slug === "bethlehem-pool-patio-renovation");
@@ -217,20 +216,19 @@ export default function HomePage() {
             <h1>
               <span className="home-hero-enter home-hero-enter-1 flex items-center gap-3 font-sans text-xs font-semibold uppercase tracking-[.2em] text-white/80 sm:text-sm">
                 <span className="h-px w-9 shrink-0 bg-[var(--brand-bright)]" aria-hidden="true" />
-                Home improvement contractor in the Lehigh Valley &amp; Berks County
+                Remodeling &amp; repairs in Berks County and the Lehigh Valley
               </span>{" "}
-              <span className="home-hero-enter home-hero-enter-2 heading-serif mt-5 block text-[clamp(2.6rem,6.2vw,5.75rem)] leading-[.98] tracking-[-.035em] text-white sm:mt-6">
-                Remodeling and repairs, <br className="hidden sm:block" />
+              <span className="home-hero-enter home-hero-enter-2 heading-serif mt-5 block text-[clamp(3rem,8vw,7.25rem)] leading-[.95] tracking-[-.04em] text-white sm:mt-6">
+                Ryan calls back. <br />
                 <span className="text-white/70">
-                  from Reading <br className="hidden lg:block" />
-                  to Bethlehem<span className="text-[var(--brand-bright)]">.</span>
+                  Every time<span className="text-[var(--brand-bright)]">.</span>
                 </span>
               </span>
             </h1>
             <div className="home-hero-enter home-hero-enter-3 mt-6 flex flex-col gap-7 sm:mt-9 sm:flex-row sm:items-end sm:justify-between">
               <p className="max-w-xl text-pretty text-base leading-relaxed text-white/85 sm:text-lg">
-                Kitchens, bathrooms, basements and outdoor rooms, plus rebuilds after fire and water damage. You get a
-                written proposal with the work and the price before we start.
+                {company.owner.name} owns RHI Pros. He answers his phone, keeps you posted the whole way and puts the
+                price in writing before we start, from Reading to Bethlehem.
               </p>
               <div className="flex shrink-0 flex-wrap gap-3">
                 <Link
@@ -313,15 +311,19 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {leadProject ? (
+      {featuredProjects.length > 0 ? (
         <section className="border-t border-[var(--border)] bg-[var(--surface-soft)] py-20 sm:py-24 lg:py-32">
           <Container>
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div className="max-w-3xl">
                 <p className="eyebrow">Selected work</p>
                 <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                  A pavilion, a media room and a blue kitchen.
+                  The two we&rsquo;re proudest of.
                 </h2>
+                <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
+                  A gable-roof pavilion and a basement media room with a full entertainment wall. After them, a kitchen
+                  in deep blue.
+                </p>
               </div>
               <Link
                 href="/projects"
@@ -334,18 +336,15 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-12 border-t border-[var(--border)] pt-10 lg:mt-16 lg:pt-14">
-              <ProjectSpread study={leadProject} size="lead" />
-            </div>
-            {moreProjects.length > 0 ? (
-              <FadeIn>
-                <div className="mt-16 grid gap-16 border-t border-[var(--border)] pt-10 lg:mt-24 lg:grid-cols-2 lg:gap-12 lg:pt-14">
-                  {moreProjects.map((study) => (
-                    <ProjectSpread key={study.slug} study={study} />
-                  ))}
-                </div>
-              </FadeIn>
-            ) : null}
+            {/* The first two featured projects are the owner's favourites; any others follow without highlights. */}
+            {featuredProjects.map((study, index) => (
+              <div
+                key={study.slug}
+                className={`border-t border-[var(--border)] pt-10 lg:pt-14 ${index === 0 ? "mt-12 lg:mt-16" : "mt-16 lg:mt-24"}`}
+              >
+                <ProjectSpread study={study} size="lead" reverse={index % 2 === 1} highlights={index < 2} />
+              </div>
+            ))}
           </Container>
         </section>
       ) : null}
@@ -411,11 +410,11 @@ export default function HomePage() {
               <div>
                 <p className="eyebrow">Who you&rsquo;ll work with</p>
                 <h2 className="heading-serif mt-4 max-w-lg text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
-                  A local company, owned by {company.owner.name}.
+                  You&rsquo;ll always know where things stand.
                 </h2>
                 <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--muted)]">
-                  RHI Pros is the working name of {company.legalName}, a registered Pennsylvania home improvement
-                  contractor.
+                  Expect friendly people and regular updates, from the first visit to the final walkthrough. RHI Pros (
+                  {company.legalName}) is owned by {company.owner.name}.
                 </p>
                 <dl className="mt-8 grid max-w-md grid-cols-2 border-t border-[var(--accent)]">
                   <div className="border-b border-r border-[var(--border)] py-4 pr-4">
@@ -516,10 +515,10 @@ export default function HomePage() {
             <div>
               <p className="eyebrow">Where we work</p>
               <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
-                Reading, Bethlehem and everywhere between.
+                Between Reading and Bethlehem? We&rsquo;ll come to you.
               </h2>
               <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                We cover the whole stretch: <InlineLink link={stripLinks.reading} />,{" "}
+                We work the whole stretch: <InlineLink link={stripLinks.reading} />,{" "}
                 <InlineLink link={stripLinks.wyomissing} /> and the rest of <InlineLink link={stripLinks.berks} />,
                 through to <InlineLink link={stripLinks.allentown} />, <InlineLink link={stripLinks.bethlehem} /> and{" "}
                 <InlineLink link={stripLinks.lehighValley} />.
@@ -641,7 +640,7 @@ export default function HomePage() {
               <div className="max-w-3xl">
                 <p className="eyebrow eyebrow-light">Start a project</p>
                 <h2 className="heading-serif mt-5 text-4xl leading-[1.02] tracking-[-.03em] sm:text-5xl lg:text-7xl">
-                  What do you need done?
+                  So, what&rsquo;s the project?
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
                   Call, or send a few details and photos. We&rsquo;ll come see the space and talk through the options
