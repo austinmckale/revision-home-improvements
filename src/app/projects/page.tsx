@@ -68,15 +68,13 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
               <h1>
                 <span className="eyebrow">Remodeling project photos</span>{" "}
                 <span className="heading-serif mt-5 block max-w-3xl text-[2.6rem] leading-[1.02] tracking-[-.035em] text-[var(--accent)] sm:text-6xl lg:text-7xl">
-                  Spaces worth{" "}
-                  <br />
-                  coming home to<span className="text-[var(--brand)]">.</span>
+                  Jobs we&rsquo;ve built<span className="text-[var(--brand)]">.</span>
                 </span>
               </h1>
             </div>
             <p className="max-w-md text-base leading-relaxed text-[var(--muted)] lg:pb-2">
-              Kitchens that bring people together. Basements made for movie nights. Patios that open up a whole new
-              room. Explore photo collections and find ideas for your own space.
+              Every photo here is from one of our own jobs, from Reading to Bethlehem, with before-and-after shots where
+              we have them.
             </p>
           </div>
 
@@ -145,9 +143,8 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
             <section aria-labelledby="signature-projects">
               <div className="mb-5 flex items-baseline justify-between gap-4">
                 <h2 id="signature-projects" className="eyebrow">
-                  Spaces to explore
+                  Featured jobs
                 </h2>
-                <span className="hidden text-xs text-[var(--muted)] sm:block">Take a closer look ↗</span>
               </div>
               <div className="grid gap-5 lg:auto-rows-[19rem] lg:grid-cols-12">
                 {featuredProjects.map((study, index) => (
@@ -168,9 +165,6 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
                 <h2 id="residential-projects" className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">
                   {selectedService ? selectedService.name : "More of our work."}
                 </h2>
-                <p className="max-w-sm text-sm leading-relaxed text-[var(--muted)]">
-                  Find ideas in the layouts, materials and finishes.
-                </p>
               </div>
               <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
                 {residential.map((study) => (

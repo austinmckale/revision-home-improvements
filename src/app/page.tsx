@@ -322,9 +322,6 @@ export default function HomePage() {
                 <h2 className="heading-serif mt-4 text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
                   The two we&rsquo;re proudest of.
                 </h2>
-                <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                  A gable-roof pavilion and a basement media room with a full entertainment wall, plus a navy kitchen.
-                </p>
               </div>
               <Link
                 href="/projects"

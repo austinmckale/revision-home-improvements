@@ -80,7 +80,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) notFound();
   const galleryImages = getProjectGalleryImages(caseStudy);
-  const { title: displayTitle, intro, image: heroImage } = getProjectPresentation(caseStudy);
+  const { title: displayTitle, story, image: heroImage } = getProjectPresentation(caseStudy);
   const collection = getProjectCollection(caseStudy);
   const isCommercial = collection === "commercial";
   // Each view once: the hero photo is not repeated below it, and curated duplicates are skipped.
@@ -157,7 +157,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                 {displayTitle}
               </span>
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{intro}</p>
+            {story ? <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{story}</p> : null}
             <div className="mt-7 flex flex-wrap gap-3">
               <Button href={quoteHref} className="!text-white">
                 Plan your project
@@ -170,16 +170,6 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
               </a>
             </div>
           </div>
-          {caseStudy.scope.length > 0 ? (
-            <div className="mt-12 border-t border-white/25 pt-4">
-              <p className="annotation text-[0.62rem] text-white/60">Highlights</p>
-              <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/85">
-                {caseStudy.scope.slice(0, 3).map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
         </Container>
       </section>
 

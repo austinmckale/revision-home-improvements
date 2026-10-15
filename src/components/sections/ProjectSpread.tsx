@@ -24,7 +24,7 @@ function SpreadPhoto({ image, sizes, className }: { image: Photo; sizes: string;
 
 /**
  * A homepage project shown the way a job file reads: a lead photo, a detail or two from the same
- * project, the name and a short spec line. The title carries the link and stretches over the whole spread.
+ * project, and the name. The title carries the link and stretches over the whole spread.
  */
 export default function ProjectSpread({
   study,
@@ -36,7 +36,7 @@ export default function ProjectSpread({
   /** Lead spreads only: photo on the right from 1024px up. */
   reverse?: boolean;
 }) {
-  const { title, spec } = getProjectPresentation(study);
+  const { title } = getProjectPresentation(study);
   const { lead, details } = getFeaturedProjectPhotos(study);
   const isLead = size === "lead";
   const label = serviceLabel({ slug: study.serviceSlug, name: study.serviceName });
@@ -69,8 +69,6 @@ export default function ProjectSpread({
             <span className="sr-only"> View {study.title}</span>
           </Link>
         </h3>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)]">{spec}</p>
-
         {details.length > 0 ? (
           <div className={`grid grid-cols-2 gap-2 sm:gap-3 ${isLead ? "mt-7 lg:mt-auto lg:pt-8" : "mt-6"}`}>
             {details.map((image) => (
