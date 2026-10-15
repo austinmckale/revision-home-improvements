@@ -36,7 +36,7 @@ const commercialSlugs = new Set([
 
 const presentation: Record<string, { title: string; image?: CaseStudy["images"][number] }> = {
   "allentown-kitchen-layout-upgrade": { title: "Glass globes over a navy island." },
-  "white-cabinet-open-plan-kitchen": { title: "White kitchen, wide-open room, nothing in the way." },
+  "white-cabinet-open-plan-kitchen": { title: "A white kitchen with room to run." },
   "reading-paver-patio-buildout": {
     title: "The backyard got a ceiling.",
     image: {
@@ -46,7 +46,7 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
   },
   "lehigh-valley-basement-finish-and-detail": { title: "A floor like poured gold." },
   "blue-kitchen-cabinet-counters": {
-    title: "Navy cabinets, all the way to the ceiling.",
+    title: "Navy, floor to ceiling. No half measures.",
     image: {
       src: "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
       alt: "Wide view of blue cabinetry with a gray countertop and backsplash, sink and faucet, microwave and beverage cooler.",
@@ -54,7 +54,7 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
   },
   "bethlehem-interior-flooring-refresh": { title: "Honey-toned floors with a mirror shine." },
   "allentown-exterior-log-home-refresh": { title: "Three stories of log siding. We brought a lift." },
-  "hamburg-laundry-bathroom-remodel": { title: "One room, two jobs: laundry and a half-bath." },
+  "hamburg-laundry-bathroom-remodel": { title: "Open studs to laundry day." },
   "ryan-bathroom-remodel": { title: "Two sinks, two windows, no waiting." },
   "bethlehem-bathroom-refresh": {
     title: "A pine barn door opens on a black-framed shower.",
@@ -65,15 +65,15 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
   },
   "bethlehem-pool-patio-renovation": { title: "The turf's gone. The lobster stayed." },
   "ryan-kitchen-remodel": { title: "Stripped out, then built back in white." },
-  "berks-county-ranch-exterior-refresh": { title: "Black shutters on a bright ranch." },
+  "berks-county-ranch-exterior-refresh": { title: "Black-tie trim for a white ranch." },
   "allentown-flooring-replacement-upgrade": { title: "Wide light planks from the fireplace to the kitchen." },
   "ryan-bedroom-interior-refresh": { title: "Carpet out, planks in, walls gone slate." },
-  "bethlehem-exterior-staircase-build": { title: "A stair that climbs the side of the house." },
-  "bethlehem-drywall-and-finish-repair": { title: "Smooth walls, square corners, not a patch in sight." },
+  "bethlehem-exterior-staircase-build": { title: "Built from the ground up. Literally." },
+  "bethlehem-drywall-and-finish-repair": { title: "You'd never know it needed fixing." },
   "lehigh-valley-full-exterior-refresh": { title: "Peeling paint out, black shutters up." },
   "allentown-fire-damage-interior-rebuild": { title: "White brick over a black-veined hearth." },
   "reading-commercial-bar-window-upgrade": { title: "Daylight along the bar." },
-  "dark-partition-commercial-restroom": { title: "Charcoal stalls, no-nonsense and new." },
+  "dark-partition-commercial-restroom": { title: "Charcoal stalls, hung dead straight." },
   "allentown-commercial-bathroom-renovation": {
     title: "The hallway floor went from stained to seamless.",
     image: {
