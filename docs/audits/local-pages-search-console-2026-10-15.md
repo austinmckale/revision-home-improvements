@@ -30,10 +30,15 @@ Source: Search Console export, Web search, July 13 – October 12, 2026 (31 clic
 | Town hubs describe each service locally | Each service row uses the first sentence of that town's own planning note where one exists. Hub sentence overlap fell from 81–84% to 55–72%. |
 | Guard | `check:rendered-seo` fails if any page links to a noindexed town + service page or lists one in the sitemap; the hub water-damage rule accepts the service page where the local page is noindexed. |
 
-## Needs owner input before more pages can improve
+## Owner confirmations (October 15, 2026)
 
-- **Cabinet refacing.** About 320 impressions for "cabinet refacing" in Berks County (positions 21–24) and 129 in the Lehigh Valley. The site says nothing about refacing; add it only if RHI Pros offers it.
-- **Patio repair.** "patio repair allentown" (105 impressions, position 18.2). The patio pages describe new installations only.
+RHI Pros offers cabinet refacing and patio repair. Added:
+
+- `/berks-county-pa/kitchen-cabinet-installation` now covers refacing and replacement ("Cabinet Refacing & Remodeling in Berks County, PA"), with refacing questions and a box-condition factor.
+- `/allentown-pa/paver-installation` is "Paver Patio Installation & Repair in Allentown, PA"; its FAQ that steered people away from small repairs is replaced. The Lehigh Valley patio page, the patio service page and the kitchen pages (Berks, Lehigh Valley, service) answer repair and refacing questions.
+
+## Still needs owner input
+
 - **Local proof.** Completed jobs with a confirmed town, photos and permission to name the town are the strongest local signal; current project records do not authenticate towns.
 - **Google Business Profile.** Map-pack results for "near me" searches depend on the profile and its reviews more than on these pages.
 - Queries for "lehigh acres" (Florida) are unrelated and need no action.

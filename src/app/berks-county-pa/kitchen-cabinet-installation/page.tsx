@@ -20,14 +20,18 @@ const heroImage = {
 };
 
 export const metadata: Metadata = getPageMetadata({
-  title: { absolute: "Kitchen Cabinet Remodeling in Berks County, PA | RHI Pros" },
+  title: { absolute: "Cabinet Refacing & Remodeling in Berks County, PA | RHI Pros" },
   description:
-    "Planning a kitchen cabinet remodel in Berks County? RHI Pros coordinates cabinet replacement with counters, fixtures and the surrounding kitchen work.",
+    "Cabinet refacing, new cabinets or a full kitchen remodel in Berks County, PA. We help you choose, then plan and install the work.",
   path: route,
   image: { url: heroImage.src, alt: heroImage.alt },
 });
 
 const projectTypes = [
+  {
+    heading: "Refacing",
+    copy: "New doors, drawer fronts and hardware on your existing cabinet boxes, with the exposed frames and sides covered to match. A good fit when the boxes are solid and the layout works.",
+  },
   {
     heading: "New cabinets, same layout",
     copy: "A good fit when the footprint works and the surrounding kitchen can take the new cabinets with few changes.",
@@ -43,6 +47,10 @@ const projectTypes = [
 ];
 
 const factors = [
+  {
+    heading: "Cabinet box condition",
+    copy: "Refacing works when the boxes are solid, square and dry. Water damage, sagging shelves or a layout change point to new cabinets.",
+  },
   {
     heading: "Existing footprint",
     copy: "Keeping cabinets where they are limits surrounding changes, though walls and floors still need a look.",
@@ -73,6 +81,7 @@ const helpfulDetails = [
   "Photos of your current kitchen",
   "Approximate room dimensions",
   "Whether the layout will stay the same",
+  "Whether you are leaning toward refacing or new cabinets",
   "Appliances that will stay or move",
   "Any sink or plumbing changes you are considering",
   "Cabinet ideas or product information, if you have them",
@@ -88,8 +97,12 @@ const cabinetProjects = cabinetProjectSlugs
 
 const faqItems = [
   {
-    q: "Is cabinet replacement the same as cabinet refacing?",
-    a: "No. Refacing keeps the existing cabinet boxes and changes the doors or exposed surfaces. Replacement installs new cabinets and can change the layout. This page covers replacement and installation; let us know which you have in mind when you request a quote.",
+    q: "What is cabinet refacing?",
+    a: "Refacing keeps your existing cabinet boxes and replaces what you see: doors, drawer fronts, hardware and new surfaces on the exposed frames and sides. Replacement installs new cabinets and can change the layout. We do both, and after seeing your kitchen we will tell you which fits.",
+  },
+  {
+    q: "When does refacing make sense?",
+    a: "When the layout works and the cabinet boxes are solid, square and dry. If boxes are damaged, or you want to move the sink or appliances, new cabinets are usually the better choice.",
   },
   {
     q: "Can cabinets be replaced without remodeling the entire kitchen?",
@@ -122,7 +135,7 @@ export default function KitchenCabinetInstallationPage() {
     <>
       <JsonLd
         data={getServiceJsonLd(
-          "Kitchen Cabinet Replacement and Installation",
+          "Kitchen Cabinet Refacing and Replacement",
           absoluteUrl(route),
           "Berks County, Pennsylvania",
         )}
@@ -132,14 +145,14 @@ export default function KitchenCabinetInstallationPage() {
           { name: "Home", href: "/" },
           { name: "Service Areas", href: "/service-areas" },
           { name: "Berks County", href: "/berks-county-pa" },
-          { name: "Kitchen Cabinet Remodeling", href: route },
+          { name: "Cabinet Refacing & Remodeling", href: route },
         ])}
       />
 
       <ServiceHero
         eyebrow="Berks County, PA"
-        title="Kitchen cabinet remodeling & replacement in Berks County."
-        intro="New cabinets planned around the way you use your kitchen, installed together with the countertops, appliances, flooring and finishes around them."
+        title="Cabinet refacing & remodeling in Berks County."
+        intro="Keep your cabinet boxes and give them new doors and fronts, or start fresh with new cabinets. We help you choose, then plan the work around your counters, appliances and floors."
         image={heroImage}
         primaryHref="#quote-form-section"
         primaryLabel="Plan your project"
@@ -152,14 +165,15 @@ export default function KitchenCabinetInstallationPage() {
           <FadeIn>
             <div className="max-w-3xl">
               <h2 className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">
-                New cabinets, or a whole new kitchen?
+                Reface, replace or remodel?
               </h2>
               <p className="mt-4 leading-relaxed text-[var(--muted)]">
-                Some homeowners want new cabinets in the same layout. Others need a broader remodel with new counters,
-                fixtures, flooring, lighting or layout. Deciding which early keeps the project, and the price, clear.
+                Refacing keeps your cabinet boxes and changes everything you see. New cabinets can keep the layout or
+                change it. A full remodel brings in counters, flooring, lighting and fixtures too. Deciding which early
+                keeps the project, and the price, clear.
               </p>
             </div>
-            <ul className="mt-8 grid gap-8 border-t border-[var(--accent)] pt-6 md:grid-cols-3">
+            <ul className="mt-8 grid gap-8 border-t border-[var(--accent)] pt-6 md:grid-cols-2 lg:grid-cols-4">
               {projectTypes.map((item) => (
                 <li key={item.heading}>
                   <h3 className="heading-serif text-2xl text-[var(--accent)]">{item.heading}</h3>

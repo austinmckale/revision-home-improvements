@@ -71,7 +71,7 @@ const stripLinks = {
 const localServiceLinks: AreaLink[] = [
   { label: "kitchen remodeling in the Lehigh Valley", href: "/lehigh-valley-pa/kitchen-remodeling" },
   { label: "kitchen remodeling in Berks County", href: "/berks-county-pa/kitchen-remodeling" },
-  { label: "kitchen cabinet remodeling in Berks County", href: "/berks-county-pa/kitchen-cabinet-installation" },
+  { label: "cabinet refacing in Berks County", href: "/berks-county-pa/kitchen-cabinet-installation" },
   { label: "basement finishing in the Lehigh Valley", href: "/lehigh-valley-pa/basement-finishing" },
   { label: "basement finishing in Reading", href: "/reading-pa/basement-finishing" },
   { label: "paver patios in the Lehigh Valley", href: "/lehigh-valley-pa/paver-installation" },

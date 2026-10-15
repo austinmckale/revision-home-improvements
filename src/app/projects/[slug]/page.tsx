@@ -31,7 +31,7 @@ const localPlanningLinks: Record<string, { href: string; label: string }[]> = {
   "kitchen-remodeling": [
     { href: "/lehigh-valley-pa/kitchen-remodeling", label: "Kitchen remodeling in the Lehigh Valley" },
     { href: "/berks-county-pa/kitchen-remodeling", label: "Kitchen remodeling in Berks County" },
-    { href: "/berks-county-pa/kitchen-cabinet-installation", label: "Cabinet replacement in Berks County" },
+    { href: "/berks-county-pa/kitchen-cabinet-installation", label: "Cabinet refacing in Berks County" },
   ],
   "basement-finishing": [
     { href: "/reading-pa/basement-finishing", label: "Basement finishing in Reading" },

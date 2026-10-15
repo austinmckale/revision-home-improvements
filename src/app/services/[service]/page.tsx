@@ -510,12 +510,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                     .
                     {service.slug === "kitchen-remodeling" ? (
                       <>
-                        {" "}Replacing cabinets only? See{" "}
+                        {" "}Just the cabinets? See{" "}
                         <Link
                           href="/berks-county-pa/kitchen-cabinet-installation"
                           className="font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
                         >
-                          cabinet installation in Berks County
+                          cabinet refacing and replacement in Berks County
                         </Link>
                         .
                       </>

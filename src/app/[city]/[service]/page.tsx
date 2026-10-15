@@ -246,16 +246,16 @@ export default async function CityServicePage({ params }: { params: Promise<Para
 
             {showCabinetPlanningBlock ? (
               <div className="surface-soft mt-6 rounded-sm border border-[var(--border)] p-5 md:p-6">
-                <h2 className="heading-serif text-2xl text-[var(--accent)]">Replacing cabinets only?</h2>
+                <h2 className="heading-serif text-2xl text-[var(--accent)]">Refacing or replacing cabinets?</h2>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                  If new cabinets are the main goal, our Berks County cabinet installation page is the better starting
-                  point. For a full-room remodel, everything you need is on this page.
+                  If the cabinets are the main goal, refacing or new cabinets in the same layout may be all you need. Our
+                  Berks County cabinet page compares the two. For a full-room remodel, everything you need is on this page.
                 </p>
                 <Link
                   href="/berks-county-pa/kitchen-cabinet-installation"
                   className="mt-4 inline-block text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
                 >
-                  Kitchen cabinet installation →
+                  Cabinet refacing &amp; remodeling →
                 </Link>
               </div>
             ) : null}

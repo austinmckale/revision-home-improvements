@@ -75,7 +75,7 @@ export const services: Service[] = [
     slug: "kitchen-remodeling",
     featuredCaseStudySlug: "blue-kitchen-cabinet-counters",
     name: "Kitchen Remodeling",
-    short: "Layout, cabinetry, counters and lighting, planned around how you cook and gather.",
+    short: "Full remodels, new cabinets or cabinet refacing, planned around how you cook and gather.",
     description: "Complete kitchen remodels: layout, cabinetry, countertops, lighting and finishes.",
     intro:
       "The kitchen works harder than any room in the house. We plan the layout, cabinetry, counters and lighting together with the plumbing and electrical behind them, order materials before demolition, and keep the time without a kitchen as short as we can.",
@@ -112,6 +112,10 @@ export const services: Service[] = [
       {
         q: "Will I still be able to use my kitchen during the remodel?",
         a: "It depends on the project. A full remodel usually means a temporary kitchen setup for a few weeks; smaller updates often leave part of the room usable. We plan this with you before work starts.",
+      },
+      {
+        q: "Do you reface cabinets?",
+        a: "Yes. Refacing keeps your cabinet boxes and replaces what you see: doors, drawer fronts, hardware and the exposed frames and sides. It works when the layout suits you and the boxes are solid. If you want to move the sink or appliances, new cabinets make more sense.",
       },
     ],
     authoritySnapshot: {
@@ -474,7 +478,7 @@ export const services: Service[] = [
     featuredCaseStudySlug: "reading-paver-patio-buildout",
     portfolioTag: "paver-installation",
     name: "Paver Installation",
-    short: "Paver patios, gable-roof pavilions and outdoor rooms, built on a solid base.",
+    short: "New paver patios, patio repairs, gable-roof pavilions and outdoor rooms, built on a solid base.",
     description:
       "Paver patios, gable-roof pavilions, covered patios, pool surrounds and connected outdoor living spaces.",
     intro:
@@ -517,6 +521,10 @@ export const services: Service[] = [
       {
         q: "Do you work on pool surrounds?",
         a: "Yes. We install and renovate pool surrounds as part of larger patio and hardscape projects.",
+      },
+      {
+        q: "Do you repair existing patios?",
+        a: "Yes. We reset sunken or loose pavers, replace cracked ones, refill washed-out joints and rebuild failing edges. We look for the cause first: usually the base, the edge restraint or drainage.",
       },
     ],
     image: {

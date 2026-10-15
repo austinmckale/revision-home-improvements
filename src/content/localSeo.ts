@@ -711,12 +711,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     ],
   },
   "allentown-pa/paver-installation": {
-    metadataTitle: "Paver Patio Installation in Allentown, PA",
+    metadataTitle: "Paver Patio Installation & Repair in Allentown, PA",
     metadataDescription:
-      "Paver patio installation in Allentown, PA for new patios, substantial renovations, pool surrounds, and connected outdoor-living projects.",
-    heroHeading: "Paver Patio Installation in Allentown, PA",
+      "New paver patios and patio repair in Allentown, PA: sunken or loose pavers, washed-out joints and failing edges, plus pool surrounds and full renovations.",
+    heroHeading: "Paver Patio Installation & Repair in Allentown, PA",
     heroIntro:
-      "Plan a new paver patio or substantial renovation around the property’s access, existing grade, drainage path, edge conditions, and connection to the home.",
+      "Build a new paver patio or fix the one you have. Sunken spots, loose pavers and washed-out joints usually trace back to the base, the edges or drainage, so that is where a repair starts.",
     localProjectHeading: "Planning an Allentown paver patio project",
     localProjectSnippet:
       "Pool curves, patio edges, and the route between the water and the house shape how an outdoor area feels. Explore the pool-patio details below, then discuss access, drainage, transitions, and the layout that fits your Allentown property.",
@@ -725,11 +725,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       "Access for excavation, aggregate, pavers, and installation equipment",
       "Existing grade and drainage around the proposed patio area",
       "Transitions at the home, lawn, pool area, or connected walkway",
+      "On an existing patio, finding why pavers settled or shifted before resetting them",
     ],
     localizedFaqs: [
       {
-        q: "Do you take on small isolated paver repairs?",
-        a: "RHI Pros currently prioritizes new patios, substantial patio renovations, pool surrounds, and larger connected outdoor projects. We can look at an existing patio to see whether a renovation is the right fit.",
+        q: "Do you repair existing paver patios?",
+        a: "Yes. We reset sunken or heaving sections, replace cracked pavers, refill washed-out joints and rebuild failing edges. If the base under a large area has failed, we will tell you whether rebuilding that section is the better fix.",
       },
     ],
     relatedCaseStudySlug: "bethlehem-pool-patio-renovation",
@@ -759,7 +760,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "berks-county-pa/kitchen-remodeling": {
     metadataTitle: "Kitchen Remodeling in Berks County, PA",
     metadataDescription:
-      "Kitchen remodeling in Berks County: cabinets, countertops, layout and finishes. Compare a cabinet-focused update with a full-room remodel and request a quote.",
+      "Kitchen remodeling and cabinet refacing in Berks County: cabinets, countertops, layout and finishes, from a cabinet update to a full remodel.",
     heroHeading: "Kitchen Remodeling in Berks County, PA",
     heroIntro:
       "Plan a Berks County kitchen remodel around layout, cabinets, counters, and finish details so the room works better day to day. RHI Pros puts the full plan in writing before work begins.",
@@ -778,8 +779,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         a: "Yes. RHI Pros serves homeowners across Berks County, including Reading, Wyomissing, and nearby townships. Availability depends on location, the project and scheduling.",
       },
       {
-        q: "Can a Berks County kitchen remodel stay focused on cabinets?",
-        a: "Sometimes. If cabinet replacement is the main focus, review our Berks County cabinet installation service. When counters, layout, or adjoining finishes are part of the plan, a full kitchen remodel is usually the better fit.",
+        q: "Can a Berks County kitchen update stay focused on the cabinets?",
+        a: "Yes. We can reface your cabinets, which keeps the boxes and replaces the doors, drawer fronts and hardware, or install new cabinets in the same layout. Our Berks County cabinet page compares the two. When counters, layout or flooring change too, a full remodel is the better fit.",
       },
       {
         q: "What should I prepare before requesting a kitchen quote?",
@@ -805,7 +806,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
       {
         href: "/berks-county-pa/kitchen-cabinet-installation",
-        anchorText: "Kitchen cabinet installation in Berks County",
+        anchorText: "Cabinet refacing and remodeling in Berks County",
         reason: "Cabinet-focused alternative when that is the main need",
       },
     ],
@@ -1545,6 +1546,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     ],
     localizedFaqs: [
       {
+        q: "Do you reface kitchen cabinets?",
+        a: "Yes. Refacing keeps your existing cabinet boxes and replaces the doors, drawer fronts and hardware, with matching surfaces on the exposed frames and sides. It suits a kitchen whose layout works and whose boxes are solid; if not, new cabinets are the better choice.",
+      },
+      {
         q: "Can a Lehigh Valley kitchen remodel still feel tailored if the home has an older layout?",
         a: "Yes. We plan around the home first, then organize layout, storage, and finish decisions so the upgrade feels intentional instead of forced into the existing footprint.",
       },
@@ -1703,8 +1708,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     ],
     localizedFaqs: [
       {
-        q: "What paver projects does RHI Pros prioritize?",
-        a: "The primary focus is new paver patios, substantial patio replacements or renovations, pool surrounds, integrated patio-and-pavilion work, and larger patio projects with connected walkways.",
+        q: "Do you repair paver patios as well as build them?",
+        a: "Yes. Repairs range from resetting a sunken corner or loose pavers to rebuilding an edge or a whole section where the base has failed. We find out why the pavers moved before resetting anything.",
       },
     ],
     relatedCaseStudySlug: "bethlehem-pool-patio-renovation",
