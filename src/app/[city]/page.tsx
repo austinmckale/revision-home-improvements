@@ -13,6 +13,7 @@ import { getLocationBySlug, locations, placeName } from "@/content/locations";
 import { primaryServices, serviceLabel } from "@/content/services";
 import { getFeaturedTestimonials } from "@/content/testimonials";
 import { getCaseStudyBySlug } from "@/content/caseStudies";
+import { getCityServiceLocalSummary, isIndexedCityServicePage } from "@/content/localSeo";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
 import { siteConfig } from "@/content/site";
 
@@ -132,13 +133,20 @@ export default async function CityHubPage({ params }: { params: Promise<Params> 
                 {primaryServices.map((service) => (
                   <li key={service.slug} className="border-b border-[var(--border)]">
                     <Link
-                      href={`/${location.slug}/${service.slug}`}
+                      href={
+                        isIndexedCityServicePage(location.slug, service.slug)
+                          ? `/${location.slug}/${service.slug}`
+                          : `/services/${service.slug}`
+                      }
                       className="group grid gap-1 py-5 transition-colors sm:grid-cols-[minmax(0,15rem)_1fr_auto] sm:items-baseline sm:gap-6"
                     >
                       <span className="heading-serif text-xl text-[var(--accent)] transition-colors group-hover:text-[var(--brand)] sm:text-2xl">
                         {serviceLabel(service)}
                       </span>
-                      <span className="text-sm leading-relaxed text-[var(--muted)]">{service.short}</span>
+                      {/* Each town describes the service in its own words where it has a local planning note. */}
+                      <span className="text-sm leading-relaxed text-[var(--muted)]">
+                        {getCityServiceLocalSummary(location.slug, service.slug) ?? service.short}
+                      </span>
                       <span
                         className="hidden text-[var(--brand)] transition-transform group-hover:translate-x-1 sm:block"
                         aria-hidden="true"

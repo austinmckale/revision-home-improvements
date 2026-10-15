@@ -3,6 +3,7 @@ import { locations } from "@/content/locations";
 import { services, primaryServices } from "@/content/services";
 import { visibleCaseStudies } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
+import { isIndexedCityServicePage } from "@/content/localSeo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -28,7 +29,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const cityRoutes = locations.map((location) => `/${location.slug}`);
   const caseStudyRoutes = visibleCaseStudies.map((item) => `/projects/${item.slug}`);
   const cityServiceRoutes = locations.flatMap((location) =>
-    services.map((service) => `/${location.slug}/${service.slug}`),
+    services
+      .filter((service) => isIndexedCityServicePage(location.slug, service.slug))
+      .map((service) => `/${location.slug}/${service.slug}`),
   );
 
   return [...staticRoutes, ...serviceRoutes, ...cityRoutes, ...caseStudyRoutes, ...cityServiceRoutes].map((route) => ({

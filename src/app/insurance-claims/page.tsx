@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import FaqList from "@/components/sections/FaqList";
 import { locations, placeName } from "@/content/locations";
+import { isIndexedCityServicePage } from "@/content/localSeo";
 import { siteConfig } from "@/content/site";
 import { getServiceBySlug } from "@/content/services";
 import { insuranceClaimsClarification } from "@/content/restoration";
@@ -94,7 +95,11 @@ export default function InsuranceClaimsPage() {
                 <span key={location.slug}>
                   {index > 0 ? (index === locations.length - 1 ? " and " : ", ") : null}
                   <Link
-                    href={`/${location.slug}/insurance-claims`}
+                    href={
+                      isIndexedCityServicePage(location.slug, "insurance-claims")
+                        ? `/${location.slug}/insurance-claims`
+                        : `/${location.slug}`
+                    }
                     className="font-semibold text-[var(--accent)] underline decoration-[var(--border)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:decoration-[var(--brand)]"
                   >
                     {placeName(location)}

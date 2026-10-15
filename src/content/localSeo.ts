@@ -1787,3 +1787,37 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
 export function getCityServiceLocalContent(citySlug: string, serviceSlug: string) {
   return cityServiceLocalContent[`${citySlug}/${serviceSlug}`];
 }
+
+/**
+ * Search Console, July 13 – October 12, 2026: these town + service pages had no local content of their
+ * own and no impressions. They stay live for visitors but are noindexed, left out of the sitemap and not
+ * linked from other pages. Before indexing one again, give it real local content and re-check a fresh export.
+ */
+export const noindexCityServicePages: ReadonlySet<string> = new Set([
+  "reading-pa/drywall-installation-repair",
+  "reading-pa/insurance-claims",
+  "wyomissing-pa/bathroom-remodeling",
+  "wyomissing-pa/flooring-installation",
+  "wyomissing-pa/water-damage-restoration",
+  "wyomissing-pa/insurance-claims",
+  "berks-county-pa/drywall-installation-repair",
+  "berks-county-pa/flooring-installation",
+  "berks-county-pa/exterior-remodeling",
+  "berks-county-pa/fire-damage-restoration",
+  "bethlehem-pa/insurance-claims",
+  "lehigh-valley-pa/drywall-installation-repair",
+  "lehigh-valley-pa/flooring-installation",
+  "lehigh-valley-pa/exterior-remodeling",
+  "lehigh-valley-pa/fire-damage-restoration",
+  "lehigh-valley-pa/insurance-claims",
+]);
+
+export function isIndexedCityServicePage(citySlug: string, serviceSlug: string) {
+  return !noindexCityServicePages.has(`${citySlug}/${serviceSlug}`);
+}
+
+/** The first sentence of a page's local planning note, used to describe it from its town hub. */
+export function getCityServiceLocalSummary(citySlug: string, serviceSlug: string) {
+  const snippet = getCityServiceLocalContent(citySlug, serviceSlug)?.localProjectSnippet;
+  return snippet?.split(/(?<=\.)\s/)[0];
+}

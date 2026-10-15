@@ -11,7 +11,7 @@ import ExpandableImageGrid from "@/components/sections/ExpandableImageGrid";
 import ServiceHero from "@/components/sections/ServiceHero";
 import { getLocationBySlug, locations, placeName } from "@/content/locations";
 import { getCaseStudyBySlug, visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
-import { getCityServiceLocalContent } from "@/content/localSeo";
+import { getCityServiceLocalContent, isIndexedCityServicePage } from "@/content/localSeo";
 import {
   curatedStaticGalleryServiceSlugs,
   exampleScopeExplanation,
@@ -72,6 +72,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       `remodeling ${location.short.toLowerCase()}`,
     ],
     alternates: { canonical: `/${location.slug}/${selectedService.slug}` },
+    // Template-only pages with no search impressions stay reachable but out of the index (see localSeo.ts).
+    ...(isIndexedCityServicePage(location.slug, selectedService.slug) ? {} : { robots: { index: false, follow: true } }),
     openGraph: {
       title: `${title} | RHI Pros`,
       description,
@@ -200,39 +202,9 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             {(isEmergencyService || service.slug === "insurance-claims") && (
               <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">{insuranceClaimsClarification}</p>
             )}
-            <section id="service-details" className="surface-soft rounded-sm border border-[var(--border)] p-5 md:p-6">
-              <h2 className="heading-serif text-3xl text-[var(--accent)]">Planning &amp; pricing</h2>
-              <div className="mt-5 grid gap-6 sm:grid-cols-2">
-                <div>
-                  <h3 className="font-semibold text-[var(--accent)]">What&apos;s included</h3>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-                    {service.whatIncluded.slice(0, 3).map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-[var(--accent)]">What affects the price</h3>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
-                    {service.pricingFactors.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
-                <Button href="#quote-form-section">Request a quote</Button>
-                <Link
-                  href={serviceOverviewHref}
-                  className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
-                >
-                  More about {service.name.toLowerCase()} →
-                </Link>
-              </div>
-            </section>
 
             {localContent && (
-              <section id="local-planning" className="surface mt-8 rounded-sm p-6">
+              <section id="local-planning" className="surface rounded-sm p-6">
                 <h2 className="heading-serif text-3xl text-[var(--accent)]">{localContent.localProjectHeading}</h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{localContent.localProjectSnippet}</p>
                 {showPriorityContextualSentence && contextualCaseStudy ? (
@@ -287,6 +259,38 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 </Link>
               </div>
             ) : null}
+
+            <section id="service-details"
+              className={`surface-soft rounded-sm border border-[var(--border)] p-5 md:p-6 ${localContent ? "mt-8" : ""}`}>
+              <h2 className="heading-serif text-3xl text-[var(--accent)]">Planning &amp; pricing</h2>
+              <div className="mt-5 grid gap-6 sm:grid-cols-2">
+                <div>
+                  <h3 className="font-semibold text-[var(--accent)]">What&apos;s included</h3>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                    {service.whatIncluded.slice(0, 3).map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[var(--accent)]">What affects the price</h3>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-[var(--muted)]">
+                    {service.pricingFactors.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+                <Button href="#quote-form-section">Request a quote</Button>
+                <Link
+                  href={serviceOverviewHref}
+                  className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--brand)] underline-offset-4 hover:underline"
+                >
+                  More about {service.name.toLowerCase()} →
+                </Link>
+              </div>
+            </section>
 
             {additionalLocalProof.length > 0 && (
               <section className="mt-8">
@@ -394,7 +398,14 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 {relatedLocalServices.map((item, index) => (
                   <span key={item.slug}>
                     {index > 0 ? (index === relatedLocalServices.length - 1 ? " and " : ", ") : null}
-                    <Link href={`/${location.slug}/${item.slug}`} className={inlineLinkClass}>
+                    <Link
+                      href={
+                        isIndexedCityServicePage(location.slug, item.slug)
+                          ? `/${location.slug}/${item.slug}`
+                          : `/services/${item.slug}`
+                      }
+                      className={inlineLinkClass}
+                    >
                       {inlineServiceName(item)}
                     </Link>
                   </span>

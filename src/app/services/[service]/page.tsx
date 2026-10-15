@@ -21,6 +21,7 @@ import {
 } from "@/content/services";
 import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { locations, placeName } from "@/content/locations";
+import { isIndexedCityServicePage } from "@/content/localSeo";
 import { siteConfig } from "@/content/site";
 import { insuranceClaimsClarification } from "@/content/restoration";
 import { absoluteUrl } from "@/lib/url";
@@ -484,7 +485,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                     <span key={location.slug}>
                       {index > 0 ? (index === nearbyLocations.length - 1 ? " and " : ", ") : null}
                       <Link
-                        href={`/${location.slug}/${service.slug}`}
+                        href={
+                          isIndexedCityServicePage(location.slug, service.slug)
+                            ? `/${location.slug}/${service.slug}`
+                            : `/${location.slug}`
+                        }
                         className="font-semibold text-[var(--accent)] underline decoration-[var(--border)] underline-offset-4 transition-colors hover:text-[var(--brand)] hover:decoration-[var(--brand)]"
                       >
                         {placeName(location)}

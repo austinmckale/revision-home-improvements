@@ -10,6 +10,13 @@ const errors = [];
 const pages = [];
 const internalTargets = new Map();
 const titles = new Map();
+// Town + service pages kept out of the index by search data (src/content/localSeo.ts).
+const noindexBlock = readFileSync(new URL("../src/content/localSeo.ts", import.meta.url), "utf8").match(
+  /noindexCityServicePages[^\[]*\[([\s\S]*?)\]\)/,
+);
+const noindexCityServicePaths = new Set(
+  [...(noindexBlock?.[1] ?? "").matchAll(/"([a-z-]+\/[a-z-]+)"/g)].map((match) => `/${match[1]}`),
+);
 const decode = (value) =>
   value.replace(
     /&(?:amp|quot|apos|lt|gt|#39|#x27);/g,
@@ -148,7 +155,13 @@ for (const url of urls) {
   );
 
   if (/^\/(allentown|bethlehem|reading|wyomissing|berks-county|lehigh-valley)-pa$/.test(path)) {
-    check(hrefs.includes(`${path}/water-damage-restoration`), `${path}: missing local water-damage link.`);
+    const localWater = `${path}/water-damage-restoration`;
+    check(
+      noindexCityServicePaths.has(localWater)
+        ? hrefs.includes("/services/water-damage-restoration")
+        : hrefs.includes(localWater),
+      `${path}: missing local water-damage link.`,
+    );
   }
   if (path === "/service-areas")
     check(hrefs.includes("/services/water-damage-restoration"), "Service Areas: missing water-damage link.");
@@ -317,7 +330,13 @@ for (const url of urls) {
 }
 
 const sitemapPaths = new Set(urls.map((url) => new URL(url).pathname));
+check(noindexCityServicePaths.size > 0, "Could not read the noindexed town + service pages from localSeo.ts.");
 for (const [path, sources] of internalTargets) {
+  check(
+    !noindexCityServicePaths.has(path),
+    `Internal link to noindexed page ${path} from ${sources.slice(0, 3).join(", ")}`,
+  );
+  check(!sitemapPaths.has(path) || !noindexCityServicePaths.has(path), `${path} is noindexed but listed in the sitemap.`);
   if (sitemapPaths.has(path)) continue;
   const response = await get(path);
   check(
