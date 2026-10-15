@@ -287,7 +287,7 @@ export const services: Service[] = [
       },
       {
         q: "Do you install epoxy floors?",
-        a: "Yes. Epoxy suits a basement well: it is seamless, easy to clean and handles the occasional damp day better than carpet. Our basement media room has a patterned epoxy floor.",
+        a: "Yes. Epoxy is seamless and easy to clean, which suits a basement. We check the slab for moisture first, because epoxy needs a dry, sound surface to bond to. Our basement media room has a patterned epoxy floor.",
       },
     ],
     image: {

@@ -36,7 +36,7 @@ const commercialSlugs = new Set([
 
 const presentation: Record<string, { title: string; image?: CaseStudy["images"][number] }> = {
   "allentown-kitchen-layout-upgrade": { title: "Glass globes over a navy island." },
-  "white-cabinet-open-plan-kitchen": { title: "No wall between the stove and the sofa." },
+  "white-cabinet-open-plan-kitchen": { title: "White kitchen, wide-open room, nothing in the way." },
   "reading-paver-patio-buildout": {
     title: "The backyard got a ceiling.",
     image: {
@@ -52,30 +52,30 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
       alt: "Wide view of blue cabinetry with a gray countertop and backsplash, sink and faucet, microwave and beverage cooler.",
     },
   },
-  "bethlehem-interior-flooring-refresh": { title: "Warm boards, one room into the next." },
-  "allentown-exterior-log-home-refresh": { title: "Cabin character, three stories tall." },
+  "bethlehem-interior-flooring-refresh": { title: "Honey-toned floors with a mirror shine." },
+  "allentown-exterior-log-home-refresh": { title: "Three stories of log siding. We brought a lift." },
   "hamburg-laundry-bathroom-remodel": { title: "One room, two jobs: laundry and a half-bath." },
   "ryan-bathroom-remodel": { title: "Two sinks, two windows, no waiting." },
   "bethlehem-bathroom-refresh": {
-    title: "A white shower, outlined in black.",
+    title: "A pine barn door opens on a black-framed shower.",
     image: {
       src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
       alt: "Shower enclosure with a molded white insert and black frame.",
     },
   },
-  "bethlehem-pool-patio-renovation": { title: "Fresh edges on every curve." },
+  "bethlehem-pool-patio-renovation": { title: "The lobster stayed. The patio around it is new." },
   "ryan-kitchen-remodel": { title: "Stripped out, then built back in white." },
   "berks-county-ranch-exterior-refresh": { title: "Black shutters on a bright ranch." },
   "allentown-flooring-replacement-upgrade": { title: "Light floors that run right into the kitchen." },
-  "ryan-bedroom-interior-refresh": { title: "Carpet out, wood in, walls gone slate." },
-  "bethlehem-exterior-staircase-build": { title: "A new stair up to the upper entry." },
-  "bethlehem-drywall-and-finish-repair": { title: "Smooth walls, sharp corners, ready to live in." },
-  "lehigh-valley-full-exterior-refresh": { title: "Three dormers, black shutters, one big porch." },
+  "ryan-bedroom-interior-refresh": { title: "Carpet out, planks in, walls gone slate." },
+  "bethlehem-exterior-staircase-build": { title: "A stair that climbs the side of the house." },
+  "bethlehem-drywall-and-finish-repair": { title: "Smooth walls, square corners, not a patch in sight." },
+  "lehigh-valley-full-exterior-refresh": { title: "Peeling paint out, black shutters up." },
   "allentown-fire-damage-interior-rebuild": { title: "White brick over a black-veined hearth." },
   "reading-commercial-bar-window-upgrade": { title: "Daylight along the bar." },
-  "dark-partition-commercial-restroom": { title: "Charcoal stalls against pale gray walls." },
+  "dark-partition-commercial-restroom": { title: "Charcoal stalls, no-nonsense and new." },
   "allentown-commercial-bathroom-renovation": {
-    title: "Blue stalls, and a corridor brought back to bright.",
+    title: "The hallway floor went from stained to seamless.",
     image: {
       src: "/images/projects/allentown-commercial-bathroom/after/hallway-after.png",
       alt: "Corridor with light painted walls, a painted block wall and dark floor surfaces.",

@@ -239,7 +239,7 @@ export const testimonials: Testimonial[] = [
   ),
   googleReview(
     "Devon M.",
-    "Awesome company. Super easy to work with. Ryan is great at understanding what we needed for our house and getting it done.",
+    "Super easy to work with. Ryan is great at understanding what we needed for our house and getting it done.",
   ),
   googleReview("Maryann T.", "Ryan and his crew were very efficient and knowledgeable about their work."),
   googleReview(
@@ -305,7 +305,7 @@ export const testimonials: Testimonial[] = [
 export const FEATURED_TESTIMONIAL_KEYS = [
   { name: "Elizabeth S.", context: "Company review" },
   { name: "Larry W.", context: "Company review" },
-  { name: "Karla S.", context: "Company review" },
+  { name: "Devon M.", context: "Company review" },
 ] as const;
 
 export function isSourceCheckedTestimonial(item: Testimonial): boolean {
