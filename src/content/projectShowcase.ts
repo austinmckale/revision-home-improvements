@@ -43,63 +43,63 @@ type Presentation = { title: string; spec: string; story?: string; image?: CaseS
 
 const presentation: Record<string, Presentation> = {
   "allentown-kitchen-layout-upgrade": {
-    title: "Glass globes over a navy island.",
+    title: "Put in a navy island with two dishwashers.",
     spec: "Navy island · two dishwashers · double wall ovens",
     story:
-      "Two dishwashers flank the farmhouse sink in the navy island, under three glass globe pendants. Behind it, walnut-tone cabinets frame double wall ovens beside a built-in stainless refrigerator.",
+      "A navy island with a farmhouse sink and a dishwasher on each side, under three glass globe pendants. Walnut-tone cabinets frame the double wall ovens, next to a built-in stainless refrigerator.",
   },
   "white-cabinet-open-plan-kitchen": {
-    title: "A white kitchen with room to run.",
+    title: "Installed a white shaker kitchen open to the living room.",
     spec: "White shaker cabinets · stainless appliances · gray plank floor",
   },
   "reading-paver-patio-buildout": {
-    title: "The backyard got a ceiling.",
+    title: "Built a gable-roof pavilion over a new paver patio.",
     spec: "Gable-roof pavilion · stained wood ceiling · paver patio",
     story:
-      "Posts first, then trusses, then a stained plank ceiling with recessed lights. We laid the paver patio underneath too, so it feels like one room that happens to be outdoors.",
+      "Set the posts, raised the trusses and roofed it, then stained a plank ceiling and set recessed lights in it. We laid the paver patio underneath too.",
     image: {
       src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
       alt: "Front view of a gable-roof pavilion, patio, and planted garden edges beside a house.",
     },
   },
   "lehigh-valley-basement-finish-and-detail": {
-    title: "A floor like poured gold.",
+    title: "Finished a basement with a poured metallic epoxy floor.",
     spec: "Metallic epoxy floor · media wall · linear fireplace",
     story:
-      "Gold and black epoxy, glossy enough to mirror the ceiling lights. At the far end, a built-out wall holds the TV over a linear fireplace, with speakers set into wood slat panels on both sides.",
+      "Poured a gold and black metallic epoxy floor across the basement. On the far wall we built out a media wall for the TV and a linear fireplace, with speakers set into wood slat panels on both sides.",
   },
   "blue-kitchen-cabinet-counters": {
-    title: "Navy, floor to ceiling. No half measures.",
+    title: "Navy cabinets to the ceiling, counter up the wall.",
     spec: "Navy shaker cabinets · full-height backsplash · wine fridge",
     story:
-      "The navy cabinets go all the way to the ceiling, and the patterned gray counter climbs the wall behind the sink to meet them. A wine fridge and a sink with a built-in cutting board finish the run beside the patio door.",
+      "Hung navy shaker cabinets to the ceiling and ran the patterned gray counter up the wall behind the sink as a full-height backsplash. Added a wine fridge and a sink with a built-in cutting board by the patio door.",
     image: {
       src: "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
       alt: "Wide view of blue cabinetry with a gray countertop and backsplash, sink and faucet, microwave and beverage cooler.",
     },
   },
   "bethlehem-interior-flooring-refresh": {
-    title: "Honey-toned floors with a mirror shine.",
+    title: "Honey-toned wood floors with a mirror shine.",
     spec: "Honey-toned wood floor · white trim · gray walls",
   },
   "allentown-exterior-log-home-refresh": {
-    title: "Three stories of log siding. We brought a lift.",
+    title: "Three stories of log siding, gable to garage.",
     spec: "Log siding · green trim · three stories",
   },
   "hamburg-laundry-bathroom-remodel": {
-    title: "Open studs to laundry day.",
+    title: "Rebuilt a tired old laundry room, floor to ceiling.",
     spec: "Laundry · utility sink · half-bath",
     story:
-      "It started as an open stud bay over an old patterned floor. Now it's bright walls and a gray plank floor, with open shelves beside the laundry and a utility sink by the toilet.",
+      "Before: an old patterned floor and an open stud wall. We pulled the floor, closed in the wall and built it back with smooth walls, a gray plank floor, open shelving, a utility sink and a new ceiling light.",
   },
   "ryan-bathroom-remodel": {
-    title: "The pink sink is gone. Now there are two.",
+    title: "Tore out a pink bathroom and put in a double vanity.",
     spec: "Double vanity · granite top · plank floor",
     story:
-      "A pink sink, a pink toilet and patterned wallpaper, all gone. In their place: a dark double vanity with a speckled granite top, warm beige walls and a light plank floor.",
+      "Out went the pink sink, pink toilet, wallpaper and bulb-strip lights. In went a dark double vanity with a granite top, a new toilet, new lights, fresh paint and a light plank floor.",
   },
   "bethlehem-bathroom-refresh": {
-    title: "A pine barn door opens on a black-framed shower.",
+    title: "Hung a pine barn door. Put in a black-framed shower.",
     spec: "Barn door · glass shower · black fixtures",
     image: {
       src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
@@ -107,51 +107,51 @@ const presentation: Record<string, Presentation> = {
     },
   },
   "bethlehem-pool-patio-renovation": {
-    title: "The turf's gone. The lobster stayed.",
+    title: "Pulled the turf and put down a textured pool deck.",
     spec: "Textured pool deck · stone-pattern border",
     story:
-      "Green turf used to run right up to the water. Now a textured gray deck follows every curve of the pool, and the lobster, crab and fish on the pool floor stayed right where they were.",
+      "Green turf ran right up to the pool's edge. We pulled it and put down a textured gray deck that follows every curve. The lobster and crab tiles on the pool floor stayed put.",
   },
   "ryan-kitchen-remodel": {
     title: "Stripped out, then built back in white.",
     spec: "White cabinets · black counters · glass mosaic backsplash",
     story:
-      "Doors off, backsplash gone, fluorescent tubes hanging from the ceiling. It came back with white cabinets, black counters, a glass mosaic backsplash and recessed lights.",
+      "Doors off, backsplash gone, fluorescent tubes hanging from the ceiling. We built it back with white cabinets, black counters, a glass mosaic backsplash and recessed lights.",
   },
   "berks-county-ranch-exterior-refresh": {
-    title: "Black-tie trim for a white ranch.",
+    title: "Black shutters and a black railing on a white ranch.",
     spec: "White siding · black shutters · black railing",
   },
   "allentown-flooring-replacement-upgrade": {
-    title: "Wide light planks from the fireplace to the kitchen.",
+    title: "Laid wide light planks from the fireplace to the kitchen.",
     spec: "Light oak-look planks · white walls · kitchen opening",
   },
   "ryan-bedroom-interior-refresh": {
-    title: "Carpet out, planks in, walls gone slate.",
+    title: "Pulled the carpet, laid planks, painted the walls slate.",
     spec: "Wood-look planks · slate walls · white trim",
     story:
-      "It had worn carpet and two different wall colors. Now it's warm wood-look planks, deep slate on every wall and bright white trim.",
+      "Pulled the worn carpet, laid wood-look planks and painted every wall a deep slate, so the white trim and doors stand out.",
   },
   "bethlehem-exterior-staircase-build": {
-    title: "Built from the ground up. Literally.",
+    title: "Built an exterior stair up to the second floor.",
     spec: "White rails · black balusters · second-floor landing",
   },
   "bethlehem-drywall-and-finish-repair": {
-    title: "You'd never know it needed fixing.",
+    title: "Drywall repairs you can't find.",
     spec: "Smooth walls · crisp corners · fresh paint",
   },
   "lehigh-valley-full-exterior-refresh": {
-    title: "Peeling paint out, black shutters up.",
+    title: "Scraped, primed and painted, then hung black shutters.",
     spec: "Black shutters · three dormers · columned porch",
     story:
-      "Paint was flaking off the porch columns and the dormer trim was down to bare wood. Now the house is crisp white again, with black shutters across the front and a full-width porch at the end of the brick walk.",
+      "Paint was flaking off the porch columns and the dormer trim was down to bare wood. We scraped, primed and painted it white, then hung black shutters across the front.",
   },
   "allentown-fire-damage-interior-rebuild": {
-    title: "White brick over a hearth like black marble.",
+    title: "Painted brick over a black marble-look hearth.",
     spec: "Painted brick · marble-look hearth · wood-look floor",
   },
   "reading-commercial-bar-window-upgrade": {
-    title: "Daylight along the bar.",
+    title: "Put in a row of windows along the bar.",
     spec: "A row of windows · dark trim · beadboard wainscot",
   },
   "dark-partition-commercial-restroom": {
@@ -159,10 +159,10 @@ const presentation: Record<string, Presentation> = {
     spec: "Charcoal partitions · gray walls · plank tile floor",
   },
   "allentown-commercial-bathroom-renovation": {
-    title: "The hallway floor went from stained to seamless.",
+    title: "Painted the block and put down a seamless gray floor.",
     spec: "Seamless gray floor · painted block walls · restroom stalls",
     story:
-      "The hallway's concrete was stained and worn, beside a dark block wall. Now the corridor, the wash area and the restroom all have a seamless gray floor, and the block wall is painted light.",
+      "The hallway concrete was stained and worn, next to a dark block wall. We painted the block light and put down a seamless gray floor through the corridor, the wash area and the restroom.",
     image: {
       src: "/images/projects/allentown-commercial-bathroom/after/hallway-after.png",
       alt: "Corridor with light painted walls, a painted block wall and dark floor surfaces.",
