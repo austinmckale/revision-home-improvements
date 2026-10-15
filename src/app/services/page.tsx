@@ -93,7 +93,7 @@ export default function ServicesHubPage() {
             <div>
               <p className="eyebrow">Make room for possibility</p>
               <h2 className="heading-serif mt-3 text-3xl text-[var(--accent)] sm:text-4xl">
-                Your home. Your next chapter.
+                One standard, every room.
               </h2>
             </div>
             <Link
@@ -137,7 +137,7 @@ export default function ServicesHubPage() {
               <div>
                 <p className="eyebrow eyebrow-light">One connected plan</p>
                 <h3 className="heading-serif mt-5 max-w-xl text-3xl sm:text-4xl">
-                  Several rooms. One thoughtful renovation.
+                  Several rooms, one plan.
                 </h3>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80">
                   When the kitchen, baths and floors change together, one plan keeps every decision and every trade

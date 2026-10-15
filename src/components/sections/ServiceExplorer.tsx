@@ -148,9 +148,9 @@ export default function ServiceExplorer({ items }: { items: ServiceExplorerItem[
                 Remodeling &amp; restoration services · Lehigh Valley &amp; Berks County
               </span>{" "}
               <span className="heading-serif mt-5 block text-[2.65rem] leading-[1.04] tracking-[-.03em] text-[var(--accent)] sm:text-6xl lg:text-[4.25rem]">
-                Remodeling,{" "}
+                From the kitchen{" "}
                 <br />
-                made personal.
+                to the back patio.
               </span>
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-[var(--muted)]">

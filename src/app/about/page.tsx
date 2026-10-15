@@ -30,7 +30,7 @@ export default function AboutPage() {
       />
       <ServiceHero
         eyebrow="About RHI Pros"
-        title="Built on clarity, delivered with care."
+        title="The remodeler who calls you back."
         intro={`Remodeling and restoration for homeowners in ${company.serviceAreas}. Every project is planned with you and put in writing before work begins.`}
         image={{
           src: "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg",
@@ -56,8 +56,7 @@ export default function AboutPage() {
               </p>
               <p className="mt-4 leading-relaxed text-[var(--muted)]">
                 The company is owned by <span className="font-semibold text-[var(--accent)]">{company.owner.name}</span>.
-                Ryan is a dad, so every project is planned around family life and the rooms your household still needs
-                every day.
+                Ryan is a dad too, so he plans each job around the family still living in the house.
               </p>
               <p className="mt-4 leading-relaxed text-[var(--muted)]">
                 RHI Pros is the working name of {company.legalName}, a registered Pennsylvania home improvement
