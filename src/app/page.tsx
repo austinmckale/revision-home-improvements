@@ -21,7 +21,7 @@ import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
 
 export const metadata: Metadata = getPageMetadata({
-  title: { absolute: "RHI Pros | Lehigh Valley Remodeling & Restoration" },
+  title: { absolute: "Home Remodeling Contractor in the Lehigh Valley & Berks County | RHI Pros" },
   description:
     "Remodeling and damage repairs in Allentown, Bethlehem, Reading, the Lehigh Valley and Berks County. See our work and request a quote from RHI Pros.",
   path: "/",

@@ -37,6 +37,17 @@ RHI Pros offers cabinet refacing and patio repair. Added:
 - `/berks-county-pa/kitchen-cabinet-installation` now covers refacing and replacement ("Cabinet Refacing & Remodeling in Berks County, PA"), with refacing questions and a box-condition factor.
 - `/allentown-pa/paver-installation` is "Paver Patio Installation & Repair in Allentown, PA"; its FAQ that steered people away from small repairs is replaced. The Lehigh Valley patio page, the patio service page and the kitchen pages (Berks, Lehigh Valley, service) answer repair and refacing questions.
 
+## Follow-up changes (October 15, 2026)
+
+| Change | Why (same export) |
+| --- | --- |
+| `/allentown-pa/bathroom-remodeling` rewritten around Allentown homes (rowhomes and twins, older plumbing, permits), the commercial-restroom lead removed, and a nearby bathroom job linked | 601 impressions for Allentown bathroom searches went to the Lehigh Valley page at positions 45–57; the Allentown page had none |
+| Lehigh Valley bathroom page links to the Allentown and Bethlehem bathroom pages | Points town searches at the town pages |
+| Cabinet refacing added to the Allentown and Lehigh Valley kitchen titles and pages; the Lehigh Valley page links to the Allentown one | 357 impressions for refacing searches (129 for "cabinet refacing lehigh valley pa" at 43.7); 403 for Allentown kitchen searches; "kitchen cabinets allentown pa" at 7.7 |
+| Home page title leads with "Home Remodeling Contractor in the Lehigh Valley & Berks County" | "home remodeling & improvement contractor lehigh valley": 277 impressions at 41.6 |
+
+Considered and skipped: a media wall page (two impressions in the period) and an epoxy or garage floor page (71 impressions, mostly "garage pit installation", a service RHI Pros does not offer).
+
 ## Still needs owner input
 
 - **Local proof.** Completed jobs with a confirmed town, photos and permission to name the town are the strongest local signal; current project records do not authenticate towns.

@@ -558,9 +558,9 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     ],
   },
   "allentown-pa/kitchen-remodeling": {
-    metadataTitle: "Kitchen Remodeling in Allentown, PA",
+    metadataTitle: "Kitchen Remodeling & Cabinet Refacing in Allentown, PA",
     metadataDescription:
-      "Kitchen remodeling in Allentown, PA for older city homes and newer suburban properties. Plan the layout, cabinets and finishes, then request a quote.",
+      "Kitchen remodeling and cabinet refacing in Allentown, PA: new or refaced cabinets, countertops, lighting and layout changes for older city homes and newer houses.",
     heroHeading: "Kitchen Remodelers in Allentown, PA",
     localProjectHeading: "Planning a kitchen remodel in Allentown",
     localProjectSnippet:
@@ -568,10 +568,15 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     localChallengesHeading: "What we plan for in Allentown kitchens",
     localChallenges: [
       "Layout constraints in older downtown homes",
+      "Whether your cabinet boxes are solid enough to reface",
       "Material lead-time planning to protect schedule",
       "Mechanical updates needed for modern appliance layouts",
     ],
     localizedFaqs: [
+      {
+        q: "Do you reface kitchen cabinets in Allentown?",
+        a: "Yes. Refacing keeps your existing cabinet boxes and replaces the doors, drawer fronts and hardware, with matching surfaces on the exposed frames and sides. It suits a kitchen whose layout works and whose boxes are solid; if not, new cabinets are the better choice.",
+      },
       {
         q: "Can you remodel kitchens in both older and newer Allentown homes?",
         a: "Yes. We plan around the home's condition, whether it needs plumbing and electrical upgrades or a finish-focused update.",
@@ -611,31 +616,37 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "allentown-pa/bathroom-remodeling": {
     metadataTitle: "Bathroom Remodeling in Allentown, PA",
     metadataDescription:
-      "Bathroom remodeling in Allentown, PA with moisture-aware construction, code-compliant upgrades, and durable material selection.",
+      "Bathroom remodeling in Allentown, PA: showers, tile, vanities and full remodels for older rowhomes and twins as well as newer houses, with the waterproofing done right behind the tile.",
     heroHeading: "Bathroom Remodelers in Allentown, PA",
     localProjectHeading: "Planning a bathroom remodel in Allentown",
     localProjectSnippet:
-      "Allentown bathroom projects range from home bathroom remodels to the occasional commercial restroom, where durable finishes matter as much as layout and waterproofing. We build for durability first, then finish the details so the room is easy to keep clean.",
+      "Allentown bathroom remodels range from small upstairs baths in older rowhomes and twins to primary bathrooms in newer houses. We fix the subfloor and old plumbing we find, and build every shower with proper waterproofing behind the tile.",
     localChallengesHeading: "What we plan for in Allentown bathrooms",
     localChallenges: [
-      "Ventilation and moisture management in high-use bathrooms",
-      "Subfloor corrections discovered after demo",
-      "Balancing a cleaner finished look with practical daily durability",
+      "Small upstairs bathrooms in older rowhomes and twins",
+      "Old galvanized or cast-iron plumbing behind the walls of older homes",
+      "Subfloor damage around the toilet and tub, found after demo",
+      "A bath fan that vents outside, not into the attic",
     ],
     localizedFaqs: [
       {
-        q: "Do you include waterproofing in Allentown bathroom remodels?",
-        a: "Yes. Waterproofing and moisture control are built into every bathroom we remodel, never an add-on.",
+        q: "Do you remodel bathrooms in older Allentown rowhomes and twins?",
+        a: "Yes. Older rowhomes and twins often have small bathrooms, older plumbing and floors that need leveling. We check for those on the first visit so they're in your proposal, not a surprise after demo.",
       },
       {
-        q: "Can you improve storage without expanding the footprint?",
-        a: "A layout assessment can identify options for fixture placement, vanity size and vertical storage. Existing plumbing, access and room dimensions determine which changes are practical.",
+        q: "Do I need a permit for a bathroom remodel in Allentown?",
+        a: "It depends on the work. Moving plumbing or adding electrical usually needs permits from the City of Allentown, while a cosmetic update often doesn't. Your proposal lists which permits apply and who files them.",
+      },
+      {
+        q: "Do you include waterproofing in Allentown bathroom remodels?",
+        a: "Yes. Waterproofing and moisture control are built into every bathroom we remodel, never an add-on.",
       },
       {
         q: "How do you prevent surprise costs during bathroom work?",
         a: "We point out likely problem areas up front, and if something unexpected turns up, you see the options and the cost before any extra work.",
       },
     ],
+    relatedCaseStudySlug: "bethlehem-bathroom-refresh",
     internalLinks: [
       {
         href: "/allentown-pa",
@@ -1512,9 +1523,9 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     relatedCaseStudySlug: "bethlehem-pool-patio-renovation",
   },
   "lehigh-valley-pa/kitchen-remodeling": {
-    metadataTitle: "Kitchen Remodeling in Lehigh Valley, PA",
+    metadataTitle: "Kitchen Remodeling & Cabinet Refacing in Lehigh Valley, PA",
     metadataDescription:
-      "Lehigh Valley kitchen remodeling with cabinet, countertop and layout planning. See our kitchen work and request a quote.",
+      "Lehigh Valley kitchen remodeling and cabinet refacing, with cabinet, countertop and layout planning. See our kitchen work and request a quote.",
     heroHeading: "Kitchen Remodeling in Lehigh Valley, PA",
     heroIntro:
       "Bring cabinets, countertops, lighting, and layout together in a kitchen that works for your everyday life. Explore finish ideas and plan your project with RHI Pros.",
@@ -1574,6 +1585,11 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         reason: "Full scope and planning expectations",
       },
       {
+        href: "/allentown-pa/kitchen-remodeling",
+        anchorText: "Kitchen remodeling and cabinet refacing in Allentown",
+        reason: "Town page for Allentown kitchen searches",
+      },
+      {
         href: "/projects/allentown-kitchen-layout-upgrade",
         anchorText: "Kitchen layout and finish ideas",
         reason: "Island layouts, cabinetry, and countertop combinations",
@@ -1623,6 +1639,16 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         href: "/services/bathroom-remodeling",
         anchorText: "Bathroom remodeling service details",
         reason: "Full process and quality expectations",
+      },
+      {
+        href: "/allentown-pa/bathroom-remodeling",
+        anchorText: "Bathroom remodeling in Allentown",
+        reason: "Town page for Allentown bathroom searches",
+      },
+      {
+        href: "/bethlehem-pa/bathroom-remodeling",
+        anchorText: "Bathroom remodeling in Bethlehem",
+        reason: "Town page for Bethlehem bathroom searches",
       },
       {
         href: "/projects",
