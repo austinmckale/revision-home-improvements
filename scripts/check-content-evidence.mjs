@@ -89,12 +89,24 @@ test("every original route and declared split receives reviewed content without 
   }
   for (const current of content.caseStudies) {
     assert.equal(current.timeline, "", current.slug);
-    assert.equal(current.locationSlug, "", current.slug);
+    // Towns come only from owner-confirmed job records (projectEvidence.ts); every other project stays unplaced.
+    if (evidence.ownerConfirmedProjectLocations.has(current.slug)) {
+      assert.match(current.locationSlug, /^(reading|wyomissing|berks-county|allentown|bethlehem|lehigh-valley)-pa$/, current.slug);
+      assert.notEqual(current.locationName, "Photo collection", current.slug);
+    } else {
+      assert.equal(current.locationSlug, "", current.slug);
+    }
     assert.equal(current.testimonial, undefined, current.slug);
     assert.equal(current.challenge, "", current.slug);
     assert.equal(current.solution, "", current.slug);
     assert.equal(current.results.length, 0, current.slug);
     assert.ok(["photos", "planning"].includes(current.mediaType), current.slug);
+  }
+  for (const slug of evidence.ownerConfirmedProjectLocations) {
+    assert.ok(
+      content.caseStudies.some((record) => record.slug === slug && record.locationSlug),
+      `${slug}: confirmed location does not match a published original record`,
+    );
   }
 });
 

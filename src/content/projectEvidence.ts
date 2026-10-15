@@ -82,6 +82,34 @@ const fireFrames: Array<[string, string]> = [
 ];
 const fieldPhotos = fireFrames.map(([file, alt]) => photo(`fire-damage-documentation/after/${file}`, alt));
 
+/**
+ * Owner confirmation, October 15, 2026: the towns in these projects' original job records are correct
+ * ("roughly correct"). Only the town already in each record is published; region-only records show the
+ * region. Never fill in a town that is not in the job record, and never invent one.
+ */
+export const ownerConfirmedProjectLocations: ReadonlySet<string> = new Set([
+  "reading-paver-patio-buildout",
+  "lehigh-valley-basement-finish-and-detail",
+  "blue-kitchen-cabinet-counters",
+  "allentown-kitchen-layout-upgrade",
+  "bethlehem-interior-flooring-refresh",
+  "allentown-exterior-log-home-refresh",
+  "hamburg-laundry-bathroom-remodel",
+  "ryan-bathroom-remodel",
+  "bethlehem-bathroom-refresh",
+  "bethlehem-pool-patio-renovation",
+  "berks-county-ranch-exterior-refresh",
+  "allentown-flooring-replacement-upgrade",
+  "ryan-kitchen-remodel",
+  "ryan-bedroom-interior-refresh",
+  "bethlehem-exterior-staircase-build",
+  "bethlehem-drywall-and-finish-repair",
+  "lehigh-valley-full-exterior-refresh",
+  "allentown-fire-damage-interior-rebuild",
+  "allentown-commercial-bathroom-renovation",
+  "reading-commercial-bar-window-upgrade",
+]);
+
 export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "allentown-kitchen-layout-upgrade": overview({
     title: "Two-tone island kitchen",

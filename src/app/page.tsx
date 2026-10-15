@@ -253,7 +253,7 @@ export default function HomePage() {
                 href="/projects/reading-paver-patio-buildout"
                 className="annotation group inline-flex min-h-8 items-center gap-2 text-[0.65rem] text-white transition-colors hover:text-white/80"
               >
-                Pictured: patio &amp; pavilion{" "}
+                Pictured: patio &amp; pavilion, Reading{" "}
                 <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
                   →
                 </span>

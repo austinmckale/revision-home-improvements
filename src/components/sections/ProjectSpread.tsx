@@ -57,7 +57,10 @@ export default function ProjectSpread({
       ) : null}
 
       <div className={`flex flex-col ${isLead ? `lg:col-span-5 lg:py-1 ${reverse ? "lg:order-1" : ""}` : ""}`}>
-        <p className="annotation text-[0.62rem] text-[var(--brand)]">{label}</p>
+        <p className="annotation text-[0.62rem] text-[var(--brand)]">
+          {label}
+          {study.locationSlug ? <span className="text-[var(--muted)]"> · {study.locationName}</span> : null}
+        </p>
         <h3
           className={`heading-serif mt-4 leading-[1.04] tracking-[-.025em] text-[var(--accent)] ${isLead ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl"}`}
         >

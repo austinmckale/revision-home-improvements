@@ -1,4 +1,4 @@
-import { projectEvidenceOverrides, projectEvidenceSplits } from "./projectEvidence";
+import { ownerConfirmedProjectLocations, projectEvidenceOverrides, projectEvidenceSplits } from "./projectEvidence";
 import { retiredProjectRedirects } from "./retiredProjects";
 
 export type CaseStudy = {
@@ -1164,7 +1164,11 @@ export const caseStudies: CaseStudy[] = [
   ...legacyCaseStudyRecords.map((record) => {
     const evidence = projectEvidenceOverrides[record.slug];
     if (!evidence) throw new Error(`Project evidence review missing: ${record.slug}`);
-    return { ...record, ...evidence };
+    // Owner-confirmed records keep the town from their own job record; everything else stays unplaced.
+    const location = ownerConfirmedProjectLocations.has(record.slug)
+      ? { locationName: record.locationName, locationSlug: record.locationSlug }
+      : {};
+    return { ...record, ...evidence, ...location };
   }),
   ...Object.entries(projectEvidenceSplits).map(([slug, split]) => {
     if (!slug.trim() || legacyCaseStudiesBySlug.has(slug)) {
