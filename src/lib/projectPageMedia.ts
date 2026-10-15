@@ -1,4 +1,5 @@
 import type { CaseStudy } from "@/content/caseStudies";
+import { curatePhotos } from "@/content/photoCuration";
 
 /** All image src values used in the Before/After toggle (for deduping the sidebar gallery). */
 export function collectBeforeAfterSrcs(caseStudy: CaseStudy): Set<string> {
@@ -14,7 +15,5 @@ export function collectBeforeAfterSrcs(caseStudy: CaseStudy): Set<string> {
  */
 export function getProjectGalleryImages(caseStudy: CaseStudy) {
   const inBeforeAfter = collectBeforeAfterSrcs(caseStudy);
-  return caseStudy.images.filter(
-    (img, index) => index > 0 && !inBeforeAfter.has(img.src),
-  );
+  return curatePhotos(caseStudy.images.slice(1), inBeforeAfter);
 }

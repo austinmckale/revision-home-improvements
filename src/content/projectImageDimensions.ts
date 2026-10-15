@@ -678,7 +678,7 @@ export const projectImageDimensions: Record<string, { width: number; height: num
   },
   "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished-preview.webp": {
     width: 720,
-    height: 1544,
+    height: 960,
   },
   "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg": {
     width: 720,

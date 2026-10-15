@@ -57,7 +57,7 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
   "hamburg-laundry-bathroom-remodel": { title: "A hardworking laundry & half-bath." },
   "ryan-bathroom-remodel": { title: "A bathroom made for every day." },
   "bethlehem-bathroom-refresh": {
-    title: "Black-framed shower, warm wood door.",
+    title: "Crisp white, black details.",
     image: {
       src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
       alt: "Shower enclosure with a molded white insert and black frame.",
@@ -67,7 +67,7 @@ const presentation: Record<string, { title: string; image?: CaseStudy["images"][
   "ryan-kitchen-remodel": { title: "Crisp white, dark counters." },
   "berks-county-ranch-exterior-refresh": { title: "Classic curb appeal." },
   "allentown-flooring-replacement-upgrade": { title: "Light floors, open living." },
-  "ryan-bedroom-interior-refresh": { title: "A bedroom in deep blue." },
+  "ryan-bedroom-interior-refresh": { title: "A bedroom in deep slate." },
   "bethlehem-exterior-staircase-build": { title: "A stair to the upper entry." },
   "bethlehem-drywall-and-finish-repair": { title: "Clean, simple finishes." },
   "lehigh-valley-full-exterior-refresh": { title: "Dormers, shutters and a front porch." },

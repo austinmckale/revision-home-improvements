@@ -13,10 +13,11 @@ import { visibleCaseStudies, getCaseStudyBySlug } from "@/content/caseStudies";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/url";
 import { businessEntityId, getBreadcrumbJsonLd } from "@/lib/structuredData";
-import { getProjectGalleryImages } from "@/lib/projectPageMedia";
+import { collectBeforeAfterSrcs, getProjectGalleryImages } from "@/lib/projectPageMedia";
 import { getProjectCollection, getProjectPresentation, orderedShowcaseProjects } from "@/content/projectShowcase";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
 import { getImageFocalClass } from "@/content/imageFocalPoints";
+import { curatePhotos } from "@/content/photoCuration";
 
 type Params = { slug: string };
 
@@ -82,7 +83,15 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   const heroImage = getProjectPresentation(caseStudy).image;
   const collection = getProjectCollection(caseStudy);
   const isCommercial = collection === "commercial";
-  const photos = caseStudy.mediaType === "photos" ? caseStudy.images : galleryImages;
+  // Each view once: the hero photo is not repeated below it, and curated duplicates are skipped.
+  const shownAbove = [...(heroImage ? [heroImage.src] : []), ...collectBeforeAfterSrcs(caseStudy)];
+  const photos = curatePhotos(
+    (caseStudy.mediaType === "photos" ? caseStudy.images : galleryImages).filter((photo) => !photo.src.includes("/before/")),
+    shownAbove,
+  );
+  const photoGroups = (caseStudy.photoGroups ?? [])
+    .map((group) => ({ ...group, images: curatePhotos(group.images, photos.map((photo) => photo.src)) }))
+    .filter((group) => group.images.length > 0);
   const quoteHref = `/request-a-quote?service=${encodeURIComponent(caseStudy.serviceSlug)}`;
   const localLinks = localPlanningLinks[caseStudy.serviceSlug] ?? [];
   // Same service first, then the rest of the same collection, so every project ends with somewhere to go.
@@ -193,7 +202,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
               cardClassName="mb-4 break-inside-avoid overflow-hidden bg-[var(--surface-soft)]"
               imageClassName="h-auto w-full"
             />
-            {caseStudy.photoGroups?.map((group) => (
+            {photoGroups.map((group) => (
               <section key={group.title} className="mt-12 border-t border-[var(--border)] pt-8">
                 <h3 className="heading-serif text-2xl text-[var(--accent)]">{group.title}</h3>
                 {group.description ? <p className="mt-2 text-sm text-[var(--muted)]">{group.description}</p> : null}
