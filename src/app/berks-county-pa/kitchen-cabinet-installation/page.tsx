@@ -210,7 +210,7 @@ export default function KitchenCabinetInstallationPage() {
       <section className="py-14 md:py-20">
         <Container>
           <FadeIn>
-            <h2 className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">Kitchen projects to explore.</h2>
+            <h2 className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">Kitchen projects.</h2>
             <div className="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-2">
               {cabinetProjects.map((project) => (
                 <ProjectCard key={project.slug} study={project} />

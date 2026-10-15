@@ -158,7 +158,7 @@ export default function ServiceExplorer({ items }: { items: ServiceExplorerItem[
             </p>
             <fieldset className="mt-7">
               <legend className="mb-3 text-xs font-semibold uppercase tracking-[.13em] text-[var(--accent)]">
-                Choose a space to explore
+                Choose a space
               </legend>
               <div className="grid grid-cols-2 gap-2">
                 {items.map((item, index) => (
@@ -186,7 +186,7 @@ export default function ServiceExplorer({ items }: { items: ServiceExplorerItem[
             </div>
             <div className="mt-3 grid gap-3 sm:flex sm:flex-wrap">
               <Button href={`/services/${active.serviceSlug}`}>
-                Explore {active.label.toLowerCase()}{" "}
+                See {active.label.toLowerCase()}{" "}
                 <span className="ml-3" aria-hidden="true">
                   ↗
                 </span>
@@ -247,7 +247,7 @@ export default function ServiceExplorer({ items }: { items: ServiceExplorerItem[
                       {displayedItem?.projectTitle}
                     </span>
                     <span className="mt-3 block text-xs font-semibold underline underline-offset-4">
-                      Explore the photos
+                      See the project
                     </span>
                   </span>
                   <span
@@ -269,7 +269,7 @@ export default function ServiceExplorer({ items }: { items: ServiceExplorerItem[
                 <p>Loading {active.label.toLowerCase()} photo…</p>
               ) : loadState.key === requestedSrc && loadState.status === "error" ? (
                 <div>
-                  <p>That photo could not load. You can try again or explore the service.</p>
+                  <p>That photo could not load. You can try again or open the service page.</p>
                   <button
                     type="button"
                     onClick={() => requestPhoto(selected, true)}
@@ -290,7 +290,7 @@ export default function ServiceExplorer({ items }: { items: ServiceExplorerItem[
             href="#remodeling"
             className="inline-flex min-h-11 items-center gap-3 font-semibold text-[var(--accent)] hover:text-[var(--brand)]"
           >
-            Explore all remodeling services <span aria-hidden="true">↓</span>
+            All remodeling services <span aria-hidden="true">↓</span>
           </a>
           <Link
             href="/fire-water-damage-restoration"

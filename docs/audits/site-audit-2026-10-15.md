@@ -22,6 +22,8 @@ Scope: all 98 sitemap pages plus the quote page, rendered from the current branc
 
 ## Fixes that need no input
 
+**Status (October 15, 2026): all 14 below are done.** The exceptions are two long titles: the home page title (73 characters) and the Lehigh Valley kitchen title (69). Both are kept for their search wording; Google cuts only the "| RHI Pros" tail.
+
 ### Project names, captions and alt text
 
 1. Town and service pages still show the old plain project names and report-style descriptions ("Poolside surround", "Basement media room", "Crisp white kitchen"). Town pages also show the same project twice: once as a "Related project" link and again as a full section. Show it once, with the job-site name.

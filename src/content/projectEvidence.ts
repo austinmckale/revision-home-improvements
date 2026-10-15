@@ -37,7 +37,7 @@ const exteriorViews = [
 ];
 const exteriorEarlier = photo(
   "lehigh-valley-exterior-refresh/before/exterior-before.jpg",
-  "Supplied earlier-condition front view showing the same dormer, window, and porch arrangement.",
+  "Before: the same dormer, windows and porch with peeling paint and no shutters.",
 );
 
 const fireFrames: Array<[string, string]> = [
@@ -112,9 +112,9 @@ export const ownerConfirmedProjectLocations: ReadonlySet<string> = new Set([
 
 export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "allentown-kitchen-layout-upgrade": overview({
-    title: "Two-tone island kitchen",
+    title: "Kitchen remodel with a navy island",
     summary:
-      "A navy island with a thick white countertop and glass globe pendants, set against walnut-tone cabinetry, double wall ovens and a built-in stainless refrigerator.",
+      "A navy island with two dishwashers and glass globe pendants, against walnut-tone cabinets, double wall ovens and a built-in stainless refrigerator.",
     featureInServiceListings: true,
     scope: [
       "Island seating and contrasting cabinetry",
@@ -134,7 +134,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "bethlehem-bathroom-refresh": overview({
-    title: "Black-framed shower bathroom",
+    title: "Bathroom with a black-framed shower",
     summary:
       "A bright white shower with a black frame, black grab bars and black fixtures, beside a gray vanity with matching black hardware.",
     scope: [
@@ -172,18 +172,18 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     beforeImages: [
       photo(
         "allentown-commercial-bathroom/before/hallway-before.png",
-        "Supplied earlier-condition view along a block-wall corridor.",
+        "Before: the corridor with a stained, worn concrete floor and a dark block wall.",
       ),
     ],
     afterImages: [
       photo(
         "allentown-commercial-bathroom/after/hallway-after.png",
-        "Matching corridor view with light painted walls and dark floor surfaces.",
+        "After: the same corridor with the block wall painted light and a seamless gray floor.",
       ),
     ],
   }),
   "allentown-exterior-log-home-refresh": overview({
-    title: "Log-style exterior",
+    title: "Log home exterior",
     summary:
       "Log-style siding with crisp contrasting window trim across all three levels of a hillside home, down to the garage.",
     scope: ["Log-style siding and contrasting trim", "Three-level front elevation", "Garage-level entry"],
@@ -228,7 +228,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "lehigh-valley-full-exterior-refresh": overview({
-    title: "Dormers, shutters & front porch",
+    title: "Exterior paint & shutters",
     summary:
       "A white colonial with black shutters, three dormers and a full-width columned porch at the end of a brick walk. Compare it before and after.",
     scope: ["Dormer and window trim details", "Contrasting shutters and porch entry", "Front and side elevation views"],
@@ -255,7 +255,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     photoGroups: [{ title: "Earlier exterior view", images: [exteriorEarlier] }],
   }),
   "bethlehem-interior-flooring-refresh": overview({
-    title: "Warm wood flooring",
+    title: "Honey-toned wood floors",
     summary:
       "Rich, warm-toned floorboards against light walls and crisp white trim, with a cased opening into the next room.",
     scope: ["Warm-toned floorboards", "Trimmed opening between rooms", "Light walls and recessed ceiling lights"],
@@ -267,7 +267,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "berks-county-ranch-exterior-refresh": overview({
-    title: "Classic ranch exterior",
+    title: "Ranch exterior, shutters & railing",
     summary:
       "White siding with black shutters and a black railing at the front steps of a single-story ranch.",
     scope: ["Single-story front elevation", "Contrasting shutters and railing", "Front entry and landscaping"],
@@ -279,7 +279,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "lehigh-valley-basement-finish-and-detail": overview({
-    title: "Basement media room",
+    title: "Basement media room & epoxy floor",
     summary:
       "A large screen and a linear fireplace share one feature wall, with recessed lighting overhead and a high-gloss patterned epoxy floor below.",
     scope: [
@@ -322,7 +322,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     images: [],
   }),
   "allentown-flooring-replacement-upgrade": overview({
-    title: "Light floors, open living",
+    title: "Light plank flooring",
     summary:
       "Light oak-look plank flooring runs through the living room to the kitchen opening, with fresh white walls and trim.",
     scope: ["Light oak-look plank flooring", "Fresh walls and trim", "Living room to kitchen opening"],
@@ -338,7 +338,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "bethlehem-drywall-and-finish-repair": overview({
-    title: "Clean interior finishes",
+    title: "Drywall repair & paint",
     summary:
       "Smooth light walls, clean corners and white closet doors over a tile floor, finished with ceiling lights and a fan.",
     featureInServiceListings: false,
@@ -383,7 +383,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "bethlehem-pool-patio-renovation": overview({
-    title: "Poolside surround",
+    title: "Pool deck renovation",
     summary:
       "A gray textured surround with a light stone-pattern border that follows every curve of the pool, from the steps to the rounded edges.",
     scope: ["Curved poolside surface", "Light stone-pattern border", "Pool-step and radius details"],
@@ -400,13 +400,13 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     beforeImages: [
       photo(
         "bethlehem-pool-patio/before/pool-patio-before.jpg",
-        "Supplied earlier-condition view of the curved pool with a green surrounding surface.",
+        "Before: green turf around the curved pool.",
       ),
     ],
     afterImages: [
       photo(
         "bethlehem-pool-patio/after/pool-patio-overview.jpg",
-        "Matching pool shape with a gray textured surround and light stone-pattern border.",
+        "After: a textured gray deck around the same pool, with a stone-pattern border.",
       ),
     ],
   }),
@@ -431,7 +431,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "ryan-bedroom-interior-refresh": overview({
-    title: "Slate-gray bedroom",
+    title: "Bedroom flooring & paint",
     summary:
       "Carpet out, warm wood-look plank flooring in, and the walls repainted a deep slate with bright white trim. Compare the room before and after.",
     scope: ["Wall colors and white trim", "Carpet and wood-look floor surfaces", "Windows and ceiling fan"],
@@ -442,7 +442,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
       ),
       photo(
         "ryan-bedroom/before/02-interior-refresh-blue-before-2.jpg",
-        "Matching bedroom with lighter walls, carpet, and the same window arrangement and ceiling fan.",
+        "Before: the same bedroom with carpet and two-tone gray walls.",
       ),
       photo(
         "ryan-bedroom/process/01-interior-refresh-blue-2-process.jpg",
@@ -456,13 +456,13 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     beforeImages: [
       photo(
         "ryan-bedroom/before/01-interior-refresh-before.jpg",
-        "Supplied earlier-condition bedroom view with carpet, light walls, and a ceiling fan.",
+        "Before: the bedroom with worn carpet, light walls and a ceiling fan.",
       ),
     ],
     afterImages: [
       photo(
         "ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
-        "Matching bedroom with dark walls, white trim, and wood-look flooring.",
+        "After: slate walls, white trim and wood-look plank flooring.",
       ),
       photo(
         "ryan-bedroom/after/04-interior-refresh-blue-4.jpg",
@@ -471,7 +471,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "blue-kitchen-cabinet-counters": overview({
-    title: "Blue cabinet kitchen",
+    title: "Navy cabinet kitchen",
     summary:
       "Navy shaker cabinets run floor to ceiling beside the patio door, with a patterned gray countertop, a matching full-height backsplash and a built-in wine fridge.",
     scope: [
@@ -523,7 +523,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "ryan-kitchen-remodel": overview({
-    title: "Crisp white kitchen",
+    title: "White kitchen remodel",
     summary:
       "White cabinets, black countertops and a glass mosaic backsplash, from a stripped-out room to finished. Compare the same corner before and after.",
     scope: [
@@ -540,20 +540,20 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     beforeImages: [
       photo(
         "ryan-kitchen/before/01-ryans-kitchen-before.jpg",
-        "Supplied earlier-condition kitchen corner with open cabinet frames and patterned flooring.",
+        "Before: the kitchen with cabinet doors off, the backsplash removed and fluorescent lights hanging.",
       ),
     ],
     afterImages: [
       photo(
         "ryan-kitchen/after/01-ryans-kitchen-after-done.jpg",
-        "Matching kitchen corner with white cabinets, dark countertops, and stainless appliances.",
+        "After: white cabinets, black countertops, a glass mosaic backsplash and recessed lights.",
       ),
     ],
   }),
   "ryan-bathroom-remodel": overview({
-    title: "Double-vanity bathroom",
+    title: "Double-vanity bathroom remodel",
     summary:
-      "A dark double vanity with a speckled granite top and two sinks, warm beige walls and a light plank floor, where a pink sink and toilet used to be. Compare the room before and after.",
+      "A dark double vanity with a granite top, beige walls and a light plank floor, where a pink sink and toilet used to be. See it before and after.",
     scope: ["Double-sink vanity with a granite top", "Wall, window, and floor finishes", "Bathing area beside the vanity"],
     images: [
       photo(
@@ -565,18 +565,18 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     beforeImages: [
       photo(
         "ryan-bathroom/before/ryans-bathroom-before.jpg",
-        "Supplied earlier-condition view of the same bathroom with a pink sink and toilet, patterned wallpaper, and dark floor tile.",
+        "Before: the same bathroom with a pink sink and toilet, patterned wallpaper and dark floor tile.",
       ),
     ],
     afterImages: [
       photo(
         "ryan-bathroom/after/ryans-bathroom-finished.jpg",
-        "Matching bathroom view with a dark double vanity, granite top, and light plank floor.",
+        "After: a dark double vanity with a granite top and a light plank floor.",
       ),
     ],
   }),
   "hamburg-laundry-bathroom-remodel": overview({
-    title: "Laundry & half-bath",
+    title: "Laundry room & half-bath remodel",
     summary:
       "One compact room that does double duty: laundry, a utility sink and open shelving beside a half-bath, finished in light walls and gray flooring.",
     scope: ["Utility sink and toilet area", "Laundry appliance and open shelving", "Window trim and floor surfaces"],
@@ -601,13 +601,13 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     beforeImages: [
       photo(
         "hamburg-laundry-bathroom/before/laundry-bathroom-before.jpg",
-        "Supplied earlier-condition view of the same narrow room with patterned flooring and an open wall bay.",
+        "Before: the narrow room with an old patterned floor and an open stud wall.",
       ),
     ],
     afterImages: [
       photo(
         "hamburg-laundry-bathroom/after/laundry-bathroom-doorway-view.jpg",
-        "Matching narrow-room view with a laundry appliance, open shelves, and updated floor surfaces.",
+        "After: the laundry, open shelving and a gray plank floor.",
       ),
     ],
   }),

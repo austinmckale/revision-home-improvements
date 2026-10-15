@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
@@ -14,9 +13,9 @@ import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
-  title: "Fire & Water Damage Restoration | Reading PA & Lehigh Valley",
+  title: "Fire & Water Damage Restoration | Reading & Allentown",
   description:
-    "Fire and water damage restoration in Reading, Berks County and the Lehigh Valley. Call RHI Pros for an assessment, a detailed repair estimate and documentation for your claim.",
+    "Fire and water damage repair in Reading, Berks County and the Lehigh Valley: an assessment, a detailed repair estimate and photos for your claim.",
   path: "/fire-water-damage-restoration",
 });
 
@@ -68,8 +67,8 @@ export default function FireWaterDamageRestorationPage() {
         ])}
       />
       <section className="border-b border-[var(--border)] bg-[var(--surface-soft)] py-10 sm:py-16">
-        <Container className="grid items-center gap-9 lg:grid-cols-[1.1fr_.9fr] lg:gap-14">
-          <div className="min-w-0">
+        <Container>
+          <div className="min-w-0 max-w-3xl">
             <p className="eyebrow">Restoration support · Lehigh Valley & Berks County</p>
             <h1 className="heading-serif mt-5 text-[clamp(2.4rem,4.7vw,4.5rem)] leading-[1.06] tracking-[-.025em] text-[var(--accent)]">
               Fire &amp; water damage restoration.
@@ -89,24 +88,6 @@ export default function FireWaterDamageRestorationPage() {
               {siteConfig.hicLabel}
             </p>
           </div>
-          <figure className="min-w-0">
-            <div className="relative aspect-[4/3] overflow-hidden bg-[var(--accent)] lg:aspect-[4/5]">
-              <Image
-                src="/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg"
-                alt="Finished living area with light wood-look flooring and freshly painted walls."
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="object-cover"
-              />
-            </div>
-            <figcaption className="flex items-start justify-between gap-4 border-b border-[var(--border)] py-4 text-xs leading-relaxed text-[var(--muted)]">
-              <span>Finished interior · new flooring and fresh walls</span>
-              <Link href="/projects" className="shrink-0 font-semibold text-[var(--brand)]">
-                See finished projects ↗
-              </Link>
-            </figcaption>
-          </figure>
         </Container>
       </section>
       <section className="py-12 sm:py-20">

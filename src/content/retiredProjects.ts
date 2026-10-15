@@ -11,4 +11,6 @@ export const retiredProjectRedirects: Readonly<Record<string, string>> = {
   "pink-tile-tub-reference": "/services/bathroom-remodeling",
   "beige-bathroom-before-after": "/services/bathroom-remodeling",
   "lehigh-water-damage-rebuild": "/services/water-damage-restoration",
+  // October 15, 2026: a closer view of the full exterior project with the same photos; merged into it.
+  "lehigh-valley-dormer-shutter-detail-refresh": "/projects/lehigh-valley-full-exterior-refresh",
 };

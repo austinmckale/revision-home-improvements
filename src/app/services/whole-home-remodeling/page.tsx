@@ -18,7 +18,7 @@ const route = "/services/whole-home-remodeling";
 export const metadata: Metadata = getPageMetadata({
   title: { absolute: "Whole-Home Remodeling in Lehigh Valley, PA | RHI Pros" },
   description:
-    "Whole-home and multi-room remodeling across the Lehigh Valley and Berks County. RHI Pros plans kitchens, bathrooms, flooring and interior finishes as one project.",
+    "Multi-room remodeling across the Lehigh Valley and Berks County: kitchens, bathrooms, flooring and interior finishes planned as one project.",
   path: route,
 });
 
@@ -216,7 +216,7 @@ export default function WholeHomeRemodelingPage() {
       <section className="py-14 md:py-20">
         <Container>
           <FadeIn>
-            <h2 className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">Projects to explore.</h2>
+            <h2 className="heading-serif text-3xl text-[var(--accent)] sm:text-4xl">Related projects.</h2>
             <div className="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-2">
               {wholeHomeProjects.map((project) => (
                 <ProjectCard key={project.slug} study={project} />

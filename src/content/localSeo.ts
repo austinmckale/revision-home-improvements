@@ -27,7 +27,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Kitchen Remodeling in Reading, PA",
     metadataDescription:
       "Kitchen remodeling in Reading, PA for layout, cabinetry, counters, and finishes. Plan existing conditions, permit responsibilities, and construction sequencing.",
-    heroHeading: "Kitchen Remodeling in Reading, PA",
+    heroHeading: "Kitchen remodeling in Reading, PA",
     localProjectHeading: "Planning a kitchen remodel in Reading",
     localProjectSnippet:
       "For a Reading kitchen remodel, we look at the existing structure and utilities alongside your layout and finish choices. If the visit turns up uneven floors, electrical changes or cabinet alignment issues, they go into the plan before countertops are measured.",
@@ -69,7 +69,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
       {
         href: "/projects",
-        anchorText: "Explore kitchen and renovation ideas",
+        anchorText: "Kitchen and renovation ideas",
         reason: "Layout, cabinet, and countertop ideas",
       },
     ],
@@ -78,7 +78,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Bathroom Remodeling in Reading, PA",
     metadataDescription:
       "Bathroom remodeling in Reading, PA with waterproofing-first builds, code-aware electrical updates, and finish quality for older homes.",
-    heroHeading: "Bathroom Remodelers in Reading, PA",
+    heroHeading: "Bathroom remodelers in Reading, PA",
     localProjectHeading: "Planning a bathroom remodel in Reading",
     localProjectSnippet:
       "In an older Reading bathroom, we check for moisture damage, drain condition and ventilation before you choose finishes. The plan covers the shower waterproofing, any plumbing or electrical changes and repairs found during demolition.",
@@ -129,10 +129,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Water Damage Restoration in Reading, PA",
     metadataDescription:
       "Water damage repairs in Reading, PA: drywall, flooring, trim and finishes rebuilt after a leak, with photos and estimates for your insurance claim.",
-    heroHeading: "Water and Flood Damage Restoration in Reading, PA",
+    heroHeading: "Water and flood damage restoration in Reading, PA",
     localProjectHeading: "Planning a water damage rebuild in Reading",
     localProjectSnippet:
-      "For water-damage reconstruction in Reading, identify affected rooms, any mitigation already completed, and materials needing replacement. Confirm drying or cleanup responsibilities separately from the proposed drywall, flooring, trim, and finish work.",
+      "After water damage in Reading, we start from the affected rooms, the drying already done and the materials that need replacing. Confirm drying or cleanup responsibilities separately from the proposed drywall, flooring, trim, and finish work.",
     localChallengesHeading: "What we plan for after water damage in Reading",
     localChallenges: [
       "Hidden moisture in wall and flooring assemblies",
@@ -175,7 +175,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Fire Damage Restoration in Reading, PA",
     metadataDescription:
       "Fire damage restoration in Reading, PA: rebuild planning, drywall, flooring and finish repairs, with documentation for your insurance claim.",
-    heroHeading: "Fire Damage Restoration in Reading, PA",
+    heroHeading: "Fire damage restoration in Reading, PA",
     localProjectHeading: "Fire damage rebuilds near Reading",
     localProjectSnippet:
       "After a fire in Reading, we look at how far smoke traveled, which materials were affected and how the home is built before planning demolition and rebuilding. You get the work and its order in writing, so you know what happens at each stage.",
@@ -212,8 +212,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "reading-pa/exterior-remodeling": {
     metadataTitle: "Exterior Remodeling in Reading, PA",
     metadataDescription:
-      "Exterior remodeling in Reading, PA for stairs, windows, siding, trim, and weather-exposed facades. Code-conscious planning, durable materials, and cleaner finish work.",
-    heroHeading: "Exterior Remodeling in Reading, PA",
+      "Exterior remodeling in Reading, PA: stairs, windows, siding and trim on weather-exposed homes, planned for code and built with durable materials.",
+    heroHeading: "Exterior remodeling in Reading, PA",
     localProjectHeading: "Planning exterior work in Reading",
     localProjectSnippet:
       "For a Reading exterior, we start with access, trim condition, window openings and the space around the house. Stairs, entries and facade changes are planned together, with preparation and finishes spelled out.",
@@ -264,7 +264,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Flooring Installation in Reading, PA",
     metadataDescription:
       "Flooring installation in Reading, PA with subfloor preparation, clean transitions and coordinated trim. See our flooring work and request a quote.",
-    heroHeading: "Flooring Installation in Reading, PA",
+    heroHeading: "Flooring installation in Reading, PA",
     heroIntro:
       "Connect your rooms with flooring that feels considered from edge to edge. Plan the surface, subfloor preparation, transitions, and trim before installation begins.",
     planningGuide: {
@@ -334,12 +334,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Paver Patio Installation in Reading, PA",
     metadataDescription:
       "Paver patio installation in Reading, PA for new patios, substantial renovations, connected walkways, and integrated outdoor-living projects.",
-    heroHeading: "Paver Patio Installation in Reading, PA",
+    heroHeading: "Paver patio installation in Reading, PA",
     heroIntro:
       "Plan a new paver patio, substantial patio renovation, or integrated outdoor-living project around the property’s access, grade, drainage, and connection to the home.",
     localProjectHeading: "Bring covered and open-air spaces together",
     localProjectSnippet:
-      "A paver patio and gable-roof pavilion can create distinct spaces for dining, relaxing, and gathering. Explore roof shapes, ceiling finishes, and landscape edges, then plan the layout around your Reading property's access, grade, and connection to the house.",
+      "A paver patio and gable-roof pavilion can create distinct spaces for dining, relaxing, and gathering. See roof shapes, ceiling finishes, and landscape edges, then plan the layout around your Reading property's access, grade, and connection to the house.",
     localChallengesHeading: "What affects a Reading paver project",
     localChallenges: [
       "Access for excavation, base materials, and installation equipment",
@@ -384,7 +384,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Paver Patio Installation in Berks County, PA",
     metadataDescription:
       "Paver patios, walkways and patio renovations in Berks County, PA, from Cumru and Spring Townships to Reading. Built on a well-drained, properly prepared base.",
-    heroHeading: "Paver Patio Installation in Berks County, PA",
+    heroHeading: "Paver patio installation in Berks County, PA",
     heroIntro:
       "Plan a new paver patio, connected walkway or substantial patio renovation around your property’s grade, drainage, access and the way you want to use the space.",
     localProjectHeading: "Planning a patio in Berks County",
@@ -439,7 +439,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Paver Patio Installation in Wyomissing, PA",
     metadataDescription:
       "Paver patios, walkways and patio renovations in Wyomissing, PA and nearby West Reading and Sinking Spring. Planned around layout, drainage and a solid base.",
-    heroHeading: "Paver Patio Installation in Wyomissing, PA",
+    heroHeading: "Paver patio installation in Wyomissing, PA",
     heroIntro:
       "Design a paver patio or walkway around your yard’s grade, drainage, access and the way it connects to the house.",
     localProjectHeading: "A patio that fits the lot",
@@ -490,12 +490,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Basement Finishing & Remodeling in Reading, PA",
     metadataDescription:
       "Basement finishing and remodeling in Reading, PA. Plan a family room, theater or flexible living space with moisture, ceiling and utility access considered.",
-    heroHeading: "Basement Finishing & Remodeling in Reading, PA",
+    heroHeading: "Basement finishing & remodeling in Reading, PA",
     heroIntro:
       "Plan a finished basement around the space’s existing conditions, utility access, ceiling constraints, lighting, and intended use before framing and finish selections begin.",
     localProjectHeading: "Planning a basement finish in Reading",
     localProjectSnippet:
-      "An entertainment wall, fireplace, layered lighting, and coordinated floor finishes can give a basement a clear purpose. Explore the room details below, then plan seating, storage, utilities, and ceiling clearances around your Reading space.",
+      "An entertainment wall, fireplace, layered lighting, and coordinated floor finishes can give a basement a clear purpose. See the room details below, then plan seating, storage, utilities, and ceiling clearances around your Reading space.",
     localChallengesHeading: "Basement conditions to review before finishing",
     localChallenges: [
       "Existing moisture conditions and any active water concerns",
@@ -560,8 +560,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "allentown-pa/kitchen-remodeling": {
     metadataTitle: "Kitchen Remodeling & Cabinet Refacing in Allentown, PA",
     metadataDescription:
-      "Kitchen remodeling and cabinet refacing in Allentown, PA: new or refaced cabinets, countertops, lighting and layout changes for older city homes and newer houses.",
-    heroHeading: "Kitchen Remodelers in Allentown, PA",
+      "Kitchen remodeling and cabinet refacing in Allentown, PA: new or refaced cabinets, countertops, lighting and layout changes for older and newer homes.",
+    heroHeading: "Kitchen remodelers in Allentown, PA",
     localProjectHeading: "Planning a kitchen remodel in Allentown",
     localProjectSnippet:
       "For an Allentown kitchen remodel, layout changes are planned alongside the existing plumbing and electrical. If cabinet or lighting choices need utility changes, your proposal covers who handles them, the cost and the order of work.",
@@ -616,8 +616,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "allentown-pa/bathroom-remodeling": {
     metadataTitle: "Bathroom Remodeling in Allentown, PA",
     metadataDescription:
-      "Bathroom remodeling in Allentown, PA: showers, tile, vanities and full remodels for older rowhomes and twins as well as newer houses, with the waterproofing done right behind the tile.",
-    heroHeading: "Bathroom Remodelers in Allentown, PA",
+      "Bathroom remodeling in Allentown, PA: showers, tile, vanities and full remodels for rowhomes, twins and newer houses, waterproofed behind the tile.",
+    heroHeading: "Bathroom remodelers in Allentown, PA",
     localProjectHeading: "Planning a bathroom remodel in Allentown",
     localProjectSnippet:
       "Allentown bathroom remodels range from small upstairs baths in older rowhomes and twins to primary bathrooms in newer houses. We fix the subfloor and old plumbing we find, and build every shower with proper waterproofing behind the tile.",
@@ -673,8 +673,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "allentown-pa/basement-finishing": {
     metadataTitle: "Basement Finishing in Allentown, PA",
     metadataDescription:
-      "Basement finishing in Allentown, PA with moisture-aware planning, cleaner layouts, and finish-ready spaces for offices, media rooms, guest areas, and flex living.",
-    heroHeading: "Basement Finishing in Allentown, PA",
+      "Basement finishing in Allentown, PA: moisture checked first, then media rooms, offices and guest space planned around your utilities and ceiling height.",
+    heroHeading: "Basement finishing in Allentown, PA",
     localProjectHeading: "Planning a finished basement in Allentown",
     localProjectSnippet:
       "For an Allentown basement, we look at lighting, room layout and access to utilities alongside your goals for the space, and check moisture, storage and service clearances before planning the finish.",
@@ -724,13 +724,13 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "allentown-pa/paver-installation": {
     metadataTitle: "Paver Patio Installation & Repair in Allentown, PA",
     metadataDescription:
-      "New paver patios and patio repair in Allentown, PA: sunken or loose pavers, washed-out joints and failing edges, plus pool surrounds and full renovations.",
-    heroHeading: "Paver Patio Installation & Repair in Allentown, PA",
+      "New paver patios and patio repair in Allentown, PA: sunken or loose pavers, washed-out joints and failing edges, plus pool decks and full rebuilds.",
+    heroHeading: "Paver patio installation & repair in Allentown, PA",
     heroIntro:
       "Build a new paver patio or fix the one you have. Sunken spots, loose pavers and washed-out joints usually trace back to the base, the edges or drainage, so that is where a repair starts.",
     localProjectHeading: "Planning an Allentown paver patio project",
     localProjectSnippet:
-      "Pool curves, patio edges, and the route between the water and the house shape how an outdoor area feels. Explore the pool-patio details below, then discuss access, drainage, transitions, and the layout that fits your Allentown property.",
+      "Allentown patio work ranges from new paver patios off the back door to fixing patios that have sunk, heaved or shifted. Either way we start underneath, with the base, the grade and where the water goes, so the finished surface stays level.",
     localChallengesHeading: "What affects an Allentown patio",
     localChallenges: [
       "Access for excavation, aggregate, pavers, and installation equipment",
@@ -744,7 +744,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         a: "Yes. We reset sunken or heaving sections, replace cracked pavers, refill washed-out joints and rebuild failing edges. If the base under a large area has failed, we will tell you whether rebuilding that section is the better fix.",
       },
     ],
-    relatedCaseStudySlug: "bethlehem-pool-patio-renovation",
+    relatedCaseStudySlug: "reading-paver-patio-buildout",
     internalLinks: [
       {
         href: "/allentown-pa",
@@ -757,9 +757,9 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
         reason: "Broader scope and planning factors",
       },
       {
-        href: "/projects/bethlehem-pool-patio-renovation",
-        anchorText: "Pool-patio layout and finish ideas",
-        reason: "Curved patio edges and pool-surround layout ideas",
+        href: "/projects/reading-paver-patio-buildout",
+        anchorText: "Paver patio and pavilion we built",
+        reason: "Finished paver patio built by RHI Pros",
       },
       {
         href: "#quote-form-section",
@@ -772,12 +772,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Kitchen Remodeling in Berks County, PA",
     metadataDescription:
       "Kitchen remodeling and cabinet refacing in Berks County: cabinets, countertops, layout and finishes, from a cabinet update to a full remodel.",
-    heroHeading: "Kitchen Remodeling in Berks County, PA",
+    heroHeading: "Kitchen remodeling in Berks County, PA",
     heroIntro:
       "Plan a Berks County kitchen remodel around layout, cabinets, counters, and finish details so the room works better day to day. RHI Pros puts the full plan in writing before work begins.",
     localProjectHeading: "Coordinate cabinets, counters, and fixtures",
     localProjectSnippet:
-      "Cabinet profiles, counter colors, and fixture finishes set the tone for the room. Explore the kitchen details below, then decide what your Berks County kitchen needs: new cabinetry, a coordinated finish update or a fuller layout change.",
+      "Cabinet profiles, counter colors, and fixture finishes set the tone for the room. See the kitchen details below, then decide what your Berks County kitchen needs: new cabinetry, a coordinated finish update or a fuller layout change.",
     localChallengesHeading: "What we plan for in Berks County kitchens",
     localChallenges: [
       "Balancing cabinet, countertop, and fixture decisions so the finished kitchen feels coordinated",
@@ -826,12 +826,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Bathroom Remodeling in Berks County, PA",
     metadataDescription:
       "Bathroom remodeling in Berks County, PA with moisture-smart planning, fixture and finish selections, and a detailed written proposal.",
-    heroHeading: "Bathroom Remodeling in Berks County, PA",
+    heroHeading: "Bathroom remodeling in Berks County, PA",
     heroIntro:
       "Plan a Berks County bathroom remodel around waterproofing, fixtures, storage, and finish details that hold up to daily use. RHI Pros puts the full plan in writing before construction starts.",
     localProjectHeading: "Making a compact bathroom work harder",
     localProjectSnippet:
-      "A compact bathroom benefits from a coordinated vanity, wall palette, and floor finish. Explore the room details below, then plan storage, fixture clearances, lighting, and materials around the space you have in Berks County.",
+      "A compact bathroom benefits from a coordinated vanity, wall palette, and floor finish. See the room details below, then plan storage, fixture clearances, lighting, and materials around the space you have in Berks County.",
     localChallengesHeading: "What we plan for in Berks County bathrooms",
     localChallenges: [
       "Improving layout and storage without overcrowding a compact bathroom footprint",
@@ -880,12 +880,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Basement Finishing in Berks County, PA",
     metadataDescription:
       "Basement finishing in Berks County, PA with moisture-aware planning, practical layouts, and finish work suited to older foundations and suburban homes.",
-    heroHeading: "Basement Finishing in Berks County, PA",
+    heroHeading: "Basement finishing in Berks County, PA",
     heroIntro:
       "Plan a finished basement around existing moisture conditions, utility access, ceiling constraints, lighting, HVAC coordination, storage, and the intended room use.",
     localProjectHeading: "Planning a basement finish in Berks County",
     localProjectSnippet:
-      "Explore media-wall, fireplace, lighting, and floor finish ideas for a basement with a clear purpose. Your Berks County plan should also account for ceiling height, storage, mechanical access, and any existing moisture concerns.",
+      "See media-wall, fireplace, lighting, and floor finish ideas for a basement with a clear purpose. Your Berks County plan should also account for ceiling height, storage, mechanical access, and any existing moisture concerns.",
     localChallengesHeading: "What we plan for in Berks County basements",
     localChallenges: [
       "Moisture and foundation conditions in older Berks County homes",
@@ -921,7 +921,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Drywall Installation and Repair in Allentown, PA",
     metadataDescription:
       "Drywall installation and repair in Allentown, PA for wall patches, ceiling repairs, and paint-ready finish work with clean seam blending.",
-    heroHeading: "Drywall Installation and Repair in Allentown, PA",
+    heroHeading: "Drywall installation and repair in Allentown, PA",
     localProjectHeading: "Planning drywall repairs in Allentown",
     localProjectSnippet:
       "Allentown drywall projects range from targeted patch repairs to broader wall and ceiling finish work tied to remodeling or restoration. We focus on clean seam blending, paint-ready surfaces, and repair planning that does not leave the room looking patched together.",
@@ -972,10 +972,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Water Damage Restoration in Allentown, PA",
     metadataDescription:
       "Water damage repairs in Allentown, PA: room-by-room planning, drywall and finish repairs, and documentation for your insurance claim.",
-    heroHeading: "Water Damage Restoration in Allentown, PA",
+    heroHeading: "Water damage restoration in Allentown, PA",
     localProjectHeading: "Planning a water damage rebuild in Allentown",
     localProjectSnippet:
-      "Water damage can reach several rooms or a single wall. For an Allentown rebuild, we review the affected materials, any mitigation records, access and any drying or cleanup still needed before planning new finishes.",
+      "After a leak or flood in Allentown, we rebuild the drywall, flooring and trim once the house has been dried out. First we review the affected materials, any mitigation records, access and any drying or cleanup still needed before planning new finishes.",
     localChallengesHeading: "What we plan for after water damage in Allentown",
     localChallenges: [
       "Coordinating repairs across several rooms on schedule",
@@ -1018,10 +1018,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Fire Damage Restoration in Allentown, PA",
     metadataDescription:
       "Fire damage restoration in Allentown, PA: organized rebuild planning, smoke and fire damage repairs, and clear documentation for your claim.",
-    heroHeading: "Fire Damage Restoration in Allentown, PA",
+    heroHeading: "Fire damage restoration in Allentown, PA",
     localProjectHeading: "Planning a fire damage rebuild in Allentown",
     localProjectSnippet:
-      "After a fire in Allentown, the move from damage review to reconstruction needs care. We organize the rebuild so structural repairs, finishes and the final details happen in the right order.",
+      "After a fire in Allentown, we document the damage, check how far the smoke traveled and plan the rebuild room by room. We organize the rebuild so structural repairs, finishes and the final details happen in the right order.",
     localChallengesHeading: "What we plan for after a fire in Allentown",
     localChallenges: [
       "Organizing the rebuild after a stressful event",
@@ -1060,7 +1060,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
       {
         href: "/projects",
-        anchorText: "Explore construction and finish details",
+        anchorText: "Construction and finish details",
         reason: "Interior layouts and construction details",
       },
     ],
@@ -1068,8 +1068,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "allentown-pa/exterior-remodeling": {
     metadataTitle: "Exterior Remodeling in Allentown, PA",
     metadataDescription:
-      "Exterior remodeling in Allentown, PA for siding, trim, garage facades, and multi-story elevations. Access planning, durable finish work, and curb-appeal improvements.",
-    heroHeading: "Exterior Remodeling in Allentown, PA",
+      "Exterior remodeling in Allentown, PA: siding, trim and garage fronts, including multi-story homes, with safe access planned before work starts.",
+    heroHeading: "Exterior remodeling in Allentown, PA",
     localProjectHeading: "Planning exterior work in Allentown",
     localProjectSnippet:
       "For an Allentown exterior, we assess the trim and facade and how each side of the house can be reached safely, then plan access, preparation and finishes before scheduling the work.",
@@ -1120,7 +1120,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Kitchen Remodeling in Bethlehem, PA",
     metadataDescription:
       "Kitchen remodeling in Bethlehem, PA for character homes and modern layouts, with detail-oriented planning and high-quality finish execution.",
-    heroHeading: "Kitchen Remodelers in Bethlehem, PA",
+    heroHeading: "Kitchen remodelers in Bethlehem, PA",
     localProjectHeading: "Planning a kitchen remodel in Bethlehem",
     localProjectSnippet:
       "For a Bethlehem kitchen, we start with the existing footprint before choosing cabinets, lighting and appliance locations. If original details matter to you, we plan the new layout and storage around them.",
@@ -1171,7 +1171,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Bathroom Remodeling in Bethlehem, PA",
     metadataDescription:
       "Bathroom remodeling in Bethlehem, PA focused on waterproofing, long-term durability, and design updates for historic and modern homes.",
-    heroHeading: "Bathroom Remodelers in Bethlehem, PA",
+    heroHeading: "Bathroom remodelers in Bethlehem, PA",
     localProjectHeading: "Planning a bathroom remodel in Bethlehem",
     localProjectSnippet:
       "For a Bethlehem bathroom, we check moisture conditions alongside layout and fixture choices. Repairs, shower preparation and the waterproofing system are settled in your proposal before you choose finishes.",
@@ -1221,8 +1221,8 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "bethlehem-pa/basement-finishing": {
     metadataTitle: "Basement Finishing in Bethlehem, PA",
     metadataDescription:
-      "Basement finishing in Bethlehem, PA with moisture-aware planning, cleaner layouts, and finish sequencing for family rooms, offices, guest space, and flex living.",
-    heroHeading: "Basement Finishing in Bethlehem, PA",
+      "Basement finishing in Bethlehem, PA: moisture and ceiling heights checked first, then family rooms, offices and guest space planned around them.",
+    heroHeading: "Basement finishing in Bethlehem, PA",
     localProjectHeading: "Planning a finished basement in Bethlehem",
     localProjectSnippet:
       "For a Bethlehem basement, we measure ceiling heights and map utilities, storage and service access before planning rooms, then plan lighting and layout around what the space allows.",
@@ -1273,7 +1273,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Drywall Repair & Installation in Bethlehem, PA",
     metadataDescription:
       "Drywall installation and repair in Bethlehem, PA for patches, wall and ceiling repairs, and paint-ready finish work with smooth, clean blending.",
-    heroHeading: "Drywall Repair & Installation in Bethlehem, PA",
+    heroHeading: "Drywall repair & installation in Bethlehem, PA",
     localProjectHeading: "Planning drywall repairs in Bethlehem",
     localProjectSnippet:
       "For drywall work in Bethlehem, we look at the existing walls, damaged areas and earlier patches before planning repairs, and agree on the finish level so repairs blend in under paint.",
@@ -1324,7 +1324,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Water Damage Restoration in Bethlehem, PA",
     metadataDescription:
       "Water damage repairs in Bethlehem, PA: drywall, flooring, trim and finishes rebuilt after a leak, with documentation for your insurance claim.",
-    heroHeading: "Water and Flood Damage Restoration in Bethlehem, PA",
+    heroHeading: "Water and flood damage restoration in Bethlehem, PA",
     localProjectHeading: "Planning a water damage rebuild in Bethlehem",
     localProjectSnippet:
       "For a Bethlehem water damage rebuild, we review the affected rooms and any completed mitigation before setting repair priorities. Your proposal lists the finishes being replaced and anything handled separately, such as drying or cleanup.",
@@ -1370,7 +1370,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Fire Damage Restoration in Bethlehem, PA",
     metadataDescription:
       "Fire damage restoration in Bethlehem, PA: phased rebuild planning, organized repairs and clear communication after fire and smoke damage.",
-    heroHeading: "Fire Damage Restoration in Bethlehem, PA",
+    heroHeading: "Fire damage restoration in Bethlehem, PA",
     localProjectHeading: "Planning a fire damage rebuild in Bethlehem",
     localProjectSnippet:
       "After a fire in Bethlehem, we document the affected areas and assess existing conditions before planning reconstruction, so you know the order of work and what has to happen before finishes go in.",
@@ -1412,7 +1412,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       },
       {
         href: "/projects",
-        anchorText: "Explore construction and finish details",
+        anchorText: "Construction and finish details",
         reason: "Interior layouts and construction details",
       },
     ],
@@ -1421,7 +1421,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Exterior Remodeling in Bethlehem, PA",
     metadataDescription:
       "Exterior remodeling in Bethlehem, PA for entry stairs, siding, trim, windows, and elevated access builds with durable materials and clean finish details.",
-    heroHeading: "Exterior Remodeling in Bethlehem, PA",
+    heroHeading: "Exterior remodeling in Bethlehem, PA",
     localProjectHeading: "Planning exterior work in Bethlehem",
     localProjectSnippet:
       "For a Bethlehem exterior, we look at entry access, trim condition, lot space and the home's existing details. Stairs and railings are planned with their layout, materials and installation requirements alongside the finish work.",
@@ -1472,12 +1472,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Paver Patio Installation in Bethlehem, PA",
     metadataDescription:
       "Paver patio installation and substantial pool-surround renovation in Bethlehem, PA, planned around access, drainage, layout, and existing conditions.",
-    heroHeading: "Paver Patio Installation in Bethlehem, PA",
+    heroHeading: "Paver patio installation in Bethlehem, PA",
     heroIntro:
       "Plan a new paver patio, substantial renovation, or pool-surround project around access, existing grade, drainage, edge conditions, and how the outdoor area will be used.",
     localProjectHeading: "Plan the space around your pool",
     localProjectSnippet:
-      "Curved pool edges call for thoughtful cuts, transitions, and usable space around the water. Explore the pool-patio details below, then plan walking routes, seating, access, and drainage around your Bethlehem property.",
+      "Around a curved pool, every edge needs careful cuts and a deck wide enough to walk and sit on. See the pool-patio details below, then plan walking routes, seating, access, and drainage around your Bethlehem property.",
     localChallengesHeading: "What affects a Bethlehem paver project",
     localChallenges: [
       "Curved pool edges and irregular patio shapes",
@@ -1526,9 +1526,9 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Kitchen Remodeling & Cabinet Refacing in Lehigh Valley, PA",
     metadataDescription:
       "Lehigh Valley kitchen remodeling and cabinet refacing, with cabinet, countertop and layout planning. See our kitchen work and request a quote.",
-    heroHeading: "Kitchen Remodeling in Lehigh Valley, PA",
+    heroHeading: "Kitchen remodeling in Lehigh Valley, PA",
     heroIntro:
-      "Bring cabinets, countertops, lighting, and layout together in a kitchen that works for your everyday life. Explore finish ideas and plan your project with RHI Pros.",
+      "Bring cabinets, countertops, lighting, and layout together in a kitchen that works for your everyday life. See finish ideas below and plan your project with RHI Pros.",
     planningGuide: {
       title: "Decide what your kitchen needs to do better.",
       items: [
@@ -1548,7 +1548,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     },
     localProjectHeading: "How Lehigh Valley kitchen projects come together",
     localProjectSnippet:
-      "Cabinet color, counter space, lighting, and storage should work together. Explore island-centered and compact kitchen ideas below, then plan the workflow and finish transitions around the room you use every day.",
+      "Cabinet color, counter space, lighting, and storage should work together. See island-centered and compact kitchen ideas below, then plan the workflow and finish transitions around the room you use every day.",
     localChallengesHeading: "What we plan for in Lehigh Valley kitchens",
     localChallenges: [
       "Balancing older-room constraints with modern kitchen flow",
@@ -1605,10 +1605,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Bathroom Remodeling in Lehigh Valley, PA",
     metadataDescription:
       "Bathroom remodeling in Lehigh Valley, PA with durable finish work, practical layout upgrades, and careful planning for clean, functional everyday spaces.",
-    heroHeading: "Bathroom Remodeling in Lehigh Valley, PA",
+    heroHeading: "Bathroom remodeling in Lehigh Valley, PA",
     localProjectHeading: "What Lehigh Valley bathroom updates often include",
     localProjectSnippet:
-      "Plan a Lehigh Valley bathroom around the way you use it: fixture placement, storage, the shower, lighting and finishes. Explore the room details for ideas; your proposal brings the practical requirements together.",
+      "Plan a Lehigh Valley bathroom around the way you use it: fixture placement, storage, the shower, lighting and finishes. See the room details for ideas; your proposal brings the practical requirements together.",
     localChallengesHeading: "What we plan for in Lehigh Valley bathrooms",
     localChallenges: [
       "Durable finish planning for bathrooms that see heavy everyday use",
@@ -1665,13 +1665,13 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "lehigh-valley-pa/basement-finishing": {
     metadataTitle: "Basement Finishing in Lehigh Valley, PA",
     metadataDescription:
-      "Basement finishing in Lehigh Valley, PA with moisture-conscious planning, lighting upgrades, and flexible layouts for family rooms, offices, and entertainment space.",
-    heroHeading: "Basement Finishing in Lehigh Valley, PA",
+      "Basement finishing in the Lehigh Valley: media rooms, family rooms and offices, with moisture checked first and lighting planned for the whole space.",
+    heroHeading: "Basement finishing in Lehigh Valley, PA",
     heroIntro:
       "Plan a finished basement around existing conditions, utility access, ceiling and lighting needs, HVAC coordination, and the way each room will be used.",
     localProjectHeading: "Give your basement a purpose",
     localProjectSnippet:
-      "An entertainment wall, fireplace, ceiling lighting, and coordinated floor finish can make a basement feel like part of the home. Explore those details below, then plan seating, utility access, sound considerations, and storage around your Lehigh Valley space.",
+      "An entertainment wall, fireplace, ceiling lighting, and coordinated floor finish can make a basement feel like part of the home. See those details below, then plan seating, utility access, sound considerations, and storage around your Lehigh Valley space.",
     localChallengesHeading: "What we plan for in Lehigh Valley basements",
     localChallenges: [
       "Layout planning around lower ceilings, utilities, and storage needs",
@@ -1720,12 +1720,12 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Paver Patio Installation in Lehigh Valley, PA",
     metadataDescription:
       "Paver patio installation across Lehigh Valley for new patios, substantial renovations, pool surrounds, and integrated outdoor-living projects.",
-    heroHeading: "Paver Patio Installation in Lehigh Valley, PA",
+    heroHeading: "Paver patio installation in Lehigh Valley, PA",
     heroIntro:
       "Plan a new paver patio, substantial renovation, pool surround, or connected outdoor-living project around access, grade, drainage, edge conditions, and the surrounding property.",
     localProjectHeading: "Create an outdoor space that fits your home",
     localProjectSnippet:
-      "Compare open patios, curved pool surrounds, and covered pavilion areas to decide how you want to spend time outside. Your Lehigh Valley plan should connect the layout to the property's access, grade, drainage, and surrounding landscape.",
+      "Compare open patios, pool decks, and covered pavilion areas to decide how you want to spend time outside. Your Lehigh Valley plan should connect the layout to the property's access, grade, drainage, and surrounding landscape.",
     localChallengesHeading: "What affects a Lehigh Valley patio",
     localChallenges: [
       "Site access for excavation, aggregate, pavers, and equipment",
@@ -1766,10 +1766,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     metadataTitle: "Water Damage Restoration in Lehigh Valley, PA",
     metadataDescription:
       "Water damage repairs in the Lehigh Valley, PA: rebuild planning and documented repairs for drywall, flooring, trim and finishes.",
-    heroHeading: "Water Damage Restoration in Lehigh Valley, PA",
+    heroHeading: "Water damage restoration in Lehigh Valley, PA",
     localProjectHeading: "Planning a water damage rebuild in the Lehigh Valley",
     localProjectSnippet:
-      "Plan the rebuild around the affected rooms, any available mitigation records, and the finishes needing repair. Agree on access, temporary arrangements, and the order of work so each phase has a clear purpose.",
+      "Across the Lehigh Valley, we plan a water damage rebuild around the affected rooms, the drying records and the finishes that need repair. Agree on access, temporary arrangements, and the order of work so each phase has a clear purpose.",
     localChallengesHeading: "What we plan for after water damage in the Lehigh Valley",
     localChallenges: [
       "Moving quickly from damage review into an organized rebuild plan",

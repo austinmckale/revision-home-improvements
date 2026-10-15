@@ -137,20 +137,20 @@ export const services: Service[] = [
     },
     image: {
       src: "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg",
-      alt: "Kitchen with blue cabinets and light countertops.",
+      alt: "Kitchen with navy cabinets, a patterned gray countertop and a full-height backsplash.",
     },
     gallery: [
       {
         src: "/images/projects/blue-kitchen-cabinet-counters/after/04-blue-kitchen-cabinets-done.jpg",
-        alt: "Blue kitchen cabinetry and light countertops.",
+        alt: "Navy cabinet run with a patterned gray countertop, sink and wine fridge.",
       },
       {
         src: "/images/projects/blue-kitchen-cabinet-counters/after/01-blue-kitchen-2.jpg",
-        alt: "Updated kitchen overview with blue cabinet finish.",
+        alt: "Navy cabinets installed, before the countertop and sink went in.",
       },
       {
         src: "/images/projects/blue-kitchen-cabinet-counters/after/03-blue-kitchen-cabinets-1.jpg",
-        alt: "Cabinet and counter detail.",
+        alt: "Navy cabinet run during installation, with tools on the floor.",
       },
     ],
   },
@@ -301,7 +301,7 @@ export const services: Service[] = [
       },
       {
         src: "/images/projects/lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
-        alt: "Reflective patterned basement floor finish.",
+        alt: "Gold and black metallic epoxy floor in a finished basement.",
       },
       {
         src: "/images/projects/lehigh-valley-basement-theater/after/wide-view-layout.jpg",
@@ -366,8 +366,8 @@ export const services: Service[] = [
       note: "Every repair is different. Your proposal reflects the damage and the finish you want.",
     },
     image: {
-      src: "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg",
-      alt: "Bedroom interior with blue walls and a light ceiling.",
+      src: "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg",
+      alt: "Room with smooth white walls, white closet doors, a ceiling fan and a tile floor.",
     },
     gallery: [
       {
@@ -460,7 +460,7 @@ export const services: Service[] = [
     },
     image: {
       src: "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg",
-      alt: "Light wood-look flooring in a furnished living area.",
+      alt: "Light wood-look plank flooring in an empty living room.",
     },
     gallery: [
       {
@@ -473,7 +473,7 @@ export const services: Service[] = [
       },
       {
         src: "/images/projects/bethlehem-interior-flooring-refresh/after/flooring-refresh.jpg",
-        alt: "Interior room showing wood-look flooring, wall finishes, and ceiling lighting.",
+        alt: "Room with honey-toned wood floors, gray walls and white trim.",
       },
     ],
   },
@@ -628,7 +628,7 @@ export const services: Service[] = [
     gallery: [
       {
         src: "/images/projects/allentown-exterior-log-home/after/front-finished.jpg",
-        alt: "Log-style house exterior with dark trim and garage doors.",
+        alt: "Log-style house exterior with green trim and garage doors.",
       },
       {
         src: "/images/projects/allentown-exterior-log-home/after/garage-elevation.jpg",
@@ -846,6 +846,11 @@ const inlineServiceNames: Record<string, string> = {
 
 export function inlineServiceName(service: Pick<Service, "slug" | "name">) {
   return inlineServiceNames[service.slug] ?? service.name.toLowerCase();
+}
+
+/** Sentence case for a full service name in a heading ("Drywall installation and repair"). */
+export function sentenceCaseServiceName(name: string) {
+  return name.charAt(0) + name.slice(1).toLowerCase();
 }
 
 /** Sentence-case label for lists and headings ("Kitchen remodeling", "Patios & outdoor living"). */

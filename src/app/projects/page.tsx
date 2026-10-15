@@ -14,9 +14,9 @@ import { getPageMetadata } from "@/lib/metadata";
 export const revalidate = 3600;
 
 export const metadata: Metadata = getPageMetadata({
-  title: "Remodeling Photo Collections | Lehigh Valley & Berks County",
+  title: "Remodeling Projects | Lehigh Valley & Berks County",
   description:
-    "Browse kitchen, bathroom, basement, patio and interior photo collections. Explore visible details and plan remodeling in the Lehigh Valley and Berks County.",
+    "Browse kitchen, bathroom, basement, patio and interior photo collections. See the details and plan remodeling in the Lehigh Valley and Berks County.",
   path: "/projects",
 });
 
@@ -180,7 +180,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
             <div className="border border-[var(--border)] bg-[var(--surface-soft)] p-6 sm:p-8">
               <h2 className="heading-serif text-2xl text-[var(--accent)]">Let’s talk through your project.</h2>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-                There are no published photo collections for this service here yet. Explore the other collections or
+                There are no published photo collections for this service here yet. See the other collections or
                 tell us what you have in mind.
               </p>
               <div className="mt-5 flex flex-wrap gap-5 text-sm font-semibold">
@@ -188,7 +188,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
                   href="/projects"
                   className="inline-flex min-h-11 items-center text-[var(--accent)] underline underline-offset-4"
                 >
-                  Explore all projects
+                  See all projects
                 </Link>
                 <Link
                   href={

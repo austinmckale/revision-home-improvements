@@ -55,7 +55,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const image = getProjectPresentation(caseStudy).image;
   const url = absoluteUrl(`/projects/${caseStudy.slug}`);
   return {
-    title: `${caseStudy.title} | ${caseStudy.mediaType === "planning" ? "Planning Reference" : "Photo Collection"}`,
+    title:
+      caseStudy.mediaType === "planning"
+        ? `${caseStudy.title} | Planning Reference`
+        : caseStudy.locationSlug
+          ? `${caseStudy.title} in ${caseStudy.locationName}`
+          : caseStudy.title,
     description: caseStudy.summary,
     alternates: { canonical: `/projects/${caseStudy.slug}` },
     openGraph: {

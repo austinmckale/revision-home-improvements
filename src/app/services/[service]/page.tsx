@@ -18,15 +18,17 @@ import {
   exampleScopeExplanation,
   getServiceBySlug,
   primaryServices,
+  sentenceCaseServiceName,
 } from "@/content/services";
 import { visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
+import { getProjectPresentation } from "@/content/projectShowcase";
 import { locations, placeName } from "@/content/locations";
 import { isIndexedCityServicePage } from "@/content/localSeo";
 import { siteConfig } from "@/content/site";
 import { insuranceClaimsClarification } from "@/content/restoration";
 import { absoluteUrl } from "@/lib/url";
 import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
-import { getFeaturedTestimonials } from "@/content/testimonials";
+import { getServiceTestimonials } from "@/content/testimonials";
 import { getPortfolioImages } from "@/lib/portfolio";
 import { getFeaturedCaseStudyGalleryImages } from "@/lib/servicePageMedia";
 import { curatePhotos } from "@/content/photoCuration";
@@ -67,30 +69,32 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     return {};
   }
   const titles: Record<string, string> = {
-    "paver-installation": "Paver Patio Installation | Lehigh Valley & Berks County",
+    "paver-installation": "Paver Patios & Repair | Lehigh Valley & Berks County",
     "drywall-installation-repair": "Drywall Installation & Repair | Lehigh Valley",
   };
   const descriptions: Record<string, string> = {
     "kitchen-remodeling":
       "Plan a kitchen remodel in the Lehigh Valley or Berks County. See cabinet, countertop and layout photos from our work, then request a quote from RHI Pros.",
     "bathroom-remodeling":
-      "Bathroom remodeling in the Lehigh Valley and Berks County. See finished showers and bathrooms, explore tile and fixture options, and request a written quote.",
+      "Bathroom remodeling in the Lehigh Valley and Berks County. See finished showers and bathrooms, compare tile and fixture options, and request a written quote.",
     "basement-finishing":
       "Turn an unfinished basement into living or entertainment space. See a real basement theater and plan layout, lighting and finishes with RHI Pros.",
     "paver-installation":
-      "Paver patios, pool surrounds and outdoor living in the Lehigh Valley and Berks County. Explore patio and pavilion photos, then plan your installation.",
+      "Paver patios, pool decks and outdoor living in the Lehigh Valley and Berks County. See patio and pavilion photos, then plan your installation.",
     "flooring-installation":
       "Flooring installation with careful subfloor preparation, clean transitions and matching trim. See our flooring work and request a quote for your home.",
     "drywall-installation-repair":
-      "Drywall installation and repair in the Lehigh Valley and Berks County. Explore smooth walls, ceiling repairs and paint-ready finishes from RHI Pros.",
+      "Drywall installation and repair in the Lehigh Valley and Berks County. See smooth walls, ceiling repairs and paint-ready finishes from RHI Pros.",
     "exterior-remodeling":
-      "Explore exterior remodeling across the Lehigh Valley and Berks County: siding, trim, stairs and curb-appeal updates with photo collections and project-planning guidance.",
+      "Exterior remodeling across the Lehigh Valley and Berks County: siding, trim, shutters and exterior stairs, with photos of finished homes.",
     "fire-damage-restoration":
-      "Fire damage restoration and interior rebuilding across the Lehigh Valley and Berks County. Call for an assessment, a detailed repair estimate and claim documentation.",
+      "Fire damage rebuilding across the Lehigh Valley and Berks County: an assessment, a detailed repair estimate and photos for your insurance claim.",
     "water-damage-restoration":
       "Water damage restoration in the Lehigh Valley and Berks County. Discuss affected rooms, phased repairs and insurance documentation with RHI Pros.",
   };
-  const title = titles[service.slug] ?? `${service.name} | Lehigh Valley & Berks County`;
+  // Keep titles short enough that Google shows the whole thing.
+  const regionalTitle = `${service.name} | Lehigh Valley & Berks County`;
+  const title = titles[service.slug] ?? (regionalTitle.length > 54 ? `${service.name} | Lehigh Valley & Berks` : regionalTitle);
   const description = descriptions[service.slug] ?? service.intro;
   const url = `/services/${service.slug}`;
   const shareImages = service.image.src
@@ -122,6 +126,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   );
   const explicitFeaturedCaseStudy = findExplicitFeaturedCaseStudy(service, visibleCaseStudies);
   const featuredCaseStudy = explicitFeaturedCaseStudy ?? relatedCaseStudies[0];
+  const featuredPresentation = featuredCaseStudy ? getProjectPresentation(featuredCaseStudy) : undefined;
   const moreCaseStudyCount = featuredCaseStudy
     ? relatedCaseStudies.filter((c) => c.slug !== featuredCaseStudy.slug).length
     : 0;
@@ -133,7 +138,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         featuredCaseStudy.images.find((img) => img.src !== heroImageSrc))
       : (featuredCaseStudy.afterImages?.[0] ?? featuredCaseStudy.images[0]));
   const showFeaturedCaseStudyThumb = Boolean(featuredCaseStudyThumb);
-  const serviceTestimonials = getFeaturedTestimonials();
+  const serviceTestimonials = getServiceTestimonials(service.slug);
   const isEmergencyService = service.slug === "fire-damage-restoration" || service.slug === "water-damage-restoration";
   const showCuratedStaticGallery = curatedStaticGalleryServiceSlugs.includes(
     service.slug as (typeof curatedStaticGalleryServiceSlugs)[number],
@@ -170,7 +175,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
     ? []
     : await getPortfolioImages({ serviceTags: [portfolioTag], limit: 6 });
   const showWholeHomeLink = wholeHomeServices.has(service.slug);
-  const pageHeading = service.slug === "paver-installation" ? "Paver Patio Installation" : service.name;
+  const pageHeading = service.slug === "paver-installation" ? "Paver patio installation" : sentenceCaseServiceName(service.name);
   const jsonLd = getServiceJsonLd(
     service.name,
     absoluteUrl(`/services/${service.slug}`),
@@ -324,7 +329,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                   <div>
                     <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">Before &amp; after</h2>
                     <p className="mt-3 mb-5 text-sm leading-relaxed text-[var(--muted)]">
-                      {featuredCaseStudy.summary}{" "}
+                      {featuredPresentation?.story ? `${featuredPresentation.story} ` : null}
                       <Link
                         href={`/projects/${featuredCaseStudy.slug}`}
                         className="whitespace-nowrap font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
@@ -340,11 +345,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                 ) : showCuratedGallerySection ? (
                   <section>
                     <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">
-                      {curatedGalleryIsSingleProject && featuredCaseStudy ? featuredCaseStudy.title : "Recent work"}
+                      {curatedGalleryIsSingleProject && featuredPresentation ? featuredPresentation.title : "Recent work"}
                     </h2>
                     {curatedGalleryIsSingleProject && featuredCaseStudy ? (
                       <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-                        {featuredCaseStudy.summary}{" "}
+                        {featuredPresentation?.story ? `${featuredPresentation.story} ` : null}
                         <Link
                           href={`/projects/${featuredCaseStudy.slug}`}
                           className="whitespace-nowrap font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
@@ -427,8 +432,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                         </div>
                       ) : null}
                       <div className="p-5 md:p-6">
-                        <p className="heading-serif text-2xl text-[var(--accent)]">{featuredCaseStudy.title}</p>
-                        <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{featuredCaseStudy.summary}</p>
+                        <p className="heading-serif text-2xl text-[var(--accent)]">{featuredPresentation?.title}</p>
+                        {featuredPresentation?.story ? (
+                          <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{featuredPresentation.story}</p>
+                        ) : null}
                         <span className="mt-4 inline-block text-sm font-semibold text-[var(--brand)]">
                           See the project →
                         </span>

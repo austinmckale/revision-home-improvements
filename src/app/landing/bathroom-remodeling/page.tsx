@@ -144,7 +144,7 @@ export default function BathroomLandingPage() {
             Bathroom details, up close
           </h2>
           <p className="mt-1 text-center text-sm text-[var(--muted)] md:text-left">
-            Explore shower, vanity and finish details.
+            Shower, vanity and finish details.
           </p>
           <div
             className="mt-5 flex gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-4 md:overflow-visible"

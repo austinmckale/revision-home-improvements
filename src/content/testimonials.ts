@@ -344,3 +344,21 @@ export function getTestimonialsByLocation(locationSlug: string) {
 export function getTestimonialsByService(serviceSlug: string) {
   return testimonials.filter((item) => isSourceCheckedTestimonial(item) && item.serviceSlug === serviceSlug);
 }
+
+/** Reviews that speak to a service's own work, shown first on that service's pages. */
+const serviceReviewNames: Readonly<Record<string, readonly string[]>> = {
+  "kitchen-remodeling": ["Karla S."],
+  "paver-installation": ["Sara M."],
+};
+
+/** Up to three reviews for a service page: any that mention this kind of work, then the featured company reviews. */
+export function getServiceTestimonials(serviceSlug: string): Testimonial[] {
+  const relevant = (serviceReviewNames[serviceSlug] ?? []).flatMap((name) => {
+    const match = testimonials.find(
+      (item) => item.name === name && item.verification.platform === "Google" && isSourceCheckedTestimonial(item),
+    );
+    return match ? [match] : [];
+  });
+  const featured = getFeaturedTestimonials().filter((item) => !relevant.includes(item));
+  return [...relevant, ...featured].slice(0, 3);
+}

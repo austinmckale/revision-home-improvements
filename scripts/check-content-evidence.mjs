@@ -211,9 +211,15 @@ test("unproven transformations, fire-loss attribution and duplicate showcase are
   const fireplace = content.getCaseStudyBySlug("allentown-fire-damage-interior-rebuild");
   assert.equal(fireplace.serviceSlug, "drywall-installation-repair");
   assert.equal(fireplace.featureInServiceListings, false);
-  const duplicate = content.getCaseStudyBySlug("lehigh-valley-dormer-shutter-detail-refresh");
+  const duplicate = getCollection("lehigh-valley-dormer-shutter-detail-refresh");
   assert.equal(duplicate.showInGallery, false);
   assert.equal(duplicate.sharedCollectionSlug, "lehigh-valley-full-exterior-refresh");
+  // The duplicate close-up page is merged into the full exterior project.
+  assert.equal(content.getCaseStudyBySlug("lehigh-valley-dormer-shutter-detail-refresh"), undefined);
+  assert.equal(
+    retired.retiredProjectRedirects["lehigh-valley-dormer-shutter-detail-refresh"],
+    "/projects/lehigh-valley-full-exterior-refresh",
+  );
 });
 
 test("owner-retired condition, documentation and planning collections are hidden but preserved", () => {
@@ -225,7 +231,8 @@ test("owner-retired condition, documentation and planning collections are hidden
     "beige-bathroom-before-after",
     "lehigh-water-damage-rebuild",
   ];
-  assert.deepEqual(Object.keys(retired.retiredProjectRedirects).sort(), [...expected].sort());
+  const merged = ["lehigh-valley-dormer-shutter-detail-refresh"];
+  assert.deepEqual(Object.keys(retired.retiredProjectRedirects).sort(), [...expected, ...merged].sort());
   for (const slug of expected) {
     assert.ok(getCollection(slug), `${slug}: record must be preserved`);
     assert.equal(content.getCaseStudyBySlug(slug), undefined, `${slug}: must not be public`);

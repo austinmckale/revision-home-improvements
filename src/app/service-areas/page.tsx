@@ -6,13 +6,13 @@ import JsonLd from "@/components/JsonLd";
 import BottomCTA from "@/components/sections/BottomCTA";
 import ServiceAreaMap from "@/components/sections/ServiceAreaMap";
 import { locations } from "@/content/locations";
-import { primaryServices } from "@/content/services";
+import { primaryServices, serviceLabel } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
-  title: "Service Areas | Allentown, Bethlehem, Lehigh Valley & Berks County",
+  title: "Service Areas | Lehigh Valley & Berks County",
   description:
     "RHI Pros serves homeowners across Allentown, Bethlehem, the Lehigh Valley, Reading, and Berks County with remodeling and restoration projects. Find your area.",
   path: "/service-areas",
@@ -78,7 +78,7 @@ export default function ServiceAreasPage() {
           <div className="paper-sheet mb-14 p-4 sm:p-8 lg:mb-20">
             <div className="mb-3 flex items-center justify-between gap-4 px-2 pt-1">
               <p className="annotation text-[0.62rem] text-[var(--muted)]">Service area · Berks ⟷ Lehigh Valley</p>
-              <p className="annotation hidden text-[0.62rem] text-[var(--muted)] sm:block">Select a city to explore</p>
+              <p className="annotation hidden text-[0.62rem] text-[var(--muted)] sm:block">Select a city</p>
             </div>
             <ServiceAreaMap />
           </div>
@@ -106,7 +106,7 @@ export default function ServiceAreasPage() {
             </div>
           </div>
           <nav aria-label="Services across our service areas" className="mt-10 border-t border-[var(--border)] pt-6">
-            <h2 className="heading-serif text-3xl text-[var(--accent)]">Explore our services</h2>
+            <h2 className="heading-serif text-3xl text-[var(--accent)]">Our services</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {primaryServices.map((service) => (
                 <Link
@@ -114,7 +114,7 @@ export default function ServiceAreasPage() {
                   href={`/services/${service.slug}`}
                   className="text-sm font-semibold text-[var(--brand)] hover:underline"
                 >
-                  {service.name}
+                  {serviceLabel(service)}
                 </Link>
               ))}
             </div>

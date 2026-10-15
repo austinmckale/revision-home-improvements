@@ -10,7 +10,7 @@ import { siteConfig } from "@/content/site";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
-  title: "Project Financing | Allentown, Lehigh Valley & Berks County",
+  title: "Project Financing | Lehigh Valley & Berks County",
   description:
     "Ask about financing for remodeling and repairs in the Lehigh Valley and Berks County. Offered through third-party lenders and subject to approval.",
   path: "/financing",

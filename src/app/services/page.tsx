@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import JsonLd from "@/components/JsonLd";
 import ServiceExplorer from "@/components/sections/ServiceExplorer";
 import BottomCTA from "@/components/sections/BottomCTA";
-import { primaryServices } from "@/content/services";
+import { primaryServices, serviceLabel } from "@/content/services";
 import { getProjectImageProps } from "@/content/projectImagePreviews";
 import { getCaseStudyBySlug } from "@/content/caseStudies";
 import { getProjectPresentation } from "@/content/projectShowcase";
@@ -124,7 +124,7 @@ export default function ServicesHubPage() {
                 </div>
                 <div className="flex items-start justify-between gap-3 pt-5">
                   <h3 className="heading-serif text-2xl text-[var(--accent)] sm:text-3xl">
-                    {service.slug === "paver-installation" ? "Patios & Outdoor Living" : service.name}
+                    {serviceLabel(service)}
                   </h3>
                   <span aria-hidden="true" className="pt-1 text-xl text-[var(--brand)]">
                     ↗
@@ -148,7 +148,7 @@ export default function ServicesHubPage() {
                 href="/services/whole-home-remodeling"
                 className="mt-8 inline-flex min-h-12 items-center justify-between gap-4 border-t border-white/30 pt-4 text-sm font-semibold"
               >
-                Explore whole-home remodeling <span aria-hidden="true">↗</span>
+                See whole-home remodeling <span aria-hidden="true">↗</span>
               </Link>
             </article>
           </div>
@@ -185,7 +185,7 @@ export default function ServicesHubPage() {
                 >
                   <span className="heading-serif text-5xl text-[var(--brand)]">0{index + 1}</span>
                   <div>
-                    <h3 className="heading-serif mt-8 text-3xl text-[var(--accent)]">{service.name}</h3>
+                    <h3 className="heading-serif mt-8 text-3xl text-[var(--accent)]">{serviceLabel(service)}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{service.short}</p>
                     <span className="mt-6 block text-sm font-semibold text-[var(--brand)]">
                       Learn more ↗

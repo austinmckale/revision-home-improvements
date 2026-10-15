@@ -14,7 +14,7 @@ import { getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = getPageMetadata({
-  title: "Insurance Claim Remodeling Support | Reading PA & Lehigh Valley",
+  title: "Insurance Claim Repairs | Reading & Lehigh Valley",
   description:
     "Insurance claim repairs in Reading, Berks County and the Lehigh Valley: photos, a detailed repair estimate for your adjuster, and the rebuild itself.",
   path: "/insurance-claims",

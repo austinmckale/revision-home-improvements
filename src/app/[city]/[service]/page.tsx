@@ -12,11 +12,13 @@ import ServiceHero from "@/components/sections/ServiceHero";
 import { getLocationBySlug, locations, placeName } from "@/content/locations";
 import { getCaseStudyBySlug, visibleCaseStudies, sortCaseStudiesByMarketPriority } from "@/content/caseStudies";
 import { getCityServiceLocalContent, isIndexedCityServicePage } from "@/content/localSeo";
+import { getProjectPresentation } from "@/content/projectShowcase";
 import {
   curatedStaticGalleryServiceSlugs,
   exampleScopeExplanation,
   getServiceBySlug,
   inlineServiceName,
+  sentenceCaseServiceName,
   primaryServices,
   services,
 } from "@/content/services";
@@ -146,6 +148,12 @@ export default async function CityServicePage({ params }: { params: Promise<Para
   const additionalLocalProof = localProof.filter(
     (item) => !showFeaturedProjectGallery || item.slug !== gallerySourceCaseStudy?.slug,
   );
+  // Each project appears once on the page: skip the inline link when the project is shown below.
+  const contextualShownBelow =
+    Boolean(contextualCaseStudy) &&
+    ((showFeaturedProjectGallery && contextualCaseStudy?.slug === gallerySourceCaseStudy?.slug) ||
+      additionalLocalProof.some((item) => item.slug === contextualCaseStudy?.slug));
+  const galleryPresentation = gallerySourceCaseStudy ? getProjectPresentation(gallerySourceCaseStudy) : undefined;
   const portfolioTag = service.portfolioTag ?? service.slug;
   const portfolioImages = showCuratedStaticGallery
     ? []
@@ -184,7 +192,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
 
       <ServiceHero
         eyebrow={location.name}
-        title={localContent?.heroHeading ?? `${service.name} in ${location.short}`}
+        title={localContent?.heroHeading ?? `${sentenceCaseServiceName(service.name)} in ${location.short}`}
         intro={
           localContent?.heroIntro ?? (isEmergencyService ? service.intro : `${service.intro} ${location.localAngle}`)
         }
@@ -198,7 +206,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
 
       <section className="py-14">
         <Container className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,.8fr)]">
-          <div>
+          <div className="order-1 lg:order-none">
             {(isEmergencyService || service.slug === "insurance-claims") && (
               <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">{insuranceClaimsClarification}</p>
             )}
@@ -207,11 +215,11 @@ export default async function CityServicePage({ params }: { params: Promise<Para
               <section id="local-planning" className="surface rounded-sm p-6">
                 <h2 className="heading-serif text-3xl text-[var(--accent)]">{localContent.localProjectHeading}</h2>
                 <p className="mt-2 text-sm text-[var(--muted)]">{localContent.localProjectSnippet}</p>
-                {showPriorityContextualSentence && contextualCaseStudy ? (
+                {showPriorityContextualSentence && contextualCaseStudy && !contextualShownBelow ? (
                   <p className="mt-3 text-sm text-[var(--muted)]">
                     Related project:{" "}
                     <Link href={`/projects/${contextualCaseStudy.slug}`} className="font-semibold text-[var(--brand)]">
-                      {contextualCaseStudy.title} ↗
+                      {getProjectPresentation(contextualCaseStudy).title} ↗
                     </Link>
                   </p>
                 ) : null}
@@ -302,8 +310,7 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                       href={`/projects/${item.slug}`}
                       className="surface rounded-lg p-4 hover:border-[var(--brand)]"
                     >
-                      <p className="heading-serif text-xl text-[var(--accent)]">{item.title}</p>
-                      <p className="mt-2 text-sm text-[var(--muted)]">{item.summary}</p>
+                      <p className="heading-serif text-xl text-[var(--accent)]">{getProjectPresentation(item).title}</p>
                       <span className="mt-3 inline-block text-sm font-semibold text-[var(--brand)]">
                         See the project →
                       </span>
@@ -339,22 +346,22 @@ export default async function CityServicePage({ params }: { params: Promise<Para
             ) : null}
           </div>
 
-          <div className="lg:row-span-2 lg:col-start-2">
+          <div className="order-3 lg:order-none lg:row-span-2 lg:col-start-2">
             <div className="lg:sticky lg:top-24">
               <QuoteForm defaultService={service.name} />
             </div>
           </div>
 
-          <div className="lg:col-start-1">
+          <div className="order-2 lg:order-none lg:col-start-1">
             <div id="project-photos">
               {showFeaturedProjectGallery ? (
                 <section>
                   <h2 className="heading-serif text-3xl text-[var(--accent)]">
-                    {gallerySourceCaseStudy ? gallerySourceCaseStudy.title : "Recent work"}
+                    {galleryPresentation ? galleryPresentation.title : "Recent work"}
                   </h2>
                   {gallerySourceCaseStudy ? (
                     <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-                      {gallerySourceCaseStudy.summary}{" "}
+                      {galleryPresentation?.story ? `${galleryPresentation.story} ` : null}
                       <Link
                         href={`/projects/${gallerySourceCaseStudy.slug}`}
                         className="whitespace-nowrap font-semibold text-[var(--brand)] underline-offset-2 hover:underline"
@@ -388,7 +395,9 @@ export default async function CityServicePage({ params }: { params: Promise<Para
                 <PortfolioGallery images={portfolioImages} title={`Recent ${service.name.toLowerCase()} work`} />
               ) : null}
             </div>
+          </div>
 
+          <div className="order-4 lg:order-none lg:col-start-1">
             <section className="mt-10 border-t border-[var(--border)] pt-8" aria-labelledby="more-local-heading">
               <h2 id="more-local-heading" className="heading-serif text-3xl text-[var(--accent)]">
                 More in {place}

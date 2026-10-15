@@ -41,7 +41,7 @@ function getCityHubDescription(location: NonNullable<ReturnType<typeof getLocati
     .slice(0, 2)
     .map((area) => area.replace(/ area$/, ""))
     .join(" and ");
-  return `Remodeling and fire and water damage repairs in ${location.name}, ${isRegion ? "including" : "plus nearby"} ${nearby}. Kitchens, bathrooms, basements and more. Request a quote.`;
+  return `Remodeling and fire and water damage repairs in ${location.name}, ${isRegion ? "including" : "plus nearby"} ${nearby}. Kitchens, bathrooms, basements and more.`;
 }
 
 export default async function CityHubPage({ params }: { params: Promise<Params> }) {
