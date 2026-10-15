@@ -323,8 +323,8 @@ export default function HomePage() {
                   The two we&rsquo;re proudest of.
                 </h2>
                 <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                  A gable-roof pavilion and a basement media room with a full entertainment wall, plus a kitchen in
-                  deep blue.
+                  A gable-roof pavilion and a basement media room with a full entertainment wall, plus a navy kitchen
+                  that runs to the ceiling.
                 </p>
               </div>
               <Link
