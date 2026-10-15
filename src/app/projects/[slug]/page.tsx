@@ -80,7 +80,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
   const caseStudy = getCaseStudyBySlug(slug);
   if (!caseStudy) notFound();
   const galleryImages = getProjectGalleryImages(caseStudy);
-  const heroImage = getProjectPresentation(caseStudy).image;
+  const { title: displayTitle, intro, image: heroImage } = getProjectPresentation(caseStudy);
   const collection = getProjectCollection(caseStudy);
   const isCommercial = collection === "commercial";
   // Each view once: the hero photo is not repeated below it, and curated duplicates are skipped.
@@ -147,11 +147,17 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
         />
         <Container className="relative z-10 flex flex-1 flex-col justify-end pt-4 sm:pt-16">
           <div className="max-w-4xl">
-            <p className="eyebrow eyebrow-light">{isCommercial ? "Commercial project" : caseStudy.serviceName}</p>
-            <h1 className="heading-serif mt-5 max-w-4xl text-4xl leading-[1.03] tracking-[-.03em] text-white sm:text-5xl lg:text-7xl">
-              {caseStudy.title}
+            <h1>
+              <span className="eyebrow eyebrow-light">
+                {isCommercial && !/commercial/i.test(caseStudy.title) ? "Commercial · " : ""}
+                {caseStudy.title}
+                {caseStudy.locationSlug ? ` · ${caseStudy.locationName}` : ""}
+              </span>{" "}
+              <span className="heading-serif mt-5 block max-w-4xl text-4xl leading-[1.03] tracking-[-.03em] text-white sm:text-5xl lg:text-7xl">
+                {displayTitle}
+              </span>
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{caseStudy.summary}</p>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">{intro}</p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Button href={quoteHref} className="!text-white">
                 Plan your project

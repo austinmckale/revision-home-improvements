@@ -118,9 +118,17 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     width: 2000,
     height: 1500,
   },
+  "/images/projects/allentown-commercial-bathroom/after/floor-after-preview.webp": {
+    width: 470,
+    height: 680,
+  },
   "/images/projects/allentown-commercial-bathroom/after/floor-after.png": {
     width: 470,
     height: 788,
+  },
+  "/images/projects/allentown-commercial-bathroom/after/hallway-after-preview.webp": {
+    width: 470,
+    height: 680,
   },
   "/images/projects/allentown-commercial-bathroom/after/hallway-after.png": {
     width: 470,
@@ -128,7 +136,7 @@ export const projectImageDimensions: Record<string, { width: number; height: num
   },
   "/images/projects/allentown-commercial-bathroom/after/sink-area-after-preview.webp": {
     width: 470,
-    height: 788,
+    height: 680,
   },
   "/images/projects/allentown-commercial-bathroom/after/sink-area-after.png": {
     width: 470,
@@ -141,6 +149,10 @@ export const projectImageDimensions: Record<string, { width: number; height: num
   "/images/projects/allentown-commercial-bathroom/before/floor-before.png": {
     width: 470,
     height: 788,
+  },
+  "/images/projects/allentown-commercial-bathroom/before/hallway-before-preview.webp": {
+    width: 470,
+    height: 680,
   },
   "/images/projects/allentown-commercial-bathroom/before/hallway-before.png": {
     width: 470,
@@ -669,8 +681,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 3024,
   },
   "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after-preview.webp": {
-    width: 946,
-    height: 2048,
+    width: 853,
+    height: 1727,
   },
   "/images/projects/lehigh-valley-exterior-refresh/after/exterior-after.jpg": {
     width: 946,
@@ -683,6 +695,10 @@ export const projectImageDimensions: Record<string, { width: number; height: num
   "/images/projects/lehigh-valley-exterior-refresh/after/exterior-finished.jpg": {
     width: 720,
     height: 1544,
+  },
+  "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before-preview.webp": {
+    width: 854,
+    height: 1729,
   },
   "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg": {
     width: 946,
@@ -711,6 +727,10 @@ export const projectImageDimensions: Record<string, { width: number; height: num
   "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg": {
     width: 3024,
     height: 4032,
+  },
+  "/images/projects/ryan-bathroom/before/ryans-bathroom-before-preview.webp": {
+    width: 1242,
+    height: 1656,
   },
   "/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg": {
     width: 1242,

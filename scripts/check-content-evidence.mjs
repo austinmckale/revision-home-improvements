@@ -198,11 +198,16 @@ test("unproven building relationships are not presented as one field-documentati
 });
 
 test("unproven transformations, fire-loss attribution and duplicate showcase are withheld", () => {
-  for (const slug of ["bethlehem-bathroom-refresh", "ryan-bathroom-remodel", "allentown-kitchen-layout-upgrade"]) {
+  for (const slug of ["bethlehem-bathroom-refresh", "allentown-kitchen-layout-upgrade"]) {
     const current = content.getCaseStudyBySlug(slug);
     assert.equal(current.beforeImages.length, 0, slug);
     assert.equal(current.afterImages.length, 0, slug);
   }
+  // Owner confirmed (October 15, 2026) that the bathroom screenshot is the same room before the remodel.
+  const doubleVanity = content.getCaseStudyBySlug("ryan-bathroom-remodel");
+  assert.equal(doubleVanity.beforeImages.length, 1);
+  assert.equal(doubleVanity.afterImages.length, 1);
+  assert.equal(doubleVanity.photoGroups?.length ?? 0, 0);
   const fireplace = content.getCaseStudyBySlug("allentown-fire-damage-interior-rebuild");
   assert.equal(fireplace.serviceSlug, "drywall-installation-repair");
   assert.equal(fireplace.featureInServiceListings, false);

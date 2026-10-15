@@ -269,7 +269,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "berks-county-ranch-exterior-refresh": overview({
     title: "Classic ranch exterior",
     summary:
-      "Light siding, dark shutters and a dark entry railing give this single-story home clean, classic curb appeal.",
+      "White siding with black shutters and a black railing at the front steps of a single-story ranch.",
     scope: ["Single-story front elevation", "Contrasting shutters and railing", "Front entry and landscaping"],
     images: [
       photo(
@@ -553,25 +553,26 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "ryan-bathroom-remodel": overview({
     title: "Double-vanity bathroom",
     summary:
-      "A dark double vanity with a granite top between two windows, with warm wood-look flooring underfoot.",
-    scope: ["Double-sink vanity and mirror", "Wall, window, and floor finishes", "Bathing area beside the vanity"],
+      "A dark double vanity with a speckled granite top and two sinks, warm beige walls and a light plank floor, where a pink sink and toilet used to be. Compare the room before and after.",
+    scope: ["Double-sink vanity with a granite top", "Wall, window, and floor finishes", "Bathing area beside the vanity"],
     images: [
       photo(
         "ryan-bathroom/after/ryans-bathroom-finished.jpg",
-        "Bathroom with a dark double-sink vanity, a window, wood-look floor, toilet, and bathing area.",
+        "Bathroom with a dark double-sink vanity, a window, light plank floor, toilet, and bathing area.",
       ),
     ],
-    photoGroups: [
-      {
-        title: "Another view",
-        description: "A wood-tone vanity with darker flooring.",
-        images: [
-          photo(
-            "ryan-bathroom/before/ryans-bathroom-before.jpg",
-            "Source screenshot of a bathroom with a wood-tone vanity, darker floor, and window details.",
-          ),
-        ],
-      },
+    // Owner confirmed (October 15, 2026) that the screenshot shows the same bathroom before the remodel.
+    beforeImages: [
+      photo(
+        "ryan-bathroom/before/ryans-bathroom-before.jpg",
+        "Supplied earlier-condition view of the same bathroom with a pink sink and toilet, patterned wallpaper, and dark floor tile.",
+      ),
+    ],
+    afterImages: [
+      photo(
+        "ryan-bathroom/after/ryans-bathroom-finished.jpg",
+        "Matching bathroom view with a dark double vanity, granite top, and light plank floor.",
+      ),
     ],
   }),
   "hamburg-laundry-bathroom-remodel": overview({

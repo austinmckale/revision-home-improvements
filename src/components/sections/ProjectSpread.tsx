@@ -24,22 +24,19 @@ function SpreadPhoto({ image, sizes, className }: { image: Photo; sizes: string;
 
 /**
  * A homepage project shown the way a job file reads: a lead photo, a detail or two from the same
- * project, and what was built. The title carries the link and stretches over the whole spread.
+ * project, the name and a short spec line. The title carries the link and stretches over the whole spread.
  */
 export default function ProjectSpread({
   study,
   size = "standard",
   reverse = false,
-  highlights = size === "lead",
 }: {
   study: CaseStudy;
   size?: "lead" | "standard";
   /** Lead spreads only: photo on the right from 1024px up. */
   reverse?: boolean;
-  /** Show the project's highlight list under the summary. */
-  highlights?: boolean;
 }) {
-  const { title } = getProjectPresentation(study);
+  const { title, spec } = getProjectPresentation(study);
   const { lead, details } = getFeaturedProjectPhotos(study);
   const isLead = size === "lead";
   const label = serviceLabel({ slug: study.serviceSlug, name: study.serviceName });
@@ -72,20 +69,7 @@ export default function ProjectSpread({
             <span className="sr-only"> View {study.title}</span>
           </Link>
         </h3>
-        <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)]">{study.summary}</p>
-
-        {highlights && study.scope.length > 0 ? (
-          <ul className="mt-5 grid gap-1.5 text-sm text-[var(--foreground)]">
-            {study.scope.map((item) => (
-              <li key={item} className="flex gap-3">
-                <span className="text-[var(--brand)]" aria-hidden="true">
-                  —
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        <p className="mt-4 max-w-xl text-base leading-relaxed text-[var(--muted)]">{spec}</p>
 
         {details.length > 0 ? (
           <div className={`grid grid-cols-2 gap-2 sm:gap-3 ${isLead ? "mt-7 lg:mt-auto lg:pt-8" : "mt-6"}`}>

@@ -28,7 +28,12 @@ export const projectImagePreviews: Record<string, string> = {
   "/images/projects/fire-damage-documentation/after/01-img_7761.jpg": "/images/projects/fire-damage-documentation/after/01-img_7761-preview.webp",
   "/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-1.png": "/images/projects/beige-bathroom-before-after/beige-bathroom-layout-board-1-preview.webp",
   "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg": "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower-preview.webp",
-  "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg": "/images/projects/bethlehem-pool-patio/before/pool-patio-before-preview.webp"
+  "/images/projects/bethlehem-pool-patio/before/pool-patio-before.jpg": "/images/projects/bethlehem-pool-patio/before/pool-patio-before-preview.webp",
+  "/images/projects/allentown-commercial-bathroom/after/hallway-after.png": "/images/projects/allentown-commercial-bathroom/after/hallway-after-preview.webp",
+  "/images/projects/allentown-commercial-bathroom/before/hallway-before.png": "/images/projects/allentown-commercial-bathroom/before/hallway-before-preview.webp",
+  "/images/projects/allentown-commercial-bathroom/after/floor-after.png": "/images/projects/allentown-commercial-bathroom/after/floor-after-preview.webp",
+  "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before.jpg": "/images/projects/lehigh-valley-exterior-refresh/before/exterior-before-preview.webp",
+  "/images/projects/ryan-bathroom/before/ryans-bathroom-before.jpg": "/images/projects/ryan-bathroom/before/ryans-bathroom-before-preview.webp"
 };
 
 /**

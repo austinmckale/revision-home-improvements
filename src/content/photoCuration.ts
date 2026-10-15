@@ -40,8 +40,6 @@ export const hiddenProjectPhotos: ReadonlySet<string> = new Set([
   p("fireplace-construction-project/after/bathroom-tile-in-progress.jpg"),
   // Black-framed shower: boxes and a bag in the doorway shot.
   p("bethlehem-bathroom-refresh/after/bathroom-door-open.jpg"),
-  // Double-vanity bathroom: a phone screenshot of a different-looking room.
-  p("ryan-bathroom/before/ryans-bathroom-before.jpg"),
   // Commercial restroom: an "After" label burned into the photo and boxes in the shot.
   p("allentown-commercial-bathroom/after/floor-after.png"),
 ]);
@@ -56,9 +54,18 @@ export function curatePhotos<T extends { src: string }>(images: readonly T[], al
   });
 }
 
-/** Originals that carry a phone screenshot frame; the cropped preview is shown at full size instead. */
-export const croppedOriginals: Readonly<Record<string, string>> = {
-  [p("lehigh-valley-exterior-refresh/after/exterior-finished.jpg")]: p(
-    "lehigh-valley-exterior-refresh/after/exterior-finished-preview.webp",
-  ),
-};
+/**
+ * Originals that carry a phone screenshot frame or a burned-in "Before"/"After" label. Originals stay
+ * unchanged on disk (their hashes are checked); the cropped preview is shown at full size instead.
+ */
+export const croppedOriginals: Readonly<Record<string, string>> = Object.fromEntries(
+  [
+    "lehigh-valley-exterior-refresh/after/exterior-finished.jpg",
+    "lehigh-valley-exterior-refresh/after/exterior-after.jpg",
+    "lehigh-valley-exterior-refresh/before/exterior-before.jpg",
+    "ryan-bathroom/before/ryans-bathroom-before.jpg",
+    "allentown-commercial-bathroom/after/hallway-after.png",
+    "allentown-commercial-bathroom/before/hallway-before.png",
+    "allentown-commercial-bathroom/after/sink-area-after.png",
+  ].map((path) => [p(path), p(path.replace(/\.(jpg|png)$/, "-preview.webp"))]),
+);

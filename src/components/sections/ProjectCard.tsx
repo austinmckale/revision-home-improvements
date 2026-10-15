@@ -14,7 +14,7 @@ export default function ProjectCard({
   variant?: "lead" | "support" | "standard";
   priority?: boolean;
 }) {
-  const { title, image } = getProjectPresentation(study);
+  const { title, spec, image } = getProjectPresentation(study);
   const isFeature = variant !== "standard";
 
   return (
@@ -70,8 +70,8 @@ export default function ProjectCard({
             ↗
           </span>
         </div>
-        {variant === "lead" && <p className="mt-4 max-w-md text-sm leading-relaxed text-white/80">{study.summary}</p>}
-        {!isFeature && <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{study.summary}</p>}
+        {variant === "lead" && <p className="mt-4 max-w-md text-sm leading-relaxed text-white/80">{spec}</p>}
+        {!isFeature && <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{spec}</p>}
         <span className="sr-only">View {study.title}</span>
       </div>
     </Link>

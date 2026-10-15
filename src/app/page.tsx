@@ -343,7 +343,7 @@ export default function HomePage() {
                 key={study.slug}
                 className={`border-t border-[var(--border)] pt-10 lg:pt-14 ${index === 0 ? "mt-12 lg:mt-16" : "mt-16 lg:mt-24"}`}
               >
-                <ProjectSpread study={study} size="lead" reverse={index % 2 === 1} highlights={index < 2} />
+                <ProjectSpread study={study} size="lead" reverse={index % 2 === 1} />
               </div>
             ))}
           </Container>
