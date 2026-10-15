@@ -281,20 +281,20 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "lehigh-valley-basement-finish-and-detail": overview({
     title: "Basement media room",
     summary:
-      "A large screen and a linear fireplace share one feature wall, with recessed lighting overhead and a high-gloss patterned floor below.",
+      "A large screen and a linear fireplace share one feature wall, with recessed lighting overhead and a high-gloss patterned epoxy floor below.",
     scope: [
       "Media wall with screen and linear fireplace",
       "Speaker placement and wall detailing",
-      "Glossy patterned floor and ceiling lights",
+      "Patterned epoxy floor and ceiling lights",
     ],
     images: [
       photo(
         "lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
-        "Basement media wall with a large screen, linear fireplace, and glossy patterned floor.",
+        "Basement media wall with a large screen, linear fireplace, and glossy patterned epoxy floor.",
       ),
       photo(
         "lehigh-valley-basement-theater/after/epoxy-floor-big-screen.jpg",
-        "Wide basement view showing the media wall, columns, ceiling lights, and glossy patterned floor.",
+        "Wide basement view showing the media wall, columns, ceiling lights, and glossy patterned epoxy floor.",
       ),
       photo(
         "lehigh-valley-basement-theater/after/wide-view-layout.jpg",

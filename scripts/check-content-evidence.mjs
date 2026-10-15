@@ -28,7 +28,8 @@ const content = evaluateModule("../src/content/caseStudies.ts", {
   "./projectEvidence": evidence,
   "./retiredProjects": retired,
 });
-const reviews = evaluateModule("../src/content/testimonials.ts");
+const company = evaluateModule("../src/content/company.ts");
+const reviews = evaluateModule("../src/content/testimonials.ts", { "@/content/company": company });
 const inventory = JSON.parse(
   readFileSync(new URL("../docs/audits/project-photo-inventory-2026-09-30.json", import.meta.url), "utf8"),
 );
@@ -237,16 +238,26 @@ test("text-only water content is planning and cannot be promoted as a finished p
 });
 
 test("published reviews have traceable sources and no invented job, service or town links", () => {
-  assert.equal(reviews.testimonials.length, 3);
+  assert.equal(reviews.testimonials.length, 11);
   assert.equal(reviews.withheldTestimonials.length, 15);
   assert.equal(reviews.getFeaturedTestimonials().length, 3);
   assert.equal(reviews.getTestimonialsByLocation("allentown-pa").length, 0);
   assert.equal(reviews.getTestimonialsByService("bathroom-remodeling").length, 0);
   for (const review of reviews.testimonials) {
     assert.equal(reviews.isSourceCheckedTestimonial(review), true);
-    assert.equal(review.verification.association, "company-only");
-    assert.ok(review.verification.url.startsWith("https://www.angi.com/"));
+    const { platform, url, association, projectSlug } = review.verification;
+    if (platform === "Google") assert.equal(url, company.company.social.googleBusinessProfile, review.name);
+    else assert.ok(url.startsWith("https://www.angi.com/"), review.name);
+    // A project link needs the review's own photos to show that project; only the pool review has them.
+    if (association === "project") {
+      assert.equal(projectSlug, "bethlehem-pool-patio-renovation", review.name);
+      assert.ok(content.getCaseStudyBySlug(projectSlug), review.name);
+    } else {
+      assert.equal(association, "company-only", review.name);
+      assert.equal(projectSlug, undefined, review.name);
+    }
     assert.equal(review.locationSlug, undefined);
     assert.equal(review.serviceSlug, undefined);
   }
+  assert.equal(reviews.getProjectTestimonial("bethlehem-pool-patio-renovation")?.name, "Sara M.");
 });

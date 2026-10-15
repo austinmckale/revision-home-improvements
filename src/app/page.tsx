@@ -16,7 +16,7 @@ import { insuranceClaimsClarification } from "@/content/restoration";
 import ProjectSpread from "@/components/sections/ProjectSpread";
 import ScopeBuilder, { type ScopeBuilderService } from "@/components/sections/ScopeBuilder";
 import ServiceAreaMap from "@/components/sections/ServiceAreaMap";
-import { getFeaturedTestimonials } from "@/content/testimonials";
+import { getFeaturedTestimonials, getProjectTestimonial } from "@/content/testimonials";
 import { company } from "@/content/company";
 import { siteConfig } from "@/content/site";
 
@@ -145,8 +145,9 @@ function InlineLink({ link }: { link: AreaLink }) {
 
 export default function HomePage() {
   const featuredReviews = getFeaturedTestimonials();
-  const [leadReview, ...moreReviews] = [...featuredReviews].sort((a, b) => b.quote.length - a.quote.length);
+  const [leadReview, ...moreReviews] = featuredReviews;
   const poolStory = visibleCaseStudies.find((study) => study.slug === "bethlehem-pool-patio-renovation");
+  const poolReview = poolStory ? getProjectTestimonial(poolStory.slug) : undefined;
   const insuranceClaims = getServiceBySlug("insurance-claims");
   const rank = (slug: string) => {
     const index = remodelingServiceOrder.indexOf(slug);
@@ -367,6 +368,25 @@ export default function HomePage() {
                     A gray textured patio with a light stone-pattern border now follows every curve of the pool, from the
                     steps to the rounded edges.
                   </p>
+                  {poolReview ? (
+                    <figure className="mt-6 border-l-2 border-[var(--brand-bright)] pl-4">
+                      <blockquote className="heading-serif text-xl leading-snug text-white">
+                        &ldquo;{poolReview.quote}&rdquo;
+                      </blockquote>
+                      <figcaption className="mt-2 text-sm text-white/70">
+                        {poolReview.name}, the homeowner ·{" "}
+                        <a
+                          href={poolReview.verification.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Read ${poolReview.name}'s review on ${poolReview.verification.platform} (opens in a new tab)`}
+                          className="underline-offset-4 hover:text-white hover:underline"
+                        >
+                          {poolReview.source} ↗
+                        </a>
+                      </figcaption>
+                    </figure>
+                  ) : null}
                   <Link
                     href={`/projects/${poolStory.slug}`}
                     className="group mt-6 inline-flex items-center gap-3 border-b border-white/45 pb-2 text-sm font-semibold text-white transition-colors hover:border-[var(--brand-bright)]"

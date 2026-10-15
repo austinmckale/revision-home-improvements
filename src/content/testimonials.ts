@@ -1,3 +1,5 @@
+import { company } from "@/content/company";
+
 type LegacyTestimonial = {
   quote: string;
   name: string;
@@ -160,11 +162,14 @@ const legacyTestimonials: LegacyTestimonial[] = [
 export type Testimonial = LegacyTestimonial & {
   verification: {
     status: "source-checked";
-    platform: "Angi";
+    platform: "Angi" | "Google";
     url: string;
     checkedAt: string;
+    /** Year-month for Angi; year only for Google, which shows reviews as "N weeks ago". */
     publishedMonth: string;
-    association: "company-only";
+    /** "project" only when the review's own photos show that project. */
+    association: "company-only" | "project";
+    projectSlug?: string;
   };
 };
 
@@ -177,6 +182,34 @@ type WithheldTestimonial = LegacyTestimonial & {
 };
 
 const angiReviewUrl = "https://www.angi.com/companylist/us/pa/temple/rhi-solutions-llc-reviews-1.htm";
+const googleReviewUrl = company.social.googleBusinessProfile;
+
+/**
+ * Exact excerpts from the owner's Google Business Profile reviews (screenshots supplied October 15, 2026).
+ * Only complete sentences visible before Google's "View full review" cut-off are used. Rating-only reviews,
+ * screen-name reviewers and reviews from people involved with the business are not published.
+ */
+const googleReview = (
+  name: string,
+  quote: string,
+  association: Testimonial["verification"]["association"] = "company-only",
+  projectSlug?: string,
+): Testimonial => ({
+  quote,
+  name,
+  context: "Company review",
+  rating: 5,
+  source: "Google review · 2026",
+  verification: {
+    status: "source-checked",
+    platform: "Google",
+    url: googleReviewUrl,
+    checkedAt: "2026-10-15",
+    publishedMonth: "2026",
+    association,
+    projectSlug,
+  },
+});
 
 /** No legacy record has a verified customer-to-project or city association. */
 export const withheldTestimonials: WithheldTestimonial[] = legacyTestimonials.map((item) => ({
@@ -190,8 +223,37 @@ export const withheldTestimonials: WithheldTestimonial[] = legacyTestimonials.ma
   },
 }));
 
-/** Exact short excerpts from the public Angi profile; no city or specific job association. */
+/** Exact excerpts from Google (2026) and Angi (2024); no city link, and a project link only when proven. */
 export const testimonials: Testimonial[] = [
+  googleReview(
+    "Elizabeth S.",
+    "Their work is amazing—very high quality, and their presence in the home is professional, reliable, and safe.",
+  ),
+  googleReview(
+    "Larry W.",
+    "The cost estimate was reasonable, but most importantly, the work was done on time (actually a little ahead of schedule), and the quality was excellent.",
+  ),
+  googleReview(
+    "Karla S.",
+    "Ryan took the time to listen to my concerns and my transformation of my Dining room and Kitchen came out perfect.",
+  ),
+  googleReview(
+    "Devon M.",
+    "Awesome company. Super easy to work with. Ryan is great at understanding what we needed for our house and getting it done.",
+  ),
+  googleReview("Maryann T.", "Ryan and his crew were very efficient and knowledgeable about their work."),
+  googleReview(
+    "Janus R.",
+    "The crew was easy to deal with and I appreciated that they cleaned up at the end of each day. A couple little things needed touched up after but they handled it right away.",
+  ),
+  googleReview("Tammy Y.", "I would recommend them for great work that they did."),
+  // Her review photos show this pool before and after, so the review is linked to the project.
+  googleReview(
+    "Sara M.",
+    "Ryan and his team did an awesome job on our pool patio renovation.",
+    "project",
+    "bethlehem-pool-patio-renovation",
+  ),
   {
     quote: "Fair price, great job!",
     name: "Alice H.",
@@ -239,18 +301,30 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-/** Company reviews, not proof of a featured project or a particular service area. */
+/** Company reviews, not proof of a featured project or a particular service area. Shown in this order. */
 export const FEATURED_TESTIMONIAL_KEYS = [
-  { name: "Alice H.", context: "Company review" },
-  { name: "Albert S.", context: "Company review" },
-  { name: "Ron K.", context: "Company review" },
+  { name: "Elizabeth S.", context: "Company review" },
+  { name: "Larry W.", context: "Company review" },
+  { name: "Karla S.", context: "Company review" },
 ] as const;
 
 export function isSourceCheckedTestimonial(item: Testimonial): boolean {
-  return (
-    item.verification?.status === "source-checked" &&
-    item.verification.association === "company-only" &&
-    item.verification.url.startsWith("https://www.angi.com/")
+  const { verification } = item;
+  if (verification?.status !== "source-checked") return false;
+  const traceable =
+    verification.platform === "Google"
+      ? verification.url === googleReviewUrl
+      : verification.url.startsWith("https://www.angi.com/");
+  const associated =
+    verification.association === "company-only" ||
+    (verification.association === "project" && Boolean(verification.projectSlug));
+  return traceable && associated;
+}
+
+/** A review whose own photos show this project. */
+export function getProjectTestimonial(projectSlug: string) {
+  return testimonials.find(
+    (item) => isSourceCheckedTestimonial(item) && item.verification.projectSlug === projectSlug,
   );
 }
 

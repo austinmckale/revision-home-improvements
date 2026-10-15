@@ -285,6 +285,10 @@ export const services: Service[] = [
         q: "Can I add a bathroom in the basement?",
         a: "Often, yes. An existing rough-in makes it simpler; without one, we walk through the options and cost during the estimate.",
       },
+      {
+        q: "Do you install epoxy floors?",
+        a: "Yes. Epoxy suits a basement well: it is seamless, easy to clean and handles the occasional damp day better than carpet. Our basement media room has a patterned epoxy floor.",
+      },
     ],
     image: {
       src: "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg",
