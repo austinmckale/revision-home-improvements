@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type PointerEvent } from "react";
 import Image, { getImageProps } from "next/image";
 import Portal from "./Portal";
 import useModalFocus from "./useModalFocus";
+import { croppedOriginals } from "@/content/photoCuration";
 
 type LightboxImage = {
   src: string;
@@ -30,8 +31,9 @@ export default function ImageLightbox({ images, activeIndex, onClose, onNavigate
   const image = activeIndex === null ? undefined : images[activeIndex];
   const isOpen = Boolean(image);
   const attempt = retry.src === image?.src ? retry.attempt : 0;
-  const imageSrc = image?.src
-    ? `${image.src}${attempt ? `${image.src.includes("?") ? "&" : "?"}photo_retry=${attempt}` : ""}`
+  const fullSrc = image?.src ? (croppedOriginals[image.src] ?? image.src) : "";
+  const imageSrc = fullSrc
+    ? `${fullSrc}${attempt ? `${fullSrc.includes("?") ? "&" : "?"}photo_retry=${attempt}` : ""}`
     : "";
   const photoStatus = photoState.key === imageSrc ? photoState.status : "loading";
 

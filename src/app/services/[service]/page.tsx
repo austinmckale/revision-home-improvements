@@ -28,6 +28,7 @@ import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { getFeaturedTestimonials } from "@/content/testimonials";
 import { getPortfolioImages } from "@/lib/portfolio";
 import { getFeaturedCaseStudyGalleryImages } from "@/lib/servicePageMedia";
+import { curatePhotos } from "@/content/photoCuration";
 import { findExplicitFeaturedCaseStudy } from "@/lib/serviceFeaturedCaseStudy";
 
 export const revalidate = 3600;
@@ -139,11 +140,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
   const featuredProjectGalleryImages = getFeaturedCaseStudyGalleryImages(featuredCaseStudy, heroImageSrc);
   const hasFeaturedProjectGallery = featuredProjectGalleryImages.length > 0;
   const pinnedFeaturedCaseStudy = Boolean(explicitFeaturedCaseStudy);
+  const serviceGallery = curatePhotos(service.gallery, [heroImageSrc]);
   const curatedGalleryImages = hasFeaturedProjectGallery
     ? featuredProjectGalleryImages
     : pinnedFeaturedCaseStudy
       ? []
-      : service.gallery.slice(0, 4);
+      : serviceGallery.slice(0, 4);
   const curatedGalleryIsSingleProject = hasFeaturedProjectGallery;
   const showCuratedGallerySection = showCuratedStaticGallery && curatedGalleryImages.length > 0;
   const featuredCollectionInGallery =
@@ -362,11 +364,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                   <div>
                     <PortfolioGallery images={portfolioImages} />
                   </div>
-                ) : service.gallery.length > 0 ? (
+                ) : serviceGallery.length > 0 ? (
                   <section>
                     <h2 className="heading-serif text-2xl text-[var(--accent)] md:text-3xl">Recent work</h2>
                     <ExpandableImageGrid
-                      images={service.gallery}
+                      images={serviceGallery}
                       inlineCount={2}
                       gridClassName={galleryGridClassName}
                       cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-xl bg-[var(--surface-soft)]"

@@ -86,7 +86,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "allentown-kitchen-layout-upgrade": overview({
     title: "Two-tone island kitchen",
     summary:
-      "A dark island with bright countertops and pendant lights sits at the center of the room, framed by warm wood cabinetry and a full stainless appliance wall.",
+      "A navy island with a thick white countertop and glass globe pendants, set against walnut-tone cabinetry, double wall ovens and a built-in stainless refrigerator.",
     featureInServiceListings: true,
     scope: [
       "Island seating and contrasting cabinetry",
@@ -106,13 +106,13 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "bethlehem-bathroom-refresh": overview({
-    title: "Black-framed shower & sliding door",
+    title: "Black-framed shower bathroom",
     summary:
-      "A white shower with a black frame and a gray vanity keep the palette crisp, while a sliding wood door adds warmth at the entry.",
+      "A bright white shower with a black frame, black grab bars and black fixtures, beside a gray vanity with matching black hardware.",
     scope: [
       "White shower enclosure with a dark frame",
       "Gray vanity and dark hardware",
-      "Sliding wood door and adjacent trim",
+      "Black grab bars, fixtures and hardware",
     ],
     images: [
       photo(
@@ -157,8 +157,8 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "allentown-exterior-log-home-refresh": overview({
     title: "Log-style exterior",
     summary:
-      "Log-style siding and crisp contrasting trim carry from the front of the house around to the garage side.",
-    scope: ["Log-style wall surfaces and contrasting trim", "Front and garage-side elevations", "Upper-facade access"],
+      "Log-style siding with crisp contrasting window trim across all three levels of a hillside home, down to the garage.",
+    scope: ["Log-style siding and contrasting trim", "Three-level front elevation", "Garage-level entry"],
     images: [
       photo(
         "allentown-exterior-log-home/after/front-finished.jpg",
@@ -202,7 +202,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "lehigh-valley-full-exterior-refresh": overview({
     title: "Dormers, shutters & front porch",
     summary:
-      "Light siding and dark shutters frame the dormers and the front porch. See the full front, the trim up close and a before view.",
+      "A white colonial with black shutters, three dormers and a full-width columned porch at the end of a brick walk. Compare it before and after.",
     scope: ["Dormer and window trim details", "Contrasting shutters and porch entry", "Front and side elevation views"],
     evidenceNote: "",
     images: [
@@ -296,8 +296,8 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "allentown-flooring-replacement-upgrade": overview({
     title: "Light floors, open living",
     summary:
-      "Light wood-look flooring runs from the living room to the kitchen opening and fireplace wall, with sliding doors bringing in daylight.",
-    scope: ["Light wood-look floor surfaces", "Fireplace-wall and trim details", "Kitchen opening and sliding doors"],
+      "Light oak-look plank flooring runs through the living room to the kitchen opening, with fresh white walls and trim.",
+    scope: ["Light oak-look plank flooring", "Fresh walls and trim", "Living room to kitchen opening"],
     images: [
       photo(
         "allentown-flooring-replacement/after/living-room-finished.jpg",
@@ -385,7 +385,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "allentown-fire-damage-interior-rebuild": overview({
     title: "Fireplace surround & hearth",
     summary:
-      "A light fireplace surround above a dark hearth makes a clean focal point for the room.",
+      "Painted white brick over a long, glossy black hearth with white veining that runs the width of the wall, with new wood-look flooring in front.",
     serviceName: "Drywall Installation and Repair",
     serviceSlug: "drywall-installation-repair",
     featureInServiceListings: false,
@@ -403,9 +403,9 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
     ],
   }),
   "ryan-bedroom-interior-refresh": overview({
-    title: "Bedroom in deep blue",
+    title: "Slate-gray bedroom",
     summary:
-      "Deep wall color, bright white trim and warm wood-look flooring. Compare the room before and after, and see it mid-project.",
+      "Carpet out, warm wood-look plank flooring in, and the walls repainted a deep slate with bright white trim. Compare the room before and after.",
     scope: ["Wall colors and white trim", "Carpet and wood-look floor surfaces", "Windows and ceiling fan"],
     images: [
       photo(
@@ -445,11 +445,11 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "blue-kitchen-cabinet-counters": overview({
     title: "Blue cabinet kitchen",
     summary:
-      "Deep blue cabinetry with patterned gray countertops and a matching backsplash. Follow it from the cabinet layout through installation to the finished kitchen.",
+      "Navy shaker cabinets run floor to ceiling beside the patio door, with a patterned gray countertop, a matching full-height backsplash and a built-in wine fridge.",
     scope: [
       "Blue cabinet doors and hardware",
       "Countertop and appliance details",
-      "Installation stages and cabinet layout",
+      "Full-height backsplash and wine fridge",
     ],
     images: [
       photo(
@@ -497,7 +497,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "ryan-kitchen-remodel": overview({
     title: "Crisp white kitchen",
     summary:
-      "White cabinets, dark countertops and stainless appliances under recessed lighting. Compare the same corner before and after.",
+      "White cabinets, black countertops and a glass mosaic backsplash, from a stripped-out room to finished. Compare the same corner before and after.",
     scope: [
       "Kitchen corner and window arrangement",
       "White cabinets and dark countertops",
@@ -525,7 +525,7 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   "ryan-bathroom-remodel": overview({
     title: "Double-vanity bathroom",
     summary:
-      "A dark double-sink vanity, light walls and warm wood-look flooring, with a window that fills the room with daylight.",
+      "A dark double vanity with a granite top between two windows, with warm wood-look flooring underfoot.",
     scope: ["Double-sink vanity and mirror", "Wall, window, and floor finishes", "Bathing area beside the vanity"],
     images: [
       photo(

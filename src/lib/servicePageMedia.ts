@@ -1,4 +1,5 @@
 import type { CaseStudy } from "@/content/caseStudies";
+import { curatePhotos } from "@/content/photoCuration";
 
 const MAX_FEATURED_PROJECT_PHOTOS = 8;
 
@@ -11,8 +12,5 @@ export function getFeaturedCaseStudyGalleryImages(
   serviceHeroImageSrc: string,
 ): Array<{ src: string; alt: string }> {
   if (!caseStudy?.images?.length) return [];
-  const hero = serviceHeroImageSrc.trim();
-  return caseStudy.images
-    .filter((img) => img.src.trim() !== hero)
-    .slice(0, MAX_FEATURED_PROJECT_PHOTOS);
+  return curatePhotos(caseStudy.images, [serviceHeroImageSrc.trim()]).slice(0, MAX_FEATURED_PROJECT_PHOTOS);
 }
