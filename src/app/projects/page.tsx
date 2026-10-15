@@ -68,7 +68,9 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
               <h1>
                 <span className="eyebrow">Remodeling project photos</span>{" "}
                 <span className="heading-serif mt-5 block max-w-3xl text-[2.6rem] leading-[1.02] tracking-[-.035em] text-[var(--accent)] sm:text-6xl lg:text-7xl">
-                  Jobs we&rsquo;ve built<span className="text-[var(--brand)]">.</span>
+                  Spaces worth{" "}
+                  <br />
+                  coming home to<span className="text-[var(--brand)]">.</span>
                 </span>
               </h1>
             </div>
