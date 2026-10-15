@@ -185,50 +185,50 @@ export default function HomePage() {
       <JsonLd data={getBreadcrumbJsonLd([{ name: "Home", href: "/" }])} />
       <JsonLd data={getFaqJsonLd(homeFaqs)} />
 
-      {/* Phones get the photo uncropped above the text; larger screens keep it behind the headline. */}
-      <section className="home-hero crop-marks relative isolate flex flex-col overflow-hidden bg-[#242720] text-white [--crop-color:transparent] [--crop-inset:5.25rem_1rem_1rem] sm:min-h-[min(900px,100svh)] sm:justify-end sm:pt-24 sm:[--crop-color:rgb(255_255_255/72%)]">
-        <div className="relative aspect-[4/3] w-full overflow-hidden sm:absolute sm:inset-0 sm:-z-20 sm:aspect-auto">
+      {/* The pavilion photo is a close shot, so it is never cropped to a thin strip: above the text on
+          phones, behind it on tablets, and as its own panel beside the text from 1024px up. */}
+      <section className="home-hero crop-marks relative isolate flex flex-col overflow-hidden bg-[#242720] text-white [--crop-color:transparent] [--crop-inset:5.25rem_1rem_1rem] sm:min-h-[min(900px,100svh)] sm:justify-end sm:pt-24 sm:[--crop-color:rgb(255_255_255/72%)] lg:justify-center lg:[--crop-color:transparent]">
+        <div className="relative aspect-[4/3] w-full overflow-hidden sm:absolute sm:inset-0 sm:-z-20 sm:aspect-auto lg:left-[58%] lg:w-auto">
           <Image
             {...getProjectImageProps(homeHeroImage)}
             alt={homeHeroImage.alt}
             fill
             priority
-            sizes="100vw"
+            sizes="(min-width: 1024px) 42vw, 100vw"
             quality={75}
             className={`home-hero-image object-cover ${getImageFocalClass(homeHeroImage.src, "hero")}`}
           />
           <div
-            className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/60 to-transparent sm:hidden"
+            className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/60 to-transparent sm:hidden lg:block lg:h-36"
             aria-hidden="true"
           />
         </div>
         <div
-          className="absolute inset-0 -z-10 hidden bg-[linear-gradient(90deg,rgba(18,23,20,.84)_0%,rgba(18,23,20,.58)_44%,rgba(18,23,20,.08)_100%)] sm:block"
+          className="absolute inset-0 -z-10 hidden bg-[linear-gradient(90deg,rgba(18,23,20,.84)_0%,rgba(18,23,20,.58)_44%,rgba(18,23,20,.08)_100%)] sm:block lg:hidden"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 -z-10 hidden bg-[linear-gradient(0deg,rgba(18,23,20,.62)_0%,transparent_45%)] sm:block"
+          className="absolute inset-0 -z-10 hidden bg-[linear-gradient(0deg,rgba(18,23,20,.62)_0%,transparent_45%)] sm:block lg:hidden"
           aria-hidden="true"
         />
 
-        <Container className="relative w-full pb-12 pt-8 sm:pb-14 sm:pt-24 md:pb-16 lg:pb-20">
-          <div className="max-w-5xl">
+        <Container className="relative w-full pb-12 pt-8 sm:pb-14 sm:pt-24 md:pb-16 lg:pb-16">
+          <div className="lg:w-[58%] lg:pr-12">
             <h1>
               <span className="home-hero-enter home-hero-enter-1 flex items-center gap-3 font-sans text-xs font-semibold uppercase tracking-[.2em] text-white/80 sm:text-sm">
                 <span className="h-px w-9 shrink-0 bg-[var(--brand-bright)]" aria-hidden="true" />
-                Remodeling &amp; repairs in Berks County and the Lehigh Valley
+                Remodeling in Berks County &amp; the Lehigh Valley
               </span>{" "}
-              <span className="home-hero-enter home-hero-enter-2 heading-serif mt-5 block text-[clamp(3rem,8vw,7.25rem)] leading-[.95] tracking-[-.04em] text-white sm:mt-6">
-                Ryan calls back. <br />
-                <span className="text-white/70">
-                  Every time<span className="text-[var(--brand-bright)]">.</span>
+              <span className="home-hero-enter home-hero-enter-2 heading-serif mt-5 block text-balance text-[clamp(2.5rem,7vw,6.25rem)] leading-[.98] tracking-[-.035em] text-white sm:mt-6 lg:text-[clamp(3rem,4.6vw,4.75rem)]">
+                <span className="block">Designed with you.</span>{" "}
+                <span className="block text-balance text-white/70">
+                  Built to the last detail<span className="text-[var(--brand-bright)]">.</span>
                 </span>
               </span>
             </h1>
-            <div className="home-hero-enter home-hero-enter-3 mt-6 flex flex-col gap-7 sm:mt-9 sm:flex-row sm:items-end sm:justify-between">
+            <div className="home-hero-enter home-hero-enter-3 mt-6 flex flex-col gap-7 sm:mt-9 sm:flex-row sm:items-end sm:justify-between lg:flex-col lg:items-start">
               <p className="max-w-xl text-pretty text-base leading-relaxed text-white/85 sm:text-lg">
-                {company.owner.name} owns RHI Pros. He answers his phone, keeps you posted the whole way and puts the
-                price in writing before we start, from Reading to Bethlehem.
+                Kitchens, baths, basements, media rooms and outdoor living, from Reading to Bethlehem.
               </p>
               <div className="flex shrink-0 flex-wrap gap-3">
                 <Link
@@ -245,20 +245,20 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-          </div>
 
-          <div className="mt-16 hidden gap-6 text-white/75 sm:grid sm:grid-cols-[auto_1fr_auto] sm:items-center">
-            <p className="annotation text-[0.65rem]">{siteConfig.hicLabel}</p>
-            <DimensionLine className="[--dimension-color:rgb(255_255_255/45%)]" />
-            <Link
-              href="/projects/reading-paver-patio-buildout"
-              className="annotation group inline-flex min-h-8 items-center gap-2 text-[0.65rem] text-white transition-colors hover:text-white/80"
-            >
-              Pictured: patio &amp; gable-roof pavilion{" "}
-              <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
-                →
-              </span>
-            </Link>
+            <div className="mt-16 hidden gap-6 text-white/75 sm:grid sm:grid-cols-[auto_1fr_auto] sm:items-center lg:mt-14">
+              <p className="annotation text-[0.65rem]">{siteConfig.hicLabel}</p>
+              <DimensionLine className="[--dimension-color:rgb(255_255_255/45%)]" />
+              <Link
+                href="/projects/reading-paver-patio-buildout"
+                className="annotation group inline-flex min-h-8 items-center gap-2 text-[0.65rem] text-white transition-colors hover:text-white/80"
+              >
+                Pictured: patio &amp; pavilion{" "}
+                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            </div>
           </div>
         </Container>
       </section>
@@ -269,10 +269,11 @@ export default function HomePage() {
             <div className="lg:sticky lg:top-28 lg:self-start">
               <p className="eyebrow">What we do</p>
               <h2 className="heading-serif mt-4 max-w-md text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl lg:text-6xl">
-                What we build and rebuild.
+                What we build.
               </h2>
               <p className="mt-5 max-w-sm text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                From a single room to a full rebuild after damage. Choose a service to see how we approach it.
+                One room or the whole house, including rebuilds after fire and water damage. Choose a service to see how
+                we approach it.
               </p>
             </div>
             <div className="grid gap-10 sm:gap-12">
@@ -321,8 +322,8 @@ export default function HomePage() {
                   The two we&rsquo;re proudest of.
                 </h2>
                 <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-                  A gable-roof pavilion and a basement media room with a full entertainment wall. After them, a kitchen
-                  in deep blue.
+                  A gable-roof pavilion and a basement media room with a full entertainment wall, plus a kitchen in
+                  deep blue.
                 </p>
               </div>
               <Link
@@ -408,13 +409,13 @@ export default function HomePage() {
           <FadeIn>
             <div className="grid gap-14 lg:grid-cols-[.85fr_1.15fr] lg:gap-20">
               <div>
-                <p className="eyebrow">Who you&rsquo;ll work with</p>
+                <p className="eyebrow">Working with us</p>
                 <h2 className="heading-serif mt-4 max-w-lg text-4xl leading-[1.03] tracking-[-.03em] text-[var(--accent)] sm:text-5xl">
                   You&rsquo;ll always know where things stand.
                 </h2>
                 <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--muted)]">
-                  Expect friendly people and regular updates, from the first visit to the final walkthrough. RHI Pros (
-                  {company.legalName}) is owned by {company.owner.name}.
+                  Expect friendly people, returned calls and regular updates, from the first visit to the final
+                  walkthrough.
                 </p>
                 <dl className="mt-8 grid max-w-md grid-cols-2 border-t border-[var(--accent)]">
                   <div className="border-b border-r border-[var(--border)] py-4 pr-4">
@@ -640,7 +641,7 @@ export default function HomePage() {
               <div className="max-w-3xl">
                 <p className="eyebrow eyebrow-light">Start a project</p>
                 <h2 className="heading-serif mt-5 text-4xl leading-[1.02] tracking-[-.03em] sm:text-5xl lg:text-7xl">
-                  So, what&rsquo;s the project?
+                  Tell us about your project.
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
                   Call, or send a few details and photos. We&rsquo;ll come see the space and talk through the options
