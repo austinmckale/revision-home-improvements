@@ -204,6 +204,8 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   }),
   "bethlehem-exterior-staircase-build": overview({
     title: "Exterior stair & landing",
+    // Owner, October 16, 2026: kept off the project grids (awkward tilted photo); the page stays.
+    showInGallery: false,
     summary:
       "A compact exterior stair rises to an elevated landing, with light posts and dark railing infill.",
     scope: ["Elevated exterior landing", "Stair run and support posts", "Light posts with dark railing infill"],
@@ -323,6 +325,8 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   }),
   "allentown-flooring-replacement-upgrade": overview({
     title: "Light plank flooring",
+    // Owner, October 16, 2026: kept off the project grids (weak photos, repeats other work); the page stays.
+    showInGallery: false,
     summary:
       "Light oak-look plank flooring runs through the living room to the kitchen opening, with fresh white walls and trim.",
     scope: ["Light oak-look plank flooring", "Fresh walls and trim", "Living room to kitchen opening"],
@@ -339,6 +343,8 @@ export const projectEvidenceOverrides: Record<string, Partial<CaseStudy>> = {
   }),
   "bethlehem-drywall-and-finish-repair": overview({
     title: "Drywall repair & paint",
+    // Owner, October 16, 2026: kept off the project grids (weak photos, repeats other work); the page stays.
+    showInGallery: false,
     summary:
       "Smooth light walls, clean corners and white closet doors over a tile floor, finished with ceiling lights and a fan.",
     featureInServiceListings: false,
@@ -650,6 +656,8 @@ export const projectEvidenceSplits: Record<string, { sourceSlug: string; evidenc
     sourceSlug: "allentown-kitchen-layout-upgrade",
     evidence: overview({
       title: "White open-plan kitchen",
+      // Owner, October 16, 2026: kept off the project grids (weak photos, repeats other work); the page stays.
+      showInGallery: false,
       summary:
         "Crisp white cabinetry and stainless appliances open straight into the living area, with gray wood-look flooring carrying through both spaces.",
       featureInServiceListings: true,

@@ -44,13 +44,13 @@ type Presentation = { title: string; story?: string; image?: CaseStudy["images"]
 
 const presentation: Record<string, Presentation> = {
   "allentown-kitchen-layout-upgrade": {
-    title: "An Allentown kitchen built around a big navy island.",
+    title: "Everything in this kitchen gathers around the navy island.",
   },
   "white-cabinet-open-plan-kitchen": {
-    title: "A bright white kitchen that opens onto the whole room.",
+    title: "A white kitchen that opens to the whole room.",
   },
   "reading-paver-patio-buildout": {
-    title: "A Reading backyard that became an outdoor room.",
+    title: "A backyard you can use rain or shine.",
     story:
       "Set the posts, raised the trusses and roofed it, then stained a plank ceiling and set recessed lights in it. We laid the paver patio underneath too.",
     image: {
@@ -59,81 +59,81 @@ const presentation: Record<string, Presentation> = {
     },
   },
   "lehigh-valley-basement-finish-and-detail": {
-    title: "A Lehigh Valley basement media room on a poured gold floor.",
+    title: "Movie nights on a poured gold floor.",
     story:
       "Poured a gold and black metallic epoxy floor across the basement. On the far wall we built out a media wall for the TV and a linear fireplace, with speakers set into wood slat panels on both sides.",
   },
   "blue-kitchen-cabinet-counters": {
-    title: "A Lehigh Valley kitchen in navy, floor to ceiling.",
+    title: "Navy cabinets, all the way up.",
     image: {
       src: "/images/projects/blue-kitchen-cabinet-counters/after/02-blue-kitchen-after_.jpg",
       alt: "Wide view of blue cabinetry with a gray countertop and backsplash, sink and faucet, microwave and beverage cooler.",
     },
   },
   "bethlehem-interior-flooring-refresh": {
-    title: "Honey-toned wood floors that warm up a Bethlehem home.",
+    title: "Honey-toned floors with a mirror shine.",
   },
   "allentown-exterior-log-home-refresh": {
-    title: "Three stories of log home on an Allentown hillside.",
+    title: "Three stories of log home, top to bottom.",
   },
   "hamburg-laundry-bathroom-remodel": {
-    title: "A bright laundry room and half-bath in Hamburg.",
+    title: "A laundry room that finally feels finished.",
     story:
       "Before: an old patterned floor and an open stud wall. We pulled the floor, closed in the wall and built it back with smooth walls, a gray plank floor, open shelving, a utility sink and a new ceiling light.",
   },
   "ryan-bathroom-remodel": {
-    title: "A Berks County bathroom with room for two at the sink.",
+    title: "Two sinks and room to get ready together.",
     story:
       "Out went the pink sink, pink toilet, wallpaper and bulb-strip lights. In went a dark double vanity with a granite top, a new toilet, new lights, fresh paint and a light plank floor.",
   },
   "bethlehem-bathroom-refresh": {
-    title: "A Bethlehem bathroom behind a pine barn door.",
+    title: "Clean lines and black trim in a small bathroom.",
     image: {
       src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
       alt: "Shower enclosure with a molded white insert and black frame.",
     },
   },
   "bethlehem-pool-patio-renovation": {
-    title: "A Bethlehem pool with a new deck all the way around.",
+    title: "A new pool deck, around every curve.",
     story:
       "Green turf ran right up to the pool's edge. We pulled it and put down a textured gray deck that follows every curve.",
   },
   "ryan-kitchen-remodel": {
-    title: "A Berks County kitchen, stripped out and built back in white.",
+    title: "Stripped out, then built back in white.",
     story:
       "Doors off, backsplash gone, fluorescent tubes hanging from the ceiling. We built it back with white cabinets, black counters, a glass mosaic backsplash and recessed lights.",
   },
   "berks-county-ranch-exterior-refresh": {
-    title: "A white Berks County ranch, sharpened up in black.",
+    title: "A white ranch with crisp black trim.",
   },
   "allentown-flooring-replacement-upgrade": {
-    title: "An Allentown living room in wide, light planks.",
+    title: "Wide, light planks through the living room.",
   },
   "ryan-bedroom-interior-refresh": {
-    title: "A Berks County bedroom in deep slate and warm wood.",
+    title: "Deep slate walls over warm wood floors.",
   },
   "bethlehem-exterior-staircase-build": {
-    title: "A Bethlehem second floor with its own way in.",
+    title: "A private way up to the second floor.",
   },
   "bethlehem-drywall-and-finish-repair": {
-    title: "A Bethlehem room where you can't find the repairs.",
+    title: "Walls that look like the repairs never happened.",
   },
   "lehigh-valley-full-exterior-refresh": {
-    title: "A Lehigh Valley colonial, freshly painted with black shutters.",
+    title: "A colonial, freshly painted, with black shutters.",
     story:
       "Paint was flaking off the porch columns and the dormer trim was down to bare wood. We scraped, primed and painted it white, then hung black shutters across the front.",
   },
   "allentown-fire-damage-interior-rebuild": {
-    title: "An Allentown fireplace wall in white brick and black marble look.",
+    title: "White brick over a black marble-look hearth.",
   },
   "reading-commercial-bar-window-upgrade": {
-    title: "A Reading bar room with daylight down its whole length.",
+    title: "Daylight down the length of the bar.",
   },
   "dark-partition-commercial-restroom": {
-    title: "A commercial restroom with charcoal stalls, hung dead straight.",
+    title: "Charcoal stalls, hung dead straight.",
   },
   "allentown-commercial-bathroom-renovation": {
-    title: "An Allentown corridor with a new seamless floor.",
+    title: "A worn hallway floor, made seamless.",
     story:
       "The hallway concrete was stained and worn, next to a dark block wall. We painted the block light and put down a seamless gray floor through the corridor, the wash area and the restroom.",
     image: {

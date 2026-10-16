@@ -162,14 +162,13 @@ test("every source photo remains in its original lineage and unchanged on disk a
   assert.equal(checked.size, 103);
 });
 
-test("different kitchens have separate listed pages with disjoint photo sets", () => {
+test("different kitchens have separate pages with disjoint photo sets", () => {
   const slugs = ["allentown-kitchen-layout-upgrade", "white-cabinet-open-plan-kitchen"];
   assertSeparateCollections(slugs, [2, 2]);
+  // The white kitchen is kept off the project grids by owner choice (October 16, 2026); its page stays.
+  assert.ok(content.galleryCaseStudies.some((record) => record.slug === slugs[0]), `${slugs[0]}: missing gallery listing`);
   for (const slug of slugs) {
-    assert.ok(
-      content.galleryCaseStudies.some((record) => record.slug === slug),
-      `${slug}: missing gallery listing`,
-    );
+    assert.ok(content.getCaseStudyBySlug(slug), `${slug}: missing page`);
     const current = getCollection(slug);
     assert.equal(current.serviceSlug, "kitchen-remodeling");
     assert.equal(current.beforeImages.length, 0, slug);
