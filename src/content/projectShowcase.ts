@@ -44,13 +44,13 @@ type Presentation = { title: string; story?: string; image?: CaseStudy["images"]
 
 const presentation: Record<string, Presentation> = {
   "allentown-kitchen-layout-upgrade": {
-    title: "Put in a navy island with two dishwashers.",
+    title: "Built the whole kitchen around a big navy island.",
   },
   "white-cabinet-open-plan-kitchen": {
-    title: "Installed a white shaker kitchen open to the living room.",
+    title: "Put in a white shaker kitchen that opens onto a big, bright room.",
   },
   "reading-paver-patio-buildout": {
-    title: "Built a gable-roof pavilion over a new paver patio.",
+    title: "Built a gable-roof pavilion that turned the backyard into a room.",
     story:
       "Set the posts, raised the trusses and roofed it, then stained a plank ceiling and set recessed lights in it. We laid the paver patio underneath too.",
     image: {
@@ -59,7 +59,7 @@ const presentation: Record<string, Presentation> = {
     },
   },
   "lehigh-valley-basement-finish-and-detail": {
-    title: "Finished a basement with a poured metallic epoxy floor.",
+    title: "Turned a basement into a media room with a poured gold epoxy floor.",
     story:
       "Poured a gold and black metallic epoxy floor across the basement. On the far wall we built out a media wall for the TV and a linear fireplace, with speakers set into wood slat panels on both sides.",
   },
@@ -74,7 +74,7 @@ const presentation: Record<string, Presentation> = {
     title: "Honey-toned wood floors with a mirror shine.",
   },
   "allentown-exterior-log-home-refresh": {
-    title: "Three stories of log siding, gable to garage.",
+    title: "Three stories of log siding, from the roof down to the garage.",
   },
   "hamburg-laundry-bathroom-remodel": {
     title: "Rebuilt a tired old laundry room, floor to ceiling.",
@@ -87,7 +87,7 @@ const presentation: Record<string, Presentation> = {
       "Out went the pink sink, pink toilet, wallpaper and bulb-strip lights. In went a dark double vanity with a granite top, a new toilet, new lights, fresh paint and a light plank floor.",
   },
   "bethlehem-bathroom-refresh": {
-    title: "Hung a pine barn door. Put in a black-framed shower.",
+    title: "Gave a small bathroom a pine barn door and a black-framed glass shower.",
     image: {
       src: "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg",
       alt: "Shower enclosure with a molded white insert and black frame.",
@@ -104,7 +104,7 @@ const presentation: Record<string, Presentation> = {
       "Doors off, backsplash gone, fluorescent tubes hanging from the ceiling. We built it back with white cabinets, black counters, a glass mosaic backsplash and recessed lights.",
   },
   "berks-county-ranch-exterior-refresh": {
-    title: "Black shutters and a black railing on a white ranch.",
+    title: "Sharpened up a white ranch with black shutters and a black railing.",
   },
   "allentown-flooring-replacement-upgrade": {
     title: "Laid wide light planks from the fireplace to the kitchen.",
@@ -113,7 +113,7 @@ const presentation: Record<string, Presentation> = {
     title: "Pulled the carpet, laid planks, painted the walls slate.",
   },
   "bethlehem-exterior-staircase-build": {
-    title: "Built an exterior stair up to the second floor.",
+    title: "Built the second floor its own way in.",
   },
   "bethlehem-drywall-and-finish-repair": {
     title: "Drywall repairs you can't find.",
@@ -124,10 +124,10 @@ const presentation: Record<string, Presentation> = {
       "Paint was flaking off the porch columns and the dormer trim was down to bare wood. We scraped, primed and painted it white, then hung black shutters across the front.",
   },
   "allentown-fire-damage-interior-rebuild": {
-    title: "Painted brick over a black marble-look hearth.",
+    title: "Painted the brick white and gave the hearth a black marble look.",
   },
   "reading-commercial-bar-window-upgrade": {
-    title: "Put in a row of windows along the bar.",
+    title: "Brought daylight in along the whole bar.",
   },
   "dark-partition-commercial-restroom": {
     title: "Charcoal stalls, hung dead straight.",
