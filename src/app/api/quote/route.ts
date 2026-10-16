@@ -2,7 +2,7 @@ import { after, NextResponse } from "next/server";
 import { createConnection, type Socket } from "node:net";
 import nodemailer from "nodemailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
-import { forwardToManagerAppLead } from "@/lib/leadIntake";
+import { forwardToManagerAppLead, getManagerAppUrl } from "@/lib/leadIntake";
 import { siteConfig } from "@/content/site";
 import { quoteSchema } from "@/lib/quoteSchema";
 
@@ -239,6 +239,29 @@ async function sendSmtpMail(
   }
 }
 
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+
+/** Lead email with one-tap Call, Text and Open-in-app buttons above the details. */
+function leadEmailHtml(payload: Record<string, unknown>, lines: string[], leadsUrl: string) {
+  const name = String(payload.name || "there");
+  const firstName = name.split(/\s+/)[0];
+  const digits = String(payload.phone || "").replace(/[^\d+]/g, "");
+  const textBody = `Hi ${firstName}, this is Ryan with RHI Pros. Thanks for reaching out about your ${String(payload.service || "project").toLowerCase()}. When is a good time to talk?`;
+  const button = (href: string, label: string, primary = false) =>
+    `<a href="${escapeHtml(href)}" style="display:inline-block;margin:0 8px 8px 0;padding:12px 18px;border-radius:6px;font:600 15px Arial,sans-serif;text-decoration:none;${primary ? "background:#b4411b;color:#fff" : "background:#eef0ec;color:#202823"}">${escapeHtml(label)}</a>`;
+  const buttons = [
+    digits ? button(`tel:${digits}`, `Call ${firstName}`, true) : "",
+    digits ? button(`sms:${digits}?&body=${encodeURIComponent(textBody)}`, `Text ${firstName}`) : "",
+    button(leadsUrl, "Open in app"),
+  ].join("");
+  const details = lines
+    .filter((line) => line && !line.startsWith("Open in the Manager App"))
+    .map((line) => `<div style="margin:4px 0">${escapeHtml(line)}</div>`)
+    .join("");
+  return `<div style="font:15px/1.5 Arial,sans-serif;color:#202823"><p style="margin:0 0 14px">New quote request from <strong>${escapeHtml(name)}</strong>.</p><div>${buttons}</div><div style="margin-top:12px;padding-top:12px;border-top:1px solid #ddd">${details}</div></div>`;
+}
+
 async function sendLeadEmail(payload: Record<string, unknown>, photos: LeadPhoto[], signal: AbortSignal) {
   const smtp = getSmtpConfig();
   const to = process.env.EMAIL_TO || siteConfig.primaryEmail;
@@ -262,6 +285,8 @@ async function sendLeadEmail(payload: Record<string, unknown>, photos: LeadPhoto
   if (payload.utm_source) {
     body.push(`Source: ${String(payload.utm_source)} / ${String(payload.utm_medium || "")}`);
   }
+  const leadsUrl = `${getManagerAppUrl().replace(/\/$/, "")}/leads`;
+  body.push("", `Open in the Manager App: ${leadsUrl}`);
 
   return sendSmtpMail(
     smtp,
@@ -271,6 +296,7 @@ async function sendLeadEmail(payload: Record<string, unknown>, photos: LeadPhoto
       replyTo: payload.email ? String(payload.email) : undefined,
       subject,
       text: body.join("\n"),
+      html: leadEmailHtml(payload, body, leadsUrl),
       attachments: photos.map((photo) => ({
         filename: photo.filename,
         content: photo.content,

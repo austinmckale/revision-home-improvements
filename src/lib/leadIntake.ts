@@ -35,7 +35,7 @@ type ManagerLeadIntakeResult =
       responseText?: string;
     };
 
-function getManagerAppUrl() {
+export function getManagerAppUrl() {
   if (process.env.MANAGER_APP_URL) return process.env.MANAGER_APP_URL;
   return process.env.NODE_ENV === "production" ? "https://app.rhipros.com" : "http://localhost:3001";
 }

@@ -167,6 +167,7 @@ function route({
         };
       if (name === "@/lib/leadIntake")
         return {
+          getManagerAppUrl: () => "https://app.example.test",
           async forwardToManagerAppLead(payload, signal) {
             calls.manager.push(payload);
             if (manager === "hang")
@@ -516,6 +517,11 @@ test("photos are attached to Discord and the lead email and kept out of text cha
     ["photo-1.jpg", "photo-2.jpg"],
   );
   assert.match(api.calls.mail[0].text, /Submitted via: Scope Builder/);
+  // Lead email: one-tap call, prefilled text and a link into the Manager App.
+  assert.match(api.calls.mail[0].text, /Open in the Manager App: https:\/\/app\.example\.test\/leads/);
+  assert.match(api.calls.mail[0].html, /href="tel:\d+"/);
+  assert.match(api.calls.mail[0].html, /href="sms:\d+\?&amp;body=Hi%20/);
+  assert.match(api.calls.mail[0].html, /href="https:\/\/app\.example\.test\/leads"[^>]*>Open in app</);
   assert.match(api.calls.manager[0].notes, /Photos: 2 attached/);
   assert(!JSON.stringify(api.calls.logs).includes(jpegPhoto.data));
   assert(!JSON.stringify(api.calls.manager).includes(jpegPhoto.data));
