@@ -22,22 +22,21 @@ function emitWithParams(eventName: string, params: Record<string, unknown>) {
 }
 
 function emitLeadConversion() {
-  if (typeof window.gtag !== "function") return;
-
-  const utmParams = new URLSearchParams(window.location.search);
-  const source = utmParams.get("utm_source") || undefined;
-  const medium = utmParams.get("utm_medium") || undefined;
-  const campaign = utmParams.get("utm_campaign") || undefined;
-
-  window.gtag("event", "generate_lead", {
+  // First-touch source, so a lead from an ad is credited even after the visitor browses other pages.
+  const attribution = getFirstTouchAttribution();
+  const params = {
     form_name: "quote_form",
-    landing_page: window.location.pathname + window.location.search,
+    landing_page: attribution.landing_page || window.location.pathname,
     page_location: window.location.href,
-    page_referrer: document.referrer || "(direct)",
-    source,
-    medium,
-    campaign,
-  });
+    page_referrer: attribution.referrer || document.referrer || "(direct)",
+    source: attribution.utm_source || attribution.traffic_source,
+    medium: attribution.utm_medium || attribution.traffic_medium,
+    campaign: attribution.utm_campaign || undefined,
+  };
+
+  // Tag Manager triggers on dataLayer events; gtag is only present when a GA4 or Ads ID is set directly.
+  window.dataLayer?.push({ event: "generate_lead", ...params });
+  window.gtag?.("event", "generate_lead", params);
 }
 
 function fbTrack(eventName: string) {
