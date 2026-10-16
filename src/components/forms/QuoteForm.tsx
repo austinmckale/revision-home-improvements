@@ -260,7 +260,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           ✓
         </span>
         <h2 ref={headingRef} tabIndex={-1} className="heading-serif mt-5 text-3xl text-[var(--accent)] outline-none">
-          Your next chapter starts here.
+          Thanks, we’ll call you back.
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
           Your request has been received. We will review your project and follow up by phone or email to discuss the
