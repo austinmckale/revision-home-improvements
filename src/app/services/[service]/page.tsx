@@ -71,6 +71,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const titles: Record<string, string> = {
     "paver-installation": "Paver Patios & Repair | Lehigh Valley & Berks County",
     "drywall-installation-repair": "Drywall Installation & Repair | Lehigh Valley",
+    // Search Console, Aug–Oct 2026: town searches ("fire damage restoration reading, pa") land on these pages.
+    "fire-damage-restoration": "Fire Damage Restoration | Reading, Allentown & Bethlehem",
+    "water-damage-restoration": "Water Damage Restoration | Reading, Allentown & Bethlehem",
   };
   const descriptions: Record<string, string> = {
     "kitchen-remodeling":
@@ -88,9 +91,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     "exterior-remodeling":
       "Exterior remodeling across the Lehigh Valley and Berks County: siding, trim, shutters and exterior stairs, with photos of finished homes.",
     "fire-damage-restoration":
-      "Fire damage rebuilding across the Lehigh Valley and Berks County: an assessment, a detailed repair estimate and photos for your insurance claim.",
+      "Fire damage rebuilds in Reading, Allentown, Bethlehem and the towns between: photos and a detailed repair estimate for your insurance claim, then the rebuild.",
     "water-damage-restoration":
-      "Water damage restoration in the Lehigh Valley and Berks County. Discuss affected rooms, phased repairs and insurance documentation with RHI Pros.",
+      "Water damage restoration in Reading, Allentown, Bethlehem and the towns between: drywall, flooring and trim rebuilt once the house is dry, with photos for your claim.",
   };
   // Keep titles short enough that Google shows the whole thing.
   const regionalTitle = `${service.name} | Lehigh Valley & Berks County`;

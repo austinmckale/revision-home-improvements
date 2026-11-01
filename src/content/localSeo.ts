@@ -185,7 +185,16 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       "Phased demolition and rebuild sequencing in occupied homes",
       "Documentation that supports insurance review and homeowner decisions",
     ],
-    localizedFaqs: [],
+    localizedFaqs: [
+      {
+        q: "Do you rebuild after both fire and water damage in Reading?",
+        a: "Yes. Once the house is safe and dry, we rebuild the drywall, flooring, trim and finishes. Water from putting out a fire often reaches rooms the fire never did, so we check those too. We don't offer emergency service.",
+      },
+      {
+        q: "Can you help with my insurance claim after a fire in Reading?",
+        a: "We photograph the damage room by room and write a detailed repair estimate you can share with your adjuster. Your insurer decides what the policy covers.",
+      },
+    ],
     internalLinks: [
       {
         href: "/reading-pa",
@@ -489,7 +498,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
   "reading-pa/basement-finishing": {
     metadataTitle: "Basement Finishing & Remodeling in Reading, PA",
     metadataDescription:
-      "Basement finishing and remodeling in Reading, PA. Plan a family room, theater or flexible living space with moisture, ceiling and utility access considered.",
+      "Basement finishing, remodeling and renovation in Reading, PA: family rooms, theaters and living space, planned around moisture, ceilings and utilities.",
     heroHeading: "Basement finishing & remodeling in Reading, PA",
     heroIntro:
       "Plan a finished basement around the space’s existing conditions, utility access, ceiling constraints, lighting, and intended use before framing and finish selections begin.",
@@ -769,10 +778,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     ],
   },
   "berks-county-pa/kitchen-remodeling": {
-    metadataTitle: "Kitchen Remodeling in Berks County, PA",
+    metadataTitle: "Kitchen Remodeling & Cabinet Refacing in Berks County, PA",
     metadataDescription:
-      "Kitchen remodeling and cabinet refacing in Berks County: cabinets, countertops, layout and finishes, from a cabinet update to a full remodel.",
-    heroHeading: "Kitchen remodeling in Berks County, PA",
+      "Kitchen remodeling, cabinet refacing and cabinet makeovers in Berks County, PA: new doors and drawer fronts, new cabinets and counters, or a full remodel.",
+    heroHeading: "Kitchen remodeling & cabinet refacing in Berks County, PA",
     heroIntro:
       "Plan a Berks County kitchen remodel around layout, cabinets, counters, and finish details so the room works better day to day. RHI Pros puts the full plan in writing before work begins.",
     localProjectHeading: "Coordinate cabinets, counters, and fixtures",
@@ -792,6 +801,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       {
         q: "Can a Berks County kitchen update stay focused on the cabinets?",
         a: "Yes. We can reface your cabinets, which keeps the boxes and replaces the doors, drawer fronts and hardware, or install new cabinets in the same layout. Our Berks County cabinet page compares the two. When counters, layout or flooring change too, a full remodel is the better fit.",
+      },
+      {
+        q: "What does a kitchen cabinet makeover include?",
+        a: "It depends on the cabinets you have. If the boxes are solid, refacing gives them new doors, drawer fronts and hardware. If they are worn out or the layout isn't working, new cabinets or a full remodel is the better fit. We look at them with you and put the options in writing.",
       },
       {
         q: "What should I prepare before requesting a kitchen quote?",
