@@ -55,8 +55,10 @@ export function curatePhotos<T extends { src: string }>(images: readonly T[], al
 }
 
 /**
- * Originals that carry a phone screenshot frame or a burned-in "Before"/"After" label. Originals stay
- * unchanged on disk (their hashes are checked); the cropped preview is shown at full size instead.
+ * Originals that carry a phone screenshot frame or a burned-in "Before"/"After" label, or jobsite
+ * clutter retouched out of the preview (owner, November 1, 2026: a sand bag by a pavilion post and a
+ * box on the back step). Originals stay unchanged on disk (their hashes are checked); the prepared
+ * preview is shown at full size instead.
  */
 export const croppedOriginals: Readonly<Record<string, string>> = Object.fromEntries(
   [
@@ -67,5 +69,7 @@ export const croppedOriginals: Readonly<Record<string, string>> = Object.fromEnt
     "allentown-commercial-bathroom/after/hallway-after.png",
     "allentown-commercial-bathroom/before/hallway-before.png",
     "allentown-commercial-bathroom/after/sink-area-after.png",
+    "frontier-patio-gable-roof/after/finished-overview.jpg",
+    "frontier-patio-gable-roof/after/angle-1.jpg",
   ].map((path) => [p(path), p(path.replace(/\.(jpg|png)$/, "-preview.webp"))]),
 );

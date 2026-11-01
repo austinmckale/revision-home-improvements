@@ -1,6 +1,8 @@
 import { projectImageDimensions } from "./projectImageDimensions";
 
 // Prepared from the matching original project photos; originals remain available in galleries.
+// The two pavilion previews (finished-overview, angle-1) also have jobsite clutter retouched out;
+// rebuild them with scripts/photo-retouch/ so the retouch is not lost.
 export const projectImagePreviews: Record<string, string> = {
   "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg": "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail-preview.webp",
   "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity.jpg": "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-vanity-preview.webp",
