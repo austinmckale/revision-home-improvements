@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
-import { getProjectImageProps } from "@/content/projectImagePreviews";
+import { getHeroImageSizes, getProjectImageProps } from "@/content/projectImagePreviews";
 import { getImageFocalClass } from "@/content/imageFocalPoints";
 
 type ServiceHeroProps = {
@@ -37,7 +37,7 @@ export default function ServiceHero({
           alt={image.alt}
           fill
           priority
-          sizes="100vw"
+          sizes={getHeroImageSizes(image.src)}
           className={`absolute inset-0 -z-20 object-cover ${getImageFocalClass(image.src, "hero")}`}
         />
       ) : null}

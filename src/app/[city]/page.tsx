@@ -14,7 +14,7 @@ import { primaryServices, serviceLabel } from "@/content/services";
 import { getFeaturedTestimonials } from "@/content/testimonials";
 import { getCaseStudyBySlug } from "@/content/caseStudies";
 import { getCityServiceLocalSummary, isIndexedCityServicePage } from "@/content/localSeo";
-import { getProjectImageProps } from "@/content/projectImagePreviews";
+import { getHeroImageSizes, getProjectImageProps } from "@/content/projectImagePreviews";
 import { siteConfig } from "@/content/site";
 
 type Params = { city: string };
@@ -78,7 +78,7 @@ export default async function CityHubPage({ params }: { params: Promise<Params> 
             alt={featuredProject.images[0].alt}
             fill
             priority
-            sizes="100vw"
+            sizes={getHeroImageSizes(featuredProject.images[0].src)}
             className="absolute inset-0 -z-20 object-cover"
           />
         ) : (

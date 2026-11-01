@@ -175,8 +175,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 788,
   },
   "/images/projects/allentown-exterior-log-home/after/front-finished-preview.webp": {
-    width: 1600,
-    height: 2133,
+    width: 2400,
+    height: 3200,
   },
   "/images/projects/allentown-exterior-log-home/after/front-finished.jpg": {
     width: 3024,
@@ -195,8 +195,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 4032,
   },
   "/images/projects/allentown-flooring-replacement/after/living-room-finished-preview.webp": {
-    width: 1600,
-    height: 2133,
+    width: 2400,
+    height: 3200,
   },
   "/images/projects/allentown-flooring-replacement/after/living-room-finished.jpg": {
     width: 3024,
@@ -235,16 +235,16 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 1080,
   },
   "/images/projects/berks-county-ranch-exterior/after/exterior-refresh-preview.webp": {
-    width: 1600,
-    height: 1200,
+    width: 2048,
+    height: 1536,
   },
   "/images/projects/berks-county-ranch-exterior/after/exterior-refresh.jpg": {
     width: 2048,
     height: 1536,
   },
   "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower-preview.webp": {
-    width: 1600,
-    height: 2133,
+    width: 2400,
+    height: 3200,
   },
   "/images/projects/bethlehem-bathroom-refresh/after/bathroom-after-shower.jpg": {
     width: 3024,
@@ -291,8 +291,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 4032,
   },
   "/images/projects/bethlehem-drywall-finish-repair/after/finished-room-preview.webp": {
-    width: 1600,
-    height: 2133,
+    width: 2400,
+    height: 3200,
   },
   "/images/projects/bethlehem-drywall-finish-repair/after/finished-room.jpg": {
     width: 3024,
@@ -315,8 +315,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 432,
   },
   "/images/projects/bethlehem-pool-patio/after/pool-patio-overview-preview.webp": {
-    width: 1600,
-    height: 1200,
+    width: 2400,
+    height: 1800,
   },
   "/images/projects/bethlehem-pool-patio/after/pool-patio-overview.jpg": {
     width: 4032,
@@ -351,8 +351,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 4032,
   },
   "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2-preview.webp": {
-    width: 1600,
-    height: 2133,
+    width: 2400,
+    height: 3200,
   },
   "/images/projects/blue-kitchen-cabinet-counters/after/05-blue-kitchen-cabinets-finished-2.jpg": {
     width: 3024,
@@ -593,8 +593,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
       height: 4032,
     },
   "/images/projects/frontier-patio-gable-roof/after/angle-1-preview.webp": {
-    width: 1600,
-    height: 1200,
+    width: 2400,
+    height: 1800,
   },
   "/images/projects/frontier-patio-gable-roof/after/angle-1.jpg": {
     width: 4032,
@@ -609,8 +609,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 3024,
   },
   "/images/projects/frontier-patio-gable-roof/after/finished-overview-preview.webp": {
-    width: 1600,
-    height: 1200,
+    width: 2400,
+    height: 1800,
   },
   "/images/projects/frontier-patio-gable-roof/after/finished-overview.jpg": {
     width: 4032,
@@ -665,8 +665,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 4032,
   },
   "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen-preview.webp": {
-    width: 1600,
-    height: 1200,
+    width: 2400,
+    height: 1800,
   },
   "/images/projects/lehigh-valley-basement-theater/after/media-room-big-screen.jpg": {
     width: 4032,
@@ -713,16 +713,16 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 1544,
   },
   "/images/projects/reading-commercial-bar-window/after/window-upgrade-preview.webp": {
-    width: 1600,
-    height: 1200,
+    width: 2400,
+    height: 1800,
   },
   "/images/projects/reading-commercial-bar-window/after/window-upgrade.jpg": {
     width: 4032,
     height: 3024,
   },
   "/images/projects/ryan-bathroom/after/ryans-bathroom-finished-preview.webp": {
-    width: 1600,
-    height: 2133,
+    width: 2400,
+    height: 3200,
   },
   "/images/projects/ryan-bathroom/after/ryans-bathroom-finished.jpg": {
     width: 3024,
@@ -737,8 +737,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 2208,
   },
   "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed-preview.webp": {
-    width: 1600,
-    height: 2133,
+    width: 2400,
+    height: 3200,
   },
   "/images/projects/ryan-bedroom/after/01-interior-refresh-blue-completed.jpg": {
     width: 3024,
@@ -777,8 +777,8 @@ export const projectImageDimensions: Record<string, { width: number; height: num
     height: 4032,
   },
   "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done-preview.webp": {
-    width: 1600,
-    height: 2133,
+    width: 2400,
+    height: 3200,
   },
   "/images/projects/ryan-kitchen/after/01-ryans-kitchen-after-done.jpg": {
     width: 3024,

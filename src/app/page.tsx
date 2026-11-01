@@ -195,7 +195,8 @@ export default function HomePage() {
             alt={homeHeroImage.alt}
             fill
             priority
-            sizes="(min-width: 1024px) 42vw, 100vw"
+            // The panel is narrow but tall, so object-cover shows this 4:3 photo about 1200px wide.
+            sizes="(min-width: 640px) 1200px, 100vw"
             quality={75}
             className={`home-hero-image object-cover ${getImageFocalClass(homeHeroImage.src, "hero")}`}
           />
@@ -565,7 +566,8 @@ export default function HomePage() {
                 </p>
               </details>
             </div>
-            <div className="paper-sheet p-4 sm:p-8">
+            {/* Town labels are too small to read on a phone; the paragraph beside it names every town. */}
+            <div className="paper-sheet hidden p-4 sm:block sm:p-8">
               <div className="mb-3 flex items-center justify-between gap-4 px-2 pt-1">
                 <p className="annotation text-[0.62rem] text-[var(--muted)]">Service area</p>
                 <p className="annotation text-[0.62rem] text-[var(--muted)]">Reading ⟷ Bethlehem</p>

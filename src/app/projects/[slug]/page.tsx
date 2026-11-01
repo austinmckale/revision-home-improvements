@@ -15,16 +15,16 @@ import { absoluteUrl } from "@/lib/url";
 import { businessEntityId, getBreadcrumbJsonLd } from "@/lib/structuredData";
 import { collectBeforeAfterSrcs, getProjectGalleryImages } from "@/lib/projectPageMedia";
 import { getProjectCollection, getProjectPresentation, orderedShowcaseProjects } from "@/content/projectShowcase";
-import { getProjectImageProps } from "@/content/projectImagePreviews";
+import { getHeroImageSizes, getProjectImageProps } from "@/content/projectImagePreviews";
 import { getImageFocalClass } from "@/content/imageFocalPoints";
 import { curatePhotos } from "@/content/photoCuration";
 
 type Params = { slug: string };
 
 /** Two columns for small sets so none is left empty; three once there are enough photos to fill them. */
-function photoColumns(count: number) {
-  if (count <= 1) return "max-w-2xl";
-  return count > 4 ? "columns-1 gap-4 sm:columns-2 lg:columns-3" : "columns-1 gap-4 sm:columns-2";
+/** A single photo keeps a readable width; larger sets fill the row (see ExpandableImageGrid `justified`). */
+function photoGridWidth(count: number) {
+  return count <= 1 ? "max-w-2xl" : "";
 }
 
 const localPlanningLinks: Record<string, { href: string; label: string }[]> = {
@@ -138,7 +138,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
             alt={heroImage.alt}
             fill
             priority
-            sizes="100vw"
+            sizes={getHeroImageSizes(heroImage.src)}
             className={`absolute inset-0 -z-20 object-cover ${getImageFocalClass(heroImage.src, "hero")}`}
           />
         ) : null}
@@ -199,9 +199,10 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
             ) : null}
             <ExpandableImageGrid
               images={photos}
-              gridClassName={`mt-8 ${photoColumns(photos.length)}`}
-              cardClassName="mb-4 break-inside-avoid overflow-hidden bg-[var(--surface-soft)]"
+              gridClassName={`mt-8 ${photoGridWidth(photos.length)}`}
+              cardClassName="overflow-hidden bg-[var(--surface-soft)]"
               imageClassName="h-auto w-full"
+              justified
             />
             {photoGroups.map((group) => (
               <section key={group.title} className="mt-12 border-t border-[var(--border)] pt-8">
@@ -209,9 +210,10 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
                 {group.description ? <p className="mt-2 text-sm text-[var(--muted)]">{group.description}</p> : null}
                 <ExpandableImageGrid
                   images={group.images}
-                  gridClassName={`mt-6 ${photoColumns(group.images.length)}`}
-                  cardClassName="mb-4 break-inside-avoid overflow-hidden bg-[var(--surface-soft)]"
+                  gridClassName={`mt-6 ${photoGridWidth(group.images.length)}`}
+                  cardClassName="overflow-hidden bg-[var(--surface-soft)]"
                   imageClassName="h-auto w-full"
+                  justified
                 />
               </section>
             ))}

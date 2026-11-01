@@ -1,3 +1,5 @@
+import { projectImageDimensions } from "./projectImageDimensions";
+
 // Prepared from the matching original project photos; originals remain available in galleries.
 export const projectImagePreviews: Record<string, string> = {
   "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail.jpg": "/images/projects/bethlehem-bathroom-refresh/after/bathroom-finished-shower-detail-preview.webp",
@@ -38,8 +40,19 @@ export const projectImagePreviews: Record<string, string> = {
 
 /**
  * Previews still pass through next/image so phones receive a responsive width
- * instead of the full 1600px preview file.
+ * instead of the full preview file. Hero previews are prepared at up to 2400px wide.
  */
 export function getProjectImageProps(image: { src: string; alt: string }) {
   return { src: projectImagePreviews[image.src] ?? image.src };
+}
+
+/**
+ * `sizes` for full-bleed hero photos. On phones the hero is taller than it is wide, so
+ * object-cover shows a landscape photo at about 1.6 times the screen width; asking for
+ * 100vw made phones load a small file and stretch it.
+ */
+export function getHeroImageSizes(src: string) {
+  const dimensions = projectImageDimensions[projectImagePreviews[src] ?? src];
+  const portrait = dimensions ? dimensions.height > dimensions.width : false;
+  return portrait ? "(max-width: 767px) 120vw, 100vw" : "(max-width: 767px) 160vw, (max-width: 1023px) 115vw, 100vw";
 }

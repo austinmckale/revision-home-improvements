@@ -161,7 +161,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
     curatedGalleryIsSingleProject &&
     (showCuratedGallerySection ||
       Boolean(featuredCaseStudy?.beforeImages?.length && featuredCaseStudy?.afterImages?.length));
-  const galleryGridClassName = curatedGalleryImages.length > 1 ? "mt-4 columns-1 gap-4 md:columns-2" : "mt-4 max-w-3xl";
+  const galleryGridClassName = curatedGalleryImages.length > 1 ? "mt-4" : "mt-4 max-w-3xl";
   const priorityLocationSlugs = priorityLocationSlugsByService[service.slug];
   const availableLocations = priorityLocationSlugs
     ? priorityLocationSlugs
@@ -365,8 +365,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                       images={curatedGalleryImages}
                       inlineCount={2}
                       gridClassName={galleryGridClassName}
-                      cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-xl bg-[var(--surface-soft)]"
+                      cardClassName="surface overflow-hidden rounded-xl bg-[var(--surface-soft)]"
                       imageClassName="h-auto w-full"
+                      justified
                     />
                   </section>
                 ) : portfolioImages.length > 0 ? (
@@ -380,8 +381,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
                       images={serviceGallery}
                       inlineCount={2}
                       gridClassName={galleryGridClassName}
-                      cardClassName="surface mb-4 break-inside-avoid overflow-hidden rounded-xl bg-[var(--surface-soft)]"
+                      cardClassName="surface overflow-hidden rounded-xl bg-[var(--surface-soft)]"
                       imageClassName="h-auto w-full"
+                      justified
                     />
                   </section>
                 ) : null}
