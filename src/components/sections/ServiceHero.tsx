@@ -52,7 +52,7 @@ export default function ServiceHero({
       <Container className="relative z-10 flex min-w-0 flex-1 flex-col justify-end pt-4 sm:pt-16">
         <div className="max-w-4xl">
           <p className="eyebrow eyebrow-light">{eyebrow}</p>
-          <h1 className="heading-serif mt-5 max-w-4xl text-4xl leading-[1.04] tracking-[-.03em] text-white sm:text-5xl lg:text-7xl">
+          <h1 className="heading-serif mt-5 max-w-4xl text-balance text-4xl leading-[1.04] tracking-[-.03em] text-white sm:text-5xl lg:text-7xl">
             {title}
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/80 sm:text-lg">{intro}</p>

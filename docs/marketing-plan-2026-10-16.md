@@ -55,7 +55,13 @@ Local Services Ads don't use landing pages; the leads go straight to the phone. 
 - no menu to wander off into
 - a tag showing which ad brought each lead
 
-A bathroom version already exists (`/landing/bathroom-remodeling`). To build: kitchen, basement and patio.
+Built (November 1, 2026), all hidden from Google search and without the site menu:
+- `rhipros.com/landing/bathroom-remodeling`
+- `rhipros.com/landing/kitchen-remodeling`
+- `rhipros.com/landing/basement-finishing`
+- `rhipros.com/landing/patios` (patios, patio repairs and pavilions)
+
+Point each ad at its page and add a campaign tag to the link, for example `?utm_source=google&utm_medium=cpc&utm_campaign=kitchen`. Every lead email then shows the page and the ad that brought it (Google and Facebook click IDs are recorded too).
 
 ## Tracking (checked October 16, 2026)
 
