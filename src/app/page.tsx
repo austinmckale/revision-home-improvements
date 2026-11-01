@@ -162,7 +162,7 @@ export default function HomePage() {
         .map(serviceRow),
     },
     {
-      title: "Repairs after fire & water damage",
+      title: "Insurance & damage repairs",
       rows: [
         ...primaryServices.filter((service) => damageRepairSlugs.includes(service.slug)).map(serviceRow),
         ...(insuranceClaims

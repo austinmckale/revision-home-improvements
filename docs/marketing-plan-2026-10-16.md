@@ -88,12 +88,25 @@ A bathroom version already exists (`/landing/bathroom-remodeling`). To build: ki
 - **Typical job: $10,000–$40,000** (see the ad budget above).
 - **The white Berks kitchen was a "cabinet refresh."** Still to confirm whether that means refacing (new doors and drawer fronts, veneer over the old boxes) or painting and new hardware.
 
+## Insurance and rebuild work (owner, November 1, 2026: "we love rebuild work and anything insurance related, huge margins")
+
+The site now has "Insurance Repairs" back in the menu, and the homepage service list groups fire, water and insurance work as "Insurance & damage repairs". No emergency wording.
+
+How this work usually arrives, best first:
+1. **Mitigation companies.** The crews that dry out and clean up after a fire or leak (franchises and independents) often don't do the rebuild. A handful of them sending you their finished jobs is worth more than any ad. Visit them, leave cards, promise fast estimates and good photos for the claim.
+2. **Insurance agents and adjusters.** Local agents get asked "who should I call?" every week. Same pitch: fast, clean estimates and photos, and you call the homeowner back.
+3. **Property managers and landlords** around Reading and Allentown: steady leak and fire repairs in rentals.
+4. **Google search ads** for rebuild searches ("water damage repair contractor", "fire damage repair", "insurance claim contractor"). Add negative keywords for emergency searches (emergency, 24 hour, extraction, drying, mold removal) so you don't pay for calls you'd turn away. Be careful with Local Services Ads in the water and fire categories: those callers usually want emergency service.
+5. **Google Business Profile:** list fire damage, water damage and insurance claim repairs as services, and post rebuild before-and-afters.
+
+Never advertise covering or waiving deductibles; in Pennsylvania that can count as insurance fraud.
+
 ## Owner questions still open
 
 1. White Berks kitchen: refacing, or painted cabinets? Refacing makes it proof for the refacing page.
 2. Was the Allentown fireplace job a fire-damage rebuild? If yes, it becomes proof for the fire pages.
 3. Is the dark-tile shower in the bathroom gallery your work?
-4. Do you still want fire and water damage rebuilds at all? If not, those pages can come down and redirect.
+4. Insurance details for the site (each one is a strong selling point once confirmed): do you meet the adjuster at the house? Write estimates in Xactimate? Handle supplements when hidden damage turns up? Do storm damage (roof, siding, trees on the house)? Do you already get work from mitigation companies?
 5. A photo of Ryan or the crew for the About page.
 6. Which jobs you want more of.
 

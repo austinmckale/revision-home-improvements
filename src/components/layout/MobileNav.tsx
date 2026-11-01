@@ -11,6 +11,7 @@ import useModalFocus from "@/components/ui/useModalFocus";
 const navLinks = [
   { href: "/services", label: "Services", primary: true },
   { href: "/projects", label: "Projects", primary: true },
+  { href: "/insurance-claims", label: "Insurance Repairs" },
   { href: "/our-process", label: "Our Process" },
   { href: "/about", label: "About" },
   { href: "/financing", label: "Financing" },
