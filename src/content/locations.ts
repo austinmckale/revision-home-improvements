@@ -26,7 +26,7 @@ export const locations: Location[] = [
     ],
     whyUs: [
       "Existing layout, plumbing and wiring reviewed before you choose finishes",
-      "Permits and inspections listed in your proposal, with who handles each",
+      "Permits and inspections handled for you and listed in your proposal",
       "Availability for your Reading address confirmed by phone or online",
     ],
   },

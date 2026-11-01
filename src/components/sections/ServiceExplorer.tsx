@@ -154,7 +154,7 @@ export default function ServiceExplorer({ items }: { items: ServiceExplorerItem[
               </span>
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-[var(--muted)]">
-              Remodeling and restoration, thoughtfully planned around the way you live. Where would you like to begin?
+              Kitchens, baths, basements, patios, rebuilds after fire or water damage, and almost anything else your house needs. Where would you like to begin?
             </p>
             <fieldset className="mt-7">
               <legend className="mb-3 text-xs font-semibold uppercase tracking-[.13em] text-[var(--accent)]">

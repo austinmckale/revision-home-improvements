@@ -464,7 +464,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     localizedFaqs: [
       {
         q: "Do I need a permit for a patio in Wyomissing?",
-        a: "Requirements depend on the project and the property. The borough decides whether a permit or zoning review applies, and your proposal notes who handles it.",
+        a: "Requirements depend on the project and the property. The borough decides whether a permit or zoning review applies. When one does, we take care of it.",
       },
       {
         q: "Will a new patio cause drainage problems?",
@@ -573,7 +573,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     heroHeading: "Kitchen remodelers in Allentown, PA",
     localProjectHeading: "Planning a kitchen remodel in Allentown",
     localProjectSnippet:
-      "For an Allentown kitchen remodel, layout changes are planned alongside the existing plumbing and electrical. If cabinet or lighting choices need utility changes, your proposal covers who handles them, the cost and the order of work.",
+      "For an Allentown kitchen remodel, layout changes are planned alongside the existing plumbing and electrical. If cabinet or lighting choices need utility changes, we handle them, and your proposal lists the cost and the order of work.",
     localChallengesHeading: "What we plan for in Allentown kitchens",
     localChallenges: [
       "Layout constraints in older downtown homes",
@@ -801,6 +801,10 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
       {
         q: "Can a Berks County kitchen update stay focused on the cabinets?",
         a: "Yes. We can reface your cabinets, which keeps the boxes and replaces the doors, drawer fronts and hardware, or install new cabinets in the same layout. Our Berks County cabinet page compares the two. When counters, layout or flooring change too, a full remodel is the better fit.",
+      },
+      {
+        q: "Do you replace countertops on their own?",
+        a: "Yes. We replace countertops on their own, or together with refaced or new cabinets as part of a bigger kitchen update.",
       },
       {
         q: "What does a kitchen cabinet makeover include?",

@@ -70,7 +70,7 @@ export default function LicensesAndInsurancePage() {
                 </div>
                 <div className="grid gap-1 border-b border-[var(--border)] py-4 sm:grid-cols-[10rem_1fr] sm:gap-4">
                   <dt className="font-semibold text-[var(--accent)]">Named insured</dt>
-                  <dd className="text-[var(--muted)]">The company on the certificate and any subcontractor coverage</dd>
+                  <dd className="text-[var(--muted)]">The company on the certificate and who it covers</dd>
                 </div>
               </dl>
             </article>
