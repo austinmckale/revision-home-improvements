@@ -80,6 +80,7 @@ A bathroom version already exists (`/landing/bathroom-remodeling`). To build: ki
 - **Stock landmark photos or clips:** not your work.
 - **More town pages, blog posts or cost guides:** about 27 impressions for cost searches in three months.
 - **Media wall and garage floor pages:** almost no searches.
+- **Winter deal (November 1, 2026):** skipped. A deal brings no traffic on its own; revisit only alongside Facebook ads and a text to past customers.
 
 ## Owner answers (November 1, 2026)
 
