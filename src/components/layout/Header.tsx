@@ -10,7 +10,6 @@ import MobileNav from "./MobileNav";
 
 const navLinks = [
   { href: "/services", label: "Services" },
-  { href: "/fire-water-damage-restoration", label: "Emergency" },
   { href: "/service-areas", label: "Service Areas" },
   { href: "/projects", label: "Projects" },
   { href: "/our-process", label: "Process" },

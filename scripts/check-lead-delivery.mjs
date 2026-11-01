@@ -190,6 +190,7 @@ function route({
             domain: "https://www.rhipros.com",
             primaryEmail: "quotes@example.test",
             phoneDisplay,
+            phoneHref: "tel:+14847069229",
           },
         };
       if (name === "@/lib/quoteSchema") return { quoteSchema: schema };
@@ -446,7 +447,11 @@ test("the customer confirmation goes to the visitor after the response and never
   assert.match(receipt.text, /^Hi Sample,/);
   assert.match(receipt.text, /Service: Kitchen Remodeling/);
   assert.match(receipt.text, /Location: Allentown 18101/);
+  assert.match(receipt.text, /What happens next/);
+  assert.match(receipt.text, /Reply to this email with a few/, "asks for photos when none were sent");
+  assert.match(receipt.html, /What you sent us/);
   assert(!receipt.text.includes("spam.example.test"));
+  assert(!receipt.html.includes("spam.example.test"));
   assert.equal(api.timers.size, 0);
 });
 

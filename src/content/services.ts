@@ -692,7 +692,7 @@ export const services: Service[] = [
       },
       {
         q: "How quickly can you respond after a fire?",
-        a: "Call us to check current availability. A quote request is not an emergency dispatch, and emergency response, safety clearance and specialist cleanup need to happen before reconstruction begins.",
+        a: "We don't offer emergency service. Safety clearance and specialist cleanup come first; once they are done, call us to plan the rebuild and check our schedule.",
       },
     ],
     authoritySnapshot: {

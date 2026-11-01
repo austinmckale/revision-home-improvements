@@ -12,7 +12,6 @@ const navLinks = [
   { href: "/services", label: "Services", primary: true },
   { href: "/projects", label: "Projects", primary: true },
   { href: "/our-process", label: "Our Process" },
-  { href: "/fire-water-damage-restoration", label: "Emergency Restoration" },
   { href: "/about", label: "About" },
   { href: "/financing", label: "Financing" },
   { href: "/warranty", label: "Warranty" },

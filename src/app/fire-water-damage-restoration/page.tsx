@@ -63,7 +63,7 @@ export default function FireWaterDamageRestorationPage() {
       <JsonLd
         data={getBreadcrumbJsonLd([
           { name: "Home", href: "/" },
-          { name: "Emergency Restoration", href: "/fire-water-damage-restoration" },
+          { name: "Fire & Water Damage", href: "/fire-water-damage-restoration" },
         ])}
       />
       <section className="border-b border-[var(--border)] bg-[var(--surface-soft)] py-10 sm:py-16">

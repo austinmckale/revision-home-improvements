@@ -327,25 +327,63 @@ async function sendCustomerConfirmation(payload: Record<string, unknown>, photoC
   const timeline = clean(payload.timeline, /[^\p{L}\d\s–-]/gu, 40);
   const location = `${clean(payload.city, /[^\p{L}\s.'-]/gu, 60)} ${clean(payload.zip, /[^\d-]/g, 10)}`.trim();
   const businessInbox = process.env.EMAIL_TO || siteConfig.primaryEmail;
+  const site = siteConfig.domain.replace(/\/$/, "");
+  const nextSteps = [
+    "Ryan calls you to hear about the project and your timing.",
+    "We visit, measure and talk through the options and your budget range.",
+    "You get a written proposal covering the work, materials, price and timing.",
+  ];
+  const sent = [
+    ["Service", service],
+    ["Timing", timeline],
+    ["Location", location],
+    ["Photos", photoCount ? `${photoCount} received` : ""],
+  ].filter(([, value]) => value);
+  const askForPhotos = !photoCount && Boolean(businessInbox);
+  const photoLine = "Have photos of the space? Reply to this email with a few. They help us prepare for the call.";
+  const legal = `${siteConfig.name} · ${siteConfig.legalName} · ${siteConfig.hicLabel}`;
+  const notice =
+    "You are receiving this because this email address was entered in a quote request on our website. If that was not you, you can ignore this message.";
 
   const text = [
     `Hi ${firstName},`,
     "",
-    `Thanks for reaching out to ${siteConfig.name}. We received your ${service} request. We will review it and follow up by phone or email to talk through next steps.`,
+    `Thanks for reaching out to ${siteConfig.name}. We received your ${service.toLowerCase()} request, and Ryan will call you back to talk it through.`,
+    "",
+    "What happens next",
+    ...nextSteps.map((step, index) => `${index + 1}. ${step}`),
+    "",
+    askForPhotos ? photoLine : "",
     "",
     "What you sent us",
-    `Service: ${service}`,
-    timeline ? `Timing: ${timeline}` : "",
-    location ? `Location: ${location}` : "",
-    photoCount ? `Photos: ${photoCount} received` : "",
+    ...sent.map(([label, value]) => `${label}: ${value}`),
     "",
-    `Need us sooner? Call ${siteConfig.phoneDisplay}${businessInbox ? ` or reply to this email` : ""}.`,
+    `Want to talk sooner? Call ${siteConfig.phoneDisplay}.`,
+    `See our recent work: ${site}/projects`,
     "",
-    `${siteConfig.name} · ${siteConfig.legalName} · ${siteConfig.hicLabel}`,
-    siteConfig.domain,
+    "Ryan",
+    siteConfig.name,
     "",
-    "You are receiving this because this email address was entered in a quote request on our website. If that was not you, you can ignore this message.",
+    legal,
+    "",
+    notice,
   ].filter((line, index, lines) => line !== "" || lines[index - 1] !== "");
+
+  const e = escapeHtml;
+  const html = `<div style="font:15px/1.55 Arial,sans-serif;color:#202823;max-width:560px">
+<p style="margin:0 0 14px">Hi ${e(firstName)},</p>
+<p style="margin:0 0 18px">Thanks for reaching out to ${e(siteConfig.name)}. We received your ${e(service.toLowerCase())} request, and Ryan will call you back to talk it through.</p>
+<p style="margin:0 0 6px;font-weight:700">What happens next</p>
+<ol style="margin:0 0 18px;padding-left:20px">${nextSteps.map((step) => `<li style="margin:0 0 4px">${e(step)}</li>`).join("")}</ol>
+${askForPhotos ? `<p style="margin:0 0 18px">${e(photoLine)}</p>` : ""}
+<div style="margin:0 0 18px;padding:12px 14px;background:#f4f5f1;border-radius:6px"><div style="font-weight:700;margin-bottom:4px">What you sent us</div>${sent
+    .map(([label, value]) => `<div>${e(label)}: ${e(value)}</div>`)
+    .join("")}</div>
+<p style="margin:0 0 18px"><a href="${e(siteConfig.phoneHref)}" style="display:inline-block;padding:12px 18px;border-radius:6px;background:#b4411b;color:#fff;font-weight:600;text-decoration:none">Call ${e(siteConfig.phoneDisplay)}</a></p>
+<p style="margin:0 0 18px"><a href="${e(`${site}/projects`)}" style="color:#b4411b">See our recent work</a></p>
+<p style="margin:0 0 18px">Ryan<br>${e(siteConfig.name)}</p>
+<p style="margin:0;font-size:12px;color:#6b726c">${e(legal)}<br>${e(notice)}</p>
+</div>`;
 
   return sendSmtpMail(
     smtp,
@@ -353,8 +391,9 @@ async function sendCustomerConfirmation(payload: Record<string, unknown>, photoC
       from: smtp.from,
       to: String(payload.email),
       replyTo: businessInbox || undefined,
-      subject: `We received your request – ${siteConfig.name}`,
+      subject: `We received your request, ${firstName === "there" ? "thank you" : firstName} – ${siteConfig.name}`,
       text: text.join("\n"),
+      html,
     },
     signal,
   );

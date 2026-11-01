@@ -43,7 +43,10 @@ These figures come mostly from marketing agencies and vary by market. Reading an
 2. **If those leads close and there's room:** add Google search ads at about $1,500 a month, sending clicks to job-type landing pages (see below).
 3. **Later:** Facebook and Instagram at about $500 a month, once there are 3–4 strong before-and-after videos. Fast call-backs matter most here, because those leads are colder.
 
-One booked kitchen or basement likely covers months of spend. **Open question:** what is the typical job size? That decides how hard to push.
+**Typical job: $10,000–$40,000 (owner, November 1, 2026).** Rough math, using assumptions to check against your own numbers:
+- If about 1 in 8 leads signs (a common range for remodelers is 1 in 5 to 1 in 10), $1,250 a month at the prices above (12–50 leads) brings about 1–6 jobs a month.
+- One average $25,000 job at a 25% margin leaves about $6,000, which pays for nearly five months of Local Services Ads.
+- So one signed job every few months pays for the whole test. Track every lead to signed or lost in the Manager App so this is judged on real numbers.
 
 ## Ad landing pages
 
@@ -78,15 +81,21 @@ A bathroom version already exists (`/landing/bathroom-remodeling`). To build: ki
 - **More town pages, blog posts or cost guides:** about 27 impressions for cost searches in three months.
 - **Media wall and garage floor pages:** almost no searches.
 
+## Owner answers (November 1, 2026)
+
+- **No emergency service.** The "Emergency" menu item and the site-wide "Emergency damage?" bar are gone, and the FAQs say plainly that we rebuild once the house is safe and dry.
+- **Email stays required** on the quote form, so there is always a way to reach the customer.
+- **Typical job: $10,000–$40,000** (see the ad budget above).
+- **The white Berks kitchen was a "cabinet refresh."** Still to confirm whether that means refacing (new doors and drawer fronts, veneer over the old boxes) or painting and new hardware.
+
 ## Owner questions still open
 
-1. Was the white Berks kitchen ("Stripped out, then built back in white") cabinet refacing? If yes, it becomes proof for the refacing page.
+1. White Berks kitchen: refacing, or painted cabinets? Refacing makes it proof for the refacing page.
 2. Was the Allentown fireplace job a fire-damage rebuild? If yes, it becomes proof for the fire pages.
 3. Is the dark-tile shower in the bathroom gallery your work?
-4. Do you offer emergency service (after hours, water extraction, board-up)? If not, rename the "Emergency" menu item.
+4. Do you still want fire and water damage rebuilds at all? If not, those pages can come down and redirect.
 5. A photo of Ryan or the crew for the About page.
-6. Can email be optional on the quote form?
-7. Typical job size, and which jobs you want more of.
+6. Which jobs you want more of.
 
 ## Check-ins
 

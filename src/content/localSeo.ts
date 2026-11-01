@@ -142,7 +142,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     localizedFaqs: [
       {
         q: "How fast should water damage repairs start in Reading?",
-        a: "Address the water source and any urgent mitigation needs promptly. Reconstruction should follow the necessary drying and cleanup work. Call to check our current availability and talk through the repairs; a quote request is not an emergency dispatch.",
+        a: "Address the water source and any urgent mitigation needs promptly. Reconstruction should follow the necessary drying and cleanup work. Once the house is dry, call us to plan the repairs. We don't offer emergency service.",
       },
       {
         q: "Can you help with insurance-related documentation?",
@@ -985,7 +985,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     localizedFaqs: [
       {
         q: "Do you offer emergency response for Allentown water damage projects?",
-        a: "Call to confirm current availability and the work RHI Pros can include. A quote request does not confirm emergency dispatch. Extraction, drying, and any specialist cleanup responsibilities should be confirmed separately from reconstruction.",
+        a: "No. We don't offer emergency response, water extraction or drying. Once a mitigation company has dried the house out, we rebuild the drywall, flooring and trim.",
       },
       {
         q: "Will you coordinate with my insurance claim documentation needs?",
@@ -1337,7 +1337,7 @@ const cityServiceLocalContent: Record<string, CityServiceLocalContent> = {
     localizedFaqs: [
       {
         q: "What is the first step after water damage in Bethlehem?",
-        a: "Address the water source and urgent mitigation needs first. Confirm who is responsible for extraction, drying, and any specialist cleanup. Then call us about the rebuild and our current availability.",
+        a: "Address the water source and urgent mitigation needs first. Confirm who is responsible for extraction, drying, and any specialist cleanup. Then call us about the rebuild. We don't offer emergency service.",
       },
       {
         q: "Do you coordinate restoration around insurance claim workflows?",

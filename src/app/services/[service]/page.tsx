@@ -202,7 +202,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<Pa
         primaryLabel={isEmergencyService ? `Call ${siteConfig.phoneDisplay}` : service.cta}
         secondaryHref={isEmergencyService ? `/request-a-quote?service=${service.slug}` : siteConfig.phoneHref}
         secondaryLabel={isEmergencyService ? "Request a quote" : `Call ${siteConfig.phoneDisplay}`}
-        notice={isEmergencyService ? "Call to talk through the damage and our current availability." : undefined}
+        notice={isEmergencyService ? "We rebuild once the house is safe and dry. Call to plan the repairs." : undefined}
       />
 
       {/* ── MAIN CONTENT ── */}

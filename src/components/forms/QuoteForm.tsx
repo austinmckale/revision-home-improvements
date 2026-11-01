@@ -263,8 +263,7 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           Thanks, we’ll call you back.
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-          Your request has been received. We will review your project and follow up by phone or email to discuss the
-          next steps.
+          Your request has been received. Ryan will call you back to talk through your project and the next steps.
         </p>
         <a
           href={siteConfig.phoneHref}
@@ -438,11 +437,12 @@ export default function QuoteForm({ defaultService }: QuoteFormProps) {
           </p>
           {isEmergency && (
             <p className="mt-4 border-l-2 border-[var(--brand)] bg-[var(--surface-soft)] p-3 text-sm leading-relaxed">
-              Urgent fire or water damage?{" "}
+              We don&rsquo;t offer emergency service. If water is still coming in, stop the source and call a
+              mitigation company first. We handle the rebuild once the house is dry. Questions?{" "}
               <a href={siteConfig.phoneHref} className="font-semibold text-[var(--brand)] underline underline-offset-4">
                 Call {siteConfig.phoneDisplay}
-              </a>{" "}
-              to discuss availability.
+              </a>
+              .
             </p>
           )}
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
